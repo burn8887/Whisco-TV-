@@ -1,0 +1,198 @@
+// StreamVerse IPTV Platform - Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------
+// USERS & AUTH
+// ------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          String    @default("VIEWER")
+  createdAt     DateTime  @default(now())
+  avatarColor   String    @default("#f97316")
+
+  profiles      Profile[]
+  subscription  Subscription?
+  paymentHistory Payment[]
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  name      String
+  isKids    Boolean  @default(false)
+  avatar    String   @default("👤")
+  pin       String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  watchlist Watchlist[]
+  progress  WatchProgress[]
+  createdAt DateTime @default(now())
+}
+
+// ------------------------------
+// SUBSCRIPTIONS & BILLING
+// ------------------------------
+
+model Plan {
+  id            String   @id @default(cuid())
+  name          String
+  slug          String   @unique
+  priceMonthly  Float
+  priceYearly   Float
+  maxScreens    Int      @default(1)
+  maxProfiles   Int      @default(1)
+  hdQuality     String   @default("HD") // SD, HD, FHD, 4K
+  channelAccess String   @default("BASIC") // BASIC, STANDARD, PREMIUM
+  vodAccess     Boolean  @default(true)
+  description   String
+  featured      Boolean  @default(false)
+  sortOrder     Int      @default(0)
+
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planId        String
+  plan          Plan     @relation(fields: [planId], references: [id])
+  status        String   @default("TRIALING")
+  billingCycle  String   @default("monthly") // monthly | yearly
+  currentPeriodEnd DateTime
+  startedAt     DateTime @default(now())
+  cancelAtPeriodEnd Boolean @default(false)
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Float
+  currency  String   @default("USD")
+  status    String   @default("paid")
+  method    String   @default("card")
+  createdAt DateTime @default(now())
+  description String
+}
+
+// ------------------------------
+// LIVE TV
+// ------------------------------
+
+model Channel {
+  id           String   @id @default(cuid())
+  name         String
+  logoUrl      String
+  streamUrl    String   // HLS/M3U endpoint - swap in real Xtream/M3U feed
+  country      String
+  countryCode  String
+  language     String   @default("English")
+  category     String   // News, Sports, Entertainment, Kids, Movies, Documentary, Music, Religious
+  tier         String   @default("BASIC") // BASIC, STANDARD, PREMIUM
+  isHD         Boolean  @default(true)
+  isFeatured   Boolean  @default(false)
+  number       Int      @default(0)
+  epg          EpgEntry[]
+}
+
+model EpgEntry {
+  id        String   @id @default(cuid())
+  channelId String
+  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  title     String
+  description String
+  startTime DateTime
+  endTime   DateTime
+}
+
+// ------------------------------
+// VOD (Video on Demand)
+// ------------------------------
+
+model Title {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  type         String
+  synopsis     String
+  posterUrl    String
+  backdropUrl  String
+  releaseYear  Int
+  rating       String   @default("PG-13")
+  imdbRating   Float    @default(7.0)
+  durationMins Int?     // for movies
+  genres       String   // comma separated
+  cast         String   // comma separated
+  director     String   @default("")
+  country      String   @default("USA")
+  language     String   @default("English")
+  tier         String   @default("BASIC")
+  isFeatured   Boolean  @default(false)
+  isNew        Boolean  @default(false)
+  isTrending   Boolean  @default(false)
+  streamUrl    String?  // for movies
+  createdAt    DateTime @default(now())
+
+  seasons      Season[]
+  watchlistedBy Watchlist[]
+  progress     WatchProgress[]
+}
+
+model Season {
+  id        String   @id @default(cuid())
+  titleId   String
+  title     Title    @relation(fields: [titleId], references: [id], onDelete: Cascade)
+  number    Int
+  episodes  Episode[]
+}
+
+model Episode {
+  id           String   @id @default(cuid())
+  seasonId     String
+  season       Season   @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  number       Int
+  name         String
+  synopsis     String
+  durationMins Int      @default(45)
+  stillUrl     String
+  streamUrl    String
+  progress     WatchProgress[]
+}
+
+model Watchlist {
+  id        String   @id @default(cuid())
+  profileId String
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  titleId   String
+  title     Title    @relation(fields: [titleId], references: [id], onDelete: Cascade)
+  addedAt   DateTime @default(now())
+
+  @@unique([profileId, titleId])
+}
+
+model WatchProgress {
+  id         String   @id @default(cuid())
+  profileId  String
+  profile    Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  titleId    String
+  title      Title    @relation(fields: [titleId], references: [id], onDelete: Cascade)
+  episodeId  String?
+  episode    Episode? @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+  positionSecs Int    @default(0)
+  totalSecs    Int    @default(1)
+  updatedAt  DateTime @updatedAt
+
+  @@unique([profileId, titleId, episodeId])
+}
