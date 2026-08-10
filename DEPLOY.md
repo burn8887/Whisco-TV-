@@ -52,7 +52,7 @@ cp .env.example .env
 
 npm install
 npx prisma db push       # creates all the tables in your Neon database
-npm run db:seed          # loads 363 channels, 164 titles, plans, demo users
+npm run db:seed          # loads 225 live channels, 164 VOD titles, demo users
 ```
 
 You only need to do this once (or again later if you want to reset the demo data).

@@ -1,0 +1,2018 @@
+[
+  {
+    "name": "DW English",
+    "country": "Germany",
+    "countryCode": "DE",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/index.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "France 24 English",
+    "country": "France",
+    "countryCode": "FR",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "France 24 Arabic",
+    "country": "France",
+    "countryCode": "FR",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://static.france24.com/live/F24_AR_LO_HLS/live_web.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "France 24 French",
+    "country": "France",
+    "countryCode": "FR",
+    "language": "French",
+    "category": "News",
+    "streamUrl": "https://static.france24.com/live/F24_FR_LO_HLS/live_web.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "Sky News Arabia",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://stream.skynewsarabia.com/hls/sna.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "TRT World",
+    "country": "Turkey",
+    "countryCode": "TR",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://tv-trtworld.medya.trt.com.tr/master.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "CBS News",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "Bloomberg TV",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://www.bloomberg.com/media-manifest/streams/us.m3u8",
+    "isFeatured": true
+  },
+  {
+    "name": "Al Arabiya",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live.alarabiya.net/alarabiapublish/alarabiya.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Arabiya Business",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live.alarabiya.net/alarabiapublish/aswaaq.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Arabiya Programs",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live.alarabiya.net/alarabiapublish/aaprograms.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Sharjah 2",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/smc2live/smc2tv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Sharjah TV",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/smc1live/smc1tv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ajman TV",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn1.logichost.in/ajmantv/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Qamar TV",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://streamer3.premio.link/alqamar/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Shallal TV",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://amg01480-alshallalfze-alshallal-ono-q0hfg.amagi.tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Sharqiya Min Kabla",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/kablatvlive/kabtv1.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Ekhbariya",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-al-ekhbaria/297b3ef1cd0633ad9cfba7473a686a06/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Hadath",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a20637d9f8fd/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Arabiya Al Hadath",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://av.alarabiya.net/alarabiapublish/alhadath.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Hadath TV",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live.alarabiya.net/alarabiapublish/alhadath.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Saudiya",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-saudi-tv/2ad66056b51fd8c1b624854623112e43/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Saudiya Alaan",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-ksa-now/71ed3aa814c643306c0a8bc4fcc7d17f/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Saudi Thaqafiya TV",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-thaqafeyyah/28c0d2a20dbf1dc049ce15d3973f494b/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Arabiya English",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://live.alarabiya.net/alarabiapublish/english/playlist_dvr.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC Masr Drama",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr-drama/567b703c19ede6598222de81b0e4508b/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC Mood",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-mood/78367bf48ccdba501d0d014a10c21031/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC+ Drama",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-plus-drama/e37251ec2aac8f6c98f75cd0fa37cd28/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Abdulmajeed Abdullah",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://d2hng5r56zpsbw.cloudfront.net/out/v1/9c4c990f44bb4767bb46271f326dd574/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aflam",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "Movies",
+    "streamUrl": "https://shd-amg-fast.edgenextcdn.net/tx001/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-hls-apps-aja-fa.getaj.net/AJA/01.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera 2",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera Arabic",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-hls-v3-aja.getaj.net/AJA-V3/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera English",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://live-hls-apps-aje-fa.getaj.net/AJE/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera Mubasher",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-hls-apps-ajm-fa.getaj.net/AJM/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera Mubasher 24",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-hls-apps-ajm24-fa.getaj.net/AJM24/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Jazeera Mubasher Broadcast 2",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-hls-apps-ajm2-fa.getaj.net/AJM2/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Qatar Television",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/qtv1live/qtv1.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Qatar Television 2",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/qtv2live/qtv2.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV 1",
+    "country": "Kuwait",
+    "countryCode": "KW",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://kwtktv1ta.cdn.mangomolo.com/ktv1/smil:ktv1.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV 2",
+    "country": "Kuwait",
+    "countryCode": "KW",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://kwtktv2ta.cdn.mangomolo.com/ktv2/smil:ktv2.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV Al Qurain",
+    "country": "Kuwait",
+    "countryCode": "KW",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://kwtktvaqta.cdn.mangomolo.com/ktvaq/smil:tktvaq.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV Arabe",
+    "country": "Kuwait",
+    "countryCode": "KW",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://kwtktvata.cdn.mangomolo.com/ktva/smil:tktva.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV Ethraa",
+    "country": "Kuwait",
+    "countryCode": "KW",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://kwtethta.cdn.mangomolo.com/eth/smil:eth.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV News",
+    "country": "Kuwait",
+    "countryCode": "KW",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://kwtkbta.cdn.mangomolo.com/kb/smil:kb.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bahrain International",
+    "country": "Bahrain",
+    "countryCode": "BH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:bahraininternational_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bahrain Quran",
+    "country": "Bahrain",
+    "countryCode": "BH",
+    "language": "Arabic",
+    "category": "Lifestyle",
+    "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainquran_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bahrain Sports 1",
+    "country": "Bahrain",
+    "countryCode": "BH",
+    "language": "Arabic",
+    "category": "Sports",
+    "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bahrain Sports 2",
+    "country": "Bahrain",
+    "countryCode": "BH",
+    "language": "Arabic",
+    "category": "Sports",
+    "streamUrl": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Oman Althakafia",
+    "country": "Oman",
+    "countryCode": "OM",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://partwota.cdn.mgmlcdn.com/omcultural/smil:omcultural.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Oman Mubashir",
+    "country": "Oman",
+    "countryCode": "OM",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://partwota.cdn.mgmlcdn.com/omlive/smil:omlive.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Oman TV",
+    "country": "Oman",
+    "countryCode": "OM",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Oman Sports TV",
+    "country": "Oman",
+    "countryCode": "OM",
+    "language": "Arabic",
+    "category": "Sports",
+    "streamUrl": "https://partneta.cdn.mgmlcdn.com/omsport/smil:omsport.stream.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "CBC",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://flu.systemnet.tv/CBC/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "CBC Drama",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://flu.systemnet.tv/CBCDrama/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "CBC Sofra",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://flu.systemnet.tv/CBCSofra/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC 1 Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Koogi TV",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://5d658d7e9f562.streamlock.net/koogi.tv/koogi.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC Masr",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr/956eac069c78a35d47245db6cdbb1575/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC Masr 2",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr-2/754931856515075b0aabf0e583495c68/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Archive",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Archive/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Comedy",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Comedy/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Drama",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Drama/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Kitchen",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/cooking/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Satellite Channel",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://jrtv-live.ercdn.net/jordanhd/jordanhd.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MTV Lebanon",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mtv-lebanon/b8ebb2a5affb812f1541712adde10e26/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Future TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/futurelive/ftv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "OTV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://otv.hibridcdn.net/otv/tv_abr/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aghani Aghani TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.streamlane.tv/hls/aghanitv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "mfm",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://hms.pfs.gdn/hms/v1/broadcast/hlmvmp2hfriode891/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD National HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt01.tangotv.in/O5aw8Zn3DDNATIONALHD/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://cdn-2.pishow.tv/live/12/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD India",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://d2gvyg6lvauoko.cloudfront.net/230226/ddindia/chunks.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV Good Times",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://amg01448-samsungin-ndtvgoodtimes-samsungin-ad-gp.amagi.tv/playlist/amg01448-samsungin-ndtvgoodtimes-samsungin/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV Madhya Pradesh Chhattisgarh",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://ndtvregional.akamaized.net/hls/live/2102726-b/ndtvmpcg/master_1.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV Marathi",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://web-ndtv-marathi.akamaized.net/hls/live/2110470/ndtvmarathi/master_1.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV Profit",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://ndtvprofit.akamaized.net/hls/live/2107404/ndtvprofit/chunklist_5.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV Rajasthan",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://ndtvregional.akamaized.net/hls/live/2102726-b/ndtvraj/master_1.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV 24x7",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/NDTV24x7.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV India",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/NDTVIndia.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "India Today",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-293160/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Republic Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://vg-republictvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-456368/main.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Republic Bharat",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/RepublicBharat.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Republic Kannada",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://vg-republictvlive.akamaized.net/ptnr-republicweb/title-Republic_TV_Kannada/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/1acd1ce1-c6a7-4ae4-afa1-133ffb111ebb/main.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Republic TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/RepublicTV.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Times Now Navbharat",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/TimesNowNavbharat.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Assam North-East",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Assam_North_East_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Bangla_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Bihar Jharkhand",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Bihar_Jharkhand_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Delhi NCR JK",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_JKLH_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Gujarati",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Gujarati_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 India",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_India_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Kannada",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Kannada_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Kerala",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Kerala_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Madhya Pradesh/Chhattisgarh",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_MP_Chhattisgarh_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Marathi",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Lokmat_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Odia",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Odia_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Punjab/Haryana/Himachal",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Punjab_Haryana_HP_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Rajasthan",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Rajasthan_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Tamil Nadu",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Tamil_Nadu_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Urdu",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_Urdu_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News18 Uttar Pradesh Uttarakhand",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://n18syndication.akamaized.net/bpk-tv/News18_UP_Uttarakhand_NW18_MOB/output01/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PTV Sports",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Sports",
+    "streamUrl": "https://tvsen7.aynascope.net/Sports1/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Dunya News (INT Feed)",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://imob.dunyanews.tv/livehd/ngrp:dunyalivehd_2_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Dunya News (UK Feed)",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://ukintl.dunyanews.tv/liveuk/ngrp:dunyalive_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Samaa TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://vodzong.mjunoon.tv:8087/streamtest/SAMAA-173/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Discover Pakistan",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.live247stream.com/discoverpakistan/web/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Madani Channel Bangla",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Neo News",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://vodzong.mjunoon.tv:8087/streamtest/Neo-110/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "M News",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://cdn.rabta.stream/M-News/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "M Sports",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Sports",
+    "streamUrl": "https://cdn.rabta.stream/M-Sports/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Grace Network",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.live247stream.com/grace/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Isaac TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.live247stream.com/isaac/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "JooMusic",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Music",
+    "streamUrl": "https://livecdn.live247stream.com/joomusic/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Joshua TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.live247stream.com/joshua/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Madani Channel English",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.madanichannel.tv/static/streaming-playlists/hls/c6a600b0-82cb-454a-8953-2bb2bb372edc/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Madani Channel Urdu",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.madanichannel.tv/static/streaming-playlists/hls/b9790f10-cb0d-4e30-82bf-84a756234e58/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News One",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://vodzong.mjunoon.tv:8087/streamtest/NEWS1-128/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PK Sports",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Sports",
+    "streamUrl": "https://lbgo.bozztv.com/ssh101/ssh101/pksportshd/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Praise TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.live247stream.com/praise/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ATN Bangla",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://tvsen5.aynaott.com/atnbangla/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NTV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ekushey TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://ekusheyserver.com/etvlivesn.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bangla Vision",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://tvsen5.aynaott.com/banglavision/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Green TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/live-orgin/greentv.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Rajdhani TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.shariarsuvo.com/hls5/rajdhanicable.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "T Sports",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Sports",
+    "streamUrl": "https://tvsen5.aynaott.com/TnMn5kZz8aLm/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Deshi TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://deshitv.deshitv24.net/live/myStream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Maasranga TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://tvsen5.aynaott.com/maasrangatv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "RTV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://tvsen5.aynaott.com/RtvHD/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Rupashi Bangla TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ruposhibangla.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ananda TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Boishakhi TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Premier Sports",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "Sports",
+    "streamUrl": "https://amg19223-amg19223c3-amgplt0351.playout.now3.amagi.tv/playlist/amg19223-amg19223c3-amgplt0351/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Premier Sports 2",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "Sports",
+    "streamUrl": "https://amg19223-amg19223c4-amgplt0351.playout.now3.amagi.tv/playlist/amg19223-amg19223c4-amgplt0351/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Abante TV",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "Entertainment",
+    "streamUrl": "https://amg19223-amg19223c12-amgplt0352.playout.now3.amagi.tv/playlist/amg19223-amg19223c12-amgplt0352/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Kongress TV",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "Entertainment",
+    "streamUrl": "https://stitch.teletarget.ru/api/v1/hls/504/158/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "CLTV 36",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "Entertainment",
+    "streamUrl": "https://live.cltv36.tv:5443/LiveApp/streams/cltvlive.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bilyonaryo News Channel",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "News",
+    "streamUrl": "https://amg19223-amg19223c11-amgplt0352.playout.now3.amagi.tv/playlist/amg19223-amg19223c11-amgplt0352/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Silverbird News 24",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_029/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Kingsview TV",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://j78dp6reyq5r-hls-live.5centscdn.com/4896_push_1963_001/00cb1f2e4ff89048f2e77e26940c00e6.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Qausain TV",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://acasmedia3.acangroup.org/qausaintv/qausaintv_output/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Wazobia Max TV Nigeria",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://wazobia.live:8333/channel/wmax.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Wazobia Max TV Port Harcourt",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://wazobia.live:8333/channel/wmaxph.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Advocate Broadcasting Network",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_045/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "BCS StarCross TV",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_001/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bride TV",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_013/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Coza TV",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_019/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Morning Cloud TV",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.live247stream.com/mc/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Akili Kids!",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Kids",
+    "streamUrl": "https://m6.livecdn.io/akilikids.co.ke/akilikids.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Capuchin TV",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://goliveafrica.media:9998/live/64227f58b8413/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Great Commission TV",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://stream-server9-jupiter.muxlive.com/hls/gctvghana/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Inooro TV",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://live-onesignal.royalmedia.co.ke/live/T-MxRsFebq6zx7k2QFMbLw.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "K24",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://livecdn.premiumfree.tv/afxpstr/K24Backup/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "LN24SA",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://cdnstack.internetmultimediaonline.org/ln24/ln24.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "LoveworldSAT",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://cdnstack.internetmultimediaonline.org/lwsat/lwsat.stream/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "WildEarth",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://wildearth-ono.amagi.tv/playlist/amg01290-wildearth-oando/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ROV TV",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_012/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Homebase TV",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_022/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NuView TV",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_002/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Adinkra TV",
+    "country": "Ghana",
+    "countryCode": "GH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://59d39900ebfb8.streamlock.net/adinkratvny/adinkratvny/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "G-eye TV",
+    "country": "Ghana",
+    "countryCode": "GH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://online.geyetv.com/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "OTV",
+    "country": "Ghana",
+    "countryCode": "GH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://5dcabf026b188.streamlock.net/OceansTV/livestream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Resurrection TV",
+    "country": "Ghana",
+    "countryCode": "GH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://1681360479.rsc.cdn77.org/1681360479/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "AP TV",
+    "country": "Ghana",
+    "countryCode": "GH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://59nyqg8elwap-hls-live.5centscdn.com/APTV/85c20905211659d143febd7c32592ee0.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "EBS HD",
+    "country": "Ethiopia",
+    "countryCode": "ET",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://rpn.bozztv.com/ebstv/ebstv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "EBS Cinema",
+    "country": "Ethiopia",
+    "countryCode": "ET",
+    "language": "English",
+    "category": "Movies",
+    "streamUrl": "https://rpn.bozztv.com/ebstv/ebscinema/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "EBS Musika",
+    "country": "Ethiopia",
+    "countryCode": "ET",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://rpn.bozztv.com/ebstv/ebsmusika/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PBS Kids",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Kids",
+    "streamUrl": "https://livestream.pbskids.org/out/v1/14507d931bbe48a69287e4850e53443c/est.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PBS Kids Hawaii",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Kids",
+    "streamUrl": "https://livestream.pbskids.org/out/v1/aa31792fee094b24b09045483f04d150/hast.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bloomberg Originals",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://86fdc85a.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctZ2JfQmxvb21iZXJnT3JpZ2luYWxzX0hMUw/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bloomberg TV +",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://66e4bbba.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctZ2JfQmxvb21iZXJnVFZQbHVzX0hMUw/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Newsmax Spanish",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://n1ottesorkatv.akamaized.net/hls/live/2113795/Live_1/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Newsmax 2",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://nmxlive.akamaized.net/hls/live/529965/Live_1/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Newsmax TV",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://nmx1ota.akamaized.net/hls/live/2107010/Live_1/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KPVM Newsmax 2",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://2-fss-2.streamhoster.com/pl_120/206858-4404556-1/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Cheddar News",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://hls.livecdn.io/cheddar.com/cheddar/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "AfroLand TV",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://alt-al.otteravision.com/alt/al/al.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Fox Weather",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://247wlive.foxweather.com/stream/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Sky News Weather",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://distro001-gb-hls1-prd.delivery.skycdp.com/easel_cdn/ngrp:weather_loop.stream_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "GB News",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://live-gbnews-ssai-test.simplestreamcdn.com/v1/master/82267e84b9e5053b3fd0ade12cb1a146df74169a/gbnews-live-TEST/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "TalkTV",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://488f4ce4.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctZ2JfVGFsa19ITFM/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Afrobeats",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.ecable.tv/afrobeats/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Brit Asia TV",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://hls.autopo.st/hls/britasiatv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Faith World TV",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://faithworldtv.abs.tv/1826926230/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "GREAT! movies",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Movies",
+    "streamUrl": "https://amg01753-narrativeuk-amg01753c3-lg-gb-1833.playouts.now.amagi.tv/playlist/amg01753-narrativeuk-greatmovies-lggb/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "GREAT! romance",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://amg01753-narrativeuk-amg01753c2-lg-gb-1832.playouts.now.amagi.tv/playlist/amg01753-narrativeuk-greatchristmas-lggb/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ATN Bangla UK",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/atnbanglauk-off.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Channel S",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "FIFA+",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Sports",
+    "streamUrl": "https://a62dad94.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "FIFA+ Women",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Sports",
+    "streamUrl": "https://cffda8ff.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9GSUZBUGx1c3dvbWVuX0hMUw/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "GOD TV",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://d1msejlow1t3l4.cloudfront.net/211125/godtv/chunks.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Mr Bean Live Action",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://amg00627-amg00627c40-rakuten-uk-5725.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanpopupcc-rakutenuk/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Pent TV",
+    "country": "Ghana",
+    "countryCode": "GH",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.dacast.com/live/a72117af-d78e-7ffe-7c12-1af6cd4a8483-live-42172a86-494b-a866-498f-dbaff4b5e3c0/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "BOKTV",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://livestream2.bokradio.co.za/hls/Bok5c.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "YOUNIB Media TV",
+    "country": "Kenya",
+    "countryCode": "KE",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Chosen TV English",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_024/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News Central",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "News",
+    "streamUrl": "https://wf.newscentral.ng:8443/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Filmax",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://s3.ideationtec.live/Filmax/Filmax.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "24 News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://mumt07.tangotv.in/zHjX9OFlTWENTYFOURNEWS/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aaj Tak",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-791258/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asharq Discovery",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://svs.itworkscdn.net/asharqdiscoverylive/asharqd.smil/playlist_dvr.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asharq Documentary",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://svs.itworkscdn.net/asharqdocumentarylive/asharqdocumentary.smil/playlist_dvr.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asharq News",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://live-news.asharq.com/asharq.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Yaum TV",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC 1",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1/15cf99af5de54063fdabfefe66adc075/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC 4",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC 5",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBC Drama",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-drama/2c28a458e2f3253e678b07ac7d13fe71/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Wousta TV",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/alwoustalive/alwoustatv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Araby TV",
+    "country": "Qatar",
+    "countryCode": "QA",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/alaraby1live/alaraby_abr/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aghapy TV",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://5b622f07944df.streamlock.net/aghapy.tv/aghapy.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aliman TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/alimanlive/imantv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABN News",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://vodzong.mjunoon.tv:8087/streamtest/ABN-161/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands Kids Club TV Arabic",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Kids",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/KidsArabic.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ACNN",
+    "country": "Nigeria",
+    "countryCode": "NG",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_014/Stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABN Afghanistan",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://mediaserver.abnvideos.com/streams/abnafghanistan.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABN Africa",
+    "country": "United States",
+    "countryCode": "US",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://mediaserver.abnvideos.com/streams/abnafrica.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Afghanistan International",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://hls.afintl.com/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Alhiwar TV",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://mn-nl.mncdn.com/alhiwar_live/smil:alhiwar.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "AMC Europe",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://dokagents.site/live/amc/mono.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Anand TV",
+    "country": "United Kingdom",
+    "countryCode": "UK",
+    "language": "English",
+    "category": "Entertainment",
+    "streamUrl": "https://live-anandtv.anandmedia.net/anandtvapp/anandtv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Charity TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://652930de05533.streamlock.net/live/ngrp:livestream_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Lana TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.streamlane.tv/hls/ltv/master.m3u8",
+    "isFeatured": false
+  }
+]

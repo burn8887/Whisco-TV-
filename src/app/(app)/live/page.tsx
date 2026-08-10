@@ -17,7 +17,7 @@ export default async function LivePage({
   if (sp.q) where.name = { contains: sp.q };
 
   const [channels, countries, categories, total] = await Promise.all([
-    prisma.channel.findMany({ where, orderBy: [{ country: "asc" }, { number: "asc" }], take: 200 }),
+    prisma.channel.findMany({ where, orderBy: [{ country: "asc" }, { number: "asc" }], take: 400 }),
     prisma.channel.findMany({ distinct: ["country"], select: { country: true }, orderBy: { country: "asc" } }),
     prisma.channel.findMany({ distinct: ["category"], select: { category: true }, orderBy: { category: "asc" } }),
     prisma.channel.count(),

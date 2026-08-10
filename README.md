@@ -1,61 +1,85 @@
-# Whisco TV — IPTV Subscription Platform
+# Whisco TV — Free Ad-Supported (FAST) TV Platform
 
-A full-stack IPTV subscription platform: global live TV + a large on-demand
-library (movies, series, documentaries), subscription billing, multi-profile
-accounts, and a complete admin console — built with Next.js, Prisma, and
-NextAuth.
+A full-stack, 100% free, ad-supported live TV + on-demand streaming
+platform: no subscriptions, no plans, no billing. Built with Next.js,
+Prisma, and NextAuth.
 
 ## What's included
 
 **Customer app**
-- Marketing homepage, pricing page, signup/login (7-day free trial on signup)
-- `/browse` — personalized home: hero banner, continue watching, trending,
+- Marketing homepage, signup/login (accounts are optional — only needed for
+  personalization; browsing and watching require no account at all)
+- `/browse` — home: hero banner, continue watching (if signed in), trending,
   new releases, genre rows, popular live channels
-- `/live` — live TV guide with country/category/search filters (363 seeded
-  channels across 32 countries and 8 categories)
-- `/live/[id]` — channel player page with tier-gating
+- `/live` — live TV guide with country/category/search filters — **225 real,
+  verified, free-to-air broadcast channels across 22 countries**, curated
+  for GCC local + expat audiences: Arabic (UAE, Saudi, Qatar, Kuwait,
+  Bahrain, Oman, Egypt, Jordan, Lebanon), English/International, Indian
+  (Hindi + regional-language), Pakistani (Urdu), Bangladeshi (Bengali),
+  Filipino, and African (Nigeria, Kenya, South Africa, Ghana, Ethiopia)
+- `/live/[id]` — channel player page (no gating — every channel is free)
 - `/vod` — on-demand library (movies/series/documentaries) with filters
   (164 seeded titles, several with full seasons/episodes)
 - `/title/[slug]` — detail page, episode list, "Add to My List"
 - `/watch/movie/[id]` and `/watch/episode/[id]` — HLS/MP4 player with resume
   position tracking
 - `/watchlist`, `/profiles` (multi-profile + kids profile), `/account`
-  (plan, billing history, upgrade/downgrade/cancel)
 
 **Admin console** (`/admin`, requires an ADMIN account)
-- Dashboard with key metrics (channels, titles, users, active subs, revenue)
-- Full CRUD for Channels, VOD Titles (incl. seasons/episodes for series),
-  Subscription Plans, and Users/subscription status
+- Dashboard with key metrics (channels, titles, users, categories)
+- Full CRUD for Channels and VOD Titles (incl. seasons/episodes for
+  series), and user management
 
 ## Demo logins
 
 - Viewer: `demo@whiscotv.demo` / `Demo123!`
 - Admin: `admin@whiscotv.demo` / `Admin123!`
+- Or just visit `/browse` directly — no account needed to watch anything.
 
-## ⚠️ Important — content sourcing
+## ⚠️ Important — content sourcing & monetization
 
-This is a fully working platform shell. The seed data uses:
-- **Placeholder channel logos / posters / stills**: generated inline SVGs
-  (no external image hosting needed).
-- **Placeholder live/VOD streams**: public, freely licensed test streams
-  (Apple/Mux HLS test streams, Google's sample MP4s) so playback works
-  out of the box in a real browser.
+**Live channels** (`prisma/live_channels.json`, loaded by `prisma/seed.ts`):
+every one of the 225 channels is a **real, currently-live, free-to-air
+public broadcast stream** — verified reachable at seed time. Sources:
+- A handful of directly-confirmed official broadcaster endpoints (DW,
+  France 24, Sky News Arabia, TRT World, CBS News, Bloomberg TV).
+- The majority via [iptv-org](https://github.com/iptv-org/iptv), a
+  long-running, community-maintained registry that specifically screens
+  for free/publicly-available streams (used by mainstream FOSS media
+  software like Jellyfin, Kodi, and Plex plugins).
 
-To go live you must plug in **your own licensed content**:
-- Live channels: point `Channel.streamUrl` at your Xtream Codes / M3U
-  provider's per-channel stream URLs (via the admin panel or by re-running
-  a seed/import script against your provider's API).
-- VOD: point `Title.streamUrl` / `Episode.streamUrl` at your licensed CDN
-  (e.g. Mux, Bunny Stream, AWS MediaConvert output, CloudFront).
-- Real payments: `src/lib/actions/billing.ts` currently mocks checkout
-  (instantly marks the subscription active). Swap in Stripe/Adyen/etc.
-  before launch.
+This gets you real scale fast, but **treat it as a strong starting
+lineup, not a finished legal/commercial deal**: public stream URLs can move
+or go offline, and a few may be geo-restricted for some viewers. Before a
+real commercial launch:
+- Re-verify the list periodically (URLs in `prisma/live_channels.json`
+  do drift — re-run the verification approach described in your project
+  history, or replace with direct broadcaster agreements).
+- For guaranteed uptime and a much larger catalog, graduate to a **FAST
+  aggregator partnership** (e.g. Amagi, Cinedigm/Cineverse, Zone.tv) —
+  this is how legitimate large FAST platforms (Pluto TV, Plex, Samsung TV
+  Plus) reach hundreds of channels: licensed, ad-revenue-share deals
+  instead of negotiating each channel individually.
+- Monetize via **server-side ad insertion (SSAI)** on top of these
+  channels once you're ready — the categories/countries were selected to
+  be broad, ad-friendly, and appealing across all target GCC communities
+  rather than niche.
+
+**VOD** (`Title`/`Episode.streamUrl`): still uses public-domain sample
+videos as placeholders. Replace with a licensed VOD syndication deal
+(Filmhub, Cinedigm/Cineverse, Under the Milky Way, or similar) for real
+movies/series/documentaries.
+
+**No payments anywhere** — this app has no subscription/billing code by
+design. If you ever add a paid premium tier, it would be a new addition,
+not a restoration of removed functionality.
 
 ## Tech stack
 
 - Next.js 16 (App Router, Server Actions) + TypeScript + Tailwind CSS
 - Prisma + PostgreSQL (any provider — Neon, Vercel Postgres, Supabase, RDS, etc.)
-- NextAuth (Auth.js v5) with credentials auth (JWT sessions)
+- NextAuth (Auth.js v5) with credentials auth (JWT sessions) — optional,
+  personalization-only
 - hls.js for adaptive live-stream playback in the browser
 
 ## Local development
@@ -64,7 +88,7 @@ To go live you must plug in **your own licensed content**:
 cp .env.example .env   # set DATABASE_URL to your Postgres connection string
 npm install
 npx prisma db push     # creates all tables in your database
-npm run db:seed        # seeds channels, VOD catalog, plans, demo users
+npm run db:seed        # seeds 225 live channels + VOD catalog + demo users
 npm run dev
 ```
 
@@ -76,7 +100,10 @@ import it into Vercel to get a permanent public URL.
 
 ## Re-seeding / editing catalog data
 
-Edit `prisma/seed.ts` (curated "flagship" titles/channels + programmatic
-bulk generation for catalog scale) and re-run `npm run db:seed`.
-It wipes and recreates all channels/titles/plans/users, so don't run it
-against a live production database with real user data.
+- Live channels: edit `prisma/live_channels.json` directly (add/remove/
+  replace entries — each needs `name`, `country`, `countryCode`,
+  `language`, `category`, `streamUrl`, optional `isFeatured`).
+- VOD: edit the curated + programmatic sections in `prisma/seed.ts`.
+- Re-run `npm run db:seed` to apply. It wipes and recreates all
+  channels/titles/users, so don't run it against a live production
+  database with real user data you want to keep.

@@ -10,7 +10,7 @@ export default async function AdminChannelsPage({ searchParams }: { searchParams
   const channels = await prisma.channel.findMany({
     where: sp.q ? { name: { contains: sp.q } } : {},
     orderBy: [{ country: "asc" }, { number: "asc" }],
-    take: 200,
+    take: 400,
   });
 
   return (

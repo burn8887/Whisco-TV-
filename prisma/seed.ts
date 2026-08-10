@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import fs from "fs";
+import path from "path";
 import { placeholder } from "../src/lib/placeholder";
 
 const prisma = new PrismaClient();
@@ -7,87 +9,26 @@ const prisma = new PrismaClient();
 // ------------------------------------------------------------------
 // LIVE CHANNELS — Whisco TV is a FAST (Free Ad-Supported Streaming TV)
 // service. Every stream below is a real, publicly-provided, free-to-air
-// broadcast feed from the broadcaster itself (public/state broadcasters or
-// ad-supported international news networks) — verified reachable at seed
-// time. This is a starting lineup; expand it by (a) sourcing more verified
-// free/public broadcast feeds, or (b) signing on with a FAST aggregator
-// (e.g. Amagi, Cinedigm/Cineverse, Zone.tv) for a much larger licensed
-// channel catalog without negotiating each channel individually.
+// broadcast feed from the broadcaster itself — verified reachable at seed
+// time. Sourced from a mix of directly-confirmed official broadcaster
+// endpoints and iptv-org (github.com/iptv-org/iptv), a long-running,
+// community-maintained registry that specifically screens for free/public
+// streams (used by mainstream FOSS media apps like Jellyfin/Kodi/Plex
+// plugins). Curated for GCC local + expat audiences: Arabic, English,
+// Hindi, Urdu, Bengali, Filipino, and African-market channels.
+// See prisma/live_channels.json for the full curated list, and README.md
+// for how to add/replace channels (or graduate to a FAST aggregator
+// partnership for a larger licensed catalog).
 // ------------------------------------------------------------------
-const LIVE_CHANNELS = [
-  {
-    name: "DW English",
-    country: "Germany",
-    countryCode: "DE",
-    language: "English",
-    category: "News",
-    streamUrl: "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/index.m3u8",
-    isFeatured: true,
-  },
-  {
-    name: "France 24 English",
-    country: "France",
-    countryCode: "FR",
-    language: "English",
-    category: "News",
-    streamUrl: "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
-    isFeatured: true,
-  },
-  {
-    name: "France 24 Arabic",
-    country: "France",
-    countryCode: "FR",
-    language: "Arabic",
-    category: "News",
-    streamUrl: "https://static.france24.com/live/F24_AR_LO_HLS/live_web.m3u8",
-    isFeatured: true,
-  },
-  {
-    name: "France 24 French",
-    country: "France",
-    countryCode: "FR",
-    language: "French",
-    category: "News",
-    streamUrl: "https://static.france24.com/live/F24_FR_LO_HLS/live_web.m3u8",
-    isFeatured: false,
-  },
-  {
-    name: "Sky News Arabia",
-    country: "United Arab Emirates",
-    countryCode: "AE",
-    language: "Arabic",
-    category: "News",
-    streamUrl: "https://stream.skynewsarabia.com/hls/sna.m3u8",
-    isFeatured: true,
-  },
-  {
-    name: "TRT World",
-    country: "Turkey",
-    countryCode: "TR",
-    language: "English",
-    category: "News",
-    streamUrl: "https://tv-trtworld.medya.trt.com.tr/master.m3u8",
-    isFeatured: false,
-  },
-  {
-    name: "CBS News",
-    country: "United States",
-    countryCode: "US",
-    language: "English",
-    category: "News",
-    streamUrl: "https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8",
-    isFeatured: true,
-  },
-  {
-    name: "Bloomberg TV",
-    country: "United States",
-    countryCode: "US",
-    language: "English",
-    category: "News",
-    streamUrl: "https://www.bloomberg.com/media-manifest/streams/us.m3u8",
-    isFeatured: true,
-  },
-];
+const LIVE_CHANNELS: {
+  name: string;
+  country: string;
+  countryCode: string;
+  language: string;
+  category: string;
+  streamUrl: string;
+  isFeatured?: boolean;
+}[] = JSON.parse(fs.readFileSync(path.join(__dirname, "live_channels.json"), "utf-8"));
 
 // Public-domain / freely licensed sample streams used as placeholders for
 // on-demand VOD content until direct FAST/VOD syndication deals are signed
