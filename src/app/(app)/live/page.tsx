@@ -1,14 +1,15 @@
 import { prisma } from "@/lib/prisma";
 import ChannelCard from "@/components/ChannelCard";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
+const PAGE_SIZE = 90;
 
 export default async function LivePage({
   searchParams,
 }: {
-  searchParams: Promise<{ country?: string; category?: string; q?: string }>;
+  searchParams: Promise<{ country?: string; category?: string; q?: string; page?: string }>;
 }) {
   const sp = await searchParams;
   const where: any = { isActive: true };
@@ -16,12 +17,26 @@ export default async function LivePage({
   if (sp.category) where.category = sp.category;
   if (sp.q) where.name = { contains: sp.q };
 
-  const [channels, countries, categories, total] = await Promise.all([
-    prisma.channel.findMany({ where, orderBy: [{ country: "asc" }, { number: "asc" }], take: 400 }),
+  const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
+
+  const [channels, countries, categories, filteredCount, total] = await Promise.all([
+    prisma.channel.findMany({
+      where,
+      orderBy: [{ country: "asc" }, { number: "asc" }],
+      take: PAGE_SIZE,
+      skip: (page - 1) * PAGE_SIZE,
+    }),
     prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true }, orderBy: { country: "asc" } }),
     prisma.channel.findMany({ distinct: ["category"], where: { isActive: true }, select: { category: true }, orderBy: { category: "asc" } }),
+    prisma.channel.count({ where }),
     prisma.channel.count({ where: { isActive: true } }),
   ]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredCount / PAGE_SIZE));
+  const baseQuery: Record<string, string> = {};
+  if (sp.country) baseQuery.country = sp.country;
+  if (sp.category) baseQuery.category = sp.category;
+  if (sp.q) baseQuery.q = sp.q;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -66,7 +81,9 @@ export default async function LivePage({
         )}
       </form>
 
-      <p className="text-xs text-zinc-500 mb-4">{channels.length} channel{channels.length !== 1 ? "s" : ""} found</p>
+      <p className="text-xs text-zinc-500 mb-4">
+        {filteredCount} channel{filteredCount !== 1 ? "s" : ""} found · page {page} of {totalPages}
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {channels.map((c) => (
@@ -74,7 +91,38 @@ export default async function LivePage({
         ))}
       </div>
 
-      {channels.length === 0 && <p className="text-zinc-500 text-center py-20">No channels match your filters.</p>}
+      {channels.length === 0 && (
+        <div className="text-center py-20">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/whisco-mascot.png" alt="Whisco looking confused" className="w-28 mx-auto mb-4 opacity-90" />
+          <p className="text-zinc-400 font-medium">Even Whisco couldn't sniff any of these out.</p>
+          <p className="text-zinc-600 text-sm mt-1">Try a different search or filter.</p>
+        </div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-4 mt-10">
+          <Link
+            href={{ pathname: "/live", query: { ...baseQuery, page: String(Math.max(1, page - 1)) } }}
+            className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold ring-1 ring-white/10 ${
+              page <= 1 ? "pointer-events-none opacity-40 bg-white/5" : "bg-white/5 hover:bg-white/10"
+            }`}
+          >
+            <ChevronLeft size={16} /> Previous
+          </Link>
+          <span className="text-sm text-zinc-400">
+            Page {page} / {totalPages}
+          </span>
+          <Link
+            href={{ pathname: "/live", query: { ...baseQuery, page: String(Math.min(totalPages, page + 1)) } }}
+            className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold ring-1 ring-white/10 ${
+              page >= totalPages ? "pointer-events-none opacity-40 bg-white/5" : "bg-white/5 hover:bg-white/10"
+            }`}
+          >
+            Next <ChevronRight size={16} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

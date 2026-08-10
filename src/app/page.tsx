@@ -45,34 +45,51 @@ export default async function Home() {
           <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-violet-700/30 rounded-full blur-3xl" />
           <div className="absolute -top-20 right-0 w-[500px] h-[500px] bg-orange-600/20 rounded-full blur-3xl" />
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 ring-1 ring-emerald-500/30 text-emerald-300 mb-6">
-            <Sparkles size={14} /> 100% free, forever — no subscription, no trial, no credit card
-          </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
-            Free live TV and on-demand. <span className="text-gradient">No catch.</span>
-          </h1>
-          <p className="mt-6 text-lg text-zinc-400 max-w-2xl mx-auto">
-            Whisco TV is a free, ad-supported streaming service with {channelCount}+ live channels from around the
-            globe plus {titleCount}+ movies, documentaries, and classic TV — including a huge library of classic films
-            you won't find anywhere else. Just open the app and
-            watch — no account, no payment, no commitment required.
-          </p>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/browse"
-              className="px-8 py-3.5 rounded-full font-semibold bg-gradient-to-r from-orange-500 to-pink-600 hover:opacity-90 transition text-lg shadow-lg shadow-orange-900/30"
-            >
-              Start Watching — It's Free
-            </Link>
-            <Link
-              href="/live"
-              className="px-8 py-3.5 rounded-full font-semibold bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition text-lg"
-            >
-              Browse Live Channels
-            </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 sm:pb-20">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div className="text-center lg:text-left">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 ring-1 ring-emerald-500/30 text-emerald-300 mb-6">
+                <Sparkles size={14} /> 100% free, forever — no subscription, no trial, no credit card
+              </span>
+              <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                Free live TV and on-demand. <span className="text-gradient">No catch.</span>
+              </h1>
+              <p className="mt-6 text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0">
+                Whisco TV is a free, ad-supported streaming service with {channelCount}+ live channels from around the
+                globe plus {titleCount}+ movies, documentaries, and classic TV — including a huge library of classic films
+                you won't find anywhere else. Just open the app and
+                watch — no account, no payment, no commitment required.
+              </p>
+              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <Link
+                  href="/browse"
+                  className="px-8 py-3.5 rounded-full font-semibold bg-gradient-to-r from-orange-500 to-pink-600 hover:opacity-90 transition text-lg shadow-lg shadow-orange-900/30"
+                >
+                  Start Watching — It's Free
+                </Link>
+                <Link
+                  href="/live"
+                  className="px-8 py-3.5 rounded-full font-semibold bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition text-lg"
+                >
+                  Browse Live Channels
+                </Link>
+              </div>
+              <p className="mt-4 text-xs text-zinc-500">Supported by ads, not subscriptions. Watch on TV, phone, tablet, or browser.</p>
+            </div>
+
+            <div className="relative flex justify-center lg:justify-end">
+              <div className="absolute inset-0 m-auto w-72 h-72 sm:w-96 sm:h-96 bg-gradient-to-br from-orange-500/30 via-pink-500/20 to-violet-600/30 rounded-full blur-3xl" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/whisco-mascot.png"
+                alt="Whisco, the Shih Tzu mascot of Whisco TV, waving hello"
+                className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
+              />
+              <span className="absolute top-2 right-2 sm:top-8 sm:right-4 bg-white text-black text-xs sm:text-sm font-bold px-3 py-1.5 rounded-2xl rounded-br-sm shadow-lg animate-bounce-in">
+                Woof! I'm Whisco 🐾
+              </span>
+            </div>
           </div>
-          <p className="mt-4 text-xs text-zinc-500">Supported by ads, not subscriptions. Watch on TV, phone, tablet, or browser.</p>
         </div>
       </section>
 
@@ -163,6 +180,31 @@ export default async function Home() {
               <p className="text-sm text-zinc-400">{f.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* MEET WHISCO */}
+      <section id="whisco" className="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t border-white/5">
+        <div className="rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-orange-950/30 ring-1 ring-white/10 p-8 sm:p-12 grid md:grid-cols-[auto_1fr] gap-8 items-center overflow-hidden relative">
+          <div className="absolute -right-16 -bottom-16 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/whisco-mascot.png"
+            alt="Whisco the Shih Tzu"
+            className="w-40 sm:w-52 mx-auto animate-float-gentle drop-shadow-2xl relative"
+          />
+          <div className="text-center md:text-left relative">
+            <span className="inline-block text-xs font-bold text-orange-400 uppercase tracking-wide mb-2">Meet the mascot</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
+              Hi, I'm <span className="text-gradient">Whisco</span> 🐾
+            </h2>
+            <p className="text-zinc-400 max-w-xl mx-auto md:mx-0">
+              Yes, Whisco TV is genuinely named after a real Shih Tzu. This whole platform is his — hundreds of live
+              channels and thousands of movies, curated so your household always has something on, without ever
+              reaching for a credit card. He personally supervises every new channel we add (mostly by napping
+              nearby).
+            </p>
+          </div>
         </div>
       </section>
 

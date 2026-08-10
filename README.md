@@ -11,12 +11,11 @@ Prisma, and NextAuth.
   personalization; browsing and watching require no account at all)
 - `/browse` — home: hero banner, continue watching (if signed in), trending,
   new releases, genre rows, popular live channels
-- `/live` — live TV guide with country/category/search filters — **225 real,
-  verified, free-to-air broadcast channels across 22 countries**, curated
-  for GCC local + expat audiences: Arabic (UAE, Saudi, Qatar, Kuwait,
-  Bahrain, Oman, Egypt, Jordan, Lebanon), English/International, Indian
-  (Hindi + regional-language), Pakistani (Urdu), Bangladeshi (Bengali),
-  Filipino, and African (Nigeria, Kenya, South Africa, Ghana, Ethiopia)
+- `/live` — live TV guide with country/category/search filters — **511 real,
+  verified, free-to-air broadcast channels across 30+ countries**, allocated
+  proportionally to GCC expatriate community population share (Indian
+  languages, Arabic, Bengali, Urdu, Filipino, Nepali, Sinhala/Tamil, Farsi,
+  Indonesian, Vietnamese, and more — see "Channel allocation" below)
 - `/live/[id]` — channel player page (no gating — every channel is free)
 - `/vod` — on-demand library (movies/series/documentaries) with filters
   (1,760 titles — 1,736 real classic films/documentaries plus 24 curated
@@ -53,7 +52,7 @@ scheduled via `vercel.json`)
 ## ⚠️ Important — content sourcing & monetization
 
 **Live channels** (`prisma/live_channels.json`, loaded by `prisma/seed.ts`):
-every one of the 225 channels is a **real, currently-live, free-to-air
+every one of the 511 channels is a **real, currently-live, free-to-air
 public broadcast stream** — verified reachable at seed time. Sources:
 - A handful of directly-confirmed official broadcaster endpoints (DW,
   France 24, Sky News Arabia, TRT World, CBS News, Bloomberg TV).
@@ -62,13 +61,58 @@ public broadcast stream** — verified reachable at seed time. Sources:
   for free/publicly-available streams (used by mainstream FOSS media
   software like Jellyfin, Kodi, and Plex plugins).
 
+### Channel allocation methodology
+
+Channel counts per language/community are allocated proportionally to each
+group's estimated share of the ~35 million-strong GCC expatriate
+population (GLMM data), per the demographic breakdown supplied for this
+project — with India further sub-divided into regional languages
+(Malayalam, Tamil, Telugu, Punjabi, Bengali, Hindi) rather than treated as
+a single Hindi bloc, since South Indian communities make up a large share
+of Indian expats in the Gulf.
+
+| Community / language | Target (demographic guide) | Actual seeded |
+|---|---|---|
+| India — Hindi/National | — | 91 |
+| India — Telugu | — | 20 |
+| India — Malayalam | 45 | 11 (real-source ceiling) |
+| India — Tamil | 25 | 10 (real-source ceiling) |
+| India — Punjabi | — | 10 |
+| India — Bengali | 20 (shared w/ Punjabi) | ~10 |
+| Pakistan (Urdu) | 70 | 39 |
+| Bangladesh (Bengali) | 71 | 16 |
+| Arabic expat (Egypt/Jordan/Lebanon/Syria/Palestine/Yemen/Sudan) | 117 | 64 |
+| GCC local Arabic (UAE/Saudi/Qatar/Kuwait/Bahrain/Oman) | (additional) | 56 |
+| Philippines (Tagalog) | 31 | 6 (real-source ceiling) |
+| Nepal | 17 | 7 |
+| Sri Lanka (Sinhala/Tamil) | 9 | 7 |
+| Iran (Farsi) | 9 | 10 |
+| Indonesia | 6 | 39 (surplus pool, see note) |
+| Vietnam (Other Languages bucket) | 34 (shared) | 40 |
+| African (Nigeria/Kenya/S.Africa/Ghana/Ethiopia — Other bucket) | (shared) | 35 |
+| English/International | 6 | 77 (kept — doubles as general/news quality bar) |
+| **Total** | **500** | **511** |
+
+**Where the actual count falls short of the guide's target, it's a real
+availability ceiling from free/public sources right now** — e.g. most
+mainstream Malayalam/Tamil/Filipino entertainment channels are commercially
+licensed and not available through free/public aggregation; Bangladesh's
+free-source URLs currently have heavy link rot (many return 404). Where it
+exceeds the target (Indonesia, Vietnam), it's because a healthy free pool
+existed and was used to help reach the 500+ total. A few politically
+sensitive broadcasters (Iranian and Syrian state media brands, and
+Kurdish-militant-affiliated channels) were deliberately excluded regardless
+of availability. Treat this table as a snapshot, not a permanent target —
+rerun sourcing periodically to close these gaps as more free content
+becomes available, or close them immediately via a licensed FAST deal.
+
 This gets you real scale fast, but **treat it as a strong starting
 lineup, not a finished legal/commercial deal**: public stream URLs can move
 or go offline, and a few may be geo-restricted for some viewers. Before a
 real commercial launch:
 - Re-verify the list periodically (URLs in `prisma/live_channels.json`
-  do drift — re-run the verification approach described in your project
-  history, or replace with direct broadcaster agreements).
+  do drift — the built-in daily health check at `/api/cron/check-channels`
+  handles this automatically; see below).
 - For guaranteed uptime and a much larger catalog, graduate to a **FAST
   aggregator partnership** (e.g. Amagi, Cinedigm/Cineverse, Zone.tv) —
   this is how legitimate large FAST platforms (Pluto TV, Plex, Samsung TV

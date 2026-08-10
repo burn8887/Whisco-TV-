@@ -2014,5 +2014,2588 @@
     "category": "Entertainment",
     "streamUrl": "https://cdn.streamlane.tv/hls/ltv/master.m3u8",
     "isFeatured": false
+  },
+  {
+    "name": "Amrita TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "Entertainment",
+    "streamUrl": "https://ddash74r36xqp.cloudfront.net/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asianet Middle East",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt03.tangotv.in/Dsly5z3HASIANETMIDDLEEAST/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asianet News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "News",
+    "streamUrl": "https://amg13737-amg13737c1-amgplt0016.playout.now3.amagi.tv/playlist/amg13737-amg13737c1-amgplt0016/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asianet Suvarna News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "News",
+    "streamUrl": "https://asianetnews.vgcdn.net/vglive-sk-335835/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD Malayalam",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-3.pishow.tv/live/27/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Kairali TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt01.tangotv.in/O5aw8Zn3KAIRALI/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Manorama News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "News",
+    "streamUrl": "https://mmtvnews1.akamaized.net/v1/master/673630b269b766886555eebfddd4f27f3de3ab50/mmtvNewsCampaign1/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Mazhavil Manorama",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "Entertainment",
+    "streamUrl": "https://yuppmedtaorire.akamaized.net/v1/master/a0d007312bfd99c47f76b77ae26b1ccdaae76cb1/mazhavilmanorama_nim_https/050522/mazhavilmanorama/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News Malayalam 24x7",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "News",
+    "streamUrl": "https://cdn-3.pishow.tv/live/1629/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Zee Malayalam News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "News",
+    "streamUrl": "https://d1ty2af03alkwd.cloudfront.net/index_4.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Mazhavil Manorama HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Malayalam",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt07.tangotv.in/zHjX9OFlMAZHAVILMANORAMAHD/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha Tamil",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://aasthaott.akamaized.net/110923/smil:aasthatamil.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD Tamil",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-2.pishow.tv/live/26/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://server.livelegitpro.in:9899/tribetv/tribetv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News 7 Tamil",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "News",
+    "streamUrl": "https://segment.yuppcdn.net/240122/news7/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "News Tamil 24x7",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "News",
+    "streamUrl": "https://cdn-3.pishow.tv/live/1433/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Raj Musix Tamil",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Music",
+    "streamUrl": "https://livestream.rajtv.tv/hlslive/Admin/px08241087/live/Raj_Musix/master_1.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Tamilan TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.zionmediait.com/zionmediaitserver2024/97484f5ce6da96e496a9b87c439835d0.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Zee Tamil News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "News",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/ZMCL/ZeeTamilNews.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Tamil Janam",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt01.tangotv.in/O5aw8Zn3JANAMTVTAMIL/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Colors Tamil HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorstamilhd11.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha Telugu",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://aasthaott.akamaized.net/110923/smil:aasthatelugu.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Andhra Pradesh",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://d1g35elx8qnif3.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_AP_H264_cloud_in/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Cinema HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Movies",
+    "streamUrl": "https://d27zlkxhgwrfgo.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_CINEMA_H264_cloud_in/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Comedy",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://cc-wie8j8y69d2uy.akamaized.net/WWBI/Amagi/ETV_Comedy_IN/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Josh",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://cc-uyh1ow5zouoio.akamaized.net/WWBI/Amagi/ETV_Josh_IN/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Life",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://d2cj1h11htct8o.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_LIFE_H264_cloud_in/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Music",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Music",
+    "streamUrl": "https://cc-szivnms4rlah6.akamaized.net/WWBI/Amagi/ETV_Music_IN/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "News",
+    "streamUrl": "https://cc-3448kp65yhc5w.akamaized.net/WWBI/Amagi/ETV_News_IN/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Telangana",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://d37d7pfp7vjqhh.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_TS_H264_cloud_in/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Telugu HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://d27zlkxhgwrfgo.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_HD_H264_cloud_in/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ETV Telugu USA",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://livegeorouus.akamaized.net/100823/etvhd_2500/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b",
+    "isFeatured": false
+  },
+  {
+    "name": "NTV Telugu",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://mumbai-edge.smartplaytv.in/NTVTelugu/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PMC Telugu",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://mumbai-edge.smartplaytv.in/PMC/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SVBC 2",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://player.mslivestream.net/tamil/ac206e74d75b285755ee4924df87d951.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SVBC 3",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://player.mslivestream.net/svbc/2e628d7e1b65d31254fd7705ff7ee64d.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SVBC 4",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SVBC Sri Venkateswara Bhakti Channel",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://player.mslivestream.net/telugu/5d076e5c3d34cb8bb08e54a4bb7e223e.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Telugu One",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://teluguone-yupptv.vgcdn.net/v1/019be9e3f04d1ea55784338b5c3e89/019be9e4474415fc60e93459e1e808/teluguone_2500k.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "TV9 Telugu",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "Entertainment",
+    "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9telcmjhcs/liveabr/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Zee Telugu News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Telugu",
+    "category": "News",
+    "streamUrl": "https://d116gfrn8orazi.cloudfront.net/index.m3u8?akes=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3NjcxOTc5NzJ9.O4qmdMPbHwKrCg6hFXvD70vjSPWKQd0a7NrjmFdeMB8",
+    "isFeatured": false
+  },
+  {
+    "name": "Chardikla Gurbaani TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://chardikalatimestv.gigabitcdn.net/in-chardikala/chardikala-gurbani-tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Chardikla Time TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://chardikalagurbanitv.gigabitcdn.net/in-chardikala/chardikala-timetv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Chardikla Time TV North America",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://chardikalanorthamerica.gigabitcdn.net/in-chardikala/chardikala-north-usa/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD Punjabi",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-4.pishow.tv/live/24/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "GTC Punjabi",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://gtc-yupp.vgcdn.net/vglive-sk-254807/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Maha Punjabi",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-4.pishow.tv/live/1521/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PTC Punjabi HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/3e22a9c278db4e3eb779afd42e41b0a6/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PTC Punjabi",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-2.pishow.tv/live/1604/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PTC Punjabi Gold",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Entertainment",
+    "streamUrl": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/6e14bac6d0384e129521a4d005188bfb/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Punjabi Hits",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Punjabi",
+    "category": "Music",
+    "streamUrl": "https://stream.ottlive.co.in/punjabihits/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABP Ananda",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/ananda-livetv/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABP Asmita",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/asmita-livetv/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DD Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-4.pishow.tv/live/37/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Enterr 10 Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-4.pishow.tv/live/241/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NK TV Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://nktv.smartstream.video/smartstream-us/nkbangla/nkbangla/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Rupasi Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt05.tangotv.in/87NeALx2RUPASIBANGLA/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "TV9 Bangla",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9banaen8yq/liveabr/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Zee Bangla Sonar",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/ColorsHD/default/ColorsHD.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Zee Bangla HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/ZeeBanglaHD.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "7S Music",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Music",
+    "streamUrl": "https://mumt03.tangotv.in/Dsly5z3H7SMUSIC/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "9X Jalwa",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt03.tangotv.in/Dsly5z3H9XJALWA/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "9X Jhakaas",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjhakaas-samsungin/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "9X Tashan",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "9XM",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://9xjio.wiseplayout.com/9XM/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "10 TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumbai-edge.smartplaytv.in/10TV/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "22Scope News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://thelegitpro.in/HDlive/22scope/index.fmp4.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aaj Tak HD",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://feeds.intoday.in/aajtak/api/aajtakhd/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aakaash Aath",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt03.tangotv.in/Dsly5z3HAAKASHAATH/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aaryaa TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.ottlive.co.in/aryatvtamil/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aaseervatham TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt04.tangotv.in/m18aqlK4AASEERVATHAMTV/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha Bhajan",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt05.tangotv.in/87NeALx2AASTHABHAJAN/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha Gujarati",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt04.tangotv.in/m18aqlK4AASTHAGUJARATI/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha Kannada",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://aasthaott.akamaized.net/110923/smil:aasthakannada.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aastha Prime 1",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABN Andhra Jyoti",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumbai-edge.smartplaytv.in/ABNAJ/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABP Ganga",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/ganga-livetv/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABP Majha",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://yupprestreamliveus.akamaized.net/vglive-sk-355289/majha/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ABP News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-472500/abpnews/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Adhyatm TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumbai-edge.smartplaytv.in/AdhyatmTV/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "AKD Calcutta News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://live.legitpro.co.in/cnnnews/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Anand TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://live.legitpro.co.in/anandtv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ananda Barta",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://account19.livebox.co.in/Anandabarta2hls/live.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ANB News",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://server.livelegitpro.in:9899/anbnews/anbnews/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Andy Haryana",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-394914/india/ngrp:angelindia_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Africa",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-904559/africa/ngrp:angelafrica_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV America",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-374850/america/ngrp:angelamerica_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Arabia",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-213167/arabia/ngrp:angelarabia_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Australia",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-310787/australia/ngrp:angelaustralia_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Chinese",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-999451/chinese/ngrp:angelchinese_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Europe",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-512011/europe/ngrp:angeleurope_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV FarEast",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-438760/fareast/ngrp:angelfareast_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Hebrew",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-150533/hebrew/ngrp:angelhebrew_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Indo-China",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-703035/indochina/ngrp:angelindochina_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Indonesia",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-234616/indonesia/ngrp:angelindonesia_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Nepal",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-109639/nepali/ngrp:angelnepali_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Portuguese",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-382409/portuese/ngrp:angelportuguese_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Russian",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-955415/russia/ngrp:angelrussia_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Angel TV Spanish",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://janya-digimix.akamaized.net/vglive-sk-351398/spanish/ngrp:angelspanish_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Anjan TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Apna Punjab TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Arputhar Yesu TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://arputharyesutv.arputharyesutv.com/live/md/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Aryan TV National",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Awaaz India TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://awaazindia.livebox.co.in/AwaazIndaTVhls/Live.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ayush TV",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-6.pishow.tv/live/221/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "B4U Bhojpuri",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "B4U Kadak",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-2.pishow.tv/live/227/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "B4U Movies",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Movies",
+    "streamUrl": "https://cdn-2.pishow.tv/live/419/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "B4U Music",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Music",
+    "streamUrl": "https://cdn-2.pishow.tv/live/415/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Balle Balle",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mcncdndigital.com/balleballetv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bharat24",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.ottlive.co.in/bharat24/index.fmp4.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bharat Express",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://stream1.livebox.co.in/VCAREhls/live.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bharat Samachar",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://idvd.multitvsolution.com/idvo/bharatsamachar.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bhojpuri Cinema",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Movies",
+    "streamUrl": "https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Big Magic",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "Entertainment",
+    "streamUrl": "https://mumt05.tangotv.in/87NeALx2BIGMAGIC/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Big TV 24x7 (576i)",
+    "country": "India",
+    "countryCode": "IN",
+    "language": "Hindi",
+    "category": "News",
+    "streamUrl": "https://d2gvyg6lvauoko.cloudfront.net/230226/bigtvmalyalam/chunks.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands Kids Club TV Chinese",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Kids",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/KidsChinese.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands Kids Club TV English",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Kids",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/kidsenglish.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands Kids Club TV Urdu",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Kids",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/KidsUrdu.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/mainlive.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV Arabic",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/Arabic.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV Chinese",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/chineselive.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV English",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/EnglishStreaming.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV Hindi",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/HindiStreaming.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV Punjabi",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/PunjabiStreaming.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV Tagalog",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/Tagalog.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "God Stands TV Urdu",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://online.godstands.tv:5443/WebRTCApp/streams/UrduStreaming.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "King TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://streamer12.vdn.dstreamone.net/kingtv/kingtv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTN News",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://vodzong.mjunoon.tv:8087/streamtest/KTNNews-151/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Lahore News",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://vcdn.dunyanews.tv/lahorelive/ngrp:lnews_1_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Minimax",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://vodzong.mjunoon.tv:8087/streamtest/disckids-157-1/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "PMI TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.live247stream.com/pmi/tv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Sky News Urdu",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "News",
+    "streamUrl": "https://lbgo.bozztv.com/ssh101/ssh101/skynews/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Such TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://video.primexsports.com/suchnews/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Zindagi TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://5ad386ff92705.streamlock.net/live_transcoder/ngrp:zindagitv.stream_all/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jeremiah TV",
+    "country": "Pakistan",
+    "countryCode": "PK",
+    "language": "Urdu",
+    "category": "Entertainment",
+    "streamUrl": "https://x.streamablecloud.com/stream/hls/jeremiahtv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ATN Music",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Music",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/atnmusic.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Channel S",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "My TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/mytv-up-off.stream/live-orgin/mytv-up-off.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ahsan TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/ahsantv/ahsantv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al-Iman TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://tv.aliman.id/aliman/live.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Alwafa Tarim TV (Am Media)",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://ammedia.siar.us/ammedia/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ashiil TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://wahyu1ptv.pages.dev/AshiilTV-HD.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Astha TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://hgmtv.com:19360/asthatv/asthatv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Astro Blitar TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/abtv/abtv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Banjar TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://banjartv.siar.us/banjartv/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Banten TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/bantentv/bantentv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Banyumas TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/bmstv/bmstv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "BN Channel",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://flv.intechmedia.net/live/ch112.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "BRTV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/brtv/brtv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Bungo TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/bungotv/bungotv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Caruban TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.carubantv.id/hls/0/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DAAI TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://pull.daaiplus.com/live-DAAIPLUS/live-DAAIPLUS_HD.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Davika TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/davika/davika/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Dhamma TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://b.webcache.maxindo.net.id/dhamma/dhamma.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Dhoho TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://dhohotv.siar.us/dhohotv/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "DMI TV (576i)",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://tvstreamcast.com/tawaftv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "dTVi",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://e.siar.us/live/dtvi.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Duta TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://dutatv.siar.us/dutatv/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Efarina TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://live.efarinatv.com/hls/bgtaufikganteng.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ficom Channel",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://v3.siar.us/ficomchannel/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Garuda TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://hgmtv.com:19360/garudatvlivestreaming/garudatvlivestreaming.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "I Am Channel",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://61146e7ab7a66.streamlock.net:8089/tes/1/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Indonesiana.TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://tvstreamcast.com/indonesiana.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jambi TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://jambitv.globaldigitalcore.com/hls/sah5tu7Eiveepohyieyie3OoteL2anga.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Kilisuci TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/kstv/kstv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "KTV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://flv.intechmedia.net/live/ch118.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Lingkar TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://lingkartv.my.id/hls/lingkartv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Madani TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.asianastream.com/madani/madanitv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Madu TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://re1.siar.us/madutv/hd720/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Magna Channel",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://edge.medcom.id/live-edge/smil:magna.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Matrix TV Yogyakarta",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.matrixtv.id/hls/0/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MBG TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.convergen.co/mbg_stream/smil:mbStream.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Metro TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://edge.medcom.id/live-edge/smil:metro.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MGSTV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://mgstv.siar.us/live/mgstv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "MQTV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://5bf7b725107e5.streamlock.net/mqtv/mqtv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Music Information Channel",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Music",
+    "streamUrl": "https://mic.siar.us/mic/live/mic.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Naajiya TV",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "language": "Indonesian",
+    "category": "Entertainment",
+    "streamUrl": "https://www.naajiyatv.com/live/livestream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "C\u00e0 Mau TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://tv.ctvcamau.vn/live/tv/tv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "C\u1ea7n Th\u01a1 TV1",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.canthotv.vn/live/tv/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "C\u1ea7n Th\u01a1 TV3",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.canthotv.vn/cs3/tv/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Cao B\u1eb1ng TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.thingnet.vn/live/smil:CRTV.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "\u0110\u00e0 N\u1eb5ng TV1",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.mediatech.vn/live/285b59a111d76974225a8e3004bfc31a509/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "\u0110\u00e0 N\u1eb5ng TV2",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.mediatech.vn/live/2859145290d0d7947ef88b6240123b62474/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "\u0110\u1eafk L\u1eafk TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.drt.vn/live/285a27750861b964c27af22091662a74f2f/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "\u0110\u1ed3ng Th\u00e1p TV2",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://618b88f69e53b.streamlock.net/THDT2/thdttv2/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "HanoiTV1",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://cloudstreamhntv.tek4tv.vn/capture/smil:HN1.smil/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "HanoiTV2",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://cloudstreamhntv.tek4tv.vn/live/smil:HN2.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "L\u00e0o Cai TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.baolaocai.vn/channel2/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ngh\u1ec7 An TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.mediatech.vn/live/2859591eef2e92249b682db021f4247c364/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "QPVN HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://qpvn.vn/live/qpvn/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Qu\u1ea3ng Ng\u00e3i TV1",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.mediatech.vn/live/285aaa79b4b265a457d81bb72bc32e2c114/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "T\u00e2y Ninh TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live-hq.evgcdn.net/live/2851dc2c9af68834814a89e61db0faee561/chunklist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Th\u00e1i Nguy\u00ean TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.thainguyentv.vn/hls/livestream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "TVB Vietnam",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://amg01868-amg01868c3-tvbanywhere-us-4491.playouts.now.amagi.tv/playlist/amg01868-tvbusa-tvbvietnam-tvbanywhereus/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Vietnam Today",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://amagi-live.ondemandkorea.com/amgplt0456.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV1 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV2 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV3 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV4 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV5 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV5 Tay Nguyen HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv5tn/live-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV6",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV7 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV9 HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VTV10",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "VSBet HD",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live05.meung.app/live/16226575.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Son La TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://kenhdp-vtvgo.vtvdigital.vn/kenhdp/sonla-720p.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Can Tho TV 2",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://live.canthotv.vn/cs2/live.stream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ha Tinh TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://cohauw9bgpvod.vcdn.cloud/httv1/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ninh Thuan TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://cdnbaokhanhhoa.com/live/90405a889081.m3u8?vhost=video",
+    "isFeatured": false
+  },
+  {
+    "name": "Khanh Hoa TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://cdnbaokhanhhoa.com/live/1332e3a79e27.m3u8?vhost=video",
+    "isFeatured": false
+  },
+  {
+    "name": "Dien Bien TV",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.langsontv.vn/live/2855dfeccb7f49a41a2b0441b3bfeda413c/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Dong Nai TV 2",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vtvgolive-ott3.vtvdigital.vn/live/dongnai2tv/chunklist_2.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SCTV4",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/sctv4/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SCTV3",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vtvgolive-sctvdrm.vtvdigital.vn/bsod999cuteptgyoutuber/1234567890/manifest/sctv3/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SCTV16",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/sctv16/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "SCTV2",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "language": "Vietnamese",
+    "category": "Entertainment",
+    "streamUrl": "https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/sctv2/master.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "247 Box TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://hls.247box.live/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "AFN TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://bozztv.com/1gbw5/tintv2/tintv2/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Asil TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://live.asil.tv/asiltv/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Assirat TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://softverse.b-cdn.net/Assirat/assiratobs/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "AVA Family",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://familyhls.avatv.live/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Mihan TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://iptv.mihantv.com/mihantv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Mohabat TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://5acf9f9415a10.streamlock.net/live_transcoder/ngrp:mohabat.stream_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "National Iranian Congress TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://tv.iraniancongress.com/stream/tv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "OXIR TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://hls.oxir.live/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Payvand TV",
+    "country": "Iran",
+    "countryCode": "IR",
+    "language": "Farsi",
+    "category": "Entertainment",
+    "streamUrl": "https://uni6rtmp.tulix.tv/ucur1/Payvand/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Hiru TV",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://tv.hiruhost.com:1936/8012/8012/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Imai TV",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://live20.bozztv.com/akamaissh101/ssh101/imaitv/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jaya TV",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://live.jayatv.lk/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NDTV LANKA",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://g4wlkqqwl23a-hls-live.5centscdn.com/NDTVLANKA/1ff5fa54d14c3ff6c6bd3918bbb7db5d.sdp/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Siyatha TV",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://rtmp01.voaplus.com/hls/6x6ik312qk4grfxocfcv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Talent TV",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://cast.talenttv.lk/hls/mcrlo1ygwpu8x4bj/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Verbum TV",
+    "country": "Sri Lanka",
+    "countryCode": "LK",
+    "language": "Sinhala/Tamil",
+    "category": "Entertainment",
+    "streamUrl": "https://video-eu1.streamerr.co/hls/scb80244b91/live.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Capital TV",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.tvnepal.com:19360/capitaltv/capitaltv.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Divya Darshan TV HD",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://live.divyadarshantv.com/hls/0/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Green Gold TV",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://vglivessai.akamaized.net/eu/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/675a37e5-f517-434e-adae-d25ae1706340/fbdb017c-7b61-4f62-8719-28b27e44c862/4.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NH BollyFlix",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://cc-r5hupcym5oehh.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-r5hupcym5oehh/d47d1910-8862-4b83-a8a6-00ac11307859/0.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NH BollyRaga",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://cc-up9j649x4thrj.akamaized.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-up9j649x4thrj/f935ee75-bf1b-4bf6-a30c-1f096a0083c5/0.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Green Gold TV HD",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://vglivessai.akamaized.net/eu/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/675a37e5-f517-434e-adae-d25ae1706340/fbdb017c-7b61-4f62-8719-28b27e44c862/0.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "TV Today Janakpur",
+    "country": "Nepal",
+    "countryCode": "NP",
+    "language": "Nepali",
+    "category": "Entertainment",
+    "streamUrl": "https://tvtoday.rpmc.com.np/hls/bipashatech/1_2/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "ATVSat",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.atvsat.com/atvsatlive/smil:atvsatlive.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Coptic TV",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://ctv.icopts.app/CTV/index.fmp4.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "El Radio 9090 FM",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://9090video.mobtada.com/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Elsharq TV",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://mn-nl.mncdn.com/elsharq_live/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Huda TV",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn.bestream.io:19360/elfaro1/elfaro1.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Rotana Cinema Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Movies",
+    "streamUrl": "https://rotana.hibridcdn.net/rotananet/cinemamasr_net-7Y83PP5adWixDF93/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Watan TV",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://rp.tactivemedia.com/watantv_source/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Altaghier TV",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://jmc-live.ercdn.net/altaghier/altaghier.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Amman TV",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://ammantv-live.ercdn.net/ammantvhd/ammantvhd.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Songs",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Song/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Sport",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Sports",
+    "streamUrl": "https://jrtv-live.ercdn.net/jordansporthd/jordansporthd.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Jordan Tourism",
+    "country": "Jordan",
+    "countryCode": "JO",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Tourism/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Nour Al Koddas",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/nour1satlive/livestream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Nour Al Sharq",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/nour8satlive/livestream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "NourSAT",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/nour4satlive/livestream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Noursat English",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/noursatenglive/noursateng.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "One TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://hms.pfs.gdn/v1/broadcast/one/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "OneFM",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://hms.pfs.gdn/v1/broadcast/onefm/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Palestine Al Yawm",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.paltodaytv.com/paltv/live/playlist_sfm4s.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Taha TV",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://stream.starmenajo.com/hls/app/live/ts:fhd.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Voice of Lebanon",
+    "country": "Lebanon",
+    "countryCode": "LB",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://svs.itworkscdn.net/vdltvlive/vdltv.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Madina",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.zaytonatube.com:8081/AlMadinatv/almadina21/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Najah News",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "News",
+    "streamUrl": "https://streaming.najah.edu:8443/hls/AlNajah.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Falastini TV",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://rp.tactivemedia.com/palestiniantv_source/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Palestine Satellite Channel",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-globecast.akamaized.net/live/eds/palestinian_satellite_channel/hls_roku/palestinian_satellite_channel.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Palestine Today",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.paltodaytv.com/paltv/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Radio Albalad TV",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.zaytonatube.com:8081/radioalbalad/radioalbalad/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Rajeen TV",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://mn-nl.mncdn.com/palabroad/live/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Shabab FM",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://streaming.zaytonatube.com:8081/ShababFM/shabab/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Watar TV",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://htvint.mada.ps/orient/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Seraj TV (1080i)",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://43869de4e1a0d641.servers.dvcloud.tv/hls/al_aqsa_channel/6udfi7v8a3eof6nlps6e9ovfrs65c7l7.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Wattan TV",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://htvmada.mada.ps:4443/wattan/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Ma'an TV",
+    "country": "Palestine",
+    "countryCode": "PS",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://htvmada.mada.ps:4443/maannews/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al-Souriya TV",
+    "country": "Syria",
+    "countryCode": "SY",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-al-souriya-tv/e3150760fa5fd62776225433b8c3d406/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Althania",
+    "country": "Syria",
+    "countryCode": "SY",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/syriatv02live/syriatv02.smil/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Halab Today TV",
+    "country": "Syria",
+    "countryCode": "SY",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://halabtoday-live.lg.mncdn.com/halabtoday/livestream/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Syria TV",
+    "country": "Syria",
+    "countryCode": "SY",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.kwikmotion.com/syriatvlive/syriatv.smil/playlist_dvr.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Prime",
+    "country": "Syria",
+    "countryCode": "SY",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://mn-nl.mncdn.com/primetv/live/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Dabanga TV",
+    "country": "Sudan",
+    "countryCode": "SD",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://hls.dabangasudan.org/hls/stream.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Sudan TV",
+    "country": "Sudan",
+    "countryCode": "SD",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://cdn-globecast.akamaized.net/live/eds/sudan_tv/hls_roku/index.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Masirah",
+    "country": "Yemen",
+    "countryCode": "YE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live.cdnbridge.tv/Almasirah/Almasirah_all/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al Masirah Mubacher",
+    "country": "Yemen",
+    "countryCode": "YE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://live2.cdnbridge.tv/AlmasirahMubasher/Mubasher_All/playlist.m3u8",
+    "isFeatured": false
+  },
+  {
+    "name": "Al-Sahat TV",
+    "country": "Yemen",
+    "countryCode": "YE",
+    "language": "Arabic",
+    "category": "Entertainment",
+    "streamUrl": "https://assahat.b-cdn.net/Assahat/assahatobs/index.m3u8",
+    "isFeatured": false
   }
 ]
