@@ -54,7 +54,8 @@ export default async function Home() {
           </h1>
           <p className="mt-6 text-lg text-zinc-400 max-w-2xl mx-auto">
             Whisco TV is a free, ad-supported streaming service with {channelCount}+ live channels from around the
-            globe and a growing library of {titleCount}+ movies, series, and documentaries. Just open the app and
+            globe plus {titleCount}+ movies, documentaries, and classic TV — including a huge library of classic films
+            you won't find anywhere else. Just open the app and
             watch — no account, no payment, no commitment required.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -97,14 +98,14 @@ export default async function Home() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <h2 className="text-3xl sm:text-4xl font-extrabold">Free doesn't mean small</h2>
           <p className="mt-4 text-zinc-400">
-            A genuinely global live channel lineup and a growing on-demand library — fully legal, fully free,
+            A genuinely global live channel lineup and a massive classic film & documentary library — fully legal, fully free,
             funded by ads instead of your wallet.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             { icon: Tv2, title: "Global Live TV", desc: `${channelCount}+ legally licensed, free-to-air channels — news, business, and more, with more added regularly.` },
-            { icon: Film, title: "Free On-Demand Library", desc: `${titleCount}+ movies, series, and documentaries, ad-supported and free to watch anytime.` },
+            { icon: Film, title: "Huge Free Film Library", desc: `${titleCount}+ movies and documentaries — classic cinema, cult favorites, and educational films, free to watch anytime.` },
             { icon: Smartphone, title: "Every Device", desc: "Smart TVs, phones, tablets, and browsers — pick up exactly where you left off." },
             { icon: Users, title: "Free Profiles", desc: "Up to 6 profiles per account with dedicated watchlists and kids mode — at no cost." },
             { icon: ShieldCheck, title: "Fully Legal, No Risk", desc: "Every channel and title is properly licensed. No pirated streams, no shutdown risk, no legal exposure." },

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Whisco TV — Free Live TV & On-Demand, Ad-Supported",
   description:
-    "Whisco TV is a free, ad-supported streaming service with 200+ live TV channels from around the globe plus a growing on-demand library of movies, series, and documentaries. No subscription, ever.",
+    "Whisco TV is a free, ad-supported streaming service with 200+ live TV channels from around the globe plus a library of 1,700+ movies and documentaries — including a huge collection of classic public-domain cinema. No subscription, ever.",
   icons: {
     icon: "/logo-mark.png",
     shortcut: "/logo-mark.png",

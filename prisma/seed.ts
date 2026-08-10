@@ -423,37 +423,6 @@ async function seedVOD() {
     count++;
   }
 
-  // Bulk movies
-  for (let i = 0; i < 90; i++) {
-    const name = `${pick(MOVIE_ADJ, i)} ${pick(MOVIE_NOUN, i + 7)}`;
-    const year = 2015 + (hash(name) % 11);
-    const g1 = pick(GENRE_POOL, hash(name));
-    const g2 = pick(GENRE_POOL, hash(name) + 3);
-    await prisma.title.create({
-      data: {
-        name,
-        slug: slugify(name) + "-" + (i + 1),
-        type: "MOVIE",
-        synopsis: genSynopsis(i),
-        posterUrl: placeholder(name, { w: 400, h: 600, kind: "poster" }),
-        backdropUrl: placeholder(name, { w: 1280, h: 720, kind: "backdrop" }),
-        releaseYear: year,
-        rating: pick(["G", "PG", "PG-13", "R"], i),
-        imdbRating: Math.round((5.5 + (hash(name) % 40) / 10) * 10) / 10,
-        durationMins: 90 + (hash(name) % 45),
-        genres: g1 === g2 ? g1 : `${g1}, ${g2}`,
-        cast: `${pick(CAST_POOL, i)}, ${pick(CAST_POOL, i + 5)}`,
-        director: pick(["Renata Kolb", "Idris Okafor", "Suzu Yamamoto", "Alina Petrov", "Marcus Webb", "Ingrid Solberg", "Jun-ho Baek", "Faye Whitmore"], i),
-        country: pick(COUNTRY_POOL, i),
-        isFeatured: false,
-        isNew: year >= 2024,
-        isTrending: hash(name) % 9 === 0,
-        streamUrl: pick(VOD_TEST_STREAMS, i + 3),
-      },
-    });
-    count++;
-  }
-
   // Flagship series
   for (const s of FLAGSHIP_SERIES) {
     const title = await prisma.title.create({
@@ -496,47 +465,6 @@ async function seedVOD() {
     count++;
   }
 
-  // Bulk series (lighter)
-  const SERIES_ADJ = ["Shadow", "Whispering", "Copper", "Velvet", "Restless", "Painted", "Marble", "Amber", "Frozen", "Southern"];
-  const SERIES_NOUN = ["District", "Bureau", "Academy", "Estate", "Precinct", "Archive", "Frontier", "Society", "Dynasty", "Outpost"];
-  for (let i = 0; i < 28; i++) {
-    const name = `The ${pick(SERIES_ADJ, i)} ${pick(SERIES_NOUN, i + 4)}`;
-    const g1 = pick(GENRE_POOL, hash(name));
-    const title = await prisma.title.create({
-      data: {
-        name,
-        slug: slugify(name) + "-" + (i + 1),
-        type: "SERIES",
-        synopsis: genSynopsis(i + 2),
-        posterUrl: placeholder(name, { w: 400, h: 600, kind: "poster" }),
-        backdropUrl: placeholder(name, { w: 1280, h: 720, kind: "backdrop" }),
-        releaseYear: 2016 + (hash(name) % 10),
-        rating: pick(["TV-PG", "TV-14", "TV-MA"], i),
-        imdbRating: Math.round((6 + (hash(name) % 35) / 10) * 10) / 10,
-        genres: g1,
-        cast: `${pick(CAST_POOL, i + 2)}, ${pick(CAST_POOL, i + 9)}`,
-        director: pick(["Renata Kolb", "Idris Okafor", "Suzu Yamamoto", "Alina Petrov"], i),
-        isNew: hash(name) % 6 === 0,
-        isTrending: hash(name) % 8 === 0,
-      },
-    });
-    const seasonRow = await prisma.season.create({ data: { titleId: title.id, number: 1 } });
-    for (let e = 0; e < 6; e++) {
-      await prisma.episode.create({
-        data: {
-          seasonId: seasonRow.id,
-          number: e + 1,
-          name: `Episode ${e + 1}`,
-          synopsis: genSynopsis(e + i),
-          durationMins: 40 + (hash(name + e) % 20),
-          stillUrl: placeholder(`${name} E${e + 1}`, { w: 640, h: 360, kind: "still" }),
-          streamUrl: pick(VOD_TEST_STREAMS, e + i),
-        },
-      });
-    }
-    count++;
-  }
-
   // Flagship documentaries
   for (const d of FLAGSHIP_DOCS) {
     await prisma.title.create({
@@ -562,30 +490,62 @@ async function seedVOD() {
     count++;
   }
 
-  // Bulk documentaries
-  const DOC_TOPICS = ["Ocean", "Cosmos", "Desert", "Rainforest", "Metropolis", "Glacier", "Savanna", "Volcano", "Reef", "Tundra", "Canyon", "Wetlands", "Highlands", "Archipelago", "Steppe", "Fjord", "Delta", "Prairie"];
-  const DOC_ANGLES = ["Untold", "Wild", "Hidden", "Living", "Ancient", "Rising", "Vanishing"];
-  for (let i = 0; i < 22; i++) {
-    const name = `${pick(DOC_ANGLES, i)} ${pick(DOC_TOPICS, i + 3)}`;
-    await prisma.title.create({
-      data: {
-        name,
-        slug: slugify(name) + "-" + (i + 1),
-        type: "DOCUMENTARY",
-        synopsis: `An immersive exploration of the ${pick(DOC_TOPICS, i + 3).toLowerCase()} and the life it sustains, filmed over two years across five countries.`,
-        posterUrl: placeholder(name, { w: 400, h: 600, kind: "poster" }),
-        backdropUrl: placeholder(name, { w: 1280, h: 720, kind: "backdrop" }),
-        releaseYear: 2018 + (hash(name) % 8),
+  // ------------------------------------------------------------------
+  // REAL PUBLIC-DOMAIN CATALOG (Internet Archive) — 1000+ real, freely
+  // licensed feature films, documentaries, and classic TV/cartoons.
+  // Sourced from well-established public-domain categories (US
+  // government works, Prelinger ephemeral films, pre-1964 features and
+  // cartoons that lapsed into the public domain). See
+  // prisma/vod_titles.json and README.md for sourcing details and how
+  // to refresh/expand this list.
+  // ------------------------------------------------------------------
+  const realTitlesPath = path.join(__dirname, "vod_titles.json");
+  if (fs.existsSync(realTitlesPath)) {
+    const realTitles: {
+      name: string;
+      slug: string;
+      type: string;
+      synopsis: string;
+      posterUrl: string;
+      backdropUrl: string;
+      releaseYear: number;
+      genres: string;
+      imdbRating: number;
+      streamUrl: string;
+    }[] = JSON.parse(fs.readFileSync(realTitlesPath, "utf-8"));
+
+    const seenSlugs = new Set<string>();
+    const rows = realTitles
+      .filter((t) => {
+        if (seenSlugs.has(t.slug)) return false;
+        seenSlugs.add(t.slug);
+        return true;
+      })
+      .map((t) => ({
+        name: t.name,
+        slug: t.slug,
+        type: t.type,
+        synopsis: t.synopsis,
+        posterUrl: t.posterUrl,
+        backdropUrl: t.backdropUrl,
+        releaseYear: t.releaseYear,
         rating: "PG",
-        imdbRating: Math.round((6.8 + (hash(name) % 25) / 10) * 10) / 10,
-        durationMins: 75 + (hash(name) % 40),
-        genres: pick(["Nature", "Science", "History", "Culture", "Technology"], i),
-        cast: "Narrated documentary",
-        isNew: hash(name) % 7 === 0,
-        streamUrl: pick(VOD_TEST_STREAMS, i + 6),
-      },
-    });
-    count++;
+        imdbRating: t.imdbRating,
+        durationMins: null,
+        genres: t.genres,
+        cast: "",
+        director: "",
+        isNew: false,
+        isTrending: false,
+        streamUrl: t.streamUrl,
+      }));
+
+    // createMany is far faster than individual creates for a batch this size
+    const BATCH = 200;
+    for (let i = 0; i < rows.length; i += BATCH) {
+      await prisma.title.createMany({ data: rows.slice(i, i + BATCH), skipDuplicates: true });
+    }
+    count += rows.length;
   }
 
   return count;

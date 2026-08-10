@@ -19,16 +19,30 @@ Prisma, and NextAuth.
   Filipino, and African (Nigeria, Kenya, South Africa, Ghana, Ethiopia)
 - `/live/[id]` — channel player page (no gating — every channel is free)
 - `/vod` — on-demand library (movies/series/documentaries) with filters
-  (164 seeded titles, several with full seasons/episodes)
+  (1,760 titles — 1,736 real classic films/documentaries plus 24 curated
+  demo titles with full seasons/episodes)
 - `/title/[slug]` — detail page, episode list, "Add to My List"
 - `/watch/movie/[id]` and `/watch/episode/[id]` — HLS/MP4 player with resume
   position tracking
 - `/watchlist`, `/profiles` (multi-profile + kids profile), `/account`
 
 **Admin console** (`/admin`, requires an ADMIN account)
-- Dashboard with key metrics (channels, titles, users, categories)
+- Dashboard with key metrics (channels, titles, users, categories), plus
+  live status of the daily channel health check
 - Full CRUD for Channels and VOD Titles (incl. seasons/episodes for
   series), and user management
+
+**Daily channel maintenance** (`src/app/api/cron/check-channels/route.ts`,
+scheduled via `vercel.json`)
+- Runs automatically once a day (Vercel Cron) and checks every live
+  channel's stream URL
+- Channels that fail 2 consecutive daily checks are automatically hidden
+  from viewers (`isActive=false`) — no dead links in the public directory
+- Channels that recover are automatically restored
+- View current status anytime at `/admin/channels` (filter by
+  active/offline) or the dashboard health banner
+- Protected by a `CRON_SECRET` — set the same value in both your `.env`
+  and your Vercel project's environment variables
 
 ## Demo logins
 
@@ -65,10 +79,32 @@ real commercial launch:
   be broad, ad-friendly, and appealing across all target GCC communities
   rather than niche.
 
-**VOD** (`Title`/`Episode.streamUrl`): still uses public-domain sample
-videos as placeholders. Replace with a licensed VOD syndication deal
-(Filmhub, Cinedigm/Cineverse, Under the Milky Way, or similar) for real
-movies/series/documentaries.
+**VOD** (`Title`/`Episode.streamUrl`): **1,736 real, freely-licensed titles** (1,035
+movies + 701 documentaries, plus classic cartoons and TV episodes filed as
+movies) sourced from the [Internet Archive](https://archive.org)
+(`prisma/vod_titles.json`, generated from `archive.org`'s public API).
+To keep legal risk low, sourcing was deliberately restricted to
+well-established public-domain categories rather than Archive.org's
+broader, loosely-moderated community collections:
+- US government works (NASA — automatically public domain under 17 U.S.C. § 105)
+- The Prelinger Archives (ephemeral/educational/industrial films explicitly
+  donated to the public domain)
+- Pre-1964 feature films, cartoons, and TV episodes — the era before
+  copyright renewal became automatic, when a large share of titles lapsed
+  into the public domain through non-renewal (a widely used, standard
+  heuristic in the public-domain film community; several imported titles'
+  own descriptions explicitly document their public-domain registration
+  status, e.g. *Jail Bait* (1954))
+
+**This is a strong starting library, not a substitute for periodic
+review**: Archive.org is a community-uploaded platform, and while the
+above categories are the most defensible for public-domain status,
+individual titles can still occasionally be subject to takedown notices.
+Treat `prisma/vod_titles.json` the same way as `prisma/live_channels.json`
+— worth periodically re-verifying, and worth removing/replacing any
+specific title that receives a legitimate rights complaint. For guaranteed
+clearance and modern titles, graduate to a licensed VOD syndication deal
+(Filmhub, Cinedigm/Cineverse, Under the Milky Way, or similar).
 
 **No payments anywhere** — this app has no subscription/billing code by
 design. If you ever add a paid premium tier, it would be a new addition,
