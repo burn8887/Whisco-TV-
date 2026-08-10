@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { notFound, redirect } from "next/navigation";
-import { getFullUser, getActiveProfile, isSubActive, userVodTier, hasTierAccess } from "@/lib/access";
+import { notFound } from "next/navigation";
+import { getActiveProfile } from "@/lib/access";
 import WatchClient from "@/components/WatchClient";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
@@ -12,11 +12,7 @@ export default async function WatchMoviePage({ params }: { params: Promise<{ id:
   const title = await prisma.title.findUnique({ where: { id } });
   if (!title || !title.streamUrl) notFound();
 
-  const user = await getFullUser();
   const profile = await getActiveProfile();
-  const active = isSubActive(user?.subscription as any);
-  const vodTier = userVodTier(user?.subscription as any);
-  if (!active || !hasTierAccess(vodTier, title.tier)) redirect(`/title/${title.slug}`);
 
   const progress = profile
     ? await prisma.watchProgress.findFirst({

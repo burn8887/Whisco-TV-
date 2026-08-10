@@ -37,7 +37,6 @@ export default async function AdminTitlesPage({ searchParams }: { searchParams: 
               <th className="text-left px-4 py-3">Name</th>
               <th className="text-left px-4 py-3">Type</th>
               <th className="text-left px-4 py-3">Year</th>
-              <th className="text-left px-4 py-3">Tier</th>
               <th className="text-left px-4 py-3">Seasons</th>
               <th className="text-right px-4 py-3">Actions</th>
             </tr>
@@ -48,9 +47,6 @@ export default async function AdminTitlesPage({ searchParams }: { searchParams: 
                 <td className="px-4 py-3 font-medium">{t.name}</td>
                 <td className="px-4 py-3 text-zinc-400">{t.type}</td>
                 <td className="px-4 py-3 text-zinc-400">{t.releaseYear}</td>
-                <td className="px-4 py-3">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/10">{t.tier}</span>
-                </td>
                 <td className="px-4 py-3 text-zinc-400">{t.type === "MOVIE" ? "—" : t._count.seasons}</td>
                 <td className="px-4 py-3">
                   <div className="flex justify-end gap-2">

@@ -1,13 +1,12 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { logoutAction } from "@/lib/actions/auth";
-import { LayoutDashboard, Tv2, Film, CreditCard, Users, LogOut, ExternalLink } from "lucide-react";
+import { LayoutDashboard, Tv2, Film, Users, LogOut, ExternalLink } from "lucide-react";
 
 const LINKS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/channels", label: "Channels", icon: Tv2 },
   { href: "/admin/titles", label: "VOD Titles", icon: Film },
-  { href: "/admin/plans", label: "Plans", icon: CreditCard },
   { href: "/admin/users", label: "Users", icon: Users },
 ];
 

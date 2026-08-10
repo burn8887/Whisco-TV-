@@ -24,7 +24,6 @@ export async function upsertChannelAction(formData: FormData) {
     countryCode: String(formData.get("countryCode") || "").toUpperCase().slice(0, 2),
     language: String(formData.get("language") || "English"),
     category: String(formData.get("category") || "Entertainment"),
-    tier: String(formData.get("tier") || "BASIC"),
     isHD: formData.get("isHD") === "on",
     isFeatured: formData.get("isFeatured") === "on",
     number: Number(formData.get("number") || 0),
@@ -67,7 +66,6 @@ export async function upsertTitleAction(formData: FormData) {
     director: String(formData.get("director") || ""),
     country: String(formData.get("country") || "USA"),
     language: String(formData.get("language") || "English"),
-    tier: String(formData.get("tier") || "BASIC"),
     isFeatured: formData.get("isFeatured") === "on",
     isNew: formData.get("isNew") === "on",
     isTrending: formData.get("isTrending") === "on",
@@ -131,48 +129,7 @@ export async function deleteEpisodeAction(formData: FormData) {
   revalidatePath(`/admin/titles/${titleId}`);
 }
 
-// ---------------- PLANS ----------------
-export async function upsertPlanAction(formData: FormData) {
-  const id = String(formData.get("id") || "");
-  const data = {
-    name: String(formData.get("name") || ""),
-    slug: slugify(String(formData.get("name") || "")),
-    priceMonthly: Number(formData.get("priceMonthly") || 0),
-    priceYearly: Number(formData.get("priceYearly") || 0),
-    maxScreens: Number(formData.get("maxScreens") || 1),
-    maxProfiles: Number(formData.get("maxProfiles") || 1),
-    hdQuality: String(formData.get("hdQuality") || "HD"),
-    channelAccess: String(formData.get("channelAccess") || "BASIC"),
-    vodAccess: formData.get("vodAccess") === "on",
-    description: String(formData.get("description") || ""),
-    featured: formData.get("featured") === "on",
-    sortOrder: Number(formData.get("sortOrder") || 0),
-  };
-
-  if (id) {
-    await prisma.plan.update({ where: { id }, data });
-  } else {
-    await prisma.plan.create({ data });
-  }
-  revalidatePath("/admin/plans");
-  revalidatePath("/pricing");
-  redirect("/admin/plans");
-}
-
-export async function deletePlanAction(formData: FormData) {
-  const id = String(formData.get("id"));
-  await prisma.plan.delete({ where: { id } });
-  revalidatePath("/admin/plans");
-}
-
 // ---------------- USERS ----------------
-export async function updateUserSubStatusAction(formData: FormData) {
-  const userId = String(formData.get("userId"));
-  const status = String(formData.get("status"));
-  await prisma.subscription.update({ where: { userId }, data: { status } });
-  revalidatePath("/admin/users");
-}
-
 export async function deleteUserAction(formData: FormData) {
   const id = String(formData.get("id"));
   await prisma.user.delete({ where: { id } });

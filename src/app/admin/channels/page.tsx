@@ -36,7 +36,6 @@ export default async function AdminChannelsPage({ searchParams }: { searchParams
               <th className="text-left px-4 py-3">Name</th>
               <th className="text-left px-4 py-3">Country</th>
               <th className="text-left px-4 py-3">Category</th>
-              <th className="text-left px-4 py-3">Tier</th>
               <th className="text-left px-4 py-3">HD</th>
               <th className="text-right px-4 py-3">Actions</th>
             </tr>
@@ -47,9 +46,6 @@ export default async function AdminChannelsPage({ searchParams }: { searchParams
                 <td className="px-4 py-3 font-medium">{c.name}</td>
                 <td className="px-4 py-3 text-zinc-400">{c.country}</td>
                 <td className="px-4 py-3 text-zinc-400">{c.category}</td>
-                <td className="px-4 py-3">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/10">{c.tier}</span>
-                </td>
                 <td className="px-4 py-3 text-zinc-400">{c.isHD ? "Yes" : "No"}</td>
                 <td className="px-4 py-3">
                   <div className="flex justify-end gap-2">

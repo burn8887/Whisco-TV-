@@ -1,10 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import { getFullUser, getActiveProfile, isSubActive, userVodTier, hasTierAccess } from "@/lib/access";
+import { getActiveProfile } from "@/lib/access";
 import Link from "next/link";
 import TitleCard from "@/components/TitleCard";
 import WatchlistButton from "@/components/WatchlistButton";
-import { Play, Star, Lock, Clock } from "lucide-react";
+import { Play, Star, Clock } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,11 +16,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
   });
   if (!title) notFound();
 
-  const user = await getFullUser();
   const profile = await getActiveProfile();
-  const active = isSubActive(user?.subscription as any);
-  const vodTier = userVodTier(user?.subscription as any);
-  const unlocked = active && hasTierAccess(vodTier, title.tier);
 
   const inWatchlist = profile
     ? !!(await prisma.watchlist.findUnique({ where: { profileId_titleId: { profileId: profile.id, titleId: title.id } } }))
@@ -47,7 +43,10 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
           <img src={title.posterUrl} alt={title.name} className="w-40 sm:w-56 rounded-xl ring-1 ring-white/10 shrink-0 shadow-2xl" />
 
           <div className="flex-1 pt-4 md:pt-24">
-            <span className="text-xs font-bold text-orange-400 uppercase tracking-wide">{title.type}</span>
+            <span className="flex items-center gap-2 text-xs font-bold text-orange-400 uppercase tracking-wide">
+              {title.type}
+              <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full ring-1 ring-emerald-500/30 normal-case">Free</span>
+            </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold mt-1">{title.name}</h1>
             <div className="flex flex-wrap items-center gap-3 mt-3 text-sm text-zinc-400">
               <span className="flex items-center gap-1 text-amber-400 font-semibold">
@@ -60,7 +59,6 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
                   <Clock size={13} /> {title.durationMins} min
                 </span>
               )}
-              <span className="px-2 py-0.5 rounded-full bg-white/10 text-xs font-semibold">{title.tier}</span>
             </div>
 
             <div className="flex flex-wrap gap-2 mt-3">
@@ -90,31 +88,19 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {title.streamUrl ? (
-                unlocked ? (
-                  <Link
-                    href={`/watch/movie/${title.id}`}
-                    className="flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-white text-black hover:bg-zinc-200 transition"
-                  >
-                    <Play size={18} fill="currentColor" /> Play
-                  </Link>
-                ) : (
-                  <Link href="/pricing" className="flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-white/10 ring-1 ring-white/20">
-                    <Lock size={18} /> Unlock with {title.tier}
-                  </Link>
-                )
+                <Link
+                  href={`/watch/movie/${title.id}`}
+                  className="flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-white text-black hover:bg-zinc-200 transition"
+                >
+                  <Play size={18} fill="currentColor" /> Play
+                </Link>
               ) : title.seasons[0]?.episodes[0] ? (
-                unlocked ? (
-                  <Link
-                    href={`/watch/episode/${title.seasons[0].episodes[0].id}`}
-                    className="flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-white text-black hover:bg-zinc-200 transition"
-                  >
-                    <Play size={18} fill="currentColor" /> Play S1E1
-                  </Link>
-                ) : (
-                  <Link href="/pricing" className="flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-white/10 ring-1 ring-white/20">
-                    <Lock size={18} /> Unlock with {title.tier}
-                  </Link>
-                )
+                <Link
+                  href={`/watch/episode/${title.seasons[0].episodes[0].id}`}
+                  className="flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-white text-black hover:bg-zinc-200 transition"
+                >
+                  <Play size={18} fill="currentColor" /> Play S1E1
+                </Link>
               ) : null}
 
               {profile && <WatchlistButton profileId={profile.id} titleId={title.id} initial={inWatchlist} />}
@@ -132,22 +118,15 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
                   {season.episodes.map((ep) => (
                     <Link
                       key={ep.id}
-                      href={unlocked ? `/watch/episode/${ep.id}` : "/pricing"}
+                      href={`/watch/episode/${ep.id}`}
                       className="flex items-center gap-4 p-3 rounded-xl bg-zinc-900/60 ring-1 ring-white/5 hover:ring-orange-500/40 transition"
                     >
                       <div className="relative w-28 sm:w-36 aspect-video rounded-lg overflow-hidden shrink-0 bg-zinc-800">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={ep.stillUrl} alt={ep.name} className="w-full h-full object-cover" />
-                        {!unlocked && (
-                          <div className="absolute inset-0 bg-black/60 grid place-items-center">
-                            <Lock size={16} />
-                          </div>
-                        )}
-                        {unlocked && (
-                          <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 grid place-items-center transition">
-                            <Play size={20} fill="white" />
-                          </div>
-                        )}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 grid place-items-center transition">
+                          <Play size={20} fill="white" />
+                        </div>
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-semibold">
@@ -169,7 +148,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
             <h2 className="text-xl font-bold mb-4">More Like This</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {similar.map((t) => (
-                <TitleCard key={t.id} title={t as any} variant="grid" locked={active ? !hasTierAccess(vodTier, t.tier) : true} />
+                <TitleCard key={t.id} title={t as any} variant="grid" />
               ))}
             </div>
           </div>

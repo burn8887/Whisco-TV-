@@ -11,12 +11,12 @@ export default async function ProfilesPage() {
   const user = await getFullUser();
   if (!user) redirect("/login");
 
-  const canAddMore = user.profiles.length < (user.subscription?.plan.maxProfiles ?? 1);
+  const canAddMore = user.profiles.length < 6;
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
       <h1 className="text-3xl font-extrabold text-center mb-2">Who's watching?</h1>
-      <p className="text-zinc-500 text-center mb-10">Switch profiles anytime. Your plan supports up to {user.subscription?.plan.maxProfiles ?? 1} profiles.</p>
+      <p className="text-zinc-500 text-center mb-10">Switch profiles anytime — up to 6 free profiles per account.</p>
 
       <div className="flex flex-wrap justify-center gap-6">
         {user.profiles.map((p) => (

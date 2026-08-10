@@ -1,7 +1,10 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-const PROTECTED_PREFIXES = ["/browse", "/live", "/vod", "/title", "/watch", "/watchlist", "/account", "/profiles", "/admin"];
+// Whisco TV is free to watch — no account required for live TV or on-demand.
+// Only personalization features (watchlist, profiles, account) and the
+// admin console require sign-in.
+const PROTECTED_PREFIXES = ["/watchlist", "/profiles", "/account", "/admin"];
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -21,5 +24,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/browse/:path*", "/live/:path*", "/vod/:path*", "/title/:path*", "/watch/:path*", "/watchlist/:path*", "/account/:path*", "/profiles/:path*", "/admin/:path*"],
+  matcher: ["/watchlist/:path*", "/profiles/:path*", "/account/:path*", "/admin/:path*"],
 };

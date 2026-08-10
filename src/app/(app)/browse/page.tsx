@@ -1,18 +1,15 @@
 import { prisma } from "@/lib/prisma";
-import { getFullUser, getActiveProfile, userVodTier, hasTierAccess, isSubActive } from "@/lib/access";
+import { getActiveProfile } from "@/lib/access";
 import Row from "@/components/Row";
 import TitleCard from "@/components/TitleCard";
 import ChannelCard from "@/components/ChannelCard";
 import Link from "next/link";
-import { Play, Info, AlertTriangle } from "lucide-react";
+import { Play, Info } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function BrowsePage() {
-  const user = await getFullUser();
   const profile = await getActiveProfile();
-  const vodTier = userVodTier(user?.subscription as any);
-  const active = isSubActive(user?.subscription as any);
 
   const [featured, trending, newReleases, movies, series, docs, channels, progress] = await Promise.all([
     prisma.title.findMany({ where: { isFeatured: true }, take: 5 }),
@@ -36,19 +33,6 @@ export default async function BrowsePage() {
 
   return (
     <div className="pb-16">
-      {!active && (
-        <div className="bg-orange-500/10 border-b border-orange-500/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3 text-sm text-orange-200">
-            <AlertTriangle size={16} className="shrink-0" />
-            Your subscription isn't active.{" "}
-            <Link href="/pricing" className="underline font-semibold">
-              Choose a plan
-            </Link>{" "}
-            to unlock all live channels and on-demand titles.
-          </div>
-        </div>
-      )}
-
       {hero && (
         <section className="relative h-[60vh] min-h-[420px] w-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -56,8 +40,9 @@ export default async function BrowsePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/90 via-transparent to-transparent" />
           <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col justify-end pb-14">
-            <span className="text-xs font-bold text-orange-400 mb-2 uppercase tracking-wide">
+            <span className="flex items-center gap-2 text-xs font-bold text-orange-400 mb-2 uppercase tracking-wide">
               Featured {hero.type === "SERIES" ? "Series" : hero.type === "DOCUMENTARY" ? "Documentary" : "Movie"}
+              <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full ring-1 ring-emerald-500/30">FREE</span>
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold max-w-2xl leading-tight">{hero.name}</h1>
             <p className="mt-4 max-w-xl text-zinc-300 text-sm sm:text-base line-clamp-3">{hero.synopsis}</p>
@@ -98,7 +83,7 @@ export default async function BrowsePage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {channels.map((c) => (
-                <ChannelCard key={c.id} channel={c} locked={!hasTierAccess(user ? "PREMIUM" : "BASIC", c.tier)} />
+                <ChannelCard key={c.id} channel={c} />
               ))}
             </div>
           </section>
@@ -106,31 +91,31 @@ export default async function BrowsePage() {
 
         <Row title="Trending Now">
           {trending.map((t) => (
-            <TitleCard key={t.id} title={t as any} locked={active ? !hasTierAccess(vodTier, t.tier) : true} />
+            <TitleCard key={t.id} title={t as any} />
           ))}
         </Row>
 
         <Row title="New Releases">
           {newReleases.map((t) => (
-            <TitleCard key={t.id} title={t as any} locked={active ? !hasTierAccess(vodTier, t.tier) : true} />
+            <TitleCard key={t.id} title={t as any} />
           ))}
         </Row>
 
         <Row title="Movies">
           {movies.map((t) => (
-            <TitleCard key={t.id} title={t as any} locked={active ? !hasTierAccess(vodTier, t.tier) : true} />
+            <TitleCard key={t.id} title={t as any} />
           ))}
         </Row>
 
         <Row title="Series">
           {series.map((t) => (
-            <TitleCard key={t.id} title={t as any} locked={active ? !hasTierAccess(vodTier, t.tier) : true} />
+            <TitleCard key={t.id} title={t as any} />
           ))}
         </Row>
 
         <Row title="Documentaries">
           {docs.map((t) => (
-            <TitleCard key={t.id} title={t as any} locked={active ? !hasTierAccess(vodTier, t.tier) : true} />
+            <TitleCard key={t.id} title={t as any} />
           ))}
         </Row>
       </div>

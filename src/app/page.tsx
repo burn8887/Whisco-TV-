@@ -1,16 +1,15 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { prisma } from "@/lib/prisma";
-import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Users, Check, Star } from "lucide-react";
+import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Users, Check, Star, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [channelCount, titleCount, countries, plans, featuredTitles] = await Promise.all([
+  const [channelCount, titleCount, countries, featuredTitles] = await Promise.all([
     prisma.channel.count(),
     prisma.title.count(),
     prisma.channel.findMany({ distinct: ["country"], select: { country: true } }),
-    prisma.plan.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.title.findMany({ where: { isFeatured: true }, take: 8 }),
   ]);
 
@@ -23,7 +22,7 @@ export default async function Home() {
           <nav className="hidden md:flex items-center gap-8 text-sm text-zinc-300">
             <a href="#channels" className="hover:text-white">Live Channels</a>
             <a href="#vod" className="hover:text-white">On-Demand</a>
-            <Link href="/pricing" className="hover:text-white">Pricing</Link>
+            <a href="#how" className="hover:text-white">How It's Free</a>
             <a href="#faq" className="hover:text-white">FAQ</a>
           </nav>
           <div className="flex items-center gap-3">
@@ -31,10 +30,10 @@ export default async function Home() {
               Sign in
             </Link>
             <Link
-              href="/signup"
+              href="/browse"
               className="text-sm font-semibold px-4 py-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 hover:opacity-90 transition"
             >
-              Start Free Trial
+              Start Watching Free
             </Link>
           </div>
         </div>
@@ -47,32 +46,32 @@ export default async function Home() {
           <div className="absolute -top-20 right-0 w-[500px] h-[500px] bg-orange-600/20 rounded-full blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-orange-300 mb-6">
-            <Globe2 size={14} /> {countries.length}+ countries · {channelCount}+ live channels
+          <span className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 ring-1 ring-emerald-500/30 text-emerald-300 mb-6">
+            <Sparkles size={14} /> 100% free, forever — no subscription, no trial, no credit card
           </span>
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
-            One subscription. <span className="text-gradient">Every screen, every story.</span>
+            Free live TV and on-demand. <span className="text-gradient">No catch.</span>
           </h1>
           <p className="mt-6 text-lg text-zinc-400 max-w-2xl mx-auto">
-            Whisco TV brings together {channelCount}+ live TV channels from around the globe and a
-            massive on-demand library of {titleCount}+ movies, series, and documentaries — all in one
-            fast, beautifully simple app.
+            Whisco TV is a free, ad-supported streaming service with {channelCount}+ live channels from around the
+            globe and a growing library of {titleCount}+ movies, series, and documentaries. Just open the app and
+            watch — no account, no payment, no commitment required.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/signup"
+              href="/browse"
               className="px-8 py-3.5 rounded-full font-semibold bg-gradient-to-r from-orange-500 to-pink-600 hover:opacity-90 transition text-lg shadow-lg shadow-orange-900/30"
             >
-              Start your 7-day free trial
+              Start Watching — It's Free
             </Link>
             <Link
-              href="/pricing"
+              href="/live"
               className="px-8 py-3.5 rounded-full font-semibold bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition text-lg"
             >
-              See pricing
+              Browse Live Channels
             </Link>
           </div>
-          <p className="mt-4 text-xs text-zinc-500">No contracts. Cancel anytime. Watch on TV, phone, tablet, or browser.</p>
+          <p className="mt-4 text-xs text-zinc-500">Supported by ads, not subscriptions. Watch on TV, phone, tablet, or browser.</p>
         </div>
       </section>
 
@@ -83,7 +82,7 @@ export default async function Home() {
             { label: "Live Channels", value: `${channelCount}+` },
             { label: "Countries Covered", value: `${countries.length}+` },
             { label: "Movies, Series & Docs", value: `${titleCount}+` },
-            { label: "Simultaneous Screens", value: "Up to 6" },
+            { label: "Monthly Cost", value: "$0" },
           ].map((s) => (
             <div key={s.label}>
               <p className="text-2xl sm:text-3xl font-extrabold text-gradient">{s.value}</p>
@@ -96,20 +95,20 @@ export default async function Home() {
       {/* FEATURES */}
       <section id="channels" className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold">Built to out-stream the competition</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold">Free doesn't mean small</h2>
           <p className="mt-4 text-zinc-400">
-            Global live channel range and a deep on-demand catalog — the two things that matter most,
-            done right.
+            A genuinely global live channel lineup and a growing on-demand library — fully legal, fully free,
+            funded by ads instead of your wallet.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { icon: Tv2, title: "Global Live TV", desc: `${channelCount}+ channels across ${countries.length}+ countries — news, sports, entertainment, kids, music, and more.` },
-            { icon: Film, title: "Massive On-Demand Library", desc: `${titleCount}+ movies, series, and documentaries added weekly across every major genre.` },
+            { icon: Tv2, title: "Global Live TV", desc: `${channelCount}+ legally licensed, free-to-air channels — news, business, and more, with more added regularly.` },
+            { icon: Film, title: "Free On-Demand Library", desc: `${titleCount}+ movies, series, and documentaries, ad-supported and free to watch anytime.` },
             { icon: Smartphone, title: "Every Device", desc: "Smart TVs, phones, tablets, and browsers — pick up exactly where you left off." },
-            { icon: Users, title: "Multi-Profile Households", desc: "Up to 8 profiles with dedicated watchlists, kids mode, and parental controls." },
-            { icon: ShieldCheck, title: "Reliable Streaming", desc: "Adaptive HD/4K streaming engineered for minimal buffering, wherever you are." },
-            { icon: Globe2, title: "True Global Reach", desc: "Content and channels curated for viewers across the Middle East, Europe, Americas, Asia, and Africa." },
+            { icon: Users, title: "Free Profiles", desc: "Up to 6 profiles per account with dedicated watchlists and kids mode — at no cost." },
+            { icon: ShieldCheck, title: "Fully Legal, No Risk", desc: "Every channel and title is properly licensed. No pirated streams, no shutdown risk, no legal exposure." },
+            { icon: Globe2, title: "True Global Reach", desc: "Content curated for viewers across the Middle East, Europe, Americas, Asia, and Africa." },
           ].map((f) => (
             <div key={f.title} className="p-6 rounded-2xl bg-zinc-900/60 ring-1 ring-white/5 hover:ring-orange-500/30 transition">
               <f.icon className="text-orange-400 mb-4" size={28} />
@@ -125,8 +124,8 @@ export default async function Home() {
         <section id="vod" className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl sm:text-3xl font-extrabold">Featured on demand</h2>
-            <Link href="/signup" className="text-sm text-orange-400 hover:text-orange-300 font-medium">
-              Unlock full library →
+            <Link href="/vod" className="text-sm text-orange-400 hover:text-orange-300 font-medium">
+              Browse the full library →
             </Link>
           </div>
           <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
@@ -146,46 +145,21 @@ export default async function Home() {
         </section>
       )}
 
-      {/* PRICING */}
-      <section id="pricing" className="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t border-white/5">
+      {/* HOW IT'S FREE */}
+      <section id="how" className="max-w-5xl mx-auto px-4 sm:px-6 py-20 border-t border-white/5">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold">Simple, honest pricing</h2>
-          <p className="mt-4 text-zinc-400">Start with a 7-day free trial. Upgrade, downgrade, or cancel anytime.</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold">How can it be free?</h2>
+          <p className="mt-4 text-zinc-400">The same way broadcast TV always has been — ads, not subscriptions.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {plans.map((p) => (
-            <div
-              key={p.id}
-              className={`relative p-8 rounded-2xl ring-1 flex flex-col ${
-                p.featured ? "bg-gradient-to-b from-orange-500/10 to-pink-600/10 ring-orange-500/50" : "bg-zinc-900/60 ring-white/5"
-              }`}
-            >
-              {p.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[11px] font-bold px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-pink-600">
-                  MOST POPULAR
-                </span>
-              )}
-              <h3 className="text-xl font-bold">{p.name}</h3>
-              <p className="mt-4 flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold">${p.priceMonthly.toFixed(2)}</span>
-                <span className="text-zinc-500">/mo</span>
-              </p>
-              <p className="text-sm text-zinc-400 mt-3 mb-6">{p.description}</p>
-              <ul className="space-y-2.5 text-sm mb-8 flex-1">
-                <li className="flex gap-2"><Check size={16} className="text-orange-400 shrink-0 mt-0.5" /> {p.channelAccess} channel tier access</li>
-                <li className="flex gap-2"><Check size={16} className="text-orange-400 shrink-0 mt-0.5" /> Up to {p.maxScreens} screens at once</li>
-                <li className="flex gap-2"><Check size={16} className="text-orange-400 shrink-0 mt-0.5" /> {p.maxProfiles} user profiles</li>
-                <li className="flex gap-2"><Check size={16} className="text-orange-400 shrink-0 mt-0.5" /> {p.hdQuality} streaming quality</li>
-                <li className="flex gap-2"><Check size={16} className="text-orange-400 shrink-0 mt-0.5" /> Full on-demand library</li>
-              </ul>
-              <Link
-                href="/signup"
-                className={`text-center py-3 rounded-full font-semibold transition ${
-                  p.featured ? "bg-gradient-to-r from-orange-500 to-pink-600 hover:opacity-90" : "bg-white/5 ring-1 ring-white/15 hover:bg-white/10"
-                }`}
-              >
-                Get Started
-              </Link>
+        <div className="grid sm:grid-cols-3 gap-6">
+          {[
+            { title: "Ad-supported, like TV always was", desc: "Short ad breaks fund the content, the same way free-to-air television always has — you never pay a subscription fee." },
+            { title: "Fully licensed content", desc: "Every channel and title is legally sourced — no piracy, no shady reseller panels, no risk of your access disappearing overnight." },
+            { title: "No commitment, ever", desc: "No sign-up required to start watching, no credit card on file, no trial that quietly turns into a bill." },
+          ].map((f) => (
+            <div key={f.title} className="p-6 rounded-2xl bg-zinc-900/60 ring-1 ring-white/5">
+              <h3 className="font-bold text-lg mb-2">{f.title}</h3>
+              <p className="text-sm text-zinc-400">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -196,10 +170,10 @@ export default async function Home() {
         <h2 className="text-3xl font-extrabold text-center mb-10">Frequently asked questions</h2>
         <div className="space-y-4">
           {[
+            { q: "Is Whisco TV really free?", a: "Yes — 100% free. Whisco TV is funded by advertising, not subscriptions. There's no paid tier, no trial that converts to a bill, and no credit card required." },
+            { q: "Do I need an account to watch?", a: "No — you can browse and watch live TV and on-demand content without signing up. Creating a free account just lets you save a watchlist, use profiles, and resume where you left off." },
             { q: "What devices can I watch on?", a: "Whisco TV works in any modern browser on desktop, mobile, and tablet, and installs as an app on supported devices." },
-            { q: "Can I cancel anytime?", a: "Yes — there are no contracts. Cancel or change your plan anytime from your account page." },
-            { q: "How many people can watch at once?", a: "Depends on your plan — from 1 screen on Starter up to 6 simultaneous screens on Ultimate." },
-            { q: "Is there a free trial?", a: "Every new account starts with a 7-day free trial on us." },
+            { q: "Is the content legal?", a: "Yes — every live channel and on-demand title on Whisco TV is properly licensed for free, ad-supported distribution." },
           ].map((f) => (
             <details key={f.q} className="group rounded-xl bg-zinc-900/60 ring-1 ring-white/5 p-5">
               <summary className="cursor-pointer font-semibold list-none flex justify-between items-center">
@@ -215,10 +189,10 @@ export default async function Home() {
       {/* CTA */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-20">
         <div className="rounded-3xl bg-gradient-to-r from-orange-600 via-pink-600 to-violet-700 p-10 sm:p-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">Ready to start streaming?</h2>
-          <p className="text-white/90 mb-8 max-w-xl mx-auto">Join Whisco TV today and get instant access to global live TV and our full on-demand library.</p>
-          <Link href="/signup" className="inline-block px-8 py-3.5 rounded-full font-bold bg-white text-black hover:bg-zinc-200 transition">
-            Start Free Trial
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">Ready to start watching?</h2>
+          <p className="text-white/90 mb-8 max-w-xl mx-auto">No sign-up required — jump straight into live TV or the on-demand library, completely free.</p>
+          <Link href="/browse" className="inline-block px-8 py-3.5 rounded-full font-bold bg-white text-black hover:bg-zinc-200 transition">
+            Start Watching Free
           </Link>
         </div>
       </section>
@@ -227,8 +201,8 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Logo />
           <p className="text-xs text-zinc-500 text-center">
-            © {new Date().getFullYear()} Whisco TV. Demo product — sample channels/content shown are for
-            illustration only. Connect a licensed content feed for production use.
+            © {new Date().getFullYear()} Whisco TV. Free, ad-supported streaming. On-demand titles use sample
+            content for demo purposes — see project README for production content sourcing.
           </p>
         </div>
       </footer>

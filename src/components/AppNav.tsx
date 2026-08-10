@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@/components/Logo";
 import { logoutAction } from "@/lib/actions/auth";
-import { Tv2, Film, Home, Bookmark, User, Shield, LogOut, Menu, X } from "lucide-react";
+import { Tv2, Film, Home, Bookmark, User, Shield, LogOut, Menu, X, LogIn } from "lucide-react";
 import { useState } from "react";
 
 const LINKS = [
@@ -20,14 +20,14 @@ export default function AppNav({
   profileName,
   profileAvatar,
   isAdmin,
-  subStatus,
+  isLoggedIn,
 }: {
-  userName: string;
-  avatarColor: string;
+  userName?: string;
+  avatarColor?: string;
   profileName?: string;
   profileAvatar?: string;
   isAdmin: boolean;
-  subStatus?: string;
+  isLoggedIn: boolean;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -66,25 +66,34 @@ export default function AppNav({
         </div>
 
         <div className="flex items-center gap-3">
-          {subStatus === "TRIALING" && (
-            <Link href="/account" className="hidden sm:block text-[11px] font-semibold px-2.5 py-1 rounded-full bg-orange-500/15 text-orange-300 ring-1 ring-orange-500/30">
-              Free Trial
+          <span className="hidden sm:block text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30">
+            100% Free
+          </span>
+          {isLoggedIn ? (
+            <>
+              <Link href="/profiles" className="hidden sm:flex items-center gap-2 text-sm text-zinc-300 hover:text-white">
+                <span className="w-7 h-7 rounded-md grid place-items-center text-sm" style={{ background: avatarColor || "#f97316" }}>
+                  {profileAvatar || "👤"}
+                </span>
+                {profileName || userName}
+              </Link>
+              <Link href="/account" className="hidden sm:flex p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5">
+                <User size={18} />
+              </Link>
+              <form action={logoutAction}>
+                <button className="hidden sm:flex p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5" title="Sign out">
+                  <LogOut size={18} />
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden sm:flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 hover:bg-white/10 text-zinc-200"
+            >
+              <LogIn size={15} /> Sign in
             </Link>
           )}
-          <Link href="/profiles" className="hidden sm:flex items-center gap-2 text-sm text-zinc-300 hover:text-white">
-            <span className="w-7 h-7 rounded-md grid place-items-center text-sm" style={{ background: avatarColor }}>
-              {profileAvatar || "👤"}
-            </span>
-            {profileName || userName}
-          </Link>
-          <Link href="/account" className="hidden sm:flex p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5">
-            <User size={18} />
-          </Link>
-          <form action={logoutAction}>
-            <button className="hidden sm:flex p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5" title="Sign out">
-              <LogOut size={18} />
-            </button>
-          </form>
           <button className="md:hidden p-2" onClick={() => setOpen(!open)}>
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -103,17 +112,25 @@ export default function AppNav({
               <Shield size={16} /> Admin
             </Link>
           )}
-          <Link href="/profiles" onClick={() => setOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5">
-            <User size={16} /> Profiles
-          </Link>
-          <Link href="/account" onClick={() => setOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5">
-            <User size={16} /> Account
-          </Link>
-          <form action={logoutAction}>
-            <button className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5 w-full">
-              <LogOut size={16} /> Sign out
-            </button>
-          </form>
+          {isLoggedIn ? (
+            <>
+              <Link href="/profiles" onClick={() => setOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5">
+                <User size={16} /> Profiles
+              </Link>
+              <Link href="/account" onClick={() => setOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5">
+                <User size={16} /> Account
+              </Link>
+              <form action={logoutAction}>
+                <button className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5 w-full">
+                  <LogOut size={16} /> Sign out
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link href="/login" onClick={() => setOpen(false)} className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-zinc-300 hover:bg-white/5">
+              <LogIn size={16} /> Sign in
+            </Link>
+          )}
         </div>
       )}
     </header>

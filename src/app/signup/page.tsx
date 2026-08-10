@@ -15,8 +15,8 @@ export default function SignupPage() {
           <Logo />
         </div>
         <div className="bg-zinc-900/70 ring-1 ring-white/10 rounded-2xl p-8">
-          <h1 className="text-2xl font-bold mb-1">Start your free trial</h1>
-          <p className="text-sm text-zinc-500 mb-6">7 days free. No commitment, cancel anytime.</p>
+          <h1 className="text-2xl font-bold mb-1">Create a free account</h1>
+          <p className="text-sm text-zinc-500 mb-6">Optional — unlocks profiles, watchlist, and resume-watching. No payment, ever.</p>
 
           <form action={formAction} className="space-y-4">
             <div>
@@ -63,6 +63,12 @@ export default function SignupPage() {
           Already have an account?{" "}
           <Link href="/login" className="text-orange-400 hover:text-orange-300 font-medium">
             Sign in
+          </Link>
+        </p>
+        <p className="text-center text-xs text-zinc-600 mt-3">
+          Just want to watch?{" "}
+          <Link href="/browse" className="text-zinc-400 hover:text-zinc-300 underline">
+            Skip this — no account needed
           </Link>
         </p>
       </div>

@@ -1,7 +1,6 @@
 import { upsertChannelAction } from "@/lib/actions/admin";
 
 const CATEGORIES = ["News", "Sports", "Entertainment", "Movies", "Kids", "Documentary", "Music", "Lifestyle"];
-const TIERS = ["BASIC", "STANDARD", "PREMIUM"];
 
 export default function ChannelForm({ channel }: { channel?: any }) {
   return (
@@ -24,27 +23,15 @@ export default function ChannelForm({ channel }: { channel?: any }) {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label className="text-xs font-medium text-zinc-400">Category</label>
-          <select name="category" defaultValue={channel?.category || "Entertainment"} className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm">
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="text-xs font-medium text-zinc-400">Subscription Tier</label>
-          <select name="tier" defaultValue={channel?.tier || "BASIC"} className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm">
-            {TIERS.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label className="text-xs font-medium text-zinc-400">Category</label>
+        <select name="category" defaultValue={channel?.category || "Entertainment"} className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm">
+          {CATEGORIES.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">

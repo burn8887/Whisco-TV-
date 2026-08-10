@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import TitleCard from "@/components/TitleCard";
-import { getFullUser, isSubActive, userVodTier, hasTierAccess } from "@/lib/access";
 import Link from "next/link";
 import { Search } from "lucide-react";
 
@@ -24,10 +23,6 @@ export default async function VodPage({
   if (sp.q) where.name = { contains: sp.q };
   if (sp.genre) where.genres = { contains: sp.genre };
 
-  const user = await getFullUser();
-  const active = isSubActive(user?.subscription as any);
-  const vodTier = userVodTier(user?.subscription as any);
-
   const [titles, total] = await Promise.all([
     prisma.title.findMany({ where, orderBy: { releaseYear: "desc" }, take: 120 }),
     prisma.title.count(),
@@ -43,7 +38,9 @@ export default async function VodPage({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-extrabold">On Demand</h1>
-        <p className="text-zinc-500 text-sm mt-1">{total}+ movies, series, and documentaries.</p>
+        <p className="text-zinc-500 text-sm mt-1">
+          {total}+ movies, series, and documentaries — <span className="text-emerald-400 font-semibold">100% free, ad-supported</span>.
+        </p>
       </div>
 
       <div className="flex gap-2 mb-6 overflow-x-auto no-scrollbar">
@@ -84,7 +81,7 @@ export default async function VodPage({
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {titles.map((t) => (
-          <TitleCard key={t.id} title={t as any} locked={active ? !hasTierAccess(vodTier, t.tier) : true} variant="grid" />
+          <TitleCard key={t.id} title={t as any} variant="grid" />
         ))}
       </div>
 

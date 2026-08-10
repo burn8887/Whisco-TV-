@@ -1,9 +1,9 @@
 import { prisma } from "@/lib/prisma";
-import { notFound, redirect } from "next/navigation";
-import { getFullUser, getActiveProfile, isSubActive, userVodTier, hasTierAccess } from "@/lib/access";
+import { notFound } from "next/navigation";
+import { getActiveProfile } from "@/lib/access";
 import WatchClient from "@/components/WatchClient";
 import Link from "next/link";
-import { ChevronLeft, Play, Lock } from "lucide-react";
+import { ChevronLeft, Play } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,15 +16,11 @@ export default async function WatchEpisodePage({ params }: { params: Promise<{ i
   if (!episode) notFound();
 
   const title = episode.season.title;
-  const user = await getFullUser();
   const profile = await getActiveProfile();
-  const active = isSubActive(user?.subscription as any);
-  const vodTier = userVodTier(user?.subscription as any);
-  if (!active || !hasTierAccess(vodTier, title.tier)) redirect(`/title/${title.slug}`);
 
   const progress = profile
-    ? await prisma.watchProgress.findUnique({
-        where: { profileId_titleId_episodeId: { profileId: profile.id, titleId: title.id, episodeId: episode.id } },
+    ? await prisma.watchProgress.findFirst({
+        where: { profileId: profile.id, titleId: title.id, episodeId: episode.id },
       })
     : null;
 

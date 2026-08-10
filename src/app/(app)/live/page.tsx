@@ -27,7 +27,9 @@ export default async function LivePage({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-extrabold">Live TV</h1>
-        <p className="text-zinc-500 text-sm mt-1">{total}+ channels from around the globe, updated live.</p>
+        <p className="text-zinc-500 text-sm mt-1">
+          {total}+ live channels from around the globe — <span className="text-emerald-400 font-semibold">100% free, ad-supported</span>.
+        </p>
       </div>
 
       <form className="flex flex-col sm:flex-row gap-3 mb-6" action="/live">

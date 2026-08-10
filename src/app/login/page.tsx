@@ -55,7 +55,13 @@ export default function LoginPage() {
         <p className="text-center text-sm text-zinc-500 mt-6">
           New to Whisco TV?{" "}
           <Link href="/signup" className="text-orange-400 hover:text-orange-300 font-medium">
-            Start your free trial
+            Create a free account
+          </Link>
+        </p>
+        <p className="text-center text-xs text-zinc-600 mt-3">
+          Just want to watch?{" "}
+          <Link href="/browse" className="text-zinc-400 hover:text-zinc-300 underline">
+            Skip this — no account needed
           </Link>
         </p>
       </div>

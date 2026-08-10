@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { upsertTitleAction } from "@/lib/actions/admin";
 
-const TIERS = ["BASIC", "STANDARD", "PREMIUM"];
 const RATINGS_MOVIE = ["G", "PG", "PG-13", "R", "NC-17"];
 const RATINGS_TV = ["TV-Y", "TV-PG", "TV-14", "TV-MA"];
 
@@ -62,21 +61,9 @@ export default function TitleForm({ title }: { title?: any }) {
         </div>
       )}
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label className="text-xs font-medium text-zinc-400">Genres (comma separated)</label>
-          <input name="genres" required defaultValue={title?.genres} className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm" />
-        </div>
-        <div>
-          <label className="text-xs font-medium text-zinc-400">Subscription Tier</label>
-          <select name="tier" defaultValue={title?.tier || "BASIC"} className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm">
-            {TIERS.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label className="text-xs font-medium text-zinc-400">Genres (comma separated)</label>
+        <input name="genres" required defaultValue={title?.genres} className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm" />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">

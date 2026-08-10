@@ -1,4 +1,4 @@
-// StreamVerse IPTV Platform - Database Schema
+// Whisco TV — Free Ad-Supported TV (FAST) Platform Schema
 
 generator client {
   provider = "prisma-client-js"
@@ -12,6 +12,9 @@ datasource db {
 // ------------------------------
 // USERS & AUTH
 // ------------------------------
+// Whisco TV is 100% free and ad-supported — no subscriptions or billing.
+// Accounts are optional and only used for personalization: profiles,
+// watchlists, and resume-watching progress.
 
 model User {
   id            String    @id @default(cuid())
@@ -23,8 +26,6 @@ model User {
   avatarColor   String    @default("#f97316")
 
   profiles      Profile[]
-  subscription  Subscription?
-  paymentHistory Payment[]
 }
 
 model Profile {
@@ -41,66 +42,18 @@ model Profile {
 }
 
 // ------------------------------
-// SUBSCRIPTIONS & BILLING
-// ------------------------------
-
-model Plan {
-  id            String   @id @default(cuid())
-  name          String
-  slug          String   @unique
-  priceMonthly  Float
-  priceYearly   Float
-  maxScreens    Int      @default(1)
-  maxProfiles   Int      @default(1)
-  hdQuality     String   @default("HD") // SD, HD, FHD, 4K
-  channelAccess String   @default("BASIC") // BASIC, STANDARD, PREMIUM
-  vodAccess     Boolean  @default(true)
-  description   String
-  featured      Boolean  @default(false)
-  sortOrder     Int      @default(0)
-
-  subscriptions Subscription[]
-}
-
-model Subscription {
-  id            String   @id @default(cuid())
-  userId        String   @unique
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  planId        String
-  plan          Plan     @relation(fields: [planId], references: [id])
-  status        String   @default("TRIALING")
-  billingCycle  String   @default("monthly") // monthly | yearly
-  currentPeriodEnd DateTime
-  startedAt     DateTime @default(now())
-  cancelAtPeriodEnd Boolean @default(false)
-}
-
-model Payment {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  amount    Float
-  currency  String   @default("USD")
-  status    String   @default("paid")
-  method    String   @default("card")
-  createdAt DateTime @default(now())
-  description String
-}
-
-// ------------------------------
-// LIVE TV
+// LIVE TV (FAST channels)
 // ------------------------------
 
 model Channel {
   id           String   @id @default(cuid())
   name         String
   logoUrl      String
-  streamUrl    String   // HLS/M3U endpoint - swap in real Xtream/M3U feed
+  streamUrl    String   // Free-to-air / ad-supported public HLS stream
   country      String
   countryCode  String
   language     String   @default("English")
-  category     String   // News, Sports, Entertainment, Kids, Movies, Documentary, Music, Religious
-  tier         String   @default("BASIC") // BASIC, STANDARD, PREMIUM
+  category     String   // News, Sports, Entertainment, Kids, Movies, Documentary, Music, Lifestyle
   isHD         Boolean  @default(true)
   isFeatured   Boolean  @default(false)
   number       Int      @default(0)
@@ -118,7 +71,7 @@ model EpgEntry {
 }
 
 // ------------------------------
-// VOD (Video on Demand)
+// VOD (Video on Demand) — free, ad-supported
 // ------------------------------
 
 model Title {
@@ -138,7 +91,6 @@ model Title {
   director     String   @default("")
   country      String   @default("USA")
   language     String   @default("English")
-  tier         String   @default("BASIC")
   isFeatured   Boolean  @default(false)
   isNew        Boolean  @default(false)
   isTrending   Boolean  @default(false)

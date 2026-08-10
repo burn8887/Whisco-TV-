@@ -3,9 +3,12 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { signIn, signOut } from "@/auth";
-import { redirect } from "next/navigation";
 
 export type FormState = { error?: string } | undefined;
+
+// Whisco TV is free and ad-supported — creating an account is optional and
+// only unlocks personalization (profiles, watchlist, resume-watching).
+// There is no plan, trial, or billing step.
 
 export async function signupAction(_prev: FormState, formData: FormData): Promise<FormState> {
   const name = String(formData.get("name") || "").trim();
@@ -18,7 +21,6 @@ export async function signupAction(_prev: FormState, formData: FormData): Promis
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) return { error: "An account with that email already exists." };
 
-  const starter = await prisma.plan.findUnique({ where: { slug: "starter" } });
   const passwordHash = await bcrypt.hash(password, 10);
 
   await prisma.user.create({
@@ -27,16 +29,6 @@ export async function signupAction(_prev: FormState, formData: FormData): Promis
       email,
       passwordHash,
       profiles: { create: [{ name, avatar: "👤" }] },
-      subscription: starter
-        ? {
-            create: {
-              planId: starter.id,
-              status: "TRIALING",
-              billingCycle: "monthly",
-              currentPeriodEnd: new Date(Date.now() + 7 * 24 * 3600 * 1000),
-            },
-          }
-        : undefined,
     },
   });
 

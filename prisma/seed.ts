@@ -4,16 +4,95 @@ import { placeholder } from "../src/lib/placeholder";
 
 const prisma = new PrismaClient();
 
-// Public-domain / freely licensed sample streams used ONLY as playable
-// placeholders for this demo build. In production, replace Channel.streamUrl
-// with your Xtream Codes/M3U live feed URLs, and Title/Episode.streamUrl with
-// your licensed VOD CDN URLs (e.g. Mux, CloudFront, Bunny Stream).
-const LIVE_TEST_STREAMS = [
-  "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-  "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8",
-  "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8",
+// ------------------------------------------------------------------
+// LIVE CHANNELS — Whisco TV is a FAST (Free Ad-Supported Streaming TV)
+// service. Every stream below is a real, publicly-provided, free-to-air
+// broadcast feed from the broadcaster itself (public/state broadcasters or
+// ad-supported international news networks) — verified reachable at seed
+// time. This is a starting lineup; expand it by (a) sourcing more verified
+// free/public broadcast feeds, or (b) signing on with a FAST aggregator
+// (e.g. Amagi, Cinedigm/Cineverse, Zone.tv) for a much larger licensed
+// channel catalog without negotiating each channel individually.
+// ------------------------------------------------------------------
+const LIVE_CHANNELS = [
+  {
+    name: "DW English",
+    country: "Germany",
+    countryCode: "DE",
+    language: "English",
+    category: "News",
+    streamUrl: "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/index.m3u8",
+    isFeatured: true,
+  },
+  {
+    name: "France 24 English",
+    country: "France",
+    countryCode: "FR",
+    language: "English",
+    category: "News",
+    streamUrl: "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
+    isFeatured: true,
+  },
+  {
+    name: "France 24 Arabic",
+    country: "France",
+    countryCode: "FR",
+    language: "Arabic",
+    category: "News",
+    streamUrl: "https://static.france24.com/live/F24_AR_LO_HLS/live_web.m3u8",
+    isFeatured: true,
+  },
+  {
+    name: "France 24 French",
+    country: "France",
+    countryCode: "FR",
+    language: "French",
+    category: "News",
+    streamUrl: "https://static.france24.com/live/F24_FR_LO_HLS/live_web.m3u8",
+    isFeatured: false,
+  },
+  {
+    name: "Sky News Arabia",
+    country: "United Arab Emirates",
+    countryCode: "AE",
+    language: "Arabic",
+    category: "News",
+    streamUrl: "https://stream.skynewsarabia.com/hls/sna.m3u8",
+    isFeatured: true,
+  },
+  {
+    name: "TRT World",
+    country: "Turkey",
+    countryCode: "TR",
+    language: "English",
+    category: "News",
+    streamUrl: "https://tv-trtworld.medya.trt.com.tr/master.m3u8",
+    isFeatured: false,
+  },
+  {
+    name: "CBS News",
+    country: "United States",
+    countryCode: "US",
+    language: "English",
+    category: "News",
+    streamUrl: "https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8",
+    isFeatured: true,
+  },
+  {
+    name: "Bloomberg TV",
+    country: "United States",
+    countryCode: "US",
+    language: "English",
+    category: "News",
+    streamUrl: "https://www.bloomberg.com/media-manifest/streams/us.m3u8",
+    isFeatured: true,
+  },
 ];
 
+// Public-domain / freely licensed sample streams used as placeholders for
+// on-demand VOD content until direct FAST/VOD syndication deals are signed
+// (see README for licensing next steps — e.g. Filmhub, Cinedigm/Cineverse,
+// Under the Milky Way for legally syndicated movie/series/doc libraries).
 const VOD_TEST_STREAMS = [
   "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
   "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -30,108 +109,12 @@ const VOD_TEST_STREAMS = [
 function pick<T>(arr: T[], i: number) {
   return arr[i % arr.length];
 }
-function rnd(seed: number, max: number) {
-  const x = Math.sin(seed) * 10000;
-  return Math.floor((x - Math.floor(x)) * max);
-}
 function slugify(s: string) {
   return s
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 }
-
-// ------------------------------------------------------------------
-// LIVE TV: COUNTRIES + CATEGORIES
-// ------------------------------------------------------------------
-const COUNTRIES: { name: string; code: string; lang: string }[] = [
-  { name: "United States", code: "US", lang: "English" },
-  { name: "United Kingdom", code: "GB", lang: "English" },
-  { name: "Canada", code: "CA", lang: "English" },
-  { name: "Germany", code: "DE", lang: "German" },
-  { name: "France", code: "FR", lang: "French" },
-  { name: "Spain", code: "ES", lang: "Spanish" },
-  { name: "Italy", code: "IT", lang: "Italian" },
-  { name: "Brazil", code: "BR", lang: "Portuguese" },
-  { name: "Mexico", code: "MX", lang: "Spanish" },
-  { name: "India", code: "IN", lang: "Hindi" },
-  { name: "Pakistan", code: "PK", lang: "Urdu" },
-  { name: "United Arab Emirates", code: "AE", lang: "Arabic" },
-  { name: "Saudi Arabia", code: "SA", lang: "Arabic" },
-  { name: "Egypt", code: "EG", lang: "Arabic" },
-  { name: "Turkey", code: "TR", lang: "Turkish" },
-  { name: "Nigeria", code: "NG", lang: "English" },
-  { name: "South Africa", code: "ZA", lang: "English" },
-  { name: "Japan", code: "JP", lang: "Japanese" },
-  { name: "South Korea", code: "KR", lang: "Korean" },
-  { name: "Philippines", code: "PH", lang: "Filipino" },
-  { name: "Indonesia", code: "ID", lang: "Indonesian" },
-  { name: "Australia", code: "AU", lang: "English" },
-  { name: "Poland", code: "PL", lang: "Polish" },
-  { name: "Netherlands", code: "NL", lang: "Dutch" },
-  { name: "Portugal", code: "PT", lang: "Portuguese" },
-  { name: "Greece", code: "GR", lang: "Greek" },
-  { name: "Sweden", code: "SE", lang: "Swedish" },
-  { name: "Ireland", code: "IE", lang: "English" },
-  { name: "Argentina", code: "AR", lang: "Spanish" },
-  { name: "Colombia", code: "CO", lang: "Spanish" },
-  { name: "Morocco", code: "MA", lang: "Arabic" },
-  { name: "Bahrain", code: "BH", lang: "Arabic" },
-];
-
-const CATEGORIES = [
-  "News",
-  "Sports",
-  "Entertainment",
-  "Movies",
-  "Kids",
-  "Documentary",
-  "Music",
-  "Lifestyle",
-];
-
-const SUFFIXES = ["One", "Plus", "24", "Prime", "Max", "Now", "Live", "World", "HD", "Extra"];
-
-function tierFor(category: string, idx: number) {
-  if (category === "Sports") return idx % 3 === 0 ? "PREMIUM" : "STANDARD";
-  if (category === "News" || category === "Local") return "BASIC";
-  if (category === "Movies") return idx % 2 === 0 ? "PREMIUM" : "STANDARD";
-  return idx % 4 === 0 ? "STANDARD" : "BASIC";
-}
-
-async function seedChannels() {
-  let num = 100;
-  const channels: any[] = [];
-  for (const country of COUNTRIES) {
-    // pick 6-8 categories per country deterministically
-    const catCount = 6 + (hash(country.code) % 3);
-    const cats = [...CATEGORIES].sort((a, b) => hash(a + country.code) - hash(b + country.code)).slice(0, catCount);
-    cats.forEach((cat, ci) => {
-      const perCat = 1 + (hash(country.code + cat) % 2); // 1-2 channels per category
-      for (let i = 0; i < perCat; i++) {
-        const suffix = pick(SUFFIXES, hash(country.code + cat + i));
-        const name = `${country.name} ${cat} ${suffix}`;
-        num += 1;
-        channels.push({
-          name,
-          logoUrl: placeholder(`${country.code} ${cat}`, { w: 200, h: 200, kind: "logo" }),
-          streamUrl: pick(LIVE_TEST_STREAMS, num),
-          country: country.name,
-          countryCode: country.code,
-          language: country.lang,
-          category: cat,
-          tier: tierFor(cat, ci + i),
-          isHD: hash(name) % 3 !== 0,
-          isFeatured: hash(name) % 11 === 0,
-          number: num,
-        });
-      }
-    });
-  }
-  await prisma.channel.createMany({ data: channels });
-  return channels.length;
-}
-
 function hash(s: string) {
   let h = 0;
   for (let i = 0; i < s.length; i++) {
@@ -139,6 +122,23 @@ function hash(s: string) {
     h |= 0;
   }
   return Math.abs(h);
+}
+
+async function seedChannels() {
+  const channels = LIVE_CHANNELS.map((c, i) => ({
+    name: c.name,
+    logoUrl: placeholder(c.name, { w: 200, h: 200, kind: "logo" }),
+    streamUrl: c.streamUrl,
+    country: c.country,
+    countryCode: c.countryCode,
+    language: c.language,
+    category: c.category,
+    isHD: true,
+    isFeatured: c.isFeatured,
+    number: 100 + i,
+  }));
+  await prisma.channel.createMany({ data: channels });
+  return channels.length;
 }
 
 // ------------------------------------------------------------------
@@ -156,7 +156,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG-13",
     imdb: 8.1,
     duration: 128,
-    tier: "PREMIUM",
     featured: true,
     trending: true,
   },
@@ -171,7 +170,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG",
     imdb: 7.6,
     duration: 111,
-    tier: "STANDARD",
     featured: true,
   },
   {
@@ -185,7 +183,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG-13",
     imdb: 7.9,
     duration: 119,
-    tier: "PREMIUM",
     isNew: true,
   },
   {
@@ -199,7 +196,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG-13",
     imdb: 7.3,
     duration: 104,
-    tier: "BASIC",
   },
   {
     name: "Iron Coast",
@@ -212,7 +208,6 @@ const FLAGSHIP_MOVIES = [
     rating: "R",
     imdb: 7.4,
     duration: 122,
-    tier: "STANDARD",
   },
   {
     name: "The Cartographer's Daughter",
@@ -225,7 +220,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG",
     imdb: 7.8,
     duration: 132,
-    tier: "STANDARD",
     isNew: true,
   },
   {
@@ -239,7 +233,6 @@ const FLAGSHIP_MOVIES = [
     rating: "R",
     imdb: 7.0,
     duration: 98,
-    tier: "PREMIUM",
     isNew: true,
     trending: true,
   },
@@ -254,7 +247,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG-13",
     imdb: 6.9,
     duration: 96,
-    tier: "BASIC",
   },
   {
     name: "Sable Point",
@@ -267,7 +259,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG-13",
     imdb: 8.3,
     duration: 141,
-    tier: "STANDARD",
     trending: true,
   },
   {
@@ -281,7 +272,6 @@ const FLAGSHIP_MOVIES = [
     rating: "R",
     imdb: 7.2,
     duration: 115,
-    tier: "PREMIUM",
   },
   {
     name: "The Quiet Season",
@@ -294,7 +284,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG",
     imdb: 7.7,
     duration: 108,
-    tier: "BASIC",
   },
   {
     name: "Skyline Zero",
@@ -307,7 +296,6 @@ const FLAGSHIP_MOVIES = [
     rating: "PG-13",
     imdb: 7.5,
     duration: 125,
-    tier: "PREMIUM",
     isNew: true,
   },
 ];
@@ -323,7 +311,6 @@ const FLAGSHIP_SERIES = [
     year: 2023,
     rating: "TV-MA",
     imdb: 8.4,
-    tier: "PREMIUM",
     featured: true,
     trending: true,
     seasons: [
@@ -340,7 +327,6 @@ const FLAGSHIP_SERIES = [
     year: 2024,
     rating: "TV-14",
     imdb: 8.0,
-    tier: "PREMIUM",
     isNew: true,
     seasons: [{ number: 1, episodes: ["Signal", "Borrowed Time", "The Fifth Sleeper", "Static Bloom", "Recursion", "Wake", "The Room Before This One", "Zero Hour"] }],
   },
@@ -353,7 +339,6 @@ const FLAGSHIP_SERIES = [
     year: 2022,
     rating: "TV-PG",
     imdb: 7.6,
-    tier: "STANDARD",
     seasons: [
       { number: 1, episodes: ["Sourdough Starter", "The Health Inspector", "Mardi Gras Rush", "Aunt Colette's Secret", "Croissantgate"] },
       { number: 2, episodes: ["The Wedding Cake", "New Ovens", "Family Recipe", "The Food Critic", "Grand Reopening"] },
@@ -368,7 +353,6 @@ const FLAGSHIP_SERIES = [
     year: 2023,
     rating: "TV-14",
     imdb: 7.9,
-    tier: "STANDARD",
     trending: true,
     seasons: [{ number: 1, episodes: ["First Watch", "Backburn", "The Ridge", "Smoke Jumpers", "Containment", "Ember"] }],
   },
@@ -381,7 +365,6 @@ const FLAGSHIP_SERIES = [
     year: 2025,
     rating: "TV-MA",
     imdb: 8.6,
-    tier: "PREMIUM",
     isNew: true,
     featured: true,
     seasons: [{ number: 1, episodes: ["The Broken Crown", "Ash Vows", "The Sealed Door", "House of Knives", "What Sleeps Below", "Reckoning", "The Long Night", "Court of Ash"] }],
@@ -395,7 +378,6 @@ const FLAGSHIP_SERIES = [
     year: 2024,
     rating: "TV-14",
     imdb: 7.8,
-    tier: "BASIC",
     seasons: [{ number: 1, episodes: ["Golden Hour", "Triage", "Code Silver", "Graveyard Shift", "Shift Change"] }],
   },
 ];
@@ -407,7 +389,6 @@ const FLAGSHIP_DOCS = [
     synopsis: "A three-year expedition beneath Antarctic ice sheets reveals ecosystems never filmed before.",
     year: 2024,
     imdb: 8.7,
-    tier: "STANDARD",
     duration: 96,
     featured: true,
   },
@@ -417,7 +398,6 @@ const FLAGSHIP_DOCS = [
     synopsis: "The untold story of the engineers who built the modern semiconductor industry from a handful of California garages.",
     year: 2023,
     imdb: 8.0,
-    tier: "BASIC",
     duration: 104,
   },
   {
@@ -426,7 +406,6 @@ const FLAGSHIP_DOCS = [
     synopsis: "How a single mineral shaped trade routes, wars, and empires across four thousand years of human history.",
     year: 2022,
     imdb: 7.9,
-    tier: "BASIC",
     duration: 88,
   },
   {
@@ -435,7 +414,6 @@ const FLAGSHIP_DOCS = [
     synopsis: "Tracing the roots of blues music through the families who kept it alive across a century of change.",
     year: 2021,
     imdb: 8.3,
-    tier: "STANDARD",
     duration: 91,
   },
   {
@@ -444,7 +422,6 @@ const FLAGSHIP_DOCS = [
     synopsis: "Inside the private companies racing to build the infrastructure for a permanent human presence beyond Earth.",
     year: 2025,
     imdb: 8.2,
-    tier: "PREMIUM",
     duration: 112,
     isNew: true,
     trending: true,
@@ -455,7 +432,6 @@ const FLAGSHIP_DOCS = [
     synopsis: "A year embedded with three nomadic communities adapting centuries-old traditions to a rapidly modernizing world.",
     year: 2023,
     imdb: 8.1,
-    tier: "STANDARD",
     duration: 99,
   },
 ];
@@ -497,7 +473,6 @@ async function seedVOD() {
         genres: m.genres,
         cast: m.cast,
         director: m.director,
-        tier: m.tier,
         isFeatured: !!m.featured,
         isNew: !!m.isNew,
         isTrending: !!m.trending,
@@ -529,7 +504,6 @@ async function seedVOD() {
         cast: `${pick(CAST_POOL, i)}, ${pick(CAST_POOL, i + 5)}`,
         director: pick(["Renata Kolb", "Idris Okafor", "Suzu Yamamoto", "Alina Petrov", "Marcus Webb", "Ingrid Solberg", "Jun-ho Baek", "Faye Whitmore"], i),
         country: pick(COUNTRY_POOL, i),
-        tier: pick(["BASIC", "STANDARD", "PREMIUM"], hash(name)),
         isFeatured: false,
         isNew: year >= 2024,
         isTrending: hash(name) % 9 === 0,
@@ -555,7 +529,6 @@ async function seedVOD() {
         genres: s.genres,
         cast: s.cast,
         director: s.director,
-        tier: s.tier,
         isFeatured: !!s.featured,
         isNew: !!s.isNew,
         isTrending: !!s.trending,
@@ -602,7 +575,6 @@ async function seedVOD() {
         genres: g1,
         cast: `${pick(CAST_POOL, i + 2)}, ${pick(CAST_POOL, i + 9)}`,
         director: pick(["Renata Kolb", "Idris Okafor", "Suzu Yamamoto", "Alina Petrov"], i),
-        tier: pick(["BASIC", "STANDARD", "PREMIUM"], hash(name)),
         isNew: hash(name) % 6 === 0,
         isTrending: hash(name) % 8 === 0,
       },
@@ -640,7 +612,6 @@ async function seedVOD() {
         durationMins: d.duration,
         genres: d.genres,
         cast: "Narrated documentary",
-        tier: d.tier,
         isFeatured: !!d.featured,
         isNew: !!d.isNew,
         isTrending: !!d.trending,
@@ -669,7 +640,6 @@ async function seedVOD() {
         durationMins: 75 + (hash(name) % 40),
         genres: pick(["Nature", "Science", "History", "Culture", "Technology"], i),
         cast: "Narrated documentary",
-        tier: pick(["BASIC", "STANDARD"], i),
         isNew: hash(name) % 7 === 0,
         streamUrl: pick(VOD_TEST_STREAMS, i + 6),
       },
@@ -680,58 +650,11 @@ async function seedVOD() {
   return count;
 }
 
-async function seedPlans() {
-  await prisma.plan.createMany({
-    data: [
-      {
-        name: "Starter",
-        slug: "starter",
-        priceMonthly: 7.99,
-        priceYearly: 79,
-        maxScreens: 1,
-        maxProfiles: 1,
-        hdQuality: "HD",
-        channelAccess: "BASIC",
-        vodAccess: true,
-        description: "Essential live channels plus our full on-demand library. Great for a single viewer.",
-        sortOrder: 1,
-      },
-      {
-        name: "Family",
-        slug: "family",
-        priceMonthly: 14.99,
-        priceYearly: 149,
-        maxScreens: 3,
-        maxProfiles: 5,
-        hdQuality: "FHD",
-        channelAccess: "STANDARD",
-        vodAccess: true,
-        description: "Our most popular plan — 500+ channels worldwide, full VOD catalog, 3 screens at once.",
-        featured: true,
-        sortOrder: 2,
-      },
-      {
-        name: "Ultimate",
-        slug: "ultimate",
-        priceMonthly: 21.99,
-        priceYearly: 219,
-        maxScreens: 6,
-        maxProfiles: 8,
-        hdQuality: "4K",
-        channelAccess: "PREMIUM",
-        vodAccess: true,
-        description: "Every channel, every sport, 4K where available, and 6 simultaneous screens for the whole household.",
-        sortOrder: 3,
-      },
-    ],
-  });
-}
-
 async function seedUsers() {
   const adminPass = await bcrypt.hash("Admin123!", 10);
   const demoPass = await bcrypt.hash("Demo123!", 10);
 
-  const admin = await prisma.user.create({
+  await prisma.user.create({
     data: {
       name: "Site Admin",
       email: "admin@whiscotv.demo",
@@ -741,8 +664,7 @@ async function seedUsers() {
     },
   });
 
-  const ultimate = await prisma.plan.findUnique({ where: { slug: "ultimate" } });
-  const demo = await prisma.user.create({
+  await prisma.user.create({
     data: {
       name: "Demo Viewer",
       email: "demo@whiscotv.demo",
@@ -755,26 +677,8 @@ async function seedUsers() {
           { name: "Kids", avatar: "🧒", isKids: true },
         ],
       },
-      subscription: {
-        create: {
-          planId: ultimate!.id,
-          status: "ACTIVE",
-          billingCycle: "monthly",
-          currentPeriodEnd: new Date(Date.now() + 30 * 24 * 3600 * 1000),
-        },
-      },
     },
   });
-
-  await prisma.payment.create({
-    data: {
-      userId: demo.id,
-      amount: 21.99,
-      description: "Ultimate Plan — Monthly",
-    },
-  });
-
-  return { admin, demo };
 }
 
 async function main() {
@@ -786,16 +690,10 @@ async function main() {
   await prisma.title.deleteMany();
   await prisma.epgEntry.deleteMany();
   await prisma.channel.deleteMany();
-  await prisma.payment.deleteMany();
-  await prisma.subscription.deleteMany();
   await prisma.profile.deleteMany();
   await prisma.user.deleteMany();
-  await prisma.plan.deleteMany();
 
-  console.log("Seeding plans...");
-  await seedPlans();
-
-  console.log("Seeding channels...");
+  console.log("Seeding live channels (real, free-to-air, verified streams)...");
   const chCount = await seedChannels();
   console.log(`  -> ${chCount} channels`);
 

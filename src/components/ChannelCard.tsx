@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { Lock, Radio } from "lucide-react";
+import { Radio } from "lucide-react";
 
 export default function ChannelCard({
   channel,
-  locked = false,
 }: {
   channel: { id: string; name: string; logoUrl: string; category: string; country: string; isHD: boolean };
-  locked?: boolean;
 }) {
   return (
     <Link
@@ -23,13 +21,9 @@ export default function ChannelCard({
           {channel.country} · {channel.category} {channel.isHD && "· HD"}
         </p>
       </div>
-      {locked ? (
-        <Lock size={16} className="text-zinc-500 shrink-0" />
-      ) : (
-        <span className="flex items-center gap-1 text-[10px] font-semibold text-red-400 shrink-0">
-          <Radio size={10} className="animate-pulse" /> LIVE
-        </span>
-      )}
+      <span className="flex items-center gap-1 text-[10px] font-semibold text-red-400 shrink-0">
+        <Radio size={10} className="animate-pulse" /> LIVE
+      </span>
     </Link>
   );
 }
