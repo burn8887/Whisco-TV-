@@ -11,16 +11,16 @@ export default async function LivePage({
   searchParams: Promise<{ country?: string; category?: string; q?: string }>;
 }) {
   const sp = await searchParams;
-  const where: any = {};
+  const where: any = { isActive: true };
   if (sp.country) where.country = sp.country;
   if (sp.category) where.category = sp.category;
   if (sp.q) where.name = { contains: sp.q };
 
   const [channels, countries, categories, total] = await Promise.all([
     prisma.channel.findMany({ where, orderBy: [{ country: "asc" }, { number: "asc" }], take: 400 }),
-    prisma.channel.findMany({ distinct: ["country"], select: { country: true }, orderBy: { country: "asc" } }),
-    prisma.channel.findMany({ distinct: ["category"], select: { category: true }, orderBy: { category: "asc" } }),
-    prisma.channel.count(),
+    prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true }, orderBy: { country: "asc" } }),
+    prisma.channel.findMany({ distinct: ["category"], where: { isActive: true }, select: { category: true }, orderBy: { category: "asc" } }),
+    prisma.channel.count({ where: { isActive: true } }),
   ]);
 
   return (

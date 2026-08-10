@@ -7,9 +7,9 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const [channelCount, titleCount, countries, featuredTitles] = await Promise.all([
-    prisma.channel.count(),
+    prisma.channel.count({ where: { isActive: true } }),
     prisma.title.count(),
-    prisma.channel.findMany({ distinct: ["country"], select: { country: true } }),
+    prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true } }),
     prisma.title.findMany({ where: { isFeatured: true }, take: 8 }),
   ]);
 

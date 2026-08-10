@@ -18,7 +18,7 @@ export default async function BrowsePage() {
     prisma.title.findMany({ where: { type: "MOVIE" }, take: 16 }),
     prisma.title.findMany({ where: { type: "SERIES" }, take: 16 }),
     prisma.title.findMany({ where: { type: "DOCUMENTARY" }, take: 16 }),
-    prisma.channel.findMany({ where: { isFeatured: true }, take: 8 }),
+    prisma.channel.findMany({ where: { isFeatured: true, isActive: true }, take: 8 }),
     profile
       ? prisma.watchProgress.findMany({
           where: { profileId: profile.id },

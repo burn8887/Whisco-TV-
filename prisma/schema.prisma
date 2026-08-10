@@ -56,6 +56,10 @@ model Channel {
   category     String   // News, Sports, Entertainment, Kids, Movies, Documentary, Music, Lifestyle
   isHD         Boolean  @default(true)
   isFeatured   Boolean  @default(false)
+  isActive     Boolean  @default(true)   // false = hidden from viewers (failed health checks)
+  failCount    Int      @default(0)      // consecutive failed daily health checks
+  lastCheckedAt DateTime?
+  lastStatus   String?                   // "ok" | "unreachable" | "invalid" — from the last health check
   number       Int      @default(0)
   epg          EpgEntry[]
 }

@@ -1,15 +1,17 @@
 import { prisma } from "@/lib/prisma";
-import { Tv2, Film, Users, Bookmark, Globe2 } from "lucide-react";
+import { Tv2, Film, Users, Bookmark, Globe2, ShieldAlert } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [channels, titles, users, watchlistCount, countries] = await Promise.all([
+  const [channels, titles, users, watchlistCount, countries, inactiveChannels, lastChecked] = await Promise.all([
     prisma.channel.count(),
     prisma.title.count(),
     prisma.user.count(),
     prisma.watchlist.count(),
     prisma.channel.findMany({ distinct: ["country"], select: { country: true } }),
+    prisma.channel.count({ where: { isActive: false } }),
+    prisma.channel.findFirst({ where: { lastCheckedAt: { not: null } }, orderBy: { lastCheckedAt: "desc" }, select: { lastCheckedAt: true } }),
   ]);
 
   const stats = [
@@ -30,7 +32,7 @@ export default async function AdminDashboard() {
         Whisco TV is 100% free and ad-supported — no plans, no billing. Overview of your channel and VOD catalog.
       </p>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
         {stats.map((s) => (
           <div key={s.label} className="p-5 rounded-2xl bg-zinc-900/60 ring-1 ring-white/5">
             <div className="flex items-center justify-between mb-3">
@@ -40,6 +42,24 @@ export default async function AdminDashboard() {
             <p className="text-xs text-zinc-500 mt-1">{s.label}</p>
           </div>
         ))}
+      </div>
+
+      <div className={`p-5 rounded-2xl mb-10 ring-1 flex items-center gap-4 ${inactiveChannels > 0 ? "bg-amber-500/10 ring-amber-500/30" : "bg-emerald-500/5 ring-emerald-500/20"}`}>
+        <ShieldAlert size={22} className={inactiveChannels > 0 ? "text-amber-400" : "text-emerald-400"} />
+        <div className="flex-1">
+          <p className="text-sm font-semibold">
+            {inactiveChannels > 0
+              ? `${inactiveChannels} channel${inactiveChannels === 1 ? "" : "s"} currently flagged offline by the daily health check`
+              : "All channels passed the last daily health check"}
+          </p>
+          <p className="text-xs text-zinc-500 mt-0.5">
+            Last check: {lastChecked?.lastCheckedAt ? new Date(lastChecked.lastCheckedAt).toLocaleString() : "not run yet"} — runs
+            automatically once a day via Vercel Cron.{" "}
+            <a href="/admin/channels?status=inactive" className="text-orange-400 hover:underline">
+              View offline channels →
+            </a>
+          </p>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">

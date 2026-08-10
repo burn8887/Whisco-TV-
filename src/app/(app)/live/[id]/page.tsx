@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import VideoPlayer from "@/components/VideoPlayer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Radio } from "lucide-react";
+import { Radio, AlertTriangle } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +12,7 @@ export default async function ChannelPage({ params }: { params: Promise<{ id: st
   if (!channel) notFound();
 
   const related = await prisma.channel.findMany({
-    where: { category: channel.category, id: { not: channel.id } },
+    where: { category: channel.category, id: { not: channel.id }, isActive: true },
     take: 8,
   });
 
@@ -26,7 +26,20 @@ export default async function ChannelPage({ params }: { params: Promise<{ id: st
         <span className="text-zinc-300">{channel.category}</span>
       </div>
 
-      <VideoPlayer src={channel.streamUrl} title={channel.name} />
+      {channel.isActive ? (
+        <VideoPlayer src={channel.streamUrl} title={channel.name} />
+      ) : (
+        <div className="w-full aspect-video rounded-xl bg-zinc-900 ring-1 ring-white/10 grid place-items-center text-center p-8">
+          <div>
+            <AlertTriangle className="mx-auto mb-4 text-amber-400" size={36} />
+            <h2 className="text-xl font-bold mb-2">This channel is temporarily unavailable</h2>
+            <p className="text-zinc-400 text-sm max-w-md mx-auto">
+              {channel.name}'s broadcast feed isn't responding right now. Our daily automated check will
+              restore it as soon as it's back online — try one of the related channels below in the meantime.
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="mt-6 flex items-start gap-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -34,9 +47,13 @@ export default async function ChannelPage({ params }: { params: Promise<{ id: st
         <div>
           <div className="flex items-center gap-2 flex-wrap">
             <h1 className="text-2xl font-extrabold">{channel.name}</h1>
-            <span className="flex items-center gap-1 text-[11px] font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full">
-              <Radio size={10} className="animate-pulse" /> LIVE
-            </span>
+            {channel.isActive ? (
+              <span className="flex items-center gap-1 text-[11px] font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full">
+                <Radio size={10} className="animate-pulse" /> LIVE
+              </span>
+            ) : (
+              <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full">OFFLINE</span>
+            )}
             <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full ring-1 ring-emerald-500/30">
               FREE
             </span>
