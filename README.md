@@ -11,7 +11,7 @@ Prisma, and NextAuth.
   personalization; browsing and watching require no account at all)
 - `/browse` — home: hero banner, continue watching (if signed in), trending,
   new releases, genre rows, popular live channels
-- `/live` — live TV guide with country/category/search filters — **511 real,
+- `/live` — live TV guide with country/category/search filters — **518 real,
   verified, free-to-air broadcast channels across 30+ countries**, allocated
   proportionally to GCC expatriate community population share (Indian
   languages, Arabic, Bengali, Urdu, Filipino, Nepali, Sinhala/Tamil, Farsi,
@@ -52,7 +52,7 @@ scheduled via `vercel.json`)
 ## ⚠️ Important — content sourcing & monetization
 
 **Live channels** (`prisma/live_channels.json`, loaded by `prisma/seed.ts`):
-every one of the 511 channels is a **real, currently-live, free-to-air
+every one of the 518 channels is a **real, currently-live, free-to-air
 public broadcast stream** — verified reachable at seed time. Sources:
 - A handful of directly-confirmed official broadcaster endpoints (DW,
   France 24, Sky News Arabia, TRT World, CBS News, Bloomberg TV).
@@ -60,6 +60,13 @@ public broadcast stream** — verified reachable at seed time. Sources:
   long-running, community-maintained registry that specifically screens
   for free/publicly-available streams (used by mainstream FOSS media
   software like Jellyfin, Kodi, and Plex plugins).
+- 7 official YouTube-live embeds (Somoy TV, Ekattor TV, Jamuna TV, Channel i
+  for Bangladesh; GMA News, UNTV, PTV Sports for the Philippines) — used for
+  major state/public broadcasters that publish their 24/7 signal via
+  YouTube Live rather than a direct public HLS endpoint. Embedding via
+  YouTube's own iframe player is standard, fully legal use of YouTube's
+  public embed API, and keeps the broadcaster's own monetization intact
+  (see `VideoPlayer.tsx` — it auto-detects `youtube.com/embed` URLs).
 
 ### Channel allocation methodology
 
@@ -80,10 +87,10 @@ of Indian expats in the Gulf.
 | India — Punjabi | — | 10 |
 | India — Bengali | 20 (shared w/ Punjabi) | ~10 |
 | Pakistan (Urdu) | 70 | 39 |
-| Bangladesh (Bengali) | 71 | 16 |
+| Bangladesh (Bengali) | 71 | 20 (incl. 4 official YouTube-live embeds) |
 | Arabic expat (Egypt/Jordan/Lebanon/Syria/Palestine/Yemen/Sudan) | 117 | 64 |
 | GCC local Arabic (UAE/Saudi/Qatar/Kuwait/Bahrain/Oman) | (additional) | 56 |
-| Philippines (Tagalog) | 31 | 6 (real-source ceiling) |
+| Philippines (Tagalog) | 31 | 9 (real-source ceiling; incl. 3 official YouTube-live embeds) |
 | Nepal | 17 | 7 |
 | Sri Lanka (Sinhala/Tamil) | 9 | 7 |
 | Iran (Farsi) | 9 | 10 |
@@ -91,7 +98,7 @@ of Indian expats in the Gulf.
 | Vietnam (Other Languages bucket) | 34 (shared) | 40 |
 | African (Nigeria/Kenya/S.Africa/Ghana/Ethiopia — Other bucket) | (shared) | 35 |
 | English/International | 6 | 77 (kept — doubles as general/news quality bar) |
-| **Total** | **500** | **511** |
+| **Total** | **500** | **518** |
 
 **Where the actual count falls short of the guide's target, it's a real
 availability ceiling from free/public sources right now** — e.g. most

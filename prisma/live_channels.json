@@ -4597,5 +4597,68 @@
     "category": "Entertainment",
     "streamUrl": "https://assahat.b-cdn.net/Assahat/assahatobs/index.m3u8",
     "isFeatured": false
+  },
+  {
+    "name": "Somoy TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "News",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UCxHoBXkY88Tb8z1Ssj6CWsQ",
+    "isFeatured": true
+  },
+  {
+    "name": "Ekattor TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "News",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UCtqvtAVmad5zywaziN6CbfA",
+    "isFeatured": false
+  },
+  {
+    "name": "Jamuna TV",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "News",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UC2qb5FD5IRnXEP4CBdt7PvA",
+    "isFeatured": true
+  },
+  {
+    "name": "Channel i",
+    "country": "Bangladesh",
+    "countryCode": "BD",
+    "language": "Bengali",
+    "category": "Entertainment",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UCA9CI-VL_LzlIROr2_n4iqA",
+    "isFeatured": false
+  },
+  {
+    "name": "GMA News (Saksi)",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "News",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UCqYw-CTd1dU2yGI71sEyqNw",
+    "isFeatured": true
+  },
+  {
+    "name": "UNTV",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "News",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UC3XaG-7UVi2vD8ZZEMNnnpw",
+    "isFeatured": true
+  },
+  {
+    "name": "PTV Sports",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "language": "Filipino",
+    "category": "Sports",
+    "streamUrl": "https://www.youtube.com/embed/live_stream?channel=UCZz1M1imoU5cC5DVbfMzRBg",
+    "isFeatured": false
   }
 ]

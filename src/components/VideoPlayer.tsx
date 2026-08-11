@@ -22,7 +22,16 @@ export default function VideoPlayer({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Some official broadcasters (e.g. state/public TV in markets without a
+  // direct public HLS feed) only publish their live signal via YouTube.
+  // Embedding their official YouTube Live channel via the standard iframe
+  // player is fully legal (YouTube's own embed API) and keeps the
+  // broadcaster's own monetization/ads intact — it's how most legitimate
+  // "free live TV" aggregators handle these sources.
+  const isYouTube = src.includes("youtube.com/embed");
+
   useEffect(() => {
+    if (isYouTube) return;
     const video = videoRef.current;
     if (!video || !src) return;
     setError(null);
@@ -66,7 +75,21 @@ export default function VideoPlayer({
       video.removeEventListener("loadedmetadata", onLoaded);
       video.removeEventListener("error", onErr);
     };
-  }, [src]);
+  }, [src, isYouTube]);
+
+  if (isYouTube) {
+    return (
+      <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden ring-1 ring-white/10">
+        <iframe
+          src={`${src}${src.includes("?") ? "&" : "?"}autoplay=1&mute=0`}
+          title={title || "Live stream"}
+          className="w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden ring-1 ring-white/10">
