@@ -30,6 +30,35 @@ async function checkStream(url: string): Promise<"ok" | "unreachable" | "invalid
     if (url.includes(".m3u8")) {
       const text = await res.text();
       if (!text.includes("#EXTM3U")) return "invalid";
+
+      // Some "master" playlists return a healthy 200 + valid #EXTM3U even
+      // though the variant stream(s) they point to are dead (e.g. a stale
+      // CDN endpoint that was never updated after infra migration). Follow
+      // the first variant one hop deep so we actually catch that case
+      // instead of reporting a channel as "ok" when playback is broken.
+      if (text.includes("#EXT-X-STREAM-INF")) {
+        const lines = text.split(/\r?\n/);
+        const variantLine = lines.find((l) => l.trim() && !l.startsWith("#"));
+        if (variantLine) {
+          const variantUrl = new URL(variantLine.trim(), res.url).toString();
+          const subController = new AbortController();
+          const subTimer = setTimeout(() => subController.abort(), 4000);
+          try {
+            const subRes = await fetch(variantUrl, {
+              signal: subController.signal,
+              headers: { "User-Agent": "Mozilla/5.0 (WhiscoTV-HealthCheck)" },
+              redirect: "follow",
+            });
+            if (!subRes.ok) return "invalid";
+            const subText = await subRes.text();
+            if (!subText.includes("#EXTM3U")) return "invalid";
+          } catch {
+            return "invalid";
+          } finally {
+            clearTimeout(subTimer);
+          }
+        }
+      }
     }
     return "ok";
   } catch {
@@ -38,6 +67,7 @@ async function checkStream(url: string): Promise<"ok" | "unreachable" | "invalid
     clearTimeout(timer);
   }
 }
+
 
 async function runBatched<T, R>(items: T[], concurrency: number, fn: (item: T) => Promise<R>): Promise<R[]> {
   const results: R[] = [];

@@ -112,10 +112,10 @@ export default function VideoPlayer({
       {error && (
         <div className="absolute inset-0 grid place-items-center bg-black/80 p-6 text-center">
           <div>
-            <p className="text-zinc-200 font-medium mb-1">Playback unavailable in this preview</p>
+            <p className="text-zinc-200 font-medium mb-1">This channel is temporarily unavailable</p>
             <p className="text-sm text-zinc-400 max-w-sm">
-              {error} This demo uses sample streams for illustration — connect your licensed
-              Xtream Codes/M3U feed or CDN in production for real playback.
+              {error} We check every channel automatically and it should be back shortly — in the
+              meantime, try another channel from the Live TV guide.
             </p>
           </div>
         </div>

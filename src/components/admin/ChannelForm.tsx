@@ -53,7 +53,7 @@ export default function ChannelForm({ channel }: { channel?: any }) {
           defaultValue={channel?.streamUrl || "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"}
           className="mt-1 w-full rounded-lg bg-black/40 ring-1 ring-white/10 outline-none px-3 py-2.5 text-sm font-mono text-xs"
         />
-        <p className="text-[11px] text-zinc-500 mt-1">In production, point this at your Xtream Codes/M3U live feed endpoint.</p>
+        <p className="text-[11px] text-zinc-500 mt-1">Direct HLS (.m3u8) or MP4 URL from an official/licensed broadcaster feed. For state broadcasters without a direct feed, use a YouTube embed URL instead (e.g. https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID).</p>
       </div>
 
       <div className="flex gap-6">
