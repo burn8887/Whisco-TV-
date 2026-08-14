@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 // automatically restored. This keeps the public /live directory free of
 // dead links without any manual work.
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
 const TIMEOUT_MS = 6000;
@@ -69,13 +69,19 @@ async function checkStream(url: string): Promise<"ok" | "unreachable" | "invalid
 }
 
 
+// Worker-pool: keeps `concurrency` checks in flight at all times instead of
+// lock-step batches (where one slow channel stalls the whole batch). This cut
+// total run time enough to matter once health checks became two hops deep.
 async function runBatched<T, R>(items: T[], concurrency: number, fn: (item: T) => Promise<R>): Promise<R[]> {
-  const results: R[] = [];
-  for (let i = 0; i < items.length; i += concurrency) {
-    const batch = items.slice(i, i + concurrency);
-    const batchResults = await Promise.all(batch.map(fn));
-    results.push(...batchResults);
+  const results: R[] = new Array(items.length);
+  let next = 0;
+  async function worker() {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i]);
+    }
   }
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker));
   return results;
 }
 
