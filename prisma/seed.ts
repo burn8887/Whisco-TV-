@@ -170,7 +170,8 @@ async function seedVOD() {
     count += rows2.length;
   }
 
-  const diziPath = path.join(__dirname, "dizi_series.json");
+  for (const seriesFile of ["dizi_series.json", "arabic_series.json"]) {
+  const diziPath = path.join(__dirname, seriesFile);
   if (fs.existsSync(diziPath)) {
     const diziShows: {
       name: string;
@@ -240,6 +241,8 @@ async function seedVOD() {
       }
       count++;
     }
+  }
+
   }
 
   return count;
