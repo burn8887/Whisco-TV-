@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
+import PosterImage from "./PosterImage";
 
 export default function TitleCard({
   title,
@@ -16,8 +17,7 @@ export default function TitleCard({
       }`}
     >
       <div className="relative w-full aspect-[2/3]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={title.posterUrl} alt={title.name} className="w-full h-full object-cover" />
+        <PosterImage src={title.posterUrl} alt={title.name} className="w-full h-full object-cover" />
         {title.isNew && (
           <span className="absolute top-2 left-2 text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-500 text-white">NEW</span>
         )}

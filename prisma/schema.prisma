@@ -91,6 +91,7 @@ model Title {
   imdbRating   Float    @default(7.0)
   durationMins Int?     // for movies
   genres       String   // comma separated
+  collection   String   @default("")  // curated viewer-facing shelf, e.g. "Cartoons & Animation"
   cast         String   // comma separated
   director     String   @default("")
   country      String   @default("USA")
