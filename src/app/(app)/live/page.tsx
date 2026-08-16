@@ -6,20 +6,42 @@ import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 export const dynamic = "force-dynamic";
 const PAGE_SIZE = 90;
 
+// Small flag/emoji accents for the language quick-nav — purely visual,
+// helps expats spot their community's row at a glance.
+const LANGUAGE_EMOJI: Record<string, string> = {
+  Arabic: "🇸🇦",
+  Hindi: "🇮🇳",
+  English: "🌍",
+  Urdu: "🇵🇰",
+  Bengali: "🇧🇩",
+  Malayalam: "🥥",
+  Tamil: "🛕",
+  Telugu: "🎬",
+  Punjabi: "🪯",
+  Filipino: "🇵🇭",
+  Indonesian: "🇮🇩",
+  Vietnamese: "🇻🇳",
+  Nepali: "🇳🇵",
+  "Sinhala/Tamil": "🇱🇰",
+  Farsi: "🇮🇷",
+  French: "🇫🇷",
+};
+
 export default async function LivePage({
   searchParams,
 }: {
-  searchParams: Promise<{ country?: string; category?: string; q?: string; page?: string }>;
+  searchParams: Promise<{ country?: string; category?: string; language?: string; q?: string; page?: string }>;
 }) {
   const sp = await searchParams;
   const where: any = { isActive: true };
   if (sp.country) where.country = sp.country;
   if (sp.category) where.category = sp.category;
-  if (sp.q) where.name = { contains: sp.q };
+  if (sp.language) where.language = sp.language;
+  if (sp.q) where.name = { contains: sp.q, mode: "insensitive" };
 
   const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
 
-  const [channels, countries, categories, filteredCount, total] = await Promise.all([
+  const [channels, countries, categories, languageGroups, filteredCount, total] = await Promise.all([
     prisma.channel.findMany({
       where,
       orderBy: [{ country: "asc" }, { number: "asc" }],
@@ -28,6 +50,12 @@ export default async function LivePage({
     }),
     prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true }, orderBy: { country: "asc" } }),
     prisma.channel.findMany({ distinct: ["category"], where: { isActive: true }, select: { category: true }, orderBy: { category: "asc" } }),
+    prisma.channel.groupBy({
+      by: ["language"],
+      where: { isActive: true },
+      _count: { _all: true },
+      orderBy: { _count: { language: "desc" } },
+    }),
     prisma.channel.count({ where }),
     prisma.channel.count({ where: { isActive: true } }),
   ]);
@@ -36,7 +64,18 @@ export default async function LivePage({
   const baseQuery: Record<string, string> = {};
   if (sp.country) baseQuery.country = sp.country;
   if (sp.category) baseQuery.category = sp.category;
+  if (sp.language) baseQuery.language = sp.language;
   if (sp.q) baseQuery.q = sp.q;
+
+  // Query object for a language pill = current filters with language swapped
+  const pillQuery = (lang?: string) => {
+    const q: Record<string, string> = {};
+    if (sp.country) q.country = sp.country;
+    if (sp.category) q.category = sp.category;
+    if (sp.q) q.q = sp.q;
+    if (lang) q.language = lang;
+    return q;
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -47,7 +86,38 @@ export default async function LivePage({
         </p>
       </div>
 
+      {/* Language quick-nav — one tap to your community's channels */}
+      <div className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto no-scrollbar">
+        <div className="flex gap-2 w-max sm:flex-wrap sm:w-auto">
+          <Link
+            href={{ pathname: "/live", query: pillQuery() }}
+            className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold ring-1 transition-colors ${
+              !sp.language
+                ? "bg-gradient-to-r from-orange-500 to-pink-600 ring-transparent text-white"
+                : "bg-zinc-900 ring-white/10 text-zinc-300 hover:ring-orange-500/50"
+            }`}
+          >
+            All languages
+          </Link>
+          {languageGroups.map((g) => (
+            <Link
+              key={g.language}
+              href={{ pathname: "/live", query: pillQuery(g.language) }}
+              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold ring-1 transition-colors ${
+                sp.language === g.language
+                  ? "bg-gradient-to-r from-orange-500 to-pink-600 ring-transparent text-white"
+                  : "bg-zinc-900 ring-white/10 text-zinc-300 hover:ring-orange-500/50"
+              }`}
+            >
+              {LANGUAGE_EMOJI[g.language] ? `${LANGUAGE_EMOJI[g.language]} ` : ""}
+              {g.language} <span className={sp.language === g.language ? "text-white/70" : "text-zinc-500"}>{g._count._all}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       <form className="flex flex-col sm:flex-row gap-3 mb-6" action="/live">
+        {sp.language && <input type="hidden" name="language" value={sp.language} />}
         <div className="relative flex-1">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
           <input
@@ -74,7 +144,7 @@ export default async function LivePage({
           ))}
         </select>
         <button className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-orange-500 to-pink-600 font-semibold text-sm">Filter</button>
-        {(sp.country || sp.category || sp.q) && (
+        {(sp.country || sp.category || sp.language || sp.q) && (
           <Link href="/live" className="px-5 py-2.5 rounded-lg bg-white/5 ring-1 ring-white/10 text-sm text-center">
             Clear
           </Link>
