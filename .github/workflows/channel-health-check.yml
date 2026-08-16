@@ -1,0 +1,27 @@
+name: Channel health check
+
+# Runs every 6 hours (on top of Vercel's daily 3AM cron, which stays as a
+# backup). Keeps the worst-case window for a silently-dead channel to ~6h
+# instead of ~24h. Uses the same Bearer-token-protected endpoint.
+on:
+  schedule:
+    - cron: "0 0,6,12,18 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Call Whisco TV health-check endpoint
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://whisco-tv.vercel.app/api/cron/check-channels")
+          echo "HTTP $code"
+          cat /tmp/result.json
+          if [ "$code" != "200" ]; then
+            echo "Health check failed with HTTP $code" >&2
+            exit 1
+          fi
