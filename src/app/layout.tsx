@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     description: "500+ free live channels, 1,700+ free titles, popular Turkish series. No subscription, ever.",
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "nIJp4qlcSvdJU30XNCoMXugjno-YahaxaU2-BpsjAH4",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
