@@ -1,0 +1,17 @@
+{
+  "comment": "Round 2: fill quota shortfalls with additional verified official channels.",
+  "english": [
+    { "key": "buzzr", "channelId": "UCNkETBwkARrGDx-G7P-jLJg", "brand": "BUZZR (Fremantle)", "type": "MOVIE", "collection": "Game Shows", "language": "English", "country": "USA", "quota": 700, "minDur": 1000 }
+  ],
+  "expat": [
+    { "key": "b4u_plus", "channelId": "UC-4wTYoUqurS55YxTyoZ5dg", "brand": "B4U Plus", "type": "MOVIE", "collection": "Hindi Cinema", "language": "Hindi", "country": "India", "quota": 700, "minDur": 4200 },
+    { "key": "b4u_kadak", "channelId": "UCBWeVB2yIfYhC4uzuUfF-dQ", "brand": "B4U Kadak", "type": "MOVIE", "collection": "Hindi Cinema", "language": "Hindi", "country": "India", "quota": 500, "minDur": 4200 },
+    { "key": "pen_movies", "channelId": "UC3ar28GS6o1p0m_wabfk2zw", "brand": "Pen Movies", "type": "MOVIE", "collection": "Hindi Cinema", "language": "Hindi", "country": "India", "quota": 600, "minDur": 4200 },
+    { "key": "rajshri", "channelId": "UCEKWXRsfUHkan-D_ljU8Asw", "brand": "Rajshri", "type": "MOVIE", "collection": "Hindi Cinema", "language": "Hindi", "country": "India", "quota": 400, "minDur": 4200 },
+    { "key": "express_tv", "channelId": "UCU1r97baEf3JJI5fY6NtMpA", "brand": "Express TV", "type": "MOVIE", "collection": "Pakistani Dramas", "language": "Urdu", "country": "Pakistan", "quota": 700, "minDur": 1500 },
+    { "key": "rotana_classic", "channelId": "UCJY3eGNWSFRi5YnQiUyIgRA", "brand": "Rotana Classic", "type": "MOVIE", "collection": "Arabic Series & Shows", "language": "Arabic", "country": "Saudi Arabia", "quota": 700, "minDur": 3600 },
+    { "key": "ap_international", "channelId": "UChtEvBpe2GQkVzzxvMLLUHA", "brand": "AP International", "type": "MOVIE", "collection": "Tamil Cinema & Serials", "language": "Tamil", "country": "India", "quota": 600, "minDur": 4200 },
+    { "key": "amrita_movies", "channelId": "UCKAN892rlYqn1GY038fUEvg", "brand": "Amrita Movies", "type": "MOVIE", "collection": "Malayalam Cinema", "language": "Malayalam", "country": "India", "quota": 600, "minDur": 4200 },
+    { "key": "sribalaji", "channelId": "UCoy3dQzEdq1y2zMnT4pdj3Q", "brand": "SriBalajiMovies", "type": "MOVIE", "collection": "Telugu Cinema", "language": "Telugu", "country": "India", "quota": 500, "minDur": 4200 }
+  ]
+}

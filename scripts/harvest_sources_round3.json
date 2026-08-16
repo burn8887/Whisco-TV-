@@ -1,0 +1,13 @@
+{
+  "comment": "Round 3: close remaining quota gaps (Arabic, Urdu, Filipino, Hindi serials, Indonesian).",
+  "english": [],
+  "expat": [
+    { "key": "melody_aflam", "channelId": "UCSv7clgCIk0CBqCPI3yfX7Q", "brand": "Melody Aflam", "type": "MOVIE", "collection": "Arabic Series & Shows", "language": "Arabic", "country": "Egypt", "quota": 700, "minDur": 3600 },
+    { "key": "bab_alhara", "channelId": "UCeUui1Xrc7LGxyBy8h-vo_w", "brand": "Bassam Al Mulla (Bab Al-Hara)", "type": "MOVIE", "collection": "Arabic Series & Shows", "language": "Arabic", "country": "Syria", "quota": 400, "minDur": 2400 },
+    { "key": "ary_zindagi", "channelId": "UCVswAdjz8Ho0y24eVarY5wg", "brand": "ARY Zindagi", "type": "MOVIE", "collection": "Pakistani Dramas", "language": "Urdu", "country": "Pakistan", "quota": 600, "minDur": 1500 },
+    { "key": "green_tv", "channelId": "UCF2ltLX1dnPa6-L1paPaMzw", "brand": "Green TV Entertainment", "type": "MOVIE", "collection": "Pakistani Dramas", "language": "Urdu", "country": "Pakistan", "quota": 500, "minDur": 1500 },
+    { "key": "tv5_ph", "channelId": "UCiFx0kZFjR29u0uJxTSq5MQ", "brand": "TV5 Philippines", "type": "MOVIE", "collection": "Filipino Shows", "language": "Filipino", "country": "Philippines", "quota": 400, "minDur": 1000 },
+    { "key": "dangal_tv", "channelId": "UCNzmmbXIbMzlqE8nD1PBXfg", "brand": "Dangal TV", "type": "MOVIE", "collection": "Hindi Serials & Shows", "language": "Hindi", "country": "India", "quota": 500, "minDur": 1000 },
+    { "key": "mnctv", "channelId": "UC34xi8JB1AKSotPUKHywbaA", "brand": "MNCTV", "type": "MOVIE", "collection": "Indonesian Shows", "language": "Indonesian", "country": "Indonesia", "quota": 400, "minDur": 1500 }
+  ]
+}

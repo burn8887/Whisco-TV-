@@ -1,0 +1,14 @@
+{
+  "comment": "Round 5 (final): top up Tamil, Malayalam, Arabic, Sinhala, Bengali, Nepali, Telugu to reach expat quota.",
+  "english": [],
+  "expat": [
+    { "key": "ayngaran", "channelId": "UCGjn3ZbkkNcQaj00qwJ0DYQ", "brand": "Ayngaran", "type": "MOVIE", "collection": "Tamil Cinema & Serials", "language": "Tamil", "country": "India", "quota": 500, "minDur": 4800 },
+    { "key": "millennium_cinemas", "channelId": "UCrtwzlQDYRs4vReNd_Ro91w", "brand": "Millennium Cinemas", "type": "MOVIE", "collection": "Malayalam Cinema", "language": "Malayalam", "country": "India", "quota": 400, "minDur": 4800 },
+    { "key": "sobky", "channelId": "UCSVSS5aSyHh7ChJlICx_Gkg", "brand": "El Sobky Production", "type": "MOVIE", "collection": "Arabic Series & Shows", "language": "Arabic", "country": "Egypt", "quota": 400, "minDur": 3600 },
+    { "key": "sham_cinema", "channelId": "UC8T24tQdTdMGMCVtck2Wt6w", "brand": "Sham Cinema", "type": "MOVIE", "collection": "Arabic Series & Shows", "language": "Arabic", "country": "Egypt", "quota": 300, "minDur": 3600 },
+    { "key": "lanka_cinema", "channelId": "UCf2Iar2LDcFaSCnVH1ZMUkA", "brand": "Lanka Cinema", "type": "MOVIE", "collection": "Sinhala Teledramas", "language": "Sinhala", "country": "Sri Lanka", "quota": 200, "minDur": 3600 },
+    { "key": "maasranga", "channelId": "UCJGnNvYgPpUhd7ImU9diBSQ", "brand": "Maasranga TV", "type": "MOVIE", "collection": "Bangla Natok & Cinema", "language": "Bengali", "country": "Bangladesh", "quota": 400, "minDur": 1200 },
+    { "key": "highlights_nepal", "channelId": "UCrzyJYtjLOTfnUur8hsr7ow", "brand": "HighlightsNepal", "type": "MOVIE", "collection": "Nepali Cinema", "language": "Nepali", "country": "Nepal", "quota": 300, "minDur": 4800 },
+    { "key": "volga_video", "channelId": "UCIeNlITYK46VkR7yIuTL8GQ", "brand": "Volga Video", "type": "MOVIE", "collection": "Telugu Cinema", "language": "Telugu", "country": "India", "quota": 300, "minDur": 4800 }
+  ]
+}

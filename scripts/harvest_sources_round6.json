@@ -1,0 +1,9 @@
+{
+  "comment": "Round 6 (final gap-close): Punjabi movies + Sun NXT Tamil + relaxed-duration re-pass on the biggest channels with new keys.",
+  "english": [],
+  "expat": [
+    { "key": "sun_nxt_free", "channelId": "UCcHFqzVQRM06U6OX8JDdBDA", "brand": "Sun NXT Free Movies", "type": "MOVIE", "collection": "Tamil Cinema & Serials", "language": "Tamil", "country": "India", "quota": 400, "minDur": 4800 },
+    { "key": "yellow_music", "channelId": "UCDjrDp76VeIzmQckJSmQJQg", "brand": "Yellow Music", "type": "MOVIE", "collection": "Punjabi Cinema", "language": "Punjabi", "country": "India", "quota": 250, "minDur": 4800 },
+    { "key": "omjee_punjabi", "channelId": "UC1yNlmO2gqHweMziybb-dQA", "brand": "Omjee Punjabi", "type": "MOVIE", "collection": "Punjabi Cinema", "language": "Punjabi", "country": "India", "quota": 250, "minDur": 4800 }
+  ]
+}

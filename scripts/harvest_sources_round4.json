@@ -1,0 +1,15 @@
+{
+  "comment": "Round 4: final fill — English docs/movies (DW, Banijay, Maverick) + Filipino/Indonesian/Malayalam top-ups.",
+  "english": [
+    { "key": "dw_documentary", "channelId": "UCW39zufHfsuGgpLviKh297Q", "brand": "DW Documentary", "type": "DOCUMENTARY", "collection": "Documentaries", "language": "English", "country": "Germany", "quota": 800, "minDur": 1500 },
+    { "key": "banijay_crime", "channelId": "UC_0r3EheCnp-wVvndYDGviQ", "brand": "Banijay Crime", "type": "DOCUMENTARY", "collection": "Crime & Mystery", "language": "English", "country": "UK", "quota": 500, "minDur": 1500 },
+    { "key": "banijay_docs", "channelId": "UCFrO-dKhooOuTtix5dia2_g", "brand": "Banijay Documentaries", "type": "DOCUMENTARY", "collection": "Documentaries", "language": "English", "country": "UK", "quota": 400, "minDur": 1500 },
+    { "key": "maverick_movies", "channelId": "UC2u3R3pjOiPZu4LtTlKkxdw", "brand": "Maverick Movies", "type": "MOVIE", "collection": "Free Movies & TV", "language": "English", "country": "USA", "quota": 600, "minDur": 3600 }
+  ],
+  "expat": [
+    { "key": "gma_pinoy", "channelId": "UCKL5hAuzgFQsyrsQKgU0Qng", "brand": "GMA Network", "type": "MOVIE", "collection": "Filipino Shows", "language": "Filipino", "country": "Philippines", "quota": 300, "minDur": 600 },
+    { "key": "indosiar2", "channelId": "UCYqOeAXJm8yV9sJ8Ud3cR7A", "brand": "Indosiar", "type": "MOVIE", "collection": "Indonesian Shows", "language": "Indonesian", "country": "Indonesia", "quota": 300, "minDur": 600 },
+    { "key": "matinee2", "channelId": "UCN8O3J_z9fdoF1xrYK89uOQ", "brand": "Matinee Now", "type": "MOVIE", "collection": "Malayalam Cinema", "language": "Malayalam", "country": "India", "quota": 300, "minDur": 1200 },
+    { "key": "suntv2", "channelId": "UCBnxEdpoZwstJqC1yZpOjRA", "brand": "Sun TV", "type": "MOVIE", "collection": "Tamil Cinema & Serials", "language": "Tamil", "country": "India", "quota": 300, "minDur": 600 }
+  ]
+}
