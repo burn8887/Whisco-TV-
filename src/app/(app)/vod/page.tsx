@@ -9,6 +9,7 @@ const PAGE_SIZE = 60;
 
 // Curated shelf order — most broadly appealing first.
 const COLLECTION_ORDER = [
+  "Turkish Dizi",
   "Cartoons & Kids",
   "Comedy Classics",
   "Classic Movies",
@@ -24,6 +25,7 @@ const COLLECTION_ORDER = [
 ];
 
 const COLLECTION_EMOJI: Record<string, string> = {
+  "Turkish Dizi": "🇹🇷",
   "Cartoons & Kids": "🎈",
   "Comedy Classics": "🎩",
   "Classic Movies": "🎬",

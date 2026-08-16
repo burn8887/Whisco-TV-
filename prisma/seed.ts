@@ -131,6 +131,86 @@ async function seedVOD() {
     count += rows.length;
   }
 
+  // ------------------------------------------------------------------
+  // TURKISH DIZI (official broadcaster YouTube embeds) — full episodes
+  // published by the shows' own official channels (Show TV, ATV, Star
+  // TV production companies). Embeds play via YouTube's player, so the
+  // broadcaster keeps its ad revenue and control; we only catalog and
+  // link. See prisma/dizi_series.json (generated from official channel
+  // catalogs; only videos with embedding enabled are included).
+  // ------------------------------------------------------------------
+  const diziPath = path.join(__dirname, "dizi_series.json");
+  if (fs.existsSync(diziPath)) {
+    const diziShows: {
+      name: string;
+      slug: string;
+      synopsis: string;
+      posterUrl: string;
+      backdropUrl: string;
+      releaseYear: number;
+      rating: string;
+      imdbRating: number;
+      genres: string;
+      collection: string;
+      cast: string;
+      director: string;
+      country: string;
+      language: string;
+      isTrending: boolean;
+      isNew: boolean;
+      seasons: {
+        number: number;
+        episodes: {
+          number: number;
+          name: string;
+          synopsis: string;
+          durationMins: number;
+          stillUrl: string;
+          streamUrl: string;
+        }[];
+      }[];
+    }[] = JSON.parse(fs.readFileSync(diziPath, "utf-8"));
+
+    for (const s of diziShows) {
+      const title = await prisma.title.create({
+        data: {
+          name: s.name,
+          slug: s.slug,
+          type: "SERIES",
+          synopsis: s.synopsis,
+          posterUrl: s.posterUrl,
+          backdropUrl: s.backdropUrl,
+          releaseYear: s.releaseYear,
+          rating: s.rating,
+          imdbRating: s.imdbRating,
+          genres: s.genres,
+          collection: s.collection,
+          cast: s.cast,
+          director: s.director,
+          country: s.country,
+          language: s.language,
+          isTrending: s.isTrending,
+          isNew: s.isNew,
+        },
+      });
+      for (const season of s.seasons) {
+        const row = await prisma.season.create({ data: { titleId: title.id, number: season.number } });
+        await prisma.episode.createMany({
+          data: season.episodes.map((e) => ({
+            seasonId: row.id,
+            number: e.number,
+            name: e.name,
+            synopsis: e.synopsis,
+            durationMins: e.durationMins,
+            stillUrl: e.stillUrl,
+            streamUrl: e.streamUrl,
+          })),
+        });
+      }
+      count++;
+    }
+  }
+
   return count;
 }
 
