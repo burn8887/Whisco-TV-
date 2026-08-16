@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Call Whisco TV health-check endpoint
+      - name: Check live channels
         run: |
           set -euo pipefail
           code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 \
@@ -22,6 +22,18 @@ jobs:
           echo "HTTP $code"
           cat /tmp/result.json
           if [ "$code" != "200" ]; then
-            echo "Health check failed with HTTP $code" >&2
+            echo "Channel health check failed with HTTP $code" >&2
+            exit 1
+          fi
+      - name: Check VOD catalog (rotating batch, all collections incl. Turkish Dizi)
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/vod_result.json -w "%{http_code}" --max-time 300 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://whisco-tv.vercel.app/api/cron/check-vod")
+          echo "HTTP $code"
+          cat /tmp/vod_result.json
+          if [ "$code" != "200" ]; then
+            echo "VOD health check failed with HTTP $code" >&2
             exit 1
           fi

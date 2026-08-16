@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/check-channels",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/check-vod",
+      "schedule": "30 3 * * *"
     }
   ]
 }

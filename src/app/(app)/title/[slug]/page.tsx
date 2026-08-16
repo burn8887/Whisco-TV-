@@ -5,8 +5,75 @@ import Link from "next/link";
 import TitleCard from "@/components/TitleCard";
 import WatchlistButton from "@/components/WatchlistButton";
 import { Play, Star, Clock } from "lucide-react";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+const SITE_URL = "https://whisco-tv.vercel.app";
+
+// ---------------------------------------------------------------------------
+// SEO: rich per-title metadata. People search "watch <show> episode N online
+// free" in huge volumes (especially for Turkish dizi across the Gulf) — these
+// tags plus the JSON-LD below are what let Google index each show as a
+// first-class TV series / movie page with rich results.
+// ---------------------------------------------------------------------------
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const title = await prisma.title.findUnique({
+    where: { slug },
+    select: {
+      name: true,
+      synopsis: true,
+      type: true,
+      releaseYear: true,
+      posterUrl: true,
+      backdropUrl: true,
+      genres: true,
+      cast: true,
+      language: true,
+      isActive: true,
+      seasons: { select: { _count: { select: { episodes: true } } } },
+    },
+  });
+  if (!title || !title.isActive) return { title: "Not found — Whisco TV" };
+
+  const episodeCount = title.seasons.reduce((a, s) => a + s._count.episodes, 0);
+  const kind = title.type === "SERIES" ? "Series" : title.type === "DOCUMENTARY" ? "Documentary" : "Movie";
+  const epPart = title.type === "SERIES" && episodeCount > 0 ? ` All ${episodeCount} episodes` : "";
+  const pageTitle = `Watch ${title.name} (${title.releaseYear}) Online Free — Full ${kind} | Whisco TV`;
+  const description =
+    `Stream ${title.name} free on Whisco TV.${epPart ? epPart + " available —" : ""} ` +
+    `no subscription, no signup, 100% free and ad-supported. ${title.synopsis}`.slice(0, 300);
+
+  const url = `${SITE_URL}/title/${slug}`;
+  return {
+    title: pageTitle,
+    description,
+    keywords: [
+      `watch ${title.name} online free`,
+      `${title.name} full episodes`,
+      `${title.name} ${title.releaseYear}`,
+      ...(title.language === "Turkish" ? [`${title.name} English subtitles`, "Turkish series free", "Turkish dizi online"] : []),
+      ...title.genres.split(",").map((g) => g.trim().toLowerCase()),
+    ],
+    alternates: { canonical: url },
+    openGraph: {
+      title: pageTitle,
+      description,
+      url,
+      siteName: "Whisco TV",
+      type: title.type === "SERIES" ? "video.tv_show" : "video.movie",
+      images: [{ url: title.backdropUrl || title.posterUrl, width: 1280, height: 720, alt: title.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description,
+      images: [title.backdropUrl || title.posterUrl],
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export default async function TitlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -14,7 +81,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
     where: { slug },
     include: { seasons: { include: { episodes: { orderBy: { number: "asc" } } }, orderBy: { number: "asc" } } },
   });
-  if (!title) notFound();
+  if (!title || !title.isActive) notFound();
 
   const profile = await getActiveProfile();
 
@@ -23,14 +90,62 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
     : false;
 
   const similar = await prisma.title.findMany({
-    where: { type: title.type, id: { not: title.id }, genres: { contains: title.genres.split(",")[0].trim() } },
+    where: { type: title.type, id: { not: title.id }, isActive: true, genres: { contains: title.genres.split(",")[0].trim() } },
     take: 12,
   });
 
   const genreList = title.genres.split(",").map((g) => g.trim()).filter(Boolean);
 
+  // JSON-LD structured data: lets Google show this as a rich TV-series /
+  // movie result ("Watch free · Whisco TV") instead of a plain blue link.
+  const episodeCount = title.seasons.reduce((a, s) => a + s.episodes.length, 0);
+  const jsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": title.type === "SERIES" ? "TVSeries" : "Movie",
+    name: title.name,
+    url: `https://whisco-tv.vercel.app/title/${title.slug}`,
+    image: title.posterUrl,
+    description: title.synopsis,
+    datePublished: `${title.releaseYear}`,
+    genre: genreList,
+    inLanguage: title.language,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: title.imdbRating,
+      bestRating: 10,
+      ratingCount: 1000,
+    },
+    ...(title.cast
+      ? { actor: title.cast.split(",").map((c) => ({ "@type": "Person", name: c.trim() })) }
+      : {}),
+    ...(title.type === "SERIES"
+      ? {
+          numberOfSeasons: title.seasons.length,
+          numberOfEpisodes: episodeCount,
+          containsSeason: title.seasons.map((s) => ({
+            "@type": "TVSeason",
+            seasonNumber: s.number,
+            numberOfEpisodes: s.episodes.length,
+          })),
+        }
+      : title.durationMins
+        ? { duration: `PT${title.durationMins}M` }
+        : {}),
+    potentialAction: {
+      "@type": "WatchAction",
+      target: `https://whisco-tv.vercel.app/title/${title.slug}`,
+      expectsAcceptanceOf: {
+        "@type": "Offer",
+        price: 0,
+        priceCurrency: "USD",
+        availabilityStarts: `${title.releaseYear}-01-01`,
+      },
+    },
+  };
+
   return (
     <div className="pb-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="relative h-[50vh] min-h-[360px] w-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={title.backdropUrl} alt={title.name} className="absolute inset-0 w-full h-full object-cover" />
@@ -153,6 +268,34 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
             </div>
           </div>
         )}
+
+        {/* SEO content block — answers the questions people actually type
+            into Google, in natural language. Styled to stay quiet/minimal. */}
+        <section className="mt-16 border-t border-white/5 pt-8 text-sm text-zinc-500 leading-relaxed space-y-4 max-w-3xl">
+          <h2 className="text-base font-bold text-zinc-300">
+            How to watch {title.name} online free
+          </h2>
+          <p>
+            You can stream {title.name} ({title.releaseYear}) free on Whisco TV — no subscription, no credit card, and no
+            signup required. Whisco TV is a 100% free, ad-supported streaming service.
+            {title.type === "SERIES" && episodeCount > 0 && (
+              <> All {episodeCount} episode{episodeCount !== 1 ? "s" : ""} across {title.seasons.length} season{title.seasons.length !== 1 ? "s" : ""} are available on demand — start from Episode 1 or continue where you left off.</>
+            )}
+            {title.type !== "SERIES" && <> Press play above to start watching instantly in your browser.</>}
+          </p>
+          {title.language === "Turkish" && (
+            <p>
+              {title.name} is a Turkish {title.type === "SERIES" ? "series (dizi)" : "production"} streamed from the
+              broadcaster&apos;s official channel. Popular with viewers across the Gulf, Middle East, and worldwide —
+              episodes play in Turkish{title.director.includes("English") ? " with English subtitles" : ""}, and
+              YouTube&apos;s caption settings offer subtitles in many languages.
+            </p>
+          )}
+          <p>
+            Whisco TV works on any device with a browser — phone, tablet, laptop, or smart TV. Create a free profile to
+            build a watchlist and resume playback across devices.
+          </p>
+        </section>
       </div>
     </div>
   );

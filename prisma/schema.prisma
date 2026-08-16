@@ -100,6 +100,10 @@ model Title {
   isNew        Boolean  @default(false)
   isTrending   Boolean  @default(false)
   streamUrl    String?  // for movies
+  isActive     Boolean  @default(true)   // false = hidden from viewers (failed VOD health checks)
+  failCount    Int      @default(0)      // consecutive failed health checks
+  lastCheckedAt DateTime?
+  lastStatus   String?                   // "ok" | "invalid" | "unknown" — from the last VOD health check
   createdAt    DateTime @default(now())
 
   seasons      Season[]

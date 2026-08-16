@@ -53,8 +53,8 @@ export default async function VodPage({
   // ------------------------------------------------------------------
   if (browsing) {
     const [groups, total] = await Promise.all([
-      prisma.title.groupBy({ by: ["collection"], _count: { _all: true } }),
-      prisma.title.count(),
+      prisma.title.groupBy({ by: ["collection"], where: { isActive: true }, _count: { _all: true } }),
+      prisma.title.count({ where: { isActive: true } }),
     ]);
     const counts = new Map(groups.map((g) => [g.collection, g._count._all]));
     const shelves = COLLECTION_ORDER.filter((c) => (counts.get(c) ?? 0) > 0);
@@ -62,7 +62,7 @@ export default async function VodPage({
     const shelfTitles = await Promise.all(
       shelves.map((c) =>
         prisma.title.findMany({
-          where: { collection: c },
+          where: { collection: c, isActive: true },
           orderBy: [{ imdbRating: "desc" }, { releaseYear: "desc" }],
           take: 12,
         })
@@ -134,7 +134,7 @@ export default async function VodPage({
   // ------------------------------------------------------------------
   // FILTER MODE: grid of one collection and/or search results.
   // ------------------------------------------------------------------
-  const where: any = {};
+  const where: any = { isActive: true };
   if (sp.collection) where.collection = sp.collection;
   if (sp.q) where.name = { contains: sp.q, mode: "insensitive" };
 
