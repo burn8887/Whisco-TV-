@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const episodeCount = title.seasons.reduce((a, s) => a + s._count.episodes, 0);
   const kind = title.type === "SERIES" ? "Series" : title.type === "DOCUMENTARY" ? "Documentary" : "Movie";
   const epPart = title.type === "SERIES" && episodeCount > 0 ? ` All ${episodeCount} episodes` : "";
-  const pageTitle = `Watch ${title.name} (${title.releaseYear}) Online Free — Full ${kind} | Whisco TV`;
+  const pageTitle = `Watch ${title.name} (${title.releaseYear}) Online Free — Full ${kind}`;
   const description =
     `Stream ${title.name} free on Whisco TV.${epPart ? epPart + " available —" : ""} ` +
     `no subscription, no signup, 100% free and ad-supported. ${title.synopsis}`.slice(0, 300);
