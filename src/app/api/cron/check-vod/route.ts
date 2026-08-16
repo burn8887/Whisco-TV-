@@ -78,14 +78,23 @@ async function checkArchiveItem(item: string, file: string): Promise<CheckResult
   return "unknown";
 }
 
+// GCC countries our audience watches from — a video only counts as "ok" if
+// it is watchable there. Broadcasters often geo-block MENA because they sold
+// regional rights (e.g. Show TV dizis on local Gulf networks); oEmbed alone
+// reports those as fine, so we also parse the watch page's
+// availableCountries list.
+const GCC = ["BH", "SA", "AE", "KW", "QA", "OM"];
+
 async function checkYouTubeVideo(videoId: string): Promise<CheckResult> {
-  for (let attempt = 0; attempt < 2; attempt++) {
+  // Step 1: existence + embeddability via oEmbed.
+  let exists = false;
+  for (let attempt = 0; attempt < 2 && !exists; attempt++) {
     try {
       const res = await fetchWithTimeout(
         `https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${videoId}&format=json`,
         TIMEOUT_MS
       );
-      if (res.ok) return "ok";
+      if (res.ok) { exists = true; break; }
       // 401/403 = embedding disabled or video private; 404 = removed
       if (res.status === 401 || res.status === 403 || res.status === 404) return "invalid";
       await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
@@ -93,7 +102,21 @@ async function checkYouTubeVideo(videoId: string): Promise<CheckResult> {
       await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
     }
   }
-  return "unknown";
+  if (!exists) return "unknown";
+
+  // Step 2: GCC geo-availability via the watch page's availableCountries.
+  try {
+    const res = await fetchWithTimeout(`https://www.youtube.com/watch?v=${videoId}&hl=en`, TIMEOUT_MS);
+    if (!res.ok) return "unknown";
+    const html = await res.text();
+    if (!html.includes("playabilityStatus")) return "unknown"; // consent/rate-limit stub
+    const m = html.match(/"availableCountries":\[([^\]]*)\]/);
+    if (!m) return "ok"; // no restriction list → worldwide
+    const countries = m[1].replace(/"/g, "").split(",");
+    return GCC.some((c) => countries.includes(c)) ? "ok" : "invalid";
+  } catch {
+    return "unknown";
+  }
 }
 
 type TitleRow = {
