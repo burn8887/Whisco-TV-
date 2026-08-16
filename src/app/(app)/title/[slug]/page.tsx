@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getActiveProfile } from "@/lib/access";
 import Link from "next/link";
 import TitleCard from "@/components/TitleCard";
+import AdSlot from "@/components/AdSlot";
 import WatchlistButton from "@/components/WatchlistButton";
 import { Play, Star, Clock } from "lucide-react";
 import type { Metadata } from "next";
@@ -257,6 +258,8 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
             ))}
           </div>
         )}
+
+        <AdSlot format="horizontal" />
 
         {similar.length > 0 && (
           <div className="mt-14">

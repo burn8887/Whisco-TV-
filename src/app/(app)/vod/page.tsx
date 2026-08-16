@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import TitleCard from "@/components/TitleCard";
+import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
 import { Search, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
@@ -106,6 +107,7 @@ export default async function VodPage({
         <div className="space-y-10">
           {shelves.map((c, i) => (
             <section key={c}>
+              {i === 3 && <AdSlot format="horizontal" />}
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-lg font-bold">
                   {COLLECTION_EMOJI[c]} {c}
@@ -197,6 +199,8 @@ export default async function VodPage({
           <p className="text-zinc-600 text-sm mt-1">Try a different search or collection.</p>
         </div>
       )}
+
+      {titles.length > 0 && <AdSlot format="horizontal" />}
 
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-4 mt-10">

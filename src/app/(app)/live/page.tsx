@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import ChannelCard from "@/components/ChannelCard";
+import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -160,6 +161,8 @@ export default async function LivePage({
           <ChannelCard key={c.id} channel={c} />
         ))}
       </div>
+
+      {channels.length > 0 && <AdSlot format="horizontal" />}
 
       {channels.length === 0 && (
         <div className="text-center py-20">

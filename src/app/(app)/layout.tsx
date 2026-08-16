@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 import { getFullUser, getActiveProfile } from "@/lib/access";
 import AppNav from "@/components/AppNav";
+import Footer from "@/components/Footer";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const user = await getFullUser();
@@ -18,6 +19,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         isLoggedIn={!!user}
       />
       <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 }
