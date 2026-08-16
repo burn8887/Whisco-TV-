@@ -1,0 +1,28 @@
+name: Turkish Dizi episode updater
+
+# Ongoing dizi (Kızılcık Şerbeti, Kuruluş Osman, Emanet, Esaret) air new
+# episodes weekly on different days. Running daily catches each new episode
+# within ~24h of the official channel upload. Every candidate is verified
+# (embeddable + full-length) before it's added to the catalog.
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Pull new episodes from official channels
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://whisco-tv.vercel.app/api/cron/update-dizi")
+          echo "HTTP $code"
+          cat /tmp/result.json
+          if [ "$code" != "200" ]; then
+            echo "Dizi updater failed with HTTP $code" >&2
+            exit 1
+          fi
