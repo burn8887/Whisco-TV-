@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Whisco TV",
   },
   description:
-    "Watch 500+ free live TV channels from around the world plus 1,700+ free movies, series, and documentaries — including popular Turkish series with full episodes. 100% free and ad-supported. No subscription, ever.",
+    "Watch 500+ free live TV channels from around the world plus 16,000+ free movies, series, and documentaries — including popular Turkish series with full episodes. 100% free and ad-supported. No subscription, ever.",
   keywords: [
     "free live tv",
     "free streaming",
@@ -35,12 +35,13 @@ export const metadata: Metadata = {
     title: "Whisco TV — Free Live TV & On-Demand Streaming",
     description:
       "500+ free live TV channels and 1,700+ free on-demand titles including popular Turkish series. 100% free, ad-supported — no subscription, ever.",
-    images: [{ url: "/logo-mark.png", width: 512, height: 512, alt: "Whisco TV" }],
+    images: [{ url: "/og-share-card.png", width: 1200, height: 630, alt: "Whisco TV — free live TV and movies" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Whisco TV — Free Live TV & On-Demand Streaming",
-    description: "500+ free live channels, 1,700+ free titles, popular Turkish series. No subscription, ever.",
+    description: "500+ free live channels, 16,000+ free titles, popular Turkish series. No subscription, ever.",
+    images: ["/og-share-card.png"],
   },
   robots: { index: true, follow: true },
   verification: {
