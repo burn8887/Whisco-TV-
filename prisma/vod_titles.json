@@ -7275,21 +7275,6 @@
   "collection": "Crime & Mystery"
  },
  {
-  "name": "Charlie Chaplin's \"The Knockout\"",
-  "slug": "charlie-chaplin-s-the-knockout",
-  "type": "MOVIE",
-  "synopsis": "Charlie Chaplins 17th Film Released June 11 1914 The Knockout was Charlie Chaplin's seventeenth film for Keystone Studios. Chaplin only has a small role, and Fatty Arbuckle takes up the main role. It also stars Arbuckle's wife, Minta Durfee, Edgar Kennedy and Keystone owner, Mack Sennett in a minor role as a spectator. The film was directed by Charles Avery, and made in 1914 in America. http://www.imdb.com/title/tt0004194/ Charlie Chaplin In The Internet Archive http://www.archive.org/details/CC",
-  "posterUrl": "https://archive.org/services/img/CC_1914_06_11_TheKnockout",
-  "backdropUrl": "https://archive.org/services/img/CC_1914_06_11_TheKnockout",
-  "releaseYear": 1914,
-  "genres": "Charlie Chaplin, Silents",
-  "imdbRating": 8.5,
-  "streamUrl": "https://archive.org/download/CC_1914_06_11_TheKnockout/CC_1914_06_11_TheKnockout_512kb.mp4",
-  "sourceBatch": "movies_feature",
-  "downloads": 123279,
-  "collection": "Comedy Classics"
- },
- {
   "name": "Bar-Z Bad Men",
   "slug": "bar-z-bad-men",
   "type": "MOVIE",
@@ -12688,21 +12673,6 @@
   "sourceBatch": "classic_tv",
   "downloads": 77515,
   "collection": "Classic Movies"
- },
- {
-  "name": "Ahead of His Time",
-  "slug": "ahead-of-his-time",
-  "type": "MOVIE",
-  "synopsis": "Tales Of Tomorrow ep Ahead of His Time * Season: 1 * Episode: 41 * First Aired: 7/18/1952",
-  "posterUrl": "https://archive.org/services/img/Tales_Of_Tomorrow_-_Ahead_Of_His_Time",
-  "backdropUrl": "https://archive.org/services/img/Tales_Of_Tomorrow_-_Ahead_Of_His_Time",
-  "releaseYear": 1952,
-  "genres": "Tales Of Tomorrow",
-  "imdbRating": 8.5,
-  "streamUrl": "https://archive.org/download/Tales_Of_Tomorrow_-_Ahead_Of_His_Time/TOT_Ahead_Of_His_Time.mp4",
-  "sourceBatch": "classic_tv",
-  "downloads": 77478,
-  "collection": "Sci-Fi & Horror"
  },
  {
   "name": "Mummy Strikes, The",
@@ -18900,21 +18870,6 @@
   "collection": "Classic Movies"
  },
  {
-  "name": "Magnetic Telescope, The",
-  "slug": "magnetic-telescope-the",
-  "type": "MOVIE",
-  "synopsis": "You can find more information regarding this film on its IMDb page .",
-  "posterUrl": "https://archive.org/services/img/magnetic_telescope",
-  "backdropUrl": "https://archive.org/services/img/magnetic_telescope",
-  "releaseYear": 1942,
-  "genres": "Kids",
-  "imdbRating": 8.5,
-  "streamUrl": "https://archive.org/download/magnetic_telescope/magnetic_telescope_512kb.mp4",
-  "sourceBatch": "cartoons",
-  "downloads": 28280,
-  "collection": "Cartoons & Kids"
- },
- {
   "name": "Frank Sinatra's Welcome Home Party for Elvis Presley (The Frank Sinatra Timex Show)",
   "slug": "frank-sinatra-s-welcome-home-party-for-elvis-presley-the-frank-sinatra-timex-show",
   "type": "MOVIE",
@@ -19768,21 +19723,6 @@
   "sourceBatch": "classic_tv",
   "downloads": 20790,
   "collection": "Classic Movies"
- },
- {
-  "name": "NASA 360 17 HD",
-  "slug": "nasa-360-17-hd",
-  "type": "DOCUMENTARY",
-  "synopsis": "A classic public-domain feature presented as part of the Whisco TV free library.",
-  "posterUrl": "https://archive.org/services/img/NASA_360_17_HD",
-  "backdropUrl": "https://archive.org/services/img/NASA_360_17_HD",
-  "releaseYear": 1950,
-  "genres": "Science",
-  "imdbRating": 8.5,
-  "streamUrl": "https://archive.org/download/NASA_360_17_HD/NASA_360_17_cropped_Med.mp4",
-  "sourceBatch": "docs_nasa",
-  "downloads": 20637,
-  "collection": "Science & Space"
  },
  {
   "name": "Episode of the Classic TV series \"The Morey Amsterdam Show\"",
