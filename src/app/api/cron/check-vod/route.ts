@@ -16,17 +16,17 @@ import { NextResponse } from "next/server";
 //
 // Because archive.org rate-limits, each run checks a rotating batch of the
 // least-recently-checked titles rather than the whole catalog. With the
-// 6-hourly schedule the entire 1,700+ catalog gets swept roughly every day.
+// 6-hourly schedule the entire 1,700+ catalog gets swept about every 3 days.
 // Titles need FAIL_THRESHOLD consecutive failures before being hidden, and
 // recovered titles are automatically restored.
 
 export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
-const BATCH_SIZE = 400; // titles per run (rotating, oldest-checked first)
-const CONCURRENCY = 12; // gentle on archive.org
+const BATCH_SIZE = 120; // titles per run (rotating, oldest-checked first)
+const CONCURRENCY = 15; // gentle on archive.org
 const FAIL_THRESHOLD = 2;
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 8000;
 
 function parseArchive(url: string | null): { item: string; file: string } | null {
   const m = url?.match(/archive\.org\/download\/([^/]+)\/(.+)$/);
@@ -58,7 +58,7 @@ async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
 type CheckResult = "ok" | "invalid" | "unknown";
 
 async function checkArchiveItem(item: string, file: string): Promise<CheckResult> {
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 1; attempt++) {
     try {
       const res = await fetchWithTimeout(`https://archive.org/metadata/${item}`, TIMEOUT_MS);
       if (res.status === 404) return "invalid";
@@ -79,7 +79,7 @@ async function checkArchiveItem(item: string, file: string): Promise<CheckResult
 }
 
 async function checkYouTubeVideo(videoId: string): Promise<CheckResult> {
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 1; attempt++) {
     try {
       const res = await fetchWithTimeout(
         `https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${videoId}&format=json`,
