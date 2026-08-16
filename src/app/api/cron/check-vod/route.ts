@@ -24,9 +24,9 @@ export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
 const BATCH_SIZE = 120; // titles per run (rotating, oldest-checked first)
-const CONCURRENCY = 15; // gentle on archive.org
+const CONCURRENCY = 10; // gentle on archive.org (fewer parallel calls = fewer 429s)
 const FAIL_THRESHOLD = 2;
-const TIMEOUT_MS = 8000;
+const TIMEOUT_MS = 10000;
 
 function parseArchive(url: string | null): { item: string; file: string } | null {
   const m = url?.match(/archive\.org\/download\/([^/]+)\/(.+)$/);
@@ -58,7 +58,7 @@ async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
 type CheckResult = "ok" | "invalid" | "unknown";
 
 async function checkArchiveItem(item: string, file: string): Promise<CheckResult> {
-  for (let attempt = 0; attempt < 1; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetchWithTimeout(`https://archive.org/metadata/${item}`, TIMEOUT_MS);
       if (res.status === 404) return "invalid";
@@ -79,7 +79,7 @@ async function checkArchiveItem(item: string, file: string): Promise<CheckResult
 }
 
 async function checkYouTubeVideo(videoId: string): Promise<CheckResult> {
-  for (let attempt = 0; attempt < 1; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetchWithTimeout(
         `https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${videoId}&format=json`,
