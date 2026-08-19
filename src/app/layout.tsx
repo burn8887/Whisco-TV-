@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import PwaSetup from "@/components/PwaSetup";
 import "./globals.css";
 
 const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
@@ -26,7 +27,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo-mark.png",
     shortcut: "/logo-mark.png",
-    apple: "/logo-mark.png",
+    apple: "/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Whisco TV",
   },
   openGraph: {
     siteName: "Whisco TV",
@@ -49,6 +55,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0a0a0f",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -63,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body className="antialiased bg-[#0a0a0f] text-zinc-100">{children}</body>
+      <body className="antialiased bg-[#0a0a0f] text-zinc-100">{children}<PwaSetup /></body>
     </html>
   );
 }
