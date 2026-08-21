@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { prisma } from "@/lib/prisma";
+import MascotVideo from "@/components/MascotVideo";
+import { SHOW_MASCOT_VIDEOS } from "@/config/features";
 import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Users, Check, Star, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -79,12 +81,22 @@ export default async function Home() {
 
             <div className="relative flex justify-center lg:justify-end">
               <div className="absolute inset-0 m-auto w-72 h-72 sm:w-96 sm:h-96 bg-gradient-to-br from-orange-500/30 via-pink-500/20 to-violet-600/30 rounded-full blur-3xl" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/whisco-mascot.png"
-                alt="Whisco, the Shih Tzu mascot of Whisco TV, waving hello"
-                className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
-              />
+              {SHOW_MASCOT_VIDEOS ? (
+                <MascotVideo
+                  src="/whisco-zoom.mp4"
+                  poster="/whisco-zoom-poster.jpg"
+                  fallbackImg="/whisco-mascot.png"
+                  alt="Whisco, the Shih Tzu mascot of Whisco TV"
+                  className="relative w-56 sm:w-80 lg:w-96 rounded-3xl ring-1 ring-white/10 shadow-2xl object-cover"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/whisco-mascot.png"
+                  alt="Whisco, the Shih Tzu mascot of Whisco TV, waving hello"
+                  className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
+                />
+              )}
               <span className="absolute top-2 right-2 sm:top-8 sm:right-4 bg-white text-black text-xs sm:text-sm font-bold px-3 py-1.5 rounded-2xl rounded-br-sm shadow-lg animate-bounce-in">
                 Woof! I'm Whisco 🐾
               </span>
@@ -187,12 +199,22 @@ export default async function Home() {
       <section id="whisco" className="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t border-white/5">
         <div className="rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-orange-950/30 ring-1 ring-white/10 p-8 sm:p-12 grid md:grid-cols-[auto_1fr] gap-8 items-center overflow-hidden relative">
           <div className="absolute -right-16 -bottom-16 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/whisco-mascot.png"
-            alt="Whisco the Shih Tzu"
-            className="w-40 sm:w-52 mx-auto animate-float-gentle drop-shadow-2xl relative"
-          />
+          {SHOW_MASCOT_VIDEOS ? (
+            <MascotVideo
+              src="/whisco-clinic.mp4"
+              poster="/whisco-clinic-poster.jpg"
+              fallbackImg="/whisco-mascot.png"
+              alt="Whisco the Shih Tzu"
+              className="w-40 sm:w-52 mx-auto rounded-2xl ring-1 ring-white/10 drop-shadow-2xl relative object-cover"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/whisco-mascot.png"
+              alt="Whisco the Shih Tzu"
+              className="w-40 sm:w-52 mx-auto animate-float-gentle drop-shadow-2xl relative"
+            />
+          )}
           <div className="text-center md:text-left relative">
             <span className="inline-block text-xs font-bold text-orange-400 uppercase tracking-wide mb-2">Meet the mascot</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
