@@ -83,7 +83,7 @@ export default async function Home() {
               <div className="absolute inset-0 m-auto w-72 h-72 sm:w-96 sm:h-96 bg-gradient-to-br from-orange-500/30 via-pink-500/20 to-violet-600/30 rounded-full blur-3xl" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/whisco-mascot.png"
+                src="/whisco-mascot-alpha.png"
                 alt="Whisco, the Shih Tzu mascot of Whisco TV, waving hello"
                 className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
               />
@@ -101,10 +101,10 @@ export default async function Home() {
         <section aria-label="Whisco in action" className="relative overflow-hidden -mt-2">
           <MascotVideo
             src="/whisco-zoom-banner.mp4"
-            poster="/whisco-zoom-poster.jpg"
-            fallbackImg="/whisco-mascot.png"
+            poster="/whisco-zoom-banner-poster.jpg"
+            fallbackImg="/whisco-mascot-alpha.png"
             alt="Whisco the Shih Tzu zooming through hyperspace"
-            className="w-full h-[220px] sm:h-[320px] lg:h-[420px] object-cover"
+            className="w-full h-[340px] sm:h-[480px] lg:h-[600px] object-cover object-center"
           />
           {/* blend edges into the page background */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0a0a0f] to-transparent" />
@@ -217,14 +217,14 @@ export default async function Home() {
             <MascotVideo
               src="/whisco-clinic.mp4"
               poster="/whisco-clinic-poster.jpg"
-              fallbackImg="/whisco-mascot.png"
+              fallbackImg="/whisco-mascot-alpha.png"
               alt="Whisco the Shih Tzu"
               className="w-40 sm:w-52 mx-auto rounded-2xl ring-1 ring-white/10 drop-shadow-2xl relative object-cover"
             />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src="/whisco-mascot.png"
+              src="/whisco-mascot-alpha.png"
               alt="Whisco the Shih Tzu"
               className="w-40 sm:w-52 mx-auto animate-float-gentle drop-shadow-2xl relative"
             />

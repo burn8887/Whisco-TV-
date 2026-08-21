@@ -167,7 +167,7 @@ export default async function LivePage({
       {channels.length === 0 && (
         <div className="text-center py-20">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/whisco-mascot.png" alt="Whisco looking confused" className="w-28 mx-auto mb-4 opacity-90" />
+          <img src="/whisco-mascot-alpha.png" alt="Whisco looking confused" className="w-28 mx-auto mb-4 opacity-90" />
           <p className="text-zinc-400 font-medium">Even Whisco couldn't sniff any of these out.</p>
           <p className="text-zinc-600 text-sm mt-1">Try a different search or filter.</p>
         </div>
