@@ -3,7 +3,7 @@ import Script from "next/script";
 import PwaSetup from "@/components/PwaSetup";
 import "./globals.css";
 
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-7207533964778777";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://whisco.tv"),
