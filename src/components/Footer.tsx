@@ -8,13 +8,16 @@ export default function Footer() {
           © {new Date().getFullYear()} Whisco TV — 100% free, ad-supported streaming. No subscription, ever.
         </p>
         <nav className="flex items-center gap-5">
+          <Link href="/about" className="hover:text-zinc-300 transition-colors">
+            About
+          </Link>
           <Link href="/privacy" className="hover:text-zinc-300 transition-colors">
             Privacy Policy
           </Link>
           <Link href="/terms" className="hover:text-zinc-300 transition-colors">
             Terms of Use
           </Link>
-          <a href="mailto:legal@whiscotv.com" className="hover:text-zinc-300 transition-colors">
+          <a href="mailto:legal@whisco.tv" className="hover:text-zinc-300 transition-colors">
             Contact
           </a>
         </nav>

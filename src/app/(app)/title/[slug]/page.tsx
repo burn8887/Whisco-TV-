@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = "https://whisco-tv.vercel.app";
+const SITE_URL = "https://whisco.tv";
 
 // ---------------------------------------------------------------------------
 // SEO: rich per-title metadata. People search "watch <show> episode N online
@@ -104,7 +104,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
     "@context": "https://schema.org",
     "@type": title.type === "SERIES" ? "TVSeries" : "Movie",
     name: title.name,
-    url: `https://whisco-tv.vercel.app/title/${title.slug}`,
+    url: `https://whisco.tv/title/${title.slug}`,
     image: title.posterUrl,
     description: title.synopsis,
     datePublished: `${title.releaseYear}`,
@@ -134,7 +134,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
         : {}),
     potentialAction: {
       "@type": "WatchAction",
-      target: `https://whisco-tv.vercel.app/title/${title.slug}`,
+      target: `https://whisco.tv/title/${title.slug}`,
       expectsAcceptanceOf: {
         "@type": "Offer",
         price: 0,

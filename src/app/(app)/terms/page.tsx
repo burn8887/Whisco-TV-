@@ -26,7 +26,7 @@ export default function TermsPage() {
             Whisco TV catalogs and plays content from legitimate sources: free-to-air broadcaster streams, official
             broadcaster channel embeds (e.g. YouTube players operated by the rights holders, who retain their own
             advertising), and public-domain or freely licensed on-demand titles. We do not host pirated content. Rights
-            holders who wish to have a source reviewed or removed can contact us at legal@whiscotv.com and we will
+            holders who wish to have a source reviewed or removed can contact us at legal@whisco.tv and we will
             respond promptly.
           </p>
         </section>
@@ -75,7 +75,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-lg font-bold text-white mb-2">Contact</h2>
-          <p>Questions? Contact us at legal@whiscotv.com.</p>
+          <p>Questions? Contact us at legal@whisco.tv.</p>
         </section>
       </div>
     </div>

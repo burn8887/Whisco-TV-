@@ -6,7 +6,7 @@ import "./globals.css";
 const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://whisco-tv.vercel.app"),
+  metadataBase: new URL("https://whisco.tv"),
   title: {
     default: "Whisco TV — Free Live TV & On-Demand Streaming, No Subscription",
     template: "%s | Whisco TV",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Whisco TV",
     type: "website",
-    url: "https://whisco-tv.vercel.app",
+    url: "https://whisco.tv",
     title: "Whisco TV — Free Live TV & On-Demand Streaming",
     description:
       "500+ free live TV channels and 1,700+ free on-demand titles including popular Turkish series. 100% free, ad-supported — no subscription, ever.",

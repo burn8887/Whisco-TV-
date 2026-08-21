@@ -19,7 +19,7 @@ jobs:
           set -euo pipefail
           code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://whisco-tv.vercel.app/api/cron/update-dizi")
+            "https://whisco.tv/api/cron/update-dizi")
           echo "HTTP $code"
           cat /tmp/result.json
           if [ "$code" != "200" ]; then

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 
-const SITE_URL = "https://whisco-tv.vercel.app";
+const SITE_URL = "https://whisco.tv";
 
 // Generated at request time (not build time) so builds never depend on DB
 // availability; CDN caching keeps crawler load negligible.
