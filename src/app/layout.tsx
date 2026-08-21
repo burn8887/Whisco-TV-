@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import PwaSetup from "@/components/PwaSetup";
 import "./globals.css";
 
@@ -73,7 +74,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body className="antialiased bg-[#0a0a0f] text-zinc-100">{children}<PwaSetup /></body>
+      <body className="antialiased bg-[#0a0a0f] text-zinc-100">
+        {children}
+        <PwaSetup />
+        <Analytics />
+      </body>
     </html>
   );
 }
