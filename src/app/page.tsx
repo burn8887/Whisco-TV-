@@ -81,22 +81,12 @@ export default async function Home() {
 
             <div className="relative flex justify-center lg:justify-end">
               <div className="absolute inset-0 m-auto w-72 h-72 sm:w-96 sm:h-96 bg-gradient-to-br from-orange-500/30 via-pink-500/20 to-violet-600/30 rounded-full blur-3xl" />
-              {SHOW_MASCOT_VIDEOS ? (
-                <MascotVideo
-                  src="/whisco-zoom.mp4"
-                  poster="/whisco-zoom-poster.jpg"
-                  fallbackImg="/whisco-mascot.png"
-                  alt="Whisco, the Shih Tzu mascot of Whisco TV"
-                  className="relative w-56 sm:w-80 lg:w-96 rounded-3xl ring-1 ring-white/10 shadow-2xl object-cover"
-                />
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src="/whisco-mascot.png"
-                  alt="Whisco, the Shih Tzu mascot of Whisco TV, waving hello"
-                  className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
-                />
-              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/whisco-mascot.png"
+                alt="Whisco, the Shih Tzu mascot of Whisco TV, waving hello"
+                className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
+              />
               <span className="absolute top-2 right-2 sm:top-8 sm:right-4 bg-white text-black text-xs sm:text-sm font-bold px-3 py-1.5 rounded-2xl rounded-br-sm shadow-lg animate-bounce-in">
                 Woof! I'm Whisco 🐾
               </span>
@@ -104,6 +94,30 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* CINEMATIC STRIP — full-bleed Whisco clip, blended into the page with
+          gradient bleeds top/bottom and side fades; no frame, no box. */}
+      {SHOW_MASCOT_VIDEOS && (
+        <section aria-label="Whisco in action" className="relative overflow-hidden -mt-2">
+          <MascotVideo
+            src="/whisco-zoom-banner.mp4"
+            poster="/whisco-zoom-poster.jpg"
+            fallbackImg="/whisco-mascot.png"
+            alt="Whisco the Shih Tzu zooming through hyperspace"
+            className="w-full h-[220px] sm:h-[320px] lg:h-[420px] object-cover"
+          />
+          {/* blend edges into the page background */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0a0a0f] to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0a0f] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0f] to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-6 sm:bottom-10 text-center">
+            <p className="text-sm sm:text-base font-bold text-white/90 drop-shadow-lg tracking-wide">
+              Life's better at full speed — <span className="text-gradient">and full free.</span>
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* STATS BAR */}
       <section className="border-y border-white/5 bg-white/[0.02]">
