@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import PwaSetup from "@/components/PwaSetup";
 import "./globals.css";
 
@@ -64,12 +63,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {ADSENSE_CLIENT && (
-          <Script
-            id="adsense"
+          // Plain script tag (not next/script): AdSense's site verification
+          // crawler looks for this exact tag in the raw HTML source.
+          // eslint-disable-next-line @next/next/no-sync-scripts
+          <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
           />
         )}
       </head>
