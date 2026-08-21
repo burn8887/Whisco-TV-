@@ -16,9 +16,9 @@ jobs:
       - name: Check live channels
         run: |
           set -euo pipefail
-          code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 \
+          code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 -L --location-trusted \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://whisco.tv/api/cron/check-channels")
+            "https://www.whisco.tv/api/cron/check-channels")
           echo "HTTP $code"
           cat /tmp/result.json
           if [ "$code" != "200" ]; then
@@ -28,9 +28,9 @@ jobs:
       - name: Check VOD catalog (rotating batch, all collections incl. Turkish Dizi)
         run: |
           set -euo pipefail
-          code=$(curl -s -o /tmp/vod_result.json -w "%{http_code}" --max-time 300 \
+          code=$(curl -s -o /tmp/vod_result.json -w "%{http_code}" --max-time 300 -L --location-trusted \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://whisco.tv/api/cron/check-vod")
+            "https://www.whisco.tv/api/cron/check-vod")
           echo "HTTP $code"
           cat /tmp/vod_result.json
           if [ "$code" != "200" ]; then

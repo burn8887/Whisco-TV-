@@ -17,9 +17,9 @@ jobs:
       - name: Pull new episodes from official channels
         run: |
           set -euo pipefail
-          code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 \
+          code=$(curl -s -o /tmp/result.json -w "%{http_code}" --max-time 300 -L --location-trusted \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://whisco.tv/api/cron/update-dizi")
+            "https://www.whisco.tv/api/cron/update-dizi")
           echo "HTTP $code"
           cat /tmp/result.json
           if [ "$code" != "200" ]; then
