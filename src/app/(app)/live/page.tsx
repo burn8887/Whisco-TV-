@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getLivePageData } from "@/lib/cached";
 import ChannelCard from "@/components/ChannelCard";
 import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
@@ -34,32 +34,16 @@ export default async function LivePage({
   searchParams: Promise<{ country?: string; category?: string; language?: string; q?: string; page?: string }>;
 }) {
   const sp = await searchParams;
-  const where: any = { isActive: true };
-  if (sp.country) where.country = sp.country;
-  if (sp.category) where.category = sp.category;
-  if (sp.language) where.language = sp.language;
-  if (sp.q) where.name = { contains: sp.q, mode: "insensitive" };
-
   const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
 
-  const [channels, countries, categories, languageGroups, filteredCount, total] = await Promise.all([
-    prisma.channel.findMany({
-      where,
-      orderBy: [{ country: "asc" }, { number: "asc" }],
-      take: PAGE_SIZE,
-      skip: (page - 1) * PAGE_SIZE,
-    }),
-    prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true }, orderBy: { country: "asc" } }),
-    prisma.channel.findMany({ distinct: ["category"], where: { isActive: true }, select: { category: true }, orderBy: { category: "asc" } }),
-    prisma.channel.groupBy({
-      by: ["language"],
-      where: { isActive: true },
-      _count: { _all: true },
-      orderBy: { _count: { language: "desc" } },
-    }),
-    prisma.channel.count({ where }),
-    prisma.channel.count({ where: { isActive: true } }),
-  ]);
+  const { channels, countries, categories, languageGroups, filteredCount, total } = await getLivePageData(
+    sp.country || "",
+    sp.category || "",
+    sp.language || "",
+    sp.q || "",
+    page,
+    PAGE_SIZE
+  );
 
   const totalPages = Math.max(1, Math.ceil(filteredCount / PAGE_SIZE));
   const baseQuery: Record<string, string> = {};

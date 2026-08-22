@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
-import { prisma } from "@/lib/prisma";
+import { getHomeStats } from "@/lib/cached";
 import MascotVideo from "@/components/MascotVideo";
 import { SHOW_MASCOT_VIDEOS } from "@/config/features";
 import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Users, Check, Star, Sparkles } from "lucide-react";
@@ -8,12 +8,7 @@ import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Users, Check, Star, Sparkle
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [channelCount, titleCount, countries, featuredTitles] = await Promise.all([
-    prisma.channel.count({ where: { isActive: true } }),
-    prisma.title.count({ where: { isActive: true } }),
-    prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true } }),
-    prisma.title.findMany({ where: { isFeatured: true, isActive: true }, take: 8 }),
-  ]);
+  const { channelCount, titleCount, countries, featuredTitles } = await getHomeStats();
 
   return (
     <div className="min-h-screen">

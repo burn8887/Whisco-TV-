@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getVodShelves, getVodGrid } from "@/lib/cached";
 import TitleCard from "@/components/TitleCard";
 import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
@@ -83,22 +83,8 @@ export default async function VodPage({
   // BROWSE MODE (default): one horizontal shelf per collection.
   // ------------------------------------------------------------------
   if (browsing) {
-    const [groups, total] = await Promise.all([
-      prisma.title.groupBy({ by: ["collection"], where: { isActive: true }, _count: { _all: true } }),
-      prisma.title.count({ where: { isActive: true } }),
-    ]);
-    const counts = new Map(groups.map((g) => [g.collection, g._count._all]));
-    const shelves = COLLECTION_ORDER.filter((c) => (counts.get(c) ?? 0) > 0);
-
-    const shelfTitles = await Promise.all(
-      shelves.map((c) =>
-        prisma.title.findMany({
-          where: { collection: c, isActive: true },
-          orderBy: [{ imdbRating: "desc" }, { releaseYear: "desc" }],
-          take: 12,
-        })
-      )
-    );
+    const { shelves, shelfTitles, counts: countsObj, total } = await getVodShelves(COLLECTION_ORDER);
+    const counts = new Map(Object.entries(countsObj));
 
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -166,21 +152,8 @@ export default async function VodPage({
   // ------------------------------------------------------------------
   // FILTER MODE: grid of one collection and/or search results.
   // ------------------------------------------------------------------
-  const where: any = { isActive: true };
-  if (sp.collection) where.collection = sp.collection;
-  if (sp.q) where.name = { contains: sp.q, mode: "insensitive" };
-
   const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
-
-  const [titles, filteredCount] = await Promise.all([
-    prisma.title.findMany({
-      where,
-      orderBy: [{ imdbRating: "desc" }, { releaseYear: "desc" }],
-      take: PAGE_SIZE,
-      skip: (page - 1) * PAGE_SIZE,
-    }),
-    prisma.title.count({ where }),
-  ]);
+  const { titles, filteredCount } = await getVodGrid(sp.collection || "", sp.q || "", page, PAGE_SIZE);
 
   const totalPages = Math.max(1, Math.ceil(filteredCount / PAGE_SIZE));
   const baseQuery: Record<string, string> = {};

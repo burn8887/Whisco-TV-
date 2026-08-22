@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getTitlePageData } from "@/lib/cached";
 import { notFound } from "next/navigation";
 import { getActiveProfile } from "@/lib/access";
 import Link from "next/link";
@@ -20,25 +21,10 @@ const SITE_URL = "https://whisco.tv";
 // ---------------------------------------------------------------------------
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const title = await prisma.title.findUnique({
-    where: { slug },
-    select: {
-      name: true,
-      synopsis: true,
-      type: true,
-      releaseYear: true,
-      posterUrl: true,
-      backdropUrl: true,
-      genres: true,
-      cast: true,
-      language: true,
-      isActive: true,
-      seasons: { select: { _count: { select: { episodes: true } } } },
-    },
-  });
-  if (!title || !title.isActive) return { title: "Not found — Whisco TV" };
+  const { title } = await getTitlePageData(slug);
+  if (!title) return { title: "Not found — Whisco TV" };
 
-  const episodeCount = title.seasons.reduce((a, s) => a + s._count.episodes, 0);
+  const episodeCount = title.seasons.reduce((a, s) => a + s.episodes.length, 0);
   const kind = title.type === "SERIES" ? "Series" : title.type === "DOCUMENTARY" ? "Documentary" : "Movie";
   const epPart = title.type === "SERIES" && episodeCount > 0 ? ` All ${episodeCount} episodes` : "";
   const pageTitle = `Watch ${title.name} (${title.releaseYear}) Online Free — Full ${kind}`;
@@ -78,22 +64,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function TitlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const title = await prisma.title.findUnique({
-    where: { slug },
-    include: { seasons: { include: { episodes: { orderBy: { number: "asc" } } }, orderBy: { number: "asc" } } },
-  });
-  if (!title || !title.isActive) notFound();
+  const { title, similar } = await getTitlePageData(slug);
+  if (!title) notFound();
 
   const profile = await getActiveProfile();
 
   const inWatchlist = profile
     ? !!(await prisma.watchlist.findUnique({ where: { profileId_titleId: { profileId: profile.id, titleId: title.id } } }))
     : false;
-
-  const similar = await prisma.title.findMany({
-    where: { type: title.type, id: { not: title.id }, isActive: true, genres: { contains: title.genres.split(",")[0].trim() } },
-    take: 12,
-  });
 
   const genreList = title.genres.split(",").map((g) => g.trim()).filter(Boolean);
 

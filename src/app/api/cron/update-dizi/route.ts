@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 // Turkish Dizi auto-updater — keeps ongoing shows fresh without manual work.
 //
@@ -193,6 +194,10 @@ export async function GET(req: Request) {
     }
     report.push(showReport);
   }
+
+  // Refresh cached catalog pages so changes appear promptly.
+  revalidatePath("/vod");
+  revalidatePath("/browse");
 
   return NextResponse.json({ totalAdded, shows: report, timestamp: new Date().toISOString() });
 }

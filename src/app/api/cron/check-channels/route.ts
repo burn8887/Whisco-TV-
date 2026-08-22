@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 // Vercel Cron Job target — runs daily (see vercel.json). Checks every
 // live channel's stream URL is still reachable and returns valid HLS
@@ -88,7 +89,11 @@ async function runBatched<T, R>(items: T[], concurrency: number, fn: (item: T) =
 export async function GET(req: Request) {
   const authHeader = req.headers.get("authorization");
   if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Refresh cached catalog pages so changes appear promptly.
+  revalidatePath("/live");
+  revalidatePath("/");
+
+  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const channels = await prisma.channel.findMany({

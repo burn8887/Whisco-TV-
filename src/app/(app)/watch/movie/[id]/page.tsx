@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getMoviePageData } from "@/lib/cached";
 import { notFound } from "next/navigation";
 import { getActiveProfile } from "@/lib/access";
 import WatchClient from "@/components/WatchClient";
@@ -9,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export default async function WatchMoviePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const title = await prisma.title.findUnique({ where: { id } });
+  const title = await getMoviePageData(id);
   if (!title || !title.streamUrl) notFound();
 
   const profile = await getActiveProfile();

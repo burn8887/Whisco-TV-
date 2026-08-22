@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 // VOD catalog health check — covers every collection including Turkish Dizi.
 //
@@ -195,6 +196,7 @@ export async function GET(req: Request) {
       streamUrl: true,
       failCount: true,
       isActive: true,
+      lastStatus: true,
       seasons: { select: { episodes: { select: { streamUrl: true }, orderBy: { number: "asc" } } }, orderBy: { number: "asc" } },
     },
     orderBy: [{ lastCheckedAt: { sort: "asc", nulls: "first" } }],
@@ -210,14 +212,22 @@ export async function GET(req: Request) {
     newlyHidden = 0,
     restored = 0;
 
+  // Batch the writes: group unchanged-status rows into updateMany calls to
+  // minimize Neon egress; only genuinely-changed rows get individual updates.
+  const okIdsNoChange: string[] = [];
+  const unknownIds: string[] = [];
   for (const { t, status } of results) {
     if (status === "ok") {
       ok++;
       if (!t.isActive) restored++;
-      await prisma.title.update({
-        where: { id: t.id },
-        data: { isActive: true, failCount: 0, lastStatus: "ok", lastCheckedAt: now },
-      });
+      if (t.isActive && t.failCount === 0 && !t.lastStatus?.startsWith("geo")) {
+        okIdsNoChange.push(t.id);
+      } else {
+        await prisma.title.update({
+          where: { id: t.id },
+          data: { isActive: true, failCount: 0, lastStatus: "ok", lastCheckedAt: now },
+        });
+      }
     } else if (status === "invalid") {
       invalid++;
       const failCount = t.failCount + 1;
@@ -228,16 +238,23 @@ export async function GET(req: Request) {
         data: { failCount, isActive: hide ? false : t.isActive, lastStatus: "invalid", lastCheckedAt: now },
       });
     } else {
-      // unknown: bump lastCheckedAt so rotation continues; never penalize.
       unknown++;
-      await prisma.title.update({
-        where: { id: t.id },
-        data: { lastStatus: "unknown", lastCheckedAt: now },
-      });
+      unknownIds.push(t.id);
     }
+  }
+  if (okIdsNoChange.length) {
+    await prisma.title.updateMany({ where: { id: { in: okIdsNoChange } }, data: { lastStatus: "ok", lastCheckedAt: now } });
+  }
+  if (unknownIds.length) {
+    await prisma.title.updateMany({ where: { id: { in: unknownIds } }, data: { lastStatus: "unknown", lastCheckedAt: now } });
   }
 
   const totalInactive = await prisma.title.count({ where: { isActive: false } });
+
+  // Refresh cached catalog pages so changes appear promptly.
+  revalidatePath("/vod");
+  revalidatePath("/browse");
+  revalidatePath("/");
 
   return NextResponse.json({
     checked: titles.length,

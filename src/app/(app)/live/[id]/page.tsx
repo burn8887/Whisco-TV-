@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getChannelPageData } from "@/lib/cached";
 import VideoPlayer from "@/components/VideoPlayer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,13 +8,8 @@ export const dynamic = "force-dynamic";
 
 export default async function ChannelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const channel = await prisma.channel.findUnique({ where: { id } });
+  const { channel, related } = await getChannelPageData(id);
   if (!channel) notFound();
-
-  const related = await prisma.channel.findMany({
-    where: { category: channel.category, id: { not: channel.id }, isActive: true },
-    take: 8,
-  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">

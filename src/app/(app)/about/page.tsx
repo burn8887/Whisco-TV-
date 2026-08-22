@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Tv2, Film, Globe2, ShieldCheck, Mail } from "lucide-react";
-import { prisma } from "@/lib/prisma";
+import { getAboutStats } from "@/lib/cached";
 
 export const dynamic = "force-dynamic";
 
@@ -12,11 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const [channels, titles, countries] = await Promise.all([
-    prisma.channel.count({ where: { isActive: true } }),
-    prisma.title.count({ where: { isActive: true } }),
-    prisma.channel.findMany({ distinct: ["country"], where: { isActive: true }, select: { country: true } }),
-  ]);
+  const { channels, titles, countryCount } = await getAboutStats();
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
@@ -39,7 +35,7 @@ export default async function AboutPage() {
           {[
             { icon: Tv2, label: "Live channels", value: `${channels}+` },
             { icon: Film, label: "On-demand titles", value: `${titles.toLocaleString()}+` },
-            { icon: Globe2, label: "Countries of origin", value: `${countries.length}+` },
+            { icon: Globe2, label: "Countries of origin", value: `${countryCount}+` },
             { icon: ShieldCheck, label: "Languages", value: "13" },
           ].map((s) => (
             <div key={s.label} className="rounded-xl bg-zinc-900/70 ring-1 ring-white/5 p-4 text-center">

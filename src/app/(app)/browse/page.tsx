@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getBrowseRows } from "@/lib/cached";
 import { getActiveProfile } from "@/lib/access";
 import Row from "@/components/Row";
 import TitleCard from "@/components/TitleCard";
@@ -11,23 +12,15 @@ export const dynamic = "force-dynamic";
 export default async function BrowsePage() {
   const profile = await getActiveProfile();
 
-  const [featured, trending, newReleases, movies, series, docs, channels, progress] = await Promise.all([
-    prisma.title.findMany({ where: { isFeatured: true, isActive: true }, take: 5 }),
-    prisma.title.findMany({ where: { isTrending: true, isActive: true }, take: 16 }),
-    prisma.title.findMany({ where: { isActive: true }, orderBy: { createdAt: "desc" }, take: 16 }),
-    prisma.title.findMany({ where: { type: "MOVIE", isActive: true }, take: 16 }),
-    prisma.title.findMany({ where: { type: "SERIES", isActive: true }, take: 16 }),
-    prisma.title.findMany({ where: { type: "DOCUMENTARY", isActive: true }, take: 16 }),
-    prisma.channel.findMany({ where: { isFeatured: true, isActive: true }, take: 8 }),
-    profile
-      ? prisma.watchProgress.findMany({
-          where: { profileId: profile.id },
-          include: { title: true },
-          orderBy: { updatedAt: "desc" },
-          take: 12,
-        })
-      : Promise.resolve([]),
-  ]);
+  const { featured, trending, newReleases, movies, series, docs, channels } = await getBrowseRows();
+  const progress = profile
+    ? await prisma.watchProgress.findMany({
+        where: { profileId: profile.id },
+        include: { title: true, episode: true },
+        orderBy: { updatedAt: "desc" },
+        take: 12,
+      })
+    : [];
 
   const hero = featured[0];
 

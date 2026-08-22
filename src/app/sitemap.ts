@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { prisma } from "@/lib/prisma";
+import { getSitemapData } from "@/lib/cached";
 
 const SITE_URL = "https://whisco.tv";
 
@@ -8,13 +8,7 @@ const SITE_URL = "https://whisco.tv";
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [titles, channels] = await Promise.all([
-    prisma.title.findMany({
-      where: { isActive: true },
-      select: { slug: true, createdAt: true, isTrending: true, language: true },
-    }),
-    prisma.channel.findMany({ where: { isActive: true }, select: { id: true } }),
-  ]);
+  const { titles, channels } = await getSitemapData();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "daily", priority: 1 },
