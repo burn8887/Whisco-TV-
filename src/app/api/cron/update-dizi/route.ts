@@ -183,7 +183,9 @@ export async function GET(req: Request) {
       }
 
       // New episodes = fresh content: surface the show and bump sitemap lastmod.
-      if ((showReport.added as unknown[]).length > 0) {
+      if ((showReport.added as unknown[]).length > 0 && title.isActive) {
+        // Only surface shows viewers can actually watch — geo-hidden titles
+        // keep collecting episodes silently in case they become available.
         await prisma.title.update({
           where: { id: title.id },
           data: { isNew: true, isTrending: true, createdAt: new Date() },
