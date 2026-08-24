@@ -1,5 +1,5 @@
 # WHISCO TV — COMPLETE PROJECT HANDOVER
-*Last updated: 2026-08-22 (major update: Vercel Pro, Neon Launch, emails working, contact page, automation suite). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
+*Last updated: 2026-08-24 (major update: React Native mobile app feature-complete, mobile API v1, RN-first launch decision). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
 
 ---
 
@@ -85,6 +85,30 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 - PWA live (manifest, sw.js — never intercepts video, offline.html, Android install prompt, iOS hint). Store plan: TWA ($25, 12 testers×14d) → Expo iOS ($99/yr).
 - WhatsApp: sticker `/home/user/whisco-sticker.webp`; OG card `public/og-share-card.png` (whisco.tv branding).
 
+
+## 6b. MOBILE APP (React Native / Expo) — FEATURE-COMPLETE, AWAITING PLAY ACCOUNT
+
+**Decision history:** TWA was planned for a September deadline; user relaxed the deadline and chose viewers-first quality → **RN-first, TWA skipped entirely**. 22 testers recruited (Google requires 12 × 14 continuous days for personal accounts). Filmhub letter updated to "apps launching Q4 2026".
+
+**Project:** `/home/user/whisco-mobile` (own git repo, NOT pushed to GitHub yet — decide with user whether same repo subfolder or new repo `whisco-mobile`).
+- Expo SDK 57 / RN 0.86, TypeScript, expo-router (tabs: Home / Live TV / On Demand / My List + /title/[slug] + /live/[id]).
+- **Video**: expo-video (native ExoPlayer) for HLS/MP4 — fullscreen, PiP, resume, error copy matches site; YouTube embeds via react-native-webview official iframe (ToS-compliant, blocks link-outs).
+- **Personalization local-first** (AsyncStorage, `src/store.ts`): watchlist + continue-watching with positions, saved every 10s, resume chip on title screen. No login needed (matches zero-friction philosophy; server sync can layer later).
+- **Data**: `src/api.ts` → https://www.whisco.tv/api/mobile/v1/{home,live,vod,title/[slug],channel/[id]} — versioned, cached (zero DB load), verified live.
+- **Branding**: `src/theme.ts` mirrors site (#0a0a0f, orange #f97316 → pink #db2777); icons/splash from brand assets.
+- **Android**: package `tv.whisco.app`, adaptive icon, INTERNET permission only. `eas.json` profiles: production (.aab, autoIncrement), preview (.apk), production-tv (EXPO_TV=1).
+- **Store kit** in `store/`: feature-graphic 1024x500, play-icon-512, `listing.md` with full copy-paste listing (name/short/full description, category, tags, privacy URL, data-safety answers = NO data collected in v1, content rating Teen, screenshot shot-list, Amazon Appstore note).
+- **Device plan**: Android phones/tablets (Play) → Android TV/Google TV/Mi Box (production-tv build, D-pad focus states already on cards) → Fire Stick (same app → Amazon Appstore, free account) → Chromebooks (automatic via Play) → PCs (whisco.tv PWA already live).
+- **Verified**: `npx tsc --noEmit` clean; `npx expo export --platform android` produces Hermes bundle.
+
+**Launch sequence remaining:**
+1. User's Play developer account finishes verification ($25 paid, in progress 2026-08-24).
+2. Agent: `npx eas build --platform android --profile production` (needs `npx eas login` — user's Expo account, or create one) → .aab.
+3. User uploads .aab to Play Console → closed testing → invite the 22 testers (need Gmail addresses or Google Group) → **14 continuous days**.
+4. Screenshots per store/listing.md shot-list during testing.
+5. Apply for production access → submit → review (3-7d) → LIVE.
+6. Then: Amazon Appstore (Fire TV), then production-tv build for Android TV listing, then iOS (Apple $99/yr, EAS handles Mac-less builds).
+
 ## 7. STANDING REMINDERS / OPEN ITEMS
 
 1. **PAT hygiene**: last token was revoked by user ✅ (good). A commit may be local-unpushed if a session ended without a fresh token — ALWAYS check `git log origin/main..HEAD` equivalent at session start (fetch needs remote re-add).
@@ -93,7 +117,8 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 4. Search Console: add whisco.tv property, submit sitemap.
 5. AdSense: wait for review; if "site not ready" feedback, address specifics.
 6. Filmhub: application in flight — watch partnerships@ inbox; on acceptance do §5 integration work.
-7. After the new automation workflows first run: check github.com/burn8887/Whisco-TV-/actions for green.
+7. Mobile app: when Play verification completes → EAS build → testers (22 ready) → 14-day clock. Expo account needed for EAS (user creates or agent walks through).
+8. After the new automation workflows first run: check github.com/burn8887/Whisco-TV-/actions for green.
 8. Uptime monitor will email the owner on failures — if user reports such an email, check /api/health first, then Neon/Vercel dashboards.
 
 ## 8. INCIDENT LOG (why the architecture looks like this)

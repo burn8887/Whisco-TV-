@@ -1,5 +1,5 @@
 # WHISCO TV — DISASTER RECOVERY & FULL-CONTINUITY DOCUMENT
-*Last updated: 2026-08-22. Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
+*Last updated: 2026-08-24 (added mobile app assets + Play/Expo accounts). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
 *Purpose 1: rebuild Whisco TV to current state from ABSOLUTE ZERO — even if GitHub, Vercel, Spaceship, and Neon accounts are all lost/hijacked/deleted.*
 *Purpose 2: allow a brand-new AI conversation to continue as if this conversation never ended.*
 
@@ -17,7 +17,9 @@
 | 6 | **Google AdSense** | publisher **ca-pub-7207533964778777** (on Gmail #1) | Monetization; site whisco.tv under review (submitted ~2026-08-21) | free (pays us) | Gmail #1 |
 | 7 | **Google Search Console** | property whisco-tv.vercel.app verified; whisco.tv pending | SEO/indexing; sitemap submitted | free | Gmail #1; verification meta tokens are IN THE CODE (layout.tsx): `D_4kmSfSxEYd_AAKNKNoq4S8aUxqTT6NZ8LSZk4dlYQ` and `nIJp4qlcSvdJU30XNCoMXugjno-YahaxaU2-BpsjAH4` |
 | 8 | **Filmhub** | application being filed 2026-08-22 from partnerships@whisco.tv via filmhub.com/contact/buyer | Future licensed-content channel account | free (rev-share) | partnerships@whisco.tv → Gmail #1 |
-| 9 | Future: Google Play ($25 once), Apple Dev ($99/yr), Bunny.net (Filmhub file hosting), Meta Ads | not yet created | — | — | Gmail #1 |
+| 9 | **Google Play Console** | $25 paid, identity verification IN PROGRESS (2026-08-24) | future app listing `tv.whisco.app` | $25 once | Gmail #1 |
+| 10 | **Expo/EAS** | to be created for cloud builds (no Mac needed) | app build pipeline | free tier OK | Gmail #1 recommended |
+| 11 | Future: Apple Dev ($99/yr), Amazon Appstore (free, Fire TV), Bunny.net (Filmhub hosting), Meta Ads | not yet created | — | — | Gmail #1 |
 
 **Live secrets (current values — rotate if hijack suspected):**
 - `CRON_SECRET` = `bab83e4291ec45b0663a2d618b63ade0b2b0a3ea85c49c4d` (Vercel env + GitHub Actions secret; auth for all cron endpoints)
@@ -46,6 +48,7 @@ Email forwards (Spaceship Email Forwarding): partnerships@, legal@, privacy@ →
 2. **The code** — GitHub repo; ALSO fully present in agent workspace at `/home/user/iptv-app` (survives conversation loss; can re-push to any new repo).
 3. **Brand assets** — in repo `public/` (mascots, videos, share card, icons) AND workspace `/home/user/` (whisco-sticker.webp, whisco-videos/*.mp4, Filmhub guide, this doc, handover doc).
 4. **User accounts/watchlists** — ONLY in Neon (not snapshotted, privacy). Acceptable loss: accounts are optional; users re-register. Neon Launch has point-in-time restore for real DB recovery.
+4b. **Mobile app code** — `/home/user/whisco-mobile` (own git repo, local only as of 2026-08-24 — commit history c110bd4→49e9819). NOT yet on GitHub: if workspace is lost before it's pushed, the app must be rebuilt from the handover §6b spec (1-2 sessions; API layer survives in main repo). RECOMMENDED NEXT SESSION: push it to GitHub (new repo or subfolder) to close this gap.
 5. **Knowledge/decisions** — `WHISCO_TV_PROJECT_HANDOVER.md` + this file, in workspace AND committed to the repo root.
 
 **Backup refresh ritual (agent: do after every big content change):** run the export snippet (Part D step 12) → commit backups to git.
