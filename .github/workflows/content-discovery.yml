@@ -1,0 +1,43 @@
+name: Content discovery
+
+# Twice-weekly content growth: new verified live channels from the public
+# iptv-org index (rotating country files) and the newest full-length VOD
+# uploads from our vetted official distributor channels. Every candidate is
+# verified (working stream / embeddable + GCC-available + full-length)
+# before it enters the catalog.
+
+on:
+  schedule:
+    # Mondays & Thursdays 04:00 UTC (07:00 Bahrain)
+    - cron: "0 4 * * 1,4"
+  workflow_dispatch: {}
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Discover new live channels
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/channels.json -w "%{http_code}" -L --max-time 300 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://www.whisco.tv/api/cron/discover-channels")
+          echo "HTTP $code"
+          cat /tmp/channels.json
+          if [ "$code" != "200" ]; then
+            echo "Channel discovery failed with HTTP $code" >&2
+            exit 1
+          fi
+      - name: Discover new VOD titles
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/vod.json -w "%{http_code}" -L --max-time 300 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://www.whisco.tv/api/cron/discover-vod")
+          echo "HTTP $code"
+          cat /tmp/vod.json
+          if [ "$code" != "200" ]; then
+            echo "VOD discovery failed with HTTP $code" >&2
+            exit 1
+          fi

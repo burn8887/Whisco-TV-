@@ -1,0 +1,28 @@
+name: Weekly maintenance
+
+# Sunday janitor run: ages out stale NEW badges, prunes long-dead channels,
+# rotates the Trending row, and prints a full catalog stats report (this
+# workflow's log doubles as the weekly operations report).
+
+on:
+  schedule:
+    - cron: "0 5 * * 0"
+  workflow_dispatch: {}
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Run maintenance + stats report
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/maint.json -w "%{http_code}" -L --max-time 200 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://www.whisco.tv/api/cron/maintenance")
+          echo "HTTP $code"
+          python3 -m json.tool /tmp/maint.json || cat /tmp/maint.json
+          if [ "$code" != "200" ]; then
+            echo "Maintenance failed with HTTP $code" >&2
+            exit 1
+          fi

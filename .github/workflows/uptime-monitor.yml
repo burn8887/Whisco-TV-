@@ -1,0 +1,46 @@
+name: Uptime monitor
+
+# Checks every 15 minutes that the site and database are healthy. Fails the
+# workflow (→ GitHub email alert to the owner) when:
+#   - the homepage or key pages don't return 200
+#   - /api/health reports "down" (DB unreachable) or "degraded"
+# This is the early-warning system: a Neon/Vercel suspension or a bad deploy
+# alerts within 15 minutes instead of being discovered by viewers.
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Homepage + key pages
+        run: |
+          set -euo pipefail
+          for path in "/" "/live" "/vod" "/browse"; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv${path}")
+            echo "${path} -> ${code}"
+            if [ "$code" != "200" ]; then
+              echo "::error::${path} returned ${code}" >&2
+              exit 1
+            fi
+          done
+      - name: Health endpoint (DB + catalog + cron staleness)
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/health.json -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv/api/health")
+          echo "HTTP $code"
+          cat /tmp/health.json
+          if [ "$code" != "200" ]; then
+            echo "::error::health endpoint returned $code (DB likely down)" >&2
+            exit 1
+          fi
+          status=$(python3 -c "import json;print(json.load(open('/tmp/health.json'))['status'])")
+          if [ "$status" != "ok" ]; then
+            warnings=$(python3 -c "import json;print(','.join(json.load(open('/tmp/health.json')).get('warnings',[])))")
+            echo "::error::health status=$status warnings=$warnings" >&2
+            exit 1
+          fi
