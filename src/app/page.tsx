@@ -272,12 +272,17 @@ export default async function Home() {
       </section>
 
       <footer className="border-t border-white/5 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center gap-5">
           <Logo />
           <p className="text-xs text-zinc-500 text-center">
-            © {new Date().getFullYear()} Whisco TV. Free, ad-supported streaming. On-demand titles use sample
-            content for demo purposes — see project README for production content sourcing.
+            © {new Date().getFullYear()} Whisco TV — 100% free, ad-supported streaming. No subscription, ever.
           </p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-400">
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+          </nav>
         </div>
       </footer>
     </div>

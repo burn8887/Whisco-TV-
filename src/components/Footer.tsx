@@ -11,15 +11,16 @@ export default function Footer() {
           <Link href="/about" className="hover:text-zinc-300 transition-colors">
             About
           </Link>
+          <Link href="/contact" className="hover:text-zinc-300 transition-colors">
+            Contact Us
+          </Link>
           <Link href="/privacy" className="hover:text-zinc-300 transition-colors">
             Privacy Policy
           </Link>
           <Link href="/terms" className="hover:text-zinc-300 transition-colors">
             Terms of Use
           </Link>
-          <a href="mailto:legal@whisco.tv" className="hover:text-zinc-300 transition-colors">
-            Contact
-          </a>
+
         </nav>
       </div>
     </footer>
