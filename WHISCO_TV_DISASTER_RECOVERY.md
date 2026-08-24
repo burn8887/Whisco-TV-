@@ -1,5 +1,5 @@
 # WHISCO TV — DISASTER RECOVERY & FULL-CONTINUITY DOCUMENT
-*Last updated: 2026-08-24 (added mobile app assets + Play/Expo accounts). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
+*Last updated: 2026-08-24-b (added Expo keystore + document access protocol). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
 *Purpose 1: rebuild Whisco TV to current state from ABSOLUTE ZERO — even if GitHub, Vercel, Spaceship, and Neon accounts are all lost/hijacked/deleted.*
 *Purpose 2: allow a brand-new AI conversation to continue as if this conversation never ended.*
 
@@ -18,7 +18,7 @@
 | 7 | **Google Search Console** | property whisco-tv.vercel.app verified; whisco.tv pending | SEO/indexing; sitemap submitted | free | Gmail #1; verification meta tokens are IN THE CODE (layout.tsx): `D_4kmSfSxEYd_AAKNKNoq4S8aUxqTT6NZ8LSZk4dlYQ` and `nIJp4qlcSvdJU30XNCoMXugjno-YahaxaU2-BpsjAH4` |
 | 8 | **Filmhub** | application being filed 2026-08-22 from partnerships@whisco.tv via filmhub.com/contact/buyer | Future licensed-content channel account | free (rev-share) | partnerships@whisco.tv → Gmail #1 |
 | 9 | **Google Play Console** | $25 paid, identity verification IN PROGRESS (2026-08-24) | future app listing `tv.whisco.app` | $25 once | Gmail #1 |
-| 10 | **Expo/EAS** | to be created for cloud builds (no Mac needed) | app build pipeline | free tier OK | Gmail #1 recommended |
+| 10 | **Expo/EAS** | account **burn8887s-team**, project whisco-tv (id 0c4f0508-0c37-438c-a553-5016aa3aaba6) | cloud builds + **ANDROID SIGNING KEYSTORE (critical: losing it means future app updates can't be signed — Expo stores it; downloadable via `eas credentials`)** | free tier | Gmail #1 |
 | 11 | Future: Apple Dev ($99/yr), Amazon Appstore (free, Fire TV), Bunny.net (Filmhub hosting), Meta Ads | not yet created | — | — | Gmail #1 |
 
 **Live secrets (current values — rotate if hijack suspected):**
@@ -163,5 +163,19 @@ node tmp_export.mjs && rm tmp_export.mjs && git add prisma/backup_*.json && git 
 | Neon | Reset role password; check data vs. snapshots (`restore_from_backup.mjs` can rebuild a clean DB); update Vercel env |
 | Spaceship | Support + enable transfer lock; verify DNS unchanged (records in Part A); if mail rules tampered, recreate forwards |
 | AdSense | Google support; verify payee/bank details untouched; check no foreign sites added to account |
+
+---
+
+# PART F — WHERE THESE DOCUMENTS LIVE (canonical access protocol)
+
+Both documents exist in THREE synchronized places after every update:
+1. **Workspace**: `/home/user/WHISCO_TV_PROJECT_HANDOVER.md` + `WHISCO_TV_DISASTER_RECOVERY.md` — what the agent reads; survives across conversations on the same account.
+2. **GitHub (the user-facing canonical copy)** — committed to the repo root, viewable/downloadable anytime, survives everything except GitHub account loss:
+   - https://github.com/burn8887/Whisco-TV-/blob/main/WHISCO_TV_PROJECT_HANDOVER.md
+   - https://github.com/burn8887/Whisco-TV-/blob/main/WHISCO_TV_DISASTER_RECOVERY.md
+   These links are conversation-independent and permanent. After any update the agent pushes, the page shows the new content immediately — check the "Last updated" line at the top of each file to confirm freshness.
+3. **Optionally the user's email/drive** — belt-and-braces against simultaneous GitHub+workspace loss. Only needed occasionally, not after every update.
+
+**Agent duty:** every time either doc is updated, copy both into `/home/user/iptv-app/`, commit, and push (with the session PAT). If no PAT is available that session, tell the user the GitHub copy is stale until the next push.
 
 *End of document. Keep this file and the handover doc updated — they are the project's black box.*

@@ -1,5 +1,5 @@
 # WHISCO TV — COMPLETE PROJECT HANDOVER
-*Last updated: 2026-08-24 (major update: React Native mobile app feature-complete, mobile API v1, RN-first launch decision). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
+*Last updated: 2026-08-24-b (production .aab BUILT — EAS build 0cab58b0 versionCode 4; preview .apk queued; user testing app on own device). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
 
 ---
 
@@ -124,7 +124,8 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 4. Search Console: add whisco.tv property, submit sitemap.
 5. AdSense: wait for review; if "site not ready" feedback, address specifics.
 6. Filmhub: application in flight — watch partnerships@ inbox; on acceptance do §5 integration work.
-7. Mobile app: when Play verification completes → EAS build → testers (22 ready) → 14-day clock. Expo account needed for EAS (user creates or agent walks through).
+7. Token policy: GitHub PAT = per-session throwaway (revoke after). Expo token = user decides policy (per-session fresh vs semi-standing) — ASK AND RECORD when next discussed.
+7b. Mobile app: when Play verification completes → EAS build → testers (22 ready) → 14-day clock. Expo account needed for EAS (user creates or agent walks through).
 8. After the new automation workflows first run: check github.com/burn8887/Whisco-TV-/actions for green.
 8. Uptime monitor will email the owner on failures — if user reports such an email, check /api/health first, then Neon/Vercel dashboards.
 
