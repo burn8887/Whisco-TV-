@@ -101,9 +101,16 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 - **Device plan**: Android phones/tablets (Play) → Android TV/Google TV/Mi Box (production-tv build, D-pad focus states already on cards) → Fire Stick (same app → Amazon Appstore, free account) → Chromebooks (automatic via Play) → PCs (whisco.tv PWA already live).
 - **Verified**: `npx tsc --noEmit` clean; `npx expo export --platform android` produces Hermes bundle.
 
+**BUILD STATUS (2026-08-24): PRODUCTION .AAB SUCCESSFULLY BUILT.**
+- EAS account: burn8887s-team (Expo project whisco-tv, id 0c4f0508-0c37-438c-a553-5016aa3aaba6; keystore generated & stored on Expo servers — critical asset, survives via Expo account).
+- Successful build: 0cab58b0-9af0-487c-a3fc-0ebbceecfd3b, versionCode 4. Artifact (.aab) downloadable from expo.dev build page (URLs expire; regenerate from build list).
+- Dependency lesson: use `npx expo install` for reanimated/worklets — manual pins break the C++ build (worklets 0.12 vs expo-modules-core; blessed combo = reanimated 4.5.1 + worklets 0.10.1).
+- Preview .apk profile also available for direct tester installs.
+- EAS auth: user provides Expo access token per session (EXPO_TOKEN env var); eas-cli installed via `npm install --prefix /home/user/.eas-cli eas-cli`.
+
 **Launch sequence remaining:**
 1. User's Play developer account finishes verification ($25 paid, in progress 2026-08-24).
-2. Agent: `npx eas build --platform android --profile production` (needs `npx eas login` — user's Expo account, or create one) → .aab.
+2. ~~Build .aab~~ DONE — download from expo.dev or rebuild fresh when needed.
 3. User uploads .aab to Play Console → closed testing → invite the 22 testers (need Gmail addresses or Google Group) → **14 continuous days**.
 4. Screenshots per store/listing.md shot-list during testing.
 5. Apply for production access → submit → review (3-7d) → LIVE.
