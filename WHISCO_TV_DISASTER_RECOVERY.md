@@ -178,4 +178,27 @@ Both documents exist in THREE synchronized places after every update:
 
 **Agent duty:** every time either doc is updated, copy both into `/home/user/iptv-app/`, commit, and push (with the session PAT). If no PAT is available that session, tell the user the GitHub copy is stale until the next push.
 
+
+# PART G — SERVICES QUICK-REFERENCE TABLE (user's operational map)
+
+| Service | Website | What we use it for | Cost | Login identity |
+|---|---|---|---|---|
+| **Spaceship** | spaceship.com | Domain registration (whisco.tv), DNS records, email forwarding (partnerships@/legal@/privacy@ → Gmail) | ~$35/yr | Own account |
+| **Vercel** | vercel.com | Website hosting + deployments (auto-deploys on git push), env vars/secrets, domain binding, 2 daily crons | Pro $20/mo | Via GitHub |
+| **Neon** | console.neon.tech | Postgres database — the entire catalog (channels, titles, episodes, users) | Launch $19/mo | Gmail/GitHub |
+| **GitHub** | github.com/burn8887 | Code repos (Whisco-TV- = website, whisco-mobile = app), scheduled automation workflows (health checks, discovery, uptime monitor), backup docs + DB snapshots | Free | Own account |
+| **Google Search Console** | search.google.com/search-console | SEO monitoring, sitemap submission, crawl/index status | Free | Gmail |
+| **Google AdSense** | adsense.google.com | Ad monetization (publisher ca-pub-7207533964778777) — site under review | Free (pays us) | Gmail |
+| **Expo / EAS** | expo.dev (account: burn8887s-team) | Cloud builds of the mobile app (.aab/.apk/iOS), **holds the Android signing keystore (critical)**, access tokens for agent builds | Free tier | Own account |
+| **Google Play Console** | play.google.com/console | Android app publishing (package tv.whisco.app), closed testing w/ 22 testers, crash reports (Android Vitals) | $25 once | Gmail |
+| **Apple Developer** | developer.apple.com | iOS app signing + App Store publishing — ENROLLMENT PENDING | $99/yr | Apple ID (use Gmail) |
+| **YouTube (passive)** | — | Official broadcaster embeds for VOD + some live channels; oEmbed/RSS APIs for verification & discovery | Free | None needed |
+| **iptv-org (passive)** | github.com/iptv-org/iptv | Public index of free-to-air live streams — weekly channel discovery source | Free | None |
+| **Internet Archive (passive)** | archive.org | Public-domain movie/doc catalog + metadata API for health checks | Free | None |
+| **Filmhub** | filmhub.com | Licensed-content marketplace — channel application submitted from partnerships@ | Free (rev-share) | partnerships@whisco.tv |
+| *Future:* Amazon Appstore | developer.amazon.com | Fire TV distribution of the same app | Free | Gmail |
+| *Future:* Bunny.net | bunny.net | Video file hosting/CDN for Filmhub-delivered content | ~$0.005–0.01/GB | TBD |
+| *Future:* Meta Ads | business.facebook.com | GCC-targeted user acquisition (~$110/mo from investor budget, post-AdSense approval) | Budgeted | TBD |
+
+
 *End of document. Keep this file and the handover doc updated — they are the project's black box.*
