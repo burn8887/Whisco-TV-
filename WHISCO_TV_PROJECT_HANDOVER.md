@@ -1,5 +1,5 @@
 # WHISCO TV — COMPLETE PROJECT HANDOVER
-*Last updated: 2026-08-24-b (production .aab BUILT — EAS build 0cab58b0 versionCode 4; preview .apk queued; user testing app on own device). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
+*Last updated: 2026-08-29 (Play Console LIVE: app created, internal-testing release publishing with versionCode 6; iOS code-complete awaiting Apple enrollment; app iterated to v0.4 through two user review rounds). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
 
 ---
 
@@ -115,6 +115,25 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 4. Screenshots per store/listing.md shot-list during testing.
 5. Apply for production access → submit → review (3-7d) → LIVE.
 6. Then: Amazon Appstore (Fire TV), then production-tv build for Android TV listing, then iOS (Apple $99/yr, EAS handles Mac-less builds).
+
+
+## 6c. MOBILE APP STATUS — 2026-08-29 SNAPSHOT (supersedes older notes below)
+
+**Play Console: VERIFIED & LIVE.** App created: name "Whisco TV: Free Live TV & VOD", package tv.whisco.app, free.
+Content rating: Teen-track answers submitted (profanity/violence "yes, not focus"; no UGC/gambling/explicit).
+**Advertising ID: declared NO** — and enforced in-manifest via android.blockedPermissions AD_ID (v1 has zero ad SDKs; flip BOTH together if ads SDK ever ships).
+**Current store bundle: versionCode 6** (build 047dde90) — includes all fixes below. User uploading to internal testing (was mid-flow with vc5 draft; instructed to swap to vc6). Next: publish internal → CLOSED testing track with 22 testers (starts mandatory 14-day clock) → production access.
+
+**App iterations from user device-testing rounds:**
+- v0.3: FIXED YouTube error 153 (embeds load via host page with whisco.tv baseUrl so YouTube sees valid origin); Whisco branding everywhere (WhiscoHeader with mascot+gradient wordmark on all tabs, About screen with clinic video + contacts, Sign-in screen vs NextAuth, zoom-banner video strip on Home, gradient CTAs).
+- v0.4: custom SVG tab icons TO USER SPEC (paw print=Home, clapperboard-with-bone-hinge=Live TV, play screen=On Demand, collar-tag-with-star=My List; sunset gradient active state); status-bar overlap FIXED (SafeAreaProvider + insets + translucent bar).
+- versionCode 5→6: AD_ID manifest block.
+
+**iOS: CODE-COMPLETE, config done** — bundle tv.whisco.app, ATS HTTPS-only (533/534 channels compliant), background audio + PiP, iPad support, premium 1024 icon, iOS Hermes bundle exports clean, full App Store listing kit in store/ios-listing.md (privacy label: no data collected; App Review notes re content sourcing). **Blocked ONLY on Apple Developer enrollment ($99/yr)** → then: eas credentials (interactive or via App Store Connect API key) → build → submit.
+
+**Repos: BOTH ON GITHUB** — whisco-mobile pushed and current (through iOS-readiness commit 30a13c7+). Workspace cleaned 106→82MB (media originals removed, git gc; everything on GitHub).
+
+**Continuity insurance:** user has set up a Claude.ai Project (knowledge = these 2 docs + Filmhub guide + store listings; custom instructions written). Docs there must be refreshed from GitHub after each milestone — that Claude's knowledge is a SNAPSHOT, staleness is the known failure mode (proven in first test: it reported Aug-24 state).
 
 ## 7. STANDING REMINDERS / OPEN ITEMS
 
