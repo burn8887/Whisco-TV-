@@ -38,15 +38,20 @@ export async function GET(req: Request) {
 
   // 3. Rotate trending: newest active titles from spotlight collections
   await prisma.title.updateMany({ where: { isTrending: true }, data: { isTrending: false } });
-  const spotlight = await prisma.title.findMany({
-    where: {
-      isActive: true,
-      collection: { in: ["Turkish Dizi", "Hindi Cinema", "Pakistani Dramas", "Arabic Series & Shows", "Filipino Shows", "Game Shows"] },
-    },
-    orderBy: { createdAt: "desc" },
-    take: 16,
-    select: { id: true },
-  });
+  // Diversity guarantee: round-robin newest titles ACROSS spotlight
+  // collections (raw newest-16 once produced an all-Arabic trending row).
+  const SPOTLIGHT = ["Turkish Dizi", "Hindi Cinema", "Pakistani Dramas", "Arabic Series & Shows", "Filipino Shows", "Game Shows", "Documentaries", "Malayalam Cinema"];
+  const perCollection = await Promise.all(
+    SPOTLIGHT.map((c) =>
+      prisma.title.findMany({
+        where: { isActive: true, collection: c },
+        orderBy: { createdAt: "desc" },
+        take: 2,
+        select: { id: true },
+      })
+    )
+  );
+  const spotlight = perCollection.flat().slice(0, 16);
   if (spotlight.length) {
     await prisma.title.updateMany({ where: { id: { in: spotlight.map((t) => t.id) } }, data: { isTrending: true } });
   }

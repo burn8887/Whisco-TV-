@@ -24,7 +24,7 @@ import { revalidatePath } from "next/cache";
 export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
-const BATCH_SIZE = 120; // titles per run (rotating, oldest-checked first)
+const BATCH_SIZE = 250; // titles per run (rotating, never-checked first; ~1250/day = full sweep ~12 days)
 const CONCURRENCY = 10; // gentle on archive.org (fewer parallel calls = fewer 429s)
 const FAIL_THRESHOLD = 2;
 const TIMEOUT_MS = 10000;
