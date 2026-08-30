@@ -202,9 +202,19 @@ export const getHomeStats = unstable_cache(
 
 export const getSitemapData = unstable_cache(
   async () => {
+    // Only pages with REAL editorial content go in the sitemap. Harvested
+    // titles with boilerplate synopses stay viewable but are noindexed —
+    // AdSense flagged "low value content" for exactly those thin pages.
     const [titles, channels] = await Promise.all([
       prisma.title.findMany({
-        where: { isActive: true },
+        where: {
+          isActive: true,
+          NOT: [
+            { synopsis: { contains: "official channel. Free and ad-supported" } },
+            { synopsis: { contains: "من القناة الرسمية" } },
+            { synopsis: { contains: "Official broadcaster upload" } },
+          ],
+        },
         select: { slug: true, createdAt: true, isTrending: true, language: true },
       }),
       prisma.channel.findMany({ where: { isActive: true }, select: { id: true } }),

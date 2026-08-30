@@ -32,6 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     `Stream ${title.name} free on Whisco TV.${epPart ? epPart + " available —" : ""} ` +
     `no subscription, no signup, 100% free and ad-supported. ${title.synopsis}`.slice(0, 300);
 
+  // Thin-content guard: harvested titles with boilerplate synopses are
+  // noindexed (viewers still get the page; Google doesn't count it).
+  const isThin =
+    title.synopsis.includes("official channel. Free and ad-supported") ||
+    title.synopsis.includes("من القناة الرسمية") ||
+    title.synopsis.includes("Official broadcaster upload");
+
   const url = `${SITE_URL}/title/${slug}`;
   return {
     title: pageTitle,
@@ -58,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       images: [title.backdropUrl || title.posterUrl],
     },
-    robots: { index: true, follow: true },
+    robots: { index: !isThin, follow: true },
   };
 }
 

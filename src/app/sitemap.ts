@@ -15,6 +15,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/live`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/vod`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/browse`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/guides/turkish-series-guide`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/guides/free-tv-for-expats-gulf`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/guides/pakistani-dramas-guide`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.5 },
   ];
 
   const titlePages: MetadataRoute.Sitemap = titles.map((t) => ({
