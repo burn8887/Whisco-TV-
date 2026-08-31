@@ -1,5 +1,5 @@
 # WHISCO TV — DISASTER RECOVERY & FULL-CONTINUITY DOCUMENT
-*Last updated: 2026-08-24-b (added Expo keystore + document access protocol). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
+*Last updated: 2026-08-31 (catalog snapshots refreshed: 601 channels, 16,533 flat titles, 394 series / 10,768 episodes). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
 *Purpose 1: rebuild Whisco TV to current state from ABSOLUTE ZERO — even if GitHub, Vercel, Spaceship, and Neon accounts are all lost/hijacked/deleted.*
 *Purpose 2: allow a brand-new AI conversation to continue as if this conversation never ended.*
 
@@ -43,7 +43,7 @@ Email forwards (Spaceship Email Forwarding): partnerships@, legal@, privacy@ →
 
 1. **The catalog (the crown-jewel data)** — 3 redundant copies:
    a. Neon DB (live).
-   b. **Git-committed JSON snapshots** in `prisma/backup_channels.json`, `prisma/backup_titles_flat.json`, `prisma/backup_series_full.json` (exported 2026-08-22: 518 channels, 16,521 flat titles, 389 series / 10,499 episodes) + restore tool `scripts/restore_from_backup.mjs`.
+   b. **Git-committed JSON snapshots** in `prisma/backup_channels.json`, `prisma/backup_titles_flat.json`, `prisma/backup_series_full.json` (exported 2026-08-31: 601 channels, 16,533 flat titles, 394 series / 10,768 episodes) + restore tool `scripts/restore_from_backup.mjs`.
    c. Original source-of-truth JSONs (`prisma/live_channels.json`, `vod_titles.json`, `vod_youtube.json`, `dizi_series.json`, `arabic_series.json`) + `prisma/seed.ts` (older state than b; use b first).
 2. **The code** — GitHub repo; ALSO fully present in agent workspace at `/home/user/iptv-app` (survives conversation loss; can re-push to any new repo).
 3. **Brand assets** — in repo `public/` (mascots, videos, share card, icons) AND workspace `/home/user/` (whisco-sticker.webp, whisco-videos/*.mp4, Filmhub guide, this doc, handover doc).

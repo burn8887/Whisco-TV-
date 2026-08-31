@@ -37,6 +37,9 @@ const SHOWS: { slug: string; channelId: string; pattern: RegExp }[] = [
   { slug: "kizilcik-serbeti", channelId: "UCRfLDCtkSwmTdwHrbmC78Xg", pattern: /^Kızılcık Şerbeti (\d+)\. Bölüm/ },
   { slug: "kurulus-osman", channelId: "UCGR1XmkoQedeJMT2ajRHvsw", pattern: /^Kuruluş Osman (\d+)\. Bölüm/ },
   { slug: "emanet-legacy", channelId: "UCgzdfH1fq76l0YAZnoko4DQ", pattern: /^Emanet (\d+)\. Bölüm/ },
+  // Season finales aired mid-2026; new-season episodes land here automatically.
+  { slug: "teskilat", channelId: "UCt8FO3MT1fWD-UI7hnutj8A", pattern: /^Teşkilat (\d+)\. Bölüm/ },
+  { slug: "cennetin-cocuklari", channelId: "UCUtWD0zOQwyaxvUxhNSR-ZQ", pattern: /^Cennetin Çocukları (\d+)\. Bölüm/ },
   // Ended/complete shows — kept so late uploads or re-added episodes still land.
   { slug: "esaret-redemption", channelId: "UCbw1MpgTP8MZiHlTq13QqOw", pattern: /^Esaret (\d+)\. Bölüm/ },
 ];

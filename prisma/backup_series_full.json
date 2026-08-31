@@ -790,7 +790,7 @@
   "language": "Turkish",
   "isFeatured": true,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -5657,8 +5657,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:41.114Z",
   "seasons": [
    {
@@ -10829,8 +10829,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:37.502Z",
   "seasons": [
    {
@@ -18452,8 +18452,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:38.405Z",
   "seasons": [
    {
@@ -18853,8 +18853,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:33.599Z",
   "seasons": [
    {
@@ -19067,8 +19067,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-30T06:05:47.568Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:31.756Z",
   "seasons": [
    {
@@ -25408,12 +25408,12 @@
   "language": "Arabic",
   "isFeatured": false,
   "isNew": false,
-  "isTrending": false,
+  "isTrending": true,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:43.823Z",
   "seasons": [
    {
@@ -26220,8 +26220,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:36.600Z",
   "seasons": [
    {
@@ -35436,8 +35436,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:28.999Z",
   "seasons": [
    {
@@ -37114,12 +37114,12 @@
   "language": "Arabic",
   "isFeatured": false,
   "isNew": false,
-  "isTrending": false,
+  "isTrending": true,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:42.920Z",
   "seasons": [
    {
@@ -40787,8 +40787,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:32.675Z",
   "seasons": [
    {
@@ -43874,8 +43874,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:39.308Z",
   "seasons": [
    {
@@ -54023,8 +54023,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-30T06:05:47.568Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:42.016Z",
   "seasons": [
    {
@@ -64897,8 +64897,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:29.917Z",
   "seasons": [
    {
@@ -65341,8 +65341,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:35.443Z",
   "seasons": [
    {
@@ -66556,8 +66556,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-24T08:27:18.376Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:40.211Z",
   "seasons": [
    {
@@ -76989,7 +76989,7 @@
   "language": "Turkish",
   "isFeatured": true,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -79412,6 +79412,113 @@
   ]
  },
  {
+  "id": "cmth5buwe0000f0rlyvuviwes",
+  "name": "Aynadaki Yabancı (Stranger in the Mirror)",
+  "slug": "aynadaki-yabanci",
+  "type": "SERIES",
+  "synopsis": "atv's gripping 2025 thriller. Azra seems to have it all as part of a wealthy family — but she is hiding dark secrets. After a failed escape with her daughter, she must take on a new identity and walk straight back into the family she fled. Onur Tuna and Simay Barlas lead a tense story of obsession, identity and survival. Complete series.",
+  "posterUrl": "https://i.ytimg.com/vi/Dq--7KpKfFM/hqdefault.jpg",
+  "backdropUrl": "https://i.ytimg.com/vi/Dq--7KpKfFM/maxresdefault.jpg",
+  "releaseYear": 2025,
+  "rating": "TV-14",
+  "imdbRating": 6.4,
+  "durationMins": null,
+  "genres": "Drama, Thriller",
+  "collection": "Turkish Dizi",
+  "cast": "Onur Tuna, Simay Barlas, Caner Topçu, Asuman Dabak",
+  "director": "Aynadaki Yabancı (atv official)",
+  "country": "Turkey",
+  "language": "Turkish",
+  "isFeatured": false,
+  "isNew": true,
+  "isTrending": true,
+  "streamUrl": null,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": null,
+  "lastStatus": null,
+  "createdAt": "2026-08-31T11:19:34.191Z",
+  "seasons": [
+   {
+    "id": "cmth5bv4t0002f0rloj7cyghk",
+    "titleId": "cmth5buwe0000f0rlyvuviwes",
+    "number": 1,
+    "episodes": [
+     {
+      "id": "cmth5bvcn0003f0rl8so5i6zj",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 1,
+      "name": "Episode 1",
+      "synopsis": "Aynadaki Yabancı — Bölüm 1. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/Dq--7KpKfFM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Dq--7KpKfFM"
+     },
+     {
+      "id": "cmth5bvcn0004f0rlrxilhw4r",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 2,
+      "name": "Episode 2",
+      "synopsis": "Aynadaki Yabancı — Bölüm 2. Official broadcaster upload.",
+      "durationMins": 135,
+      "stillUrl": "https://i.ytimg.com/vi/7yJnFwslH_M/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/7yJnFwslH_M"
+     },
+     {
+      "id": "cmth5bvcn0005f0rlse0jvh0r",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 3,
+      "name": "Episode 3",
+      "synopsis": "Aynadaki Yabancı — Bölüm 3. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/7R2hGa1Lvh4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/7R2hGa1Lvh4"
+     },
+     {
+      "id": "cmth5bvcn0006f0rloesx9mmi",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 4,
+      "name": "Episode 4",
+      "synopsis": "Aynadaki Yabancı — Bölüm 4. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/efQmaI6dqa4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/efQmaI6dqa4"
+     },
+     {
+      "id": "cmth5bvcn0007f0rl31zuywom",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 5,
+      "name": "Episode 5",
+      "synopsis": "Aynadaki Yabancı — Bölüm 5. Official broadcaster upload.",
+      "durationMins": 128,
+      "stillUrl": "https://i.ytimg.com/vi/ULZAfWUYQ9g/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ULZAfWUYQ9g"
+     },
+     {
+      "id": "cmth5bvcn0008f0rl51wryw4m",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 6,
+      "name": "Episode 6",
+      "synopsis": "Aynadaki Yabancı — Bölüm 6. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/jxu3l6Oiumk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/jxu3l6Oiumk"
+     },
+     {
+      "id": "cmth5bvcn0009f0rlm4to58vs",
+      "seasonId": "cmth5bv4t0002f0rloj7cyghk",
+      "number": 7,
+      "name": "Episode 7",
+      "synopsis": "Aynadaki Yabancı — Bölüm 7. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/Bjc4pJDiCUE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Bjc4pJDiCUE"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "id": "cmsvwnpqc00wv4q2r8uqc6kiz",
   "name": "Baba",
   "slug": "baba",
@@ -81191,6 +81298,303 @@
       "durationMins": 40,
       "stillUrl": "https://i.ytimg.com/vi/qFY8ikqv8E8/hqdefault.jpg",
       "streamUrl": "https://www.youtube.com/embed/qFY8ikqv8E8"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "cmth5bwn5000qf0rlznnkxpzq",
+  "name": "Ben Leman (I Am Leman)",
+  "slug": "ben-leman",
+  "type": "SERIES",
+  "synopsis": "NOW's 2025 drama of buried secrets. The lives of four women and one man — Leman, Şahika, Mine, Suzi and Demir — collide when sins buried years ago come to light, putting every friendship and love to the test. Burçin Terzioğlu leads a story of brave confrontations with the past. Complete series.",
+  "posterUrl": "https://i.ytimg.com/vi/e3_w-y2n0OU/hqdefault.jpg",
+  "backdropUrl": "https://i.ytimg.com/vi/e3_w-y2n0OU/maxresdefault.jpg",
+  "releaseYear": 2025,
+  "rating": "TV-14",
+  "imdbRating": 6.7,
+  "durationMins": null,
+  "genres": "Drama",
+  "collection": "Turkish Dizi",
+  "cast": "Burçin Terzioğlu, Özgür Çevik, Duygu Sarışın, Selin Şekerci",
+  "director": "Ben Leman (NOW official)",
+  "country": "Turkey",
+  "language": "Turkish",
+  "isFeatured": false,
+  "isNew": true,
+  "isTrending": false,
+  "streamUrl": null,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": null,
+  "lastStatus": null,
+  "createdAt": "2026-08-31T11:19:36.449Z",
+  "seasons": [
+   {
+    "id": "cmth5bwr1000sf0rlpokqnilw",
+    "titleId": "cmth5bwn5000qf0rlznnkxpzq",
+    "number": 1,
+    "episodes": [
+     {
+      "id": "cmth5bwux000tf0rlmgq5mas9",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 1,
+      "name": "Episode 1",
+      "synopsis": "Ben Leman — Bölüm 1. Official broadcaster upload.",
+      "durationMins": 63,
+      "stillUrl": "https://i.ytimg.com/vi/e3_w-y2n0OU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/e3_w-y2n0OU"
+     },
+     {
+      "id": "cmth5bwux000uf0rlsm834lea",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 2,
+      "name": "Episode 2",
+      "synopsis": "Ben Leman — Bölüm 2. Official broadcaster upload.",
+      "durationMins": 68,
+      "stillUrl": "https://i.ytimg.com/vi/5qaPQcfYe8E/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5qaPQcfYe8E"
+     },
+     {
+      "id": "cmth5bwux000vf0rls9bagec5",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 3,
+      "name": "Episode 3",
+      "synopsis": "Ben Leman — Bölüm 3. Official broadcaster upload.",
+      "durationMins": 58,
+      "stillUrl": "https://i.ytimg.com/vi/XxjhP2vgBv0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/XxjhP2vgBv0"
+     },
+     {
+      "id": "cmth5bwux000wf0rl9sihp0gb",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 4,
+      "name": "Episode 4",
+      "synopsis": "Ben Leman — Bölüm 4. Official broadcaster upload.",
+      "durationMins": 59,
+      "stillUrl": "https://i.ytimg.com/vi/AN8Gmd18sr0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/AN8Gmd18sr0"
+     },
+     {
+      "id": "cmth5bwux000xf0rlxb7v42ta",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 5,
+      "name": "Episode 5",
+      "synopsis": "Ben Leman — Bölüm 5. Official broadcaster upload.",
+      "durationMins": 57,
+      "stillUrl": "https://i.ytimg.com/vi/3w_OJEMvEb8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/3w_OJEMvEb8"
+     },
+     {
+      "id": "cmth5bwux000yf0rl68rbeh2t",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 6,
+      "name": "Episode 6",
+      "synopsis": "Ben Leman — Bölüm 6. Official broadcaster upload.",
+      "durationMins": 60,
+      "stillUrl": "https://i.ytimg.com/vi/WJW7igRUQwo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/WJW7igRUQwo"
+     },
+     {
+      "id": "cmth5bwux000zf0rlbu5xo4cl",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 7,
+      "name": "Episode 7",
+      "synopsis": "Ben Leman — Bölüm 7. Official broadcaster upload.",
+      "durationMins": 65,
+      "stillUrl": "https://i.ytimg.com/vi/sDn2hR-jJ5M/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/sDn2hR-jJ5M"
+     },
+     {
+      "id": "cmth5bwux0010f0rl456eni94",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 8,
+      "name": "Episode 8",
+      "synopsis": "Ben Leman — Bölüm 8. Official broadcaster upload.",
+      "durationMins": 66,
+      "stillUrl": "https://i.ytimg.com/vi/5izYZcfAk4s/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5izYZcfAk4s"
+     },
+     {
+      "id": "cmth5bwux0011f0rlodbt7ava",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 9,
+      "name": "Episode 9",
+      "synopsis": "Ben Leman — Bölüm 9. Official broadcaster upload.",
+      "durationMins": 63,
+      "stillUrl": "https://i.ytimg.com/vi/V68BM43ePWo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/V68BM43ePWo"
+     },
+     {
+      "id": "cmth5bwux0012f0rlmu3qsg9q",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 10,
+      "name": "Episode 10",
+      "synopsis": "Ben Leman — Bölüm 10. Official broadcaster upload.",
+      "durationMins": 63,
+      "stillUrl": "https://i.ytimg.com/vi/ywnIrm1XDfY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ywnIrm1XDfY"
+     },
+     {
+      "id": "cmth5bwux0013f0rlmyjgwuny",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 11,
+      "name": "Episode 11",
+      "synopsis": "Ben Leman — Bölüm 11. Official broadcaster upload.",
+      "durationMins": 72,
+      "stillUrl": "https://i.ytimg.com/vi/HMWMSjZpG0U/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/HMWMSjZpG0U"
+     },
+     {
+      "id": "cmth5bwux0014f0rlaki0koz0",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 12,
+      "name": "Episode 12",
+      "synopsis": "Ben Leman — Bölüm 12. Official broadcaster upload.",
+      "durationMins": 63,
+      "stillUrl": "https://i.ytimg.com/vi/VUInhgYPx0U/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/VUInhgYPx0U"
+     },
+     {
+      "id": "cmth5bwuy0015f0rl47dwxcdb",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 13,
+      "name": "Episode 13",
+      "synopsis": "Ben Leman — Bölüm 13. Official broadcaster upload.",
+      "durationMins": 66,
+      "stillUrl": "https://i.ytimg.com/vi/_RrOrNjiDOs/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/_RrOrNjiDOs"
+     },
+     {
+      "id": "cmth5bwuy0016f0rl64qelcma",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 14,
+      "name": "Episode 14",
+      "synopsis": "Ben Leman — Bölüm 14. Official broadcaster upload.",
+      "durationMins": 68,
+      "stillUrl": "https://i.ytimg.com/vi/kRsflIXSwDY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/kRsflIXSwDY"
+     },
+     {
+      "id": "cmth5bwuy0017f0rly845o2pg",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 15,
+      "name": "Episode 15",
+      "synopsis": "Ben Leman — Bölüm 15. Official broadcaster upload.",
+      "durationMins": 70,
+      "stillUrl": "https://i.ytimg.com/vi/qE5tOXJX4ek/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/qE5tOXJX4ek"
+     },
+     {
+      "id": "cmth5bwuy0018f0rl5mjh5fig",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 16,
+      "name": "Episode 16",
+      "synopsis": "Ben Leman — Bölüm 16. Official broadcaster upload.",
+      "durationMins": 65,
+      "stillUrl": "https://i.ytimg.com/vi/XvSEfYjzcFo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/XvSEfYjzcFo"
+     },
+     {
+      "id": "cmth5bwuy0019f0rlr9evxziz",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 17,
+      "name": "Episode 17",
+      "synopsis": "Ben Leman — Bölüm 17. Official broadcaster upload.",
+      "durationMins": 66,
+      "stillUrl": "https://i.ytimg.com/vi/GGvpAntsZFg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/GGvpAntsZFg"
+     },
+     {
+      "id": "cmth5bwuy001af0rlwbxgfzq8",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 18,
+      "name": "Episode 18",
+      "synopsis": "Ben Leman — Bölüm 18. Official broadcaster upload.",
+      "durationMins": 73,
+      "stillUrl": "https://i.ytimg.com/vi/uptm3qtOWjY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/uptm3qtOWjY"
+     },
+     {
+      "id": "cmth5bwuy001bf0rlaalv3jkg",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 19,
+      "name": "Episode 19",
+      "synopsis": "Ben Leman — Bölüm 19. Official broadcaster upload.",
+      "durationMins": 70,
+      "stillUrl": "https://i.ytimg.com/vi/7blfsBRphsU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/7blfsBRphsU"
+     },
+     {
+      "id": "cmth5bwuy001cf0rl9xlskdo5",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 20,
+      "name": "Episode 20",
+      "synopsis": "Ben Leman — Bölüm 20. Official broadcaster upload.",
+      "durationMins": 63,
+      "stillUrl": "https://i.ytimg.com/vi/1CGt4IR9N0Q/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/1CGt4IR9N0Q"
+     },
+     {
+      "id": "cmth5bwuy001df0rlw6bpc8rn",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 21,
+      "name": "Episode 21",
+      "synopsis": "Ben Leman — Bölüm 21. Official broadcaster upload.",
+      "durationMins": 64,
+      "stillUrl": "https://i.ytimg.com/vi/r4ngQ7BnQxw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/r4ngQ7BnQxw"
+     },
+     {
+      "id": "cmth5bwuy001ef0rl473a1nok",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 22,
+      "name": "Episode 22",
+      "synopsis": "Ben Leman — Bölüm 22. Official broadcaster upload.",
+      "durationMins": 66,
+      "stillUrl": "https://i.ytimg.com/vi/ngl4d6wcThE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ngl4d6wcThE"
+     },
+     {
+      "id": "cmth5bwuy001ff0rlmaua6vta",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 23,
+      "name": "Episode 23",
+      "synopsis": "Ben Leman — Bölüm 23. Official broadcaster upload.",
+      "durationMins": 66,
+      "stillUrl": "https://i.ytimg.com/vi/oRrM_Kob0TU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/oRrM_Kob0TU"
+     },
+     {
+      "id": "cmth5bwuy001gf0rlnqp8d4ig",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 24,
+      "name": "Episode 24",
+      "synopsis": "Ben Leman — Bölüm 24. Official broadcaster upload.",
+      "durationMins": 60,
+      "stillUrl": "https://i.ytimg.com/vi/3OBKbLQVMfE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/3OBKbLQVMfE"
+     },
+     {
+      "id": "cmth5bwuy001hf0rlkhsxe2e9",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 25,
+      "name": "Episode 25",
+      "synopsis": "Ben Leman — Bölüm 25. Official broadcaster upload.",
+      "durationMins": 78,
+      "stillUrl": "https://i.ytimg.com/vi/yMW84zlb3NY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/yMW84zlb3NY"
+     },
+     {
+      "id": "cmth5bwuy001if0rlzn4281wl",
+      "seasonId": "cmth5bwr1000sf0rlpokqnilw",
+      "number": 26,
+      "name": "Episode 26",
+      "synopsis": "Ben Leman — Bölüm 26. Official broadcaster upload.",
+      "durationMins": 63,
+      "stillUrl": "https://i.ytimg.com/vi/IVu3G5DbzjA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/IVu3G5DbzjA"
      }
     ]
    }
@@ -83032,6 +83436,470 @@
   ]
  },
  {
+  "id": "cmth5bvw3000af0rlblikn9m1",
+  "name": "Çarpıntı (Heartbeat)",
+  "slug": "carpinti",
+  "type": "SERIES",
+  "synopsis": "Star TV's 2025 romantic mystery starring Kerem Bürsin. After Aslı receives the heart of Melike Alkan in a transplant, she is drawn into the grieving Alkan family's world of wealth, power and forbidden love — while one question haunts everyone: was Melike's death an accident, or murder? Complete series.",
+  "posterUrl": "https://i.ytimg.com/vi/r2mmo8XfmH4/hqdefault.jpg",
+  "backdropUrl": "https://i.ytimg.com/vi/r2mmo8XfmH4/maxresdefault.jpg",
+  "releaseYear": 2025,
+  "rating": "TV-14",
+  "imdbRating": 5.7,
+  "durationMins": null,
+  "genres": "Drama, Mystery, Romance",
+  "collection": "Turkish Dizi",
+  "cast": "Kerem Bürsin, Lizge Cömert, Deniz Çakır, Sibel Taşçıoğlu",
+  "director": "Çarpıntı (Star TV official)",
+  "country": "Turkey",
+  "language": "Turkish",
+  "isFeatured": false,
+  "isNew": true,
+  "isTrending": true,
+  "streamUrl": null,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": null,
+  "lastStatus": null,
+  "createdAt": "2026-08-31T11:19:35.476Z",
+  "seasons": [
+   {
+    "id": "cmth5bvzz000cf0rlq46iao7w",
+    "titleId": "cmth5bvw3000af0rlblikn9m1",
+    "number": 1,
+    "episodes": [
+     {
+      "id": "cmth5bw3v000df0rl1cd21g8u",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 1,
+      "name": "Episode 1",
+      "synopsis": "Çarpıntı — Bölüm 1. Official broadcaster upload.",
+      "durationMins": 64,
+      "stillUrl": "https://i.ytimg.com/vi/r2mmo8XfmH4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/r2mmo8XfmH4"
+     },
+     {
+      "id": "cmth5bw3v000ef0rlhnia0v7q",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 2,
+      "name": "Episode 2",
+      "synopsis": "Çarpıntı — Bölüm 2. Official broadcaster upload.",
+      "durationMins": 61,
+      "stillUrl": "https://i.ytimg.com/vi/24KPDFDumF4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/24KPDFDumF4"
+     },
+     {
+      "id": "cmth5bw3v000ff0rlyc7lqgh1",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 3,
+      "name": "Episode 3",
+      "synopsis": "Çarpıntı — Bölüm 3. Official broadcaster upload.",
+      "durationMins": 54,
+      "stillUrl": "https://i.ytimg.com/vi/6yVzjmrjz4s/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/6yVzjmrjz4s"
+     },
+     {
+      "id": "cmth5bw3v000gf0rlc5qc6prz",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 4,
+      "name": "Episode 4",
+      "synopsis": "Çarpıntı — Bölüm 4. Official broadcaster upload.",
+      "durationMins": 117,
+      "stillUrl": "https://i.ytimg.com/vi/s2I5OfgCkB4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/s2I5OfgCkB4"
+     },
+     {
+      "id": "cmth5bw3v000hf0rlk2ta6x2l",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 5,
+      "name": "Episode 5",
+      "synopsis": "Çarpıntı — Bölüm 5. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/effwtLBUH4I/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/effwtLBUH4I"
+     },
+     {
+      "id": "cmth5bw3v000if0rlxgaiw0xe",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 6,
+      "name": "Episode 6",
+      "synopsis": "Çarpıntı — Bölüm 6. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/e3ZdDVXsO1k/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/e3ZdDVXsO1k"
+     },
+     {
+      "id": "cmth5bw3v000jf0rlcrro0235",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 7,
+      "name": "Episode 7",
+      "synopsis": "Çarpıntı — Bölüm 7. Official broadcaster upload.",
+      "durationMins": 155,
+      "stillUrl": "https://i.ytimg.com/vi/sLmyN1jWrdc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/sLmyN1jWrdc"
+     },
+     {
+      "id": "cmth5bw3v000kf0rl6rdpxzrz",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 8,
+      "name": "Episode 8",
+      "synopsis": "Çarpıntı — Bölüm 8. Official broadcaster upload.",
+      "durationMins": 156,
+      "stillUrl": "https://i.ytimg.com/vi/Wyz_hREUn_s/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Wyz_hREUn_s"
+     },
+     {
+      "id": "cmth5bw3v000lf0rlevyo4ree",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 9,
+      "name": "Episode 9",
+      "synopsis": "Çarpıntı — Bölüm 9. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/EPEm0bZ1vlY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/EPEm0bZ1vlY"
+     },
+     {
+      "id": "cmth5bw3v000mf0rlbr0t20ig",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 10,
+      "name": "Episode 10",
+      "synopsis": "Çarpıntı — Bölüm 10. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/_fIDkLMB2BU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/_fIDkLMB2BU"
+     },
+     {
+      "id": "cmth5bw3v000nf0rlhlprbqcc",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 11,
+      "name": "Episode 11",
+      "synopsis": "Çarpıntı — Bölüm 11. Official broadcaster upload.",
+      "durationMins": 117,
+      "stillUrl": "https://i.ytimg.com/vi/LlSGcrjZPDs/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/LlSGcrjZPDs"
+     },
+     {
+      "id": "cmth5bw3v000of0rl3za5zuve",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 12,
+      "name": "Episode 12",
+      "synopsis": "Çarpıntı — Bölüm 12. Official broadcaster upload.",
+      "durationMins": 129,
+      "stillUrl": "https://i.ytimg.com/vi/Dtg59qRJ2iA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Dtg59qRJ2iA"
+     },
+     {
+      "id": "cmth5bw3v000pf0rldunsx8rf",
+      "seasonId": "cmth5bvzz000cf0rlq46iao7w",
+      "number": 13,
+      "name": "Episode 13",
+      "synopsis": "Çarpıntı — Bölüm 13. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/iYxqsBYhW7w/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/iYxqsBYhW7w"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "cmth5bxe6001jf0rl40uv3ny0",
+  "name": "Cennetin Çocukları (Children of Paradise)",
+  "slug": "cennetin-cocuklari",
+  "type": "SERIES",
+  "synopsis": "TRT 1's warm-hearted 2025 dramedy. Fleeing a troubled past, İskender seeks a fresh start in the idyllic town of Arafköy, where he crosses paths with Cennet Ana — a mother who has never stopped searching for her missing son. A feel-good story about second chances, found family and small-town life.",
+  "posterUrl": "https://i.ytimg.com/vi/_AI_o0zDnEk/hqdefault.jpg",
+  "backdropUrl": "https://i.ytimg.com/vi/_AI_o0zDnEk/maxresdefault.jpg",
+  "releaseYear": 2025,
+  "rating": "TV-14",
+  "imdbRating": 7,
+  "durationMins": null,
+  "genres": "Comedy, Drama, Family",
+  "collection": "Turkish Dizi",
+  "cast": "İsmail Hacıoğlu, Özgü Kaya, Yurdaer Okur, Melisa Şenolsun",
+  "director": "Cennetin Çocukları (TRT official)",
+  "country": "Turkey",
+  "language": "Turkish",
+  "isFeatured": false,
+  "isNew": true,
+  "isTrending": false,
+  "streamUrl": null,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": null,
+  "lastStatus": null,
+  "createdAt": "2026-08-31T11:19:37.422Z",
+  "seasons": [
+   {
+    "id": "cmth5bxi1001lf0rlwvua32fp",
+    "titleId": "cmth5bxe6001jf0rl40uv3ny0",
+    "number": 1,
+    "episodes": [
+     {
+      "id": "cmth5bxlx001mf0rlid5yfd3n",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 1,
+      "name": "Episode 1",
+      "synopsis": "Cennetin Çocukları — Bölüm 1. Official broadcaster upload.",
+      "durationMins": 147,
+      "stillUrl": "https://i.ytimg.com/vi/_AI_o0zDnEk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/_AI_o0zDnEk"
+     },
+     {
+      "id": "cmth5bxlx001nf0rli31bt8ef",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 2,
+      "name": "Episode 2",
+      "synopsis": "Cennetin Çocukları — Bölüm 2. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/w-f-IY6hPdY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/w-f-IY6hPdY"
+     },
+     {
+      "id": "cmth5bxlx001of0rlzy93viom",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 3,
+      "name": "Episode 3",
+      "synopsis": "Cennetin Çocukları — Bölüm 3. Official broadcaster upload.",
+      "durationMins": 143,
+      "stillUrl": "https://i.ytimg.com/vi/v1DpSjPBgmY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/v1DpSjPBgmY"
+     },
+     {
+      "id": "cmth5bxlx001pf0rlzqosy2hg",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 4,
+      "name": "Episode 4",
+      "synopsis": "Cennetin Çocukları — Bölüm 4. Official broadcaster upload.",
+      "durationMins": 155,
+      "stillUrl": "https://i.ytimg.com/vi/GDoTL_oKC-U/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/GDoTL_oKC-U"
+     },
+     {
+      "id": "cmth5bxlx001qf0rlzp2676my",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 5,
+      "name": "Episode 5",
+      "synopsis": "Cennetin Çocukları — Bölüm 5. Official broadcaster upload.",
+      "durationMins": 153,
+      "stillUrl": "https://i.ytimg.com/vi/h14C1mfI2F4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/h14C1mfI2F4"
+     },
+     {
+      "id": "cmth5bxlx001rf0rlz2ngctt2",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 6,
+      "name": "Episode 6",
+      "synopsis": "Cennetin Çocukları — Bölüm 6. Official broadcaster upload.",
+      "durationMins": 156,
+      "stillUrl": "https://i.ytimg.com/vi/W5TYblqvf5w/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/W5TYblqvf5w"
+     },
+     {
+      "id": "cmth5bxlx001sf0rlc36acie0",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 17,
+      "name": "Episode 17",
+      "synopsis": "Cennetin Çocukları — Bölüm 17. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/Zj6XLoJAnGE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Zj6XLoJAnGE"
+     },
+     {
+      "id": "cmth5bxlx001tf0rly9yoazoo",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 18,
+      "name": "Episode 18",
+      "synopsis": "Cennetin Çocukları — Bölüm 18. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/jbx_B9plnMw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/jbx_B9plnMw"
+     },
+     {
+      "id": "cmth5bxlx001uf0rl97oefrtr",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 19,
+      "name": "Episode 19",
+      "synopsis": "Cennetin Çocukları — Bölüm 19. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/YDEIowUCzX8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/YDEIowUCzX8"
+     },
+     {
+      "id": "cmth5bxlx001vf0rlkyej5eys",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 20,
+      "name": "Episode 20",
+      "synopsis": "Cennetin Çocukları — Bölüm 20. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/dZ9t83g1L1I/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/dZ9t83g1L1I"
+     },
+     {
+      "id": "cmth5bxlx001wf0rl30rrpp7t",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 21,
+      "name": "Episode 21",
+      "synopsis": "Cennetin Çocukları — Bölüm 21. Official broadcaster upload.",
+      "durationMins": 147,
+      "stillUrl": "https://i.ytimg.com/vi/oq4Exv9PaeY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/oq4Exv9PaeY"
+     },
+     {
+      "id": "cmth5bxlx001xf0rl4b75ua9s",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 22,
+      "name": "Episode 22",
+      "synopsis": "Cennetin Çocukları — Bölüm 22. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/dfYwr-i4FtI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/dfYwr-i4FtI"
+     },
+     {
+      "id": "cmth5bxlx001yf0rloptyl94n",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 23,
+      "name": "Episode 23",
+      "synopsis": "Cennetin Çocukları — Bölüm 23. Official broadcaster upload.",
+      "durationMins": 114,
+      "stillUrl": "https://i.ytimg.com/vi/pWbuCpOS4Q8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/pWbuCpOS4Q8"
+     },
+     {
+      "id": "cmth5bxlx001zf0rl10hgmffb",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 24,
+      "name": "Episode 24",
+      "synopsis": "Cennetin Çocukları — Bölüm 24. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/rJqIE7GuF7U/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/rJqIE7GuF7U"
+     },
+     {
+      "id": "cmth5bxlx0020f0rlfwhsewys",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 25,
+      "name": "Episode 25",
+      "synopsis": "Cennetin Çocukları — Bölüm 25. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/MAaIRoVNeeE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/MAaIRoVNeeE"
+     },
+     {
+      "id": "cmth5bxlx0021f0rl66agzlfp",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 26,
+      "name": "Episode 26",
+      "synopsis": "Cennetin Çocukları — Bölüm 26. Official broadcaster upload.",
+      "durationMins": 146,
+      "stillUrl": "https://i.ytimg.com/vi/MxaEXVrOIhA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/MxaEXVrOIhA"
+     },
+     {
+      "id": "cmth5bxlx0022f0rllsuzrdzb",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 27,
+      "name": "Episode 27",
+      "synopsis": "Cennetin Çocukları — Bölüm 27. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/Ti3uKH4ncoo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Ti3uKH4ncoo"
+     },
+     {
+      "id": "cmth5bxlx0023f0rlwwp6jtgt",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 28,
+      "name": "Episode 28",
+      "synopsis": "Cennetin Çocukları — Bölüm 28. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/6YPpuEhhNXw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/6YPpuEhhNXw"
+     },
+     {
+      "id": "cmth5bxlx0024f0rlp4p826iu",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 29,
+      "name": "Episode 29",
+      "synopsis": "Cennetin Çocukları — Bölüm 29. Official broadcaster upload.",
+      "durationMins": 135,
+      "stillUrl": "https://i.ytimg.com/vi/d1USbwMdI5k/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/d1USbwMdI5k"
+     },
+     {
+      "id": "cmth5bxlx0025f0rl8cxdogwp",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 30,
+      "name": "Episode 30",
+      "synopsis": "Cennetin Çocukları — Bölüm 30. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/2dWVOEIDxWY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/2dWVOEIDxWY"
+     },
+     {
+      "id": "cmth5bxlx0026f0rlndq3t3fy",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 31,
+      "name": "Episode 31",
+      "synopsis": "Cennetin Çocukları — Bölüm 31. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/dB-vdNdXa-E/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/dB-vdNdXa-E"
+     },
+     {
+      "id": "cmth5bxlx0027f0rlzqse4qpk",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 32,
+      "name": "Episode 32",
+      "synopsis": "Cennetin Çocukları — Bölüm 32. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/zyCKCQBN82g/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/zyCKCQBN82g"
+     },
+     {
+      "id": "cmth5bxlx0028f0rl1fy2gudh",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 33,
+      "name": "Episode 33",
+      "synopsis": "Cennetin Çocukları — Bölüm 33. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/y3QUEEdSju8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/y3QUEEdSju8"
+     },
+     {
+      "id": "cmth5bxlx0029f0rlhnblvya1",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 34,
+      "name": "Episode 34",
+      "synopsis": "Cennetin Çocukları — Bölüm 34. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/1TPcVv7Xcbk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/1TPcVv7Xcbk"
+     },
+     {
+      "id": "cmth5bxlx002af0rldss29l6i",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 35,
+      "name": "Episode 35",
+      "synopsis": "Cennetin Çocukları — Bölüm 35. Official broadcaster upload.",
+      "durationMins": 135,
+      "stillUrl": "https://i.ytimg.com/vi/YCaYrX-itfU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/YCaYrX-itfU"
+     },
+     {
+      "id": "cmth5bxlx002bf0rls7omb0hr",
+      "seasonId": "cmth5bxi1001lf0rlwvua32fp",
+      "number": 36,
+      "name": "Episode 36",
+      "synopsis": "Cennetin Çocukları — Bölüm 36. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/ACoHNsoB9Bc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ACoHNsoB9Bc"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "id": "cmsvwn948000d4q2rey3vmd5z",
   "name": "Cesur ve Güzel",
   "slug": "cesur-ve-guzel",
@@ -83408,12 +84276,12 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": false,
-  "isTrending": false,
+  "isTrending": true,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-30T09:02:23.882Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:34:03.137Z",
   "seasons": [
    {
@@ -83875,7 +84743,7 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -88530,8 +89398,8 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
-  "isTrending": true,
+  "isNew": false,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -94002,8 +94870,8 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
-  "isTrending": true,
+  "isNew": false,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -101130,12 +101998,12 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": false,
-  "isTrending": false,
+  "isTrending": true,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-30T09:02:23.882Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:34:02.100Z",
   "seasons": [
    {
@@ -101811,7 +102679,7 @@
   "language": "Turkish",
   "isFeatured": true,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -102368,7 +103236,7 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -103993,7 +104861,7 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -106661,7 +107529,7 @@
   "language": "Turkish",
   "isFeatured": true,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -108032,6 +108900,146 @@
       "streamUrl": "https://www.youtube.com/embed/Tj8tTL1Km4E"
      },
      {
+      "id": "cmt6y85qh0001azn1ta54mt7h",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 89,
+      "name": "Episode 89",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 89. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/jw_HFsjyAck/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/jw_HFsjyAck"
+     },
+     {
+      "id": "cmt6y86am0003azn1wyhxyjsa",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 90,
+      "name": "Episode 90",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 90. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/0HNaKn08Dgk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/0HNaKn08Dgk"
+     },
+     {
+      "id": "cmtdghigw000r5od7zcmc0gcg",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 91,
+      "name": "Episode 91",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 91. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/J4dqNsvUvR4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/J4dqNsvUvR4"
+     },
+     {
+      "id": "cmtdghiwf000t5od7mv3d8z5q",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 92,
+      "name": "Episode 92",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 92. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/BpMbOmXrNZ4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/BpMbOmXrNZ4"
+     },
+     {
+      "id": "cmtdghj5s000v5od7ew5vbg5r",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 93,
+      "name": "Episode 93",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 93. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/xEvWOno4pHE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/xEvWOno4pHE"
+     },
+     {
+      "id": "cmtdghjlv000x5od7gplkw9mm",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 94,
+      "name": "Episode 94",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 94. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/a9WD_6RRe1A/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/a9WD_6RRe1A"
+     },
+     {
+      "id": "cmtdghjzo000z5od7f8bpwuzf",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 95,
+      "name": "Episode 95",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 95. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/Hn75Z7BiwAo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Hn75Z7BiwAo"
+     },
+     {
+      "id": "cmtdghkg500115od7r2trqnfj",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 96,
+      "name": "Episode 96",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 96. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/B1Q579tf5vc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/B1Q579tf5vc"
+     },
+     {
+      "id": "cmtdghkp000135od71y3s0off",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 97,
+      "name": "Episode 97",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 97. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/5Wtm47EObp0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5Wtm47EObp0"
+     },
+     {
+      "id": "cmtdghl4600155od77viplsrz",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 98,
+      "name": "Episode 98",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 98. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/5XVIW-4XZoY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5XVIW-4XZoY"
+     },
+     {
+      "id": "cmtdghljx00175od7ddqzhtxl",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 99,
+      "name": "Episode 99",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 99. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/8FMJP4JGKOc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/8FMJP4JGKOc"
+     },
+     {
+      "id": "cmtdghlzs00195od7m0lepbr6",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 100,
+      "name": "Episode 100",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 100. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/cqU8TaCDOY4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/cqU8TaCDOY4"
+     },
+     {
+      "id": "cmtfce8v2000121t80r3o5upp",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 101,
+      "name": "Episode 101",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 101. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/vtV0TmROsic/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/vtV0TmROsic"
+     },
+     {
+      "id": "cmtfce9jq000321t8cn15jgdv",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 102,
+      "name": "Episode 102",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 102. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/fmySsMvLC_8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/fmySsMvLC_8"
+     },
+     {
       "id": "cmsvgooa700295otq654u2u7h",
       "seasonId": "cmsvgoo2l00025otq2a3nybxj",
       "number": 104,
@@ -108788,8 +109796,8 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
-  "isTrending": true,
+  "isNew": false,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -115376,6 +116384,1880 @@
   ]
  },
  {
+  "id": "cmth5by55002cf0rlbbtgsdtv",
+  "name": "Teşkilat (The Shadow Team)",
+  "slug": "teskilat",
+  "type": "SERIES",
+  "synopsis": "TRT 1's blockbuster spy saga, now past 180 episodes. An elite team of Turkish intelligence operatives gives up their own identities to run covert operations against threats to the nation — living unseen among the crowds. High-stakes action, tradecraft and sacrifice across six seasons and counting.",
+  "posterUrl": "https://i.ytimg.com/vi/783_OJX_1fA/hqdefault.jpg",
+  "backdropUrl": "https://i.ytimg.com/vi/783_OJX_1fA/maxresdefault.jpg",
+  "releaseYear": 2021,
+  "rating": "TV-14",
+  "imdbRating": 6.1,
+  "durationMins": null,
+  "genres": "Action, Drama, Thriller",
+  "collection": "Turkish Dizi",
+  "cast": "Murat Yıldırım, Deniz Baysal, Çağlar Ertuğrul, Gizem Karaca",
+  "director": "Teşkilat (TRT official)",
+  "country": "Turkey",
+  "language": "Turkish",
+  "isFeatured": false,
+  "isNew": true,
+  "isTrending": false,
+  "streamUrl": null,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": null,
+  "lastStatus": null,
+  "createdAt": "2026-08-31T11:19:38.394Z",
+  "seasons": [
+   {
+    "id": "cmth5by92002ef0rlp3mtrzwd",
+    "titleId": "cmth5by55002cf0rlbbtgsdtv",
+    "number": 1,
+    "episodes": [
+     {
+      "id": "cmth5byd1002ff0rle9v95og0",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 1,
+      "name": "Episode 1",
+      "synopsis": "Teşkilat — Bölüm 1. Official broadcaster upload.",
+      "durationMins": 125,
+      "stillUrl": "https://i.ytimg.com/vi/783_OJX_1fA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/783_OJX_1fA"
+     },
+     {
+      "id": "cmth5byd1002gf0rlpe22g7r1",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 2,
+      "name": "Episode 2",
+      "synopsis": "Teşkilat — Bölüm 2. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/Q5CUmF_-_ik/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Q5CUmF_-_ik"
+     },
+     {
+      "id": "cmth5byd1002hf0rlf7ubm0h4",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 3,
+      "name": "Episode 3",
+      "synopsis": "Teşkilat — Bölüm 3. Official broadcaster upload.",
+      "durationMins": 127,
+      "stillUrl": "https://i.ytimg.com/vi/EDlVagqTyPg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/EDlVagqTyPg"
+     },
+     {
+      "id": "cmth5byd1002if0rlcvkaspuj",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 4,
+      "name": "Episode 4",
+      "synopsis": "Teşkilat — Bölüm 4. Official broadcaster upload.",
+      "durationMins": 128,
+      "stillUrl": "https://i.ytimg.com/vi/iUm3O4pWCuI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/iUm3O4pWCuI"
+     },
+     {
+      "id": "cmth5byd1002jf0rl0i34lkul",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 5,
+      "name": "Episode 5",
+      "synopsis": "Teşkilat — Bölüm 5. Official broadcaster upload.",
+      "durationMins": 121,
+      "stillUrl": "https://i.ytimg.com/vi/pKci6DAdcr4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/pKci6DAdcr4"
+     },
+     {
+      "id": "cmth5byd1002kf0rlglutq8dg",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 6,
+      "name": "Episode 6",
+      "synopsis": "Teşkilat — Bölüm 6. Official broadcaster upload.",
+      "durationMins": 128,
+      "stillUrl": "https://i.ytimg.com/vi/8XoiCcKZUm8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/8XoiCcKZUm8"
+     },
+     {
+      "id": "cmth5byd1002lf0rlad1zvnbk",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 7,
+      "name": "Episode 7",
+      "synopsis": "Teşkilat — Bölüm 7. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/92UsM2MfwVc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/92UsM2MfwVc"
+     },
+     {
+      "id": "cmth5byd1002mf0rlb6icoc95",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 8,
+      "name": "Episode 8",
+      "synopsis": "Teşkilat — Bölüm 8. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/Ty3NlxNk6kg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Ty3NlxNk6kg"
+     },
+     {
+      "id": "cmth5byd1002nf0rlhugh4wkd",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 9,
+      "name": "Episode 9",
+      "synopsis": "Teşkilat — Bölüm 9. Official broadcaster upload.",
+      "durationMins": 121,
+      "stillUrl": "https://i.ytimg.com/vi/4gdY4fdPPNo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/4gdY4fdPPNo"
+     },
+     {
+      "id": "cmth5byd1002of0rlb2jyp25z",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 10,
+      "name": "Episode 10",
+      "synopsis": "Teşkilat — Bölüm 10. Official broadcaster upload.",
+      "durationMins": 129,
+      "stillUrl": "https://i.ytimg.com/vi/gRhFgGcE90M/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/gRhFgGcE90M"
+     },
+     {
+      "id": "cmth5byd1002pf0rlcklio590",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 11,
+      "name": "Episode 11",
+      "synopsis": "Teşkilat — Bölüm 11. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/ByD4RkEav0s/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ByD4RkEav0s"
+     },
+     {
+      "id": "cmth5byd1002qf0rla84xu6gm",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 12,
+      "name": "Episode 12",
+      "synopsis": "Teşkilat — Bölüm 12. Official broadcaster upload.",
+      "durationMins": 121,
+      "stillUrl": "https://i.ytimg.com/vi/R-zwHqwCcA4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/R-zwHqwCcA4"
+     },
+     {
+      "id": "cmth5byd1002rf0rl75naryuo",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 13,
+      "name": "Episode 13",
+      "synopsis": "Teşkilat — Bölüm 13. Official broadcaster upload.",
+      "durationMins": 126,
+      "stillUrl": "https://i.ytimg.com/vi/VE5D-5VpyIc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/VE5D-5VpyIc"
+     },
+     {
+      "id": "cmth5byd1002sf0rl7adf76iw",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 14,
+      "name": "Episode 14",
+      "synopsis": "Teşkilat — Bölüm 14. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/yx-o49VsGwI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/yx-o49VsGwI"
+     },
+     {
+      "id": "cmth5byd1002tf0rlb2g0mbfi",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 15,
+      "name": "Episode 15",
+      "synopsis": "Teşkilat — Bölüm 15. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/qV6ly0Z2_eo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/qV6ly0Z2_eo"
+     },
+     {
+      "id": "cmth5byd1002uf0rlj8ec9owx",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 16,
+      "name": "Episode 16",
+      "synopsis": "Teşkilat — Bölüm 16. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/g-j5NzGZtFo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/g-j5NzGZtFo"
+     },
+     {
+      "id": "cmth5byd1002vf0rlp0449p57",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 17,
+      "name": "Episode 17",
+      "synopsis": "Teşkilat — Bölüm 17. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/_gFF2WxgYMo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/_gFF2WxgYMo"
+     },
+     {
+      "id": "cmth5byd1002wf0rlafwvwu9z",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 18,
+      "name": "Episode 18",
+      "synopsis": "Teşkilat — Bölüm 18. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/XPd8qjXKlWI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/XPd8qjXKlWI"
+     },
+     {
+      "id": "cmth5byd1002xf0rlpnbunfum",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 19,
+      "name": "Episode 19",
+      "synopsis": "Teşkilat — Bölüm 19. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/AoUrIbmxVsQ/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/AoUrIbmxVsQ"
+     },
+     {
+      "id": "cmth5byd1002yf0rl8s4c3tyf",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 20,
+      "name": "Episode 20",
+      "synopsis": "Teşkilat — Bölüm 20. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/SAbGJW8GoE4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/SAbGJW8GoE4"
+     },
+     {
+      "id": "cmth5byd1002zf0rlqpcaau82",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 21,
+      "name": "Episode 21",
+      "synopsis": "Teşkilat — Bölüm 21. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/ht0WYkW0dNk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ht0WYkW0dNk"
+     },
+     {
+      "id": "cmth5byd10030f0rlbbpu651r",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 22,
+      "name": "Episode 22",
+      "synopsis": "Teşkilat — Bölüm 22. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/K15bBf4Ef78/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/K15bBf4Ef78"
+     },
+     {
+      "id": "cmth5byd10031f0rl8zt95ncr",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 23,
+      "name": "Episode 23",
+      "synopsis": "Teşkilat — Bölüm 23. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/4ke3AR38Mt4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/4ke3AR38Mt4"
+     },
+     {
+      "id": "cmth5byd10032f0rlsv8b28hg",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 24,
+      "name": "Episode 24",
+      "synopsis": "Teşkilat — Bölüm 24. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/YAmxKslxIu0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/YAmxKslxIu0"
+     },
+     {
+      "id": "cmth5byd10033f0rlo1q3hc9a",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 25,
+      "name": "Episode 25",
+      "synopsis": "Teşkilat — Bölüm 25. Official broadcaster upload.",
+      "durationMins": 143,
+      "stillUrl": "https://i.ytimg.com/vi/zv59in7xIyM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/zv59in7xIyM"
+     },
+     {
+      "id": "cmth5byd10034f0rlom0uh87c",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 26,
+      "name": "Episode 26",
+      "synopsis": "Teşkilat — Bölüm 26. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/fc5b7gdcgJE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/fc5b7gdcgJE"
+     },
+     {
+      "id": "cmth5byd10035f0rlxcbkwygu",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 27,
+      "name": "Episode 27",
+      "synopsis": "Teşkilat — Bölüm 27. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/1-rNIcCA_DY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/1-rNIcCA_DY"
+     },
+     {
+      "id": "cmth5byd10036f0rl49wziarx",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 28,
+      "name": "Episode 28",
+      "synopsis": "Teşkilat — Bölüm 28. Official broadcaster upload.",
+      "durationMins": 126,
+      "stillUrl": "https://i.ytimg.com/vi/EW9iZDkbc4I/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/EW9iZDkbc4I"
+     },
+     {
+      "id": "cmth5byd10037f0rlycntfyya",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 29,
+      "name": "Episode 29",
+      "synopsis": "Teşkilat — Bölüm 29. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/8_SpNJf_dEA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/8_SpNJf_dEA"
+     },
+     {
+      "id": "cmth5byd10038f0rlkfume1sa",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 30,
+      "name": "Episode 30",
+      "synopsis": "Teşkilat — Bölüm 30. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/49iOhBvX3ek/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/49iOhBvX3ek"
+     },
+     {
+      "id": "cmth5byd10039f0rldpsweqpe",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 31,
+      "name": "Episode 31",
+      "synopsis": "Teşkilat — Bölüm 31. Official broadcaster upload.",
+      "durationMins": 155,
+      "stillUrl": "https://i.ytimg.com/vi/2RAsrMuNTTY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/2RAsrMuNTTY"
+     },
+     {
+      "id": "cmth5byd1003af0rlcqx09zey",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 32,
+      "name": "Episode 32",
+      "synopsis": "Teşkilat — Bölüm 32. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/B4INcHmMqRA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/B4INcHmMqRA"
+     },
+     {
+      "id": "cmth5byd1003bf0rl4utt3zcr",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 33,
+      "name": "Episode 33",
+      "synopsis": "Teşkilat — Bölüm 33. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/MFqGXEEEpxQ/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/MFqGXEEEpxQ"
+     },
+     {
+      "id": "cmth5byd1003cf0rljity9hu5",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 34,
+      "name": "Episode 34",
+      "synopsis": "Teşkilat — Bölüm 34. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/waE0ju9PfzE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/waE0ju9PfzE"
+     },
+     {
+      "id": "cmth5byd1003df0rlhtqyv9wv",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 35,
+      "name": "Episode 35",
+      "synopsis": "Teşkilat — Bölüm 35. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/C_7kNsbGXZc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/C_7kNsbGXZc"
+     },
+     {
+      "id": "cmth5byd1003ef0rlmcwnoee0",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 36,
+      "name": "Episode 36",
+      "synopsis": "Teşkilat — Bölüm 36. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/LmmK5v5v5r0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/LmmK5v5v5r0"
+     },
+     {
+      "id": "cmth5byd1003ff0rl4li33ik2",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 37,
+      "name": "Episode 37",
+      "synopsis": "Teşkilat — Bölüm 37. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/mPo3B0SL0_g/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/mPo3B0SL0_g"
+     },
+     {
+      "id": "cmth5byd1003gf0rlqoax99fk",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 38,
+      "name": "Episode 38",
+      "synopsis": "Teşkilat — Bölüm 38. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/uiWPXVp2qWA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/uiWPXVp2qWA"
+     },
+     {
+      "id": "cmth5byd1003hf0rlvvn3v9i0",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 39,
+      "name": "Episode 39",
+      "synopsis": "Teşkilat — Bölüm 39. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/18x5hnEDtAA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/18x5hnEDtAA"
+     },
+     {
+      "id": "cmth5byd1003if0rle9racggl",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 40,
+      "name": "Episode 40",
+      "synopsis": "Teşkilat — Bölüm 40. Official broadcaster upload.",
+      "durationMins": 151,
+      "stillUrl": "https://i.ytimg.com/vi/qiYw_YnmFe0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/qiYw_YnmFe0"
+     },
+     {
+      "id": "cmth5byd1003jf0rldkk89vdr",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 41,
+      "name": "Episode 41",
+      "synopsis": "Teşkilat — Bölüm 41. Official broadcaster upload.",
+      "durationMins": 146,
+      "stillUrl": "https://i.ytimg.com/vi/I1YOl5vPhPg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/I1YOl5vPhPg"
+     },
+     {
+      "id": "cmth5byd1003kf0rlxpgo9eoo",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 42,
+      "name": "Episode 42",
+      "synopsis": "Teşkilat — Bölüm 42. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/bzSgN7PkNHU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/bzSgN7PkNHU"
+     },
+     {
+      "id": "cmth5byd1003lf0rl3pbqh1mk",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 43,
+      "name": "Episode 43",
+      "synopsis": "Teşkilat — Bölüm 43. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/c9XKBPreBgQ/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/c9XKBPreBgQ"
+     },
+     {
+      "id": "cmth5byd1003mf0rlwbaqthby",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 44,
+      "name": "Episode 44",
+      "synopsis": "Teşkilat — Bölüm 44. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/c6y0bXTSCk0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/c6y0bXTSCk0"
+     },
+     {
+      "id": "cmth5byd1003nf0rljraox8yx",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 45,
+      "name": "Episode 45",
+      "synopsis": "Teşkilat — Bölüm 45. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/PFqp9oP4PhE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/PFqp9oP4PhE"
+     },
+     {
+      "id": "cmth5byd1003of0rl81qfz8l9",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 46,
+      "name": "Episode 46",
+      "synopsis": "Teşkilat — Bölüm 46. Official broadcaster upload.",
+      "durationMins": 143,
+      "stillUrl": "https://i.ytimg.com/vi/hm-L--rS2jE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/hm-L--rS2jE"
+     },
+     {
+      "id": "cmth5byd1003pf0rlwjmtco9x",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 47,
+      "name": "Episode 47",
+      "synopsis": "Teşkilat — Bölüm 47. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/ivAzHqFfdE8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ivAzHqFfdE8"
+     },
+     {
+      "id": "cmth5byd1003qf0rl1ucp7vey",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 48,
+      "name": "Episode 48",
+      "synopsis": "Teşkilat — Bölüm 48. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/SSyUUeDccl4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/SSyUUeDccl4"
+     },
+     {
+      "id": "cmth5byd1003rf0rl713qvrnp",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 49,
+      "name": "Episode 49",
+      "synopsis": "Teşkilat — Bölüm 49. Official broadcaster upload.",
+      "durationMins": 161,
+      "stillUrl": "https://i.ytimg.com/vi/C0Tuxe-JYrw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/C0Tuxe-JYrw"
+     },
+     {
+      "id": "cmth5byd1003sf0rlllqtnfo8",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 50,
+      "name": "Episode 50",
+      "synopsis": "Teşkilat — Bölüm 50. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/Zfae8wCfP-M/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Zfae8wCfP-M"
+     },
+     {
+      "id": "cmth5byd1003tf0rlw2fsfrpv",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 51,
+      "name": "Episode 51",
+      "synopsis": "Teşkilat — Bölüm 51. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/Y3zupwjVqWU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Y3zupwjVqWU"
+     },
+     {
+      "id": "cmth5byd1003uf0rldo79p4il",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 52,
+      "name": "Episode 52",
+      "synopsis": "Teşkilat — Bölüm 52. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/0NBXMJbmkU8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/0NBXMJbmkU8"
+     },
+     {
+      "id": "cmth5byd1003vf0rlmqabitwo",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 53,
+      "name": "Episode 53",
+      "synopsis": "Teşkilat — Bölüm 53. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/iSt7c4589O4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/iSt7c4589O4"
+     },
+     {
+      "id": "cmth5byd1003wf0rl9cg6endl",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 54,
+      "name": "Episode 54",
+      "synopsis": "Teşkilat — Bölüm 54. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/hhGlzNwBsB4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/hhGlzNwBsB4"
+     },
+     {
+      "id": "cmth5byd1003xf0rl9glhv512",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 55,
+      "name": "Episode 55",
+      "synopsis": "Teşkilat — Bölüm 55. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/QHJNZymYLBU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/QHJNZymYLBU"
+     },
+     {
+      "id": "cmth5byd1003yf0rlbcjxmu1u",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 56,
+      "name": "Episode 56",
+      "synopsis": "Teşkilat — Bölüm 56. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/b10XzAZ3o9o/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/b10XzAZ3o9o"
+     },
+     {
+      "id": "cmth5byd1003zf0rlo9b2v92q",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 57,
+      "name": "Episode 57",
+      "synopsis": "Teşkilat — Bölüm 57. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/oMIYQBeyHIc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/oMIYQBeyHIc"
+     },
+     {
+      "id": "cmth5byd10040f0rl07pyxkeo",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 58,
+      "name": "Episode 58",
+      "synopsis": "Teşkilat — Bölüm 58. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/xGQGJ25mKQg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/xGQGJ25mKQg"
+     },
+     {
+      "id": "cmth5byd10041f0rlningvszp",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 59,
+      "name": "Episode 59",
+      "synopsis": "Teşkilat — Bölüm 59. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/KvPm0-6wBvg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/KvPm0-6wBvg"
+     },
+     {
+      "id": "cmth5byd10042f0rlkbe0d1kt",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 60,
+      "name": "Episode 60",
+      "synopsis": "Teşkilat — Bölüm 60. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/qHojliEqtx8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/qHojliEqtx8"
+     },
+     {
+      "id": "cmth5byd10043f0rl2w32bgqb",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 61,
+      "name": "Episode 61",
+      "synopsis": "Teşkilat — Bölüm 61. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/nSKlPW1ABBI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/nSKlPW1ABBI"
+     },
+     {
+      "id": "cmth5byd10044f0rl6mep2k7v",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 62,
+      "name": "Episode 62",
+      "synopsis": "Teşkilat — Bölüm 62. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/ggExKmEcCnU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ggExKmEcCnU"
+     },
+     {
+      "id": "cmth5byd10045f0rln18acnsc",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 63,
+      "name": "Episode 63",
+      "synopsis": "Teşkilat — Bölüm 63. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/yZdU_NbjACM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/yZdU_NbjACM"
+     },
+     {
+      "id": "cmth5byd10046f0rlppav1hb7",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 64,
+      "name": "Episode 64",
+      "synopsis": "Teşkilat — Bölüm 64. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/9-BZc4ZKno0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/9-BZc4ZKno0"
+     },
+     {
+      "id": "cmth5byd20047f0rlno0zabi2",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 65,
+      "name": "Episode 65",
+      "synopsis": "Teşkilat — Bölüm 65. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/D-oYsq8jLlc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/D-oYsq8jLlc"
+     },
+     {
+      "id": "cmth5byd20048f0rl78642euh",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 66,
+      "name": "Episode 66",
+      "synopsis": "Teşkilat — Bölüm 66. Official broadcaster upload.",
+      "durationMins": 155,
+      "stillUrl": "https://i.ytimg.com/vi/0NXegXU_QmQ/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/0NXegXU_QmQ"
+     },
+     {
+      "id": "cmth5byd20049f0rlk7i2m1q6",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 67,
+      "name": "Episode 67",
+      "synopsis": "Teşkilat — Bölüm 67. Official broadcaster upload.",
+      "durationMins": 151,
+      "stillUrl": "https://i.ytimg.com/vi/Vj0a92BkBkU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Vj0a92BkBkU"
+     },
+     {
+      "id": "cmth5byd2004af0rl92kt1htq",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 68,
+      "name": "Episode 68",
+      "synopsis": "Teşkilat — Bölüm 68. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/5euEpcjQqZg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5euEpcjQqZg"
+     },
+     {
+      "id": "cmth5byd2004bf0rlgvdmepxl",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 69,
+      "name": "Episode 69",
+      "synopsis": "Teşkilat — Bölüm 69. Official broadcaster upload.",
+      "durationMins": 133,
+      "stillUrl": "https://i.ytimg.com/vi/T7a-hoj-VSI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/T7a-hoj-VSI"
+     },
+     {
+      "id": "cmth5byd2004cf0rl76asuwli",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 70,
+      "name": "Episode 70",
+      "synopsis": "Teşkilat — Bölüm 70. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/AZvxaD7QBd8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/AZvxaD7QBd8"
+     },
+     {
+      "id": "cmth5byd2004df0rl4m08v7yd",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 71,
+      "name": "Episode 71",
+      "synopsis": "Teşkilat — Bölüm 71. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/NtaNNQctHs8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/NtaNNQctHs8"
+     },
+     {
+      "id": "cmth5byd2004ef0rl9vce28yq",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 72,
+      "name": "Episode 72",
+      "synopsis": "Teşkilat — Bölüm 72. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/AvPoe3T50ok/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/AvPoe3T50ok"
+     },
+     {
+      "id": "cmth5byd2004ff0rlnkfq8wa3",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 73,
+      "name": "Episode 73",
+      "synopsis": "Teşkilat — Bölüm 73. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/qWFQKocTcp0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/qWFQKocTcp0"
+     },
+     {
+      "id": "cmth5byd2004gf0rl5gee7g9v",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 74,
+      "name": "Episode 74",
+      "synopsis": "Teşkilat — Bölüm 74. Official broadcaster upload.",
+      "durationMins": 147,
+      "stillUrl": "https://i.ytimg.com/vi/-s8oRRWfIts/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/-s8oRRWfIts"
+     },
+     {
+      "id": "cmth5byd2004hf0rlfegjhz4n",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 75,
+      "name": "Episode 75",
+      "synopsis": "Teşkilat — Bölüm 75. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/l-E-dKTqmNs/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/l-E-dKTqmNs"
+     },
+     {
+      "id": "cmth5byd2004if0rl6qaxhxdq",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 76,
+      "name": "Episode 76",
+      "synopsis": "Teşkilat — Bölüm 76. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/sGt4WCmgLTE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/sGt4WCmgLTE"
+     },
+     {
+      "id": "cmth5byd2004jf0rlb38kyo2l",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 77,
+      "name": "Episode 77",
+      "synopsis": "Teşkilat — Bölüm 77. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/5oOfE4rfFak/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5oOfE4rfFak"
+     },
+     {
+      "id": "cmth5byd2004kf0rl3hl46yp0",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 78,
+      "name": "Episode 78",
+      "synopsis": "Teşkilat — Bölüm 78. Official broadcaster upload.",
+      "durationMins": 124,
+      "stillUrl": "https://i.ytimg.com/vi/2w2miQOx7Z0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/2w2miQOx7Z0"
+     },
+     {
+      "id": "cmth5byd2004lf0rly0zvh4c9",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 79,
+      "name": "Episode 79",
+      "synopsis": "Teşkilat — Bölüm 79. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/wwQCqfaoiZk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/wwQCqfaoiZk"
+     },
+     {
+      "id": "cmth5byd2004mf0rlth8hk5fj",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 80,
+      "name": "Episode 80",
+      "synopsis": "Teşkilat — Bölüm 80. Official broadcaster upload.",
+      "durationMins": 157,
+      "stillUrl": "https://i.ytimg.com/vi/AJUdgRXcH44/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/AJUdgRXcH44"
+     },
+     {
+      "id": "cmth5byd2004nf0rli3dc9ycf",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 81,
+      "name": "Episode 81",
+      "synopsis": "Teşkilat — Bölüm 81. Official broadcaster upload.",
+      "durationMins": 131,
+      "stillUrl": "https://i.ytimg.com/vi/F2qa2Co3Nr4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/F2qa2Co3Nr4"
+     },
+     {
+      "id": "cmth5byd2004of0rldkxzckgm",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 82,
+      "name": "Episode 82",
+      "synopsis": "Teşkilat — Bölüm 82. Official broadcaster upload.",
+      "durationMins": 135,
+      "stillUrl": "https://i.ytimg.com/vi/Rd7B-URSlTE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Rd7B-URSlTE"
+     },
+     {
+      "id": "cmth5byd2004pf0rlugiahpra",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 83,
+      "name": "Episode 83",
+      "synopsis": "Teşkilat — Bölüm 83. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/f6D4ICNj8BM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/f6D4ICNj8BM"
+     },
+     {
+      "id": "cmth5byd2004qf0rlw6ah1nh6",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 84,
+      "name": "Episode 84",
+      "synopsis": "Teşkilat — Bölüm 84. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/bFSHPRnpRLI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/bFSHPRnpRLI"
+     },
+     {
+      "id": "cmth5byd2004rf0rle1z6l9ee",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 85,
+      "name": "Episode 85",
+      "synopsis": "Teşkilat — Bölüm 85. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/fJ2CunJktgA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/fJ2CunJktgA"
+     },
+     {
+      "id": "cmth5byd2004sf0rltcnuyil7",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 86,
+      "name": "Episode 86",
+      "synopsis": "Teşkilat — Bölüm 86. Official broadcaster upload.",
+      "durationMins": 134,
+      "stillUrl": "https://i.ytimg.com/vi/xCROwkAtXRA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/xCROwkAtXRA"
+     },
+     {
+      "id": "cmth5byd2004tf0rldkzzoh5n",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 87,
+      "name": "Episode 87",
+      "synopsis": "Teşkilat — Bölüm 87. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/y_iH2A7YrTc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/y_iH2A7YrTc"
+     },
+     {
+      "id": "cmth5byd2004uf0rl6peygw2e",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 88,
+      "name": "Episode 88",
+      "synopsis": "Teşkilat — Bölüm 88. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/dX8BP0q7sFE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/dX8BP0q7sFE"
+     },
+     {
+      "id": "cmth5byd2004vf0rlwcp5s55i",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 89,
+      "name": "Episode 89",
+      "synopsis": "Teşkilat — Bölüm 89. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/9UBkq6dY-ag/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/9UBkq6dY-ag"
+     },
+     {
+      "id": "cmth5byd2004wf0rl8b3sefa3",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 90,
+      "name": "Episode 90",
+      "synopsis": "Teşkilat — Bölüm 90. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/lVFcTjwJSJ4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/lVFcTjwJSJ4"
+     },
+     {
+      "id": "cmth5byd2004xf0rl5mr6ac5n",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 91,
+      "name": "Episode 91",
+      "synopsis": "Teşkilat — Bölüm 91. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/tw6uu-8n4aY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/tw6uu-8n4aY"
+     },
+     {
+      "id": "cmth5byd2004yf0rlb425swk8",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 92,
+      "name": "Episode 92",
+      "synopsis": "Teşkilat — Bölüm 92. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/42FDmJSPLCk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/42FDmJSPLCk"
+     },
+     {
+      "id": "cmth5byd2004zf0rlq4hvvhen",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 93,
+      "name": "Episode 93",
+      "synopsis": "Teşkilat — Bölüm 93. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/KRt64oSdenY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/KRt64oSdenY"
+     },
+     {
+      "id": "cmth5byd20050f0rlg5zy722w",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 94,
+      "name": "Episode 94",
+      "synopsis": "Teşkilat — Bölüm 94. Official broadcaster upload.",
+      "durationMins": 147,
+      "stillUrl": "https://i.ytimg.com/vi/fFtVlevch-M/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/fFtVlevch-M"
+     },
+     {
+      "id": "cmth5byd20051f0rlufw0gig9",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 95,
+      "name": "Episode 95",
+      "synopsis": "Teşkilat — Bölüm 95. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/Ezwv5MecsL0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Ezwv5MecsL0"
+     },
+     {
+      "id": "cmth5byd20052f0rl208kzzvb",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 96,
+      "name": "Episode 96",
+      "synopsis": "Teşkilat — Bölüm 96. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/lKLLDwU1Ttw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/lKLLDwU1Ttw"
+     },
+     {
+      "id": "cmth5byd20053f0rllcm5idwj",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 97,
+      "name": "Episode 97",
+      "synopsis": "Teşkilat — Bölüm 97. Official broadcaster upload.",
+      "durationMins": 157,
+      "stillUrl": "https://i.ytimg.com/vi/Y-phySiPat0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Y-phySiPat0"
+     },
+     {
+      "id": "cmth5byd20054f0rldog2aoxs",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 98,
+      "name": "Episode 98",
+      "synopsis": "Teşkilat — Bölüm 98. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/BLgM_bs7HuE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/BLgM_bs7HuE"
+     },
+     {
+      "id": "cmth5byd20055f0rlyenrq70q",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 99,
+      "name": "Episode 99",
+      "synopsis": "Teşkilat — Bölüm 99. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/dwcgNnysGe8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/dwcgNnysGe8"
+     },
+     {
+      "id": "cmth5byd20056f0rl5dspvssq",
+      "seasonId": "cmth5by92002ef0rlp3mtrzwd",
+      "number": 100,
+      "name": "Episode 100",
+      "synopsis": "Teşkilat — Bölüm 100. Official broadcaster upload.",
+      "durationMins": 151,
+      "stillUrl": "https://i.ytimg.com/vi/jzjdxDrssr4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/jzjdxDrssr4"
+     }
+    ]
+   },
+   {
+    "id": "cmth5bywc0058f0rlfshvycva",
+    "titleId": "cmth5by55002cf0rlbbtgsdtv",
+    "number": 2,
+    "episodes": [
+     {
+      "id": "cmth5bz0a0059f0rl4f53xq64",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 101,
+      "name": "Episode 101",
+      "synopsis": "Teşkilat — Bölüm 101. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/6JL9YxpgFRI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/6JL9YxpgFRI"
+     },
+     {
+      "id": "cmth5bz0a005af0rl7hxiuq7m",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 102,
+      "name": "Episode 102",
+      "synopsis": "Teşkilat — Bölüm 102. Official broadcaster upload.",
+      "durationMins": 143,
+      "stillUrl": "https://i.ytimg.com/vi/K6WaETFCChQ/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/K6WaETFCChQ"
+     },
+     {
+      "id": "cmth5bz0a005bf0rlgxerss1h",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 104,
+      "name": "Episode 104",
+      "synopsis": "Teşkilat — Bölüm 104. Official broadcaster upload.",
+      "durationMins": 147,
+      "stillUrl": "https://i.ytimg.com/vi/t3cmeDiK_Y4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/t3cmeDiK_Y4"
+     },
+     {
+      "id": "cmth5bz0a005cf0rlnym719qg",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 105,
+      "name": "Episode 105",
+      "synopsis": "Teşkilat — Bölüm 105. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/IuMMyHirkwk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/IuMMyHirkwk"
+     },
+     {
+      "id": "cmth5bz0a005df0rl5fp7cuxb",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 106,
+      "name": "Episode 106",
+      "synopsis": "Teşkilat — Bölüm 106. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/dyc08bb3TzE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/dyc08bb3TzE"
+     },
+     {
+      "id": "cmth5bz0a005ef0rl4w799ygm",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 107,
+      "name": "Episode 107",
+      "synopsis": "Teşkilat — Bölüm 107. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/IbT7PYLlmRg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/IbT7PYLlmRg"
+     },
+     {
+      "id": "cmth5bz0a005ff0rlv84n90bk",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 108,
+      "name": "Episode 108",
+      "synopsis": "Teşkilat — Bölüm 108. Official broadcaster upload.",
+      "durationMins": 135,
+      "stillUrl": "https://i.ytimg.com/vi/bXFJdyFF7ts/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/bXFJdyFF7ts"
+     },
+     {
+      "id": "cmth5bz0a005gf0rlsf9q37f2",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 109,
+      "name": "Episode 109",
+      "synopsis": "Teşkilat — Bölüm 109. Official broadcaster upload.",
+      "durationMins": 135,
+      "stillUrl": "https://i.ytimg.com/vi/ennSGUe_464/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ennSGUe_464"
+     },
+     {
+      "id": "cmth5bz0a005hf0rluzniv2mm",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 110,
+      "name": "Episode 110",
+      "synopsis": "Teşkilat — Bölüm 110. Official broadcaster upload.",
+      "durationMins": 132,
+      "stillUrl": "https://i.ytimg.com/vi/9xqWJxoe36U/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/9xqWJxoe36U"
+     },
+     {
+      "id": "cmth5bz0a005if0rlillw9jdw",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 111,
+      "name": "Episode 111",
+      "synopsis": "Teşkilat — Bölüm 111. Official broadcaster upload.",
+      "durationMins": 157,
+      "stillUrl": "https://i.ytimg.com/vi/ppIikuHZ1Rw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ppIikuHZ1Rw"
+     },
+     {
+      "id": "cmth5bz0a005jf0rlkfliesz6",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 112,
+      "name": "Episode 112",
+      "synopsis": "Teşkilat — Bölüm 112. Official broadcaster upload.",
+      "durationMins": 153,
+      "stillUrl": "https://i.ytimg.com/vi/OvyM-J2GrCc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/OvyM-J2GrCc"
+     },
+     {
+      "id": "cmth5bz0a005kf0rll3f7zn90",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 113,
+      "name": "Episode 113",
+      "synopsis": "Teşkilat — Bölüm 113. Official broadcaster upload.",
+      "durationMins": 130,
+      "stillUrl": "https://i.ytimg.com/vi/4hVOGVGOknc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/4hVOGVGOknc"
+     },
+     {
+      "id": "cmth5bz0a005lf0rl2z7ddz09",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 114,
+      "name": "Episode 114",
+      "synopsis": "Teşkilat — Bölüm 114. Official broadcaster upload.",
+      "durationMins": 129,
+      "stillUrl": "https://i.ytimg.com/vi/MdrVp0uYSD4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/MdrVp0uYSD4"
+     },
+     {
+      "id": "cmth5bz0a005mf0rlv9babe7l",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 115,
+      "name": "Episode 115",
+      "synopsis": "Teşkilat — Bölüm 115. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/h4sFEm7lwK0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/h4sFEm7lwK0"
+     },
+     {
+      "id": "cmth5bz0a005nf0rlcmjrcp6n",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 116,
+      "name": "Episode 116",
+      "synopsis": "Teşkilat — Bölüm 116. Official broadcaster upload.",
+      "durationMins": 132,
+      "stillUrl": "https://i.ytimg.com/vi/3R-oYG5SEuI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/3R-oYG5SEuI"
+     },
+     {
+      "id": "cmth5bz0a005of0rldgrfzqu5",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 117,
+      "name": "Episode 117",
+      "synopsis": "Teşkilat — Bölüm 117. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/hKxiCYujF8A/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/hKxiCYujF8A"
+     },
+     {
+      "id": "cmth5bz0a005pf0rl7hcy5tsb",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 118,
+      "name": "Episode 118",
+      "synopsis": "Teşkilat — Bölüm 118. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/Ec3U7sY4-vU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Ec3U7sY4-vU"
+     },
+     {
+      "id": "cmth5bz0a005qf0rl26shq3tj",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 119,
+      "name": "Episode 119",
+      "synopsis": "Teşkilat — Bölüm 119. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/SrpoalBCo1A/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/SrpoalBCo1A"
+     },
+     {
+      "id": "cmth5bz0a005rf0rlbt3f1abo",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 120,
+      "name": "Episode 120",
+      "synopsis": "Teşkilat — Bölüm 120. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/UMnYc7dCdo0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/UMnYc7dCdo0"
+     },
+     {
+      "id": "cmth5bz0a005sf0rlpmq9wgar",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 121,
+      "name": "Episode 121",
+      "synopsis": "Teşkilat — Bölüm 121. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/nlctK3LQYRM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/nlctK3LQYRM"
+     },
+     {
+      "id": "cmth5bz0a005tf0rl7h55ge0m",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 122,
+      "name": "Episode 122",
+      "synopsis": "Teşkilat — Bölüm 122. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/Cu-ZhsHawjg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Cu-ZhsHawjg"
+     },
+     {
+      "id": "cmth5bz0a005uf0rllfrar2n4",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 123,
+      "name": "Episode 123",
+      "synopsis": "Teşkilat — Bölüm 123. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/gCuhRStZsnE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/gCuhRStZsnE"
+     },
+     {
+      "id": "cmth5bz0a005vf0rlj59o5dz7",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 124,
+      "name": "Episode 124",
+      "synopsis": "Teşkilat — Bölüm 124. Official broadcaster upload.",
+      "durationMins": 137,
+      "stillUrl": "https://i.ytimg.com/vi/iHZhQG3gKBg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/iHZhQG3gKBg"
+     },
+     {
+      "id": "cmth5bz0a005wf0rlzlslh3vg",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 125,
+      "name": "Episode 125",
+      "synopsis": "Teşkilat — Bölüm 125. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/iAYmhqb2lSw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/iAYmhqb2lSw"
+     },
+     {
+      "id": "cmth5bz0a005xf0rlxa2fuhr2",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 126,
+      "name": "Episode 126",
+      "synopsis": "Teşkilat — Bölüm 126. Official broadcaster upload.",
+      "durationMins": 146,
+      "stillUrl": "https://i.ytimg.com/vi/GOINC9_Swmk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/GOINC9_Swmk"
+     },
+     {
+      "id": "cmth5bz0a005yf0rl40wpnhbu",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 127,
+      "name": "Episode 127",
+      "synopsis": "Teşkilat — Bölüm 127. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/yJvCmtUtgMs/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/yJvCmtUtgMs"
+     },
+     {
+      "id": "cmth5bz0a005zf0rlf0z6wnvs",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 128,
+      "name": "Episode 128",
+      "synopsis": "Teşkilat — Bölüm 128. Official broadcaster upload.",
+      "durationMins": 146,
+      "stillUrl": "https://i.ytimg.com/vi/P20zqXFiYuo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/P20zqXFiYuo"
+     },
+     {
+      "id": "cmth5bz0a0060f0rleg3mg4ya",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 129,
+      "name": "Episode 129",
+      "synopsis": "Teşkilat — Bölüm 129. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/rmUT1a_TGyo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/rmUT1a_TGyo"
+     },
+     {
+      "id": "cmth5bz0a0061f0rl3gp5wui5",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 130,
+      "name": "Episode 130",
+      "synopsis": "Teşkilat — Bölüm 130. Official broadcaster upload.",
+      "durationMins": 143,
+      "stillUrl": "https://i.ytimg.com/vi/j0vAn5KvBjw/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/j0vAn5KvBjw"
+     },
+     {
+      "id": "cmth5bz0a0062f0rlr931q2br",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 131,
+      "name": "Episode 131",
+      "synopsis": "Teşkilat — Bölüm 131. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/UKKLR8aDjqA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/UKKLR8aDjqA"
+     },
+     {
+      "id": "cmth5bz0a0063f0rlw6z4mie4",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 132,
+      "name": "Episode 132",
+      "synopsis": "Teşkilat — Bölüm 132. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/5cWYhLlork4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/5cWYhLlork4"
+     },
+     {
+      "id": "cmth5bz0a0064f0rlfzooxp1x",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 133,
+      "name": "Episode 133",
+      "synopsis": "Teşkilat — Bölüm 133. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/LE0qScUkehY/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/LE0qScUkehY"
+     },
+     {
+      "id": "cmth5bz0a0065f0rlr6f9l39e",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 134,
+      "name": "Episode 134",
+      "synopsis": "Teşkilat — Bölüm 134. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/QwQtiyuCfww/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/QwQtiyuCfww"
+     },
+     {
+      "id": "cmth5bz0a0066f0rly5ooac03",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 135,
+      "name": "Episode 135",
+      "synopsis": "Teşkilat — Bölüm 135. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/GovL-a2Kz94/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/GovL-a2Kz94"
+     },
+     {
+      "id": "cmth5bz0a0067f0rl9uobercj",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 136,
+      "name": "Episode 136",
+      "synopsis": "Teşkilat — Bölüm 136. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/NL3_LbnCIiA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/NL3_LbnCIiA"
+     },
+     {
+      "id": "cmth5bz0a0068f0rlt8ecpp2q",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 137,
+      "name": "Episode 137",
+      "synopsis": "Teşkilat — Bölüm 137. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/K54WGtcGfz8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/K54WGtcGfz8"
+     },
+     {
+      "id": "cmth5bz0a0069f0rlyqlz416e",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 138,
+      "name": "Episode 138",
+      "synopsis": "Teşkilat — Bölüm 138. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/64_K1A7Q34o/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/64_K1A7Q34o"
+     },
+     {
+      "id": "cmth5bz0a006af0rlsl3pgw2y",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 139,
+      "name": "Episode 139",
+      "synopsis": "Teşkilat — Bölüm 139. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/tcAM9zaPhkg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/tcAM9zaPhkg"
+     },
+     {
+      "id": "cmth5bz0a006bf0rlx478tjhe",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 140,
+      "name": "Episode 140",
+      "synopsis": "Teşkilat — Bölüm 140. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/rTxg2sWGGCc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/rTxg2sWGGCc"
+     },
+     {
+      "id": "cmth5bz0a006cf0rl4so6y3uq",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 141,
+      "name": "Episode 141",
+      "synopsis": "Teşkilat — Bölüm 141. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/1VP96tuetYA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/1VP96tuetYA"
+     },
+     {
+      "id": "cmth5bz0a006df0rlqmvz0n1i",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 142,
+      "name": "Episode 142",
+      "synopsis": "Teşkilat — Bölüm 142. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/jbYZktullxk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/jbYZktullxk"
+     },
+     {
+      "id": "cmth5bz0a006ef0rl31xucezv",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 143,
+      "name": "Episode 143",
+      "synopsis": "Teşkilat — Bölüm 143. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/Zj-lvVY9XOI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Zj-lvVY9XOI"
+     },
+     {
+      "id": "cmth5bz0a006ff0rl581d2ruc",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 144,
+      "name": "Episode 144",
+      "synopsis": "Teşkilat — Bölüm 144. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/8y-jJSZAb4Y/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/8y-jJSZAb4Y"
+     },
+     {
+      "id": "cmth5bz0a006gf0rlvcdcflua",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 145,
+      "name": "Episode 145",
+      "synopsis": "Teşkilat — Bölüm 145. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/Tb7kNw5ewNM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Tb7kNw5ewNM"
+     },
+     {
+      "id": "cmth5bz0a006hf0rlr8rmxhwb",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 146,
+      "name": "Episode 146",
+      "synopsis": "Teşkilat — Bölüm 146. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/xXWoRxNQm1M/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/xXWoRxNQm1M"
+     },
+     {
+      "id": "cmth5bz0a006if0rlecv9pxa4",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 147,
+      "name": "Episode 147",
+      "synopsis": "Teşkilat — Bölüm 147. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/6VBuzZpAQuk/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/6VBuzZpAQuk"
+     },
+     {
+      "id": "cmth5bz0a006jf0rlpu6vp2s9",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 148,
+      "name": "Episode 148",
+      "synopsis": "Teşkilat — Bölüm 148. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/4SMY3wppoDI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/4SMY3wppoDI"
+     },
+     {
+      "id": "cmth5bz0a006kf0rlqefstz94",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 149,
+      "name": "Episode 149",
+      "synopsis": "Teşkilat — Bölüm 149. Official broadcaster upload.",
+      "durationMins": 163,
+      "stillUrl": "https://i.ytimg.com/vi/VAum9AqpIjA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/VAum9AqpIjA"
+     },
+     {
+      "id": "cmth5bz0a006lf0rln2ek3vju",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 150,
+      "name": "Episode 150",
+      "synopsis": "Teşkilat — Bölüm 150. Official broadcaster upload.",
+      "durationMins": 151,
+      "stillUrl": "https://i.ytimg.com/vi/okiXe7Oa9qo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/okiXe7Oa9qo"
+     },
+     {
+      "id": "cmth5bz0a006mf0rl35fefjkv",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 151,
+      "name": "Episode 151",
+      "synopsis": "Teşkilat — Bölüm 151. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/v86WGFjgpsM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/v86WGFjgpsM"
+     },
+     {
+      "id": "cmth5bz0a006nf0rlxx3dr56o",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 152,
+      "name": "Episode 152",
+      "synopsis": "Teşkilat — Bölüm 152. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/BrHC_bGnH3s/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/BrHC_bGnH3s"
+     },
+     {
+      "id": "cmth5bz0a006of0rlr6ixydv1",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 153,
+      "name": "Episode 153",
+      "synopsis": "Teşkilat — Bölüm 153. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/Y362b8sjLYA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Y362b8sjLYA"
+     },
+     {
+      "id": "cmth5bz0a006pf0rlpm82v5jz",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 154,
+      "name": "Episode 154",
+      "synopsis": "Teşkilat — Bölüm 154. Official broadcaster upload.",
+      "durationMins": 153,
+      "stillUrl": "https://i.ytimg.com/vi/B7f0wxL4ykE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/B7f0wxL4ykE"
+     },
+     {
+      "id": "cmth5bz0a006qf0rlle6svz96",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 155,
+      "name": "Episode 155",
+      "synopsis": "Teşkilat — Bölüm 155. Official broadcaster upload.",
+      "durationMins": 149,
+      "stillUrl": "https://i.ytimg.com/vi/UsZ_2isweBc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/UsZ_2isweBc"
+     },
+     {
+      "id": "cmth5bz0a006rf0rllz0ykl2l",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 156,
+      "name": "Episode 156",
+      "synopsis": "Teşkilat — Bölüm 156. Official broadcaster upload.",
+      "durationMins": 155,
+      "stillUrl": "https://i.ytimg.com/vi/QX4XCGFfJtA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/QX4XCGFfJtA"
+     },
+     {
+      "id": "cmth5bz0a006sf0rli638alet",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 157,
+      "name": "Episode 157",
+      "synopsis": "Teşkilat — Bölüm 157. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/zvjpexklIdE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/zvjpexklIdE"
+     },
+     {
+      "id": "cmth5bz0a006tf0rlqtd31lbs",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 158,
+      "name": "Episode 158",
+      "synopsis": "Teşkilat — Bölüm 158. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/ndTlGkIZGl4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/ndTlGkIZGl4"
+     },
+     {
+      "id": "cmth5bz0a006uf0rlgtcswgf8",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 159,
+      "name": "Episode 159",
+      "synopsis": "Teşkilat — Bölüm 159. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/gQPeOeoNZRo/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/gQPeOeoNZRo"
+     },
+     {
+      "id": "cmth5bz0a006vf0rluh7n0ypv",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 160,
+      "name": "Episode 160",
+      "synopsis": "Teşkilat — Bölüm 160. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/hqeTAsn8U14/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/hqeTAsn8U14"
+     },
+     {
+      "id": "cmth5bz0a006wf0rll091qym6",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 161,
+      "name": "Episode 161",
+      "synopsis": "Teşkilat — Bölüm 161. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/d_ClCQ20G0o/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/d_ClCQ20G0o"
+     },
+     {
+      "id": "cmth5bz0a006xf0rlxhxab9n3",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 162,
+      "name": "Episode 162",
+      "synopsis": "Teşkilat — Bölüm 162. Official broadcaster upload.",
+      "durationMins": 141,
+      "stillUrl": "https://i.ytimg.com/vi/_L97JtycIpc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/_L97JtycIpc"
+     },
+     {
+      "id": "cmth5bz0a006yf0rlfcynsiwi",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 163,
+      "name": "Episode 163",
+      "synopsis": "Teşkilat — Bölüm 163. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/bTHv10p7cKU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/bTHv10p7cKU"
+     },
+     {
+      "id": "cmth5bz0a006zf0rl71et026k",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 164,
+      "name": "Episode 164",
+      "synopsis": "Teşkilat — Bölüm 164. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/vuRcLdAFOS4/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/vuRcLdAFOS4"
+     },
+     {
+      "id": "cmth5bz0a0070f0rlev011x5y",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 165,
+      "name": "Episode 165",
+      "synopsis": "Teşkilat — Bölüm 165. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/HoLh87a7qL0/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/HoLh87a7qL0"
+     },
+     {
+      "id": "cmth5bz0a0071f0rlu7dw6gh2",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 166,
+      "name": "Episode 166",
+      "synopsis": "Teşkilat — Bölüm 166. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/z5S2biboSmI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/z5S2biboSmI"
+     },
+     {
+      "id": "cmth5bz0a0072f0rl24s41y3t",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 167,
+      "name": "Episode 167",
+      "synopsis": "Teşkilat — Bölüm 167. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/s1gUAu5b9wc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/s1gUAu5b9wc"
+     },
+     {
+      "id": "cmth5bz0a0073f0rlu5487bgi",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 168,
+      "name": "Episode 168",
+      "synopsis": "Teşkilat — Bölüm 168. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/AOlGNJ_sGkI/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/AOlGNJ_sGkI"
+     },
+     {
+      "id": "cmth5bz0a0074f0rlb0vr4pop",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 169,
+      "name": "Episode 169",
+      "synopsis": "Teşkilat — Bölüm 169. Official broadcaster upload.",
+      "durationMins": 138,
+      "stillUrl": "https://i.ytimg.com/vi/2Jgz9C3aZrM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/2Jgz9C3aZrM"
+     },
+     {
+      "id": "cmth5bz0a0075f0rlp2zej605",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 170,
+      "name": "Episode 170",
+      "synopsis": "Teşkilat — Bölüm 170. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/C7I51LbLA38/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/C7I51LbLA38"
+     },
+     {
+      "id": "cmth5bz0a0076f0rlo5arnwi6",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 171,
+      "name": "Episode 171",
+      "synopsis": "Teşkilat — Bölüm 171. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/Q0J7gdN9wRQ/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Q0J7gdN9wRQ"
+     },
+     {
+      "id": "cmth5bz0a0077f0rlacvmhfug",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 172,
+      "name": "Episode 172",
+      "synopsis": "Teşkilat — Bölüm 172. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/FqO9Po7bsXU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/FqO9Po7bsXU"
+     },
+     {
+      "id": "cmth5bz0a0078f0rlwyhqs07q",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 173,
+      "name": "Episode 173",
+      "synopsis": "Teşkilat — Bölüm 173. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/cRktmmxKKCM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/cRktmmxKKCM"
+     },
+     {
+      "id": "cmth5bz0a0079f0rllhzly9ei",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 174,
+      "name": "Episode 174",
+      "synopsis": "Teşkilat — Bölüm 174. Official broadcaster upload.",
+      "durationMins": 140,
+      "stillUrl": "https://i.ytimg.com/vi/RujN_qmmZaM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/RujN_qmmZaM"
+     },
+     {
+      "id": "cmth5bz0a007af0rlmkt079y0",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 175,
+      "name": "Episode 175",
+      "synopsis": "Teşkilat — Bölüm 175. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/3pGumCkuzQs/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/3pGumCkuzQs"
+     },
+     {
+      "id": "cmth5bz0a007bf0rlg4mxlp54",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 176,
+      "name": "Episode 176",
+      "synopsis": "Teşkilat — Bölüm 176. Official broadcaster upload.",
+      "durationMins": 148,
+      "stillUrl": "https://i.ytimg.com/vi/PbDQjPHhvHU/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/PbDQjPHhvHU"
+     },
+     {
+      "id": "cmth5bz0a007cf0rlm3t2xz43",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 177,
+      "name": "Episode 177",
+      "synopsis": "Teşkilat — Bölüm 177. Official broadcaster upload.",
+      "durationMins": 144,
+      "stillUrl": "https://i.ytimg.com/vi/n7p17a0V428/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/n7p17a0V428"
+     },
+     {
+      "id": "cmth5bz0a007df0rl4malgyih",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 178,
+      "name": "Episode 178",
+      "synopsis": "Teşkilat — Bölüm 178. Official broadcaster upload.",
+      "durationMins": 151,
+      "stillUrl": "https://i.ytimg.com/vi/xPpJiPn-1Zg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/xPpJiPn-1Zg"
+     },
+     {
+      "id": "cmth5bz0a007ef0rln1r7e0qm",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 179,
+      "name": "Episode 179",
+      "synopsis": "Teşkilat — Bölüm 179. Official broadcaster upload.",
+      "durationMins": 145,
+      "stillUrl": "https://i.ytimg.com/vi/Pl7PdJ_WmSg/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/Pl7PdJ_WmSg"
+     },
+     {
+      "id": "cmth5bz0b007ff0rljtjgb1z4",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 180,
+      "name": "Episode 180",
+      "synopsis": "Teşkilat — Bölüm 180. Official broadcaster upload.",
+      "durationMins": 142,
+      "stillUrl": "https://i.ytimg.com/vi/lu8fPSrAqlM/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/lu8fPSrAqlM"
+     },
+     {
+      "id": "cmth5bz0b007gf0rlu6nup8k3",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 181,
+      "name": "Episode 181",
+      "synopsis": "Teşkilat — Bölüm 181. Official broadcaster upload.",
+      "durationMins": 136,
+      "stillUrl": "https://i.ytimg.com/vi/I0N8W-DUAnE/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/I0N8W-DUAnE"
+     },
+     {
+      "id": "cmth5bz0b007hf0rlcswirrhg",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 182,
+      "name": "Episode 182",
+      "synopsis": "Teşkilat — Bölüm 182. Official broadcaster upload.",
+      "durationMins": 139,
+      "stillUrl": "https://i.ytimg.com/vi/b_KDfG3WA0k/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/b_KDfG3WA0k"
+     },
+     {
+      "id": "cmth5bz0b007if0rl5t1l4u02",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 183,
+      "name": "Episode 183",
+      "synopsis": "Teşkilat — Bölüm 183. Official broadcaster upload.",
+      "durationMins": 150,
+      "stillUrl": "https://i.ytimg.com/vi/cJZ0sfXR9oA/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/cJZ0sfXR9oA"
+     },
+     {
+      "id": "cmth5bz0b007jf0rl6byyjb0k",
+      "seasonId": "cmth5bywc0058f0rlfshvycva",
+      "number": 184,
+      "name": "Episode 184",
+      "synopsis": "Teşkilat — Bölüm 184. Official broadcaster upload.",
+      "durationMins": 152,
+      "stillUrl": "https://i.ytimg.com/vi/GmUeoMkZcYc/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/GmUeoMkZcYc"
+     }
+    ]
+   }
+  ]
+ },
+ {
   "id": "cmsvwnqfh00xs4q2r6fx9nbws",
   "name": "Tozluyaka",
   "slug": "tozluyaka",
@@ -117668,7 +120550,7 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
