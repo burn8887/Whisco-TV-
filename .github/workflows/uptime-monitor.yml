@@ -4,8 +4,14 @@ name: Uptime monitor
 # workflow (→ GitHub email alert to the owner) when:
 #   - the homepage or key pages don't return 200
 #   - /api/health reports "down" (DB unreachable) or "degraded"
-# This is the early-warning system: a Neon/Vercel suspension or a bad deploy
-# alerts within 15 minutes instead of being discovered by viewers.
+#
+# Hardened 2026-09-01: every check now retries 3× with 20s backoff before
+# failing. A single transient network/DNS blip on the GitHub runner (curl
+# exit 6 "couldn't resolve host" — happened 2026-09-01 15:42 UTC while the
+# site was fully up) no longer fires a false alarm; a real outage (>1 min)
+# still alerts within the same run. DNS is cross-checked via Google DoH so
+# alert emails say clearly whether it's a runner blip, a DNS problem, or a
+# genuine site outage.
 
 on:
   schedule:
@@ -15,27 +21,53 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Homepage + key pages
         run: |
-          set -euo pipefail
-          for path in "/" "/live" "/vod" "/browse"; do
-            code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv${path}")
-            echo "${path} -> ${code}"
-            if [ "$code" != "200" ]; then
-              echo "::error::${path} returned ${code}" >&2
-              exit 1
+          set -uo pipefail
+          check_path() {
+            local path="$1" attempt code
+            for attempt in 1 2 3; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv${path}")
+              rc=$?
+              if [ $rc -eq 0 ] && [ "$code" = "200" ]; then
+                echo "${path} -> 200 (attempt ${attempt})"
+                return 0
+              fi
+              echo "${path} attempt ${attempt}: curl_exit=${rc} http=${code} — retrying in 20s"
+              sleep 20
+            done
+            # All 3 attempts failed — disambiguate before alerting.
+            dns=$(curl -s --max-time 10 "https://dns.google/resolve?name=www.whisco.tv&type=A" | grep -o '"data"' | head -1)
+            if [ $rc -eq 6 ] && [ -n "$dns" ]; then
+              echo "::error::${path} FAILED 3x with curl exit 6 (DNS at runner) BUT www.whisco.tv resolves via Google DoH — likely GitHub runner DNS issue, verify manually" >&2
+            elif [ $rc -eq 6 ]; then
+              echo "::error::${path} FAILED 3x — DNS NOT RESOLVING (check Spaceship DNS / domain expiry!)" >&2
+            else
+              echo "::error::${path} FAILED 3x — curl_exit=${rc} http=${code} (site likely DOWN)" >&2
             fi
+            return 1
+          }
+          fail=0
+          for path in "/" "/live" "/vod" "/browse"; do
+            check_path "$path" || fail=1
           done
+          exit $fail
       - name: Health endpoint (DB + catalog + cron staleness)
         run: |
-          set -euo pipefail
-          code=$(curl -s -o /tmp/health.json -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv/api/health")
+          set -uo pipefail
+          for attempt in 1 2 3; do
+            code=$(curl -s -o /tmp/health.json -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv/api/health")
+            rc=$?
+            if [ $rc -eq 0 ] && [ "$code" = "200" ]; then break; fi
+            echo "health attempt ${attempt}: curl_exit=${rc} http=${code} — retrying in 20s"
+            sleep 20
+          done
           echo "HTTP $code"
-          cat /tmp/health.json
-          if [ "$code" != "200" ]; then
-            echo "::error::health endpoint returned $code (DB likely down)" >&2
+          cat /tmp/health.json || true
+          if [ $rc -ne 0 ] || [ "$code" != "200" ]; then
+            echo "::error::health endpoint failed after 3 attempts (curl_exit=${rc} http=${code}) — DB likely down" >&2
             exit 1
           fi
           status=$(python3 -c "import json;print(json.load(open('/tmp/health.json'))['status'])")
@@ -44,3 +76,24 @@ jobs:
             echo "::error::health status=$status warnings=$warnings" >&2
             exit 1
           fi
+      - name: Mobile API v1 (used by app testers)
+        run: |
+          set -uo pipefail
+          fail=0
+          for path in "/api/mobile/v1/home" "/api/mobile/v1/live" "/api/mobile/v1/vod"; do
+            for attempt in 1 2 3; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "https://www.whisco.tv${path}")
+              rc=$?
+              if [ $rc -eq 0 ] && [ "$code" = "200" ]; then
+                echo "${path} -> 200 (attempt ${attempt})"
+                break
+              fi
+              echo "${path} attempt ${attempt}: curl_exit=${rc} http=${code}"
+              [ $attempt -lt 3 ] && sleep 20
+            done
+            if [ $rc -ne 0 ] || [ "$code" != "200" ]; then
+              echo "::error::${path} failed after 3 attempts — MOBILE APP TESTERS AFFECTED" >&2
+              fail=1
+            fi
+          done
+          exit $fail
