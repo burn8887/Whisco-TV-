@@ -1,5 +1,5 @@
 # WHISCO TV — COMPLETE PROJECT HANDOVER
-*Last updated: 2026-08-31 (Turkish shelf expanded: +5 latest 2025/26 dizi — Aynadaki Yabancı, Çarpıntı, Ben Leman, Cennetin Çocukları, Teşkilat — 255 verified episodes added; Teşkilat + Cennetin Çocukları wired into dizi auto-updater; catalog snapshots refreshed). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
+*Last updated: 2026-09-01 (INCIDENT RESOLVED: 15:42 UTC uptime-monitor failure was a GitHub-runner DNS blip (curl exit 6), site never down — monitor hardened with 3x retry + DoH DNS cross-check + mobile API v1 endpoints now monitored; 26 closed-testing testers active; iOS: Apple Developer enrollment DONE, awaiting ASC API key from user). Purpose: allow any future conversation/agent to resume this project with zero context loss. Read fully before acting.*
 
 ---
 
