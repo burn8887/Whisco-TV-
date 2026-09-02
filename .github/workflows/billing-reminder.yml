@@ -1,0 +1,49 @@
+name: Billing reminder
+
+# Opens a GitHub Issue on the 25th of every month — GitHub emails the owner
+# automatically. Purpose: verify the card has funds BEFORE the two billing
+# events (Neon ~1st, Vercel ~22nd) so the site/app never gets suspended
+# mid-month. Ledger: WHISCO_TV_BILLING.md in repo root.
+
+on:
+  schedule:
+    - cron: "0 5 25 * *"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open billing pre-check issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const now = new Date();
+            const month = now.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+            // Annual-renewal escalations
+            const y = now.getUTCFullYear(), m = now.getUTCMonth() + 1;
+            let annual = '';
+            if (y === 2027 && m === 7) annual = '\n\n## ⚠️ ANNUAL: whisco.tv domain expires 2027-08-20 — RENEW AT SPACESHIP NOW (consider multi-year).';
+            if (y === 2027 && m === 8) annual = '\n\n## 🚨 ANNUAL: Apple Developer renews ~2027-09-01 ($99) AND domain expired 2027-08-20 if not yet renewed — CHECK BOTH TODAY.';
+            const body = [
+              `Monthly pre-check for **${month}** (full ledger: \`WHISCO_TV_BILLING.md\`):`,
+              '',
+              '- [ ] Card balance ≥ **$40** available',
+              '- [ ] **Neon** will charge ~$5–15 on the **1st** (usage-based, Launch plan)',
+              '- [ ] **Vercel** will charge **$20** around the **22nd** — if the invoice says **$30**, the $10 Speed Insights add-on is active: disable it in Vercel → Project → Speed Insights',
+              '- [ ] No unexpected vendors on the bank statement',
+              '- [ ] (Quarterly-ish) glance at Expo/GitHub — both must still be on free tier',
+              annual,
+              '',
+              '_Auto-created by billing-reminder.yml on the 25th. Close after checking. If a charge looks wrong, tell the agent in chat — audits are cheap._'
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🧾 Monthly billing pre-check — ${month}`,
+              body
+            });
