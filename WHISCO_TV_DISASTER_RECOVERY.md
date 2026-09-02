@@ -1,5 +1,5 @@
 # WHISCO TV — DISASTER RECOVERY & FULL-CONTINUITY DOCUMENT
-*Last updated: 2026-09-02 (STANDING GitHub PAT policy adopted; WHISCO_TV_BILLING.md ledger added + billing-reminder workflow; Apple/ASC credentials registered; Neon moved to usage-based Launch ~$5-15/mo). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
+*Last updated: 2026-09-02-b (iOS SUBMITTED FOR APP STORE REVIEW — WAITING_FOR_REVIEW since 08:05 UTC. Plus: standing-PAT policy; WHISCO_TV_BILLING.md + billing-reminder workflow; Apple/ASC credentials registered; Neon usage-based ~$5-15/mo). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
 *Purpose 1: rebuild Whisco TV to current state from ABSOLUTE ZERO — even if GitHub, Vercel, Spaceship, and Neon accounts are all lost/hijacked/deleted.*
 *Purpose 2: allow a brand-new AI conversation to continue as if this conversation never ended.*
 

@@ -1,5 +1,5 @@
 # WHISCO TV — BILLING & SUBSCRIPTIONS LEDGER
-*Last updated: 2026-09-02. Canonical copy in workspace + iptv-app repo root. Re-upload to Grok/Claude project after every change.*
+*Last updated: 2026-09-02-b (unchanged amounts; iOS submitted for review — no new costs). Canonical copy in workspace + iptv-app repo root. Re-upload to Grok/Claude project after every change.*
 
 ## Monthly expenses
 
