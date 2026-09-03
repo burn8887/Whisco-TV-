@@ -190,7 +190,7 @@ Both documents exist in THREE synchronized places after every update:
 | **Google Search Console** | search.google.com/search-console | SEO monitoring, sitemap submission, crawl/index status | Free | Gmail |
 | **Google AdSense** | adsense.google.com | Ad monetization (publisher ca-pub-7207533964778777) — site under review | Free (pays us) | Gmail |
 | **Expo / EAS** | expo.dev (account: burn8887s-team) | Cloud builds of the mobile app (.aab/.apk/iOS), **holds the Android signing keystore (critical)**, access tokens for agent builds | Free tier | Own account |
-| **Google Play Console** | play.google.com/console | Android app publishing (package tv.whisco.app), closed testing w/ 22 testers, crash reports (Android Vitals) | $25 once | Gmail |
+| **Google Play Console** | play.google.com/console | Android app publishing (package tv.whisco.app), closed testing w/ 26 testers, crash reports (Android Vitals) | $25 once | Gmail |
 | **Apple Developer** | developer.apple.com | iOS app signing + App Store publishing — ENROLLMENT PENDING | $99/yr | Apple ID (use Gmail) |
 | **YouTube (passive)** | — | Official broadcaster embeds for VOD + some live channels; oEmbed/RSS APIs for verification & discovery | Free | None needed |
 | **iptv-org (passive)** | github.com/iptv-org/iptv | Public index of free-to-air live streams — weekly channel discovery source | Free | None |

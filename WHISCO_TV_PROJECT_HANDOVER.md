@@ -88,7 +88,7 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 
 ## 6b. MOBILE APP (React Native / Expo) — FEATURE-COMPLETE, AWAITING PLAY ACCOUNT
 
-**Decision history:** TWA was planned for a September deadline; user relaxed the deadline and chose viewers-first quality → **RN-first, TWA skipped entirely**. 22 testers recruited (Google requires 12 × 14 continuous days for personal accounts). Filmhub letter updated to "apps launching Q4 2026".
+**Decision history:** TWA was planned for a September deadline; user relaxed the deadline and chose viewers-first quality → **RN-first, TWA skipped entirely**. 26 testers recruited (Google requires 12 × 14 continuous days for personal accounts). Filmhub letter updated to "apps launching Q4 2026".
 
 **Project:** `/home/user/whisco-mobile` (own git repo, NOT pushed to GitHub yet — decide with user whether same repo subfolder or new repo `whisco-mobile`).
 - Expo SDK 57 / RN 0.86, TypeScript, expo-router (tabs: Home / Live TV / On Demand / My List + /title/[slug] + /live/[id]).
@@ -111,7 +111,7 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 **Launch sequence remaining:**
 1. User's Play developer account finishes verification ($25 paid, in progress 2026-08-24).
 2. ~~Build .aab~~ DONE — download from expo.dev or rebuild fresh when needed.
-3. User uploads .aab to Play Console → closed testing → invite the 22 testers (need Gmail addresses or Google Group) → **14 continuous days**.
+3. User uploads .aab to Play Console → closed testing → invite the 26 testers (need Gmail addresses or Google Group) → **14 continuous days**.
 4. Screenshots per store/listing.md shot-list during testing.
 5. Apply for production access → submit → review (3-7d) → LIVE.
 6. Then: Amazon Appstore (Fire TV), then production-tv build for Android TV listing, then iOS (Apple $99/yr, EAS handles Mac-less builds).
@@ -122,7 +122,7 @@ All API crons auth via `Authorization: Bearer <CRON_SECRET>`; all on www host.
 **Play Console: VERIFIED & LIVE.** App created: name "Whisco TV: Free Live TV & VOD", package tv.whisco.app, free.
 Content rating: Teen-track answers submitted (profanity/violence "yes, not focus"; no UGC/gambling/explicit).
 **Advertising ID: declared NO** — and enforced in-manifest via android.blockedPermissions AD_ID (v1 has zero ad SDKs; flip BOTH together if ads SDK ever ships).
-**Current store bundle: versionCode 6** (build 047dde90) — includes all fixes below. User uploading to internal testing (was mid-flow with vc5 draft; instructed to swap to vc6). Next: publish internal → CLOSED testing track with 22 testers (starts mandatory 14-day clock) → production access.
+**Current store bundle: versionCode 6** (build 047dde90) — includes all fixes below. User uploading to internal testing (was mid-flow with vc5 draft; instructed to swap to vc6). Next: publish internal → CLOSED testing track with 26 testers (starts mandatory 14-day clock) → production access.
 
 **App iterations from user device-testing rounds:**
 - v0.3: FIXED YouTube error 153 (embeds load via host page with whisco.tv baseUrl so YouTube sees valid origin); Whisco branding everywhere (WhiscoHeader with mascot+gradient wordmark on all tabs, About screen with clinic video + contacts, Sign-in screen vs NextAuth, zoom-banner video strip on Home, gradient CTAs).
@@ -144,7 +144,7 @@ Content rating: Teen-track answers submitted (profanity/violence "yes, not focus
 5. AdSense: wait for review; if "site not ready" feedback, address specifics.
 6. Filmhub: application in flight — watch partnerships@ inbox; on acceptance do §5 integration work.
 7. Token policy: GitHub PAT = per-session throwaway (revoke after). Expo token = user decides policy (per-session fresh vs semi-standing) — ASK AND RECORD when next discussed.
-7b. Mobile app: when Play verification completes → EAS build → testers (22 ready) → 14-day clock. Expo account needed for EAS (user creates or agent walks through).
+7b. Mobile app: when Play verification completes → EAS build → testers (26 active) → 14-day clock. Expo account needed for EAS (user creates or agent walks through).
 8. After the new automation workflows first run: check github.com/burn8887/Whisco-TV-/actions for green.
 8. Uptime monitor will email the owner on failures — if user reports such an email, check /api/health first, then Neon/Vercel dashboards.
 

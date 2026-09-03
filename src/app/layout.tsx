@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import PwaSetup from "@/components/PwaSetup";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-7207533964778777";
@@ -73,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body className="antialiased bg-[#0a0a0f] text-zinc-100">{children}<PwaSetup /></body>
+      <body className="antialiased bg-[#0a0a0f] text-zinc-100">{children}<PwaSetup /><Analytics /></body>
     </html>
   );
 }
