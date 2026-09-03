@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSitemapData } from "@/lib/cached";
+import { GUIDES } from "@/lib/guides";
 
 const SITE_URL = "https://whisco.tv";
 
@@ -16,9 +17,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/vod`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/browse`, changeFrequency: "daily", priority: 0.8 },
     { url: `${SITE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/guides/turkish-series-guide`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/guides/free-tv-for-expats-gulf`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/guides/pakistani-dramas-guide`, changeFrequency: "weekly", priority: 0.8 },
+    // All guides register automatically — add to GUIDES array and it's in the sitemap.
+    ...GUIDES.map((g) => ({
+      url: `${SITE_URL}/guides/${g.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.5 },
   ];
