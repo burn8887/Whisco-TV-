@@ -102,4 +102,98 @@ export const GUIDES: Guide[] = [
     ctaLabel: "Browse Pakistani Dramas",
     ctaHref: "/vod?collection=Pakistani+Dramas",
   },
+  {
+    slug: "bollywood-classics-free",
+    title: "Free Bollywood Movies Online: The Legal Way to Watch Hindi Cinema",
+    h1: "Bollywood for Free, Legally: A Guide for Hindi Movie Lovers in the Gulf",
+    intro:
+      "Hindi cinema is the largest film industry on earth by output, and for the millions of Indians in the Gulf it is a direct line home. What many viewers do not know: thousands of Bollywood films are legally free to watch, published by the studios themselves. Whisco TV carries more than 2,500 Hindi titles from official studio channels — this guide explains what is there and how to make the most of it.",
+    sections: [
+      {
+        heading: "Why studios give movies away free",
+        paragraphs: [
+          "Studios like Goldmines, Shemaroo, Rajshri, B4U and Pen own enormous film libraries, and advertising-supported streaming lets those libraries earn money forever instead of gathering dust. The studio uploads the full film to its official channel, advertising pays for it, and you watch free. It is the same bargain as television — except the catalog is tens of thousands of films deep.",
+          "This is why you should never pay a pirate 'movie pack' seller: the legitimate owners are giving much of it away already, in better quality, with zero legal or malware risk.",
+        ],
+      },
+      {
+        heading: "What you will find on Whisco TV",
+        paragraphs: [
+          "The Hindi Cinema shelf runs from 1950s classics to recent releases — action with Akshay Kumar and Ajay Devgn, 90s romances, Salman and Shah Rukh hits, and the South-dubbed action films that dominate Hindi-speaking YouTube. Dedicated shelves for Malayalam, Tamil, Telugu and Punjabi cinema sit alongside, plus Hindi Serials for daily-soap viewers.",
+          "Every title is checked automatically around the clock — if a studio pulls a film, it disappears from the catalog rather than wasting your evening with a dead link. New films are added automatically every week as studios publish them.",
+        ],
+      },
+      {
+        heading: "Tips for the best experience",
+        paragraphs: [
+          "Use the search box for actors or specific films — with 2,500+ Hindi titles, search is faster than scrolling. Add films to My List when you spot something interesting; your watch progress is remembered so an interrupted movie resumes where you stopped.",
+          "On a phone, install the app (Android now, iPhone soon) or add whisco.tv to your home screen. On a laptop, whisco.tv works in any browser — and if your TV has a browser or casting, the big screen is one tap away.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse Hindi Cinema",
+    ctaHref: "/vod?collection=Hindi+Cinema",
+  },
+  {
+    slug: "malayalam-movies-gulf",
+    title: "Malayalam Movies Free Online: A Guide for Keralites in the Gulf",
+    h1: "Malayalam Cinema, Free in the Gulf: From Mohanlal Classics to New Releases",
+    intro:
+      "No diaspora loves its cinema like Keralites love Malayalam film — and no expat community in the Gulf is prouder of its industry's golden run. From Mohanlal and Mammootty evergreens to the new-generation directors rewriting Indian cinema, Whisco TV carries close to 700 Malayalam titles, all free, all from official channels. Here is your orientation.",
+    sections: [
+      {
+        heading: "The Gulf connection",
+        paragraphs: [
+          "Nearly three million Malayalis live and work in the GCC — in many Kerala households, the Gulf is simply part of the family map. Malayalam cinema knows this: Gulf-set stories from Pathemari to Aadujeevitham speak directly to the pravasi experience, and Friday releases in Dubai and Doha sell out as fast as in Kochi.",
+          "Between cinema visits, the official channels of Malayalam studios and distributors publish full films legally — which is what fills our shelf. Matinee Now, Millennium, Amrita and others keep the classics and the mid-catalog available to everyone, everywhere, free.",
+        ],
+      },
+      {
+        heading: "Where to start on the shelf",
+        paragraphs: [
+          "For the classics: the Mohanlal and Mammootty catalogs of the 80s and 90s remain the industry's spine — comedy, drama and the films every Malayali quotes from memory. For newer sensibilities, look for the character-driven realism that made Malayalam cinema the critics' favorite industry in India.",
+          "The shelf also carries Malayalam-dubbed South Indian action for family movie nights, and Kerala's TV channels stream live on the Live TV tab under the Malayalam filter — Asianet, Mathrubhumi News, Manorama and more, depending on current availability.",
+        ],
+      },
+      {
+        heading: "Watching together, at home and back home",
+        paragraphs: [
+          "Whisco TV is free with no account required, so recommending a film to family in Kerala is just sending a link. Progress sync, My List and the mobile apps make the nightly film-after-dinner ritual effortless — the same way you watched at home, just continued abroad.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse Malayalam Cinema",
+    ctaHref: "/vod?collection=Malayalam+Cinema",
+  },
+  {
+    slug: "arabic-series-guide",
+    title: "Classic Arabic Series Free Online: Khaleeji, Syrian and Lebanese Drama",
+    h1: "Arabic Drama on Whisco TV: The Series the Whole Region Grew Up On",
+    intro:
+      "Before streaming, there was the Ramadan musalsal — and the golden decades of Kuwaiti theatre-drama, Syrian social realism and Lebanese romance that still define Arabic television. Whisco TV carries more than 300 Arabic series with over 7,000 episodes from official broadcaster channels, spanning Kuwait, Syria, Lebanon, the UAE, Jordan, Qatar and Bahrain. This guide maps the territory.",
+    sections: [
+      {
+        heading: "The traditions on the shelf",
+        paragraphs: [
+          "Khaleeji drama — Kuwait above all — is the Gulf's own voice: family sagas, sharp social comedy and the theatre-trained actors whose plays and serials every Gulf household knows. Our Kuwaiti collection is the largest on the shelf at over 120 series.",
+          "Syrian drama brought Arabic television its realism — Bab Al-Hara's old-Damascus courtyards became a pan-Arab Ramadan ritual, and Syrian social dramas remain the writers' room the region measures itself against. Lebanese production adds the romance and the polish, including the crime saga Al-Hayba that traveled the world.",
+        ],
+      },
+      {
+        heading: "Why these classics matter now",
+        paragraphs: [
+          "Arab satellite TV built a shared living-room culture across the region — an Emirati, a Jordanian and a Bahraini can quote the same Kuwaiti comedy. Broadcasters have published these libraries on their official channels to keep that heritage alive, which is exactly the legal, free source Whisco TV organizes.",
+          "For younger viewers raised on subscription platforms, the shelf is a chance to meet the originals: the series your parents planned their evenings around, free and in one place.",
+        ],
+      },
+      {
+        heading: "Finding your way",
+        paragraphs: [
+          "Open On Demand and look for the Arabic Series & Shows shelf, or search a title directly. Series pages list episodes in broadcast order with progress remembered. Live Arabic channels — news, entertainment and religious programming from across the region — are under the Arabic filter on the Live TV tab.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse Arabic Series",
+    ctaHref: "/vod?collection=Arabic+Series+%26+Shows",
+  },
 ];
