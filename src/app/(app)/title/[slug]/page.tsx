@@ -7,6 +7,7 @@ import TitleCard from "@/components/TitleCard";
 import AdSlot from "@/components/AdSlot";
 import WatchlistButton from "@/components/WatchlistButton";
 import ShareButton from "@/components/ShareButton";
+import CopyMessageButton from "@/components/CopyMessageButton";
 import { Play, Star, Clock } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -207,6 +208,12 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
 
               {profile && <WatchlistButton profileId={profile.id} titleId={title.id} initial={inWatchlist} />}
               <ShareButton title={title.name} path={`/title/${slug}`} />
+              <CopyMessageButton
+                name={title.name}
+                language={title.language}
+                meta={title.type === "SERIES" ? `${title.language} · series` : `${title.language}${title.durationMins ? ` · ${Math.floor(title.durationMins / 60)}h ${title.durationMins % 60}m` : ""}`}
+                path={`/title/${slug}`}
+              />
             </div>
           </div>
         </div>
