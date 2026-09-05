@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/live`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/vod`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/browse`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/new`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/guides`, changeFrequency: "weekly", priority: 0.8 },
     // All guides register automatically — add to GUIDES array and it's in the sitemap.
     ...GUIDES.map((g) => ({

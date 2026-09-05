@@ -237,3 +237,51 @@ export const getAboutStats = unstable_cache(
   ["about-stats"],
   { revalidate: REVAL_SLOW }
 );
+
+// "New This Week" — titles added in the last 7 days grouped by collection,
+// plus recently-updated ongoing series (new episodes). Powers /new and the
+// RSS feed. Cached 1h — freshness is driven by cron cadence, not page hits.
+export const getNewThisWeek = unstable_cache(
+  async () => {
+    const since = new Date(Date.now() - 7 * 24 * 3600 * 1000);
+    const [newTitles, updatedSeries] = await Promise.all([
+      prisma.title.findMany({
+        where: { isActive: true, createdAt: { gte: since } },
+        select: {
+          name: true, slug: true, posterUrl: true, collection: true,
+          language: true, type: true, createdAt: true, synopsis: true,
+        },
+        orderBy: { createdAt: "desc" },
+        take: 200,
+      }),
+      // Ongoing series that gained episodes this week (episode ids are cuid —
+      // no createdAt on Episode, so approximate via title lastCheckedAt+isNew
+      // signals; dizi updater bumps lastCheckedAt when it adds episodes).
+      prisma.title.findMany({
+        where: {
+          isActive: true, type: "SERIES", isNew: true,
+          createdAt: { lt: since }, lastCheckedAt: { gte: since },
+          collection: "Turkish Dizi",
+        },
+        select: { name: true, slug: true, posterUrl: true, collection: true, language: true },
+        take: 24,
+      }),
+    ]);
+    const byCollection = new Map<string, typeof newTitles>();
+    for (const t of newTitles) {
+      const arr = byCollection.get(t.collection) ?? [];
+      arr.push(t);
+      byCollection.set(t.collection, arr);
+    }
+    return {
+      generatedAt: new Date().toISOString(),
+      totalNew: newTitles.length,
+      groups: [...byCollection.entries()]
+        .sort((a, b) => b[1].length - a[1].length)
+        .map(([collection, titles]) => ({ collection, titles })),
+      updatedSeries,
+    };
+  },
+  ["new-this-week"],
+  { revalidate: REVAL_SLOW }
+);

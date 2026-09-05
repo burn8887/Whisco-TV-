@@ -73,7 +73,7 @@ export async function GET(req: Request) {
 
   // Weekly IndexNow refresh of evergreen pages (guides + hubs) so engines
   // re-crawl them promptly after content updates.
-  await pingIndexNow(["/", "/live", "/vod", "/guides",
+  await pingIndexNow(["/", "/live", "/vod", "/new", "/guides",
     "/guides/turkish-series-guide", "/guides/free-tv-for-expats-gulf",
     "/guides/pakistani-dramas-guide", "/guides/bollywood-classics-free",
     "/guides/malayalam-movies-gulf", "/guides/arabic-series-guide"]);

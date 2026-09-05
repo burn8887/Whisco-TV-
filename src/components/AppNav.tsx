@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@/components/Logo";
 import { logoutAction } from "@/lib/actions/auth";
-import { Tv2, Film, Home, Bookmark, User, Shield, LogOut, Menu, X, LogIn } from "lucide-react";
+import { Tv2, Film, Home, Bookmark, User, Shield, LogOut, Menu, X, LogIn, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 const LINKS = [
   { href: "/browse", label: "Home", icon: Home },
   { href: "/live", label: "Live TV", icon: Tv2 },
   { href: "/vod", label: "On Demand", icon: Film },
+  { href: "/new", label: "New", icon: Sparkles },
   { href: "/watchlist", label: "My List", icon: Bookmark },
 ];
 
