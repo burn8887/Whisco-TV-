@@ -4,7 +4,8 @@ import { getTitlePageData } from "@/lib/cached";
 // Branded WhatsApp/social share card per title. Poster + gradient + wordmark
 // + "Watch Free" pill — makes every shared link unfurl as a premium-looking
 // preview instead of a raw YouTube thumbnail. Edge-cached heavily.
-export const runtime = "edge";
+// nodejs runtime: getTitlePageData uses Prisma (not edge-compatible).
+export const runtime = "nodejs";
 
 export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
