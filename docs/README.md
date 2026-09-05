@@ -30,5 +30,15 @@ All documents here were drafted with AI assistance (Grok heavy-model workforce, 
 | `Grok_Workforce_Prompts.md` | W1–W10 tiered business/growth/ops prompts + FACTS BLOCK |
 | `Grok_Research_Prompts.md` | The original 5 research prompts (all returned) |
 
-## Pending from the workforce run (paste back when ready)
-- W5 marketing calendar · W6 SEO briefs/drafts · W7 sponsorship kit · W8 ops manual/org design · W9 Filmhub scorecard · W10 GCC regulatory scan
+## Workforce run W5–W10 (received 2026-09-05, reviewed)
+
+| Document | What it is | Status |
+|---|---|---|
+| `Whisco_TV_Marketing_Playbook.pdf` | 12-month calendar (Ramadan/Onam/Diwali/IPL/dizi-season), Meta ads playbook for $110/mo, ASO plan, WhatsApp Channel system | ACTIVE — feeds monthly marketing tasks |
+| `Whisco_TV_SEO_Content_Pack.pdf` | 20 gap briefs + 5 full article drafts | PIPELINE — agent adapts drafts into /guides (verify facts first) |
+| `Whisco_TV_Sponsor_Prospects_Pack.md` | 30 GCC prospects, early-stage rate card, media-kit template, outreach sequences | HOLD until analytics numbers exist (~Oct) |
+| `Whisco_TV_Operations_Org_AI_Blueprint.md` | Ops runbooks, org stages 0–3, 8-agent AI workforce design with guardrails | REFERENCE — agent roles adopted incrementally |
+| `Whisco_TV_Acquisition_Kit.md` | Filmhub 150-title scoring rubric (0–100, A–D bands), kill criteria, quotas, 30-day review template | ACTIVE — use at licensing time |
+| `Whisco_TV_GCC_Streaming_Regulatory_Memo.md` | 6-state licensing/content/ads/data analysis; Bahrain posture; 10 red lines | REFERENCE — informs formation + geo policy |
+
+**All 10 workforce prompts returned.** Pending: W1 adversarial pass (hostile due-diligence rerun of the financial model).
