@@ -161,6 +161,9 @@ Content rating: Teen-track answers submitted (profanity/violence "yes, not focus
 - **Workflows failed 6s after domain cutover** → apex 308s to www; workflows now use www + -L.
 - Demo content fully purged (24 fake titles Aug 16); "sample content" footer text removed Aug 22 — never reintroduce either.
 
+## 8b. BUSINESS DOCUMENT LIBRARY (added 2026-09-05)
+Repo `docs/` tree (indexed in docs/README.md): /business = investor plan (5yr P&L, 3 scenarios, $0 external cash needed in all), company profile, Bahrain formation guide (DECISION PENDING: single-shareholder W.L.L. "Whisco Media W.L.L.", ISIC 6312+6201+6311, ~BHD 700-1,400 setup incl. year-1 virtual office; SPC abolished 2020), policy suite PDF (8 templates, legal review needed), fundraising pack PDF, Filmhub call prep, company dossier (v1.0 — the third-party-AI context doc; version-bump on milestones). /research = 3 Grok research docs (communities, SEO gaps, competitor teardown). /prompts = reusable workforce packs. Grok trial outputs W5-W10 pending. Key strategic decisions on the table for founder: (1) file W.L.L. formation, (2) investor side-letter Form A (gift) vs Form B (convertible), (3) policy suite legal review before publishing.
+
 ## 9. NEXT MAJOR MILESTONES
 
 1. AdSense approval → ads live → first revenue.
