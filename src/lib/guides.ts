@@ -196,4 +196,43 @@ export const GUIDES: Guide[] = [
     ctaLabel: "Browse Arabic Series",
     ctaHref: "/vod?collection=Arabic+Series+%26+Shows",
   },
+  {
+    slug: "cut-the-pirate-box",
+    title: "Life After the Pirate IPTV Box: Legal Free TV for Gulf Expats",
+    h1: "Cutting the Pirate Box: What Actually Works Instead",
+    intro:
+      "Every expat compound in the Gulf knows the ritual: someone sells you a loaded box or a Firestick 'subscription' — 10,000 channels for a few dinars a month. Then it freezes during the cricket, dies during the season finale, and the seller's number stops answering. This guide is the honest map of what replaces it: what is legally free, what genuinely requires a paid app, and how to set up a household that never depends on a pirate seller again.",
+    sections: [
+      {
+        heading: "Why the box always fails you",
+        paragraphs: [
+          "Pirate IPTV services are illegal rebroadcasts. They freeze on big match nights precisely because that is when overloaded stolen streams collapse — and when rights holders hunt them hardest. The seller can vanish with your renewal money at any time, the apps are a documented malware vector, and in the UAE and other Gulf states, using them can carry real legal risk. None of this is bad luck. It is the business model.",
+          "The uncomfortable truth the sellers rely on: most people never learn how much of what they watch is already legal and free. The box bundles 90% legally-free channels with 10% premium sports and charges you for the lot.",
+        ],
+      },
+      {
+        heading: "What is legally free right now",
+        paragraphs: [
+          "News, entertainment and general channels from India, Pakistan, Bangladesh, the Philippines, Indonesia, Nepal, Sri Lanka and across the Arab world broadcast free-to-air and stream legally without any subscription. Production houses publish full movie libraries on official channels: Goldmines and Shemaroo for Hindi cinema, HUM, ARY and Geo networks for Pakistani dramas with English subtitles, official Turkish broadcaster channels for dizi.",
+          "Whisco TV exists to organize exactly this: 600+ legal live channels and 14,000+ on-demand titles in 13 languages, in one place, checked automatically around the clock — free because it is advertising-supported, the same bargain as TV back home. No box, no seller, no dish on the balcony, nothing to install beyond a browser or our free app.",
+        ],
+      },
+      {
+        heading: "What still honestly needs a paid app — and what it costs",
+        paragraphs: [
+          "Live premium sport is the big one: top cricket, Premier League football and major tournaments are exclusively licensed in MENA, mostly to TOD/beIN and platforms like Starzplay for cricket. If live sport matters to your household, that is the one subscription worth budgeting for — often cheaper per month than the pirate box that kept freezing anyway.",
+          "Some day-one releases from Indian OTT platforms and specific catalog exclusives also stay behind their own apps. Our honest advice: pay for the one thing your family truly needs live, take everything else from the legal free layer, and you will usually spend less than the box cost — with none of the freezing.",
+        ],
+      },
+      {
+        heading: "The 15-minute household setup",
+        paragraphs: [
+          "On a Smart TV: open the browser to whisco.tv, or cast from your phone. On Android phones and tablets: our app is on Google Play. On iPhone: the App Store version is on its way, and Safari works today — Share, then Add to Home Screen. For the living room on a budget, any Android TV box running the official Play Store (not a 'loaded' one) does the job.",
+          "Set the language filter once — Malayalam, Tamil, Urdu, Tagalog, Bahasa, Arabic, Turkish, whatever home sounds like — and the lineup is yours. Add shows to My List, and your episodes resume where you stopped. If a channel ever dies upstream, our systems remove it automatically instead of leaving you staring at a frozen screen wondering if the seller will answer this time.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse Free Live TV",
+    ctaHref: "/live",
+  },
 ];

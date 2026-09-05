@@ -1,0 +1,75 @@
+name: Community post digest
+
+# Every Monday 06:00 UTC (09:00 Bahrain): opens a GitHub Issue with ready-to-
+# adapt DRAFT posts for the week, built from what actually changed in the
+# catalog (via /api/mobile/v1/home + /new page data) and targeted at the
+# vetted community list from the 2026-09-05 research map.
+#
+# HARD RULE (owner's doctrine): drafts are for a HUMAN to review, adapt, and
+# post manually in communities where they genuinely participate. Nothing in
+# this workflow posts anywhere. Automation prepares; humans press send.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Build digest from live catalog
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Pull what's new from the production API (cached, zero DB load)
+            const res = await fetch("https://www.whisco.tv/api/mobile/v1/home");
+            const home = await res.json();
+            const stats = home.stats || {};
+            const rows = home.rows || [];
+            const newRow = rows.find(r => (r.title || "").toLowerCase().includes("new")) || rows[0] || { items: [] };
+            const fresh = (newRow.items || []).slice(0, 6).map(t => `- **${t.name}** → https://whisco.tv/title/${t.slug}?utm_source=community&utm_medium=post`);
+
+            const week = new Date().toISOString().slice(0, 10);
+            const body = [
+              `Weekly community digest for **${week}**. Catalog now: **${stats.channels || "600+"} live channels · ${stats.titles || "14,500+"} titles**.`,
+              "",
+              "## Fresh this week (use in drafts)",
+              fresh.length ? fresh.join("\n") : "_Quiet week — lead with the New This Week page instead: https://whisco.tv/new_",
+              "",
+              "## Draft posts (ADAPT to the thread — never paste cold)",
+              "",
+              "### 1. Expat.com Bahrain — reply in Firestick/streaming threads (LOW risk, disclose you built it)",
+              "> If the Firestick box keeps freezing, most of what's on it is actually legal and free anyway — Indian/Pakistani/Filipino/Arabic channels broadcast free-to-air. I run whisco.tv which organizes 600+ of them legally (declared interest). For live EPL/cricket you still need TOD/beIN — that part no free service can do legally.",
+              "",
+              "### 2. r/cordcutters — use the Self-Promo flair, disclosure required (MEDIUM risk)",
+              "> [Self-Promo] Built a free legal streaming platform for Middle East expats — 600+ FTA channels, 14K titles, 13 languages, no signup. Feedback welcome, especially from anyone cord-cutting outside the US.",
+              "",
+              "### 3. r/ABCDesis — answer Jadoo-box-type threads only (MEDIUM risk)",
+              "> Legal alternative for parents' Desi TV: most Hindi/Urdu channels are free-to-air and studios like Goldmines/Shemaroo publish full movies officially. whisco.tv (mine — disclosure) aggregates those legally for free. For live cricket you'll still need a paid sports app.",
+              "",
+              "### 4. Turkish drama communities — answer 'where to watch legally' threads (HIGH risk — value first, link only if rules allow)",
+              "> The official broadcaster channels (ATV, Star, Show, Kanal D, NOW, TRT) publish full episodes free — that's the legal HD source. We've organized 61 series / 3,600+ episodes of them at whisco.tv with resume/watchlist. YouTube auto-captions cover EN on most.",
+              "",
+              "### 5. WhatsApp/Telegram groups you're actually in (family-forward pattern)",
+              "> New this Friday on Whisco TV (free, no signup): [pick 1-2 titles from the fresh list — lead with LANGUAGE + runtime, e.g. 'Malayalam · 2h 10m']. https://whisco.tv/new",
+              "",
+              "## Rules reminders (from the community map)",
+              "- NEVER post cold to r/dubai / r/Bahrain / r/UAE country subs — answer existing threads only",
+              "- ExpatWoman + Dubai Mallu Chat: links banned — do not post",
+              "- Pirate Telegram dump channels: never touch (brand safety)",
+              "- Always disclose it's your platform. One helpful answer > five promos.",
+              "",
+              "_Auto-generated Monday digest (community-digest.yml). Close after posting week's picks. Full map: workspace `uploads/gulf-expat-tv-communities-map.md`._"
+            ].join("\n");
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📣 Community post digest — week of ${week}`,
+              body
+            });
