@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { pingIndexNow } from "@/lib/indexnow";
 
 // Weekly live-channel discovery — keeps the Live TV lineup growing without
 // manual work. Pulls the community-maintained iptv-org index, filters to our
@@ -182,6 +183,7 @@ export async function GET(req: Request) {
 
   if (added.length) {
     revalidatePath("/live");
+    await pingIndexNow(["/live"]);
     revalidatePath("/");
   }
 

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { pingIndexNow } from "@/lib/indexnow";
 
 // Weekly VOD discovery — keeps shelves fresh with the newest full-length
 // uploads from distributor channels we have already vetted (official,
@@ -114,6 +115,7 @@ export async function GET(req: Request) {
   }
 
   let totalAdded = 0;
+  const addedSlugs: string[] = [];
   const report: Record<string, unknown>[] = [];
 
   for (const src of SOURCES) {
@@ -174,6 +176,7 @@ export async function GET(req: Request) {
           },
         });
         (srcReport.added as number) = (srcReport.added as number) + 1;
+        addedSlugs.push(slug);
         totalAdded++;
       }
     } catch (err) {
@@ -185,6 +188,8 @@ export async function GET(req: Request) {
   if (totalAdded) {
     revalidatePath("/vod");
     revalidatePath("/browse");
+    // IndexNow: get new title pages indexed within hours.
+    await pingIndexNow(["/vod", ...addedSlugs.map((sl) => `/title/${sl}`)]);
   }
 
   return NextResponse.json({ totalAdded, sources: report, timestamp: new Date().toISOString() });

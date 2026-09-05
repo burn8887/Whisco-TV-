@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { pingIndexNow } from "@/lib/indexnow";
 
 // Turkish Dizi auto-updater — keeps ongoing shows fresh without manual work.
 //
@@ -203,6 +204,13 @@ export async function GET(req: Request) {
   // Refresh cached catalog pages so changes appear promptly.
   revalidatePath("/vod");
   revalidatePath("/browse");
+
+  // IndexNow: ping search engines for shows that gained episodes (title pages
+  // changed) so fresh content is indexed within hours, not weeks.
+  const changedPaths = report
+    .filter((r) => Array.isArray(r.added) && (r.added as unknown[]).length > 0)
+    .map((r) => `/title/${r.slug}`);
+  if (changedPaths.length > 0) await pingIndexNow(["/vod", ...changedPaths]);
 
   return NextResponse.json({ totalAdded, shows: report, timestamp: new Date().toISOString() });
 }

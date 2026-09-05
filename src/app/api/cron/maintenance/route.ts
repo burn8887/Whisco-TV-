@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { pingIndexNow } from "@/lib/indexnow";
 
 // Weekly janitor — keeps the catalog fresh-feeling and tidy without human
 // intervention:
@@ -69,6 +70,13 @@ export async function GET(req: Request) {
   revalidatePath("/browse");
   revalidatePath("/vod");
   revalidatePath("/");
+
+  // Weekly IndexNow refresh of evergreen pages (guides + hubs) so engines
+  // re-crawl them promptly after content updates.
+  await pingIndexNow(["/", "/live", "/vod", "/guides",
+    "/guides/turkish-series-guide", "/guides/free-tv-for-expats-gulf",
+    "/guides/pakistani-dramas-guide", "/guides/bollywood-classics-free",
+    "/guides/malayalam-movies-gulf", "/guides/arabic-series-guide"]);
 
   return NextResponse.json({
     newBadgesAged: agedNew.count,
