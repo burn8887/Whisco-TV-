@@ -6,6 +6,7 @@ import Link from "next/link";
 import TitleCard from "@/components/TitleCard";
 import AdSlot from "@/components/AdSlot";
 import WatchlistButton from "@/components/WatchlistButton";
+import ShareButton from "@/components/ShareButton";
 import { Play, Star, Clock } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -57,13 +58,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url,
       siteName: "Whisco TV",
       type: title.type === "SERIES" ? "video.tv_show" : "video.movie",
-      images: [{ url: title.backdropUrl || title.posterUrl, width: 1280, height: 720, alt: title.name }],
+      images: [{ url: `${SITE_URL}/api/og/title/${slug}`, width: 1200, height: 630, alt: title.name }],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: [title.backdropUrl || title.posterUrl],
+      images: [`${SITE_URL}/api/og/title/${slug}`],
     },
     robots: { index: !isThin, follow: true },
   };
@@ -205,6 +206,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
               ) : null}
 
               {profile && <WatchlistButton profileId={profile.id} titleId={title.id} initial={inWatchlist} />}
+              <ShareButton title={title.name} path={`/title/${slug}`} />
             </div>
           </div>
         </div>
