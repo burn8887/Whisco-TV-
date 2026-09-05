@@ -41,4 +41,9 @@ All documents here were drafted with AI assistance (Grok heavy-model workforce, 
 | `Whisco_TV_Acquisition_Kit.md` | Filmhub 150-title scoring rubric (0–100, A–D bands), kill criteria, quotas, 30-day review template | ACTIVE — use at licensing time |
 | `Whisco_TV_GCC_Streaming_Regulatory_Memo.md` | 6-state licensing/content/ads/data analysis; Bahrain posture; 10 red lines | REFERENCE — informs formation + geo policy |
 
-**All 10 workforce prompts returned.** Pending: W1 adversarial pass (hostile due-diligence rerun of the financial model).
+**All 11 workforce outputs returned (incl. adversarial pass).**
+
+| Document | What it is | Status |
+|---|---|---|
+| `Whisco_TV_Hostile_Diligence_Memo.md` | Adversarial attack on the W1 financial model — the honest risk picture | READ WITH the business plan, always |
+| `Whisco_TV_Operating_Rules_v2.md` | The rulebook adopted from it: measurement rules, 4-gate model, $3k/mo budget governance tiers, maintenance register, decisions log | **GOVERNING DOCUMENT** |
