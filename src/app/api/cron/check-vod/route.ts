@@ -168,17 +168,23 @@ async function checkTitle(t: TitleRow): Promise<CheckResult> {
   }
 }
 
-async function runPool<T, R>(items: T[], concurrency: number, fn: (item: T) => Promise<R>): Promise<R[]> {
-  const results: R[] = new Array(items.length);
+// Time-budgeted pool: stops picking NEW items once the deadline passes so the
+// route always returns well inside Vercel's maxDuration (the 2026-09-06 failure
+// was exit-28: batch of 250 outran the 300s window as the harvest backlog and
+// YouTube latency grew). Unprocessed titles stay least-recently-checked and
+// are simply first in the next run — nothing is lost, the sweep self-heals.
+async function runPool<T, R>(items: T[], concurrency: number, fn: (item: T) => Promise<R>, deadlineMs = 230_000): Promise<R[]> {
+  const results: (R | undefined)[] = new Array(items.length);
+  const started = Date.now();
   let next = 0;
   async function worker() {
-    while (next < items.length) {
+    while (next < items.length && Date.now() - started < deadlineMs) {
       const i = next++;
       results[i] = await fn(items[i]);
     }
   }
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker));
-  return results;
+  return results.filter((r): r is R => r !== undefined);
 }
 
 export async function GET(req: Request) {
@@ -257,7 +263,8 @@ export async function GET(req: Request) {
   revalidatePath("/");
 
   return NextResponse.json({
-    checked: titles.length,
+    checked: results.length,
+    batchRequested: titles.length,
     ok,
     invalid,
     unknown,
