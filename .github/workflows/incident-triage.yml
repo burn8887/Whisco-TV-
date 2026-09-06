@@ -1,0 +1,162 @@
+name: Incident triage
+
+# THE MONITOR OF THE MONITORS.
+# Fires automatically whenever any operational workflow completes with failure.
+# It: (1) pulls the failed job's step-level detail and annotations,
+#     (2) applies known-cause diagnosis rules (learned from past incidents),
+#     (3) checks whether production is actually affected (site + health API),
+#     (4) opens ONE labeled GitHub Issue with full triage context — deduped:
+#         if an open incident Issue already exists for the same workflow, it
+#         comments on it instead of spamming new Issues.
+# Purpose: incidents are diagnosed and filed within minutes, with context
+# waiting for the engineering agent at next session — the owner is no longer
+# the pager. (Born from the 2026-09-06 check-vod exit-28 incident, which sat
+# in email until the owner forwarded a screenshot.)
+
+on:
+  workflow_run:
+    workflows:
+      - "Uptime monitor"
+      - "Channel health check"
+      - "Turkish Dizi episode updater"
+      - "Content discovery"
+      - "Weekly maintenance"
+      - "Billing reminder"
+      - "Community post digest"
+    types: [completed]
+
+permissions:
+  issues: write
+  actions: read
+
+jobs:
+  triage:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Diagnose and file incident
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            const wfName = run.name;
+            const runUrl = run.html_url;
+            const runId = run.id;
+
+            // ---- 1. Pull job + step details and annotations ----
+            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner, repo: context.repo.repo, run_id: runId
+            });
+            let stepLines = [], annotations = [];
+            for (const job of jobs.data.jobs) {
+              for (const s of job.steps || []) {
+                if (s.conclusion && s.conclusion !== 'success' && s.conclusion !== 'skipped')
+                  stepLines.push(`- ❌ **${job.name} / ${s.name}** → ${s.conclusion}`);
+              }
+              try {
+                const ann = await github.rest.checks.listAnnotations({
+                  owner: context.repo.owner, repo: context.repo.repo, check_run_id: job.id
+                });
+                for (const a of ann.data) annotations.push(a.message);
+              } catch (e) { /* annotations optional */ }
+            }
+            const annText = annotations.join(' | ') || 'none';
+
+            // ---- 2. Known-cause diagnosis rules (institutional memory) ----
+            let diagnosis = '🔍 **Unknown cause** — agent must pull logs and investigate.';
+            let severity = 'investigate';
+            if (/exit code 28/.test(annText)) {
+              diagnosis = '⏱️ **Timeout (curl exit 28)** — a cron endpoint outran its window. Known pattern (2026-09-06 check-vod): batch work exceeding Vercel 300s. Check whether the time-budget guard is working or another endpoint needs one. Usually NOT production-affecting.';
+              severity = 'known-pattern';
+            } else if (/exit code 6/.test(annText)) {
+              diagnosis = '🌐 **DNS failure on the runner (curl exit 6)** — known pattern (2026-09-01): usually a GitHub-runner blip, NOT a real outage. Uptime monitor has retry+DoH guards; if this still fired, verify DNS at registrar quickly.';
+              severity = 'known-pattern';
+            } else if (/401|Unauthorized/i.test(annText)) {
+              diagnosis = '🔑 **Auth failure** — CRON_SECRET mismatch between GitHub secret and Vercel env, or secret was rotated on one side only. Fix: compare and re-sync both.';
+              severity = 'action-required';
+            } else if (/5\d\d/.test(annText)) {
+              diagnosis = '🔥 **Server 5xx from production** — possibly real. Check Vercel deploy status and Neon; consider rollback of last deploy.';
+              severity = 'possibly-production';
+            }
+
+            // ---- 3. Is production actually affected right now? ----
+            let prodStatus = 'unknown';
+            try {
+              const health = await fetch('https://www.whisco.tv/api/health', { signal: AbortSignal.timeout(15000) });
+              if (health.ok) {
+                const h = await health.json();
+                prodStatus = `**${h.status}** — ${h.catalog.activeChannels} channels, ${h.catalog.activeTitles} titles, DB ${h.db.reachable ? 'reachable' : 'DOWN'} (${h.db.latencyMs}ms)`;
+              } else {
+                prodStatus = `⚠️ health endpoint returned HTTP ${health.status} — PRODUCTION MAY BE AFFECTED`;
+                severity = 'possibly-production';
+              }
+            } catch (e) {
+              prodStatus = '🚨 health endpoint UNREACHABLE — PRODUCTION MAY BE DOWN';
+              severity = 'possibly-production';
+            }
+
+            // ---- 4. File or append to incident Issue (dedupe per workflow) ----
+            const title = `🚨 Incident: ${wfName} failed`;
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'incident', per_page: 50
+            });
+            const dup = existing.data.find(i => i.title === title);
+            const body = [
+              `**Workflow:** ${wfName}`,
+              `**Run:** ${runUrl}`,
+              `**When:** ${run.created_at}`,
+              `**Failed steps:**`,
+              stepLines.join('\n') || '- (step detail unavailable)',
+              `**Annotations:** ${annText}`,
+              '',
+              `## Auto-diagnosis (${severity})`,
+              diagnosis,
+              '',
+              `## Production status at triage time`,
+              prodStatus,
+              '',
+              severity === 'possibly-production'
+                ? '### ⚠️ OWNER: if the site is down, message the agent NOW rather than waiting.'
+                : '_No owner action needed — the engineering agent will handle this at next session (Issue auto-closes if the next scheduled run succeeds)._'
+            ].join('\n');
+
+            if (dup) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: dup.number, body: `Repeat failure:\n\n${body}`
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['incident', severity]
+              });
+            }
+
+  # Auto-close incident Issues when the same workflow succeeds again
+  autoclose:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Close resolved incidents
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const wfName = context.payload.workflow_run.name;
+            const title = `🚨 Incident: ${wfName} failed`;
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'incident', per_page: 50
+            });
+            for (const i of open.data.filter(i => i.title === title)) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: i.number,
+                body: `✅ Auto-resolved: "${wfName}" succeeded on the next run (${context.payload.workflow_run.html_url}). Closing. Agent should still review the root cause at next session if the failure was novel.`
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: i.number, state: 'closed'
+              });
+            }
