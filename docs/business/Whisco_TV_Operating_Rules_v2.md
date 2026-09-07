@@ -60,7 +60,7 @@ Founder authorized up to $3,000/month at agent discretion. **The agent's discipl
 
 **Recurring agent duties:** verify workflow greens each session · fact-check + adapt SEO-pack drafts into /guides (~2/week target) · refresh dossier + handover on milestones · re-export DB snapshots after big catalog changes · monthly billing Issue closure follow-up · sponsor-pack activation ~Oct (after 4 weeks analytics) · Ramadan campaign prep from marketing playbook (~Jan 2027).
 
-**Calendar triggers registered:** AdSense re-review (~15 Sep) · Play 14-day clock end (~mid-Sep) · Apple verdict watch (daily API check if silent past 8 Sep) · analytics 4-week mark (~1 Oct) → media kit + sponsor wake-up · budget tier review at each gate opening.
+**Calendar triggers registered:** RAMADAN 2027: 1 Dec 2026 = freeze campaign bible + build /ramadan hub (reverse calendar in Ramadan Bible §1.2; 1 Ramadan ≈ 8 Feb 2027) · AdSense re-review (~15 Sep) · Play 14-day clock end (~mid-Sep) · Apple verdict watch (daily API check if silent past 8 Sep) · analytics 4-week mark (~1 Oct) → media kit + sponsor wake-up · budget tier review at each gate opening.
 
 ## 5. Decisions log (running)
 
