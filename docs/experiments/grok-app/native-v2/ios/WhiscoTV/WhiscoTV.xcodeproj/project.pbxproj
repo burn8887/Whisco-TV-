@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+/* Begin PBXBuildFile section */
+		394CDF96404740419870493B /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BDB6BABEF24A14B20E508B /* APIClient.swift */; };
+		72FBEC963F744A029FEFB50C /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42738A6D49D4F88865AD39A /* Components.swift */; };
+		C859862503644C389C906F60 /* HomeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77996892BE994C0C8D38C31E /* HomeTime.swift */; };
+		6715517A6C9D4432A389DF29 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B8C130B8A64A23AC65BA94 /* HomeView.swift */; };
+		CA872CB6B5FA4DB886469D08 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6777C52C0495E8F9416F5 /* LibraryView.swift */; };
+		13E7443DBA51457CB7B07978 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D326DD942540ADA53E085D /* LiveView.swift */; };
+		211D062FEDF144898DB8236C /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46F2F50EC2D44EFB33B6B4D /* LocalStore.swift */; };
+		FF3502ADC21042B0A7FDFC0C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363AAFF8E884CB887390AAA /* Models.swift */; };
+		8AB9DE1AE85B40E3BD40F5CC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9739BFE9FF1049D290042C8F /* OnboardingView.swift */; };
+		F9FBC141EA8D413198FE517B /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404023B7A3941D48DB29CFF /* Players.swift */; };
+		3D912E7AFE804DE8810F093F /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C7CCC3E522439F95D87476 /* RootTabView.swift */; };
+		7BEABB59B68847FCBC691CE3 /* SearchCast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74FEF59481E41FF94425C5D /* SearchCast.swift */; };
+		91DBAC6536F14095AA2ABD7A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2EE798DE8F49CCBF4E6C26 /* Theme.swift */; };
+		CC4ED537F2214915B71559A9 /* TitleWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377B89DEBFC244E5A9596910 /* TitleWatch.swift */; };
+		1AE66061C27E4953A3560CF3 /* WhiscoTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24EC738EB74070A2212565 /* WhiscoTVApp.swift */; };
+		4F4C1C92808643489E37FA7C /* YouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0041730CE3AD4057B8F9AEBC /* YouView.swift */; };
+		B9282A6B3E7548E09B8F8CBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2CFB20CE4574C69BFCD144D /* Assets.xcassets */; };
+		BFDA9A16FC25452FA3493126 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C84C515519C144A98181A138 /* PrivacyInfo.xcprivacy */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		54BDB6BABEF24A14B20E508B /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		B42738A6D49D4F88865AD39A /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		77996892BE994C0C8D38C31E /* HomeTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTime.swift; sourceTree = "<group>"; };
+		32B8C130B8A64A23AC65BA94 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ABA6777C52C0495E8F9416F5 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		59D326DD942540ADA53E085D /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
+		E46F2F50EC2D44EFB33B6B4D /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
+		4363AAFF8E884CB887390AAA /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		9739BFE9FF1049D290042C8F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D404023B7A3941D48DB29CFF /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
+		16C7CCC3E522439F95D87476 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		C74FEF59481E41FF94425C5D /* SearchCast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCast.swift; sourceTree = "<group>"; };
+		4B2EE798DE8F49CCBF4E6C26 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		377B89DEBFC244E5A9596910 /* TitleWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWatch.swift; sourceTree = "<group>"; };
+		FA24EC738EB74070A2212565 /* WhiscoTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiscoTVApp.swift; sourceTree = "<group>"; };
+		0041730CE3AD4057B8F9AEBC /* YouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouView.swift; sourceTree = "<group>"; };
+		E2CFB20CE4574C69BFCD144D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7A9C94CE907B4817B3989887 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C84C515519C144A98181A138 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		0402055F7F1942529C06C16D /* Whisco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whisco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E01EC550217540A8A022775C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8A58D070897B4DB29D8F9A74 = {
+			isa = PBXGroup;
+			children = (
+				FE17ADD2DA6143F4B87120F5 /* WhiscoTV */,
+				9335A55417EF4ED6813633F9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE17ADD2DA6143F4B87120F5 /* WhiscoTV */ = {
+			isa = PBXGroup;
+			children = (
+				54BDB6BABEF24A14B20E508B /* APIClient.swift */,
+				B42738A6D49D4F88865AD39A /* Components.swift */,
+				77996892BE994C0C8D38C31E /* HomeTime.swift */,
+				32B8C130B8A64A23AC65BA94 /* HomeView.swift */,
+				ABA6777C52C0495E8F9416F5 /* LibraryView.swift */,
+				59D326DD942540ADA53E085D /* LiveView.swift */,
+				E46F2F50EC2D44EFB33B6B4D /* LocalStore.swift */,
+				4363AAFF8E884CB887390AAA /* Models.swift */,
+				9739BFE9FF1049D290042C8F /* OnboardingView.swift */,
+				D404023B7A3941D48DB29CFF /* Players.swift */,
+				16C7CCC3E522439F95D87476 /* RootTabView.swift */,
+				C74FEF59481E41FF94425C5D /* SearchCast.swift */,
+				4B2EE798DE8F49CCBF4E6C26 /* Theme.swift */,
+				377B89DEBFC244E5A9596910 /* TitleWatch.swift */,
+				FA24EC738EB74070A2212565 /* WhiscoTVApp.swift */,
+				0041730CE3AD4057B8F9AEBC /* YouView.swift */,
+				E2CFB20CE4574C69BFCD144D /* Assets.xcassets */,
+				7A9C94CE907B4817B3989887 /* Info.plist */,
+				C84C515519C144A98181A138 /* PrivacyInfo.xcprivacy */,
+			);
+			path = WhiscoTV;
+			sourceTree = "<group>";
+		};
+		9335A55417EF4ED6813633F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0402055F7F1942529C06C16D /* Whisco.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A2FBEBA447A54E8B90AF158D /* WhiscoTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F64EE5C148574C9D98AB5E0A /* Build configuration list for PBXNativeTarget "WhiscoTV" */;
+			buildPhases = (
+				1D3A45C5AE5B42CDA947701F /* Sources */,
+				E01EC550217540A8A022775C /* Frameworks */,
+				30EC3B0E39164C5590E12A49 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhiscoTV;
+			productName = Whisco;
+			productReference = 0402055F7F1942529C06C16D /* Whisco.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		93869315AEB84DDFBDBA1759 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A2FBEBA447A54E8B90AF158D = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 6383D14FD432486091DF2CDD /* Build configuration list for PBXProject "WhiscoTV" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ar,
+			);
+			mainGroup = 8A58D070897B4DB29D8F9A74;
+			productRefGroup = 9335A55417EF4ED6813633F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A2FBEBA447A54E8B90AF158D /* WhiscoTV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30EC3B0E39164C5590E12A49 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9282A6B3E7548E09B8F8CBF /* Assets.xcassets in Resources */,
+				BFDA9A16FC25452FA3493126 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D3A45C5AE5B42CDA947701F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				394CDF96404740419870493B /* APIClient.swift in Sources */,
+				72FBEC963F744A029FEFB50C /* Components.swift in Sources */,
+				C859862503644C389C906F60 /* HomeTime.swift in Sources */,
+				6715517A6C9D4432A389DF29 /* HomeView.swift in Sources */,
+				CA872CB6B5FA4DB886469D08 /* LibraryView.swift in Sources */,
+				13E7443DBA51457CB7B07978 /* LiveView.swift in Sources */,
+				211D062FEDF144898DB8236C /* LocalStore.swift in Sources */,
+				FF3502ADC21042B0A7FDFC0C /* Models.swift in Sources */,
+				8AB9DE1AE85B40E3BD40F5CC /* OnboardingView.swift in Sources */,
+				F9FBC141EA8D413198FE517B /* Players.swift in Sources */,
+				3D912E7AFE804DE8810F093F /* RootTabView.swift in Sources */,
+				7BEABB59B68847FCBC691CE3 /* SearchCast.swift in Sources */,
+				91DBAC6536F14095AA2ABD7A /* Theme.swift in Sources */,
+				CC4ED537F2214915B71559A9 /* TitleWatch.swift in Sources */,
+				1AE66061C27E4953A3560CF3 /* WhiscoTVApp.swift in Sources */,
+				4F4C1C92808643489E37FA7C /* YouView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		337FAD046A77467CBA205C56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		97AE9D74AAC940669026C229 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F5134D3D71F04F528C030EA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WhiscoTV/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Whisco;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tv.whisco.app;
+				PRODUCT_NAME = Whisco;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		16652F6695024040A86E2928 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WhiscoTV/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Whisco;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tv.whisco.app;
+				PRODUCT_NAME = Whisco;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6383D14FD432486091DF2CDD /* Build configuration list for PBXProject "WhiscoTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				337FAD046A77467CBA205C56 /* Debug */,
+				97AE9D74AAC940669026C229 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F64EE5C148574C9D98AB5E0A /* Build configuration list for PBXNativeTarget "WhiscoTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5134D3D71F04F528C030EA6 /* Debug */,
+				16652F6695024040A86E2928 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 93869315AEB84DDFBDBA1759 /* Project object */;
+}

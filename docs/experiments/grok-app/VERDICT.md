@@ -30,3 +30,7 @@ Hub sponsorship (weekly, per-language, never-on-player) is the standout — it's
 
 ## Fact notes
 - Grok's top-5 community table (Indian 9.1M, Bangladeshi 5.04M, Pakistani 4.9M, Egyptian 3.3M, Filipino 2.2M — Al Jazeera/GMI Mar 2026) differs slightly from our dossier's framing (we group South Asian + treat Egyptian under Arab expats). Its sourcing is plausible; our marketing already covers all five. No doctrine change needed.
+
+
+## UPDATE 2026-09-07 (v2 drop — Phase 3 completed)
+Second workspace received: native trees now substantially real — iOS 16 files/~2,900 lines WITH .xcodeproj; Android 11 files/~1,400 lines WITH AndroidManifest + full Gradle setup; both hit our live API v1. New in v2: Gulf-first onboarding (nationals-welcome door — adopted into our About copy same day), kids face mode (ads drop off for kids — GOOD compliance instinct), live-zapper Ch+/- interaction, real-Whisco portrait assets (gold-tan mask). Status upgraded: from "sketch" to "credible reference implementation" — still not store-ready (no signing, no store metadata, untested on devices, YouTube embed handling needs our error-153 host-page fix which it lacks) but genuinely portable patterns. v1.1 SHORTLIST from v2: kids face/profile (pairs with Faces), live-channel zapper, Gulf-first onboarding order. Archived at native-v2/.
