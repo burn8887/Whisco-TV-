@@ -1,5 +1,5 @@
 # WHISCO TV — COMPANY DOSSIER & KNOWLEDGE BASE
-*Version 1.0 — 5 September 2026. Purpose: complete background for analysts, advisors, and AI assistants working on Whisco TV business tasks. This document is the authoritative context; where a task prompt conflicts with it, flag the conflict rather than guessing. Contains no credentials or secrets by design.*
+*Version 1.1 — 7 September 2026. Purpose: complete background for analysts, advisors, and AI assistants working on Whisco TV business tasks. This document is the authoritative context; where a task prompt conflicts with it, flag the conflict rather than guessing. Contains no credentials or secrets by design.*
 
 ---
 
@@ -27,8 +27,8 @@ A Gulf expat family today chooses between: (a) paying for 3–5 siloed apps (ZEE
 ## 2.1 Catalog (live production numbers)
 | Asset | Count | Notes |
 |---|---|---|
-| Live TV channels | **581 active** (~620 total) | Free-to-air HLS streams + official YouTube-live; auto-health-checked every 6 hours; dead channels auto-hidden, auto-restored when back |
-| On-demand titles | **15,696 active** (~17k catalog) | Growing weekly via automated discovery |
+| Live TV channels | **585 active** (~620 total) | Free-to-air HLS streams + official YouTube-live; auto-health-checked every 6 hours; dead channels auto-hidden, auto-restored when back |
+| On-demand titles | **16,800+ active** (~17.5k catalog) | Growing weekly via automated discovery |
 | Turkish series (dizi) | 61 series / ~3,650 episodes | Incl. complete runs of Teşkilat (183 eps), Emanet (800+), latest 2025-26 wave (Aynadaki Yabancı, Çarpıntı, Ben Leman, Cennetin Çocukları) |
 | Arabic series | 333 series / ~7,100 episodes | Kuwait 121, Syria 73, Lebanon 52, UAE 42, Jordan 26, Qatar 15, Bahrain 1 |
 | Hindi cinema | 2,500+ titles | Goldmines, Shemaroo, Rajshri, B4U and other official studio channels |
@@ -144,5 +144,12 @@ Both apps: native video player (ExoPlayer/AVPlayer) for HLS, YouTube content via
 - Where legal/regulatory drafting is requested: produce templates and mark them as requiring qualified local counsel review — particularly Bahrain company law and GCC media regulation.
 - Deliverables should be Markdown, tables where useful, sources cited for external claims, [EST] markers on estimates.
 - The operating workflow: **you draft/research → founder reviews → the engineering agent verifies against live systems and integrates.** Nothing you produce deploys directly.
+
+## CHANGELOG v1.1 (7 September 2026)
+- **Positioning refinement:** "Built in Bahrain for every Gulf household — nationals AND expats — deepest in the languages expats can't find anywhere else legally." Welcome is Gulf-wide; catalog depth stays expat-niched. About page updated live. Sponsor pitch now has two stories: "Gulf households" (Batelco/stc/Gulf Air class) + language-corridor packages (Air India Express/Al Ansari class).
+- **Operating Rules v2 adopted** (post hostile-diligence pass): measured-only forecasting (MAU=0 until stores public + AdSense live; RPM $1–3 planning band; video/sponsor revenue $0 until signed/proven), four-gate model (G1 AdSense, G2 both stores public, G3 licence signed + files in own player, G4 CR issued), budget authorization $3,000/mo governed by gate-based tiers.
+- **Founder decisions:** W.L.L. formation GO ("Whisco Media W.L.L."), Form A gift side-letter GO, policy suite v2 publication GO.
+- **Home Time feature live** on whisco.tv/live: origin-city clocks per language community (from the Sept clean-room app experiment; experiment archived, v1.1 app shortlist: kids face mode, live zapper, Gulf-first onboarding).
+- **Status:** iOS in App Store review (day 6); Android closed testing day 6/14; Filmhub call scheduled; AdSense re-review ~mid-Sept; 7 guides live; incident-triage automation now auto-diagnoses any workflow failure.
 
 *End of dossier. Companion documents that may also be provided: research outputs on Gulf expat communities (58-community map), SEO content-gap analysis (long-tail queries), competitive app teardown (15 apps), Filmhub/MENA licensing briefing, and WhatsApp sharing-culture study — all September 2026.*
