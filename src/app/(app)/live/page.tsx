@@ -2,6 +2,7 @@ import { getLivePageData } from "@/lib/cached";
 import ChannelCard from "@/components/ChannelCard";
 import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
+import HomeTime from "@/components/HomeTime";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -69,6 +70,11 @@ export default async function LivePage({
         <p className="text-zinc-500 text-sm mt-1">
           {total}+ live channels from around the globe — <span className="text-emerald-400 font-semibold">100% free, ad-supported</span>.
         </p>
+        {sp.language && (
+          <div className="mt-2">
+            <HomeTime language={sp.language} />
+          </div>
+        )}
       </div>
 
       {/* Language quick-nav — one tap to your community's channels */}
