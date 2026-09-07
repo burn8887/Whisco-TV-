@@ -37,6 +37,9 @@ All documents here were drafted with AI assistance (Grok heavy-model workforce, 
 | `Whisco_TV_Marketing_Playbook.pdf` | 12-month calendar (Ramadan/Onam/Diwali/IPL/dizi-season), Meta ads playbook for $110/mo, ASO plan, WhatsApp Channel system | ACTIVE — feeds monthly marketing tasks |
 | `Whisco_TV_SEO_Content_Pack.pdf` | 20 gap briefs + 5 full article drafts | PIPELINE — agent adapts drafts into /guides (verify facts first) |
 | `Whisco_TV_Sponsor_Prospects_Pack.md` | 30 GCC prospects, early-stage rate card, media-kit template, outreach sequences | SUPERSEDED-IN-PART by Patronage Program (below) — prospect list still canonical |
+| `Whisco_TV_Founder_Absence_DR.md` | 21-day founder-absence simulation, top-10 SPOFs w/ <2hr mitigations, family runbook, inverse (AI-outage) scenario. ACTION ITEMS: break-glass card, Play clock start date | ACTIVE — mitigations to build |
+| `Whisco_TV_Originals_Strategy.md` | 22-format study + 6-format Whisco slate w/ full pilot scripts, mascot voice bible, rights architecture — all ≤6hrs/week | PIPELINE — pick 1-2 formats post-launch |
+| `Whisco_TV_GCC_Digital_Ad_Revenue_Atlas.md` | Agency map, SSP/programmatic reality at our scale, Ramadan booking cycles, Bahrain W.L.L. invoicing/VAT | REFERENCE — activates at G1+G2 |
 | `Whisco_TV_Arabic_Localization_Pack.md` | Full AR site chrome (EN→AR side-by-side), Arabic store listings + ASO keywords, 2 original Arabic guides, RTL implementation notes | BUILD PIPELINE — agent implements RTL + AR guides |
 | `Whisco_TV_App_Store_Review_War_Room.md` | 5.2.3 rejection patterns, evidence pack to PRE-BUILD, Resolution Center templates, status-inquiry calendar (day 7-14 = ONE inquiry; never cancel-resubmit) | ACTIVE — governs Apple review handling NOW |
 | `Whisco_TV_Press_Kit.md` | 12 GCC outlets + journalists, 3 press releases EN+AR, founder Q&A prep | READY — fires at launch week |
