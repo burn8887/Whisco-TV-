@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Whisco TV is a free, ad-supported streaming service for expatriate communities in the Gulf — live TV and on-demand movies and series in 13 languages. No subscription, ever.",
+    "Whisco TV is a free, ad-supported streaming service for Gulf households — nationals and expats alike. Live TV and on-demand movies and series in 13 languages. No subscription, ever.",
 };
 
 export default async function AboutPage() {
@@ -24,7 +24,7 @@ export default async function AboutPage() {
           <h2 className="text-lg font-bold text-white mb-2">What we are</h2>
           <p>
             Whisco TV is a <span className="text-emerald-400 font-semibold">100% free, ad-supported</span> streaming
-            service built for expatriate communities across Bahrain, Saudi Arabia, the UAE, Kuwait, Qatar, and Oman —
+            service built for every household in Bahrain, Saudi Arabia, the UAE, Kuwait, Qatar, and Oman — Gulf nationals and the region’s expatriate communities alike —
             and for anyone, anywhere, who wants TV from home. South Asian, Filipino, Arab, Indonesian, Nepali, Sri
             Lankan, and Turkish-drama audiences all have a shelf here, in their own language. There is no subscription,
             no credit card, and no catch: advertising keeps the lights on.
@@ -64,7 +64,7 @@ export default async function AboutPage() {
         <section>
           <h2 className="text-lg font-bold text-white mb-2">Work with us</h2>
           <p>
-            We partner with content owners, distributors, and advertisers who want to reach Gulf expatriate audiences.
+            We partner with content owners, distributors, and advertisers who want to reach Gulf households — national and expatriate audiences across all six GCC states.
             If you have content to license to us or want to advertise on Whisco TV, we&apos;d love to talk.
           </p>
         </section>
