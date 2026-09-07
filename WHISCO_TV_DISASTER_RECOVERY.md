@@ -1,5 +1,5 @@
 # WHISCO TV — DISASTER RECOVERY & FULL-CONTINUITY DOCUMENT
-*Last updated: 2026-09-02-b (iOS SUBMITTED FOR APP STORE REVIEW — WAITING_FOR_REVIEW since 08:05 UTC. Plus: standing-PAT policy; WHISCO_TV_BILLING.md + billing-reminder workflow; Apple/ASC credentials registered; Neon usage-based ~$5-15/mo). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
+*Last updated: 2026-09-07-c (Apple/ASC registry RESTORED after doc-rot found by Claude freshness test; incident-triage + community-digest workflows added to automations list. Previous: iOS SUBMITTED FOR APP STORE REVIEW — WAITING_FOR_REVIEW since 08:05 UTC. Plus: standing-PAT policy; WHISCO_TV_BILLING.md + billing-reminder workflow; Apple/ASC credentials registered; Neon usage-based ~$5-15/mo). Companion to `WHISCO_TV_PROJECT_HANDOVER.md` (read BOTH).*
 *Purpose 1: rebuild Whisco TV to current state from ABSOLUTE ZERO — even if GitHub, Vercel, Spaceship, and Neon accounts are all lost/hijacked/deleted.*
 *Purpose 2: allow a brand-new AI conversation to continue as if this conversation never ended.*
 
@@ -191,7 +191,7 @@ Both documents exist in THREE synchronized places after every update:
 | **Google AdSense** | adsense.google.com | Ad monetization (publisher ca-pub-7207533964778777) — site under review | Free (pays us) | Gmail |
 | **Expo / EAS** | expo.dev (account: burn8887s-team) | Cloud builds of the mobile app (.aab/.apk/iOS), **holds the Android signing keystore (critical)**, access tokens for agent builds | Free tier | Own account |
 | **Google Play Console** | play.google.com/console | Android app publishing (package tv.whisco.app), closed testing w/ 26 testers, crash reports (Android Vitals) | $25 once | Gmail |
-| **Apple Developer** | developer.apple.com | iOS app signing + App Store publishing — ENROLLMENT PENDING | $99/yr | Apple ID (use Gmail) |
+| **Apple Developer + ASC** | developer.apple.com + appstoreconnect.apple.com | Team **X2UPN4792Y** (Ali Albaharna); bundleId tv.whisco.app (CGDK5D6GU4); ascAppId **6807647992**; dist cert 3D2AQ39PD3 (exp 2027-09-01); profile GJ7634S5R8; ASC API key **B279KL3Y3K** / issuer b071aa69-7af0-411d-9019-9b9057882600; **.p8 + dist certs/p12s in /home/user/.keys/** (outside repos); v1.0 SUBMITTED FOR REVIEW 2026-09-02 (reviewSubmission c80e30c4); TestFlight live, internal group 03e7edb4 | $99/yr (renews ~2027-09-01) | Apple ID = Gmail #1 |
 | **YouTube (passive)** | — | Official broadcaster embeds for VOD + some live channels; oEmbed/RSS APIs for verification & discovery | Free | None needed |
 | **iptv-org (passive)** | github.com/iptv-org/iptv | Public index of free-to-air live streams — weekly channel discovery source | Free | None |
 | **Internet Archive (passive)** | archive.org | Public-domain movie/doc catalog + metadata API for health checks | Free | None |
