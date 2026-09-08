@@ -10,10 +10,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.515Z",
-  "lastStatus": "ok",
+  "isActive": false,
+  "failCount": 14,
+  "lastCheckedAt": "2026-09-08T15:58:21.451Z",
+  "lastStatus": "unreachable",
   "number": 389
  },
  {
@@ -29,7 +29,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.515Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.496Z",
   "lastStatus": "ok",
   "number": 390
  },
@@ -46,7 +46,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.338Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.730Z",
   "lastStatus": "ok",
   "number": 299
  },
@@ -63,7 +63,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.722Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.292Z",
   "lastStatus": "ok",
   "number": 544
  },
@@ -80,25 +80,8 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.108Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.290Z",
   "lastStatus": "ok",
-  "number": 0
- },
- {
-  "id": "cmt6p7rfw000014e4phpz5eo8",
-  "name": "4TV News",
-  "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/4_TV.png",
-  "streamUrl": "https://cdn-4.pishow.tv/live/1007/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:26.804Z",
-  "lastStatus": "unreachable",
   "number": 0
  },
  {
@@ -114,7 +97,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.212Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.855Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -131,7 +114,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.281Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.469Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -148,26 +131,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.399Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.371Z",
   "lastStatus": "ok",
   "number": 384
- },
- {
-  "id": "cmt6p7rmg000214e458h8h5ug",
-  "name": "99TV",
-  "logoUrl": "https://i.imgur.com/dZA4gel.png",
-  "streamUrl": "https://cdn-1.pishow.tv/live/1211/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.393Z",
-  "lastStatus": "ok",
-  "number": 0
  },
  {
   "id": "cmsor42mj007xnn71l1hgfo6h",
@@ -182,7 +148,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.462Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.436Z",
   "lastStatus": "ok",
   "number": 385
  },
@@ -199,7 +165,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.436Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.436Z",
   "lastStatus": "ok",
   "number": 386
  },
@@ -216,7 +182,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.477Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.450Z",
   "lastStatus": "ok",
   "number": 387
  },
@@ -233,7 +199,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.494Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.450Z",
   "lastStatus": "ok",
   "number": 388
  },
@@ -250,7 +216,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.105Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.616Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -267,7 +233,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.128Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.212Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -284,7 +250,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.395Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.336Z",
   "lastStatus": "ok",
   "number": 316
  },
@@ -301,7 +267,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.640Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.733Z",
   "lastStatus": "ok",
   "number": 317
  },
@@ -318,7 +284,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.698Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.610Z",
   "lastStatus": "ok",
   "number": 400
  },
@@ -335,7 +301,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.242Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.335Z",
   "lastStatus": "ok",
   "number": 313
  },
@@ -352,7 +318,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.049Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.867Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -369,7 +335,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.276Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.279Z",
   "lastStatus": "ok",
   "number": 375
  },
@@ -386,7 +352,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.278Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.291Z",
   "lastStatus": "ok",
   "number": 376
  },
@@ -403,7 +369,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.674Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.611Z",
   "lastStatus": "ok",
   "number": 401
  },
@@ -420,7 +386,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.653Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.672Z",
   "lastStatus": "ok",
   "number": 402
  },
@@ -437,7 +403,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.753Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.691Z",
   "lastStatus": "ok",
   "number": 403
  },
@@ -454,7 +420,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.459Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.568Z",
   "lastStatus": "ok",
   "number": 315
  },
@@ -471,7 +437,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.873Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.775Z",
   "lastStatus": "ok",
   "number": 545
  },
@@ -488,7 +454,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.733Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.690Z",
   "lastStatus": "ok",
   "number": 405
  },
@@ -505,7 +471,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.539Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.647Z",
   "lastStatus": "ok",
   "number": 320
  },
@@ -522,7 +488,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.776Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.752Z",
   "lastStatus": "ok",
   "number": 408
  },
@@ -539,7 +505,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.481Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.574Z",
   "lastStatus": "ok",
   "number": 264
  },
@@ -555,9 +521,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.030Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:14.086Z",
+  "lastStatus": "unreachable",
   "number": 0
  },
  {
@@ -573,7 +539,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.525Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.627Z",
   "lastStatus": "ok",
   "number": 220
  },
@@ -590,7 +556,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.099Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.216Z",
   "lastStatus": "ok",
   "number": 287
  },
@@ -605,9 +571,9 @@
   "category": "Music",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:35.493Z",
+  "isActive": false,
+  "failCount": 8,
+  "lastCheckedAt": "2026-09-08T15:58:22.333Z",
   "lastStatus": "unreachable",
   "number": 462
  },
@@ -624,7 +590,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.676Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.327Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -641,7 +607,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.889Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.550Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -658,7 +624,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.005Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.095Z",
   "lastStatus": "ok",
   "number": 568
  },
@@ -675,7 +641,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.569Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.997Z",
   "lastStatus": "ok",
   "number": 548
  },
@@ -692,7 +658,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.264Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.184Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -709,7 +675,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.522Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.573Z",
   "lastStatus": "ok",
   "number": 300
  },
@@ -726,7 +692,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.573Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.530Z",
   "lastStatus": "ok",
   "number": 391
  },
@@ -743,7 +709,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.556Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.515Z",
   "lastStatus": "ok",
   "number": 392
  },
@@ -760,7 +726,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.883Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.708Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -777,7 +743,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.541Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.530Z",
   "lastStatus": "ok",
   "number": 393
  },
@@ -794,7 +760,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.594Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.515Z",
   "lastStatus": "ok",
   "number": 394
  },
@@ -811,7 +777,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.595Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.594Z",
   "lastStatus": "ok",
   "number": 395
  },
@@ -828,7 +794,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.619Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.594Z",
   "lastStatus": "ok",
   "number": 396
  },
@@ -845,7 +811,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.633Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.531Z",
   "lastStatus": "ok",
   "number": 397
  },
@@ -862,7 +828,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.860Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.578Z",
   "lastStatus": "ok",
   "number": 398
  },
@@ -879,7 +845,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.674Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.609Z",
   "lastStatus": "ok",
   "number": 399
  },
@@ -896,7 +862,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.857Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.892Z",
   "lastStatus": "ok",
   "number": 335
  },
@@ -913,7 +879,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.106Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.372Z",
   "lastStatus": "ok",
   "number": 345
  },
@@ -930,26 +896,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.926Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.018Z",
   "lastStatus": "ok",
   "number": 235
- },
- {
-  "id": "cmsor42mf000snn71ry8og27j",
-  "name": "Abdulmajeed Abdullah",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1MDA3MjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSI4MC41IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5BYmR1bG1hamVlZDwvdGV4dD4KPHRleHQgeD0iNTAlIiB5PSIxMTkuNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMzIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgb3BhY2l0eT0iMC45MiI+QWJkdWxsYWg8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://d2hng5r56zpsbw.cloudfront.net/out/v1/9c4c990f44bb4767bb46271f326dd574/index.m3u8",
-  "country": "Saudi Arabia",
-  "countryCode": "SA",
-  "language": "Arabic",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 7,
-  "lastCheckedAt": "2026-08-31T06:06:30.470Z",
-  "lastStatus": "invalid",
-  "number": 128
  },
  {
   "id": "cmsor42mj008gnn711d02slob",
@@ -964,26 +913,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.711Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.673Z",
   "lastStatus": "ok",
   "number": 404
- },
- {
-  "id": "cmsor42mh004gnn71men3t5aq",
-  "name": "Adinkra TV",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzEwYjk4MSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMjJjMjIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkFkaW5rcmEgVFY8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://59d39900ebfb8.streamlock.net/adinkratvny/adinkratvny/playlist.m3u8",
-  "country": "Ghana",
-  "countryCode": "GH",
-  "language": "English",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.401Z",
-  "lastStatus": "ok",
-  "number": 260
  },
  {
   "id": "cmsor42mh0040nn71yiy87v14",
@@ -998,7 +930,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.742Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.130Z",
   "lastStatus": "ok",
   "number": 244
  },
@@ -1015,7 +947,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.601Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.726Z",
   "lastStatus": "ok",
   "number": 318
  },
@@ -1032,7 +964,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.392Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.288Z",
   "lastStatus": "ok",
   "number": 129
  },
@@ -1049,7 +981,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.163Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.256Z",
   "lastStatus": "ok",
   "number": 277
  },
@@ -1066,7 +998,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.366Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.494Z",
   "lastStatus": "ok",
   "number": 282
  },
@@ -1083,7 +1015,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.078Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.971Z",
   "lastStatus": "ok",
   "number": 168
  },
@@ -1100,7 +1032,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.480Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.569Z",
   "lastStatus": "ok",
   "number": 311
  },
@@ -1116,10 +1048,27 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:33.720Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:20.813Z",
+  "lastStatus": "ok",
   "number": 465
+ },
+ {
+  "id": "cmtqq2bws000ap9rfkdspapvy",
+  "name": "Ajman TV",
+  "logoUrl": "https://i.imgur.com/hVNIwgE.png",
+  "streamUrl": "https://cdn1.logichost.in/ajmantv/live/playlist.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.549Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mh0045nn71urgy335i",
@@ -1134,7 +1083,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.163Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.256Z",
   "lastStatus": "ok",
   "number": 249
  },
@@ -1151,7 +1100,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.632Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.098Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1168,7 +1117,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.017Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.335Z",
   "lastStatus": "ok",
   "number": 108
  },
@@ -1185,7 +1134,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.375Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.649Z",
   "lastStatus": "ok",
   "number": 119
  },
@@ -1202,7 +1151,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.219Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.255Z",
   "lastStatus": "ok",
   "number": 109
  },
@@ -1219,7 +1168,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.078Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.977Z",
   "lastStatus": "ok",
   "number": 124
  },
@@ -1236,7 +1185,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.938Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.421Z",
   "lastStatus": "ok",
   "number": 110
  },
@@ -1253,7 +1202,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.462Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.495Z",
   "lastStatus": "ok",
   "number": 310
  },
@@ -1270,7 +1219,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.999Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.710Z",
   "lastStatus": "ok",
   "number": 117
  },
@@ -1287,7 +1236,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.200Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.707Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1304,7 +1253,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.750Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.367Z",
   "lastStatus": "ok",
   "number": 118
  },
@@ -1321,7 +1270,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.121Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.132Z",
   "lastStatus": "ok",
   "number": 120
  },
@@ -1338,7 +1287,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.315Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.736Z",
   "lastStatus": "ok",
   "number": 130
  },
@@ -1355,7 +1304,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.470Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.132Z",
   "lastStatus": "ok",
   "number": 131
  },
@@ -1372,7 +1321,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.381Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.052Z",
   "lastStatus": "ok",
   "number": 132
  },
@@ -1389,7 +1338,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.632Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.175Z",
   "lastStatus": "ok",
   "number": 133
  },
@@ -1406,7 +1355,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.709Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.167Z",
   "lastStatus": "ok",
   "number": 134
  },
@@ -1423,7 +1372,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.219Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.613Z",
   "lastStatus": "ok",
   "number": 135
  },
@@ -1440,7 +1389,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.626Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.840Z",
   "lastStatus": "ok",
   "number": 136
  },
@@ -1457,7 +1406,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.115Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.975Z",
   "lastStatus": "ok",
   "number": 589
  },
@@ -1474,7 +1423,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.004Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.097Z",
   "lastStatus": "ok",
   "number": 608
  },
@@ -1491,7 +1440,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.101Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.015Z",
   "lastStatus": "ok",
   "number": 609
  },
@@ -1508,7 +1457,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.207Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.007Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1525,7 +1474,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.017Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.175Z",
   "lastStatus": "ok",
   "number": 590
  },
@@ -1542,7 +1491,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.504Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.341Z",
   "lastStatus": "ok",
   "number": 114
  },
@@ -1559,7 +1508,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.053Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.024Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1576,7 +1525,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.393Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.290Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1593,7 +1542,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.236Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.105Z",
   "lastStatus": "ok",
   "number": 121
  },
@@ -1610,7 +1559,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.045Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.569Z",
   "lastStatus": "ok",
   "number": 122
  },
@@ -1627,7 +1576,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.593Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.131Z",
   "lastStatus": "ok",
   "number": 115
  },
@@ -1644,7 +1593,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.060Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.255Z",
   "lastStatus": "ok",
   "number": 116
  },
@@ -1661,7 +1610,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.262Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.920Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1678,7 +1627,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.299Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.415Z",
   "lastStatus": "ok",
   "number": 309
  },
@@ -1695,7 +1644,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.306Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.412Z",
   "lastStatus": "ok",
   "number": 304
  },
@@ -1712,7 +1661,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.261Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.090Z",
   "lastStatus": "ok",
   "number": 610
  },
@@ -1729,7 +1678,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.057Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.391Z",
   "lastStatus": "ok",
   "number": 601
  },
@@ -1746,7 +1695,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.280Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.947Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1763,7 +1712,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.484Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.525Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1780,7 +1729,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.688Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.328Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1797,7 +1746,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.720Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.734Z",
   "lastStatus": "ok",
   "number": 319
  },
@@ -1814,7 +1763,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.800Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.884Z",
   "lastStatus": "ok",
   "number": 312
  },
@@ -1831,7 +1780,24 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.186Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.022Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3aqw80002umqjejax2tgt",
+  "name": "Alkhuzama Radio",
+  "logoUrl": "https://shahid.mbc.net/mediaObject/61010cbc-91c5-4ce1-94a4-ed40adadb97b",
+  "streamUrl": "https://live.kwikmotion.com/sbrksakhuzamaradiolive/srpkhuzama/playlist.m3u8",
+  "country": "Saudi Arabia",
+  "countryCode": "SA",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:13.928Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1848,7 +1814,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.450Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.132Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1865,7 +1831,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.102Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.933Z",
   "lastStatus": "ok",
   "number": 575
  },
@@ -1882,7 +1848,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.576Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.212Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1899,7 +1865,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.193Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.056Z",
   "lastStatus": "ok",
   "number": 602
  },
@@ -1916,7 +1882,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.711Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.344Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1933,7 +1899,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.027Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.858Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -1950,7 +1916,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.235Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.605Z",
   "lastStatus": "ok",
   "number": 576
  },
@@ -1967,7 +1933,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.748Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.730Z",
   "lastStatus": "ok",
   "number": 324
  },
@@ -1984,7 +1950,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.847Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.290Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2001,7 +1967,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.754Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.690Z",
   "lastStatus": "ok",
   "number": 406
  },
@@ -2018,7 +1984,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.914Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.972Z",
   "lastStatus": "ok",
   "number": 321
  },
@@ -2035,7 +2001,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.789Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.752Z",
   "lastStatus": "ok",
   "number": 407
  },
@@ -2052,7 +2018,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.942Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.217Z",
   "lastStatus": "ok",
   "number": 231
  },
@@ -2069,7 +2035,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.814Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.770Z",
   "lastStatus": "ok",
   "number": 409
  },
@@ -2085,9 +2051,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.856Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:21.830Z",
+  "lastStatus": "unreachable",
   "number": 410
  },
  {
@@ -2102,9 +2068,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.833Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:21.770Z",
+  "lastStatus": "invalid",
   "number": 411
  },
  {
@@ -2120,7 +2086,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.833Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.770Z",
   "lastStatus": "ok",
   "number": 412
  },
@@ -2137,7 +2103,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.868Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.830Z",
   "lastStatus": "ok",
   "number": 413
  },
@@ -2154,7 +2120,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.938Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.847Z",
   "lastStatus": "ok",
   "number": 414
  },
@@ -2171,7 +2137,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.912Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.851Z",
   "lastStatus": "ok",
   "number": 415
  },
@@ -2188,7 +2154,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.934Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.851Z",
   "lastStatus": "ok",
   "number": 416
  },
@@ -2205,7 +2171,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.893Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.909Z",
   "lastStatus": "ok",
   "number": 417
  },
@@ -2222,7 +2188,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.912Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.851Z",
   "lastStatus": "ok",
   "number": 418
  },
@@ -2239,7 +2205,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.973Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.263Z",
   "lastStatus": "ok",
   "number": 419
  },
@@ -2256,7 +2222,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.648Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.694Z",
   "lastStatus": "ok",
   "number": 420
  },
@@ -2273,7 +2239,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.946Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.932Z",
   "lastStatus": "ok",
   "number": 421
  },
@@ -2290,7 +2256,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.024Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.578Z",
   "lastStatus": "ok",
   "number": 422
  },
@@ -2307,7 +2273,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.451Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.548Z",
   "lastStatus": "ok",
   "number": 423
  },
@@ -2323,9 +2289,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.633Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:16.088Z",
+  "lastStatus": "unreachable",
   "number": 424
  },
  {
@@ -2341,7 +2307,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.603Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.210Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2358,7 +2324,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.012Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.932Z",
   "lastStatus": "ok",
   "number": 425
  },
@@ -2375,26 +2341,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.992Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.932Z",
   "lastStatus": "ok",
   "number": 426
- },
- {
-  "id": "cmt6p7s1v000914e4l4plixcf",
-  "name": "Aradana TV",
-  "logoUrl": "https://dtil.tmsimg.com/assets/s142649_ld_h9_aa.png?lock=720x540",
-  "streamUrl": "https://cdn-1.pishow.tv/live/961/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.529Z",
-  "lastStatus": "ok",
-  "number": 0
  },
  {
   "id": "cmt6p7s42000a14e4fpnwzclh",
@@ -2409,26 +2358,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.888Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.212Z",
   "lastStatus": "ok",
   "number": 0
- },
- {
-  "id": "cmsor42mj0093nn71pi9j839u",
-  "name": "Arputhar Yesu TV",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg0Y2MxNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJlMDUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkFycHV0aGFyIFllc3UgVFY8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://arputharyesutv.arputharyesutv.com/live/md/index.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 11,
-  "lastCheckedAt": "2026-08-31T06:06:35.071Z",
-  "lastStatus": "unreachable",
-  "number": 427
  },
  {
   "id": "cmsor42mj0094nn71xg2kjjgi",
@@ -2443,7 +2375,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.071Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.890Z",
   "lastStatus": "ok",
   "number": 428
  },
@@ -2460,7 +2392,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.322Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.411Z",
   "lastStatus": "ok",
   "number": 301
  },
@@ -2477,7 +2409,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.643Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.175Z",
   "lastStatus": "ok",
   "number": 302
  },
@@ -2494,7 +2426,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.994Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.097Z",
   "lastStatus": "ok",
   "number": 303
  },
@@ -2511,7 +2443,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.042Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.847Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2528,7 +2460,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.000Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.683Z",
   "lastStatus": "ok",
   "number": 325
  },
@@ -2545,7 +2477,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.219Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.657Z",
   "lastStatus": "ok",
   "number": 326
  },
@@ -2562,7 +2494,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.799Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.814Z",
   "lastStatus": "ok",
   "number": 327
  },
@@ -2579,7 +2511,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.201Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.854Z",
   "lastStatus": "ok",
   "number": 546
  },
@@ -2594,10 +2526,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 2,
-  "lastCheckedAt": "2026-08-31T06:06:27.359Z",
-  "lastStatus": "unreachable",
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:13.787Z",
+  "lastStatus": "ok",
   "number": 0
  },
  {
@@ -2613,7 +2545,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.930Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.735Z",
   "lastStatus": "ok",
   "number": 547
  },
@@ -2630,7 +2562,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.404Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.736Z",
   "lastStatus": "ok",
   "number": 469
  },
@@ -2647,7 +2579,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.561Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.413Z",
   "lastStatus": "ok",
   "number": 470
  },
@@ -2664,7 +2596,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.132Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.012Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2681,7 +2613,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.053Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.988Z",
   "lastStatus": "ok",
   "number": 429
  },
@@ -2698,26 +2630,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.515Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.210Z",
   "lastStatus": "ok",
   "number": 0
- },
- {
-  "id": "cmsor42mj0096nn71pte848xq",
-  "name": "Ayush TV",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmNDQ0NCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0NTBhMGEiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkF5dXNoIFRWPC90ZXh0PgogIAo8L3N2Zz4=",
-  "streamUrl": "https://cdn-6.pishow.tv/live/221/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:31.565Z",
-  "lastStatus": "unreachable",
-  "number": 430
  },
  {
   "id": "cmsor42mj0097nn71wcufjl9w",
@@ -2732,60 +2647,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.102Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.988Z",
   "lastStatus": "ok",
   "number": 431
- },
- {
-  "id": "cmsor42mj0098nn714yp0j8sv",
-  "name": "B4U Kadak",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg0Y2MxNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJlMDUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkI0VSBLYWRhazwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-2.pishow.tv/live/227/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.091Z",
-  "lastStatus": "ok",
-  "number": 432
- },
- {
-  "id": "cmsor42mj0099nn71ifw5ogex",
-  "name": "B4U Movies",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzEwYjk4MSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMjJjMjIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkI0VSBNb3ZpZXM8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://cdn-2.pishow.tv/live/419/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Movies",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.133Z",
-  "lastStatus": "ok",
-  "number": 433
- },
- {
-  "id": "cmsor42mj009ann714u3tu0x7",
-  "name": "B4U Music",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYzNjZmMSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTFiNGIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkI0VSBNdXNpYzwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-2.pishow.tv/live/415/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Music",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.151Z",
-  "lastStatus": "ok",
-  "number": 434
  },
  {
   "id": "cmsor42mh0041nn71jg6ch90v",
@@ -2800,26 +2664,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.392Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.613Z",
   "lastStatus": "ok",
   "number": 245
- },
- {
-  "id": "cmt6p7sf0000f14e4oa51u6l3",
-  "name": "BIG TV",
-  "logoUrl": "https://jiotvimages.cdn.jio.com/dare_images/images/Big_TV.png",
-  "streamUrl": "https://cdn-1.pishow.tv/live/1059/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.365Z",
-  "lastStatus": "ok",
-  "number": 0
  },
  {
   "id": "cmsor42mk00aenn71vxh6b1zo",
@@ -2834,7 +2681,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.219Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.247Z",
   "lastStatus": "ok",
   "number": 474
  },
@@ -2851,26 +2698,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.109Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.683Z",
   "lastStatus": "ok",
   "number": 294
- },
- {
-  "id": "cmt6p7sjd000h14e47a6vzled",
-  "name": "BRK News",
-  "logoUrl": "https://d229kpbsb5jevy.cloudfront.net/yuppfast/content/common/channel/logos/brk-news.png",
-  "streamUrl": "https://cdn-1.pishow.tv/live/1037/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.419Z",
-  "lastStatus": "ok",
-  "number": 0
  },
  {
   "id": "cmsor42mk00afnn71ez2kwtyo",
@@ -2885,7 +2715,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.938Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.569Z",
   "lastStatus": "ok",
   "number": 475
  },
@@ -2902,7 +2732,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.045Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.865Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2919,7 +2749,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.927Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.708Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2936,7 +2766,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.121Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.531Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -2953,7 +2783,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.767Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.774Z",
   "lastStatus": "ok",
   "number": 145
  },
@@ -2970,7 +2800,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.790Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.841Z",
   "lastStatus": "ok",
   "number": 146
  },
@@ -2987,7 +2817,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.252Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.890Z",
   "lastStatus": "ok",
   "number": 147
  },
@@ -3004,7 +2834,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.539Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.328Z",
   "lastStatus": "ok",
   "number": 148
  },
@@ -3021,7 +2851,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.184Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.026Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3038,7 +2868,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.490Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.469Z",
   "lastStatus": "ok",
   "number": 435
  },
@@ -3055,7 +2885,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.213Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.297Z",
   "lastStatus": "ok",
   "number": 223
  },
@@ -3071,9 +2901,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:35.571Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.413Z",
+  "lastStatus": "ok",
   "number": 471
  },
  {
@@ -3089,7 +2919,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.548Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.413Z",
   "lastStatus": "ok",
   "number": 472
  },
@@ -3106,26 +2936,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.548Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.382Z",
   "lastStatus": "ok",
   "number": 473
- },
- {
-  "id": "cmt6p7sam000d14e4i9g0298s",
-  "name": "Bhakthi TV",
-  "logoUrl": "https://upload.wikimedia.org/wikipedia/en/6/61/Bhakthi_TV_logo.jpg",
-  "streamUrl": "https://cdn-1.pishow.tv/live/397/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.439Z",
-  "lastStatus": "ok",
-  "number": 0
  },
  {
   "id": "cmt6p7sct000e14e4mhd3gjy8",
@@ -3140,7 +2953,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.768Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.629Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3157,7 +2970,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.169Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.012Z",
   "lastStatus": "ok",
   "number": 437
  },
@@ -3174,7 +2987,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.180Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.012Z",
   "lastStatus": "ok",
   "number": 438
  },
@@ -3191,7 +3004,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.150Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.012Z",
   "lastStatus": "ok",
   "number": 436
  },
@@ -3208,7 +3021,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.230Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.066Z",
   "lastStatus": "ok",
   "number": 439
  },
@@ -3225,7 +3038,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.156Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.255Z",
   "lastStatus": "ok",
   "number": 441
  },
@@ -3242,7 +3055,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.393Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.709Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3259,7 +3072,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.722Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.897Z",
   "lastStatus": "ok",
   "number": 238
  },
@@ -3276,7 +3089,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.841Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.549Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3293,7 +3106,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.828Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.051Z",
   "lastStatus": "ok",
   "number": 270
  },
@@ -3310,7 +3123,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.781Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.816Z",
   "lastStatus": "ok",
   "number": 107
  },
@@ -3327,7 +3140,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.084Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.177Z",
   "lastStatus": "ok",
   "number": 271
  },
@@ -3344,7 +3157,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.259Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.377Z",
   "lastStatus": "ok",
   "number": 232
  },
@@ -3361,7 +3174,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.072Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.175Z",
   "lastStatus": "ok",
   "number": 246
  },
@@ -3378,7 +3191,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.420Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.245Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3395,7 +3208,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.384Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.490Z",
   "lastStatus": "ok",
   "number": 283
  },
@@ -3410,10 +3223,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.359Z",
-  "lastStatus": "ok",
+  "isActive": false,
+  "failCount": 3,
+  "lastCheckedAt": "2026-09-08T15:58:15.927Z",
+  "lastStatus": "unreachable",
   "number": 476
  },
  {
@@ -3429,7 +3242,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.914Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.007Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3446,7 +3259,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.919Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.105Z",
   "lastStatus": "ok",
   "number": 153
  },
@@ -3463,7 +3276,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.858Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.415Z",
   "lastStatus": "ok",
   "number": 154
  },
@@ -3480,7 +3293,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.950Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.972Z",
   "lastStatus": "ok",
   "number": 155
  },
@@ -3497,7 +3310,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.984Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.167Z",
   "lastStatus": "ok",
   "number": 106
  },
@@ -3514,7 +3327,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.802Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.157Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3530,10 +3343,27 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.739Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:19.777Z",
+  "lastStatus": "unreachable",
   "number": 237
+ },
+ {
+  "id": "cmtl3ar540006umqjq96a483v",
+  "name": "CNBC Arabiya",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/CNBC_Arabia_2025.svg/960px-CNBC_Arabia_2025.svg.png",
+  "streamUrl": "https://cnbc-live.akamaized.net/cnbc/master.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.184Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmt6p7swj000n14e45goph6gt",
@@ -3548,7 +3378,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.968Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.868Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3565,7 +3395,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.154Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.943Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3582,7 +3412,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.086Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.604Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3599,7 +3429,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.062Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.810Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3616,7 +3446,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.123Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.131Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3633,42 +3463,8 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.166Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.129Z",
   "lastStatus": "ok",
-  "number": 0
- },
- {
-  "id": "cmt6tsrbz000657fbfg0xoxs1",
-  "name": "CVR English",
-  "logoUrl": "https://i.imgur.com/k0WTQKi.png",
-  "streamUrl": "https://cdn-2.pishow.tv/live/425/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.078Z",
-  "lastStatus": "ok",
-  "number": 0
- },
- {
-  "id": "cmt6tsre7000757fbgvzhp23r",
-  "name": "CVR Health",
-  "logoUrl": "https://i.imgur.com/bCyW32I.png",
-  "streamUrl": "https://cdn-6.pishow.tv/live/395/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:28.201Z",
-  "lastStatus": "unreachable",
   "number": 0
  },
  {
@@ -3684,7 +3480,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.593Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.689Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3701,7 +3497,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.372Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.537Z",
   "lastStatus": "ok",
   "number": 534
  },
@@ -3718,7 +3514,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.692Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.574Z",
   "lastStatus": "ok",
   "number": 507
  },
@@ -3735,9 +3531,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.180Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.297Z",
   "lastStatus": "ok",
   "number": 561
+ },
+ {
+  "id": "cmtqq2b8o0000p9rfitsvrcjz",
+  "name": "Capital TV HD HD",
+  "logoUrl": "https://i.imgur.com/hb4bq1t.png",
+  "streamUrl": "https://streaming.tvnepal.com:19360/capitaltv/720p.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:13.938Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mh0046nn71ub20zrpw",
@@ -3750,10 +3563,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.287Z",
-  "lastStatus": "ok",
+  "isActive": false,
+  "failCount": 12,
+  "lastCheckedAt": "2026-09-08T15:58:20.336Z",
+  "lastStatus": "unreachable",
   "number": 250
  },
  {
@@ -3769,7 +3582,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.140Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.446Z",
   "lastStatus": "ok",
   "number": 477
  },
@@ -3786,7 +3599,24 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.810Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.091Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3arp4000fumqjkwku84tg",
+  "name": "Ch4Teen Documentary",
+  "logoUrl": "https://i.imgur.com/pHpFGeg.png",
+  "streamUrl": "https://ch14.tv/live/ch4teendoc/playlist.m3u8",
+  "country": "Kuwait",
+  "countryCode": "KW",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.450Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -3803,26 +3633,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.963Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.212Z",
   "lastStatus": "ok",
   "number": 0
- },
- {
-  "id": "cmsor42mk00a3nn71sndizg58",
-  "name": "Channel S",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdjM2FlZCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTFiNGIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkNoYW5uZWwgUzwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8",
-  "country": "Bangladesh",
-  "countryCode": "BD",
-  "language": "Bengali",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.533Z",
-  "lastStatus": "ok",
-  "number": 463
  },
  {
   "id": "cmsor42mh0058nn71d88157ju",
@@ -3837,26 +3650,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.026Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.129Z",
   "lastStatus": "ok",
   "number": 288
  },
  {
-  "id": "cmt6p7ss5000l14e4t3v3bfta",
-  "name": "Channel WIN",
-  "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_CHANNEL_WIN/images/LOGO_HD/image.png",
-  "streamUrl": "https://cdn-4.pishow.tv/live/229/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
+  "id": "cmsor42mk00a3nn71sndizg58",
+  "name": "Channel S",
+  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdjM2FlZCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTFiNGIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkNoYW5uZWwgUzwvdGV4dD4KICAKPC9zdmc+",
+  "streamUrl": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8",
+  "country": "Bangladesh",
+  "countryCode": "BD",
+  "language": "Bengali",
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:28.325Z",
-  "lastStatus": "unreachable",
-  "number": 0
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.382Z",
+  "lastStatus": "ok",
+  "number": 463
  },
  {
   "id": "cmsor42mm00eann71bxp83n3c",
@@ -3871,7 +3684,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.329Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.169Z",
   "lastStatus": "ok",
   "number": 614
  },
@@ -3888,7 +3701,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.118Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.132Z",
   "lastStatus": "ok",
   "number": 365
  },
@@ -3905,7 +3718,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.120Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.200Z",
   "lastStatus": "ok",
   "number": 366
  },
@@ -3922,7 +3735,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.197Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.211Z",
   "lastStatus": "ok",
   "number": 367
  },
@@ -3939,7 +3752,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.444Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.495Z",
   "lastStatus": "ok",
   "number": 322
  },
@@ -3956,26 +3769,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.242Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.333Z",
   "lastStatus": "ok",
   "number": 276
- },
- {
-  "id": "cmt6p7suc000m14e4hwk0f3cc",
-  "name": "Chithiram",
-  "logoUrl": "https://i.imgur.com/xv9cWSh.png",
-  "streamUrl": "https://cdn-6.pishow.tv/live/1243/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:27.920Z",
-  "lastStatus": "unreachable",
-  "number": 0
  },
  {
   "id": "cmsor42mh005gnn71mso3ct3n",
@@ -3990,7 +3786,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.219Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.255Z",
   "lastStatus": "ok",
   "number": 296
  },
@@ -4007,7 +3803,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.471Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.786Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4024,7 +3820,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.395Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.526Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4041,7 +3837,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.948Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.842Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4058,7 +3854,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.269Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.095Z",
   "lastStatus": "ok",
   "number": 344
  },
@@ -4075,7 +3871,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.660Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.705Z",
   "lastStatus": "ok",
   "number": 569
  },
@@ -4092,7 +3888,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.209Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.332Z",
   "lastStatus": "ok",
   "number": 247
  },
@@ -4109,7 +3905,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.871Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.814Z",
   "lastStatus": "ok",
   "number": 504
  },
@@ -4126,7 +3922,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.717Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.540Z",
   "lastStatus": "ok",
   "number": 505
  },
@@ -4142,9 +3938,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.707Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:22.575Z",
+  "lastStatus": "unreachable",
   "number": 506
  },
  {
@@ -4160,7 +3956,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.139Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.971Z",
   "lastStatus": "ok",
   "number": 478
  },
@@ -4177,7 +3973,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.074Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.763Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4194,42 +3990,8 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.905Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.087Z",
   "lastStatus": "ok",
-  "number": 0
- },
- {
-  "id": "cmsor42mi007pnn71re99tn0j",
-  "name": "DD Bangla",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1OWUwYiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0NTFhMDMiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkREIEJhbmdsYTwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-4.pishow.tv/live/37/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Bengali",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:34.306Z",
-  "lastStatus": "unreachable",
-  "number": 377
- },
- {
-  "id": "cmt6tsrpa000c57fbbtfokvfs",
-  "name": "DD Bihar",
-  "logoUrl": "https://i.imgur.com/C7KQiZI.png",
-  "streamUrl": "https://cdn-4.pishow.tv/live/35/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:28.550Z",
-  "lastStatus": "unreachable",
   "number": 0
  },
  {
@@ -4245,24 +4007,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.359Z",
-  "lastStatus": "ok",
-  "number": 0
- },
- {
-  "id": "cmt6tsrtp000e57fb9wlwdwcv",
-  "name": "DD Chhattisgarh",
-  "logoUrl": "https://i.imgur.com/zBg6Iuv.png",
-  "streamUrl": "https://cdn-1.pishow.tv/live/15/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.723Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.609Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4279,7 +4024,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.041Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.489Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4296,7 +4041,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.867Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.867Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4313,7 +4058,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.869Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.235Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4330,7 +4075,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.671Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.762Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4347,7 +4092,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.375Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.051Z",
   "lastStatus": "ok",
   "number": 172
  },
@@ -4364,7 +4109,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.629Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.528Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4381,60 +4126,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.554Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.027Z",
   "lastStatus": "ok",
   "number": 0
- },
- {
-  "id": "cmt6tt0kg000l57fbii2kvebt",
-  "name": "DD Kisan",
-  "logoUrl": "https://i.imgur.com/x56WJEa.png",
-  "streamUrl": "https://cdn-6.pishow.tv/live/9/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:29.140Z",
-  "lastStatus": "unreachable",
-  "number": 0
- },
- {
-  "id": "cmt6tt0mo000m57fbbso9xzvy",
-  "name": "DD Madhya Pradesh",
-  "logoUrl": "https://dtil.tmsimg.com/assets/s142790_ld_h15_aa.png?lock=720x540",
-  "streamUrl": "https://cdn-1.pishow.tv/live/31/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.827Z",
-  "lastStatus": "ok",
-  "number": 0
- },
- {
-  "id": "cmsor42mi006cnn71icb11jsa",
-  "name": "DD Malayalam",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg0Y2MxNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJlMDUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkREIE1hbGF5YWxhbTwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-3.pishow.tv/live/27/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Malayalam",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.699Z",
-  "lastStatus": "ok",
-  "number": 328
  },
  {
   "id": "cmt6tt0ow000n57fb5htwbfsw",
@@ -4449,7 +4143,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.424Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.552Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4466,7 +4160,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.749Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.789Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4483,60 +4177,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.620Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.604Z",
   "lastStatus": "ok",
   "number": 170
- },
- {
-  "id": "cmsor42mg001znn71wh6ihj5p",
-  "name": "DD News",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg0Y2MxNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJlMDUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkREIE5ld3M8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://cdn-2.pishow.tv/live/12/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Hindi",
-  "category": "News",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.391Z",
-  "lastStatus": "ok",
-  "number": 171
- },
- {
-  "id": "cmsor42mi007gnn71g7h1mlgs",
-  "name": "DD Punjabi",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1MDA3MjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkREIFB1bmphYmk8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://cdn-4.pishow.tv/live/24/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Punjabi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:34.164Z",
-  "lastStatus": "unreachable",
-  "number": 368
- },
- {
-  "id": "cmsor42mi006knn71px1gceh2",
-  "name": "DD Tamil",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg0Y2MxNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJlMDUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkREIFRhbWlsPC90ZXh0PgogIAo8L3N2Zz4=",
-  "streamUrl": "https://cdn-2.pishow.tv/live/26/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Tamil",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.779Z",
-  "lastStatus": "ok",
-  "number": 336
  },
  {
   "id": "cmtdgajc7000j5od7axvots64",
@@ -4551,7 +4194,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.202Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.131Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4568,7 +4211,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.310Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.172Z",
   "lastStatus": "ok",
   "number": 482
  },
@@ -4585,7 +4228,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.515Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.292Z",
   "lastStatus": "ok",
   "number": 100
  },
@@ -4602,7 +4245,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.704Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.288Z",
   "lastStatus": "ok",
   "number": 606
  },
@@ -4619,7 +4262,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.788Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.248Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4636,7 +4279,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.437Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.608Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4653,7 +4296,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.768Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.861Z",
   "lastStatus": "ok",
   "number": 227
  },
@@ -4670,7 +4313,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.437Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.291Z",
   "lastStatus": "ok",
   "number": 480
  },
@@ -4686,9 +4329,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:34.992Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:21.909Z",
+  "lastStatus": "ok",
   "number": 481
  },
  {
@@ -4704,7 +4347,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.372Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.457Z",
   "lastStatus": "ok",
   "number": 538
  },
@@ -4721,9 +4364,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.298Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.212Z",
   "lastStatus": "ok",
   "number": 206
+ },
+ {
+  "id": "cmtqq2bd10001p9rf3ynntusj",
+  "name": "Divya Darshan TV",
+  "logoUrl": "https://i.imgur.com/EwDQ12F.png",
+  "streamUrl": "http://live.divyadarshantv.com/hls/stream.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:13.934Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42ml00cunn71nkj4n82q",
@@ -4738,7 +4398,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.010Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.815Z",
   "lastStatus": "ok",
   "number": 562
  },
@@ -4755,7 +4415,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.158Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.947Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4772,7 +4432,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.123Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.946Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4789,7 +4449,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.865Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.734Z",
   "lastStatus": "ok",
   "number": 539
  },
@@ -4806,7 +4466,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.237Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.131Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4823,7 +4483,24 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.245Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.868Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3ar7d0007umqj9mrcukr9",
+  "name": "Dubai TV International",
+  "logoUrl": "https://i.imgur.com/UMmbyHv.png",
+  "streamUrl": "http://185.9.2.18/chid_139/index.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.947Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -4840,7 +4517,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.055Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.499Z",
   "lastStatus": "ok",
   "number": 203
  },
@@ -4857,7 +4534,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.487Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.078Z",
   "lastStatus": "ok",
   "number": 204
  },
@@ -4872,9 +4549,9 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 6,
-  "lastCheckedAt": "2026-08-31T06:06:31.333Z",
+  "isActive": true,
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:18.997Z",
   "lastStatus": "unreachable",
   "number": 484
  },
@@ -4891,7 +4568,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.980Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.096Z",
   "lastStatus": "ok",
   "number": 266
  },
@@ -4908,7 +4585,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.141Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.095Z",
   "lastStatus": "ok",
   "number": 265
  },
@@ -4925,7 +4602,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.922Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.373Z",
   "lastStatus": "ok",
   "number": 267
  },
@@ -4942,7 +4619,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.560Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.653Z",
   "lastStatus": "ok",
   "number": 346
  },
@@ -4959,7 +4636,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.174Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.367Z",
   "lastStatus": "ok",
   "number": 347
  },
@@ -4976,7 +4653,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.851Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.894Z",
   "lastStatus": "ok",
   "number": 348
  },
@@ -4993,26 +4670,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.070Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.131Z",
   "lastStatus": "ok",
   "number": 349
- },
- {
-  "id": "cmsor42mi006ynn71k0xk6xwp",
-  "name": "ETV Life",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1MDA3MjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkVUViBMaWZlPC90ZXh0PgogIAo8L3N2Zz4=",
-  "streamUrl": "https://d2cj1h11htct8o.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_LIFE_H264_cloud_in/index.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Telugu",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.008Z",
-  "lastStatus": "ok",
-  "number": 350
  },
  {
   "id": "cmsor42mi006znn71fqe6q6rh",
@@ -5027,7 +4687,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.930Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.972Z",
   "lastStatus": "ok",
   "number": 351
  },
@@ -5044,7 +4704,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.860Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.292Z",
   "lastStatus": "ok",
   "number": 352
  },
@@ -5061,7 +4721,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.878Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.963Z",
   "lastStatus": "ok",
   "number": 353
  },
@@ -5078,7 +4738,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.962Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.052Z",
   "lastStatus": "ok",
   "number": 354
  },
@@ -5095,7 +4755,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.992Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.041Z",
   "lastStatus": "ok",
   "number": 355
  },
@@ -5112,7 +4772,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.312Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.209Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -5129,7 +4789,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.030Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.212Z",
   "lastStatus": "ok",
   "number": 485
  },
@@ -5146,7 +4806,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.261Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.090Z",
   "lastStatus": "ok",
   "number": 612
  },
@@ -5163,7 +4823,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.360Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.775Z",
   "lastStatus": "ok",
   "number": 222
  },
@@ -5180,7 +4840,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.028Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.895Z",
   "lastStatus": "ok",
   "number": 570
  },
@@ -5197,7 +4857,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.279Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.449Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -5214,26 +4874,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.037Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.854Z",
   "lastStatus": "ok",
   "number": 571
- },
- {
-  "id": "cmsor42mi007qnn714espor8a",
-  "name": "Enterr 10 Bangla",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYzNjZmMSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTFiNGIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPkVudGVyciAxMCBCYW5nbGE8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://cdn-4.pishow.tv/live/241/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Bengali",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:34.356Z",
-  "lastStatus": "unreachable",
-  "number": 378
  },
  {
   "id": "cmsor42mh0059nn71vstic9py",
@@ -5248,7 +4891,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.844Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.371Z",
   "lastStatus": "ok",
   "number": 289
  },
@@ -5265,7 +4908,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.136Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.815Z",
   "lastStatus": "ok",
   "number": 290
  },
@@ -5282,7 +4925,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.393Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.469Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -5299,7 +4942,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.150Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.254Z",
   "lastStatus": "ok",
   "number": 284
  },
@@ -5316,7 +4959,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.413Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.469Z",
   "lastStatus": "ok",
   "number": 591
  },
@@ -5332,9 +4975,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:29.297Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:16.631Z",
+  "lastStatus": "ok",
   "number": 486
  },
  {
@@ -5350,7 +4993,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.140Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.177Z",
   "lastStatus": "ok",
   "number": 278
  },
@@ -5367,7 +5010,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.186Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.078Z",
   "lastStatus": "ok",
   "number": 102
  },
@@ -5384,7 +5027,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.548Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.650Z",
   "lastStatus": "ok",
   "number": 101
  },
@@ -5401,7 +5044,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.454Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.810Z",
   "lastStatus": "ok",
   "number": 103
  },
@@ -5418,7 +5061,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.553Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.868Z",
   "lastStatus": "ok",
   "number": 166
  },
@@ -5435,7 +5078,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.847Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.016Z",
   "lastStatus": "ok",
   "number": 261
  },
@@ -5452,7 +5095,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.228Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.336Z",
   "lastStatus": "ok",
   "number": 280
  },
@@ -5469,7 +5112,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.339Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.169Z",
   "lastStatus": "ok",
   "number": 615
  },
@@ -5486,7 +5129,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.879Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.963Z",
   "lastStatus": "ok",
   "number": 291
  },
@@ -5503,7 +5146,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.901Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.977Z",
   "lastStatus": "ok",
   "number": 285
  },
@@ -5520,7 +5163,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.839Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.496Z",
   "lastStatus": "ok",
   "number": 286
  },
@@ -5537,7 +5180,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.174Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.211Z",
   "lastStatus": "ok",
   "number": 369
  },
@@ -5554,7 +5197,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.688Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.314Z",
   "lastStatus": "ok",
   "number": 487
  },
@@ -5571,7 +5214,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.821Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.937Z",
   "lastStatus": "ok",
   "number": 314
  },
@@ -5588,7 +5231,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.213Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.066Z",
   "lastStatus": "ok",
   "number": 442
  },
@@ -5605,7 +5248,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.230Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.092Z",
   "lastStatus": "ok",
   "number": 443
  },
@@ -5622,7 +5265,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.248Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.092Z",
   "lastStatus": "ok",
   "number": 444
  },
@@ -5639,7 +5282,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.310Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.144Z",
   "lastStatus": "ok",
   "number": 445
  },
@@ -5656,7 +5299,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.258Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.092Z",
   "lastStatus": "ok",
   "number": 446
  },
@@ -5673,7 +5316,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.293Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.145Z",
   "lastStatus": "ok",
   "number": 447
  },
@@ -5690,7 +5333,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.336Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.172Z",
   "lastStatus": "ok",
   "number": 448
  },
@@ -5707,7 +5350,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.327Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.173Z",
   "lastStatus": "ok",
   "number": 449
  },
@@ -5724,7 +5367,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.330Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.650Z",
   "lastStatus": "ok",
   "number": 450
  },
@@ -5741,7 +5384,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.373Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.224Z",
   "lastStatus": "ok",
   "number": 451
  },
@@ -5758,7 +5401,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.389Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.223Z",
   "lastStatus": "ok",
   "number": 452
  },
@@ -5775,7 +5418,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.819Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.855Z",
   "lastStatus": "ok",
   "number": 211
  },
@@ -5792,7 +5435,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.215Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.537Z",
   "lastStatus": "ok",
   "number": 251
  },
@@ -5809,7 +5452,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.759Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.856Z",
   "lastStatus": "ok",
   "number": 563
  },
@@ -5826,7 +5469,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.294Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.312Z",
   "lastStatus": "ok",
   "number": 566
  },
@@ -5843,7 +5486,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.344Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.896Z",
   "lastStatus": "ok",
   "number": 224
  },
@@ -5860,7 +5503,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.647Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.076Z",
   "lastStatus": "ok",
   "number": 535
  },
@@ -5877,7 +5520,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.786Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.575Z",
   "lastStatus": "ok",
   "number": 512
  },
@@ -5894,7 +5537,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.603Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.627Z",
   "lastStatus": "ok",
   "number": 554
  },
@@ -5911,7 +5554,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.409Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.525Z",
   "lastStatus": "ok",
   "number": 258
  },
@@ -5928,7 +5571,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.023Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.855Z",
   "lastStatus": "ok",
   "number": 572
  },
@@ -5945,7 +5588,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.981Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.768Z",
   "lastStatus": "ok",
   "number": 488
  },
@@ -5962,7 +5605,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.944Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.815Z",
   "lastStatus": "ok",
   "number": 555
  },
@@ -5979,7 +5622,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.461Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.893Z",
   "lastStatus": "ok",
   "number": 180
  },
@@ -5996,7 +5639,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.612Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.460Z",
   "lastStatus": "ok",
   "number": 489
  },
@@ -6013,7 +5656,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.895Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.937Z",
   "lastStatus": "ok",
   "number": 252
  },
@@ -6030,7 +5673,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:26.393Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.105Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -6047,7 +5690,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.597Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.788Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -6064,7 +5707,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.609Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.368Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -6081,7 +5724,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.628Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.461Z",
   "lastStatus": "ok",
   "number": 490
  },
@@ -6098,7 +5741,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.271Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.135Z",
   "lastStatus": "ok",
   "number": 613
  },
@@ -6115,7 +5758,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.654Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.867Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -6132,7 +5775,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.518Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.999Z",
   "lastStatus": "ok",
   "number": 461
  },
@@ -6149,7 +5792,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.411Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.656Z",
   "lastStatus": "ok",
   "number": 213
  },
@@ -6166,7 +5809,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.095Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.810Z",
   "lastStatus": "ok",
   "number": 160
  },
@@ -6183,7 +5826,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.440Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.890Z",
   "lastStatus": "ok",
   "number": 161
  },
@@ -6200,7 +5843,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.252Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.209Z",
   "lastStatus": "ok",
   "number": 162
  },
@@ -6217,7 +5860,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.176Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.416Z",
   "lastStatus": "ok",
   "number": 163
  },
@@ -6234,7 +5877,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.096Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.774Z",
   "lastStatus": "ok",
   "number": 164
  },
@@ -6251,7 +5894,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.663Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.408Z",
   "lastStatus": "ok",
   "number": 577
  },
@@ -6268,7 +5911,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.214Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.297Z",
   "lastStatus": "ok",
   "number": 578
  },
@@ -6285,7 +5928,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.898Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.416Z",
   "lastStatus": "ok",
   "number": 579
  },
@@ -6302,7 +5945,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.699Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.657Z",
   "lastStatus": "ok",
   "number": 214
  },
@@ -6319,7 +5962,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.583Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.697Z",
   "lastStatus": "ok",
   "number": 253
  },
@@ -6336,7 +5979,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.503Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.617Z",
   "lastStatus": "ok",
   "number": 275
  },
@@ -6353,26 +5996,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.453Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.253Z",
   "lastStatus": "ok",
   "number": 454
- },
- {
-  "id": "cmsor42mk00awnn71ybny07kg",
-  "name": "KTV",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1MDA3MjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPktUVjwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://flv.intechmedia.net/live/ch118.m3u8",
-  "country": "Indonesia",
-  "countryCode": "ID",
-  "language": "Indonesian",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.943Z",
-  "lastStatus": "ok",
-  "number": 492
  },
  {
   "id": "cmsor42mf0013nn71lymo0qxs",
@@ -6387,7 +6013,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.078Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.710Z",
   "lastStatus": "ok",
   "number": 139
  },
@@ -6404,7 +6030,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.381Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.167Z",
   "lastStatus": "ok",
   "number": 140
  },
@@ -6421,7 +6047,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.620Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.420Z",
   "lastStatus": "ok",
   "number": 141
  },
@@ -6438,7 +6064,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.980Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.613Z",
   "lastStatus": "ok",
   "number": 142
  },
@@ -6455,7 +6081,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.299Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.184Z",
   "lastStatus": "ok",
   "number": 337
  },
@@ -6472,7 +6098,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.157Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.894Z",
   "lastStatus": "ok",
   "number": 143
  },
@@ -6489,9 +6115,43 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.563Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.609Z",
   "lastStatus": "ok",
   "number": 144
+ },
+ {
+  "id": "cmtl3arrc000gumqjvag0n0n9",
+  "name": "KTV Sport",
+  "logoUrl": "https://i.imgur.com/R1hGX1d.png",
+  "streamUrl": "https://kwtspta.cdn.mangomolo.com/sp/smil:sp.stream.smil/chunklist.m3u8",
+  "country": "Kuwait",
+  "countryCode": "KW",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.530Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3artk000humqj5emlctqs",
+  "name": "KTV Sport Plus",
+  "logoUrl": "https://i.imgur.com/l4oX0gf.png",
+  "streamUrl": "https://kwtsplta.cdn.mangomolo.com/spl/smil:spl.stream.smil/chunklist.m3u8",
+  "country": "Kuwait",
+  "countryCode": "KW",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.447Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmtgptd47000a5d85gvwqfgne",
@@ -6506,7 +6166,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.732Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.324Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -6523,9 +6183,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.835Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.892Z",
   "lastStatus": "ok",
   "number": 329
+ },
+ {
+  "id": "cmtqq2bf80002p9rf75mhv026",
+  "name": "Kantipur TV",
+  "logoUrl": "https://i.imgur.com/HEVo2Gc.png",
+  "streamUrl": "https://ktvhdsg.ekantipur.com:8443/high_quality_85840165/hd/kantipurtv/hd_1080/chunks.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:13.944Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42ml00c5nn71g45r7omf",
@@ -6540,7 +6217,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.851Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.697Z",
   "lastStatus": "ok",
   "number": 537
  },
@@ -6557,7 +6234,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.627Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.493Z",
   "lastStatus": "ok",
   "number": 491
  },
@@ -6574,7 +6251,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.389Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.252Z",
   "lastStatus": "ok",
   "number": 453
  },
@@ -6591,7 +6268,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.837Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.936Z",
   "lastStatus": "ok",
   "number": 236
  },
@@ -6608,9 +6285,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.961Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.489Z",
   "lastStatus": "ok",
   "number": 157
+ },
+ {
+  "id": "cmtqq2bul0009p9rfak8bkkzb",
+  "name": "LBC",
+  "logoUrl": "https://s3.eu-central-1.amazonaws.com/rotana.website/channels/1688402500.webp",
+  "streamUrl": "http://185.9.2.18/chid_327/index.m3u8",
+  "country": "Saudi Arabia",
+  "countryCode": "SA",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.628Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mh004ann71b6vir9yv",
@@ -6625,7 +6319,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.530Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.216Z",
   "lastStatus": "ok",
   "number": 254
  },
@@ -6642,7 +6336,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.405Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.253Z",
   "lastStatus": "ok",
   "number": 455
  },
@@ -6659,7 +6353,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.561Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.575Z",
   "lastStatus": "ok",
   "number": 323
  },
@@ -6676,7 +6370,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.017Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.656Z",
   "lastStatus": "ok",
   "number": 493
  },
@@ -6693,7 +6387,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.321Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.414Z",
   "lastStatus": "ok",
   "number": 255
  },
@@ -6710,7 +6404,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.509Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.868Z",
   "lastStatus": "ok",
   "number": 514
  },
@@ -6727,7 +6421,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.424Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.367Z",
   "lastStatus": "ok",
   "number": 209
  },
@@ -6744,7 +6438,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.819Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.096Z",
   "lastStatus": "ok",
   "number": 210
  },
@@ -6761,7 +6455,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.777Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.884Z",
   "lastStatus": "ok",
   "number": 305
  },
@@ -6778,7 +6472,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.844Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.918Z",
   "lastStatus": "ok",
   "number": 156
  },
@@ -6795,7 +6489,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.640Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.727Z",
   "lastStatus": "ok",
   "number": 306
  },
@@ -6812,7 +6506,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.401Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.490Z",
   "lastStatus": "ok",
   "number": 307
  },
@@ -6829,7 +6523,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.779Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.026Z",
   "lastStatus": "ok",
   "number": 308
  },
@@ -6846,7 +6540,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.497Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.548Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -6863,7 +6557,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.475Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.971Z",
   "lastStatus": "ok",
   "number": 158
  },
@@ -6880,7 +6574,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.672Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.529Z",
   "lastStatus": "ok",
   "number": 159
  },
@@ -6897,7 +6591,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.822Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.408Z",
   "lastStatus": "ok",
   "number": 125
  },
@@ -6914,9 +6608,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.280Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.694Z",
   "lastStatus": "ok",
   "number": 126
+ },
+ {
+  "id": "cmtl3ar9l0008umqj3nzlppom",
+  "name": "MBC Persia",
+  "logoUrl": "https://i.imgur.com/4FXiyjn.png",
+  "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-persia/818ee8e4b592dc497608f066d825bfb4/index.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.684Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mf000rnn71q1ylj0lr",
@@ -6931,7 +6642,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.235Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.920Z",
   "lastStatus": "ok",
   "number": 127
  },
@@ -6947,9 +6658,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:35.639Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.494Z",
+  "lastStatus": "ok",
   "number": 500
  },
  {
@@ -6965,7 +6676,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.725Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.056Z",
   "lastStatus": "ok",
   "number": 501
  },
@@ -6982,7 +6693,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.626Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.394Z",
   "lastStatus": "ok",
   "number": 165
  },
@@ -6999,7 +6710,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.503Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.617Z",
   "lastStatus": "ok",
   "number": 600
  },
@@ -7016,7 +6727,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.291Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.935Z",
   "lastStatus": "ok",
   "number": 228
  },
@@ -7033,7 +6744,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.369Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.457Z",
   "lastStatus": "ok",
   "number": 207
  },
@@ -7050,7 +6761,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.135Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.263Z",
   "lastStatus": "ok",
   "number": 215
  },
@@ -7067,7 +6778,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.644Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.947Z",
   "lastStatus": "ok",
   "number": 216
  },
@@ -7084,7 +6795,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.540Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.026Z",
   "lastStatus": "ok",
   "number": 494
  },
@@ -7100,9 +6811,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:35.649Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.494Z",
+  "lastStatus": "ok",
   "number": 495
  },
  {
@@ -7117,27 +6828,10 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:30.474Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.848Z",
+  "lastStatus": "ok",
   "number": 496
- },
- {
-  "id": "cmsor42mi007inn714uk5kjzk",
-  "name": "Maha Punjabi",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYzNjZmMSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTFiNGIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPk1haGEgUHVuamFiaTwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-4.pishow.tv/live/1521/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Punjabi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": false,
-  "failCount": 5,
-  "lastCheckedAt": "2026-08-31T06:06:34.242Z",
-  "lastStatus": "unreachable",
-  "number": 370
  },
  {
   "id": "cmtfksn91000dz479x7cxzh5s",
@@ -7152,7 +6846,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.653Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.628Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7169,7 +6863,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.444Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.264Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7186,7 +6880,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.548Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.551Z",
   "lastStatus": "ok",
   "number": 330
  },
@@ -7203,7 +6897,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.498Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.707Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7220,7 +6914,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.791Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.342Z",
   "lastStatus": "ok",
   "number": 497
  },
@@ -7237,7 +6931,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.000Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.768Z",
   "lastStatus": "ok",
   "number": 331
  },
@@ -7254,7 +6948,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.679Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.805Z",
   "lastStatus": "ok",
   "number": 334
  },
@@ -7271,7 +6965,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.286Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.864Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7288,7 +6982,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.291Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.212Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7304,9 +6998,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:28.316Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:16.315Z",
+  "lastStatus": "ok",
   "number": 499
  },
  {
@@ -7322,7 +7016,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.452Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.537Z",
   "lastStatus": "ok",
   "number": 549
  },
@@ -7339,9 +7033,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.414Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.302Z",
   "lastStatus": "ok",
   "number": 456
+ },
+ {
+  "id": "cmtqq2bhf0003p9rfx0wha24l",
+  "name": "Mithila Nepal TV",
+  "logoUrl": "https://i.ibb.co/CWn3fH9/1689333550464.jpg",
+  "streamUrl": "http://150.107.205.212:1935/live/mithila/playlist.m3u8?DVR=",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:13.946Z",
+  "lastStatus": "unreachable",
+  "number": 0
  },
  {
   "id": "cmtgptcxn00075d856mih5slo",
@@ -7356,7 +7067,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.340Z",
+  "lastCheckedAt": "2026-09-08T15:58:13.849Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7373,26 +7084,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.257Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.972Z",
   "lastStatus": "ok",
   "number": 550
- },
- {
-  "id": "cmtfksnhs000hz4799gncp47f",
-  "name": "Mohammed Abdo",
-  "logoUrl": "https://assets.mbcmood.com/channels/1720184012Mohammed%20Abdo%20banner.png",
-  "streamUrl": "https://d2ow8h651gs7dx.cloudfront.net/out/v1/371fb663da604e659a2fb99bf89d92d4/index.m3u8",
-  "country": "Saudi Arabia",
-  "countryCode": "SA",
-  "language": "Arabic",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.342Z",
-  "lastStatus": "ok",
-  "number": 0
  },
  {
   "id": "cmsor42mh0044nn713yp309kk",
@@ -7407,7 +7101,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.582Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.697Z",
   "lastStatus": "ok",
   "number": 248
  },
@@ -7424,7 +7118,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.524Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.105Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7441,7 +7135,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.575Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.548Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -7458,7 +7152,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.233Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.008Z",
   "lastStatus": "ok",
   "number": 292
  },
@@ -7475,7 +7169,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.483Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.333Z",
   "lastStatus": "ok",
   "number": 464
  },
@@ -7492,7 +7186,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.157Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.393Z",
   "lastStatus": "ok",
   "number": 178
  },
@@ -7509,7 +7203,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.265Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.453Z",
   "lastStatus": "ok",
   "number": 173
  },
@@ -7526,26 +7220,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.060Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.525Z",
   "lastStatus": "ok",
   "number": 179
- },
- {
-  "id": "cmsor42ml00cpnn71sntrbj1t",
-  "name": "NDTV LANKA",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzE0YjhhNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwNDJmMmUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPk5EVFYgTEFOS0E8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://g4wlkqqwl23a-hls-live.5centscdn.com/NDTVLANKA/1ff5fa54d14c3ff6c6bd3918bbb7db5d.sdp/playlist.m3u8",
-  "country": "Sri Lanka",
-  "countryCode": "LK",
-  "language": "Sinhala/Tamil",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.951Z",
-  "lastStatus": "ok",
-  "number": 557
  },
  {
   "id": "cmsor42mg0022nn71xhz42jbh",
@@ -7560,7 +7237,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.332Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.533Z",
   "lastStatus": "ok",
   "number": 174
  },
@@ -7577,7 +7254,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.688Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.499Z",
   "lastStatus": "ok",
   "number": 175
  },
@@ -7594,7 +7271,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.922Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.935Z",
   "lastStatus": "ok",
   "number": 176
  },
@@ -7611,7 +7288,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.095Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.015Z",
   "lastStatus": "ok",
   "number": 177
  },
@@ -7628,7 +7305,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.175Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.816Z",
   "lastStatus": "ok",
   "number": 564
  },
@@ -7645,7 +7322,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.609Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.697Z",
   "lastStatus": "ok",
   "number": 565
  },
@@ -7662,7 +7339,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.357Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.358Z",
   "lastStatus": "ok",
   "number": 379
  },
@@ -7679,7 +7356,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.460Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.736Z",
   "lastStatus": "ok",
   "number": 221
  },
@@ -7696,26 +7373,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.936Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.973Z",
   "lastStatus": "ok",
   "number": 356
  },
  {
-  "id": "cmsor42mk00b7nn71iw7jkfaj",
-  "name": "Naajiya TV",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1OWUwYiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0NTFhMDMiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPk5hYWppeWEgVFY8L3RleHQ+CiAgCjwvc3ZnPg==",
-  "streamUrl": "https://www.naajiyatv.com/live/livestream.m3u8",
-  "country": "Indonesia",
-  "countryCode": "ID",
-  "language": "Indonesian",
+  "id": "cmtl3aqpl0000umqjw1048751",
+  "name": "National Geographic HD",
+  "logoUrl": "https://dtil.tmsimg.com/assets/s143574_ld_h15_aa.png?lock=720x540",
+  "streamUrl": "http://103.165.93.31:8095/nationalGeographic/index.m3u8",
+  "country": "Sri Lanka",
+  "countryCode": "LK",
+  "language": "Sinhala/Tamil",
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
   "isActive": false,
-  "failCount": 12,
-  "lastCheckedAt": "2026-08-31T06:06:31.566Z",
+  "failCount": 5,
+  "lastCheckedAt": "2026-09-08T15:58:14.018Z",
   "lastStatus": "unreachable",
-  "number": 503
+  "number": 0
  },
  {
   "id": "cmsor42ml00cjnn71h8qp4k1o",
@@ -7730,7 +7407,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.335Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.682Z",
   "lastStatus": "ok",
   "number": 551
  },
@@ -7747,9 +7424,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.022Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.051Z",
   "lastStatus": "ok",
   "number": 208
+ },
+ {
+  "id": "cmtqq2bjm0004p9rf9abzkd4h",
+  "name": "Nepal 1",
+  "logoUrl": "https://i.imgur.com/Xr4FjC8.png",
+  "streamUrl": "https://mumt05.tangotv.in/87NeALx2NEPAL1/index.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.165Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mi006mnn71tfbcnyn0",
@@ -7764,7 +7458,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.698Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.733Z",
   "lastStatus": "ok",
   "number": 338
  },
@@ -7781,26 +7475,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.617Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.654Z",
   "lastStatus": "ok",
   "number": 297
- },
- {
-  "id": "cmsor42mi006gnn710uqrx2l2",
-  "name": "News Malayalam 24x7",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1OWUwYiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0NTFhMDMiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSI4MC41IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5OZXdzIE1hbGF5YWxhbTwvdGV4dD4KPHRleHQgeD0iNTAlIiB5PSIxMTkuNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMzIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgb3BhY2l0eT0iMC45MiI+MjR4NzwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-3.pishow.tv/live/1629/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Malayalam",
-  "category": "News",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.532Z",
-  "lastStatus": "ok",
-  "number": 332
  },
  {
   "id": "cmsor42mg0039nn71yqmes8v9",
@@ -7815,26 +7492,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.898Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.977Z",
   "lastStatus": "ok",
   "number": 217
- },
- {
-  "id": "cmsor42mi006nnn71xlq5kvox",
-  "name": "News Tamil 24x7",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1OWUwYiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0NTFhMDMiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPk5ld3MgVGFtaWwgMjR4NzwvdGV4dD4KICAKPC9zdmc+",
-  "streamUrl": "https://cdn-3.pishow.tv/live/1433/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Tamil",
-  "category": "News",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.773Z",
-  "lastStatus": "ok",
-  "number": 339
  },
  {
   "id": "cmsor42mg002enn714u4m78ll",
@@ -7849,7 +7509,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.984Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.689Z",
   "lastStatus": "ok",
   "number": 186
  },
@@ -7866,7 +7526,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.610Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.855Z",
   "lastStatus": "ok",
   "number": 187
  },
@@ -7883,7 +7543,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.610Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.157Z",
   "lastStatus": "ok",
   "number": 188
  },
@@ -7900,7 +7560,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.096Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.735Z",
   "lastStatus": "ok",
   "number": 189
  },
@@ -7917,7 +7577,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.782Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.761Z",
   "lastStatus": "ok",
   "number": 190
  },
@@ -7934,7 +7594,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.488Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.137Z",
   "lastStatus": "ok",
   "number": 191
  },
@@ -7951,7 +7611,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.742Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.336Z",
   "lastStatus": "ok",
   "number": 192
  },
@@ -7968,7 +7628,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.411Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.604Z",
   "lastStatus": "ok",
   "number": 193
  },
@@ -7985,7 +7645,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.313Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.736Z",
   "lastStatus": "ok",
   "number": 194
  },
@@ -8002,7 +7662,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.712Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.473Z",
   "lastStatus": "ok",
   "number": 195
  },
@@ -8019,7 +7679,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.331Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.137Z",
   "lastStatus": "ok",
   "number": 196
  },
@@ -8036,7 +7696,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.589Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.935Z",
   "lastStatus": "ok",
   "number": 197
  },
@@ -8053,7 +7713,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.018Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.184Z",
   "lastStatus": "ok",
   "number": 198
  },
@@ -8070,7 +7730,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.947Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.452Z",
   "lastStatus": "ok",
   "number": 199
  },
@@ -8087,7 +7747,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.759Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.927Z",
   "lastStatus": "ok",
   "number": 200
  },
@@ -8104,7 +7764,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.453Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.730Z",
   "lastStatus": "ok",
   "number": 201
  },
@@ -8121,7 +7781,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.539Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.648Z",
   "lastStatus": "ok",
   "number": 273
  },
@@ -8138,7 +7798,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.189Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.576Z",
   "lastStatus": "ok",
   "number": 272
  },
@@ -8155,7 +7815,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.185Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.533Z",
   "lastStatus": "ok",
   "number": 274
  },
@@ -8172,9 +7832,60 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.726Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.618Z",
   "lastStatus": "ok",
   "number": 515
+ },
+ {
+  "id": "cmtqq2blt0005p9rfx15qvaqd",
+  "name": "Nick Jr.",
+  "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NICK_JUNIOR/images/LOGO_HD/image.png",
+  "streamUrl": "http://103.185.24.134:3001/NICK-JR/index.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.248Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3aqu00001umqj31cwgt3o",
+  "name": "Nickelodeon",
+  "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NICK/images/LOGO_HD/image.png",
+  "streamUrl": "http://103.185.24.134:3001/NICK/index.m3u8",
+  "country": "Sri Lanka",
+  "countryCode": "LK",
+  "language": "Sinhala/Tamil",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.344Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3aqyg0003umqjm0uqdvbo",
+  "name": "Nidae AlIslam Radio",
+  "logoUrl": "https://aloula.faulio.com/storage/mediagallery/0f/c5/fullhd_5da380cdfc304fd7d4672a83aeb6c62bc1d3d3e8.png",
+  "streamUrl": "https://live.kwikmotion.com/sbrksanedaradiolive/srpksanedaradio/playlist.m3u8",
+  "country": "Saudi Arabia",
+  "countryCode": "SA",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.264Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42ml00c4nn71ccseje2z",
@@ -8189,7 +7900,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.977Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.057Z",
   "lastStatus": "ok",
   "number": 536
  },
@@ -8206,7 +7917,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.682Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.468Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -8223,7 +7934,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.102Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.895Z",
   "lastStatus": "ok",
   "number": 580
  },
@@ -8240,9 +7951,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.090Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.934Z",
   "lastStatus": "ok",
   "number": 581
+ },
+ {
+  "id": "cmtl3arbt0009umqjgkzj1m16",
+  "name": "Nour TV",
+  "logoUrl": "https://upload.wikimedia.org/wikipedia/en/8/8c/Nourtv_logo.jpg",
+  "streamUrl": "https://cdn.bestream.io:19360/elfaro4/elfaro4.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.370Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42ml00denn717v0ktzgq",
@@ -8257,7 +7985,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.530Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.616Z",
   "lastStatus": "ok",
   "number": 582
  },
@@ -8274,7 +8002,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.767Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.857Z",
   "lastStatus": "ok",
   "number": 583
  },
@@ -8291,7 +8019,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.027Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.211Z",
   "lastStatus": "ok",
   "number": 259
  },
@@ -8308,7 +8036,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.680Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.947Z",
   "lastStatus": "ok",
   "number": 167
  },
@@ -8325,7 +8053,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.858Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.155Z",
   "lastStatus": "ok",
   "number": 262
  },
@@ -8342,7 +8070,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.349Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.137Z",
   "lastStatus": "ok",
   "number": 552
  },
@@ -8359,7 +8087,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.766Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.533Z",
   "lastStatus": "ok",
   "number": 149
  },
@@ -8376,7 +8104,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.821Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.576Z",
   "lastStatus": "ok",
   "number": 150
  },
@@ -8393,7 +8121,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.174Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.817Z",
   "lastStatus": "ok",
   "number": 152
  },
@@ -8410,7 +8138,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.583Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.248Z",
   "lastStatus": "ok",
   "number": 151
  },
@@ -8427,7 +8155,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.106Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.576Z",
   "lastStatus": "ok",
   "number": 268
  },
@@ -8444,7 +8172,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.052Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.098Z",
   "lastStatus": "ok",
   "number": 269
  },
@@ -8461,7 +8189,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.021Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.377Z",
   "lastStatus": "ok",
   "number": 218
  },
@@ -8478,7 +8206,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.038Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.053Z",
   "lastStatus": "ok",
   "number": 357
  },
@@ -8495,26 +8223,9 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.469Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.303Z",
   "lastStatus": "ok",
   "number": 457
- },
- {
-  "id": "cmsor42mi007knn71m37nk0lr",
-  "name": "PTC Punjabi",
-  "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y0M2Y1ZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0YzA1MTkiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgCiAgPHRleHQgeD0iNTAlIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIG9wYWNpdHk9IjAuOTIiPlBUQyBQdW5qYWJpPC90ZXh0PgogIAo8L3N2Zz4=",
-  "streamUrl": "https://cdn-2.pishow.tv/live/1604/master.m3u8",
-  "country": "India",
-  "countryCode": "IN",
-  "language": "Punjabi",
-  "category": "Entertainment",
-  "isHD": true,
-  "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.227Z",
-  "lastStatus": "ok",
-  "number": 372
  },
  {
   "id": "cmsor42mi007lnn71bb0bdgdh",
@@ -8529,7 +8240,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.254Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.212Z",
   "lastStatus": "ok",
   "number": 373
  },
@@ -8546,7 +8257,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.199Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.278Z",
   "lastStatus": "ok",
   "number": 371
  },
@@ -8563,7 +8274,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.340Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.215Z",
   "lastStatus": "ok",
   "number": 617
  },
@@ -8580,7 +8291,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.568Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.076Z",
   "lastStatus": "ok",
   "number": 202
  },
@@ -8597,7 +8308,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.916Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.018Z",
   "lastStatus": "ok",
   "number": 586
  },
@@ -8614,7 +8325,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.662Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.776Z",
   "lastStatus": "ok",
   "number": 592
  },
@@ -8631,7 +8342,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.178Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.233Z",
   "lastStatus": "ok",
   "number": 593
  },
@@ -8648,7 +8359,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.371Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.469Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -8665,9 +8376,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.944Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.776Z",
   "lastStatus": "ok",
   "number": 553
+ },
+ {
+  "id": "cmtl3are1000aumqjkbnhgxhx",
+  "name": "Peace TV Chinese",
+  "logoUrl": "https://github.com/fawazahmed0/tiger/raw/master/peace/chinese.jpg",
+  "streamUrl": "https://dzkyvlfyge.erbvr.com/PeaceTvChinese/index.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.025Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mh005dnn71j5e6k4y6",
@@ -8682,7 +8410,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.084Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.174Z",
   "lastStatus": "ok",
   "number": 293
  },
@@ -8699,7 +8427,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.863Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.840Z",
   "lastStatus": "ok",
   "number": 219
  },
@@ -8716,7 +8444,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.134Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.155Z",
   "lastStatus": "ok",
   "number": 233
  },
@@ -8733,7 +8461,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.532Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.767Z",
   "lastStatus": "ok",
   "number": 234
  },
@@ -8750,9 +8478,43 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.249Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.055Z",
   "lastStatus": "ok",
   "number": 605
+ },
+ {
+  "id": "cmtqq2bo00006p9rf83mncf3z",
+  "name": "Public 4K TV",
+  "logoUrl": "https://i.imgur.com/JxEzgDP.png",
+  "streamUrl": "http://103.180.240.141:8080/hls/main1/playlist.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.178Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3arg8000bumqj8eugi1w9",
+  "name": "Pulse95 Radio",
+  "logoUrl": "https://maraya.faulio.com/storage/mediagallery/60/26/fullhd_d5c3c81b0562a76bc63f073a5e0947f309b0215b.png",
+  "streamUrl": "https://svs.itworkscdn.net/pulse95live/pulse96/playlist.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.449Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mi007mnn71w7ckpdwj",
@@ -8767,7 +8529,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.321Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.291Z",
   "lastStatus": "ok",
   "number": 374
  },
@@ -8784,7 +8546,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.771Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.619Z",
   "lastStatus": "ok",
   "number": 516
  },
@@ -8801,7 +8563,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.906Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.087Z",
   "lastStatus": "ok",
   "number": 137
  },
@@ -8818,7 +8580,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.409Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.236Z",
   "lastStatus": "ok",
   "number": 138
  },
@@ -8835,7 +8597,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.447Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.548Z",
   "lastStatus": "ok",
   "number": 241
  },
@@ -8852,7 +8614,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.810Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.026Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -8869,7 +8631,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.429Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.693Z",
   "lastStatus": "ok",
   "number": 517
  },
@@ -8886,7 +8648,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.379Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.415Z",
   "lastStatus": "ok",
   "number": 257
  },
@@ -8903,7 +8665,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.977Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.790Z",
   "lastStatus": "ok",
   "number": 229
  },
@@ -8920,7 +8682,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.006Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.709Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -8936,9 +8698,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.056Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:19.312Z",
+  "lastStatus": "unreachable",
   "number": 594
  },
  {
@@ -8954,7 +8716,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.732Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.338Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -8971,7 +8733,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.755Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.927Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -8988,7 +8750,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.695Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.806Z",
   "lastStatus": "ok",
   "number": 340
  },
@@ -9005,7 +8767,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.418Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.457Z",
   "lastStatus": "ok",
   "number": 225
  },
@@ -9022,9 +8784,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.183Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.055Z",
   "lastStatus": "ok",
   "number": 595
+ },
+ {
+  "id": "cmtqq2bq70007p9rfskqq8v6l",
+  "name": "Ray TV HD",
+  "logoUrl": "https://i.imgur.com/QIkgiEn.png",
+  "streamUrl": "https://streaming.tvnepal.com:19360/raynewsdaily/720p.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.170Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mg0029nn71dljgvmi1",
@@ -9039,7 +8818,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.265Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.787Z",
   "lastStatus": "ok",
   "number": 181
  },
@@ -9056,7 +8835,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.902Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.373Z",
   "lastStatus": "ok",
   "number": 182
  },
@@ -9072,9 +8851,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.584Z",
-  "lastStatus": "ok",
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-08T15:58:17.212Z",
+  "lastStatus": "unreachable",
   "number": 183
  },
  {
@@ -9090,7 +8869,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.938Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.453Z",
   "lastStatus": "ok",
   "number": 184
  },
@@ -9105,11 +8884,28 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 6,
-  "lastCheckedAt": "2026-08-31T06:06:33.060Z",
-  "lastStatus": "unreachable",
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:20.175Z",
+  "lastStatus": "ok",
   "number": 263
+ },
+ {
+  "id": "cmtl3arvs000iumqjizucq0de",
+  "name": "Ritmu TV",
+  "logoUrl": "https://play-lh.googleusercontent.com/aO-2614npPjbJny21ljgGDRqfixPUG39uLfXwG-xX6fd2y5sxjp_SR6ty92d9l08yt10",
+  "streamUrl": "https://659605a54e9a6.streamlock.net:8443/live/livestream/playlist.m3u8",
+  "country": "Kuwait",
+  "countryCode": "KW",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.446Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmtgptdar000d5d857m7fvbow",
@@ -9124,7 +8920,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.761Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.258Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -9141,7 +8937,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.966Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.629Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -9156,9 +8952,9 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:29.297Z",
+  "isActive": false,
+  "failCount": 2,
+  "lastCheckedAt": "2026-09-08T15:58:18.209Z",
   "lastStatus": "unreachable",
   "number": 230
  },
@@ -9175,7 +8971,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.384Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.357Z",
   "lastStatus": "ok",
   "number": 380
  },
@@ -9192,7 +8988,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.835Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.450Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -9209,7 +9005,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.818Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.897Z",
   "lastStatus": "ok",
   "number": 542
  },
@@ -9226,7 +9022,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.882Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.735Z",
   "lastStatus": "ok",
   "number": 543
  },
@@ -9243,7 +9039,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.862Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.057Z",
   "lastStatus": "ok",
   "number": 541
  },
@@ -9260,7 +9056,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.865Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.697Z",
   "lastStatus": "ok",
   "number": 540
  },
@@ -9277,7 +9073,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.041Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.120Z",
   "lastStatus": "ok",
   "number": 358
  },
@@ -9294,7 +9090,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.015Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.052Z",
   "lastStatus": "ok",
   "number": 359
  },
@@ -9311,7 +9107,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.600Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.408Z",
   "lastStatus": "ok",
   "number": 360
  },
@@ -9328,7 +9124,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.095Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.120Z",
   "lastStatus": "ok",
   "number": 361
  },
@@ -9345,7 +9141,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.344Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.999Z",
   "lastStatus": "ok",
   "number": 205
  },
@@ -9362,7 +9158,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.712Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.472Z",
   "lastStatus": "ok",
   "number": 123
  },
@@ -9379,7 +9175,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.999Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.628Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -9396,7 +9192,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.130Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.253Z",
   "lastStatus": "ok",
   "number": 598
  },
@@ -9413,7 +9209,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.181Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.012Z",
   "lastStatus": "ok",
   "number": 596
  },
@@ -9430,9 +9226,43 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.520Z",
+  "lastCheckedAt": "2026-09-08T15:58:15.687Z",
   "lastStatus": "ok",
   "number": 111
+ },
+ {
+  "id": "cmtl3arig000cumqjfrjxgplv",
+  "name": "Sharjah Radio",
+  "logoUrl": "https://i.imgur.com/q7GGALe.png",
+  "streamUrl": "https://svs.itworkscdn.net/smcradiolive/smcradiolive/playlist.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.288Z",
+  "lastStatus": "ok",
+  "number": 0
+ },
+ {
+  "id": "cmtl3arkp000dumqjedivqacj",
+  "name": "Sharjah Radio Quran",
+  "logoUrl": "https://i.imgur.com/MxZlOvc.png",
+  "streamUrl": "https://live.kwikmotion.com/smcquranlive/quranradiolive/playlist.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.369Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mf000cnn710mk0ffjh",
@@ -9447,7 +9277,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.663Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.496Z",
   "lastStatus": "ok",
   "number": 112
  },
@@ -9464,7 +9294,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.847Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.940Z",
   "lastStatus": "ok",
   "number": 239
  },
@@ -9481,7 +9311,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.609Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.705Z",
   "lastStatus": "ok",
   "number": 558
  },
@@ -9498,7 +9328,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.704Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.446Z",
   "lastStatus": "ok",
   "number": 104
  },
@@ -9513,10 +9343,10 @@
   "category": "News",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 3,
-  "lastCheckedAt": "2026-08-31T06:06:35.468Z",
-  "lastStatus": "unreachable",
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.333Z",
+  "lastStatus": "ok",
   "number": 458
  },
  {
@@ -9530,10 +9360,10 @@
   "category": "News",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.926Z",
-  "lastStatus": "ok",
+  "isActive": false,
+  "failCount": 2,
+  "lastCheckedAt": "2026-09-08T15:58:20.017Z",
+  "lastStatus": "unreachable",
   "number": 279
  },
  {
@@ -9549,7 +9379,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.260Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.134Z",
   "lastStatus": "ok",
   "number": 611
  },
@@ -9566,9 +9396,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.977Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.391Z",
   "lastStatus": "ok",
   "number": 533
+ },
+ {
+  "id": "cmtqq2bse0008p9rfe8imas1d",
+  "name": "Sonic",
+  "logoUrl": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONIC/images/LOGO_HD/image.png",
+  "streamUrl": "http://103.185.24.134:3001/SONIC/index.m3u8",
+  "country": "Nepal",
+  "countryCode": "NP",
+  "language": "Nepali",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.027Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mm00e3nn7127qnfgq1",
@@ -9583,7 +9430,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.689Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.777Z",
   "lastStatus": "ok",
   "number": 607
  },
@@ -9600,7 +9447,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.503Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.015Z",
   "lastStatus": "ok",
   "number": 604
  },
@@ -9617,7 +9464,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.681Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.783Z",
   "lastStatus": "ok",
   "number": 226
  },
@@ -9634,7 +9481,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:28.882Z",
+  "lastCheckedAt": "2026-09-08T15:58:17.051Z",
   "lastStatus": "ok",
   "number": 105
  },
@@ -9651,7 +9498,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.023Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.895Z",
   "lastStatus": "ok",
   "number": 567
  },
@@ -9668,7 +9515,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.334Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.292Z",
   "lastStatus": "ok",
   "number": 381
  },
@@ -9685,7 +9532,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:30.314Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.631Z",
   "lastStatus": "ok",
   "number": 363
  },
@@ -9702,7 +9549,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.795Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.654Z",
   "lastStatus": "ok",
   "number": 520
  },
@@ -9719,7 +9566,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.169Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.975Z",
   "lastStatus": "ok",
   "number": 587
  },
@@ -9736,7 +9583,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.293Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.377Z",
   "lastStatus": "ok",
   "number": 559
  },
@@ -9753,7 +9600,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.644Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.488Z",
   "lastStatus": "ok",
   "number": 281
  },
@@ -9770,7 +9617,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.757Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.813Z",
   "lastStatus": "ok",
   "number": 343
  },
@@ -9787,9 +9634,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:33.959Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.042Z",
   "lastStatus": "ok",
   "number": 341
+ },
+ {
+  "id": "cmtl3ar0o0004umqj14x2ixrn",
+  "name": "Tarab",
+  "logoUrl": "https://assets.mbcmood.com/channels/1738059679TARAB_Logo.png",
+  "streamUrl": "https://shd-amg-fast-btpls.shahid.net/tx002/playlist.m3u8",
+  "country": "Saudi Arabia",
+  "countryCode": "SA",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.788Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mi007ann71ph3onz25",
@@ -9804,9 +9668,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.086Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.132Z",
   "lastStatus": "ok",
   "number": 362
+ },
+ {
+  "id": "cmtl3ar2w0005umqj8bteobvz",
+  "name": "Thikrayat TV (1080p) [Geo-blocked]",
+  "logoUrl": "https://i.imgur.com/AKa1X9d.png",
+  "streamUrl": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-thikrayat/8cfa8fe0c96275735745b89c683b27e3/index.m3u8",
+  "country": "Saudi Arabia",
+  "countryCode": "SA",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:14.787Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42mk00bnnn71d2gqschi",
@@ -9819,10 +9700,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 10,
-  "lastCheckedAt": "2026-08-31T06:06:31.254Z",
-  "lastStatus": "unreachable",
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:18.761Z",
+  "lastStatus": "ok",
   "number": 519
  },
  {
@@ -9838,7 +9719,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.253Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.233Z",
   "lastStatus": "ok",
   "number": 185
  },
@@ -9855,7 +9736,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.668Z",
+  "lastCheckedAt": "2026-09-08T15:58:18.656Z",
   "lastStatus": "ok",
   "number": 518
  },
@@ -9872,7 +9753,7 @@
   "isFeatured": true,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.339Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.136Z",
   "lastStatus": "ok",
   "number": 616
  },
@@ -9888,8 +9769,8 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": false,
-  "failCount": 4,
-  "lastCheckedAt": "2026-08-31T06:06:35.804Z",
+  "failCount": 3,
+  "lastCheckedAt": "2026-09-08T15:58:22.655Z",
   "lastStatus": "unreachable",
   "number": 532
  },
@@ -9904,10 +9785,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 2,
-  "lastCheckedAt": "2026-08-31T06:06:35.960Z",
-  "lastStatus": "unreachable",
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.815Z",
+  "lastStatus": "ok",
   "number": 560
  },
  {
@@ -9923,7 +9804,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:35.786Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.655Z",
   "lastStatus": "ok",
   "number": 521
  },
@@ -9940,7 +9821,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.106Z",
+  "lastCheckedAt": "2026-09-08T15:58:22.975Z",
   "lastStatus": "ok",
   "number": 588
  },
@@ -9957,9 +9838,26 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.741Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.857Z",
   "lastStatus": "ok",
   "number": 574
+ },
+ {
+  "id": "cmtl3armw000eumqjnxrk4ukc",
+  "name": "Watar Radio",
+  "logoUrl": "https://sbauae.faulio.com/storage/mediagallery/d2/ad/fullhd_48adf2291d08266c05ed1b0c24f326c86b1095b7.png",
+  "streamUrl": "https://svs.itworkscdn.net/smcwatarlive/smcwatar/playlist.m3u8",
+  "country": "United Arab Emirates",
+  "countryCode": "AE",
+  "language": "Arabic",
+  "category": "Entertainment",
+  "isHD": true,
+  "isFeatured": false,
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:15.210Z",
+  "lastStatus": "ok",
+  "number": 0
  },
  {
   "id": "cmsor42ml00dtnn71vxgq23zx",
@@ -9974,7 +9872,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:36.181Z",
+  "lastCheckedAt": "2026-09-08T15:58:23.012Z",
   "lastStatus": "ok",
   "number": 597
  },
@@ -9991,7 +9889,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.901Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.939Z",
   "lastStatus": "ok",
   "number": 599
  },
@@ -10008,7 +9906,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.974Z",
+  "lastCheckedAt": "2026-09-08T15:58:20.017Z",
   "lastStatus": "ok",
   "number": 242
  },
@@ -10025,7 +9923,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.688Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.783Z",
   "lastStatus": "ok",
   "number": 243
  },
@@ -10042,7 +9940,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:32.817Z",
+  "lastCheckedAt": "2026-09-08T15:58:19.861Z",
   "lastStatus": "ok",
   "number": 256
  },
@@ -10057,9 +9955,9 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:33.618Z",
+  "isActive": false,
+  "failCount": 15,
+  "lastCheckedAt": "2026-09-08T15:58:20.653Z",
   "lastStatus": "unreachable",
   "number": 295
  },
@@ -10076,7 +9974,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.436Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.372Z",
   "lastStatus": "ok",
   "number": 383
  },
@@ -10093,7 +9991,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.414Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.371Z",
   "lastStatus": "ok",
   "number": 382
  },
@@ -10110,7 +10008,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:34.149Z",
+  "lastCheckedAt": "2026-09-08T15:58:21.199Z",
   "lastStatus": "ok",
   "number": 364
  },
@@ -10127,7 +10025,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:29.062Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.006Z",
   "lastStatus": "ok",
   "number": 460
  },
@@ -10144,7 +10042,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:27.995Z",
+  "lastCheckedAt": "2026-09-08T15:58:14.459Z",
   "lastStatus": "ok",
   "number": 0
  },
@@ -10160,9 +10058,9 @@
   "isHD": true,
   "isFeatured": false,
   "isActive": true,
-  "failCount": 1,
-  "lastCheckedAt": "2026-08-31T06:06:35.707Z",
-  "lastStatus": "unreachable",
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:22.539Z",
+  "lastStatus": "ok",
   "number": 508
  },
  {
@@ -10176,10 +10074,10 @@
   "category": "Entertainment",
   "isHD": true,
   "isFeatured": false,
-  "isActive": false,
-  "failCount": 2,
-  "lastCheckedAt": "2026-08-31T06:06:31.727Z",
-  "lastStatus": "unreachable",
+  "isActive": true,
+  "failCount": 0,
+  "lastCheckedAt": "2026-09-08T15:58:18.919Z",
+  "lastStatus": "ok",
   "number": 509
  },
  {
@@ -10195,7 +10093,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.489Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.569Z",
   "lastStatus": "ok",
   "number": 510
  },
@@ -10212,7 +10110,7 @@
   "isFeatured": false,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-31T06:06:31.898Z",
+  "lastCheckedAt": "2026-09-08T15:58:16.328Z",
   "lastStatus": "ok",
   "number": 511
  }

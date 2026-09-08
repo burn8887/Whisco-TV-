@@ -23,8 +23,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "unknown",
   "createdAt": "2026-08-16T14:45:15.754Z",
   "seasons": [
    {
@@ -120,8 +120,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:37.505Z",
   "seasons": [
    {
@@ -437,8 +437,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:44.970Z",
   "seasons": [
    {
@@ -789,7 +789,7 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
@@ -1431,8 +1431,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:48.252Z",
   "seasons": [
    {
@@ -1548,8 +1548,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:08.380Z",
   "seasons": [
    {
@@ -1725,8 +1725,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:24.180Z",
   "seasons": [
    {
@@ -2012,8 +2012,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:44.460Z",
   "seasons": [
    {
@@ -2089,8 +2089,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:24.995Z",
   "seasons": [
    {
@@ -2216,8 +2216,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:09.719Z",
   "seasons": [
    {
@@ -2403,8 +2403,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:02.256Z",
   "seasons": [
    {
@@ -2640,8 +2640,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:36.601Z",
   "seasons": [
    {
@@ -2857,8 +2857,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:51.647Z",
   "seasons": [
    {
@@ -2934,8 +2934,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:02.988Z",
   "seasons": [
    {
@@ -3251,8 +3251,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:20.602Z",
   "seasons": [
    {
@@ -3378,8 +3378,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:26.430Z",
   "seasons": [
    {
@@ -3575,8 +3575,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:55.765Z",
   "seasons": [
    {
@@ -3912,8 +3912,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:37.691Z",
   "seasons": [
    {
@@ -4249,8 +4249,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:10.683Z",
   "seasons": [
    {
@@ -4666,8 +4666,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:24.647Z",
   "seasons": [
    {
@@ -4983,8 +4983,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:10.486Z",
   "seasons": [
    {
@@ -5320,8 +5320,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:02.618Z",
   "seasons": [
    {
@@ -5774,8 +5774,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:21.521Z",
   "seasons": [
    {
@@ -5871,8 +5871,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:26.245Z",
   "seasons": [
    {
@@ -5958,8 +5958,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:50.284Z",
   "seasons": [
    {
@@ -6295,8 +6295,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:58.525Z",
   "seasons": [
    {
@@ -6462,8 +6462,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:16.217Z",
   "seasons": [
    {
@@ -6659,8 +6659,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:24.589Z",
   "seasons": [
    {
@@ -6936,8 +6936,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:46.469Z",
   "seasons": [
    {
@@ -7053,8 +7053,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:46.410Z",
   "seasons": [
    {
@@ -7160,8 +7160,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:09.302Z",
   "seasons": [
    {
@@ -7497,8 +7497,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:56.558Z",
   "seasons": [
    {
@@ -7634,8 +7634,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:45.060Z",
   "seasons": [
    {
@@ -7971,8 +7971,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:58.092Z",
   "seasons": [
    {
@@ -8308,8 +8308,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:19.443Z",
   "seasons": [
    {
@@ -8495,8 +8495,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:48.751Z",
   "seasons": [
    {
@@ -8652,8 +8652,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:15.294Z",
   "seasons": [
    {
@@ -9009,8 +9009,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:03.178Z",
   "seasons": [
    {
@@ -9306,8 +9306,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:57.476Z",
   "seasons": [
    {
@@ -9383,8 +9383,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:18.418Z",
   "seasons": [
    {
@@ -9550,8 +9550,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:26.025Z",
   "seasons": [
    {
@@ -9887,8 +9887,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:37.481Z",
   "seasons": [
    {
@@ -9994,8 +9994,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:44.140Z",
   "seasons": [
    {
@@ -10331,8 +10331,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:26.946Z",
   "seasons": [
    {
@@ -10438,8 +10438,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:44.050Z",
   "seasons": [
    {
@@ -10535,8 +10535,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:04.982Z",
   "seasons": [
    {
@@ -10712,8 +10712,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:13.809Z",
   "seasons": [
    {
@@ -10926,8 +10926,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:53.489Z",
   "seasons": [
    {
@@ -11293,8 +11293,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:47.331Z",
   "seasons": [
    {
@@ -11430,8 +11430,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:20.364Z",
   "seasons": [
    {
@@ -11767,8 +11767,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:53.380Z",
   "seasons": [
    {
@@ -12104,8 +12104,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "unknown",
   "createdAt": "2026-08-16T14:45:12.986Z",
   "seasons": [
    {
@@ -12441,8 +12441,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:48.310Z",
   "seasons": [
    {
@@ -12778,8 +12778,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:18.983Z",
   "seasons": [
    {
@@ -13025,8 +13025,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:47.729Z",
   "seasons": [
    {
@@ -13222,8 +13222,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:25.918Z",
   "seasons": [
    {
@@ -13389,8 +13389,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:19.339Z",
   "seasons": [
    {
@@ -13516,8 +13516,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:41.862Z",
   "seasons": [
    {
@@ -13853,8 +13853,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:11.963Z",
   "seasons": [
    {
@@ -14130,8 +14130,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:56.176Z",
   "seasons": [
    {
@@ -14397,8 +14397,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:55.256Z",
   "seasons": [
    {
@@ -14534,8 +14534,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:43.648Z",
   "seasons": [
    {
@@ -14871,8 +14871,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:12.064Z",
   "seasons": [
    {
@@ -15208,8 +15208,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:03.633Z",
   "seasons": [
    {
@@ -15545,8 +15545,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:18.934Z",
   "seasons": [
    {
@@ -15882,8 +15882,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:18.765Z",
   "seasons": [
    {
@@ -16029,8 +16029,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:11.039Z",
   "seasons": [
    {
@@ -16396,8 +16396,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:48.648Z",
   "seasons": [
    {
@@ -16733,8 +16733,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:18.062Z",
   "seasons": [
    {
@@ -17070,8 +17070,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:36.144Z",
   "seasons": [
    {
@@ -17417,8 +17417,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:33.287Z",
   "seasons": [
    {
@@ -17564,8 +17564,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:39.860Z",
   "seasons": [
    {
@@ -17861,8 +17861,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:30.181Z",
   "seasons": [
    {
@@ -18158,8 +18158,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:19.684Z",
   "seasons": [
    {
@@ -18235,8 +18235,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:20.958Z",
   "seasons": [
    {
@@ -18529,8 +18529,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:30.523Z",
   "seasons": [
    {
@@ -18716,8 +18716,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:02.069Z",
   "seasons": [
    {
@@ -18970,8 +18970,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:03.540Z",
   "seasons": [
    {
@@ -19174,8 +19174,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:06.826Z",
   "seasons": [
    {
@@ -19351,8 +19351,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:04.099Z",
   "seasons": [
    {
@@ -19568,8 +19568,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:59.935Z",
   "seasons": [
    {
@@ -19875,8 +19875,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:22.804Z",
   "seasons": [
    {
@@ -20202,8 +20202,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:16.174Z",
   "seasons": [
    {
@@ -20399,8 +20399,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:45.890Z",
   "seasons": [
    {
@@ -20586,8 +20586,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:10.115Z",
   "seasons": [
    {
@@ -20923,8 +20923,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:01.287Z",
   "seasons": [
    {
@@ -21060,8 +21060,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:52.329Z",
   "seasons": [
    {
@@ -21397,8 +21397,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:17.600Z",
   "seasons": [
    {
@@ -21694,8 +21694,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:49.672Z",
   "seasons": [
    {
@@ -22031,8 +22031,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:16.005Z",
   "seasons": [
    {
@@ -22108,8 +22108,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:57.097Z",
   "seasons": [
    {
@@ -22475,8 +22475,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:32.465Z",
   "seasons": [
    {
@@ -22642,8 +22642,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:07.591Z",
   "seasons": [
    {
@@ -22779,8 +22779,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:51.410Z",
   "seasons": [
    {
@@ -23066,8 +23066,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:35.223Z",
   "seasons": [
    {
@@ -23353,8 +23353,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:43.129Z",
   "seasons": [
    {
@@ -23680,8 +23680,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:51.015Z",
   "seasons": [
    {
@@ -23957,8 +23957,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:31.101Z",
   "seasons": [
    {
@@ -24294,8 +24294,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:07.875Z",
   "seasons": [
    {
@@ -24481,8 +24481,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:51.206Z",
   "seasons": [
    {
@@ -24748,8 +24748,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:25.571Z",
   "seasons": [
    {
@@ -25085,8 +25085,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:40.021Z",
   "seasons": [
    {
@@ -25489,8 +25489,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:14.373Z",
   "seasons": [
    {
@@ -25686,8 +25686,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:12.330Z",
   "seasons": [
    {
@@ -25873,8 +25873,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:07.224Z",
   "seasons": [
    {
@@ -26317,8 +26317,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:49.988Z",
   "seasons": [
    {
@@ -26444,8 +26444,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:11.409Z",
   "seasons": [
    {
@@ -26571,8 +26571,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:45.379Z",
   "seasons": [
    {
@@ -26848,8 +26848,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:34.149Z",
   "seasons": [
    {
@@ -27165,8 +27165,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:09.761Z",
   "seasons": [
    {
@@ -27502,8 +27502,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:27.414Z",
   "seasons": [
    {
@@ -27839,8 +27839,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:23.665Z",
   "seasons": [
    {
@@ -28336,8 +28336,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:24.276Z",
   "seasons": [
    {
@@ -28423,8 +28423,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:38.811Z",
   "seasons": [
    {
@@ -28610,8 +28610,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:39.533Z",
   "seasons": [
    {
@@ -28967,8 +28967,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:28.681Z",
   "seasons": [
    {
@@ -29294,8 +29294,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:31.951Z",
   "seasons": [
    {
@@ -29621,8 +29621,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:40.941Z",
   "seasons": [
    {
@@ -29978,8 +29978,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:25.324Z",
   "seasons": [
    {
@@ -30215,8 +30215,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:28.269Z",
   "seasons": [
    {
@@ -30302,8 +30302,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:05.150Z",
   "seasons": [
    {
@@ -30639,8 +30639,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:58.938Z",
   "seasons": [
    {
@@ -30816,8 +30816,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:28.081Z",
   "seasons": [
    {
@@ -30903,8 +30903,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:53.668Z",
   "seasons": [
    {
@@ -31200,8 +31200,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:51.829Z",
   "seasons": [
    {
@@ -31327,8 +31327,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:13.403Z",
   "seasons": [
    {
@@ -31434,8 +31434,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:47.222Z",
   "seasons": [
    {
@@ -31791,8 +31791,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:18.015Z",
   "seasons": [
    {
@@ -31988,8 +31988,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:18.522Z",
   "seasons": [
    {
@@ -32165,8 +32165,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:37.890Z",
   "seasons": [
    {
@@ -32422,8 +32422,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:28.788Z",
   "seasons": [
    {
@@ -32619,8 +32619,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:21.695Z",
   "seasons": [
    {
@@ -32806,8 +32806,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:33.793Z",
   "seasons": [
    {
@@ -33183,8 +33183,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:36.768Z",
   "seasons": [
    {
@@ -33520,8 +33520,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:27.349Z",
   "seasons": [
    {
@@ -33697,8 +33697,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:40.453Z",
   "seasons": [
    {
@@ -33974,8 +33974,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:55.638Z",
   "seasons": [
    {
@@ -34311,8 +34311,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:04.830Z",
   "seasons": [
    {
@@ -34648,8 +34648,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:22.438Z",
   "seasons": [
    {
@@ -34835,8 +34835,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:32.024Z",
   "seasons": [
    {
@@ -35172,8 +35172,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:42.299Z",
   "seasons": [
    {
@@ -35299,8 +35299,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:42.620Z",
   "seasons": [
    {
@@ -35513,8 +35513,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:19.854Z",
   "seasons": [
    {
@@ -35780,8 +35780,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:10.222Z",
   "seasons": [
    {
@@ -36117,8 +36117,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:38.182Z",
   "seasons": [
    {
@@ -36454,8 +36454,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:59.857Z",
   "seasons": [
    {
@@ -36791,8 +36791,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:00.412Z",
   "seasons": [
    {
@@ -37225,8 +37225,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:06.672Z",
   "seasons": [
    {
@@ -37352,8 +37352,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:54.844Z",
   "seasons": [
    {
@@ -37609,8 +37609,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:13.449Z",
   "seasons": [
    {
@@ -37946,8 +37946,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:16.575Z",
   "seasons": [
    {
@@ -38053,8 +38053,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:06.530Z",
   "seasons": [
    {
@@ -38160,8 +38160,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:23.725Z",
   "seasons": [
    {
@@ -38377,8 +38377,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:37.259Z",
   "seasons": [
    {
@@ -38714,8 +38714,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:15.087Z",
   "seasons": [
    {
@@ -38841,8 +38841,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:24.073Z",
   "seasons": [
    {
@@ -39038,8 +39038,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:00.857Z",
   "seasons": [
    {
@@ -39375,8 +39375,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:23.359Z",
   "seasons": [
    {
@@ -39452,8 +39452,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:17.140Z",
   "seasons": [
    {
@@ -39749,8 +39749,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:05.903Z",
   "seasons": [
    {
@@ -39996,8 +39996,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:04.458Z",
   "seasons": [
    {
@@ -40163,8 +40163,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:46.809Z",
   "seasons": [
    {
@@ -40450,8 +40450,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:30.108Z",
   "seasons": [
    {
@@ -41014,8 +41014,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:03.909Z",
   "seasons": [
    {
@@ -41321,8 +41321,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:54.889Z",
   "seasons": [
    {
@@ -41658,8 +41658,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:17.095Z",
   "seasons": [
    {
@@ -41805,8 +41805,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:26.839Z",
   "seasons": [
    {
@@ -42142,8 +42142,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:34.716Z",
   "seasons": [
    {
@@ -42309,8 +42309,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:14.730Z",
   "seasons": [
    {
@@ -42596,8 +42596,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:46.903Z",
   "seasons": [
    {
@@ -43083,8 +43083,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:54.409Z",
   "seasons": [
    {
@@ -43420,8 +43420,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:02.699Z",
   "seasons": [
    {
@@ -43707,8 +43707,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:52.748Z",
   "seasons": [
    {
@@ -43991,8 +43991,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:14.832Z",
   "seasons": [
    {
@@ -44188,8 +44188,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:34.302Z",
   "seasons": [
    {
@@ -44535,8 +44535,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:12.885Z",
   "seasons": [
    {
@@ -44862,8 +44862,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:14.170Z",
   "seasons": [
    {
@@ -44949,8 +44949,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:40.781Z",
   "seasons": [
    {
@@ -45226,8 +45226,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:34.794Z",
   "seasons": [
    {
@@ -45423,8 +45423,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:39.042Z",
   "seasons": [
    {
@@ -45760,8 +45760,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:17.843Z",
   "seasons": [
    {
@@ -46087,8 +46087,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:28.337Z",
   "seasons": [
    {
@@ -46424,8 +46424,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:35.636Z",
   "seasons": [
    {
@@ -46761,8 +46761,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:52.066Z",
   "seasons": [
    {
@@ -47098,8 +47098,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:38.121Z",
   "seasons": [
    {
@@ -47365,8 +47365,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:30.838Z",
   "seasons": [
    {
@@ -47452,8 +47452,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:43.219Z",
   "seasons": [
    {
@@ -47789,8 +47789,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:53.046Z",
   "seasons": [
    {
@@ -48136,8 +48136,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:59.445Z",
   "seasons": [
    {
@@ -48473,8 +48473,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:31.030Z",
   "seasons": [
    {
@@ -48690,8 +48690,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:36.050Z",
   "seasons": [
    {
@@ -48877,8 +48877,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:01.147Z",
   "seasons": [
    {
@@ -49204,8 +49204,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:07.915Z",
   "seasons": [
    {
@@ -49541,8 +49541,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:35.845Z",
   "seasons": [
    {
@@ -49888,8 +49888,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:49.067Z",
   "seasons": [
    {
@@ -50215,8 +50215,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:35.413Z",
   "seasons": [
    {
@@ -50532,8 +50532,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:26.491Z",
   "seasons": [
    {
@@ -50719,8 +50719,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:20.260Z",
   "seasons": [
    {
@@ -51056,8 +51056,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:13.909Z",
   "seasons": [
    {
@@ -51403,8 +51403,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:32.872Z",
   "seasons": [
    {
@@ -51740,8 +51740,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:37.195Z",
   "seasons": [
    {
@@ -52237,8 +52237,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:56.686Z",
   "seasons": [
    {
@@ -52404,8 +52404,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:39.451Z",
   "seasons": [
    {
@@ -52541,8 +52541,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:56.730Z",
   "seasons": [
    {
@@ -52878,8 +52878,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:21.420Z",
   "seasons": [
    {
@@ -53045,8 +53045,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:15.653Z",
   "seasons": [
    {
@@ -53362,8 +53362,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:31.444Z",
   "seasons": [
    {
@@ -53589,8 +53589,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:06.303Z",
   "seasons": [
    {
@@ -53916,8 +53916,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:41.809Z",
   "seasons": [
    {
@@ -54130,8 +54130,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:45.490Z",
   "seasons": [
    {
@@ -54357,8 +54357,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:29.188Z",
   "seasons": [
    {
@@ -54674,8 +54674,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:32.950Z",
   "seasons": [
    {
@@ -54871,8 +54871,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:44.622Z",
   "seasons": [
    {
@@ -55208,8 +55208,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:50.723Z",
   "seasons": [
    {
@@ -55555,8 +55555,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "unknown",
   "createdAt": "2026-08-16T14:45:11.142Z",
   "seasons": [
    {
@@ -55892,8 +55892,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:59.013Z",
   "seasons": [
    {
@@ -56249,8 +56249,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:16.923Z",
   "seasons": [
    {
@@ -56396,8 +56396,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:38.531Z",
   "seasons": [
    {
@@ -56583,8 +56583,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:22.103Z",
   "seasons": [
    {
@@ -56710,8 +56710,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:58.571Z",
   "seasons": [
    {
@@ -57047,8 +57047,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:38.613Z",
   "seasons": [
    {
@@ -57234,8 +57234,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:17.495Z",
   "seasons": [
    {
@@ -57411,8 +57411,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:40.371Z",
   "seasons": [
    {
@@ -57748,8 +57748,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:12.526Z",
   "seasons": [
    {
@@ -58085,8 +58085,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:41.378Z",
   "seasons": [
    {
@@ -58422,8 +58422,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:10.641Z",
   "seasons": [
    {
@@ -58769,8 +58769,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:47.828Z",
   "seasons": [
    {
@@ -59106,8 +59106,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:27.761Z",
   "seasons": [
    {
@@ -59233,8 +59233,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:43.705Z",
   "seasons": [
    {
@@ -59360,8 +59360,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:57.171Z",
   "seasons": [
    {
@@ -59537,8 +59537,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:22.341Z",
   "seasons": [
    {
@@ -59644,8 +59644,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:11.606Z",
   "seasons": [
    {
@@ -59981,8 +59981,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:33.873Z",
   "seasons": [
    {
@@ -60318,8 +60318,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:42.210Z",
   "seasons": [
    {
@@ -60425,8 +60425,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:41.291Z",
   "seasons": [
    {
@@ -60522,8 +60522,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:20.774Z",
   "seasons": [
    {
@@ -60859,8 +60859,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:46.301Z",
   "seasons": [
    {
@@ -61156,8 +61156,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:01.699Z",
   "seasons": [
    {
@@ -61493,8 +61493,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:36.970Z",
   "seasons": [
    {
@@ -61790,8 +61790,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:00.229Z",
   "seasons": [
    {
@@ -61947,8 +61947,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:14.336Z",
   "seasons": [
    {
@@ -62044,8 +62044,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:39.102Z",
   "seasons": [
    {
@@ -62431,8 +62431,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:09.193Z",
   "seasons": [
    {
@@ -62838,8 +62838,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:35.130Z",
   "seasons": [
    {
@@ -62955,8 +62955,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:08.796Z",
   "seasons": [
    {
@@ -63302,8 +63302,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:32.365Z",
   "seasons": [
    {
@@ -63499,8 +63499,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:00.366Z",
   "seasons": [
    {
@@ -63835,9 +63835,9 @@
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
-  "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "failCount": 1,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "invalid",
   "createdAt": "2026-08-16T14:45:27.865Z",
   "seasons": [
    {
@@ -64173,8 +64173,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:45.543Z",
   "seasons": [
    {
@@ -64510,8 +64510,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:22.744Z",
   "seasons": [
    {
@@ -65024,8 +65024,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:34.207Z",
   "seasons": [
    {
@@ -65428,8 +65428,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:50.095Z",
   "seasons": [
    {
@@ -65715,8 +65715,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:49.361Z",
   "seasons": [
    {
@@ -66052,8 +66052,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:13.250Z",
   "seasons": [
    {
@@ -66219,8 +66219,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:02.207Z",
   "seasons": [
    {
@@ -66653,8 +66653,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:04.059Z",
   "seasons": [
    {
@@ -66950,8 +66950,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:09.433Z",
   "seasons": [
    {
@@ -67267,8 +67267,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:52.566Z",
   "seasons": [
    {
@@ -67604,8 +67604,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:55.810Z",
   "seasons": [
    {
@@ -67931,8 +67931,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:06.070Z",
   "seasons": [
    {
@@ -68278,8 +68278,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:23.023Z",
   "seasons": [
    {
@@ -68395,8 +68395,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:08.144Z",
   "seasons": [
    {
@@ -68522,8 +68522,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:23.261Z",
   "seasons": [
    {
@@ -68619,8 +68619,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:57.650Z",
   "seasons": [
    {
@@ -68916,8 +68916,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:59.491Z",
   "seasons": [
    {
@@ -69253,8 +69253,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:05.477Z",
   "seasons": [
    {
@@ -69590,8 +69590,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:54.337Z",
   "seasons": [
    {
@@ -69717,8 +69717,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:29.706Z",
   "seasons": [
    {
@@ -69814,8 +69814,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:41.701Z",
   "seasons": [
    {
@@ -70041,8 +70041,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:49.569Z",
   "seasons": [
    {
@@ -70428,8 +70428,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:47.387Z",
   "seasons": [
    {
@@ -70765,8 +70765,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:11.564Z",
   "seasons": [
    {
@@ -71102,8 +71102,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:45.982Z",
   "seasons": [
    {
@@ -71309,8 +71309,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:36.559Z",
   "seasons": [
    {
@@ -71636,8 +71636,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:33.383Z",
   "seasons": [
    {
@@ -71803,8 +71803,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:36.337Z",
   "seasons": [
    {
@@ -72090,8 +72090,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:30.623Z",
   "seasons": [
    {
@@ -72397,8 +72397,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:50.908Z",
   "seasons": [
    {
@@ -72694,8 +72694,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:49.172Z",
   "seasons": [
    {
@@ -73031,8 +73031,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:53.968Z",
   "seasons": [
    {
@@ -73368,8 +73368,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:03.135Z",
   "seasons": [
    {
@@ -73715,8 +73715,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:21.182Z",
   "seasons": [
    {
@@ -73992,8 +73992,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:58.018Z",
   "seasons": [
    {
@@ -74339,8 +74339,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:27.163Z",
   "seasons": [
    {
@@ -74436,8 +74436,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:16.673Z",
   "seasons": [
    {
@@ -74773,8 +74773,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:25.510Z",
   "seasons": [
    {
@@ -75040,8 +75040,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:05.751Z",
   "seasons": [
    {
@@ -75357,8 +75357,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:58.392Z",
   "seasons": [
    {
@@ -75504,8 +75504,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:54.719Z",
   "seasons": [
    {
@@ -75621,8 +75621,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:48:08.513Z",
   "seasons": [
    {
@@ -75768,8 +75768,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:15.256Z",
   "seasons": [
    {
@@ -75855,8 +75855,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:52.124Z",
   "seasons": [
    {
@@ -76192,8 +76192,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:06.993Z",
   "seasons": [
    {
@@ -76529,8 +76529,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:29.602Z",
   "seasons": [
    {
@@ -76656,8 +76656,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:21.878Z",
   "seasons": [
    {
@@ -76988,13 +76988,13 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T06:11:58.357Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:18.422Z",
   "seasons": [
    {
@@ -77130,7 +77130,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:44.316Z",
   "seasons": [
@@ -77477,8 +77477,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:12.485Z",
   "seasons": [
    {
@@ -77594,8 +77594,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:31.009Z",
   "seasons": [
    {
@@ -78431,8 +78431,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:59.311Z",
   "seasons": [
    {
@@ -78538,7 +78538,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T13:56:32.153Z",
+  "lastCheckedAt": "2026-09-07T06:13:37.002Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:53.930Z",
   "seasons": [
@@ -79431,12 +79431,12 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-31T12:06:02.767Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-31T11:19:34.191Z",
   "seasons": [
    {
@@ -79542,8 +79542,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T06:11:58.357Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:41.124Z",
   "seasons": [
    {
@@ -79879,7 +79879,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T03:16:53.157Z",
+  "lastCheckedAt": "2026-09-07T03:30:16.243Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:47.582Z",
   "seasons": [
@@ -80306,8 +80306,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:40.884Z",
   "seasons": [
    {
@@ -80943,8 +80943,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:01.777Z",
   "seasons": [
    {
@@ -81130,8 +81130,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:04.555Z",
   "seasons": [
    {
@@ -81327,8 +81327,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-31T12:06:02.767Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-31T11:19:36.449Z",
   "seasons": [
    {
@@ -81624,7 +81624,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T03:45:06.205Z",
+  "lastCheckedAt": "2026-09-07T03:30:16.243Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:49.398Z",
   "seasons": [
@@ -81771,8 +81771,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:07.453Z",
   "seasons": [
    {
@@ -82408,8 +82408,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:43.541Z",
   "seasons": [
    {
@@ -82595,8 +82595,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:00.777Z",
   "seasons": [
    {
@@ -83232,8 +83232,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:28.289Z",
   "seasons": [
    {
@@ -83455,12 +83455,12 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-31T12:06:02.767Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-31T11:19:35.476Z",
   "seasons": [
    {
@@ -83622,12 +83622,12 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": false,
+  "isTrending": true,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-31T12:06:02.767Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-31T11:19:37.422Z",
   "seasons": [
    {
@@ -83923,8 +83923,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:19.592Z",
   "seasons": [
    {
@@ -84276,7 +84276,7 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": false,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -84742,13 +84742,13 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": false,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T06:11:58.357Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:21.409Z",
   "seasons": [
    {
@@ -87398,8 +87398,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "unknown",
   "createdAt": "2026-08-16T14:33:34.773Z",
   "seasons": [
    {
@@ -87745,7 +87745,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T03:45:06.205Z",
+  "lastCheckedAt": "2026-09-07T03:30:16.243Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:50.301Z",
   "seasons": [
@@ -87982,8 +87982,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:27.382Z",
   "seasons": [
    {
@@ -88489,8 +88489,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:30.099Z",
   "seasons": [
    {
@@ -89066,8 +89066,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:05.378Z",
   "seasons": [
    {
@@ -89403,7 +89403,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:34.427Z",
   "seasons": [
@@ -94328,7 +94328,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:41.563Z",
   "seasons": [
@@ -94875,7 +94875,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:37.982Z",
   "seasons": [
@@ -99710,8 +99710,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:57.572Z",
   "seasons": [
    {
@@ -99887,8 +99887,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:57.604Z",
   "seasons": [
    {
@@ -100194,7 +100194,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:43.397Z",
   "seasons": [
@@ -100941,8 +100941,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:08.837Z",
   "seasons": [
    {
@@ -101568,8 +101568,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:20.035Z",
   "seasons": [
    {
@@ -101715,7 +101715,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T03:16:53.157Z",
+  "lastCheckedAt": "2026-09-07T03:30:16.243Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:45.646Z",
   "seasons": [
@@ -101998,7 +101998,7 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": false,
-  "isTrending": true,
+  "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
@@ -102199,7 +102199,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T08:08:14.023Z",
+  "lastCheckedAt": "2026-09-07T06:13:37.002Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:52.112Z",
   "seasons": [
@@ -102416,8 +102416,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:38.411Z",
   "seasons": [
    {
@@ -102678,13 +102678,13 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:26.476Z",
   "seasons": [
    {
@@ -103235,13 +103235,13 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": false,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T06:11:58.357Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:20.502Z",
   "seasons": [
    {
@@ -103667,7 +103667,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T19:00:45.503Z",
+  "lastCheckedAt": "2026-09-07T00:15:30.000Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:44.743Z",
   "seasons": [
@@ -103804,8 +103804,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:56.664Z",
   "seasons": [
    {
@@ -104221,8 +104221,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:43:42.785Z",
   "seasons": [
    {
@@ -104558,8 +104558,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:55.331Z",
   "seasons": [
    {
@@ -104860,13 +104860,13 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": false,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:24.659Z",
   "seasons": [
    {
@@ -105302,7 +105302,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:42.480Z",
   "seasons": [
@@ -106079,7 +106079,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T19:18:11.584Z",
+  "lastCheckedAt": "2026-09-07T12:12:47.051Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:54.839Z",
   "seasons": [
@@ -107236,8 +107236,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:33.869Z",
   "seasons": [
    {
@@ -107528,7 +107528,7 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": true,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
@@ -108028,10 +108028,10 @@
   "isNew": false,
   "isTrending": false,
   "streamUrl": null,
-  "isActive": false,
+  "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:45:06.245Z",
-  "lastStatus": "geo",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-22T07:23:07.465Z",
   "seasons": [
    {
@@ -109040,6 +109040,16 @@
       "streamUrl": "https://www.youtube.com/embed/fmySsMvLC_8"
      },
      {
+      "id": "cmth5i1tr0001lh8uu9iocxji",
+      "seasonId": "cmsvgoo2l00025otq2a3nybxj",
+      "number": 103,
+      "name": "Episode 103",
+      "synopsis": "Kızılcık Şerbeti — Bölüm 103. Official broadcaster upload.",
+      "durationMins": 120,
+      "stillUrl": "https://i.ytimg.com/vi/SoKo-3BmgL8/hqdefault.jpg",
+      "streamUrl": "https://www.youtube.com/embed/SoKo-3BmgL8"
+     },
+     {
       "id": "cmsvgooa700295otq654u2u7h",
       "seasonId": "cmsvgoo2l00025otq2a3nybxj",
       "number": 104,
@@ -109417,8 +109427,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:56.251Z",
   "seasons": [
    {
@@ -109504,8 +109514,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:34:01.196Z",
   "seasons": [
    {
@@ -109801,7 +109811,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T07:43:48.203Z",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T07:06:32.843Z",
   "seasons": [
@@ -111153,10 +111163,10 @@
   "isNew": false,
   "isTrending": false,
   "streamUrl": null,
-  "isActive": false,
+  "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": "geo",
+  "lastCheckedAt": "2026-09-06T13:43:03.133Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:58.476Z",
   "seasons": [
    {
@@ -111562,8 +111572,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:42.728Z",
   "seasons": [
    {
@@ -111739,8 +111749,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:25.100Z",
   "seasons": [
    {
@@ -112136,8 +112146,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:53.921Z",
   "seasons": [
    {
@@ -112473,8 +112483,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:52.997Z",
   "seasons": [
    {
@@ -112660,8 +112670,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:44.569Z",
   "seasons": [
    {
@@ -112997,8 +113007,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:59.379Z",
   "seasons": [
    {
@@ -113304,7 +113314,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T19:00:45.503Z",
+  "lastCheckedAt": "2026-09-07T00:15:30.000Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:43.839Z",
   "seasons": [
@@ -113571,8 +113581,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:40.220Z",
   "seasons": [
    {
@@ -114008,7 +114018,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T19:00:45.503Z",
+  "lastCheckedAt": "2026-09-07T00:15:30.000Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:42.934Z",
   "seasons": [
@@ -114303,10 +114313,10 @@
   "isNew": false,
   "isTrending": false,
   "streamUrl": null,
-  "isActive": false,
+  "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": "geo",
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:51.205Z",
   "seasons": [
    {
@@ -114852,7 +114862,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T08:08:14.023Z",
+  "lastCheckedAt": "2026-09-07T06:13:37.002Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:53.024Z",
   "seasons": [
@@ -115149,8 +115159,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:23.749Z",
   "seasons": [
    {
@@ -115666,8 +115676,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:46:50.489Z",
   "seasons": [
    {
@@ -116003,8 +116013,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:29.260Z",
   "seasons": [
    {
@@ -116150,7 +116160,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T03:45:06.205Z",
+  "lastCheckedAt": "2026-09-07T03:30:16.243Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:48.493Z",
   "seasons": [
@@ -116403,12 +116413,12 @@
   "language": "Turkish",
   "isFeatured": false,
   "isNew": true,
-  "isTrending": false,
+  "isTrending": true,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-08-31T12:06:02.767Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-31T11:19:38.394Z",
   "seasons": [
    {
@@ -118281,7 +118291,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-16T19:00:45.503Z",
+  "lastCheckedAt": "2026-09-07T00:15:30.000Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:42.029Z",
   "seasons": [
@@ -118578,8 +118588,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:29.195Z",
   "seasons": [
    {
@@ -118925,8 +118935,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T18:10:55.957Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:47:48.148Z",
   "seasons": [
    {
@@ -119082,8 +119092,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:31.544Z",
   "seasons": [
    {
@@ -119169,7 +119179,7 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": "2026-08-17T03:16:53.157Z",
+  "lastCheckedAt": "2026-09-07T03:30:16.243Z",
   "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:46.550Z",
   "seasons": [
@@ -119286,8 +119296,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:34:00.286Z",
   "seasons": [
    {
@@ -119583,8 +119593,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:45:39.963Z",
   "seasons": [
    {
@@ -119670,8 +119680,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:44:01.333Z",
   "seasons": [
    {
@@ -120007,8 +120017,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:32.956Z",
   "seasons": [
    {
@@ -120549,13 +120559,13 @@
   "country": "Turkey",
   "language": "Turkish",
   "isFeatured": false,
-  "isNew": true,
+  "isNew": false,
   "isTrending": false,
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:55.754Z",
   "seasons": [
    {
@@ -121541,8 +121551,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:25.565Z",
   "seasons": [
    {
@@ -122068,8 +122078,8 @@
   "streamUrl": null,
   "isActive": true,
   "failCount": 0,
-  "lastCheckedAt": null,
-  "lastStatus": null,
+  "lastCheckedAt": "2026-09-04T12:12:28.100Z",
+  "lastStatus": "ok",
   "createdAt": "2026-08-16T14:33:39.316Z",
   "seasons": [
    {
