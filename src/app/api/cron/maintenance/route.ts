@@ -41,11 +41,14 @@ export async function GET(req: Request) {
   await prisma.title.updateMany({ where: { isTrending: true }, data: { isTrending: false } });
   // Diversity guarantee: round-robin newest titles ACROSS spotlight
   // collections (raw newest-16 once produced an all-Arabic trending row).
-  const SPOTLIGHT = ["Turkish Dizi", "Hindi Cinema", "Pakistani Dramas", "Arabic Series & Shows", "Filipino Shows", "Game Shows", "Documentaries", "Malayalam Cinema"];
+  // Brand rule (2026-09-09, founder directive): main-page faces stay MODERN.
+  // No black-and-white-era artwork in Trending — pre-1980 titles and the
+  // vintage-thumbnail collections (Game Shows, Classic*) never rotate in.
+  const SPOTLIGHT = ["Turkish Dizi", "Hindi Cinema", "Pakistani Dramas", "Arabic Series & Shows", "Filipino Shows", "Malayalam Cinema", "Telugu Cinema", "Bangla Natok & Cinema"];
   const perCollection = await Promise.all(
     SPOTLIGHT.map((c) =>
       prisma.title.findMany({
-        where: { isActive: true, collection: c },
+        where: { isActive: true, collection: c, releaseYear: { gte: 1980 } },
         orderBy: { createdAt: "desc" },
         take: 2,
         select: { id: true },

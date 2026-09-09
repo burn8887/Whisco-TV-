@@ -138,7 +138,9 @@ export const getVodShelves = unstable_cache(
       shelves.map((c) =>
         prisma.title.findMany({
           where: { collection: c, isActive: true },
-          orderBy: [{ imdbRating: "desc" }, { releaseYear: "desc" }],
+          // Modern-first (brand rule): recency leads, rating breaks ties.
+          // Vintage-era artwork stays browsable deeper in, never the shelf face.
+          orderBy: [{ releaseYear: "desc" }, { imdbRating: "desc" }],
           take: 12,
         })
       )
