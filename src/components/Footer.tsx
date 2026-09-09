@@ -14,6 +14,9 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-zinc-300 transition-colors">
             Contact Us
           </Link>
+          <Link href="/new" className="hover:text-zinc-300 transition-colors">
+            New This Week
+          </Link>
           <Link href="/guides" className="hover:text-zinc-300 transition-colors">
             Guides
           </Link>

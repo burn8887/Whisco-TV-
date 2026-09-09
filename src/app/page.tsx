@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { GUIDES } from "@/lib/guides";
 import { getHomeStats } from "@/lib/cached";
 import MascotVideo from "@/components/MascotVideo";
 import { SHOW_MASCOT_VIDEOS } from "@/config/features";
@@ -258,6 +259,26 @@ export default async function Home() {
             </details>
           ))}
         </div>
+      </section>
+
+      {/* Guides — editorial content on the front door (readers + crawlers) */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
+        <div className="flex items-end justify-between mb-5">
+          <h2 className="text-2xl sm:text-3xl font-extrabold">Guides for our viewers</h2>
+          <Link href="/guides" className="text-sm text-orange-400 hover:text-orange-300 font-medium">All guides →</Link>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {GUIDES.slice(0, 6).map((g) => (
+            <Link key={g.slug} href={`/guides/${g.slug}`}
+              className="block rounded-2xl bg-zinc-900/70 ring-1 ring-white/5 hover:ring-orange-500/40 transition p-5">
+              <p className="font-bold text-sm leading-snug line-clamp-2">{g.h1}</p>
+              <p className="text-xs text-zinc-500 mt-2 line-clamp-2">{g.intro}</p>
+            </Link>
+          ))}
+        </div>
+        <p className="text-sm text-zinc-500 mt-4">
+          Fresh content lands every week — see <Link href="/new" className="text-orange-400 hover:underline">what&apos;s new this week</Link>.
+        </p>
       </section>
 
       {/* CTA */}
