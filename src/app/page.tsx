@@ -1,3 +1,4 @@
+import { TonightOnWhisco } from "@/components/tonight/TonightOnWhisco";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { GUIDES } from "@/lib/guides";
@@ -158,6 +159,8 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      <TonightOnWhisco />
 
       {/* VOD PREVIEW */}
       {featuredTitles.length > 0 && (
