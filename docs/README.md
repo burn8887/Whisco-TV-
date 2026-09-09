@@ -1,4 +1,6 @@
 # Whisco TV — Business & Research Document Library
+
+> **`WHISCO_TV_DIALOGUE_CHRONICLE.md`** (this folder) — the decision-and-event chronicle of the founder↔agent dialogue (Aug–Sep 2026). Read alongside HANDOVER for the "how we got here." Updated at major milestones.
 *Index maintained by the engineering agent. Last updated: 2026-09-05.*
 
 All documents here were drafted with AI assistance (Grok heavy-model workforce, Sept 2026 trial), then **reviewed and fact-checked against live production data** by the engineering agent before inclusion. Documents marked TEMPLATE require qualified legal review before use.
