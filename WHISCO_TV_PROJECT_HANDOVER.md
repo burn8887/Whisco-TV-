@@ -181,3 +181,10 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - Exhibits verified live 11 Sep: oEmbed authors, availableCountries GCC+US all true, archive metadata licenseurl=publicdomain x4.
 - REMAINING (browser-only, user): Resolution Center reply (final text in Apple_Resubmission_FINAL.md) + Resubmit button. Then agent verifies WAITING_FOR_REVIEW via API.
 - Files: Apple_Resubmission_FINAL.md (execution doc), asc/Whisco_TV_Content_Rights_Statement_v2.md (source), new PDF at workspace root + docs/business/. Screenshots orig+fixed in /home/user/asc/shots/.
+
+## 2026-09-11 14:54 UTC — RESUBMITTED TO APPLE
+- User sent Resolution Center reply + clicked Resubmit. API-verified: submission c80e30c4 and version 1.0 both WAITING_FOR_REVIEW (resubmitted 2026-09-11T14:54:07Z). Same build 1.0(5).
+- Package on file: name "Whisco TV: Live TV & Movies", de-priced promo/keywords, 8 pill-free screenshots (About shots deleted), evidence PDF v2 (ToS quotes + verified exhibits + honest-limitation), reviewer tap-path in Review Notes.
+- WATCH: daily state check via API. If REJECTED again -> paste message verbatim, escalation ladder in Apple_Resubmission_FINAL.md (hide named title -> shrink review catalog server-side -> call request after 2nd 5.2.3 bounce).
+- Expected turnaround ~48h per Apple email [EST]. Convergence week unchanged: Play production app ~Sep 15, Filmhub call Sep 17 22:00, AdSense re-review Sep 17-19, SITE FREEZE Sep 16-19.
+
