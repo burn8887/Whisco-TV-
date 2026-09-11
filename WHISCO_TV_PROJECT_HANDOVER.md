@@ -188,3 +188,11 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - WATCH: daily state check via API. If REJECTED again -> paste message verbatim, escalation ladder in Apple_Resubmission_FINAL.md (hide named title -> shrink review catalog server-side -> call request after 2nd 5.2.3 bounce).
 - Expected turnaround ~48h per Apple email [EST]. Convergence week unchanged: Play production app ~Sep 15, Filmhub call Sep 17 22:00, AdSense re-review Sep 17-19, SITE FREEZE Sep 16-19.
 
+## 2026-09-11 (evening) — GROK APPOINTED DESIGN LEAD; Mascot 2.0 pack adopted
+- Founder: "grok is officially in charge of design. I love his concepts." Grok = creative authority; pipeline unchanged (Grok designs -> agent verifies -> founder previews -> agent ships).
+- Pack filed: docs/business/Whisco_TV_Design_Vision_Mascot_2.md. Governance + sprint map: docs/design-concepts/Design_Refresh_Implementation_Map.md.
+- KEY ADOPTIONS: Illustrated Host = depiction C (Design System v1.0 amended by founder approval); dog NEVER on title posters/store catalog shots/ads/legal; "one greeting, then quiet" replaces chatty hero chrome; Maghrib ember multiplier (subtle) replaces full palette retint; Rive over Lottie for companion; 20s store preview (photo-first, no cartoon over posters); Kind Zapper /surf + Majlis Mode /tonight + Letters Home /home-time = the three wow pages.
+- Sprint (Sep 20-Oct 3): bias light, letterbox thumbs, empty-state Host (4 static WebPs first), aurora+maghrib, OG/hero swap, 6 collection covers, Kind Zapper v0, Majlis Mode v0.
+- BLOCKERS: 14+ pack images live in Grok's workspace — founder must download+upload (esp. mascot/00-lock-portrait.jpg = canonical face lock, + 3 real-dog reference photos). QA flags: Persian keheh in AR copy (وسکو must become ويسكو), useIdleSleep re-arm bug — both documented in implementation map.
+- Freeze 16-19 Sep holds. Staging only until Sep 20.
+
