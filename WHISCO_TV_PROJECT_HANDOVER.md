@@ -196,3 +196,11 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - BLOCKERS: 14+ pack images live in Grok's workspace — founder must download+upload (esp. mascot/00-lock-portrait.jpg = canonical face lock, + 3 real-dog reference photos). QA flags: Persian keheh in AR copy (وسکو must become ويسكو), useIdleSleep re-arm bug — both documented in implementation map.
 - Freeze 16-19 Sep holds. Staging only until Sep 20.
 
+## 2026-09-11 (night) — Mascot 2.0 asset drop received & filed
+- Grok's full binary pack landed (zip renamed .txt, unzipped): 26 images = 3 REAL-DOG refs (face-tile closeup / living-room throw / compound lawn — likeness source of truth), 11 mascot frames (00-lock-portrait.jpg CANONICAL 1408x1408), 6 covers (no dog, verified), 3 heroes, 3 seasonal. + ARENA_README (likeness order, file register), vision memo copy. All PIL-verified valid.
+- Filed at iptv-app/design-drop/ (design source, NOT production /public) and pushed to GitHub — repo is now the permanent asset store; workspace copies are disposable.
+- README key facts: refs were renamed (01-face-tile=whisco-marble, 02=whisco-sit-front, 03=whisco-outdoor); character-sheet 01 has puppy drift (directional only); if any pose face fights 00, composite the lock head.
+- Workspace hygiene: pruned asc/shots/orig (19MB, screenshots live on Apple servers), deleted zip after extraction. Workspace ~101MB snapshot-relevant.
+- STORAGE PROTOCOL AGREED (founder proposal): founder keeps large binaries locally; repo holds a manifest (design-drop/ARENA_README.md + this handover) listing what exists + SHA/dims; agent requests uploads by filename when needed; agent deletes local copies after filing to repo; anything >5MB that isn't needed in-repo stays founder-side. Zip-renamed-.txt upload trick works.
+- Sprint items 5-6 now UNBLOCKED (assets in repo). Sept 20 start unchanged.
+
