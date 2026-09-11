@@ -174,3 +174,10 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 3. Meta ads campaign (~$110/mo) once AdSense approved.
 4. Play Store TWA, then iOS app.
 5. Weekly ops: watch Actions dashboard; maintenance workflow log = weekly stats report.
+
+## 2026-09-11 (later) — Grok cross-check integrated, ASC updated via API
+- Grok adversarial verdict received: evidence PDF was "architecture essay"; screenshots pill = real 2.3.7 risk; promo "No subscription, no signup" = price/terms language; reply too long, no reviewer path; strategy = fix-all-then-resubmit (correct path).
+- EXECUTED via ASC API (all verified): promo text rewritten (no price/terms words); 2 About screenshots (full of free/no-credit-card text) DELETED from both sets; 3+3 pill screenshots masked (PIL, page-bg fill) and re-uploaded (all COMPLETE); sets reordered Live→OnDemand→Player→MyList (4 per device now); evidence PDF rebuilt v2 (ToS verbatim quotes, 6 oEmbed-verified exhibits incl. KurulusOsman/Goldmines/HarPalGeo/ABS-CBN/MatineeNow, 4 archive.org items w/ publicdomain licenseurl, 4 broadcaster-domain FTA origins, honest-limitation §8, reviewer path §9) and re-attached (old deleted); Review Notes rewritten w/ tap path + geo note.
+- Exhibits verified live 11 Sep: oEmbed authors, availableCountries GCC+US all true, archive metadata licenseurl=publicdomain x4.
+- REMAINING (browser-only, user): Resolution Center reply (final text in Apple_Resubmission_FINAL.md) + Resubmit button. Then agent verifies WAITING_FOR_REVIEW via API.
+- Files: Apple_Resubmission_FINAL.md (execution doc), asc/Whisco_TV_Content_Rights_Statement_v2.md (source), new PDF at workspace root + docs/business/. Screenshots orig+fixed in /home/user/asc/shots/.
