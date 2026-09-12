@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSitemapData } from "@/lib/cached";
 import { GUIDES } from "@/lib/guides";
+import { WHERE_GUIDES } from "@/lib/where";
 
 const SITE_URL = "https://whisco.tv";
 
@@ -21,6 +22,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // All guides register automatically — add to GUIDES array and it's in the sitemap.
     ...GUIDES.map((g) => ({
       url: `${SITE_URL}/guides/${g.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+    { url: `${SITE_URL}/where`, changeFrequency: "weekly", priority: 0.8 },
+    ...WHERE_GUIDES.map((g) => ({
+      url: `${SITE_URL}/where/${g.slug}`,
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
