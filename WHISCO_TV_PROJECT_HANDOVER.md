@@ -211,3 +211,9 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - Agent remains sole executor (production, repos, keys, stores, money). Founder ferries between bot chats.
 - Also today: #2 closed (Vercel $20 confirmed), #3 closed (stale), #4 digest verified (links 200) — now routed through Basil/Fatema flow instead of direct founder posting.
 
+## 2026-09-12 (midday) — DIGEST CRON v2: Basil-ready brief + robo-compliance
+- community-digest.yml rewritten (00b3d0d): Monday Issue is now a BASIL BRIEF — single-paste assignment block for Basil's chat. Robo-compliance in code before Issue creation: blacklist regex scan (titles+seeds), floors auto-scrub (exact counts -> 600+/16,000+), disclosure auto-insert on MED/HIGH rooms, per-link HTTP 200 HEAD verification (dead links dropped+logged). Compliance log embedded for Fatema's ledger.
+- TEST FIRED: run success, Issue #5 created (week 2026-09-12), 6 fresh verified titles, all checks clean. #4 closed as superseded.
+- Ferry-role reality documented for founder: bots are chat contexts (no API/scheduler/inbox) — automation happens machine-side; founder's touches reduced to 2 pastes + posting. Weekly cycle: cron Monday 06:00 -> founder pastes #-issue body to Basil -> pack -> Fatema verdict -> founder posts -> Basil logs -> close Issue.
+- Supplements delivered to both bots (Fatema_Supplement_1, Basil_Supplement_1 + 58-room map). Both bots calibrated: floors rule, blacklist-naming REJECT, ويسكو spelling. Fatema ledger seeded with convergence-week calendar + 3 standing tasks (Monday briefing, verdict SLA, doc-errata log).
+
