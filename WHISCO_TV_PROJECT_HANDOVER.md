@@ -204,3 +204,10 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - STORAGE PROTOCOL AGREED (founder proposal): founder keeps large binaries locally; repo holds a manifest (design-drop/ARENA_README.md + this handover) listing what exists + SHA/dims; agent requests uploads by filename when needed; agent deletes local copies after filing to repo; anything >5MB that isn't needed in-repo stays founder-side. Zip-renamed-.txt upload trick works.
 - Sprint items 5-6 now UNBLOCKED (assets in repo). Sept 20 start unchanged.
 
+## 2026-09-12 — BOT TEAM FORMED: Fatema (Team Leader) + Basil (Posting)
+- Founder created 2-bot org: FATEMA = team leader/ops coordinator (founder's single briefing+approval point; monitors all bot work; credentials REGISTER metadata-only; future intake for tasks/automations/billing summaries). BASIL = posting & distribution (weekly digest packs, owned-channel calendars, thread briefs, outreach drafts, account CREATION REQUESTS only).
+- DOCTRINE PRESERVED with founder-visible design-arounds: (1) humans still post in third-party communities — Basil preps to last click, founder clicks; bot publishing allowed on OWNED channels only post-approval. (2) NO secrets in bot chats — Fatema holds register metadata; actual credentials = founder password manager + /home/user/.keys/. Both bots instructed to REFUSE pasted passwords.
+- Docs: docs/business/Whisco_TV_Bot_Team_Charter.md (governing), Fatema_Bootstrap_Prompt.md, Basil_Bootstrap_Prompt.md. Approval flows + sanitization tiers in charter §5-6.
+- Agent remains sole executor (production, repos, keys, stores, money). Founder ferries between bot chats.
+- Also today: #2 closed (Vercel $20 confirmed), #3 closed (stale), #4 digest verified (links 200) — now routed through Basil/Fatema flow instead of direct founder posting.
+
