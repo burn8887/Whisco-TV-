@@ -1,0 +1,68 @@
+name: Content QA sweep
+
+# Weekly catalog-quality audit (Saturdays 04:00 UTC) — catches the mistakes
+# visitors see before more visitors see them:
+#   * script/language consistency (e.g. Arabic-script name on a Turkish title)
+#   * name-year vs database-year conflicts ("(2020)" in name, 2026 in DB)
+#   * synopsis-year vs database-year conflicts (recent DB year, old year in text)
+#   * placeholder/broken text in names ("undefined", "null", empty synopsis)
+#   * duplicate active slugs pointing at the same stream URL
+# Files ONE deduplicated GitHub Issue per run when findings exist; silent when clean.
+# Read-only: this workflow never modifies the catalog. Fixes are agent/founder work.
+# Origin: first user-testing round 12 Sep 2026 (visitors caught 2 content errors).
+
+on:
+  schedule:
+    - cron: "0 4 * * 6"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps + prisma client
+        run: npm install --no-audit --no-fund && npx prisma generate
+
+      - name: Run catalog QA scan
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/content_qa.mjs > qa_report.md || true
+
+      - name: File issue if findings
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.existsSync('qa_report.md') ? fs.readFileSync('qa_report.md', 'utf8') : '';
+            if (!report.includes('FINDINGS:')) { core.info('Catalog clean — no issue filed.'); return; }
+            const count = (report.match(/FINDINGS: (\d+)/) || [0,'?'])[1];
+            const week = new Date().toISOString().slice(0, 10);
+            // dedupe: skip if an open content-qa issue already exists
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'content-qa'
+            });
+            if (open.data.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: open.data[0].number,
+                body: `Weekly re-scan ${week}: still-open findings below.\n\n${report.slice(0, 60000)}`
+              });
+              return;
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: `🔍 Content QA — ${count} finding(s), week of ${week}`,
+              labels: ['content-qa'],
+              body: report.slice(0, 65000)
+            });

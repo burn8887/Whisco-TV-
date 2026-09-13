@@ -217,3 +217,10 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - Ferry-role reality documented for founder: bots are chat contexts (no API/scheduler/inbox) — automation happens machine-side; founder's touches reduced to 2 pastes + posting. Weekly cycle: cron Monday 06:00 -> founder pastes #-issue body to Basil -> pack -> Fatema verdict -> founder posts -> Basil logs -> close Issue.
 - Supplements delivered to both bots (Fatema_Supplement_1, Basil_Supplement_1 + 58-room map). Both bots calibrated: floors rule, blacklist-naming REJECT, ويسكو spelling. Fatema ledger seeded with convergence-week calendar + 3 standing tasks (Monday briefing, verdict SLA, doc-errata log).
 
+## 2026-09-12 (evening) — User-testing round 1 integrated
+- FIRST QUALITATIVE FEEDBACK (family/friends, majority verdicts): over-defends "free" (fix: Voice Doctrine §2, max 2 free-claims/page); homepage too text-heavy (already = Band A sprint); TWO VOICES wanted — Whisco TV professional vs Whisco quirky (adopted as Voice Doctrine v1.0, docs/business/); content discrepancies spotted (Arabic-titled Turkish show + 2026-vs-2020 year — exact examples not yet re-identified, patterns covered by new QA cron).
+- NEW: content-qa.yml (weekly Sat 04:00) + scripts/content_qa.mjs — 5 checks: script-vs-language, name-year-vs-db, synopsis-year-vs-db, broken text, duplicate streams. Files deduped Issues (label content-qa). Needs DATABASE_URL secret in repo Actions secrets (ACTION: founder or agent must add — check if already present).
+- First scan: 4 real findings in 16,862 titles, ALL FIXED same-session (Nijam relabeled Tamil; 3 duplicate-stream copies deactivated). Catalog scans CLEAN.
+- /where pages: 5 pages STAGED on where-pages branch (d8cb337) — merge Sep 20.
+- 3-year bands delivered to founder (lower + realistic, [EST], gates-dependent). Y1 0-8k, Y2 7-50k, Y3 20-160k net.
+
