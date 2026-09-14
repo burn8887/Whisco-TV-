@@ -112,3 +112,80 @@ A bespoke audit cannot solve this at production pace. The production VOD sweep a
 All five titles confirmed delisted from the live site — each `/title/<slug>` now returns **HTTP 404** (they returned 200 while the 15-minute page cache held): `leyla`, `sahipsizler`, `kizilcik-serbeti`, `security`, `carpinti`. Catalog: active titles 16,859 -> 16,854. `/api/health` green, no warnings.
 
 The sitemap still lists 4 of the 5 until its hourly revalidation fires, after which it drops them. No action needed.
+
+---
+
+# ADDENDUM 2 — FOUNDER DECISIONS EXECUTED 2026-09-14 (evening)
+
+## (a) geo-health-fix DEPLOYED
+Merged to `main` (`623182a`), Vercel deploy **READY** (commit `c6b5eba`).
+
+**First three live sweep runs** (manually triggered against production; these are real runs, not a simulation):
+
+| Run | checked | ok | invalid | unknown | **geo** | geo-partial | restored | newlyHidden | totalInactive |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 231 | 181 | 16 | 1 | **33** | 0 | 4 | 0 | 77 |
+| 2 | 177 | 177 | 0 | 0 | **0** | 0 | 0 | 0 | 77 |
+| 3 | 179 | 178 | 0 | 1 | **0** | 0 | 0 | 0 | 77 |
+
+**No over-hiding.** Runs 2 and 3 were entirely clean. Run 1's 33 `geo` classifications are explained below — none of them introduced viewer exposure, verified by an explicit check that **zero ACTIVE titles carry a geo status** (`active + geo = 0`, `active + geo-partial = 0`).
+
+**What run 1 actually proved (the most valuable result of the day):** the 33 geo titles were **already hidden as `invalid`** by the old code — which is the original bug in action. `invalid` fell 122 → 90 as those rows were correctly reclassified to `geo`. They were: **Free Movies & TV 22, Crime & Mystery 9** (Forensic Files, Untold Stories of the ER — brand catalogs, exactly the FilmRise/Shout pattern from the August audit), **Documentaries 1**, **Turkish Dizi 1** (Çarpıntı). Two consequences, both good:
+1. The catalogue state is now **honest** — a licence block is recorded as a licence block, not as a dead stream.
+2. Those 33 titles are now protected by the new **confirm-before-restore** guard. Previously a single flaky `ok` reading would have restored them to the site as "working", which is precisely how Leyla came back.
+
+**Correction to my own earlier claim — the sweep is NOT under 5 days.** Run 1 completed **231 of 700** requested titles; runs 2 and 3 completed **177 and 179 of 700**. The **230-second time budget is the bottleneck, not the batch size**, so raising `BATCH_SIZE` bought nothing and wasted Neon egress (rows fetched with their episodes, never reached). Reverted to **250** with the measurements recorded in the code. Real sweep rate: **~1,150 titles/day → a full catalog pass takes ~15 days**, not the ~12 days the old code comment claimed and not the <5 days I previously stated. [Measured, not estimated.]
+**The actual speed-up (designed, not built):** skip the per-episode watch-page probe for titles whose *channel* verdict is already known within the same run — whole brand catalogues share one geo verdict, so a run of 250 titles spanning ~50 channels needs ~50 watch-page probes instead of 250. Proposed for the Sep 20 sprint.
+
+## (b) 16 dead videos HIDDEN — founder-approved scope extension
+Each was re-verified with a **fresh oEmbed probe immediately before the write** (not on the earlier audit reading). All 16 confirmed dead (oEmbed 401/403/404) and written as `isActive=false, lastStatus="invalid"` — **kept honest as `invalid`, not `geo`**, per instruction. They were left un-refreshed in the rotation before this, which is why run 1 independently re-confirmed exactly **16 invalid** — an unplanned cross-validation of the write.
+
+**Slugs (16):**
+```
+the-worlds-oldest-virus-research-lab
+war-in-congo-trapped-in-a-spiral-of-violence
+an-expensive-global-climate-experiment
+cambodia-the-forgotten-temple-of-banteay-chhmar
+vietnam-between-communism-and-capitalism
+power-failure-in-germany-horror-scenario-or-genuine-possibility
+on-the-trail-of-a-gigantic-nazi-raid
+beirut-explosion-2020-the-unsolved-catastrophe
+bullying-in-spain-s-schools
+the-milwaukee-cannibal-my-friend-dahmer
+plastic-waste-deforestation-and-floods-indonesias-environmental-disasters
+israel-s-era-of-military-rule
+endangered-amazon-why-the-earth-s-lungs-are-dying
+91-a-film-about-guns-in-america-sandy-hook
+mothers-in-the-boardroom-combining-children-and-career
+ar-d3dce2c487   (وراء الشمس)
+```
+**One caught by hand, worth recording:** `ar-d3dce2c487` is a **SERIES** with `streamUrl: null` — its video IDs live on episodes. A naive `streamUrl`-only check skips it (my first pass did). It was verified properly: **3 of 30 episodes sampled, all 403 dead, none live** → hidden. Any future script touching titles must resolve video IDs from episodes for SERIES rows.
+
+## (c) canonical-host-fix DEPLOYED
+Merged to `main` (`c6b5eba`). Verified live:
+- `/new` and `/guides/bollywood-classics-free` canonicals → **`https://www.whisco.tv/...`**
+- sitemap → **2,718 URLs, all www**
+- robots.txt `Sitemap:` → **www**
+- `/title/kurulus-osman` canonical **and** JSON-LD `url` → **www**
+
+Post-deploy actions completed:
+- **GSC sitemap re-submitted** — HTTP 204; `lastSubmitted` now **2026-09-14T01:25:25Z**, 0 errors, 0 warnings.
+- **IndexNow ping** — HTTP 200 accepted, 7 URLs (the 2 stuck pages plus the homepage, /guides and the 3 indexed guides).
+- Remaining: **founder's manual Request Indexing clicks** on the 2 stuck URLs (Console-only action).
+
+## Catalog state after all writes (measured 2026-09-14)
+```
+status split   ok 16032 | unknown 757 | invalid 90 | geo 33 | duplicate 3
+active titles  16,838     inactive 81
+active + geo status: 0    (no viewer-facing exposure)
+```
+
+## (d) Play — API read complete, two Console-only checks handed to the founder
+- Closed track **`whisco.tv test `** holds **versionCode 6**, status *completed*; bundles on file: vc5, vc6.
+- Tester list exists **only** on that track: Google Group **`testers-community@googlegroups.com`**. Production/beta/alpha tracks are empty.
+- **The Play API cannot report the 14-day opt-in clock or the target-API banner** — both are Console-only. Verified by probing the bundles endpoints: they return only `versionCode` + `sha1` + `sha256`.
+- **Target API 36: expected compliant.** Expo's compatibility table lists **SDK 57 → compileSdkVersion 36 / targetSdkVersion 36**, and whisco-mobile is Expo `~57.0.15`. The Console banner remains the authoritative check, so the walkthrough requires it before applying. (Honest limit: the target SDK of an already-uploaded bundle is not readable via API.)
+- Full click-by-click walkthrough with copy-ready answers (all within Google's ~300-character limit, verified programmatically) filed at **`docs/business/Whisco_TV_Play_Production_Application.md`**.
+
+## Standing process change (founder instruction)
+**`lastStatus` distribution check added permanently to the daily watch list.** The KPI-that-cannot-fail failure mode is now twice-proven (the hardwired `geoHidden: 0`, and the `invalid`/`geo` conflation that hid 33 blocked titles behind a meaningless label). Daily check = the status-split line above, watched for movement in `geo` / `invalid` / `unknown`, not just pass/fail.

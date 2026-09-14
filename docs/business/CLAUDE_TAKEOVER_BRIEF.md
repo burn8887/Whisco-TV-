@@ -101,6 +101,7 @@ Prod: https://www.whisco.tv (apex 308→www, curl needs -L). Health: /api/health
 4. Workflows green (Actions API) + site /api/health
 5. Workspace size + git remote/config repair (snapshot strips them EVERY time)
 6. Monday: Play production application walkthrough + Fatema's first Monday briefing (founder will ask her)
+7. **`lastStatus` distribution check** — report the split (ok / invalid / unknown / geo / duplicate) and the active+inactive counts, and state whether anything MOVED since yesterday. Add permanently 2026-09-14: the never-fails-KPI failure mode is now twice-proven (a `geoHidden` metric hardwired to 0, and `invalid` silently absorbing `geo` for 33 blocked titles). Pass/fail green is not enough — a number that cannot fail is worse than no number. Also assert `active + geo == 0` (no geo-blocked title is ever viewer-facing).
 
 ## 8. OPEN ITEMS / LOOSE ENDS
 
