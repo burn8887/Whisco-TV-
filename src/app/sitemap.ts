@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getSitemapData } from "@/lib/cached";
 import { GUIDES } from "@/lib/guides";
 
-const SITE_URL = "https://whisco.tv";
+const SITE_URL = "https://www.whisco.tv";
 
 // Generated at request time (not build time) so builds never depend on DB
 // availability; CDN caching keeps crawler load negligible.

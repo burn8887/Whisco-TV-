@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/api/", "/account", "/profiles", "/watchlist"],
       },
     ],
-    sitemap: "https://whisco.tv/sitemap.xml",
+    sitemap: "https://www.whisco.tv/sitemap.xml",
   };
 }
