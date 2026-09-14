@@ -82,7 +82,8 @@ Either one kills my access instantly; deleting the credential file on our side i
 ## What I'll run and what you'll see
 
 ```bash
-python3 asc/check_adsense.py
+python3 asc/check_adsense.py     # lives at /home/user/asc/ — workspace ops tooling,
+                                 # kept out of the repo like the Apple/GSC/Play helpers
 ```
 
 Prints: the AdSense account(s), every site with its state and the plain-English meaning, and any policy alerts.
