@@ -194,6 +194,7 @@ async function checkYouTubeVideoStrict(videoId: string): Promise<GeoProof> {
 
 type TitleRow = {
   id: string;
+  slug: string;
   name: string;
   type: string;
   streamUrl: string | null;
@@ -274,6 +275,7 @@ export async function GET(req: Request) {
   const titles = await prisma.title.findMany({
     select: {
       id: true,
+      slug: true,
       name: true,
       type: true,
       streamUrl: true,
@@ -296,6 +298,16 @@ export async function GET(req: Request) {
     geoPartial = 0,
     newlyHidden = 0,
     restored = 0;
+
+  // Slugs whose VISIBILITY changed this run. Their title pages must be
+  // revalidated explicitly — revalidatePath("/vod"|"/browse"|"/") below does
+  // NOT cover /title/[slug]. Found 2026-09-14: three geo-hidden titles kept
+  // serving full pages (HTTP 200, with metadata and player) after being hidden
+  // again, because the page data cached while they were briefly live (15-minute
+  // revalidate) was never invalidated. A hidden title must stop being reachable
+  // promptly — a reviewer or a crawler holding a 200 page for a title we believe
+  // is delisted is exactly the risk this work exists to remove.
+  const changedVisibility: string[] = [];
 
   // Batch the writes: group unchanged-status rows into updateMany calls to
   // minimize Neon egress; only genuinely-changed rows get individual updates.
@@ -324,9 +336,15 @@ export async function GET(req: Request) {
             lastCheckedAt: now,
           },
         });
+        // Always revalidate: this branch always leaves the title inactive, and a
+        // page cached while it was briefly visible must not keep serving.
+        changedVisibility.push(t.slug);
       } else {
         ok++;
-        if (!t.isActive) restored++;
+        if (!t.isActive) {
+          restored++;
+          changedVisibility.push(t.slug);
+        }
         if (t.isActive && t.failCount === 0 && !t.lastStatus?.startsWith("geo")) {
           okIdsNoChange.push(t.id);
         } else {
@@ -341,6 +359,7 @@ export async function GET(req: Request) {
       const failCount = t.failCount + 1;
       const hide = failCount >= FAIL_THRESHOLD;
       if (hide && t.isActive) newlyHidden++;
+      if (hide || !t.isActive) changedVisibility.push(t.slug);
       await prisma.title.update({
         where: { id: t.id },
         data: { failCount, isActive: hide ? false : t.isActive, lastStatus: "invalid", lastCheckedAt: now },
@@ -352,6 +371,7 @@ export async function GET(req: Request) {
       // measured from zero.
       geo++;
       if (t.isActive) newlyHidden++;
+      changedVisibility.push(t.slug); // ends inactive either way
       await prisma.title.update({
         where: { id: t.id },
         data: { isActive: false, lastStatus: "geo", failCount: 0, lastCheckedAt: now },
@@ -383,6 +403,12 @@ export async function GET(req: Request) {
   revalidatePath("/vod");
   revalidatePath("/browse");
   revalidatePath("/");
+  revalidatePath("/new");
+  revalidatePath("/sitemap.xml");
+  // ...and the individual title pages whose visibility actually changed. Without
+  // this a title hidden mid-run keeps serving its cached page until the 15-minute
+  // revalidate lapses.
+  for (const slug of changedVisibility) revalidatePath(`/title/${slug}`);
 
   return NextResponse.json({
     checked: results.length,
@@ -394,6 +420,7 @@ export async function GET(req: Request) {
     geoPartial,
     restored,
     newlyHidden,
+    revalidated: changedVisibility.length,
     totalInactive,
     timestamp: now.toISOString(),
   });
