@@ -1,22 +1,19 @@
-name: Geo re-audit (one-off)
+name: Geo audit (channel-level, one-off)
 
 # One-off, manually-dispatched ops job (2026-09-14 geo-exposure finding).
 # NOT on a schedule. Safe to delete once the permanent check-vod fix is live.
 #
-# Runs from GitHub's runners (clean IPs) because a sandbox/local run gets
-# HTTP 429 rate-limited by YouTube after ~500 probes.
+# Maps every title to its YouTube channel via oEmbed (fast, not rate-limited),
+# probes one video per channel for GCC availability, then verifies every title
+# of a blocked channel individually before hiding it.
 #
-# Inputs:
-#   limit    max titles to examine this run
-#   dry_run  "true" = report only, write nothing
+# A per-title brute force cannot work: YouTube returns HTTP 429 after a few
+# hundred rapid watch-page fetches from one IP (observed from both a sandbox and
+# a GitHub runner). Channel-level narrowing turns ~8,400 probes into ~110.
 
 on:
   workflow_dispatch:
     inputs:
-      limit:
-        description: "Max titles to examine this run"
-        required: false
-        default: "400"
       dry_run:
         description: "Report only, write nothing (true/false)"
         required: false
@@ -46,16 +43,16 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
-      - name: Run geo re-audit
+      - name: Run channel-level geo audit
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: node scripts/geo_reaudit.mjs "${{ inputs.limit }}" "${{ inputs.dry_run }}"
+        run: node scripts/geo_channel_audit.mjs "${{ inputs.dry_run }}"
 
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geo-reaudit-results
-          path: /tmp/geo_reaudit_results.json
+          name: geo-audit-results
+          path: /tmp/geo_channel_audit.json
           if-no-files-found: ignore
           retention-days: 30
