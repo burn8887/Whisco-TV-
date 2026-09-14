@@ -314,3 +314,46 @@ So one title that was inactive before 01:12 is active with `ok` now, and no snap
 
 ### Open item for the founder decision
 Verifying these four (and continuously detecting Gulf-only blocks) needs a vantage **inside the GCC** — the production sweep runs from a US region and structurally cannot see a block it is not itself subject to. A small GCC proxy or VPS is roughly **$5–10/mo [EST]**; it needs a decision, not a default.
+
+
+---
+
+# ADDENDUM 5 — the Gulf vantage is live, and it settles the open questions (2026-09-14)
+
+A Qatar vantage (GCP `me-central1-a`, Doha) is now wired: an SSH-only exit node with no service account, reachable from GitHub Actions through a SOCKS5 tunnel. Setup detail and the credential-free handover are in `docs/business/GCC_Geo_Vantage_Setup.md`.
+
+## What the Gulf sees that the US never could
+
+| Title | From Doha | Verdict |
+|---|---|---|
+| `kurulus-osman` (control) | list = 161–162 countries, **all GCC** | AVAILABLE — first *positive* availability evidence in the project's history |
+| `leyla` | list = 223 countries, **0 GCC** | BLOCKED-ALL-GCC (third independent confirmation) |
+| `sahipsizler` | list = 231 countries, **0 GCC** | BLOCKED-ALL-GCC (third independent confirmation) |
+| `kizilcik-serbeti` | list = 227 countries, **0 GCC** | BLOCKED-ALL-GCC (third independent confirmation) |
+| `the-man-from-elysian-fields` | list = **11** countries, 0 GCC | BLOCKED-ALL-GCC → **hidden** (was a genuine restore error) |
+| `maniac-cop-2` | list = 247 countries, all GCC | AVAILABLE — restore was correct |
+| `maniac-cop-iii-badge-of-silence` | list = 236 countries, all GCC | AVAILABLE — restore was correct |
+| `the-dick-van-dyke-show` S5E26 | list = 249 countries, all GCC | AVAILABLE — restore was correct |
+
+**Verdict on the 2026-09-13 event: 3 of the 4 re-activations were legitimate; 1 was an error and is now corrected with Gulf-side evidence.**
+
+## The 03:30 restores were legitimate too
+
+A scheduled run restored two titles at 03:30:16 UTC. Both are **archive.org public-domain items** (`3StoogesPilot`, `KarloffThriller`), not YouTube — the strict guard passes non-YouTube sources by design, and both URLs were independently re-verified with a range request returning `206 video/mp4`. No regression. **A restore is only suspicious when the source is YouTube.**
+
+Discipline note: the same check nearly produced a false alarm — a truncated console print (70 characters) hid the `.mp4` extension, which made a live URL look dead. The full value was verified before any claim was made.
+
+## Method note: the four readings from inside the Gulf
+
+1. **list absent** → playable where we asked → available in that country (positive evidence)
+2. **list present, zero GCC** → BLOCKED-ALL-GCC
+3. **list present, all six GCC** → AVAILABLE-ALL-GCC
+4. **list present, some GCC** → PARTIAL-GCC (available in those states only)
+
+An earlier version of the script collapsed (2), (3) and (4) into "PARTIAL-GCC", which made the known-good control read as "unverifiable". Fixed before it informed any decision; the vocabularies now match the four readings exactly.
+
+## What this unlocks
+
+- The audit cadence can move to the Gulf: the channel-level sweep (~110 channel probes) plus per-title confirmation replaces a 15-day US-side job with a short one.
+- Restores in the production sweep are now governed by positive, list-backed evidence only; anything unprovable stays hidden.
+- Still undetermined, and honestly so: **run #1's fourth restore** is not identifiable (no pre-run snapshot exists), and the four titles above are the only ones we can now check — a **full Gulf-side catalogue audit** is the way to catch any remaining Gulf-only block, and is the next step.

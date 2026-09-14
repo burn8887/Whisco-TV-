@@ -99,11 +99,17 @@ async function probe(id) {
   return o;
 }
 
+// Vocabularies matter here. An earlier version of this function returned
+// "PARTIAL-GCC" for ANY list containing a GCC country, which made the known-good
+// control (a list containing all six) read as "unverifiable". From inside the
+// Gulf there are four distinct readings and each means something specific:
 const verdictOf = (o) => {
   if (o.http === "ERR" || o.http === "EMPTY") return "UNVERIFIABLE";
-  if (!o.playability) return "UNVERIFIABLE"; // consent/ratelimit stub
-  if (!o.listPresent) return `AVAILABLE-IN-${exitCountry}`; // playable where we asked
-  return o.gcc.length === 0 ? "BLOCKED-ALL-GCC" : "PARTIAL-GCC";
+  if (!o.playability) return "UNVERIFIABLE"; // consent / ratelimit stub
+  if (!o.listPresent) return `AVAILABLE-IN-${exitCountry}`; // playable where we asked => available here
+  if (o.gcc.length === 0) return "BLOCKED-ALL-GCC"; // blocked in every Gulf state
+  if (o.gcc.length === GCC.length) return "AVAILABLE-ALL-GCC"; // watchable in all six
+  return "PARTIAL-GCC"; // watchable in some Gulf states, not others
 };
 
 const results = [];
@@ -126,7 +132,9 @@ async function verifyTitle(t) {
       `gcc=[${o.gcc.join(",")}] missing=[${o.missing.join(",")}]  -> ${v}`);
   }
   const blocked = probes.filter((x) => x.verdict === "BLOCKED-ALL-GCC");
-  const available = probes.filter((x) => x.verdict.startsWith("AVAILABLE"));
+  // PARTIAL-GCC counts as available for the title decision: it IS watchable
+  // somewhere in the Gulf, and only a block across all six is a hide.
+  const available = probes.filter((x) => x.verdict.startsWith("AVAILABLE") || x.verdict === "PARTIAL-GCC");
   let verdict;
   if (blocked.length && !available.length) verdict = "BLOCKED-ALL-GCC";
   else if (available.length && !blocked.length) verdict = "AVAILABLE";

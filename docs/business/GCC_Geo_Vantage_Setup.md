@@ -2,6 +2,41 @@
 
 **Status:** approved by the founder 2026-09-14 (item 1 of the pending list). Paid/free tier choice is the founder's; everything after account creation is done by the exec.
 
+## ✅ LIVE as of 2026-09-14 06:35 (Bahrain) — and no Google credential was ever handed over
+
+| | |
+|---|---|
+| Instance | `gcc-geo-vantage`, zone `me-central1-a` (**Doha, Qatar**), `e2-micro`, Ubuntu 24.04, RUNNING |
+| Address | `34.18.218.174` (kept in GitHub Actions secrets, not in this repo) |
+| Access | SSH key only; **no service account, no scopes** on the box — it is a dumb exit node |
+| Verified exit | `34.18.218.174 — Doha, Baladiyat ad Dawhah, QA` |
+| Wiring | GitHub secrets `GCC_VPS_HOST` / `GCC_VPS_USER` / `GCC_VPS_SSH_KEY` set; workflow `gcc-geo-probe` ran green end-to-end |
+| Cost | inside the approved band; see the estimate note below |
+
+**Dammam was abandoned, not debugged:** Google's `me-central2` is gated commercially (KSA customers must buy via CNTXT; non-KSA need Invoiced Billing). Doha has no such gate.
+
+**Cosmetic known issue:** the secret holding the SSH username is the string `geo`, so GitHub's log masker redacts every occurrence of `geo` in this workflow's logs — command names appear as `gcc_***_probe.mjs` and the exit IP prints as `***`. Nothing is broken; it is the masker doing its job on a very short secret value. Not worth a metadata change to fix.
+
+## First results from inside the Gulf (2026-09-14)
+
+Read-only run through the tunnel, from the sandbox and again from a GitHub runner:
+
+| Title | Reading from Doha | Meaning |
+|---|---|---|
+| `kurulus-osman` (**control**) | list of 161–162 countries, **all six GCC present** | genuinely available in the Gulf — the control behaves as expected, and this is the first *positive* availability evidence we have ever had |
+| `leyla` | list of 223 countries, **zero GCC** | blocked across the Gulf — third independent confirmation |
+| `sahipsizler` | list of 231 countries, **zero GCC** | blocked across the Gulf — third independent confirmation |
+| `kizilcik-serbeti` | list of 227 countries, **zero GCC** | blocked across the Gulf — third independent confirmation |
+| `the-man-from-elysian-fields` | list of **11** countries, zero GCC | blocked — a real restore error from 2026-09-13, now hidden |
+| `maniac-cop-2` | list of 247 countries, all six GCC present | legitimately available — its restore was correct |
+| `maniac-cop-iii-badge-of-silence` | list of 236 countries, all six GCC present | legitimately available — its restore was correct |
+| `the-dick-van-dyke-show` S5E26 | list of 249 countries, all six GCC present | legitimately available — its restore was correct |
+
+**So of the four titles re-activated on 2026-09-13, three were correct and one was an error that is now corrected.** The vantage also settled two more open items the same way:
+
+- The two titles a scheduled run restored at 03:30 (three-stooges-failed-pilot-2, thriller-the-return-of-andrew-bentley) are **archive.org public-domain items**, not geo-restricted at all. Both were re-verified by range request: `206 video/mp4`. **Legitimate restores, no regression** — and a reminder that a restore is only suspicious when the source is YouTube.
+- Running the probe from a datacenter IP works: YouTube returns the normal page, no consent wall, no 429 at verification scale.
+
 ## Why this exists (one paragraph)
 
 Our geo checks ask YouTube "is this video watchable in the Gulf?" The answer only appears on the watch page **when the video is unplayable from wherever we are asking**. Our production sweep runs from a US region, so a title that is playable in the United States and blocked in the Gulf returns a page with **no availability list at all** — which tells us nothing, and once caused three GCC-blocked titles to be restored to the live site (2026-09-14) and four more to be re-activated the evening before (2026-09-13). From a vantage **inside** the Gulf the reading becomes meaningful in both directions:
