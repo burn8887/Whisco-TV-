@@ -106,3 +106,9 @@ A bespoke audit cannot solve this at production pace. The production VOD sweep a
 
 - `geo-partial` titles need a per-episode decision; the schema cannot express "this episode is blocked" yet. Flagged, not hidden.
 - The 16 dead videos (above) need a founder decision on whether to hide them now rather than wait for the sweep.
+
+## VERIFICATION (2026-09-14, post-fix)
+
+All five titles confirmed delisted from the live site — each `/title/<slug>` now returns **HTTP 404** (they returned 200 while the 15-minute page cache held): `leyla`, `sahipsizler`, `kizilcik-serbeti`, `security`, `carpinti`. Catalog: active titles 16,859 -> 16,854. `/api/health` green, no warnings.
+
+The sitemap still lists 4 of the 5 until its hourly revalidation fires, after which it drops them. No action needed.
