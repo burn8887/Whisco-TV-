@@ -66,6 +66,22 @@ gcloud services enable compute.googleapis.com && gcloud compute instances create
 
 Verified before handing over: `ubuntu-2404-lts-amd64` / `ubuntu-os-cloud` are the correct family and project (Canonical + Google docs), and `me-central2` carries zones `-a`, `-b`, `-c`. `--no-service-account` requires `--no-scopes`; both are included so the box holds no Google identity at all.
 
+### Second attempt failed: Cloud Shell had no project selected
+
+`ERROR: (gcloud.services.enable) The required property [project] is not currently set.` Cloud Shell starts with an empty active config, so the very first command in the chain aborted — **nothing was created**. The command below discovers the project, pins it, then builds.
+
+**v2 — the paste that works (one line):**
+
+```
+P=$(gcloud projects list --format='value(projectId)' | head -1); echo "USING PROJECT: $P"; gcloud config set project "$P"; gcloud services enable compute.googleapis.com; gcloud compute instances create gcc-geo-vantage --zone=me-central2-a --machine-type=e2-micro --image-family=ubuntu-2404-lts-amd64 --image-project=ubuntu-os-cloud --boot-disk-size=10GB --no-service-account --no-scopes --metadata=ssh-keys='geo:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIkGonCxMU+BsUult8MMrx+Jzd2cPPoj5F9rT8Dx/MKY geo'; echo "=== YOUR IP ==="; gcloud compute instances describe gcc-geo-vantage --zone=me-central2-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
+
+`;` separators (not `&&`) so one failed step still lets the later ones report their own error instead of hiding it. If the account holds several projects, the output line `USING PROJECT: <id>` says which one was used — tell me if it picked the wrong one and I will move it.
+
+### Cost revised upward, honestly
+
+The earlier **$7–8/mo [EST]** covered compute only. Google now bills external IPv4 addresses that are attached and in use, which this box needs for SSH — allow **~$3–4/mo [EST]** on top, so budget **~$10–12/mo [EST]** total. Still inside the approved band and Tier 0. The console's own estimate on the instance screen is authoritative; the only hard figure to date is the **$0.01 budget alert** I will ask for.
+
 **If the org policy is ever lifted and a key is preferred instead:** IAM & Admin → Organization Policies → filter for "Disable service account key creation" → Edit → *Override parent's policy* → Enforcement **Off** → Set policy. Needs the Organization Policy Administrator role, weakens the posture org-wide, and the key should still be revoked immediately after setup. Not the recommended route.
 
 ## Alternative if you would rather pay nothing: Oracle Cloud Always Free
