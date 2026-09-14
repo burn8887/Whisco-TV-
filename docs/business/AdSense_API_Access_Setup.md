@@ -28,13 +28,12 @@ Use the **same project that already holds `whisco-agent`** (the project the GSC/
 
 1. **Enable the API.** **APIs & Services → Library** → search **`AdSense Management API`** → open it → **Enable**.
    *(The API must be enabled in the project that owns the OAuth client, or every call fails with "has not been used in project … or it is disabled".)*
-2. **Consent screen.** **APIs & Services → OAuth consent screen**:
-   - User type **External** → **Create**
-   - App name: **`Whisco TV Ops`**
-   - User support email + Developer contact email: your address
-   - **Save and continue** through Scopes and Test users without adding anything
-   - Back on the overview, if **Publishing status** says **Testing**, click **Publish app** → **Confirm**.
-     *Why it matters: apps left in Testing have refresh tokens that expire every 7 days. Published apps don't. Google may email about verification — ignore it, this app is only for your own account.*
+2. **Consent screen / Google Auth Platform.** Open **APIs & Services → Google Auth Platform** (the old "OAuth consent screen" menu item was replaced in 2024; the direct link is **https://console.cloud.google.com/auth/audience** — check the project selector says your project).
+   - If it isn't configured yet: click **Get started** and run the 4-step wizard → App name **`Whisco TV Ops`**, support email = your address, **User type: External** → Create.
+   - **Audience tab → Test users → + Add users → add `burn8887@gmail.com` → Save.**
+     ⚠️ **Do not skip this.** An app in *Testing* status is limited to listed test accounts; without it, authorizing fails with **"Error 403: access_denied — Access blocked: Whisco TV Ops has not completed the Google verification process. This app can only be accessed by developer-approved test accounts."** Adding the test user takes effect immediately.
+   - **Still on the Audience tab → Publishing status → Publish app → Confirm ("push to production?").**
+     *Two reasons, both real: (a) apps left in Testing expire refresh tokens every **7 days**, while published apps' tokens persist; (b) it removes the test-account restriction entirely. If Google shows "Needs verification", **do not start verification** — unverified apps can still be authorized by the owner through the "Advanced → Go to … (unsafe)" link, and verification is unnecessary for a single-user ops client.*
 3. **Create the OAuth client.** **APIs & Services → Credentials → + Create credentials → OAuth client ID**:
    - Application type: **Web application**
    - Name: **`Whisco Ops CLI`**
@@ -71,6 +70,16 @@ Use the **same project that already holds `whisco-agent`** (the project the GSC/
 9. **Attach that file to your next message** (don't paste the values into the chat text — same practice as the succession pack).
 
 **What I do with it:** move it to `/home/user/.keys/adsense-oauth.json` with `600` permissions, **delete the upload**, run `python3 asc/check_adsense.py`, and report the state table. As always: never committed, never echoed. (`.keys/` is gitignored; `git status` is checked clean after every credential write.)
+
+## Troubleshooting — errors seen in practice
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| **`Error 403: access_denied` — "has not completed the Google verification process… can only be accessed by developer-approved test accounts"** | App is in **Testing** status and the signed-in account is not a listed test user | Google Auth Platform → **Audience** → add **`burn8887@gmail.com`** under **Test users**; then **Publish app**. (Hit for real on 2026-09-14 — the first version of this guide wrongly said to skip Test users.) |
+| *"Google hasn't verified this app"* after a successful publish | Normal for a published app requesting a sensitive scope | Click **Advanced → Go to Whisco TV Ops (unsafe)** → Continue. Expected on every fresh authorization for an unverified app. |
+| `redirect_uri_mismatch` | The redirect URI is not exactly right | Client must list **`https://developers.google.com/oauthplayground`** verbatim, no trailing slash |
+| Token stops working after ~7 days | The app stayed in **Testing** | Publish the app, then re-run Part B to mint a fresh token |
+| *"AdSense Management API has not been used in project … or it is disabled"* | API not enabled in the project that owns the OAuth client | Enable it there (Part A step 1) |
 
 ## Revoking, any time
 
