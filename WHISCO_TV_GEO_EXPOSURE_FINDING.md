@@ -189,3 +189,71 @@ active + geo status: 0    (no viewer-facing exposure)
 
 ## Standing process change (founder instruction)
 **`lastStatus` distribution check added permanently to the daily watch list.** The KPI-that-cannot-fail failure mode is now twice-proven (the hardwired `geoHidden: 0`, and the `invalid`/`geo` conflation that hid 33 blocked titles behind a meaningless label). Daily check = the status-split line above, watched for movement in `geo` / `invalid` / `unknown`, not just pass/fail.
+
+---
+
+# ADDENDUM 3 — ⚠️ REGRESSION FOUND AND FIXED THE SAME SESSION (2026-09-14, 01:1x–01:35)
+
+## What went wrong
+**Sweep run #1 restored three GCC-blocked titles to the live site.** Leyla, Sahipsizler and Kızılcık Şerbeti were written back to `isActive=true, lastStatus="ok"` at **01:12** by the very code that was supposed to protect them.
+
+**My earlier claim in Addendum 2 — that those titles "are now protected by the new confirm-before-restore guard" — was WRONG.** The guard existed, but it was defeated by the bug it was meant to guard against, because both it and the main path shared the same faulty assumption.
+
+## Root cause (this is the important one)
+**YouTube's watch page only carries the `availableCountries` list when the video is NOT playable from the requesting region.** If the requester's region can play it, the page contains no list at all.
+
+The code did this:
+```ts
+if (!m) return "ok"; // no restriction list → worldwide
+```
+So a list-less page — which means *"playable where I'm asking from"*, and says **nothing** about the Gulf — was read as *"available in the GCC"*. The sweep therefore marked the three titles `ok` and restored them.
+
+**Proven empirically, not inferred.** A targeted verify run from GitHub probed 4 titles × 3 episodes each:
+
+| Title | Known GCC status | Availability list on the page |
+|---|---|---|
+| Leyla | blocked | **absent** |
+| Sahipsizler | blocked | **absent** |
+| Kızılcık Şerbeti | blocked | **absent** |
+| **Kuruluş Osman (control)** | **available** | **absent** |
+
+The control has no list either. So list-absence is **environmental, not a property of the video** — it cannot be used as evidence of anything. Twelve probes, zero lists, including the title we know works in the Gulf.
+
+## The fix (`1975f5c`, deployed and verified)
+Restore **only on positive evidence**: a list that **exists** AND **contains at least one GCC country**. Everything else means "could not verify" → the title **stays hidden**.
+
+- explicit blocked reading → `lastStatus: "geo"`
+- unreadable / list-less page → `lastStatus: "unknown"` and **stays hidden** (labelled honestly — it is not a proven geo block)
+- applied to **every inactive YouTube-backed title**, not just `geo`-status ones, because the old code mislabelled geo-blocked titles as `invalid` and this same path would have restored them
+
+**Accepted trade-off:** a false negative. A title whose block is genuinely lifted, but whose availability we cannot read at that moment, stays hidden until an audit verifies it. That is the correct side to fail on — a hidden title is invisible, an exposed one is a licensing and review risk.
+
+**Verification (run #4, live code):** `checked 250/250, ok 242, invalid 1, unknown 0, geo 7, restored 0, newlyHidden 0, totalInactive 80`. **`restored: 0`** where the buggy run had restored 4. `active + geo = 0` holds. The three titles remain `isActive=false, lastStatus=geo`.
+
+## The three titles
+Re-hidden at 01:29 on the basis of **earlier same-day list-backed evidence** (each episode probed with the list present — 223/227/231 countries — and **zero** GCC countries in it), which is exactly the explicit-blocked criterion, and which matches the project's own August audit that classified all three as GCC-blocked. A fresh confirmation probe was not possible at that moment: the sandbox IP was HTTP-429 blocked and the GitHub vantage cannot see a list for these titles at all.
+
+## Structural limitation now on the record
+**A vantage point can only see a block if that vantage is itself blocked.** The production sweep runs from a US region, so it structurally **cannot detect Gulf-only blocks** (titles available in the US but not in the GCC — which is exactly what Leyla, Kızılcık Şerbeti and Sahipsizler are). It *can* detect titles blocked in both places (most of the FilmRise/Shout catalogues), which is why the August audit caught 2,414 titles.
+
+Consequences and proposals:
+- The production sweep is therefore a **guard against regression, not a detector**. The strict no-restore rule makes it safe in that role.
+- Detection must come from a vantage where the target titles are blocked. The **sandbox vantage did see all three** Gulf-only blocks, so audits from there work — but the IP gets HTTP-429 limited after a few hundred probes, so runs must be chunked with pauses.
+- **Paid option for the founder to consider:** a small GCC-region proxy or a GCC VPS (roughly $5–10/mo [EST]) would let the audit ask from inside the market we actually serve, turning the sweep into a genuine Gulf-side detector. That is a recurring spend, so it needs a decision, not a default.
+- A better signal may exist — YouTube's InnerTube player endpoint accepts a region parameter — but the unauthenticated call **returned UNPLAYABLE for every title tested, including the known-good control**, so it needs visitor-data/PO-token handling to be usable. Tested, not adopted; recorded so the dead end is not re-explored blindly.
+
+## Throughput correction (again — measured)
+| Run | checked | wall time | geo | restored |
+|---|---|---|---|---|
+| 1 | 231 (of 700) | 251s | 33 | 4 |
+| 2 | 177 (of 700) | 244s | 0 | 0 |
+| 3 | 179 (of 700) | 247s | 0 | 0 |
+| **4** | **250 (of 250)** | **48s** | 7 | **0** |
+
+Run 4 completed its entire batch in **48 seconds**, against 244–251s for the three before it. So the sweep rate is **highly variable (roughly 180–250 titles per run depending on the title mix)** and the earlier "the time budget is the hard bottleneck" conclusion was too strong: with `BATCH_SIZE` back at 250 the batch now finishes with room to spare. The honest statement is the range, and the real lever remains the channel-verdict cache (one geo verdict reused across a brand's whole catalogue).
+
+## Catalogue state (measured 2026-09-14 ~01:35)
+```
+ok 16,037 | unknown 754 | geo 43 | invalid 82 | duplicate 3
+active 16,839 | inactive 80 | active + geo = 0
+```
