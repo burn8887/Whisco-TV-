@@ -24,11 +24,16 @@ import { revalidatePath } from "next/cache";
 export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
-const BATCH_SIZE = 700; // titles per run (rotating, never-checked first; ~3500/day across 5 daily
-// runs = full catalog sweep in under 5 days. Was 250 while the "geo" status was broken and
-// 8,700+ active titles sat unchecked for a week at a time — a wrong verdict stayed live too
-// long. The deadline guard below still protects the 300s Vercel window: unprocessed titles
-// roll to the next run, so over-batching is self-correcting.)
+// MEASURED 2026-09-14: the batch size is NOT the sweep's bottleneck — the 230s time budget
+// is. Three live runs processed 231 / 177 / 179 titles before the deadline fired, so raising
+// this number only wastes Neon egress (rows are fetched with their episodes, then never
+// reached). 250 keeps the batch just above observed capacity. A full sweep currently takes
+// ~1,150 titles/day => ~15 days across the catalog, NOT the "12 days" the old comment
+// claimed and not the "<5 days" a bigger batch was expected to buy. The real speed-up is
+// skipping the per-episode watch-page probe for titles whose CHANNEL verdict is already
+// known in the same run (channel-level geo is per-uploader for whole brand catalogs) —
+// designed, not yet built.
+const BATCH_SIZE = 250; // titles per run (rotating, least-recently-checked first)
 const CONCURRENCY = 10; // gentle on archive.org (fewer parallel calls = fewer 429s)
 const FAIL_THRESHOLD = 2;
 const TIMEOUT_MS = 10000;
