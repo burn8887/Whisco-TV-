@@ -32,7 +32,22 @@ Use the **same project that already holds `whisco-agent`** (the project the GSC/
    - If it isn't configured yet: click **Get started** and run the 4-step wizard → App name **`Whisco TV Ops`**, support email = your address, **User type: External** → Create.
    - **Audience tab → Test users → + Add users → add `burn8887@gmail.com` → Save.**
      ⚠️ **Do not skip this.** An app in *Testing* status is limited to listed test accounts; without it, authorizing fails with **"Error 403: access_denied — Access blocked: Whisco TV Ops has not completed the Google verification process. This app can only be accessed by developer-approved test accounts."** Adding the test user takes effect immediately.
-   - **Still on the Audience tab → Publishing status → Publish app → Confirm ("push to production?").**
+   - **Complete the Branding page first — "Publish app" is disabled until you do.** Google Auth Platform → **Branding** → fill every field it marks required:
+     - App name: **Whisco TV Ops**
+     - User support email: **burn8887@gmail.com**
+     - App homepage: **https://www.whisco.tv**
+     - Privacy policy: **https://www.whisco.tv/privacy**
+     - Terms of service: **https://www.whisco.tv/terms**
+     - Authorised domain: **whisco.tv**
+     - Developer contact email: **burn8887@gmail.com**
+     - ⚠️ **Do not upload a logo.** A logo is what pushes an app into Google's verification requirements; without one, publishing stays verification-free for a single-user ops client. (Verified live 2026-09-14: all four URLs return 200.)
+   - **Then Audience tab → Publishing status → Publish app → Confirm ("push to production?").**
+
+   ### Which project am I actually in? (check before any of the above)
+   An OAuth client's ID begins with the **project number** that owns it. Ours is **`1030975964145`**. If the project selector does not match, every fix lands in the wrong project:
+   - **Google Auth Platform → Clients** — is **`Whisco Ops CLI`** listed? If yes, this is the right project.
+   - If not, switch projects in the top selector and check again; or confirm by opening **IAM & Admin → Settings** in each candidate project and comparing **Project number** to `1030975964145`.
+   - The project must also have the **AdSense Management API enabled** (Part A step 1) — the API and the OAuth client have to live in the same project.
      *Two reasons, both real: (a) apps left in Testing expire refresh tokens every **7 days**, while published apps' tokens persist; (b) it removes the test-account restriction entirely. If Google shows "Needs verification", **do not start verification** — unverified apps can still be authorized by the owner through the "Advanced → Go to … (unsafe)" link, and verification is unnecessary for a single-user ops client.*
 3. **Create the OAuth client.** **APIs & Services → Credentials → + Create credentials → OAuth client ID**:
    - Application type: **Web application**
