@@ -78,6 +78,25 @@ P=$(gcloud projects list --format='value(projectId)' | head -1); echo "USING PRO
 
 `;` separators (not `&&`) so one failed step still lets the later ones report their own error instead of hiding it. If the account holds several projects, the output line `USING PROJECT: <id>` says which one was used — tell me if it picked the wrong one and I will move it.
 
+### Dammam (me-central2) is a dead end — switch the zone to Doha (me-central1-a)
+
+Founder's third attempt created nothing and returned:
+
+```
+ERROR: (gcloud.compute.instances.create) Could not fetch resource:
+ - Permission denied on 'locations/me-central2-a' (or it may not exist).
+```
+
+Cause found in Google's own docs (`cloud.google.com/docs/dammam-region-access`), not guessed: **the Dammam region is gated. KSA-based customers must buy through CNTXT, Google's exclusive reseller for the Kingdom; non-KSA customers can only use it on Invoiced Billing.** A self-serve credit-card account gets exactly the error above. There is no IAM fix — it is a commercial gate, and switching to invoiced billing to get a $5 proxy would be absurd.
+
+**Fix: use Doha, Qatar — `me-central1-a`.** No equivalent gate is documented for `me-central1`, and the region launched with E2 VMs in all three zones. Qatar is a GCC state, so the vantage works for what we need. Everything else in the command is unchanged.
+
+```
+P=$(gcloud projects list --format='value(projectId)' | head -1); echo "USING PROJECT: $P"; gcloud config set project "$P"; gcloud compute instances create gcc-geo-vantage --zone=me-central1-a --machine-type=e2-micro --image-family=ubuntu-2404-lts-amd64 --image-project=ubuntu-os-cloud --boot-disk-size=10GB --no-service-account --no-scopes --metadata=ssh-keys='geo:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIkGonCxMU+BsUult8MMrx+Jzd2cPPoj5F9rT8Dx/MKY geo'; echo "=== YOUR IP ==="; gcloud compute instances describe gcc-geo-vantage --zone=me-central1-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
+
+If `me-central1` is also refused, the fallback order is: **Oracle Cloud Dubai or Jeddah** (Always Free, no reseller gate) then **Azure Qatar Central**. Do not chase Dammam; it is not a technical problem.
+
 ### Cost revised upward, honestly
 
 The earlier **$7–8/mo [EST]** covered compute only. Google now bills external IPv4 addresses that are attached and in use, which this box needs for SSH — allow **~$3–4/mo [EST]** on top, so budget **~$10–12/mo [EST]** total. Still inside the approved band and Tier 0. The console's own estimate on the instance screen is authoritative; the only hard figure to date is the **$0.01 budget alert** I will ask for.
