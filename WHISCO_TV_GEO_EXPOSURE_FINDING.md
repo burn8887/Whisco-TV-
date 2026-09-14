@@ -257,3 +257,34 @@ Run 4 completed its entire batch in **48 seconds**, against 244–251s for the t
 ok 16,037 | unknown 754 | geo 43 | invalid 82 | duplicate 3
 active 16,839 | inactive 80 | active + geo = 0
 ```
+
+## SECOND BUG, same session — hidden titles kept serving their pages (`0d935e6`)
+While verifying the fix, three titles sat at `isActive=false` in the database **and still returned full HTTP 200 pages** — title, metadata, canonical, player markup — and were still listed in the sitemap (2,726 URLs).
+
+Not a cache artifact and not a database mismatch. Measured cause:
+- `/title/[slug]` is `force-dynamic`, so the page renders per request, **but its data comes from `unstable_cache` with a 15-minute window**.
+- The cron revalidated `/vod`, `/browse` and `/` after a run — **never the individual title paths**.
+- So a title that was visible when its page was last rendered keeps serving that snapshot after being hidden again.
+
+Proof it was slug-specific and not global: three geo-hidden titles that were **never reactivated** returned **404**, and the three that had been briefly restored returned **200**, from the same code and the same database.
+
+**Fix:** every run now revalidates `/title/[slug]` for **every title it leaves hidden** (not only for titles whose visibility flipped during that run — the stale entries predate the fix), plus any title it restores, plus `/new` and `/sitemap.xml`. The run report now includes a `revalidated` count.
+
+**Verified after deploy (run #5):** the three slugs were queued to the front of the sweep, re-checked, and revalidated — `revalidated: 3`, `restored: 0`.
+
+| Check | Before | After |
+|---|---|---|
+| `/title/leyla` | 200 (stale) | **404** |
+| `/title/sahipsizler` | 200 (stale) | **404** |
+| `/title/kizilcik-serbeti` | 200 (stale) | **404** |
+| Sitemap | 2,726 URLs, 3 hidden titles listed | **2,723 URLs, 0 hidden titles listed** |
+| Control `/title/kurulus-osman` | 200 | 200 (unchanged) |
+| 16 dead videos | 404 | 404 (unchanged) |
+
+**Note on labels:** re-checking from the US vantage returns "no list" (unprovable), so those three now read `lastStatus: "unknown"` rather than `"geo"`. Both keep the title hidden; `unknown` is the honest label for what the production sweep can see from where it runs. That is the structural limitation described above, not a change in the licensing position.
+
+## Watch-list hardening (proposed)
+`active + geo == 0` cannot catch a restore, because a restore rewrites the status to `ok`. Add to the daily check:
+1. **Known-hidden slug guard** — a fixed list of slugs that must stay `isActive=false` and return 404.
+2. **Sitemap count guard** — the sitemap URL count must not rise without a corresponding catalogue change.
+3. **`restored` must be 0** in every run unless a human has verified a title is genuinely back.
