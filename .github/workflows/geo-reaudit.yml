@@ -18,6 +18,18 @@ on:
         description: "Report only, write nothing (true/false)"
         required: false
         default: "false"
+      mode:
+        description: "audit = full channel-level sweep | verify = named slugs"
+        required: false
+        default: "audit"
+      slugs:
+        description: "mode=verify: comma-separated title slugs"
+        required: false
+        default: ""
+      hide:
+        description: "mode=verify: hide titles with a clean list-backed BLOCKED verdict"
+        required: false
+        default: "false"
 
 concurrency:
   group: geo-reaudit
@@ -43,10 +55,17 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
-      - name: Run channel-level geo audit
+      - name: Run channel-level geo audit (mode=audit)
+        if: inputs.mode != 'verify'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: node scripts/geo_channel_audit.mjs "${{ inputs.dry_run }}"
+
+      - name: Run targeted geo verify (mode=verify)
+        if: inputs.mode == 'verify'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/geo_verify.mjs "${{ inputs.slugs }}" "${{ inputs.hide }}"
 
       - name: Upload results
         if: always()
