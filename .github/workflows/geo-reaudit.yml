@@ -1,0 +1,61 @@
+name: Geo re-audit (one-off)
+
+# One-off, manually-dispatched ops job (2026-09-14 geo-exposure finding).
+# NOT on a schedule. Safe to delete once the permanent check-vod fix is live.
+#
+# Runs from GitHub's runners (clean IPs) because a sandbox/local run gets
+# HTTP 429 rate-limited by YouTube after ~500 probes.
+#
+# Inputs:
+#   limit    max titles to examine this run
+#   dry_run  "true" = report only, write nothing
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max titles to examine this run"
+        required: false
+        default: "400"
+      dry_run:
+        description: "Report only, write nothing (true/false)"
+        required: false
+        default: "false"
+
+concurrency:
+  group: geo-reaudit
+  cancel-in-progress: false
+
+jobs:
+  reaudit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+
+      - name: Prisma generate
+        run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Run geo re-audit
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/geo_reaudit.mjs "${{ inputs.limit }}" "${{ inputs.dry_run }}"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geo-reaudit-results
+          path: /tmp/geo_reaudit_results.json
+          if-no-files-found: ignore
+          retention-days: 30
