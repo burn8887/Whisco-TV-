@@ -59,3 +59,50 @@ The `geo` mechanism was believed to be operating (the takeover brief still recor
 ---
 
 *Filed by the engineering agent, 2026-09-14. Companion entry appended to WHISCO_TV_PROJECT_HANDOVER.md.*
+
+---
+
+# ADDENDUM — AUDIT EXECUTED 2026-09-14 (founder Option 1)
+
+## What was done
+
+**1. Hidden, verified, freeze-safe (5 titles total):**
+
+| Slug | Title | Channel | How verified |
+|---|---|---|---|
+| `leyla` | Leyla | Leyla: Hayat...Aşk...Adalet... | 2 probes BLOCKED |
+| `sahipsizler` | Sahipsizler | (series channel) | 2 probes BLOCKED |
+| `kizilcik-serbeti` | Kızılcık Şerbeti | Kızılcık Şerbeti | 2 probes BLOCKED |
+| `security` | Security | Shout! Studios | 3 probes BLOCKED |
+| `carpinti` | Çarpıntı (Heartbeat) | Çarpıntı Dizisi | channel double-probe + per-title probe |
+
+All written as `isActive=false, lastStatus="geo", failCount=0`. DB now: **5 geo rows, 65 inactive titles.**
+
+Note on `carpinti`: it was added 2026-08-31 as one of the new Turkish dizi and recorded as "all 6 GCC countries geo-verified". It is GCC-blocked now. **Geo availability changes over time** — which is the whole argument for continuous re-checking, not a one-off audit.
+
+**2. Method found, then corrected twice (recorded so nobody repeats it):**
+
+- A per-title brute force over all ~8,400 stale titles **cannot work**. YouTube rate-limits the watch page (HTTP 429) after roughly 340 rapid fetches from one IP. Observed independently from the sandbox *and* from a GitHub Actions runner. The first sandbox attempt aborted at 549 ok / 651 unknown; a GitHub run aborted at 354 titles.
+- **oEmbed is a different service and is NOT rate-limited** (8,378 titles -> 110 channels in ~30 seconds). Channel-level narrowing turns ~8,400 probes into ~110.
+- **But a channel verdict cannot certify a channel's titles.** "Shout! Studios" (428 titles) probes *ok* at channel level, while its title `security` is genuinely GCC-blocked. **Geo-restriction is applied per video, not per uploader.** So the channel pass is a targeting filter only — every write still required per-title verification.
+- A 28-title targeted sample across Turkish Dizi / Hindi Cinema / Pakistani Dramas found 0 additional blocked titles. Cumulative: ~990 titles directly probed today with 0 blocked among them, against 1 blocked in a 27-title random sample. **True catalog-wide count remains UNDETERMINED [EST]** — the honest read is "low base rate, with per-video exceptions that a channel-level scan cannot rule out."
+
+**3. Dead videos found (16) — reported, NOT hidden (out of the approved scope; liveness is the sweep's job):**
+
+The oEmbed liveness step surfaced 16 titles whose video is gone or non-embeddable (oEmbed 401/403/404). 15 are DW Documentary titles (e.g. `the-worlds-oldest-virus-research-lab`, `war-in-congo-trapped-in-a-spiral-of-violence`, `beirut-explosion-2020-the-unsolved-catastrophe`, `91-a-film-about-guns-in-america-sandy-hook`) plus one Arabic title (`ar-d3dce2c487` :: وراء الشمس). These are broken for viewers today and carry the *same* reviewer-risk as a geo-block. They were left in the stale queue deliberately (their `lastCheckedAt` was not refreshed), so the production sweep reaches them early and hides them properly after its 2-failure threshold.
+
+## The decisive fix is the code change, not the audit
+
+A bespoke audit cannot solve this at production pace. The production VOD sweep already probes GCC availability **per title** at a cadence YouTube tolerates (250/run, 5 runs/day, no 429s in months). It was simply throwing the answer away — recording a GCC block as `invalid` and never writing `geo`. Branch `geo-health-fix` (`48afa66`) fixes the writer, the KPI and the sweep budget:
+
+- `checkYouTubeVideo()` returns a real **`geo`** status; series get `geo` (all samples blocked) or `geo-partial` (mixed, stays visible + flagged)
+- write path hides on `geo` immediately (no FAIL_THRESHOLD wait — a licence block is not a flaky stream) and restores only after `confirmGeoAvailable()` second-opinion probe
+- `maintenance` reports a real status split (`geoFullyHidden`, `geoPartialVisible`, `statusSplit`) and raises alarms, instead of a KPI hardwired to 0
+- `BATCH_SIZE` 250 -> 700, bringing a full catalog pass under ~5 days
+
+**Once deployed, the sweep becomes the continuous per-title geo audit.** Recommended deployment: a cron-route-only change (no page, no UI, no site structure), so it sits outside the freeze's intent and would complete a full pass inside the AdSense window (Sep 17-19).
+
+## Still open
+
+- `geo-partial` titles need a per-episode decision; the schema cannot express "this episode is blocked" yet. Flagged, not hidden.
+- The 16 dead videos (above) need a founder decision on whether to hide them now rather than wait for the sweep.
