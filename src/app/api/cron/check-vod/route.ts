@@ -24,7 +24,11 @@ import { revalidatePath } from "next/cache";
 export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
-const BATCH_SIZE = 250; // titles per run (rotating, never-checked first; ~1250/day = full sweep ~12 days)
+const BATCH_SIZE = 700; // titles per run (rotating, never-checked first; ~3500/day across 5 daily
+// runs = full catalog sweep in under 5 days. Was 250 while the "geo" status was broken and
+// 8,700+ active titles sat unchecked for a week at a time — a wrong verdict stayed live too
+// long. The deadline guard below still protects the 300s Vercel window: unprocessed titles
+// roll to the next run, so over-batching is self-correcting.)
 const CONCURRENCY = 10; // gentle on archive.org (fewer parallel calls = fewer 429s)
 const FAIL_THRESHOLD = 2;
 const TIMEOUT_MS = 10000;
@@ -56,7 +60,21 @@ async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
 
 // "ok" = verified good; "invalid" = verified dead; "unknown" = couldn't
 // verify (rate limit/timeouts) — unknown NEVER counts as a failure.
-type CheckResult = "ok" | "invalid" | "unknown";
+//
+// Geo results (added 2026-09-14 after the geo-exposure finding):
+//  "geo"         = the title is NOT watchable in the GCC at all. Hidden from
+//                  viewers, same as a dead stream, but tracked separately so
+//                  the maintenance KPI can never quietly read 0 again.
+//                  A GCC block is NOT "invalid": the video is alive, it just
+//                  isn't licensed for our audience. Conflating the two is what
+//                  let Leyla / Kızılcık Şerbeti / Sahipsizler drift back onto
+//                  the site while every dashboard said "ok".
+//  "geo-partial" = some sampled episodes are GCC-blocked, some are watchable.
+//                  Title stays VISIBLE (viewers can still watch the good
+//                  episodes) but is flagged + counted for a human decision.
+//                  Deliberately not hidden: hiding a 400-episode series over
+//                  one blocked sample would be a worse viewer outcome.
+type CheckResult = "ok" | "invalid" | "unknown" | "geo" | "geo-partial";
 
 async function checkArchiveItem(item: string, file: string): Promise<CheckResult> {
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -114,10 +132,25 @@ async function checkYouTubeVideo(videoId: string): Promise<CheckResult> {
     const m = html.match(/"availableCountries":\[([^\]]*)\]/);
     if (!m) return "ok"; // no restriction list → worldwide
     const countries = m[1].replace(/"/g, "").split(",");
-    return GCC.some((c) => countries.includes(c)) ? "ok" : "invalid";
+    // Blocked for every GCC country = unavailable to our entire audience.
+    return GCC.some((c) => countries.includes(c)) ? "ok" : "geo";
   } catch {
     return "unknown";
   }
+}
+
+// Second-opinion probe used before restoring a geo-hidden title. Returns true
+// only if the title is genuinely watchable in the GCC. Non-YouTube sources are
+// not geo-restricted in our catalog, so they pass immediately.
+async function confirmGeoAvailable(t: TitleRow): Promise<boolean> {
+  const eps = t.seasons.flatMap((s) => s.episodes);
+  const target =
+    t.type === "SERIES"
+      ? (eps.find((e) => parseYouTube(e.streamUrl))?.streamUrl ?? null)
+      : t.streamUrl;
+  const yt = parseYouTube(target);
+  if (!yt) return true;
+  return (await checkYouTubeVideo(yt)) === "ok";
 }
 
 type TitleRow = {
@@ -148,6 +181,11 @@ async function checkTitle(t: TitleRow): Promise<CheckResult> {
     }
     const invalid = results.filter((r) => r === "invalid").length;
     const ok = results.filter((r) => r === "ok").length;
+    const geo = results.filter((r) => r === "geo").length;
+    // Every sample is GCC-blocked -> the show cannot be watched by our audience.
+    if (geo > 0 && ok === 0 && invalid === 0) return "geo";
+    // Mixed: some episodes blocked, some watchable. Keep visible, flag it.
+    if (geo > 0 && ok > 0) return "geo-partial";
     if (invalid > ok) return "invalid"; // majority of samples dead
     if (ok > 0) return "ok";
     return "unknown";
@@ -215,6 +253,8 @@ export async function GET(req: Request) {
   let ok = 0,
     invalid = 0,
     unknown = 0,
+    geo = 0,
+    geoPartial = 0,
     newlyHidden = 0,
     restored = 0;
 
@@ -224,15 +264,28 @@ export async function GET(req: Request) {
   const unknownIds: string[] = [];
   for (const { t, status } of results) {
     if (status === "ok") {
-      ok++;
-      if (!t.isActive) restored++;
-      if (t.isActive && t.failCount === 0 && !t.lastStatus?.startsWith("geo")) {
-        okIdsNoChange.push(t.id);
-      } else {
+      // A geo-hidden title needs a SECOND independent probe before we put it
+      // back in front of Gulf viewers. A single flaky "ok" reading is exactly
+      // what re-exposed Leyla / Kızılcık Şerbeti / Sahipsizler (Sep 2026):
+      // hidden in August, one good reading later, live again with every
+      // dashboard reporting "ok".
+      if (!t.isActive && t.lastStatus?.startsWith("geo") && !(await confirmGeoAvailable(t as TitleRow))) {
+        geo++;
         await prisma.title.update({
           where: { id: t.id },
-          data: { isActive: true, failCount: 0, lastStatus: "ok", lastCheckedAt: now },
+          data: { isActive: false, lastStatus: "geo", failCount: 0, lastCheckedAt: now },
         });
+      } else {
+        ok++;
+        if (!t.isActive) restored++;
+        if (t.isActive && t.failCount === 0 && !t.lastStatus?.startsWith("geo")) {
+          okIdsNoChange.push(t.id);
+        } else {
+          await prisma.title.update({
+            where: { id: t.id },
+            data: { isActive: true, failCount: 0, lastStatus: "ok", lastCheckedAt: now },
+          });
+        }
       }
     } else if (status === "invalid") {
       invalid++;
@@ -242,6 +295,26 @@ export async function GET(req: Request) {
       await prisma.title.update({
         where: { id: t.id },
         data: { failCount, isActive: hide ? false : t.isActive, lastStatus: "invalid", lastCheckedAt: now },
+      });
+    } else if (status === "geo") {
+      // Verified unavailable across every GCC country. Hide immediately — no
+      // FAIL_THRESHOLD wait, because this is not a flaky stream, it is a
+      // licensing fact. failCount is reset so a later genuine death is
+      // measured from zero.
+      geo++;
+      if (t.isActive) newlyHidden++;
+      await prisma.title.update({
+        where: { id: t.id },
+        data: { isActive: false, lastStatus: "geo", failCount: 0, lastCheckedAt: now },
+      });
+    } else if (status === "geo-partial") {
+      // Some episodes watchable, some geo-blocked. Stay visible but flagged, so
+      // it surfaces in the maintenance KPI split for a human decision. Never
+      // counted as a failure.
+      geoPartial++;
+      await prisma.title.update({
+        where: { id: t.id },
+        data: { lastStatus: "geo-partial", failCount: 0, lastCheckedAt: now },
       });
     } else {
       unknown++;
@@ -268,6 +341,8 @@ export async function GET(req: Request) {
     ok,
     invalid,
     unknown,
+    geo,
+    geoPartial,
     restored,
     newlyHidden,
     totalInactive,

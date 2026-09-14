@@ -61,14 +61,41 @@ export async function GET(req: Request) {
   }
 
   // 4. Stats report
-  const [channelsTotal, channelsActive, titlesTotal, titlesActive, titlesGeo, byCollection] = await Promise.all([
+  //
+  // The geo KPI is computed from a real status split (2026-09-14 fix). It used
+  // to be `count({ where: { lastStatus: "geo" } })` while nothing in the code
+  // path ever wrote that value — so it could only ever report 0, and it printed
+  // "geoHidden: 0" every week while three GCC-blocked titles sat live on the
+  // site. A metric that cannot fail is worse than no metric. This one is now
+  // driven by the same statuses the health sweep actually writes, and raises an
+  // explicit alarm when the blocked/unverifiable share is unhealthy.
+  const [channelsTotal, channelsActive, titlesTotal, titlesActive, statusSplit, byCollection] = await Promise.all([
     prisma.channel.count(),
     prisma.channel.count({ where: { isActive: true } }),
     prisma.title.count(),
     prisma.title.count({ where: { isActive: true } }),
-    prisma.title.count({ where: { lastStatus: "geo" } }),
+    prisma.title.groupBy({ by: ["lastStatus"], _count: { _all: true } }),
     prisma.title.groupBy({ by: ["collection"], where: { isActive: true }, _count: { _all: true }, orderBy: { _count: { collection: "desc" } } }),
   ]);
+
+  const split: Record<string, number> = {};
+  for (const row of statusSplit) split[row.lastStatus ?? "never-checked"] = row._count._all;
+
+  const geoHidden = (split["geo"] ?? 0) + (split["geo-partial"] ?? 0);
+  const geoFullyHidden = split["geo"] ?? 0;
+  const geoPartialVisible = split["geo-partial"] ?? 0;
+
+  const unverifiableShare = titlesActive > 0 ? ((split["unknown"] ?? 0) + (split["invalid"] ?? 0)) / titlesActive : 0;
+  const alerts: string[] = [];
+  if (geoFullyHidden > 500) {
+    alerts.push(`geoHidden=${geoFullyHidden} — unusually high; re-run the per-brand GCC geo audit before assuming the catalog is clean`);
+  }
+  if (geoPartialVisible > 0) {
+    alerts.push(`geo-partial=${geoPartialVisible} titles are live but have GCC-blocked episodes — needs a per-episode decision (schema cannot express it yet)`);
+  }
+  if (unverifiableShare > 0.15) {
+    alerts.push(`unverifiable share ${(unverifiableShare * 100).toFixed(1)}% of active titles (unknown+invalid) — sweep is not converging; check for YouTube/archive.org rate-limiting`);
+  }
 
   revalidatePath("/browse");
   revalidatePath("/vod");
@@ -87,7 +114,15 @@ export async function GET(req: Request) {
     trendingRotated: spotlight.length,
     stats: {
       channels: { total: channelsTotal, active: channelsActive },
-      titles: { total: titlesTotal, active: titlesActive, geoHidden: titlesGeo },
+      titles: {
+        total: titlesTotal,
+        active: titlesActive,
+        geoHidden, // BACK-COMPAT headline number (now real, was hardwired 0 until 2026-09-14)
+        geoFullyHidden, // verified unavailable across all 6 GCC countries
+        geoPartialVisible, // live titles with some GCC-blocked episodes
+        statusSplit: split, // ok / invalid / unknown / geo / geo-partial
+      },
+      alerts,
       topCollections: byCollection.slice(0, 10).map((c) => ({ collection: c.collection, count: c._count._all })),
     },
     timestamp: new Date().toISOString(),
