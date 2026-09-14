@@ -144,18 +144,52 @@ async function checkYouTubeVideo(videoId: string): Promise<CheckResult> {
   }
 }
 
-// Second-opinion probe used before restoring a geo-hidden title. Returns true
-// only if the title is genuinely watchable in the GCC. Non-YouTube sources are
-// not geo-restricted in our catalog, so they pass immediately.
-async function confirmGeoAvailable(t: TitleRow): Promise<boolean> {
+type GeoProof = "available" | "blocked" | "unprovable";
+
+// STRICT GCC-availability proof — used before putting ANY YouTube-backed title
+// back in front of viewers.
+//
+// Why strict matters (learned the hard way, 2026-09-14): YouTube's watch page
+// only carries the `availableCountries` list when the video is NOT playable from
+// the requesting region. If the requesting region CAN play it, the page has no
+// list at all — which says nothing about the Gulf. So "no list" must NEVER be
+// read as "available in the GCC".
+//
+// Proof, from a probe of 4 titles across regions: the control title known to be
+// GCC-available returned no list, while the GCC-blocked ones returned a list with
+// zero GCC countries in it. Treating absence as availability restored Leyla,
+// Sahipsizler and Kızılcık Şerbeti to the live site hours after they were hidden.
+//
+// So: restore ONLY on positive evidence — a list that EXISTS and CONTAINS a GCC
+// country. Anything else (no list, 429, timeout, consent stub) => unprovable =>
+// leave it hidden. The cost is a false negative: a title whose block is lifted
+// while our probe can't see a list stays hidden until an audit verifies it. That
+// is the correct side to fail on: a hidden title is invisible to viewers, an
+// exposed one is a licensing and review risk.
+async function confirmGeoAvailable(t: TitleRow): Promise<GeoProof> {
   const eps = t.seasons.flatMap((s) => s.episodes);
   const target =
     t.type === "SERIES"
       ? (eps.find((e) => parseYouTube(e.streamUrl))?.streamUrl ?? null)
       : t.streamUrl;
   const yt = parseYouTube(target);
-  if (!yt) return true;
-  return (await checkYouTubeVideo(yt)) === "ok";
+  if (!yt) return "available"; // non-YouTube sources carry no geo restriction in this catalog
+  return checkYouTubeVideoStrict(yt);
+}
+
+async function checkYouTubeVideoStrict(videoId: string): Promise<GeoProof> {
+  try {
+    const res = await fetchWithTimeout(`https://www.youtube.com/watch?v=${videoId}&hl=en`, TIMEOUT_MS);
+    if (!res.ok) return "unprovable";
+    const html = await res.text();
+    if (!html.includes("playabilityStatus")) return "unprovable"; // consent / rate-limit stub
+    const m = html.match(/"availableCountries":\[([^\]]*)\]/);
+    if (!m) return "unprovable"; // no list => proves NOTHING about GCC availability
+    const countries = m[1].replace(/"/g, "").split(",");
+    return GCC.some((c) => countries.includes(c)) ? "available" : "blocked";
+  } catch {
+    return "unprovable";
+  }
 }
 
 type TitleRow = {
@@ -269,16 +303,26 @@ export async function GET(req: Request) {
   const unknownIds: string[] = [];
   for (const { t, status } of results) {
     if (status === "ok") {
-      // A geo-hidden title needs a SECOND independent probe before we put it
-      // back in front of Gulf viewers. A single flaky "ok" reading is exactly
-      // what re-exposed Leyla / Kızılcık Şerbeti / Sahipsizler (Sep 2026):
-      // hidden in August, one good reading later, live again with every
-      // dashboard reporting "ok".
-      if (!t.isActive && t.lastStatus?.startsWith("geo") && !(await confirmGeoAvailable(t as TitleRow))) {
-        geo++;
+      // ANY inactive YouTube-backed title must produce positive, list-backed
+      // proof of GCC availability before it goes back in front of viewers. This
+      // is deliberately broader than the geo-status check it replaced: a title
+      // the OLD code mislabelled "invalid" while it was really GCC-blocked would
+      // otherwise be restored by this same ambiguous path.
+      const proof = !t.isActive ? await confirmGeoAvailable(t as TitleRow) : "available";
+      if (proof !== "available") {
+        // Stay hidden. Label honestly: an explicit blocked reading is "geo";
+        // an unreadable page is "unknown" — we simply could not verify it, and
+        // guessing "ok" is what exposed three titles earlier today.
+        if (proof === "blocked") geo++;
+        else unknown++;
         await prisma.title.update({
           where: { id: t.id },
-          data: { isActive: false, lastStatus: "geo", failCount: 0, lastCheckedAt: now },
+          data: {
+            isActive: false,
+            lastStatus: proof === "blocked" ? "geo" : "unknown",
+            failCount: 0,
+            lastCheckedAt: now,
+          },
         });
       } else {
         ok++;
