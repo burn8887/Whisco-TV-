@@ -52,6 +52,22 @@ If the paste field is not offered at create time, add it afterwards instead: **C
 
 Paste me the instance's **External IP**. Nothing else. I add it (plus the private key and user) to GitHub Actions secrets, and everything after that is mine.
 
+## UPDATE 2026-09-14 — service-account keys are blocked on this org; use Cloud Shell
+
+Founder hit **`iam.disableServiceAccountKeyCreation`** when trying to make the setup key JSON: an Organization Policy on the org (a "Secure by Default" style enforcement) blocks service-account key creation. This is Google deliberately closing the long-lived-credential path, and it is the right default — so the plan changed rather than fought it.
+
+**Consequence: no Google credential of any kind needs to be handed over.** The VM is created from **Cloud Shell** (the founder's own browser session, no key, no token), and the exec receives only the instance's external IP. Everything after that runs over SSH with the tunnel keypair already held.
+
+**The one paste (Cloud Shell, project = whatever the console selector shows, billing must be linked):**
+
+```
+gcloud services enable compute.googleapis.com && gcloud compute instances create gcc-geo-vantage --zone=me-central2-a --machine-type=e2-micro --image-family=ubuntu-2404-lts-amd64 --image-project=ubuntu-os-cloud --boot-disk-size=10GB --no-service-account --no-scopes --metadata=ssh-keys='geo:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIkGonCxMU+BsUult8MMrx+Jzd2cPPoj5F9rT8Dx/MKY geo' && echo "=== YOUR IP ===" && gcloud compute instances describe gcc-geo-vantage --zone=me-central2-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
+
+Verified before handing over: `ubuntu-2404-lts-amd64` / `ubuntu-os-cloud` are the correct family and project (Canonical + Google docs), and `me-central2` carries zones `-a`, `-b`, `-c`. `--no-service-account` requires `--no-scopes`; both are included so the box holds no Google identity at all.
+
+**If the org policy is ever lifted and a key is preferred instead:** IAM & Admin → Organization Policies → filter for "Disable service account key creation" → Edit → *Override parent's policy* → Enforcement **Off** → Set policy. Needs the Organization Policy Administrator role, weakens the posture org-wide, and the key should still be revoked immediately after setup. Not the recommended route.
+
 ## Alternative if you would rather pay nothing: Oracle Cloud Always Free
 
 - **Sign-up:** https://signup.cloud.oracle.com — pick **Home region: Saudi Arabia West (Jeddah)** *or* **UAE East (Dubai)** at signup. **The home region cannot be changed afterwards**, and Always Free resources only run there — this is the one step that cannot be undone, so choose deliberately.
