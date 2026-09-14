@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Guides",
   description:
     "Original guides from Whisco TV: what to watch, where to start with Turkish dizi and Pakistani dramas, and how Gulf expats can watch TV from home legally and free.",
-  alternates: { canonical: "https://whisco.tv/guides" },
+  alternates: { canonical: "https://www.whisco.tv/guides" },
 };
 
 export default function GuidesIndex() {

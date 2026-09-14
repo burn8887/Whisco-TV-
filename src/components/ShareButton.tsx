@@ -8,7 +8,7 @@ import { Share2, Check } from "lucide-react";
 // Gulf), copy-to-clipboard fallback on desktop.
 export default function ShareButton({ title, path }: { title: string; path: string }) {
   const [copied, setCopied] = useState(false);
-  const url = `https://whisco.tv${path}?utm_source=share&utm_medium=social&utm_campaign=title_share`;
+  const url = `https://www.whisco.tv${path}?utm_source=share&utm_medium=social&utm_campaign=title_share`;
   const text = `${title} — watch free on Whisco TV (no subscription):`;
 
   async function onShare() {

@@ -4,7 +4,7 @@ import { getNewThisWeek } from "@/lib/cached";
 // community tools pick up Whisco TV additions automatically.
 export const revalidate = 3600;
 
-const SITE = "https://whisco.tv";
+const SITE = "https://www.whisco.tv";
 
 function esc(s: string): string {
   return s

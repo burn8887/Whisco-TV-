@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: guide.title,
     description: guide.intro.slice(0, 160),
-    alternates: { canonical: `https://whisco.tv/guides/${guide.slug}` },
+    alternates: { canonical: `https://www.whisco.tv/guides/${guide.slug}` },
     robots: { index: true, follow: true },
   };
 }
@@ -27,9 +27,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     "@type": "Article",
     headline: guide.h1,
     description: guide.intro.slice(0, 200),
-    author: { "@type": "Organization", name: "Whisco TV", url: "https://whisco.tv" },
-    publisher: { "@type": "Organization", name: "Whisco TV", url: "https://whisco.tv" },
-    mainEntityOfPage: `https://whisco.tv/guides/${guide.slug}`,
+    author: { "@type": "Organization", name: "Whisco TV", url: "https://www.whisco.tv" },
+    publisher: { "@type": "Organization", name: "Whisco TV", url: "https://www.whisco.tv" },
+    mainEntityOfPage: `https://www.whisco.tv/guides/${guide.slug}`,
     inLanguage: "en",
   };
 

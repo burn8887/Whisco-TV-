@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "New This Week — Fresh Free Movies, Series & Episodes",
   description:
     "Everything added to Whisco TV in the last 7 days: new free movies, series and episodes across Hindi, Malayalam, Tamil, Telugu, Urdu, Bangla, Arabic, Turkish, Filipino and more. Updated automatically, always free.",
-  alternates: { canonical: "https://whisco.tv/new" },
+  alternates: { canonical: "https://www.whisco.tv/new" },
 };
 
 export const revalidate = 3600;

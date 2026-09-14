@@ -32,7 +32,7 @@ export default function CopyMessageButton({
   path: string;
 }) {
   const [copied, setCopied] = useState(false);
-  const url = `https://whisco.tv${path}?utm_source=copymsg&utm_medium=chat&utm_campaign=family_forward`;
+  const url = `https://www.whisco.tv${path}?utm_source=copymsg&utm_medium=chat&utm_campaign=family_forward`;
   const build = CAPTIONS[language] ?? DEFAULT_CAPTION;
 
   async function onCopy() {
