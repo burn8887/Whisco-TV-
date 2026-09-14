@@ -25,9 +25,21 @@ on:
         required: false
         default: ""
       hide:
-        description: "Hide titles with a clean list-backed BLOCKED-ALL-GCC verdict"
+        description: "probe mode: hide titles with a clean list-backed BLOCKED-ALL-GCC verdict"
         required: false
         default: "false"
+      mode:
+        description: "probe = named slugs | audit = channel-level catalogue sweep from the Gulf"
+        required: false
+        default: "probe"
+      dry_run:
+        description: "audit mode: report only, write nothing (true/false)"
+        required: false
+        default: "true"
+      scope:
+        description: "audit mode: all = every live title | stale = only titles unchecked for 7+ days"
+        required: false
+        default: "all"
 
 concurrency:
   group: gcc-geo-probe
@@ -74,17 +86,28 @@ jobs:
           done
           echo "tunnel exit: $(cat /tmp/exit.json 2>/dev/null | head -c 300)"
 
-      - name: Probe
+      - name: Probe named slugs (mode=probe)
+        if: inputs.mode != 'audit'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SOCKS_PROXY: socks5h://127.0.0.1:1080
         run: node scripts/gcc_geo_probe.mjs "${{ inputs.slugs }}" "${{ inputs.hide }}" "${{ inputs.ids }}"
+
+      - name: Channel-level catalogue audit (mode=audit)
+        if: inputs.mode == 'audit'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SOCKS_PROXY: socks5h://127.0.0.1:1080
+          AUDIT_SCOPE: ${{ inputs.scope }}
+        run: node scripts/geo_channel_audit.mjs "${{ inputs.dry_run }}"
 
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gcc-geo-probe
-          path: /tmp/gcc_geo_probe.json
+          path: |
+            /tmp/gcc_geo_probe.json
+            /tmp/geo_channel_audit.json
           if-no-files-found: ignore
           retention-days: 30

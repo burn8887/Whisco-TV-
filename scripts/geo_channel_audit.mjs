@@ -34,6 +34,7 @@
  */
 import { PrismaClient } from "@prisma/client";
 import fs from "node:fs";
+import { execFile } from "node:child_process";
 
 const p = new PrismaClient();
 const DRY = String(process.argv[2] || "false").toLowerCase() === "true";
@@ -43,6 +44,13 @@ const UA = {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
   "Accept-Language": "en-US,en;q=0.9",
 };
+// SOCKS_PROXY routes the WATCH-PAGE probes through a Gulf vantage (see
+// scripts/gcc_geo_probe.mjs). oEmbed stays direct: it is not geo-sensitive.
+// Why it matters: from a non-GCC vantage the availability list only appears when
+// the video is unplayable THERE, so a list-less page is silence, not evidence.
+// From inside the Gulf a list-less page means "playable here" — positive proof.
+const SOCKS = process.env.SOCKS_PROXY || "";
+const SCOPE = process.env.AUDIT_SCOPE === "all" ? "all" : "stale";
 const MAP_CONCURRENCY = 6; // oEmbed is tolerant
 const PROBE_CONCURRENCY = 2; // watch page is not — stay slow
 const OUT = "/tmp/geo_channel_audit.json";
@@ -55,6 +63,49 @@ const ytId = (u) => {
 };
 
 const stats = { oembed: 0, watchProbes: 0, http429: 0, unreadable: 0, consecutiveBad: 0, pauses: 0 };
+
+function curlGet(url, timeoutMs = 30000) {
+  const host = SOCKS.replace(/^socks5h?:\/\//, "");
+  return new Promise((resolve) => {
+    execFile(
+      "curl",
+      ["-s", "--socks5-hostname", host, "--max-time", String(Math.ceil(timeoutMs / 1000)),
+       "-H", `User-Agent: ${UA["User-Agent"]}`, "-H", "Accept-Language: en-US,en;q=0.9",
+       "-w", "\n%{http_code}", url],
+      { timeout: timeoutMs + 10000, maxBuffer: 64 * 1024 * 1024 },
+      (err, stdout) => {
+        const out = String(stdout || "");
+        const i = out.lastIndexOf("\n");
+        const status = i >= 0 ? parseInt(out.slice(i + 1), 10) || 0 : 0;
+        resolve({ status, body: i >= 0 ? out.slice(0, i) : "" });
+      }
+    );
+  });
+}
+
+async function httpText(url, timeoutMs) {
+  if (SOCKS) return curlGet(url, timeoutMs);
+  try {
+    const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(timeoutMs) });
+    return { status: r.status, body: r.ok ? await r.text() : "" };
+  } catch {
+    return { status: 0, body: "" };
+  }
+}
+
+// Confirmed vantage. Established BEFORE any probe, and re-stated in the output,
+// because a verdict is only meaningful alongside where it was taken.
+let VANTAGE_GCC = false;
+let exitInfo = null;
+if (SOCKS) {
+  const r = await curlGet("https://ipinfo.io/json", 20000);
+  try { exitInfo = JSON.parse(r.body); } catch { exitInfo = null; }
+  VANTAGE_GCC = !!(exitInfo && GCC.includes(exitInfo.country));
+}
+console.log("=== vantage ===");
+console.log(SOCKS
+  ? `  tunnel ${SOCKS} -> ${exitInfo?.ip || "?"} (${exitInfo?.city || "?"}, ${exitInfo?.country || "?"}) ${VANTAGE_GCC ? "CONFIRMED GCC" : "NOT GCC"}`
+  : "  NO tunnel — direct/production vantage (a list-less watch page proves nothing here)");
 
 async function oembed(id) {
   for (let a = 0; a < 2; a++) {
@@ -93,21 +144,18 @@ async function watchProbe(id) {
   for (let a = 0; a < 2; a++) {
     try {
       stats.watchProbes++;
-      const r = await fetch(`https://www.youtube.com/watch?v=${id}&hl=en`, {
-        headers: UA,
-        signal: AbortSignal.timeout(20000),
-      });
+      const r = await httpText(`https://www.youtube.com/watch?v=${id}&hl=en`, 25000);
       if (r.status === 429 || r.status === 403) {
         stats.http429++;
         stats.consecutiveBad++;
         await new Promise((res) => setTimeout(res, 5000 * (a + 1)));
         continue;
       }
-      if (!r.ok) {
+      if (!r.status || r.status >= 400) {
         stats.consecutiveBad++;
         return "unknown";
       }
-      const html = await r.text();
+      const html = r.body;
       if (!html.includes("playabilityStatus")) {
         stats.unreadable++;
         stats.consecutiveBad++;
@@ -115,7 +163,11 @@ async function watchProbe(id) {
       }
       stats.consecutiveBad = 0;
       const m = html.match(/"availableCountries":\[([^\]]*)\]/);
-      if (!m) return "ok"; // no restriction list -> worldwide
+      // A MISSING list means "playable from where we asked" and nothing more. It
+      // is positive evidence ONLY when the asker is inside the Gulf. From a US
+      // vantage it is silence — and reading silence as "available worldwide" is
+      // exactly the bug that restored three GCC-blocked titles on 2026-09-14.
+      if (!m) return VANTAGE_GCC ? "ok" : "unknown";
       const list = m[1].replace(/"/g, "").split(",");
       return GCC.some((c) => list.includes(c)) ? "ok" : "blocked";
     } catch {
@@ -160,10 +212,21 @@ async function pool(items, concurrency, fn) {
   return outcomes.every((o) => o !== false);
 }
 
+if (!DRY && !VANTAGE_GCC) {
+  console.log("\n[ABORT] Refusing to WRITE from a vantage that is not confirmed inside the Gulf.");
+  console.log("        A non-GCC 'blocked' reading hides titles on evidence we cannot interpret,");
+  console.log("        and a non-GCC 'no list' reading is the bug that caused the 2026-09-14 restore.");
+  console.log("        Re-run with dryRun=true for a read-only report, or route through the Gulf tunnel.");
+  await p.$disconnect();
+  process.exit(2);
+}
+
 const started = Date.now();
 const out = {
   started: new Date().toISOString(),
   dryRun: DRY,
+  scope: SCOPE,
+  vantage: SOCKS ? { ip: exitInfo?.ip, city: exitInfo?.city, country: exitInfo?.country, confirmedGcc: VANTAGE_GCC } : { direct: true, confirmedGcc: false },
   mapped: 0,
   channels: 0,
   dead: [],
@@ -180,7 +243,9 @@ try {
   const titles = await p.title.findMany({
     where: {
       isActive: true,
-      OR: [{ lastCheckedAt: null }, { lastCheckedAt: { lt: cut } }],
+      // "all" = every live title regardless of when it was last checked, for a
+      // full Gulf-side sweep. "stale" = the original incremental queue.
+      ...(SCOPE === "all" ? {} : { OR: [{ lastCheckedAt: null }, { lastCheckedAt: { lt: cut } }] }),
       NOT: { lastStatus: { startsWith: "geo" } },
     },
     orderBy: { lastCheckedAt: "asc" },
