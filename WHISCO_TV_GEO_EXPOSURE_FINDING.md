@@ -288,3 +288,29 @@ Proof it was slug-specific and not global: three geo-hidden titles that were **n
 1. **Known-hidden slug guard** — a fixed list of slugs that must stay `isActive=false` and return 404.
 2. **Sitemap count guard** — the sitemap URL count must not rise without a corresponding catalogue change.
 3. **`restored` must be 0** in every run unless a human has verified a title is genuinely back.
+
+## ADDENDUM 4 — the bug had fired BEFORE, and one restore is still unattributed (2026-09-14)
+
+### The same failure mode fired the previous evening
+Diffing the tracked catalogue backup (`prisma/backup_titles_flat.json` — the only snapshot of a previous hidden state we hold, 44 titles marked hidden) against live state found **4 titles that the backup records as hidden and that are live again right now**:
+
+| Slug | Name | Restored | Status now |
+|---|---|---|---|
+| `maniac-cop-2` | Maniac Cop 2 | 2026-09-13 20:43 | active, `ok` |
+| `maniac-cop-iii-badge-of-silence` | Maniac Cop III: Badge of Silence | 2026-09-13 20:43 | active, `ok` |
+| `the-dick-van-dyke-show-season-5-episode-26-…` | The Dick Van Dyke Show S5E26 | 2026-09-13 20:43 | active, `ok` |
+| `the-man-from-elysian-fields` | The Man From Elysian Fields | 2026-09-13 20:43 | active, `ok` |
+
+All four were re-activated at the same minute by a scheduled sweep, hours before today's runs — i.e. **the same ambiguous list-absent reading that re-exposed the three Turkish titles. This was not a single incident.** Whether these four are genuinely GCC-available today is **UNKNOWN**: they were hidden by an earlier audit, and we cannot positively re-verify them from any vantage we currently have (the sandbox IP is rate-limited; the US vantage cannot produce a list for these titles). They are viewer-facing in the meantime. This is logged as an open verification item, not as a claim in either direction.
+
+### Run #1's fourth restore is still unattributed
+Run #1 reported `restored: 4`. Three are the Turkish titles (identified, re-hidden, verified 404). The fourth is **not identifiable from any evidence we hold**:
+- all 16 dead videos: still hidden (verified individually) ✗
+- the 20 titles hidden before today and untouched by today's runs: all still hidden ✗
+- the 3 duplicate and 17 invalid pre-existing hidden rows: all still hidden ✗
+- run #1's own composition is fully accounted for (231 checked = 178 still active/ok + 16 invalid + 33 geo + 3 re-stamped + 1 unknown)
+
+So one title that was inactive before 01:12 is active with `ok` now, and no snapshot of the pre-run hidden set was ever taken, so it cannot be named retroactively. **The lesson is in the tooling, not the number:** the run report gave a count and nothing else, which is exactly the "number that cannot fail" pattern again — a restore should never be a silent counter increment. `restored` is now covered by the strict guard (every inactive YouTube title requires list-backed proof), the run report exposes the count, and the watch list requires it to be **0**.
+
+### Open item for the founder decision
+Verifying these four (and continuously detecting Gulf-only blocks) needs a vantage **inside the GCC** — the production sweep runs from a US region and structurally cannot see a block it is not itself subject to. A small GCC proxy or VPS is roughly **$5–10/mo [EST]**; it needs a decision, not a default.
