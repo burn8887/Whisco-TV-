@@ -111,6 +111,14 @@ python3 asc/check_adsense.py     # lives at /home/user/asc/ — workspace ops to
                                  # kept out of the repo like the Apple/GSC/Play helpers
 ```
 
+**Preferred completion path (2026-09-15):** skip the Playground's token exchange entirely. Authorize with the consent URL, copy the resulting `code` (or the whole redirect URL), and hand it over — the exec redeems it server-side with
+
+```bash
+python3 asc/adsense_get_token.py '<code or full redirect URL>'
+```
+
+which writes `.keys/adsense-oauth.json` itself. The code is single-use, short-lived, and useless without the client secret, which never leaves the vault. This removes the Playground's client-mismatch trap and its 24-hour refresh-token revocation.
+
 Prints: the AdSense account(s), every site with its state and the plain-English meaning, and any policy alerts.
 
 Expected right now — the site is in review, submitted ~21 Aug for `whisco.tv`. Whatever it says, it becomes a line I can check daily without you touching anything.
