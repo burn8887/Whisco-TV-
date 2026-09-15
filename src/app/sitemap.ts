@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSitemapData } from "@/lib/cached";
+import { prisma } from "@/lib/prisma";
 import { GUIDES } from "@/lib/guides";
 
 const SITE_URL = "https://www.whisco.tv";
@@ -36,11 +37,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: t.language === "Turkish" ? 0.9 : t.isTrending ? 0.8 : 0.6,
   }));
 
+  // In-house editorial: every published article, and a show hub for every series
+  // we have written about. These are the pages that carry original writing, so
+  // they are the ones worth surfacing to search engines first.
+  const articles = await prisma.article.findMany({
+    where: { published: true },
+    select: { slug: true, publishedAt: true, title: { select: { slug: true } } },
+  });
+  const articlePages: MetadataRoute.Sitemap = articles.map((a) => ({
+    url: `${SITE_URL}/articles/${a.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+    ...(a.publishedAt ? { lastModified: a.publishedAt } : {}),
+  }));
+  const showSlugs = [...new Set(articles.map((a) => a.title.slug))];
+  const showPages: MetadataRoute.Sitemap = showSlugs.map((sl) => ({
+    url: `${SITE_URL}/shows/${sl}`,
+    changeFrequency: "weekly",
+    priority: 0.75,
+  }));
+
   const channelPages: MetadataRoute.Sitemap = channels.map((c) => ({
     url: `${SITE_URL}/live/${c.id}`,
     changeFrequency: "daily" as const,
     priority: 0.5,
   }));
 
-  return [...staticPages, ...titlePages, ...channelPages];
+  return [...staticPages, ...articlePages, ...showPages, ...titlePages, ...channelPages];
 }

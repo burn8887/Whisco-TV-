@@ -109,6 +109,7 @@ model Title {
   seasons      Season[]
   watchlistedBy Watchlist[]
   progress     WatchProgress[]
+  articles     Article[]
 }
 
 model Season {
@@ -156,4 +157,33 @@ model WatchProgress {
   updatedAt  DateTime @updatedAt
 
   @@unique([profileId, titleId, episodeId])
+}
+
+// ---------------------------------------------------------------------------
+// In-house editorial. One Article row per piece of original writing: series
+// guides, character studies, season arcs, and single-episode essays. This is the
+// product differentiator the founder mandated ("an article for every episode")
+// and simultaneously the answer to AdSense's "low value content" finding —
+// original writing on a catalogue page is what turns it from thin to valuable.
+// ---------------------------------------------------------------------------
+model Article {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           Title     @relation(fields: [titleId], references: [id], onDelete: Cascade)
+  titleId         String
+  kind            String    @default("SERIES_GUIDE") // SERIES_GUIDE | CHARACTER | SEASON | EPISODE | ESSAY
+  headline        String
+  dek             String
+  body            String
+  author          String    @default("Whisco Editorial")
+  readingTimeMins Int       @default(5)
+  tags            String[]
+  episodeNumber   Int?
+  published       Boolean   @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([titleId])
+  @@index([published, publishedAt])
 }
