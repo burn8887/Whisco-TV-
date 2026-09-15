@@ -294,3 +294,12 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - Verified clean (so the rejection is not a reachability problem): robots.txt allows all except /admin,/api/,/account,/profiles,/watchlist; Mediapartners-Google and AdsBot-Google both get HTTP 200 with the AdSense snippet present; no X-Robots-Tag; ads.txt correct on BOTH apex whisco.tv and www.whisco.tv.
 - Leading hypothesis for the rejection (NOT confirmed - needs the issue list): thin/duplicative content on the catalogue's bulk. Measured: title pages ~181 words, much of it navigation, leaving ~60-80 words of unique text per page across ~16,000 pages. Homepage 1,241 words, /vod 3,495, /new only 139.
 - Open question for the founder: the site UI still shows a "100% Free" pill - the phrase Apple flagged under guideline 2.3.7, already scrubbed from the App Store listing. Scrub on the web too? Founder call (public copy).
+
+
+## 2026-09-15 — AdSense history confirmed (previous agent + founder email); window references VOIDED
+- **Authoritative timeline:** application ~2026-08-21 with account creation → **first rejection 2026-08-29** ("you need to fix some issues before your site is ready to show ads"). Not a pending re-review, not an indexing gate.
+- **VOID: every "AdSense re-review window 17–19 Sep" reference.** It was inherited planning built on an unverified assumption (a re-review was pending) and gated on guide indexing, which was never the blocker. Corrected in the brief (operations list + daily-routine list) and here.
+- **The thin-content diagnosis was already ours in August** — that is WHY the 7 guides exist. Measured today: guides 336–732 words each (7 live, all in the sitemap).
+- **The /where pages are the next instalment, staged on `origin/where-pages` (5 pages v1, ~353 words each [EST from source], three-column honesty format: free legal / paid legal / not here).** They ship after the 16–19 Sep freeze. Branch is behind main on `check-vod` and `maintenance` — merging on the 20th needs `git fetch --deepen=40` first (shallow-clone trap, documented).
+- **Still the open question, and only the Console answers it:** the verbatim Sites-page issue list. That decides which fix is correct. Do not act on the hypothesis until it has been read.
+- **"100% Free" pill:** founder decided the Apple surfaces case already (scrubbed there). Voice Doctrine §2 caps free-claims at 2/page; the pill predates the doctrine. Recommendation: scrub for consistency, across site UI. Founder's call — do not deploy during the freeze regardless.

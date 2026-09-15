@@ -96,7 +96,7 @@ Prod: https://www.whisco.tv (apex 308→www, curl needs -L). Health: /api/health
 ## 7. DAILY WATCH LIST (run each session until resolved)
 
 1. Apple submission state (API) — flip to IN_REVIEW/ACCEPTED/REJECTED expected within days
-2. Guides indexing (URL Inspection API ×5 URLs) — gates AdSense request 17–19 Sep
+2. Guides indexing (URL Inspection API ×7 URLs) — **NO LONGER AN ADSENSE GATE (voided 2026-09-15).** The site was rejected 2026-08-29 on its Sites-page issues, not on indexing. Indexing work is still worth doing for traffic; it does not gate G1.
 3. Issue #5 — mod desk responses; founder pastes them, you hand him pre-approved C1–C4 text
 4. Workflows green (Actions API) + site /api/health
 5. Workspace size + git remote/config repair (snapshot strips them EVERY time)
@@ -130,6 +130,6 @@ Prod: https://www.whisco.tv (apex 308→www, curl needs -L). Health: /api/health
 2. Apple state check + guides indexing check + workflows green
 3. Read WHISCO_TV_PROJECT_HANDOVER.md end to end (chronology + context this brief compresses)
 4. Tell the founder: what day it is in the plan, what's pending on him, what you're watching
-5. If it's Sep 15+: Play production application. If Sep 17: Filmhub prep refresh morning, call 22:00. If Sep 17–19: AdSense request when guides indexed. If Sep 20+: merge where-pages, start sprint.
+5. If it's Sep 15+: Play production application. If Sep 17: Filmhub prep refresh morning, call 22:00. **AdSense: void — no re-review window exists. Ordered path = read Sites-page issues → fix → Request review → add payment info.** If Sep 20+: merge where-pages, start sprint. **Sep 16-19 freeze: content/template work may be BUILT but not deployed until the 20th.**
 
 **Sign-off habit: 🐾. The dog is the station. The station is a living room. Keep it honest, keep it green.**
