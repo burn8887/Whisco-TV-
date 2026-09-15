@@ -277,3 +277,11 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - **Throughput (measured, variable):** runs took 251s / 244s / 247s / **48s** for 231 / 177 / 179 / 250 titles. Run 4 finished its whole batch in 48s, so "the 230s time budget is the hard bottleneck" was too strong a conclusion — the honest statement is **~180–250 titles per run, highly dependent on title mix**. BATCH_SIZE stays 250. Real lever remains the channel-verdict cache.
 - Catalogue ~01:35: ok 16,037 | unknown 754 | geo 43 | invalid 82 | duplicate 3 → active 16,839 | inactive 80 | active+geo 0.
 - **Tooling added:** `scripts/geo_verify.mjs` + `mode=verify` input on the geo-reaudit workflow (named slugs, prints RAW evidence — list present? country count? GCC membership? — and only hides on an explicit list-backed BLOCKED reading).
+
+
+## 2026-09-15 — AdSense access is API-driven, and the G1 blocker is now known
+- **Credential:** read-only OAuth refresh token at `.keys/adsense-oauth.json` (mode 600, never printed, never committed). Client `Whisco Ops CLI` in project `1030975964145`. Redeemed server-side by `asc/adsense_get_token.py` — which exists because the OAuth Playground redeems codes with its OWN client and fails `unauthorized_client` (hit for real). Service accounts do NOT work with the AdSense API.
+- **Live state (2026-09-15):** account `accounts/pub-7207533964778777` = **READY** (created 2026-08-21, TZ Asia/Bahrain). Site `whisco.tv` = **NEEDS_ATTENTION**.
+- **Alerts:** `adsense-onboarding-incomplete` — *"add your payment info and connect your site"* (the real G1 blocker, founder-only), plus `ua-conflict-policy-update` (standard Ukraine notice, informational).
+- **Correction to the prior belief:** the site was never in review. "Under review since ~21 Aug" was an assumption; the API shows onboarding incomplete, which explains why nothing advanced.
+- **Tooling:** `asc/check_adsense.py` prints state + alerts; run it daily — it makes the G1 gate machine-readable for the first time.
