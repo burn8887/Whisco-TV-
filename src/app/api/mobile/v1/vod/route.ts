@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { getVodShelves, getVodGrid } from "@/lib/cached";
+import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { getIosVodTitles, getIosCollections } from "@/lib/store-ios";
 
 // Mobile API v1 — VOD.
 //  GET /api/mobile/v1/vod                    → shelves (browse mode)
@@ -68,6 +70,47 @@ export async function GET(req: Request) {
   const q = url.searchParams.get("q") || "";
   const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10) || 1);
 
+  // ---------------------------------------------------------------- iOS store
+  // Cleared titles only. If a collection filter matches nothing cleared, this
+  // returns an EMPTY grid — it never falls back to the public catalogue, because
+  // a fallback would hand the reviewer exactly the content we are gating out.
+  if (isIosStore(req)) {
+    if (!collection && !q) {
+      const [items, collections] = await Promise.all([getIosVodTitles({ limit: 80 }), getIosCollections()]);
+      return NextResponse.json(
+        {
+          store: "ios",
+          mode: "shelves",
+          total: items.length,
+          // Shelves are derived from the CLEARED set, so no chip or count can
+          // advertise a catalogue this build does not carry.
+          shelves: collections.map((c) => ({
+            name: c.collection,
+            count: c.count,
+            items: items.filter((t) => t.collection === c.collection).map(slim),
+          })),
+          items: items.map(slim),
+        },
+        { headers: IOS_HEADERS }
+      );
+    }
+    const items = await getIosVodTitles({ collection, q, limit: 80 });
+    return NextResponse.json(
+      {
+        store: "ios",
+        mode: "grid",
+        collection,
+        q,
+        page: 1,
+        pageSize: items.length,
+        filteredCount: items.length,
+        total: items.length,
+        items: items.map(slim),
+      },
+      { headers: IOS_HEADERS }
+    );
+  }
+
   if (!collection && !q) {
     const { shelves, shelfTitles, counts, total } = await getVodShelves(ORDER);
     return NextResponse.json(
@@ -80,7 +123,7 @@ export async function GET(req: Request) {
           items: shelfTitles[i].map(slim),
         })),
       },
-      { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } }
+      { headers: PUBLIC_HEADERS }
     );
   }
 
@@ -95,6 +138,6 @@ export async function GET(req: Request) {
       filteredCount,
       items: titles.map(slim),
     },
-    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } }
+    { headers: PUBLIC_HEADERS }
   );
 }

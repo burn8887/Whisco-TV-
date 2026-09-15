@@ -62,6 +62,17 @@ model Channel {
   lastStatus   String?                   // "ok" | "unreachable" | "invalid" — from the last health check
   number       Int      @default(0)
   epg          EpgEntry[]
+  // ---- PROVENANCE + STORE CLEARANCE (Apple 5.2.2, build 6) ----------------
+  // FAIL CLOSED: clearedForApp defaults false, so every harvested row is
+  // invisible to the iOS store build until a human ticks it with evidence.
+  sourceKind       String?   // "iptv-org" | "official-yt-live" | "manual"
+  provenanceUrl    String?   // where we got it (e.g. the iptv-org issue URL)
+  officialSiteUrl  String?   // the broadcaster's own page for this channel
+  rightsBasis      String?   // plain-English reason we believe we may carry it
+  evidenceUrl      String?   // link a reviewer can open and check
+  clearedForApp    Boolean   @default(false)
+  clearedAt        DateTime?
+  clearedBy        String?
 }
 
 model EpgEntry {
@@ -109,6 +120,19 @@ model Title {
   seasons      Season[]
   watchlistedBy Watchlist[]
   progress     WatchProgress[]
+  // ---- PROVENANCE + STORE CLEARANCE (Apple 5.2.2, build 6) ----------------
+  // sourceKind: "youtube-official-channel" | "archive-org" | "none"
+  // uploaderChannelId is the OFFICIAL rights-holder channel the item came from.
+  // FAIL CLOSED: clearedForApp defaults false.
+  sourceKind        String?
+  uploaderChannelId String?
+  uploaderUrl       String?
+  rightsBasis       String?
+  evidenceUrl       String?
+  clearedForApp     Boolean   @default(false)
+  clearedAt         DateTime?
+  clearedBy         String?
+  articles     Article[]
 }
 
 model Season {
@@ -156,4 +180,32 @@ model WatchProgress {
   updatedAt  DateTime @updatedAt
 
   @@unique([profileId, titleId, episodeId])
+}
+
+// In-house editorial. One Article row per piece of original writing: series
+// guides, character studies, season arcs, and single-episode essays. This is the
+// product differentiator the founder mandated ("an article for every episode")
+// and simultaneously the answer to AdSense's "low value content" finding —
+// original writing on a catalogue page is what turns it from thin to valuable.
+// ---------------------------------------------------------------------------
+model Article {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           Title     @relation(fields: [titleId], references: [id], onDelete: Cascade)
+  titleId         String
+  kind            String    @default("SERIES_GUIDE") // SERIES_GUIDE | CHARACTER | SEASON | EPISODE | ESSAY
+  headline        String
+  dek             String
+  body            String
+  author          String    @default("Whisco Editorial")
+  readingTimeMins Int       @default(5)
+  tags            String[]
+  episodeNumber   Int?
+  published       Boolean   @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([titleId])
+  @@index([published, publishedAt])
 }
