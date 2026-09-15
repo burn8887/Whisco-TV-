@@ -285,3 +285,12 @@ Hostile-diligence memo received (Grok adversarial pass on W1) — filed at docs/
 - **Alerts:** `adsense-onboarding-incomplete` — *"add your payment info and connect your site"* (the real G1 blocker, founder-only), plus `ua-conflict-policy-update` (standard Ukraine notice, informational).
 - **Correction to the prior belief:** the site was never in review. "Under review since ~21 Aug" was an assumption; the API shows onboarding incomplete, which explains why nothing advanced.
 - **Tooling:** `asc/check_adsense.py` prints state + alerts; run it daily — it makes the G1 gate machine-readable for the first time.
+
+
+## 2026-09-15 (later) — AdSense: the site was REVIEWED AND REJECTED on 2026-08-29
+- Google's email (founder's inbox, Sat 2026-08-29 19:59): reviewed, "your site isn't ready to show ads at this time. There are some issues which need fixing."
+- Timeline: account created 2026-08-21 -> site submitted -> reviewed -> REJECTED 2026-08-29 -> NEEDS_ATTENTION ever since (17 days unactioned).
+- My error, for the record: I read the API's site state NEEDS_ATTENTION and asserted "the site was never in review". The API exposes STATE, not HISTORY - the same state serves both "never submitted" and "reviewed and rejected". The founder's email was the evidence that overturned it.
+- Verified clean (so the rejection is not a reachability problem): robots.txt allows all except /admin,/api/,/account,/profiles,/watchlist; Mediapartners-Google and AdsBot-Google both get HTTP 200 with the AdSense snippet present; no X-Robots-Tag; ads.txt correct on BOTH apex whisco.tv and www.whisco.tv.
+- Leading hypothesis for the rejection (NOT confirmed - needs the issue list): thin/duplicative content on the catalogue's bulk. Measured: title pages ~181 words, much of it navigation, leaving ~60-80 words of unique text per page across ~16,000 pages. Homepage 1,241 words, /vod 3,495, /new only 139.
+- Open question for the founder: the site UI still shows a "100% Free" pill - the phrase Apple flagged under guideline 2.3.7, already scrubbed from the App Store listing. Scrub on the web too? Founder call (public copy).
