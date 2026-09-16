@@ -6,42 +6,34 @@ that letter is Grok's to write after this checklist is finished.
 
 ---
 
-## TASK 0 — Set up this Mac first (only needed once)
+## TASK 0 — Set up the Linux terminal you already have (no Mac needed)
 
-Your terminal said three things: **`git: command not found`**, **`eas: command not found`**, and
-**`cd whisco-mobile: No such file or directory`**. That is one cause, not three: this Mac has never had the
-developer tools installed, so nothing was ever cloned here.
+**You do not need a Mac, and you never did.** Build 5 was not made on a Mac either — EAS builds the iOS binary on
+**Expo's own cloud servers**. The computer you type the command on only has to send it. Your Chromebook's Linux
+terminal is a perfectly good place to do that.
 
-**First — is the Mac you built build 5 on still around?** If it is, build there: it already has everything, and
-you can skip to Task 1. Everything below is for setting up this one.
+That terminal said `git: command not found`, `eas: command not found` and `cd whisco-mobile: No such file or
+directory` because nothing has been installed in it yet. One setup, about ten minutes, and it is done for good.
 
-### 0.1 Install git (it comes with Apple's Command Line Tools)
-
-```
-xcode-select --install
-```
-
-A popup appears → click **Install** → agree → wait (5–15 minutes, it is a big download). When it finishes:
+### 0.1 Install the four tools
 
 ```
-git --version
-```
-
-It must print something like `git version 2.39.5`. If it says `command not found` again, tell me.
-
-### 0.2 Install Node (needed to run the build tool)
-
-Download and run the macOS installer from **https://nodejs.org/en/download** — take the **LTS** version,
-double-click the `.pkg`, click through it. Then check:
-
-```
+sudo apt update
+sudo apt install -y git openssl unzip curl
 node -v
-npm -v
 ```
 
-Both must print a version number. (If you already have Homebrew, `brew install node` does the same thing faster.)
+If `node -v` prints **v20** (or higher), skip to 0.2. If it prints nothing, or v18 or lower, run:
 
-### 0.3 Get the project onto this Mac
+```
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v
+```
+
+`node -v` must now print **v20.x**.
+
+### 0.2 Get the project
 
 ```
 cd ~
@@ -50,25 +42,23 @@ cd whisco-mobile
 git log --oneline -1
 ```
 
-The repo is public, so it needs no password. `git log` must print **`3669584`** or later — that is the build-6
-commit with the store header, the Source line and the rights report.
+The repo is public, so no password is needed. `git log` must print **`3669584`** or later.
 
-### 0.4 Log in to Expo
+### 0.3 Log in to Expo
 
 ```
 npx eas-cli@latest login
 ```
 
-Use your Expo account for **burn8887s-team** (the project is `whisco-tv`).
+Use your Expo account for **burn8887s-team**. This is the one password in the whole process that only you have.
 
-### 0.5 Build the signing files (the only fiddly bit — I already proved it works)
+### 0.4 Build the signing files (I proved this works, on files we actually have)
 
-The project signs with **local** credentials, and those files are deliberately not in git. The old ones are gone —
-but the certificate, its private key and the App Store profile are all in this workspace, so you build a fresh
-signing file with **a password you choose**. I verified this end to end: the key and certificate match, and the
-resulting file carries exactly the certificate your app store profile expects.
+The project signs with **local** credentials, and those files are deliberately not in git. The old copies belonged
+to a sandbox that no longer exists — but the certificate, its private key and the App Store profile are all in the
+workspace, so you make a fresh signing file with **a password you choose**.
 
-First download these three files from the workspace (open each, hit download):
+Download these three from the workspace (open each, press download):
 
 ```
 .keys/dist_key.pem
@@ -76,23 +66,33 @@ First download these three files from the workspace (open each, hit download):
 .keys/whisco_appstore.mobileprovision
 ```
 
-Then, in the project folder, paste:
+**Where did they land?** ChromeOS puts browser downloads in *My files > Downloads*, which the Linux terminal sees
+at `/mnt/chromeos/MyFiles/Downloads`. Check both:
 
 ```
+ls ~/Downloads 2>/dev/null; ls /mnt/chromeos/MyFiles/Downloads 2>/dev/null
+```
+
+Then, using whichever folder actually has them (the example below assumes `/mnt/chromeos/MyFiles/Downloads`):
+
+```
+mkdir -p ~/keys-src
+cp /mnt/chromeos/MyFiles/Downloads/{dist_key.pem,dist_cert.pem,whisco_appstore.mobileprovision} ~/keys-src/
+
 cd ~/whisco-mobile
-mkdir -p credentials ~/whisco-keys
+mkdir -p credentials
 
 openssl pkcs12 -export \
-  -inkey ~/Downloads/dist_key.pem \
-  -in ~/Downloads/dist_cert.pem \
+  -inkey ~/keys-src/dist_key.pem \
+  -in ~/keys-src/dist_cert.pem \
   -out credentials/dist.p12 \
   -name "Apple Distribution: Ali Albaharna (X2UPN4792Y)"
 
-cp ~/Downloads/whisco_appstore.mobileprovision credentials/
+cp ~/keys-src/whisco_appstore.mobileprovision credentials/
 ```
 
-The `openssl` command **asks you to type a password twice — choose one and remember it**, then paste it into the
-next step:
+`openssl` **asks you to type a password twice — pick one and write it down**, then put the same password in the
+next command:
 
 ```
 cat > credentials.json <<'JSON'
@@ -105,15 +105,14 @@ cat > credentials.json <<'JSON'
 JSON
 ```
 
-Replace `PUT-YOUR-PASSWORD-HERE` with the password you just typed. Both `credentials.json` and `credentials/` are
-already ignored by git, so they can never be committed by accident. Check the file opens:
+Both `credentials.json` and `credentials/` are already ignored by git. Check the file opens (use your password):
 
 ```
-openssl pkcs12 -in credentials/dist.p12 -nokeys -passin pass:PUT-YOUR-PASSWORD-HERE | head -1
+openssl pkcs12 -in credentials/dist.p12 -nokeys -passin pass:PUT-YOUR-PASSWORD-HERE | head -2
 ```
 
-It should print `Bag Attributes` or `subject=...`. If it says "mac verify error", the password in
-`credentials.json` does not match the one you typed — redo the two steps.
+It should print `Bag Attributes` or `subject=...`. If it says **"mac verify error"**, the password in
+`credentials.json` is not the one you typed — redo those two steps.
 
 ---
 
@@ -129,7 +128,7 @@ git log --oneline -1
 npx eas-cli@latest build --platform ios --profile production
 ```
 
-*(Use `npx eas-cli@latest`, not plain `eas` — `eas` alone does not exist on a fresh Mac, and `npx` fetches the
+*(Use `npx eas-cli@latest`, not plain `eas` — `eas` alone is not installed anywhere yet, and `npx` fetches the
 tool without installing anything globally.)*
 
 - The `git log` line must print `3669584` or later. If it prints anything else, stop and tell me.
@@ -143,14 +142,17 @@ tool without installing anything globally.)*
 When the build finishes, download the `.ipa` from the link EAS gives you, then paste:
 
 ```
-cd ~/Downloads
+```
+cd ~
 mkdir -p ipa-check && cd ipa-check
 unzip -o ~/Downloads/*.ipa
-plutil -p Payload/WhiscoTV.app/Info.plist | grep -i UIBackgroundModes
+python3 -c "import glob,plistlib; p=glob.glob('Payload/*.app/Info.plist')[0]; d=plistlib.load(open(p,'rb')); print('UIBackgroundModes:', d.get('UIBackgroundModes','ABSENT'))"
 ```
 
-- **No output at all = PASS.** That is what we want.
-- If it prints `"UIBackgroundModes" => [...]`, **stop and tell me** — do not upload.
+- **It must print `UIBackgroundModes: ABSENT`.** That is the pass.
+- If it prints `UIBackgroundModes: ['audio']`, **stop and tell me** — do not upload.
+
+*(`plutil` only exists on a Mac, so this uses Python instead. It reads the same file Apple reads.)*
 
 ## TASK 3 — Put it on your phone
 
