@@ -156,8 +156,43 @@ What survives from that draft, correctly re-labelled:
 
 ---
 
-## 8. OPEN QUESTIONS
-1. **Which content did Apple flag?** Blocked on the screenshot download (§7A).
-2. **Is `native-v2` the shipping Xcode project?** The PDF shows an **Xcode Cloud** tab, so a cloud build pipeline exists. Need to confirm this repo's project is the one that produces build 5, and who can rebuild/upload.
-3. **Do we have any actual written permission from any broadcaster or rights holder?** If yes, that must lead the v2 statement. **NOT IN DATA** — I have found no licence document in the workspace.
-4. **Is a narrowed app catalogue acceptable product-wise**, with the full catalogue remaining on web? My recommendation is yes; it needs the founder's explicit agreement because it changes what the app is.
+## 8. BUILD PATH — RESOLVED 2026-09-15 (supersedes earlier "NOT VERIFIED")
+
+**Q8 was closed by the founder. The shipping iOS app is NOT built from this repo, and never was.**
+
+| Question | Answer |
+|---|---|
+| Where does the iOS app live? | **`github.com/burn8887/whisco-mobile`** — Expo **managed** + **EAS build**. Handover HEAD was `5c5181a`. |
+| Is there a committed `ios/`? | **No.** Expo CNG — the native project is generated per build. |
+| Is there a founder Mac / Organizer? | **No.** Builds run on EAS, not locally. |
+| What is `iptv-app`'s Xcode project then? | `docs/experiments/grok-app/native-v2/` is an **experiment**. At `CURRENT_PROJECT_VERSION = 1` it **is not build 5** and must **not** be edited for 2.5.4. Editing it would have changed nothing. |
+| How was build 5 produced? | `eas build --platform ios` from `whisco-mobile`, then `eas submit` (profile carries the ASC API key path; key file is gitignored and lives outside the repo). |
+
+### The 2.5.4 fix location, corrected
+The fix belongs in **`whisco-mobile`**, not here. Done 2026-09-15, commit `d39aefd`:
+- **Deleting `UIBackgroundModes` from `app.json` alone does NOT work.** `expo-video`'s
+  config plugin re-adds it, because `supportsPictureInPicture: true` makes its internal
+  `shouldEnableBackgroundAudio` true. Verified empirically: delete-the-key + `expo prebuild`
+  still produced a plist containing `["audio"]`. **That path would have earned a third
+  rejection on the same guideline.**
+- Fix used instead: a local config plugin (`plugins/withNoBackgroundAudio.js`) that strips
+  `audio` on iOS only, registered **first** in the plugins array (Expo composes Info.plist
+  mods in reverse registration order, so first-in-array runs last and wins).
+- **Why not just set `supportsPictureInPicture: false`:** that also deletes
+  `android:supportsPictureInPicture`, silently removing PiP from the Android app that is
+  live in closed testing on Play. We do not break one store to fix the other.
+- **Verified by prebuild on both platforms:** iOS `UIBackgroundModes` **absent**;
+  Android `android:supportsPictureInPicture="true"` **preserved**.
+
+### Build-number note
+`eas.json` sets `cli.appVersionSource: "remote"` and `build.production.autoIncrement: true`.
+**EAS therefore assigns and increments the build number server-side; the local
+`ios.buildNumber: "1"` in `app.json` is ignored for production builds.** That is why the
+repo said `1` while Apple received build `5`. A manual "bump to 6" would be a **no-op** —
+the next production build auto-increments from EAS's remote counter. Confirm the counter in
+the EAS dashboard before submitting.
+
+## 9. REMAINING OPEN QUESTIONS
+1. **Which content did Apple flag?** Answered — Apple attached the Live TV screenshot; see the briefing addendum.
+2. **Do we have any written permission from any broadcaster or rights holder?** If yes, that must lead the v2 statement. **NOT IN DATA** — no licence document found in the workspace.
+3. **Is a narrowed app catalogue acceptable product-wise**, with the full catalogue remaining on web? My recommendation is yes; it needs the founder's explicit agreement because it changes what the app is.
