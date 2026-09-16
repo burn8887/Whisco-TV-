@@ -27,11 +27,18 @@ const APPROVED = [
   {
     catalogueName: "France 24 English", // reuse the catalogue row's branding fields
     handle: "France24_en",
+    // Official channel id, confirmed by fetching the RSS feed for that id and reading
+    // its own author name ("FRANCE 24 English") — NOT by scraping a channel page,
+    // which is full of other channels' ids. Scraping produced UCCCPCZNChQdGa9EkATeye4g
+    // (France 24's FRENCH channel) and UC5EBcSIqJEJuJNelUiQ_F2A (an unrelated channel,
+    // "InfoMigrants") as candidates. The RSS oracle is the reliable test.
+    channelId: "UCQfwfsi5VrQ8yKZ-UWmAEFg",
     site: "https://www.france24.com/en/",
   },
   {
     catalogueName: "DW English",
     handle: "dwnews",
+    channelId: "UCknLrEdhRCp1aegoMqRaCZg", // RSS author name: "DW News"
     site: "https://www.dw.com/",
   },
 ];
