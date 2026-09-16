@@ -1,4 +1,5 @@
 import { getLivePageData } from "@/lib/cached";
+import { excludeIosOnly } from "@/lib/store-public";
 import ChannelCard from "@/components/ChannelCard";
 import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default async function LivePage({
   const sp = await searchParams;
   const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
 
-  const { channels, countries, categories, languageGroups, filteredCount, total } = await getLivePageData(
+  const pageData = await getLivePageData(
     sp.country || "",
     sp.category || "",
     sp.language || "",
@@ -45,6 +46,15 @@ export default async function LivePage({
     page,
     PAGE_SIZE
   );
+  // App-Store-only rows are not part of the public directory — not in the list, not
+  // in the "625+ live channels" figure, and not in the language chips.
+  const { channels, countries, categories, languageGroups, filteredCount, total } =
+    await excludeIosOnly(pageData, {
+      country: sp.country || "",
+      category: sp.category || "",
+      language: sp.language || "",
+      q: sp.q || "",
+    });
 
   const totalPages = Math.max(1, Math.ceil(filteredCount / PAGE_SIZE));
   const baseQuery: Record<string, string> = {};

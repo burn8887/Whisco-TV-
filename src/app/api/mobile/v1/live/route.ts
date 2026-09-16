@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getLivePageData } from "@/lib/cached";
 import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosLiveChannels } from "@/lib/store-ios";
+import { excludeIosOnly } from "@/lib/store-public";
 
 // Mobile API v1 — live TV directory with the same filters as the web page.
 // GET /api/mobile/v1/live?country=&category=&language=&q=&page=1
@@ -53,14 +54,24 @@ export async function GET(req: Request) {
   }
 
   // ------------------------------------------------------------- public store
-  const { channels, countries, categories, languageGroups, filteredCount, total } = await getLivePageData(
-    url.searchParams.get("country") || "",
-    url.searchParams.get("category") || "",
-    url.searchParams.get("language") || "",
-    url.searchParams.get("q") || "",
+  const publicFilters = {
+    country: url.searchParams.get("country") || "",
+    category: url.searchParams.get("category") || "",
+    language: url.searchParams.get("language") || "",
+    q: url.searchParams.get("q") || "",
+  };
+  const pageData = await getLivePageData(
+    publicFilters.country,
+    publicFilters.category,
+    publicFilters.language,
+    publicFilters.q,
     page,
     PAGE_SIZE
   );
+  // App-Store-only rows never appear in the public directory, and neither do their
+  // counts or chips. See src/lib/store-public.ts for why this is not in cached.ts.
+  const { channels, countries, categories, languageGroups, filteredCount, total } =
+    await excludeIosOnly(pageData, publicFilters);
 
   return NextResponse.json(
     {

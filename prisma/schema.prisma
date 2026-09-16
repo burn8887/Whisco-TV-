@@ -65,7 +65,7 @@ model Channel {
   // ---- PROVENANCE + STORE CLEARANCE (Apple 5.2.2, build 6) ----------------
   // FAIL CLOSED: clearedForApp defaults false, so every harvested row is
   // invisible to the iOS store build until a human ticks it with evidence.
-  sourceKind       String?   // "iptv-org" | "official-yt-live" | "manual"
+  sourceKind       String?   // "iptv-org" | "youtube-live" (App-Store-only) | "manual"
   provenanceUrl    String?   // where we got it (e.g. the iptv-org issue URL)
   officialSiteUrl  String?   // the broadcaster's own page for this channel
   rightsBasis      String?   // plain-English reason we believe we may carry it
