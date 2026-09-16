@@ -3,7 +3,7 @@
 **Surface:** `whisco.tv` homepage  
 **Format bible:** Originals Strategy §2.A — *Tonight on Whisco* / الليلة على وسکو  
 **Date:** 10 September 2026  
-**Status:** production-shaped patch. Founder (or Arena) pastes into `burn8887/iptv-app`. This chat cannot push the repo.
+**Status:** production-shaped patch. Founder (or Arena) pastes into `burn8887/Whisco-TV-`. This chat cannot push the repo.
 
 This is a living-room utility, not a popularity claim. Six communities. One title each. Live catalog only. If the APIs are dark, the section is absent. No error box. No “most watched in Bahrain.” No ad slot.
 
@@ -36,7 +36,7 @@ Live DOM on `https://www.whisco.tv/` as of 10 Sep 2026, in order:
 9. `#faq`
 10. closing CTA
 
-Repo source of truth is GitHub `burn8887/iptv-app` (private). The homepage is the App Router page that renders `x-matched-path: /`. Search the repo for the string `Featured on demand` or `id="vod"`. That file is the homepage. On this codebase it will be one of:
+Repo source of truth is GitHub `burn8887/Whisco-TV-` (private). The homepage is the App Router page that renders `x-matched-path: /`. Search the repo for the string `Featured on demand` or `id="vod"`. That file is the homepage. On this codebase it will be one of:
 
 - `app/page.tsx`
 - `app/(marketing)/page.tsx`
