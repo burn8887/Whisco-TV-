@@ -6,6 +6,82 @@ that letter is Grok's to write after this checklist is finished.
 
 ---
 
+## TASK 0 — Set up this Mac first (only needed once)
+
+Your terminal said three things: **`git: command not found`**, **`eas: command not found`**, and
+**`cd whisco-mobile: No such file or directory`**. That is one cause, not three: this Mac has never had the
+developer tools installed, so nothing was ever cloned here.
+
+**First — is the Mac you built build 5 on still around?** If it is, build there: it already has everything, and
+you can skip to Task 1. Everything below is for setting up this one.
+
+### 0.1 Install git (it comes with Apple's Command Line Tools)
+
+```
+xcode-select --install
+```
+
+A popup appears → click **Install** → agree → wait (5–15 minutes, it is a big download). When it finishes:
+
+```
+git --version
+```
+
+It must print something like `git version 2.39.5`. If it says `command not found` again, tell me.
+
+### 0.2 Install Node (needed to run the build tool)
+
+Download and run the macOS installer from **https://nodejs.org/en/download** — take the **LTS** version,
+double-click the `.pkg`, click through it. Then check:
+
+```
+node -v
+npm -v
+```
+
+Both must print a version number. (If you already have Homebrew, `brew install node` does the same thing faster.)
+
+### 0.3 Get the project onto this Mac
+
+```
+cd ~
+git clone https://github.com/burn8887/whisco-mobile.git
+cd whisco-mobile
+git log --oneline -1
+```
+
+The repo is public, so it needs no password. `git log` must print **`3669584`** or later — that is the build-6
+commit with the store header, the Source line and the rights report.
+
+### 0.4 Log in to Expo
+
+```
+npx eas-cli@latest login
+```
+
+Use your Expo account for **burn8887s-team** (the project is `whisco-tv`).
+
+### 0.5 If the build complains about iOS credentials
+
+The project is configured to use **local** signing credentials, and those files were deliberately kept out of
+git — so a brand-new clone does not have them. If the build stops and mentions credentials, run:
+
+```
+npx eas-cli credentials -p ios
+```
+
+Choose the **production** profile, then accept the option to **set up a Distribution Certificate** and
+**Provisioning Profile**. Creating a new distribution certificate is safe: Apple allows several, and it does not
+touch the app, your existing TestFlight builds, or the App Store listing.
+
+If it offers **Apple Service API Key** as the way to sign in, that is the easiest path — it skips the Apple ID
+two-factor prompts. The key (`AuthKey_B279KL3Y3K.p8`) is in the workspace under `.keys/`; download it to this Mac
+and point EAS at it.
+
+Then run the build again.
+
+---
+
 ## TASK 1 — Run the build (5 minutes of typing, then it runs on its own)
 
 Open Terminal and paste this whole block:
@@ -15,10 +91,15 @@ cd whisco-mobile
 git checkout main
 git pull
 git log --oneline -1
-eas build --platform ios --profile production
+npx eas-cli@latest build --platform ios --profile production
 ```
 
+*(Use `npx eas-cli@latest`, not plain `eas` — `eas` alone does not exist on a fresh Mac, and `npx` fetches the
+tool without installing anything globally.)*
+
 - The `git log` line must print `3669584` or later. If it prints anything else, stop and tell me.
+- **Never run `eas submit`.** It is barred, and this project's submit profile points at a key path that only
+  exists in my workspace, so it would fail anyway.
 - **Write down the build number EAS gives you.** It is not necessarily 6 — EAS assigns it.
 - Leave it running. It takes a while.
 
