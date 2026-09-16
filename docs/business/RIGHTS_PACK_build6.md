@@ -73,20 +73,22 @@ Attachment target: App Review Information. Written **only about what build 6 con
 ---
 
 ## PAGES 5–6 — CLASS B: PUBLIC DOMAIN, WITH VERBATIM RIGHTS TEXT
-**Playback is in-app** — the app's native player streams the file that archive.org serves. It does not open the item page. The rights text below is quoted **verbatim from each item's own details page**, not paraphrased.
+**Playback is in-app** — the app's native player streams the file that archive.org serves. It does not open the item page.
 
-| # | Title | Year | Rights text as it appears on the item page | Item page |
-|---|---|---|---|---|
-| 1 | Topper — Henrietta Sells The House | — | **"Public Domain Mark 1.0"** → creativecommons.org/publicdomain/mark/1.0/ | archive.org/details/Topper-HenriettaSellsTheHouse |
-| 2 | A Word to the Wives | 1955 | **"Public Domain"** → creativecommons.org/licenses/publicdomain/ | archive.org/details/Wordtoth1955 |
-| 3 | Highlights 1965: A Progress Report | 1965 | **"Public Domain"** → creativecommons.org/licenses/publicdomain/ | archive.org/details/highlights_1965_1 |
-| 4 | The Iron Mask | — | **"Public Domain"** → creativecommons.org/licenses/publicdomain/ | archive.org/details/iron_mask_ipod |
+**Every file below was verified on the actual file, not on the library's label.** We requested each file and read its real codec. This was necessary: many Internet Archive items offer several file versions, and several of the versions we originally selected turned out to be **MPEG-4 Part 2**, a format iOS decodes the audio of but **not** the picture. Those were removed. Every file below is **H.264 (`avc1`), Constrained Baseline, 640×480** — the most compatible video profile in existence.
 
-**To check any row:** open the item page and read the licence line. It is the library's own declaration, not ours.
+| # | Title | Year | Rights text on the item page | Duration | Item page |
+|---|---|---|---|---|---|
+| 1 | **American Look (Part I)** | 1958 | **"Public Domain"** | 8.2 min | archive.org/details/American1958 |
+| 2 | **Park Conscious** | 1938 | **"Public Domain"** | 7.7 min | archive.org/details/ParkCons1938 |
+| 3 | **A Word to the Wives** | 1955 | **"Public Domain"** | ~14 min | archive.org/details/Wordtoth1955 |
+| 4 | **All About Polymorphics** | 1959 | **"Public Domain"** | 7.4 min | archive.org/details/AllAboutPolymorphics |
 
-**Scope note, stated plainly:** across the whole archive.org set in our catalogue we found 1,154 items carrying a public-domain declaration, 18 requiring attribution we do not yet display, and 2 under a NonCommercial licence. **The NonCommercial items are excluded** — Whisco TV is funded by advertising, which is a commercial use, and those licences do not permit it. Attribution-required items are held until the app displays creator credit.
+All four are from the Prelinger Archives, the well-known public-domain moving-image collection. Each is a **sponsored documentary or educational film** — none is a cinema feature, a series, or a television entertainment property.
 
----
+**To verify any row:** open the item page. The licence line is displayed on the page itself, in the library's own words.
+
+**Scope note, stated plainly:** across the whole archive.org set in our catalogue — 1,724 items — we found 811 whose file is in a format iOS can play, of which **492 also carry a public-domain declaration.** We also found 18 items requiring attribution we do not yet display, and 2 under a NonCommercial licence. **The NonCommercial items are excluded** — Whisco TV is funded by advertising, which is a commercial use, and those licences do not permit it. Attribution-required items are held until the app displays creator credit. Items whose file has no playable video track are excluded entirely.
 
 ## PAGE 7 — WHAT WE REMOVED, AND WHAT WE WILL REMOVE NEXT
 
