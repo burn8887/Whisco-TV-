@@ -24,24 +24,74 @@ const APPLY = process.argv.includes("--apply");
  * nothing gets added without his own play-test first.
  */
 const APPROVED = [
+  // ---- ALREADY SEEDED AND TICKED (Grok: keep as-is) -------------------------
   {
-    catalogueName: "France 24 English", // reuse the catalogue row's branding fields
+    catalogueName: "France 24 English",
     handle: "France24_en",
-    // Official channel id, confirmed by fetching the RSS feed for that id and reading
-    // its own author name ("FRANCE 24 English") — NOT by scraping a channel page,
-    // which is full of other channels' ids. Scraping produced UCCCPCZNChQdGa9EkATeye4g
-    // (France 24's FRENCH channel) and UC5EBcSIqJEJuJNelUiQ_F2A (an unrelated channel,
-    // "InfoMigrants") as candidates. The RSS oracle is the reliable test.
-    channelId: "UCQfwfsi5VrQ8yKZ-UWmAEFg",
+    channelId: "UCQfwfsi5VrQ8yKZ-UWmAEFg", // RSS author: "FRANCE 24 English"
     site: "https://www.france24.com/en/",
   },
   {
     catalogueName: "DW English",
     handle: "dwnews",
-    channelId: "UCknLrEdhRCp1aegoMqRaCZg", // RSS author name: "DW News"
+    channelId: "UCknLrEdhRCp1aegoMqRaCZg", // RSS author: "DW News"
     site: "https://www.dw.com/",
   },
+
+  // ---- NEW (Grok P3, 2026-09-16): seeds FALSE, hidden from the public listing.
+  // Every channelId was resolved by the RSS-author oracle, and every one was
+  // confirmed to have a genuine 24/7 broadcast — the live video's own title says so
+  // ("LIVE: Watch TRT World", "[CNA 24/7 LIVE]", etc.). That test is what rejected
+  // DW Documentary, whose "live" turned out to be a one-off online discussion.
+  {
+    handle: "trtworld",
+    channelId: "UC7fWeaHhqgM4Ry-RMpM2YYw",
+    site: "https://www.trtworld.com/",
+    branding: { name: "TRT World", country: "Turkey", countryCode: "TR", language: "English", category: "News" },
+  },
+  {
+    handle: "aljazeeraenglish",
+    channelId: "UCNye-wNBqNL5ZzHSJj3l8Bg",
+    site: "https://www.aljazeera.com/",
+    // The catalogue carries Al Jazeera ARABIC; this row is the English channel, so
+    // branding is explicit rather than copied.
+    branding: { name: "Al Jazeera English", country: "Qatar", countryCode: "QA", language: "English", category: "News" },
+  },
+  {
+    handle: "channelnewsasia",
+    channelId: "UC83jt4dlz1Gjl58fzQrrKZg",
+    site: "https://www.channelnewsasia.com/",
+    branding: { name: "CNA", country: "Singapore", countryCode: "SG", language: "English", category: "News" },
+  },
+  {
+    handle: "NHKWORLDJAPAN",
+    channelId: "UCSPEjw8F2nQDtmUKPFNF7_A",
+    site: "https://www3.nhk.or.jp/nhkworld/",
+    branding: { name: "NHK WORLD-JAPAN", country: "Japan", countryCode: "JP", language: "English", category: "News" },
+  },
+  {
+    handle: "africanews",
+    channelId: "UC1_E8NeF5QHY2dtdLRBCCLA",
+    site: "https://www.africanews.com/",
+    branding: { name: "Africanews", country: "Pan-African", countryCode: "AF", language: "English", category: "News" },
+  },
+  {
+    // Optional per Grok; included because it IS a genuine 24/7 channel
+    // ("Watch ABC NEWS Australia live | ABC NEWS"). It is what takes the live set to 8.
+    handle: "abcnewsaustralia",
+    channelId: "UCVgO39Bk5sMo66-6o6Spn6Q",
+    site: "https://www.abc.net.au/news",
+    branding: { name: "ABC News (Australia)", country: "Australia", countryCode: "AU", language: "English", category: "News" },
+  },
 ];
+
+// NOT SEEDED, and why — recorded so it is not re-litigated:
+//   DW Documentary  — its "live" is an event, not a 24/7 stream. Grok's condition:
+//                     only if it is a 24/7 live channel, not a VOD dump. It is the
+//                     latter; its own live title was "War in Sudan ... An online
+//                     discussion by DW Documentary".
+//   Sky News, Bloomberg Television, Reuters — excluded by Grok: news-terminal look.
+//   Somoy, Jamuna, Ekattor, Channel i — excluded by Grok: not for this binary.
 
 const RIGHTS_BASIS =
   "Official broadcaster live stream, published by the broadcaster on its own YouTube channel and played through YouTube's embeddable player. No hosting, copying or re-encoding by us.";
@@ -62,22 +112,44 @@ function assertSafe(payload) {
   }
 }
 
+/** The broadcaster's own channel avatar — the same asset YouTube shows for the channel. */
+async function channelAvatar(handle) {
+  try {
+    const r = await fetch(`https://www.youtube.com/@${handle}`, {
+      headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15" },
+      signal: AbortSignal.timeout(30000),
+    });
+    const html = await r.text();
+    const m = html.match(/<meta property="og:image" content="([^"]+)"/);
+    return m ? m[1] : "";
+  } catch {
+    return "";
+  }
+}
+
 async function main() {
   const prisma = new PrismaClient();
   let created = 0;
 
   for (const entry of APPROVED) {
-    const source = await prisma.channel.findFirst({
-      where: { name: entry.catalogueName },
-      select: {
-        id: true, name: true, logoUrl: true, country: true, countryCode: true,
-        language: true, category: true, isHD: true, number: true, streamUrl: true,
-      },
-    });
-    if (!source) {
-      console.log(`  ⚠ ${entry.catalogueName}: no catalogue row to copy branding from — skipping`);
-      continue;
+    // Branding: explicit for new rows, copied from the catalogue where the
+    // broadcaster already has a row. A missing catalogue row is only fatal if the
+    // entry carries no explicit branding of its own.
+    let source = null;
+    if (entry.catalogueName) {
+      source = await prisma.channel.findFirst({
+        where: { name: entry.catalogueName },
+        select: {
+          id: true, name: true, logoUrl: true, country: true, countryCode: true,
+          language: true, category: true, isHD: true, number: true,
+        },
+      });
+      if (!source && !entry.branding) {
+        console.log(`  ⚠ ${entry.catalogueName}: no catalogue row to copy branding from — skipping`);
+        continue;
+      }
     }
+    const label = entry.branding?.name ?? entry.catalogueName;
 
     const provenanceUrl = `https://www.youtube.com/@${entry.handle}`;
     const existing = await prisma.channel.findFirst({
@@ -100,7 +172,7 @@ async function main() {
     // this channel — we do not store an unverified row.
     const live = await resolveLive(entry.handle);
     if (!live.ok) {
-      console.log(`  ✗ ${entry.catalogueName}: ${live.why} — skipping, nothing written`);
+      console.log(`  ✗ ${label}: ${live.why} — skipping, nothing written`);
       continue;
     }
     console.log(`     (channel currently live: ${live.videoId}, uploader "${live.author}" — verified, not stored)`);
@@ -111,15 +183,16 @@ async function main() {
       throw new Error(`bad streamUrl for ${entry.catalogueName}: ${streamUrl}`);
     }
 
+    const b = entry.branding;
     const payload = {
-      name: source.name,
-      logoUrl: source.logoUrl,
-      country: source.country,
-      countryCode: source.countryCode,
-      language: source.language,
+      name: b?.name ?? source.name,
+      logoUrl: b ? await channelAvatar(entry.handle) : source.logoUrl,
+      country: b?.country ?? source.country,
+      countryCode: b?.countryCode ?? source.countryCode,
+      language: b?.language ?? source.language,
       category: "News",
-      isHD: source.isHD,
-      number: source.number,
+      isHD: b ? true : source.isHD,
+      number: b ? 0 : source.number,
       sourceKind: "youtube-live",
       provenanceUrl,
       officialSiteUrl: entry.site,
@@ -133,7 +206,7 @@ async function main() {
     assertSafe(payload);
 
     const verb = existing ? "UPDATE" : "CREATE";
-    console.log(`  ${verb}  ${source.name}`);
+    console.log(`  ${verb}  ${payload.name}`);
     console.log(`     streamUrl     ${streamUrl}`);
     console.log(`     evidenceUrl   ${evidenceUrl}`);
     console.log(`     sourceKind    youtube-live   (provenance ${provenanceUrl})`);

@@ -23,30 +23,25 @@ const RIGHTS_BASIS = (id, text) =>
   `${text} — declared on the item's own Internet Archive page (${ITEM_PAGE(id)}). Prelinger Archives.`;
 
 const ROWS = [
-  {
-    slug: "american-look-part-i",
-    identifier: "American1958",
-    file: "American1958.mp4",
-    rights: 'Public Domain',
-  },
-  {
-    slug: "word-to-the-wives-a",
-    identifier: "Wordtoth1955",
-    file: "Wordtoth1955.mp4", // H.264. NOT Wordtoth1955_edit.mp4 (MPEG-4 Part 2, audio-only on iOS)
-    rights: 'Public Domain',
-  },
-  {
-    slug: "park-conscious",
-    identifier: "ParkCons1938",
-    file: "ParkCons1938.mp4",
-    rights: 'Public Domain',
-  },
-  {
-    slug: "all-about-polymorphics",
-    identifier: "AllAboutPolymorphics",
-    file: "AllAboutPolymorphics.mp4",
-    rights: 'Public Domain',
-  },
+  // ---- the two the founder has already PLAY-TESTED and ticked (unchanged here) ----
+  { slug: "american-look-part-i", identifier: "American1958", file: "American1958.mp4", rights: "Public Domain" },
+  { slug: "word-to-the-wives-a", identifier: "Wordtoth1955", file: "Wordtoth1955.mp4", rights: "Public Domain" },
+
+  // ---- staged FALSE, awaiting the founder's play-test (Grok P3: up to 6) ----
+  // Every one: Prelinger Archives, "Public Domain" printed on its own item page, and
+  // ffprobe-verified on the real file as h264 / avc1 / Constrained Baseline / 640x480.
+  // Chosen as craft, industry, sponsored and educational films — no cartoons, no
+  // television, no cinema, nothing that would read as a storefront shelf.
+  { slug: "bookbinders", identifier: "Bookbind1961", file: "Bookbind1961.mp4", rights: "Public Domain" },
+  { slug: "out-of-this-world-2", identifier: "out_of_this_world", file: "out_of_this_world.mp4", rights: "Public Domain" },
+  { slug: "design-for-dreaming", identifier: "Designfo1956", file: "Designfo1956.mp4", rights: "Public Domain" },
+  { slug: "san-francisco-earthquake-aftermath-part-3", identifier: "SanFranc1906_3", file: "SanFranc1906_3.mp4", rights: "Public Domain" },
+  { slug: "skateboard-sense", identifier: "skateboard_sense", file: "skateboard_sense.mp4", rights: "Public Domain" },
+  { slug: "more-dangerous-than-dynamite", identifier: "more_dangerous_then_dynamite", file: "more_dangerous_then_dynamite.mp4", rights: "Public Domain" },
+
+  // ---- two already staged false, left as they are ----
+  { slug: "park-conscious", identifier: "ParkCons1938", file: "ParkCons1938.mp4", rights: "Public Domain" },
+  { slug: "all-about-polymorphics", identifier: "AllAboutPolymorphics", file: "AllAboutPolymorphics.mp4", rights: "Public Domain" },
 ];
 
 const ALLOWED_SLUGS = new Set(ROWS.map((r) => r.slug));
