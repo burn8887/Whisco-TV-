@@ -1,10 +1,17 @@
 import { NextResponse } from "next/server";
 import { getBrowseRows, getHomeStats } from "@/lib/cached";
+import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { getIosLiveChannels, getIosShelves, getIosStats } from "@/lib/store-ios";
 
 // Mobile API v1 — home screen payload.
 // Public, read-only, served from the same cache layer as the website so the
 // app adds ~zero DB load. Versioned under /api/mobile/v1 so future app
 // versions can evolve without breaking older installs.
+//
+// STORE SPLIT (Apple 5.2.2, build 6): the iOS store gets its own small,
+// evidence-only home. Critically, its `stats` count what THIS BUILD carries, not
+// the public catalogue — advertising 16,841 titles the build does not offer is
+// Guideline 2.3.1(a).
 
 export const dynamic = "force-dynamic";
 
@@ -32,7 +39,43 @@ const slim = (t: {
   isNew: t.isNew,
 });
 
-export async function GET() {
+export async function GET(req: Request) {
+  // ---------------------------------------------------------------- iOS store
+  if (isIosStore(req)) {
+    const [stats, { featured, docs, publicDomain }, channels] = await Promise.all([
+      getIosStats(),
+      getIosShelves(),
+      getIosLiveChannels(15),
+    ]);
+
+    const rows = [
+      { key: "live", label: "Live News & Public Service", items: [] as ReturnType<typeof slim>[] },
+      { key: "docs", label: "Documentaries", items: docs.map(slim) },
+      { key: "publicdomain", label: "Public Domain Classics", items: publicDomain.map(slim) },
+    ].filter((r) => r.items.length > 0 || r.key === "live");
+
+    return NextResponse.json(
+      {
+        store: "ios",
+        // Counts of what this build actually offers — never the public totals.
+        stats: { channels: stats.channels, titles: stats.titles },
+        hero: featured.slice(0, 5).map(slim),
+        rows,
+        // No "Movies" row and no "Series" row: the iOS On Demand surface must not
+        // read as a cinema/dizi storefront (Grok's lock, item 4).
+        featuredChannels: channels.map((c) => ({
+          id: c.id,
+          name: c.name,
+          logoUrl: c.logoUrl,
+          category: c.category,
+          country: c.country,
+        })),
+      },
+      { headers: IOS_HEADERS }
+    );
+  }
+
+  // ------------------------------------------------------------- public store
   const [{ featured, trending, newReleases, movies, series, docs, channels }, stats] = await Promise.all([
     getBrowseRows(),
     getHomeStats(),
@@ -57,6 +100,6 @@ export async function GET() {
         country: c.country,
       })),
     },
-    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } }
+    { headers: PUBLIC_HEADERS }
   );
 }

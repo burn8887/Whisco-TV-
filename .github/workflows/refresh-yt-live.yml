@@ -1,0 +1,47 @@
+name: Refresh iOS live YouTube embeds
+
+# A pinned YouTube live video id is the CURRENT broadcast, not a permanent address.
+# When a 24/7 stream restarts, YouTube issues a new id and the stored embed URL goes
+# dead — a reviewer could open the app weeks later and see a dead player. This job
+# re-resolves each channel's current live stream and updates streamUrl.
+#
+# WHAT IT WRITES: streamUrl, evidenceUrl, lastCheckedAt, lastStatus, failCount — only.
+# WHAT IT NEVER TOUCHES: clearedForApp, clearedBy, clearedAt.
+# Apple clearance is a human act. The script refuses to write those columns at all
+# (see the WRITABLE guard in scripts/refresh_yt_live.mjs), so this schedule cannot
+# clear content even by mistake.
+#
+# Every resolved video is identity-checked against the channel's own handle via
+# oEmbed before it is stored: a candidate that belongs to a different channel is
+# refused rather than written. That guard exists because a heuristic fallback once
+# returned a different broadcaster's video for @dwnews.
+#
+# Observed rotation: @dwnews resolved to LuKwFajn37U and then to GkalPSPLlUY within
+# one session on 2026-09-15 — which is why this runs every 6 hours.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps + prisma client
+        run: npm install --no-audit --no-fund && npx prisma generate
+
+      - name: Refresh live embed URLs (streamUrl only — never clearedForApp)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/refresh_yt_live.mjs --apply

@@ -1,12 +1,48 @@
 import { NextResponse } from "next/server";
 import { getChannelPageData } from "@/lib/cached";
+import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { getIosChannel } from "@/lib/store-ios";
 
 // Mobile API v1 — single live channel + related channels.
+//
+// STORE SPLIT (Apple 5.2.2, build 6): on the iOS store an uncleared channel is a
+// hard 404. Deep links must not be a way around the gate.
 
 export const dynamic = "force-dynamic";
 
-export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
+  // ---------------------------------------------------------------- iOS store
+  if (isIosStore(req)) {
+    const channel = await getIosChannel(id);
+    if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404, headers: IOS_HEADERS });
+
+    return NextResponse.json(
+      {
+        store: "ios",
+        channel: {
+          id: channel.id,
+          name: channel.name,
+          logoUrl: channel.logoUrl,
+          streamUrl: channel.streamUrl,
+          country: channel.country,
+          language: channel.language,
+          category: channel.category,
+          isHD: channel.isHD,
+          isActive: channel.isActive,
+          rightsBasis: channel.rightsBasis ?? null,
+          evidenceUrl: channel.evidenceUrl ?? null,
+        },
+        // No "related" rail on the iOS store: related rows would leak uncleared
+        // channels into the app through the back door.
+        related: [],
+      },
+      { headers: IOS_HEADERS }
+    );
+  }
+
+  // ------------------------------------------------------------- public store
   const { channel, related } = await getChannelPageData(id);
   if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404 });
 
@@ -24,6 +60,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 
   return NextResponse.json(
     { channel: slim(channel), related: related.map(slim) },
-    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } }
+    { headers: PUBLIC_HEADERS }
   );
 }

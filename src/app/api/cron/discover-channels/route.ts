@@ -175,6 +175,23 @@ export async function GET(req: Request) {
           isActive: true,
           lastStatus: "ok",
           lastCheckedAt: new Date(),
+          // ---------------------------------------------------------------
+          // APP STORE CLEARANCE — Grok's lock, item 2: "discover-channels must
+          // not create iOS-cleared rows."
+          //
+          // This cron harvests from the community iptv-org index. A URL being
+          // listed in a public index is NOT permission to redistribute it, and
+          // Apple rejected exactly that argument on 2026-09-15 (Guideline
+          // 5.2.2). So every row born here is explicitly NOT cleared for the
+          // App Store build, and carries its provenance so we can answer
+          // "where did this come from?" without guessing.
+          //
+          // clearedForApp is deliberately absent from the update paths too:
+          // only a human, deliberately, with evidence, may set it true.
+          // ---------------------------------------------------------------
+          sourceKind: "iptv-org",
+          provenanceUrl: `https://iptv-org.github.io/iptv/countries/${c.countryCode.toLowerCase()}.m3u`,
+          clearedForApp: false,
         },
       });
       added.push({ name: c.name, country: c.country });
