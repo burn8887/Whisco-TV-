@@ -202,6 +202,7 @@ async function main() {
       console.log(`  ✗ ${row.name.padEnd(28)} ${live.why}`);
       // A row whose broadcast has ended is not something we silently delete or hide —
       // it is reported. Whether the channel stays in the build is a human decision.
+      // Note this path never rewrites streamUrl, so a channel-form row keeps its URL.
       if (APPLY) {
         const payload = { lastCheckedAt: new Date(), lastStatus: "no-live-stream" };
         assertSafe(payload);
@@ -216,6 +217,21 @@ async function main() {
       console.log(`  ✗ ${row.name.padEnd(28)} live id ${live.videoId} is NOT embeddable (http ${emb.http})`);
       if (APPLY) {
         const payload = { lastCheckedAt: new Date(), lastStatus: "not-embeddable" };
+        assertSafe(payload);
+        await prisma.channel.update({ where: { id: row.id }, data: payload });
+      }
+      continue;
+    }
+
+    // ------------------------------------------------------------------ channel form
+    // If the row embeds the CHANNEL (live_stream?channel=UC...), there is no stored
+    // video id and therefore nothing to refresh. This branch must exist or the job
+    // would overwrite the stable channel URL with a pinned one — reintroducing exactly
+    // the id rot the channel form removes. So: verify, record, and do NOT rewrite.
+    if (String(row.streamUrl).includes("live_stream?channel=")) {
+      console.log(`  ✓ ${row.name.padEnd(28)} channel form, live now (${live.videoId}, "${(emb.author || "").slice(0, 22)}") — URL left alone`);
+      if (APPLY) {
+        const payload = { lastCheckedAt: new Date(), lastStatus: "ok" };
         assertSafe(payload);
         await prisma.channel.update({ where: { id: row.id }, data: payload });
       }

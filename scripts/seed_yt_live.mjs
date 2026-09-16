@@ -85,13 +85,25 @@ async function main() {
       select: { id: true, streamUrl: true, clearedForApp: true, clearedBy: true },
     });
 
+    // CHANNEL FORM, confirmed working 2026-09-15: the founder played a Somoy row on
+    // whisco.tv that uses exactly this URL shape and saw YouTube's player and the LIVE
+    // badge. So we store the CHANNEL, not a broadcast: no video id is stored and there
+    // is nothing to go stale when a 24/7 stream restarts. The 6-hourly refresh job
+    // stays as a liveness monitor and does not rewrite this URL (see its channel-form
+    // branch, which had to be taught not to "helpfully" re-pin it).
+    const streamUrl = `https://www.youtube.com/embed/live_stream?channel=${entry.channelId}`;
+    // Evidence for a reviewer: the broadcaster's own channel. The embed is the channel,
+    // so the channel page is the matching link to show them.
+    const evidenceUrl = provenanceUrl;
+
+    // Still confirm the channel has a live stream AND that the live video belongs to
+    // this channel — we do not store an unverified row.
     const live = await resolveLive(entry.handle);
     if (!live.ok) {
       console.log(`  ✗ ${entry.catalogueName}: ${live.why} — skipping, nothing written`);
       continue;
     }
-    const streamUrl = `https://www.youtube.com/embed/${live.videoId}`;
-    const evidenceUrl = `https://www.youtube.com/watch?v=${live.videoId}`;
+    console.log(`     (channel currently live: ${live.videoId}, uploader "${live.author}" — verified, not stored)`);
 
     // The app decides how to play a source with src.includes("youtube.com/embed").
     // A nocookie URL does NOT match that test and would silently fail. Enforced here.
