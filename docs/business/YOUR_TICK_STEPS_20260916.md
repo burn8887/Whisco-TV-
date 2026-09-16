@@ -20,35 +20,39 @@
 
 # STEP 1 — Look at four links
 
-## ✅ ROWS 3 AND 4: DONE — you already verified these
-You played both and got **video + audio**, and both item pages showed **"Public Domain"**. That is the whole test. Rows 3 and 4 are **confirmed**.
+## ROWS 3 AND 4: DONE — you verified these
+Video + audio on both, and both item pages showed **"Public Domain"**. That is the whole test. **Confirmed.**
 
-## ROWS 1 AND 2: your link test was invalid, not our URL
-Opening `youtube.com/embed/...` **directly in the address bar** sends no referer. YouTube now rejects that with **Error 153 for every embed** — I reproduced it against **Somoy too**, the row you have already watched working on whisco.tv, and against the pinned video form. It is the test method, not the channel ids.
+## ROWS 1 AND 2 — test them on YOUR OWN SITE (this is the correct test)
 
-Proof, same URLs, same moment:
+Open these **in your phone's browser**. They are live on whisco.tv right now, on the real player, with the same referer policy as the row you already watched working. No deploy, no build, no sandbox.
 
-| URL | no referer | with referer |
-|---|---|---|
-| Our France 24 channel form | **Error 153** | **0 errors** |
-| Our DW channel form | **Error 153** | **0 errors** |
-| Somoy (known working) | **Error 153** | **0 errors** |
-| The pinned video form | **Error 153** | **0 errors** |
+**First, the CONTROL — the row you already confirmed works:**
+```
+https://www.whisco.tv/live/cmsor42mm00e7nn71p24aui9q
+```
+Somoy TV. You have seen this play with YouTube chrome + LIVE. If this fails today, something changed on YouTube's side and we stop.
 
-## The correct test — open the live preview
-I have served a page with both embeds loaded the way the app loads them (iframe, with a referer):
+**Then the two rows being ticked:**
+```
+https://www.whisco.tv/live/cmu4b0gpy000011a19c6r66q0      <- France 24 English
+https://www.whisco.tv/live/cmu4b0hup000111a1qeev0ylr      <- DW News
+```
 
-**→ Open the live preview labelled "Embed test page" in your workspace.**
-
-| You should see | Meaning |
+| What you see | Meaning |
 |---|---|
-| France 24 live + "FRANCE 24 English" + YouTube chrome | row 1 confirmed |
-| DW live + "DW News" + YouTube chrome | row 2 confirmed |
-| Error 153 in the frames too | **a real finding — I will not ship these. Tell me and I stop.** |
+| All three play with YouTube chrome | rows 1 and 2 confirmed, send TRUE |
+| Somoy plays, France 24 / DW do not | the channel ids are wrong, I fix them, nothing gets ticked |
+| None play | YouTube changed something, we stop and reassess |
 
-The app was already built for this. `Player.tsx` in whisco-mobile renders the embed inside a WebView with `baseUrl: "https://www.whisco.tv"` and `referrerpolicy` on the iframe, with a comment saying it was added for error 153. So the app sends a referer even though a plain browser address bar does not.
+All three use the identical URL shape — `youtube.com/embed/live_stream?channel=UC...` — so any difference between them is about the **channel id**, which is exactly what needs testing.
 
-**One honest caveat:** I can verify the embed works given a referer (above), and the app is written to supply one — but I cannot test iOS WKWebView from here. Somoy playing on your website proves the browser path, not the app's WebView path. If the preview works and you want belt-and-braces, the app's own player can be checked on a device before `eas submit`.
+### Why my earlier instructions failed (three mistakes, all mine)
+1. **Direct `/embed/` link in the address bar** sends no referer, so YouTube returns error 153 for *every* embed, including your working Somoy row.
+2. **The file preview in the chat window** is a sandboxed iframe with **no network**, so anything external is blocked by design.
+3. **The served sandbox URL** needs a **traffic access token**, so plain browser navigation is refused.
+
+Your own site has none of those problems, and it is the closest thing to the reviewer's iPad we can reach today.
 
 # STEP 2 — Reply TRUE
 
