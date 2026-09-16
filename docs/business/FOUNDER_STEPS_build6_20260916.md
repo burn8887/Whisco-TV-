@@ -61,24 +61,59 @@ npx eas-cli@latest login
 
 Use your Expo account for **burn8887s-team** (the project is `whisco-tv`).
 
-### 0.5 If the build complains about iOS credentials
+### 0.5 Build the signing files (the only fiddly bit — I already proved it works)
 
-The project is configured to use **local** signing credentials, and those files were deliberately kept out of
-git — so a brand-new clone does not have them. If the build stops and mentions credentials, run:
+The project signs with **local** credentials, and those files are deliberately not in git. The old ones are gone —
+but the certificate, its private key and the App Store profile are all in this workspace, so you build a fresh
+signing file with **a password you choose**. I verified this end to end: the key and certificate match, and the
+resulting file carries exactly the certificate your app store profile expects.
+
+First download these three files from the workspace (open each, hit download):
 
 ```
-npx eas-cli credentials -p ios
+.keys/dist_key.pem
+.keys/dist_cert.pem
+.keys/whisco_appstore.mobileprovision
 ```
 
-Choose the **production** profile, then accept the option to **set up a Distribution Certificate** and
-**Provisioning Profile**. Creating a new distribution certificate is safe: Apple allows several, and it does not
-touch the app, your existing TestFlight builds, or the App Store listing.
+Then, in the project folder, paste:
 
-If it offers **Apple Service API Key** as the way to sign in, that is the easiest path — it skips the Apple ID
-two-factor prompts. The key (`AuthKey_B279KL3Y3K.p8`) is in the workspace under `.keys/`; download it to this Mac
-and point EAS at it.
+```
+cd ~/whisco-mobile
+mkdir -p credentials ~/whisco-keys
 
-Then run the build again.
+openssl pkcs12 -export \
+  -inkey ~/Downloads/dist_key.pem \
+  -in ~/Downloads/dist_cert.pem \
+  -out credentials/dist.p12 \
+  -name "Apple Distribution: Ali Albaharna (X2UPN4792Y)"
+
+cp ~/Downloads/whisco_appstore.mobileprovision credentials/
+```
+
+The `openssl` command **asks you to type a password twice — choose one and remember it**, then paste it into the
+next step:
+
+```
+cat > credentials.json <<'JSON'
+{
+  "ios": {
+    "provisioningProfilePath": "credentials/whisco_appstore.mobileprovision",
+    "distributionCertificate": { "path": "credentials/dist.p12", "password": "PUT-YOUR-PASSWORD-HERE" }
+  }
+}
+JSON
+```
+
+Replace `PUT-YOUR-PASSWORD-HERE` with the password you just typed. Both `credentials.json` and `credentials/` are
+already ignored by git, so they can never be committed by accident. Check the file opens:
+
+```
+openssl pkcs12 -in credentials/dist.p12 -nokeys -passin pass:PUT-YOUR-PASSWORD-HERE | head -1
+```
+
+It should print `Bag Attributes` or `subject=...`. If it says "mac verify error", the password in
+`credentials.json` does not match the one you typed — redo the two steps.
 
 ---
 

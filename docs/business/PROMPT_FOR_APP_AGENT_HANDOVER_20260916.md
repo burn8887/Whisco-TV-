@@ -50,7 +50,7 @@ output, actually run the command in the workspace and paste the real output. Rea
 11. The Apple Distribution certificate and the "Whisco TV App Store" provisioning profile in `.keys/` are valid
     until **2027-09-01** and the certificate inside the profile matches `dist_cert.pem` by fingerprint — I checked.
     Confirm the same, and tell me whether any *other* certificate or profile was used on the last build.
-12. The ASC API key `AuthKey_B279KL3Y3K.p8` (key id `B279KL3Y3K`, issuer `b071aa69-af70-411d-9019-9b9057882600`,
+12. The ASC API key `AuthKey_B279KL3Y3K.p8` (key id `B279KL3Y3K`, issuer `b071aa69-7af0-411d-9019-9b9057882600`,
     team `X2UPN4792Y`) — was it used for the builds, and does it have the rights needed? Where should it live on a
     clean Mac?
 13. `eas.json`'s submit profile points at `/home/user/.keys/AuthKey_B279KL3Y3K.p8` — an absolute path that only
