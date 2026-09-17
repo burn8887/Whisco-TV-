@@ -19,7 +19,7 @@ export const GUIDES: Guide[] = [
     title: "The Complete Guide to Turkish Series (Dizi) on Whisco TV",
     h1: "Turkish Series on Whisco TV: What to Watch and Where to Start",
     intro:
-      "Turkish dramas — dizi — have become one of the most-watched television genres on earth, and nowhere is the love stronger than in the Gulf. Whisco TV carries more than 50 series with thousands of full episodes, all free, all from the shows' official channels. This guide explains what makes dizi special, which shows to start with, and how to find them here.",
+      "Turkish dramas — dizi — have become one of the most-watched television genres on earth, and nowhere is the love stronger than in the Gulf. Every series we list plays from the show's own official channel — free, and legal. This guide explains what makes dizi special, which shows to start with, and how to find them here.",
     sections: [
       {
         heading: "Why Turkish drama conquered the Gulf",
@@ -65,7 +65,7 @@ export const GUIDES: Guide[] = [
         heading: "What's legally free right now",
         paragraphs: [
           "News and general entertainment from most home countries broadcasts free-to-air: Indian, Pakistani, Bangladeshi, Filipino, Indonesian, Nepali, Sri Lankan and Arabic channels stream legally without any subscription. Production houses like Goldmines and Shemaroo publish full Bollywood movies on their official channels; HUM, ARY and GEO do the same for Pakistani dramas — with English subtitles.",
-          "Whisco TV brings these legitimate sources together in one place: 500+ live channels and 14,000+ on-demand titles, organized by language and community, checked automatically around the clock so dead links never waste your evening. It costs nothing because it's advertising-supported — the same model as broadcast TV back home.",
+          "Whisco TV brings these legitimate sources together in one place, organized by language and community and checked automatically around the clock so dead links never waste your evening. Everything plays from an official broadcaster channel or a public-domain archive; we host no video files of our own. Our apps carry a smaller, fully documented shelf — official YouTube news live, plus public-domain films from archive.org. It costs nothing because it's advertising-supported — the same model as broadcast TV back home.",
         ],
       },
       {
@@ -83,7 +83,7 @@ export const GUIDES: Guide[] = [
     title: "Pakistani Dramas on Whisco TV: A Starter Guide",
     h1: "Pakistani Dramas, Free and Subtitled: Where to Begin",
     intro:
-      "Pakistani dramas are having a golden age — tight 25–40 episode stories, powerhouse acting, and productions from HUM, ARY, GEO and Express that regularly outclass much bigger industries. Whisco TV carries over a thousand full episodes from the networks' official channels, most with English subtitles.",
+      "Pakistani dramas are having a golden age — tight 25–40 episode stories, powerhouse acting, and productions from HUM, ARY, GEO and Express that regularly outclass much bigger industries. Whisco TV lists full episodes from the networks' official channels, most with English subtitles.",
     sections: [
       {
         heading: "Why Pakistani dramas are different",
@@ -107,7 +107,7 @@ export const GUIDES: Guide[] = [
     title: "Free Bollywood Movies Online: The Legal Way to Watch Hindi Cinema",
     h1: "Bollywood for Free, Legally: A Guide for Hindi Movie Lovers in the Gulf",
     intro:
-      "Hindi cinema is the largest film industry on earth by output, and for the millions of Indians in the Gulf it is a direct line home. What many viewers do not know: thousands of Bollywood films are legally free to watch, published by the studios themselves. Whisco TV carries more than 2,500 Hindi titles from official studio channels — this guide explains what is there and how to make the most of it.",
+      "Hindi cinema is the largest film industry on earth by output, and for the millions of Indians in the Gulf it is a direct line home. What many viewers do not know: thousands of Bollywood films are legally free to watch, published by the studios themselves. Whisco TV lists Hindi titles published by the studios' own official channels — this guide explains what is there and how to make the most of it.",
     sections: [
       {
         heading: "Why studios give movies away free",
@@ -126,7 +126,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Tips for the best experience",
         paragraphs: [
-          "Use the search box for actors or specific films — with 2,500+ Hindi titles, search is faster than scrolling. Add films to My List when you spot something interesting; your watch progress is remembered so an interrupted movie resumes where you stopped.",
+          "Use the search box for actors or specific films — search is faster than scrolling. Add films to My List when you spot something interesting; your watch progress is remembered so an interrupted movie resumes where you stopped.",
           "On a phone, install the app (Android now, iPhone soon) or add whisco.tv to your home screen. On a laptop, whisco.tv works in any browser — and if your TV has a browser or casting, the big screen is one tap away.",
         ],
       },
@@ -139,7 +139,7 @@ export const GUIDES: Guide[] = [
     title: "Malayalam Movies Free Online: A Guide for Keralites in the Gulf",
     h1: "Malayalam Cinema, Free in the Gulf: From Mohanlal Classics to New Releases",
     intro:
-      "No diaspora loves its cinema like Keralites love Malayalam film — and no expat community in the Gulf is prouder of its industry's golden run. From Mohanlal and Mammootty evergreens to the new-generation directors rewriting Indian cinema, Whisco TV carries close to 700 Malayalam titles, all free, all from official channels. Here is your orientation.",
+      "No diaspora loves its cinema like Keralites love Malayalam film — and no expat community in the Gulf is prouder of its industry's golden run. From Mohanlal and Mammootty evergreens to the new-generation directors rewriting Indian cinema, Whisco TV lists Malayalam titles from the films' own official channels, all free. Here is your orientation.",
     sections: [
       {
         heading: "The Gulf connection",
@@ -170,7 +170,7 @@ export const GUIDES: Guide[] = [
     title: "Classic Arabic Series Free Online: Khaleeji, Syrian and Lebanese Drama",
     h1: "Arabic Drama on Whisco TV: The Series the Whole Region Grew Up On",
     intro:
-      "Before streaming, there was the Ramadan musalsal — and the golden decades of Kuwaiti theatre-drama, Syrian social realism and Lebanese romance that still define Arabic television. Whisco TV carries more than 300 Arabic series with over 7,000 episodes from official broadcaster channels, spanning Kuwait, Syria, Lebanon, the UAE, Jordan, Qatar and Bahrain. This guide maps the territory.",
+      "Before streaming, there was the Ramadan musalsal — and the golden decades of Kuwaiti theatre-drama, Syrian social realism and Lebanese romance that still define Arabic television. Whisco TV lists Arabic series from official broadcaster channels, spanning Kuwait, Syria, Lebanon, the UAE, Jordan, Qatar and Bahrain. This guide maps the territory.",
     sections: [
       {
         heading: "The traditions on the shelf",
@@ -214,7 +214,7 @@ export const GUIDES: Guide[] = [
         heading: "What is legally free right now",
         paragraphs: [
           "News, entertainment and general channels from India, Pakistan, Bangladesh, the Philippines, Indonesia, Nepal, Sri Lanka and across the Arab world broadcast free-to-air and stream legally without any subscription. Production houses publish full movie libraries on official channels: Goldmines and Shemaroo for Hindi cinema, HUM, ARY and Geo networks for Pakistani dramas with English subtitles, official Turkish broadcaster channels for dizi.",
-          "Whisco TV exists to organize exactly this: 600+ legal live channels and 14,000+ on-demand titles in 13 languages, in one place, checked automatically around the clock — free because it is advertising-supported, the same bargain as TV back home. No box, no seller, no dish on the balcony, nothing to install beyond a browser or our free app.",
+          "Whisco TV exists to organize exactly this: legal channels and on-demand titles from official broadcaster channels and public-domain archives, in one place, checked automatically around the clock — free because it is advertising-supported, the same bargain as TV back home. No box, no seller, no dish on the balcony, nothing to install beyond a browser or our free app.",
         ],
       },
       {

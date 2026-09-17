@@ -5,7 +5,7 @@ import { GUIDES } from "@/lib/guides";
 export const metadata: Metadata = {
   title: "Guides",
   description:
-    "Original guides from Whisco TV: what to watch, where to start with Turkish dizi and Pakistani dramas, and how Gulf expats can watch TV from home legally and free.",
+    "Original guides from Whisco TV: how Gulf expats can watch TV from home, legally and free, from official broadcaster channels and public-domain archives. Our apps carry a smaller, documented shelf — official YouTube news live, plus archive.org public-domain film.",
   alternates: { canonical: "https://www.whisco.tv/guides" },
 };
 
