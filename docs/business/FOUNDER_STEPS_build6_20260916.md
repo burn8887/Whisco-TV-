@@ -203,51 +203,63 @@ Verified locally before you spend a build: the change produces `TARGETED_DEVICE_
   exists in my workspace, so it would fail anyway.
 - It takes 15–25 minutes. You can close the terminal; the build runs on Expo's servers.
 
-## TASK 2 — Prove the build is clean (the plist check)
+## TASK 2 — Check build 7's plist, then upload it to TestFlight
 
-The earlier attempt failed on the first command: it read `~/Downloads/.ipa` with **no filename**, so `unzip` had
-nothing to open, the folder stayed empty, and the Python check then had nothing to look at (that is the
-`IndexError` — harmless, just the result of the empty folder).
+An EAS build stays on Expo's servers; **App Store Connect cannot see it until you upload it.** That is why build 7
+is not showing — it has not been submitted yet. Two checks first, then the upload.
 
-**Step 2.1 — find where the file actually is.** This lists every `.ipa` on the machine:
+**Step 2.1 — download build 7's IPA.** Open the artifact link from the build log
+(`https://expo.dev/artifacts/eas/2ZFRK…ipa`) and save it to **Linux files**, then:
 
 ```
 cd ~
 find ~ -maxdepth 4 -iname "*.ipa" -printf "%p  (%s bytes)\n" 2>/dev/null
 ```
 
-You should see one line, something like `/home/burn8887/Downloads/zp_4Vv-…ipa`. The size will be tens of megabytes.
-
-*If it prints nothing*, download it again and save it to **Linux files**, then re-run the find.
-
-**Step 2.2 — unpack it.** The `$( … )` below picks up the file automatically, so the long name cannot go wrong:
+**Step 2.2 — unpack and check both things:**
 
 ```
-mkdir -p ~/ipa-check && cd ~/ipa-check
+mkdir -p ~/ipa7 && cd ~/ipa7
 IPA=$(find ~ -maxdepth 4 -iname "*.ipa" | head -1)
 echo "Using: $IPA"
 unzip -o "$IPA"
-ls Payload
-```
-
-`ls Payload` must print `WhiscoTV.app`. If it is empty or missing, the unzip did not work — send me the output.
-
-**Step 2.3 — the check:**
-
-```
 python3 -c "
 import glob, plistlib
-p = glob.glob('Payload/*.app/Info.plist')
-print('found:', p)
-d = plistlib.load(open(p[0], 'rb'))
-print('UIBackgroundModes:', d.get('UIBackgroundModes', 'ABSENT'))
+p = glob.glob('Payload/*.app/Info.plist')[0]
+d = plistlib.load(open(p,'rb'))
+print('UIBackgroundModes:', d.get('UIBackgroundModes','ABSENT'))
+print('UIDeviceFamily   :', d.get('UIDeviceFamily'))
 "
 ```
 
-- **`UIBackgroundModes: ABSENT` → PASS.** Grok's condition 1 is met. Keep this output.
-- **`UIBackgroundModes: ['audio']` → STOP.** Do not upload anything. Tell me immediately.
+Both lines must read:
 
-**Record for the report:** the EAS build number should be **7** — read it off the log, do not assume it.
+- **`UIBackgroundModes: ABSENT`** → Grok's condition 1, still holding.
+- **`UIDeviceFamily   : [1]`** → iPhone only. `[1]` is correct; if it says `[1, 2]` the iPad drop did not reach the
+  binary and we stop before uploading.
+
+**Step 2.3 — confirm `eas.json` still points at your key.** (`git pull` should have left it alone, but one line
+proves it):
+
+```
+cd ~/whisco-mobile
+grep ascApiKeyPath eas.json
+```
+
+It must show `/home/burn8887/whisco-keys/AuthKey_B279KL3Y3K.p8`. If it shows `/home/user/.keys/…`, re-run:
+
+```
+sed -i 's|/home/user/.keys/AuthKey_B279KL3Y3K.p8|/home/burn8887/whisco-keys/AuthKey_B279KL3Y3K.p8|' eas.json
+```
+
+**Step 2.4 — upload build 7 to TestFlight:**
+
+```
+npx eas-cli@latest submit --platform ios --profile production --latest
+```
+
+`--latest` picks build 7 (the newest finished build). This **uploads to TestFlight only** — Grok confirmed that is
+not the barred step; *Submit for Review* is. Apple then processes it for 5–15 minutes.
 
 ## TASK 3 — Put build 6 on your phone (TestFlight)
 
