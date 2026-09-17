@@ -89,33 +89,35 @@ ls ~/dist_key.pem ~/dist_cert.pem ~/whisco_appstore.mobileprovision
 
 All three must be listed.
 
-**Step 3 — make the signing file.** This asks you to type a password twice — pick one and write it down:
+**Step 3 — make the signing file.** ⚠️ **Do not let openssl prompt you for a password** — its hidden prompt
+fails on this terminal ("Verify failure / Can't read Password"), and typing with nothing appearing is normal but
+useless here. This captures the password first, where you can see it:
 
 ```
 cd ~/whisco-mobile
 mkdir -p credentials
-
+read -p "Type a password, then press Enter: " P12PW
 openssl pkcs12 -export -legacy \
   -inkey ~/dist_key.pem \
   -in ~/dist_cert.pem \
   -out credentials/dist.p12 \
+  -passout pass:"$P12PW" \
   -name "Apple Distribution: Ali Albaharna (X2UPN4792Y)"
-
 cp ~/whisco_appstore.mobileprovision credentials/
 ```
 
-*If `openssl` says "legacy" is not supported, run the same command with `-legacy` deleted.* The `-legacy` flag
-produces the older format EAS is known to read reliably — the previous agent left a 3DES copy in the vault for the
-same reason.
+*If `openssl` says `legacy` is not supported, run the same command with `-legacy` deleted.* The `-legacy` flag is
+deliberate: it produces the older PKCS#12 format, and I tested the output against **node-forge**, the parser EAS
+uses — it reads it cleanly (1 certificate, 1 key). A modern-format file is not guaranteed to work.
 
-**Step 4 — point EAS at it**, with your password in place of `YOUR-PASSWORD`:
+**Step 4 — point EAS at it.** The same `$P12PW` variable fills in the password, so you never retype it:
 
 ```
-cat > credentials.json <<'JSON'
+cat > credentials.json <<JSON
 {
   "ios": {
     "provisioningProfilePath": "credentials/whisco_appstore.mobileprovision",
-    "distributionCertificate": { "path": "credentials/dist.p12", "password": "YOUR-PASSWORD" }
+    "distributionCertificate": { "path": "credentials/dist.p12", "password": "$P12PW" }
   }
 }
 JSON
@@ -123,14 +125,22 @@ JSON
 
 Both `credentials.json` and `credentials/` are already ignored by git.
 
-**Step 5 — prove the password works:**
+**Step 5 — prove it works:**
 
 ```
-openssl pkcs12 -in credentials/dist.p12 -nokeys -passin pass:YOUR-PASSWORD | head -2
+openssl pkcs12 -legacy -in credentials/dist.p12 -nokeys -passin pass:"$P12PW" | grep subject=
 ```
 
-`Bag Attributes` or `subject=...` means you are done. **`mac verify error`** means the password in
-`credentials.json` is not the one you typed — redo steps 3 and 4.
+A line beginning **`subject=UID=X2UPN4792Y, CN=Apple Distribution: Ali Albaharna (X2UPN4792Y)`** means you are done.
+Nothing printed means the file did not open — tell me before going further.
+
+**Step 6 — clear the password from the session:**
+
+```
+unset P12PW
+```
+
+Nothing you typed lands in the shell history — the commands record `$P12PW`, never the password itself.
 
 You can delete the leftovers whenever you like:
 
