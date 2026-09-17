@@ -52,67 +52,91 @@ npx eas-cli@latest login
 
 Use your Expo account for **burn8887s-team**. This is the one password in the whole process that only you have.
 
-### 0.4 Build the signing files (I proved this works, on files we actually have)
+### 0.4 Build the signing files
 
 The project signs with **local** credentials, and those files are deliberately not in git. The old copies belonged
 to a sandbox that no longer exists — but the certificate, its private key and the App Store profile are all in the
 workspace, so you make a fresh signing file with **a password you choose**.
 
-Download these three from the workspace (open each, press download):
+I put clean copies in one folder so they are easy to find: **`download-keys/`** in the workspace.
 
 ```
-.keys/dist_key.pem
-.keys/dist_cert.pem
-.keys/whisco_appstore.mobileprovision
+download-keys/dist_key.pem
+download-keys/dist_cert.pem
+download-keys/whisco_appstore.mobileprovision
 ```
 
-**Where did they land?** ChromeOS puts browser downloads in *My files > Downloads*, which the Linux terminal sees
-at `/mnt/chromeos/MyFiles/Downloads`. Check both:
+**First — are they already on the machine?** Your Files sidebar showed a "whisco tv keys" folder and a synced
+workspace folder, so check before downloading anything:
 
 ```
-ls ~/Downloads 2>/dev/null; ls /mnt/chromeos/MyFiles/Downloads 2>/dev/null
+find ~ -maxdepth 5 \( -iname "dist_key.pem" -o -iname "*.mobileprovision" \) 2>/dev/null
 ```
 
-Then, using whichever folder actually has them (the example below assumes `/mnt/chromeos/MyFiles/Downloads`):
+If that finds them, skip to step 3 and use those paths.
+
+**Step 1 — download the three files.** Open each in the workspace and press download. They land in
+**My files > Downloads**.
+
+**Step 2 — get them into Linux.** `/mnt/chromeos/MyFiles/Downloads` is **not reachable** from your terminal — that
+is why every `cp` failed, even for the file that was sitting in Downloads. In the ChromeOS **Files** app instead:
+drag the three files onto **Linux files** in the left sidebar, or right-click each → **Copy to…** → **Linux files**.
+Then check:
 
 ```
-mkdir -p ~/keys-src
-cp /mnt/chromeos/MyFiles/Downloads/{dist_key.pem,dist_cert.pem,whisco_appstore.mobileprovision} ~/keys-src/
+ls ~/dist_key.pem ~/dist_cert.pem ~/whisco_appstore.mobileprovision
+```
 
+All three must be listed.
+
+**Step 3 — make the signing file.** This asks you to type a password twice — pick one and write it down:
+
+```
 cd ~/whisco-mobile
 mkdir -p credentials
 
-openssl pkcs12 -export \
-  -inkey ~/keys-src/dist_key.pem \
-  -in ~/keys-src/dist_cert.pem \
+openssl pkcs12 -export -legacy \
+  -inkey ~/dist_key.pem \
+  -in ~/dist_cert.pem \
   -out credentials/dist.p12 \
   -name "Apple Distribution: Ali Albaharna (X2UPN4792Y)"
 
-cp ~/keys-src/whisco_appstore.mobileprovision credentials/
+cp ~/whisco_appstore.mobileprovision credentials/
 ```
 
-`openssl` **asks you to type a password twice — pick one and write it down**, then put the same password in the
-next command:
+*If `openssl` says "legacy" is not supported, run the same command with `-legacy` deleted.* The `-legacy` flag
+produces the older format EAS is known to read reliably — the previous agent left a 3DES copy in the vault for the
+same reason.
+
+**Step 4 — point EAS at it**, with your password in place of `YOUR-PASSWORD`:
 
 ```
 cat > credentials.json <<'JSON'
 {
   "ios": {
     "provisioningProfilePath": "credentials/whisco_appstore.mobileprovision",
-    "distributionCertificate": { "path": "credentials/dist.p12", "password": "PUT-YOUR-PASSWORD-HERE" }
+    "distributionCertificate": { "path": "credentials/dist.p12", "password": "YOUR-PASSWORD" }
   }
 }
 JSON
 ```
 
-Both `credentials.json` and `credentials/` are already ignored by git. Check the file opens (use your password):
+Both `credentials.json` and `credentials/` are already ignored by git.
+
+**Step 5 — prove the password works:**
 
 ```
-openssl pkcs12 -in credentials/dist.p12 -nokeys -passin pass:PUT-YOUR-PASSWORD-HERE | head -2
+openssl pkcs12 -in credentials/dist.p12 -nokeys -passin pass:YOUR-PASSWORD | head -2
 ```
 
-It should print `Bag Attributes` or `subject=...`. If it says **"mac verify error"**, the password in
-`credentials.json` is not the one you typed — redo those two steps.
+`Bag Attributes` or `subject=...` means you are done. **`mac verify error`** means the password in
+`credentials.json` is not the one you typed — redo steps 3 and 4.
+
+You can delete the leftovers whenever you like:
+
+```
+rm -rf ~/keys-src
+```
 
 ---
 
