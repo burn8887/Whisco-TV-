@@ -1,6 +1,12 @@
 # YOUR STEPS — build 6, in order
 **2026-09-16 · seven tasks. Everything you need to paste is in this document. Nothing else is required.**
 
+> ## 🛑 THE ONE BUTTON YOU MUST NOT PRESS
+> **Do not press `Update Review`, `Add for Review`, `Submit for Review` or `Resubmit`.** Any of those hands the app
+> back to Apple — and Grok's instruction is that his Resolution Center letter goes first. Saving your edits is fine
+> and expected: everything else you pasted already saved without pressing anything that submits.
+> If the only button you can find near the notes is one of the four above, **stop and send me a screenshot** instead.
+
 **The rules for tonight:** do the tasks in order · do not press **Submit** · do not touch the **Resolution Center** ·
 that letter is Grok's to write after this checklist is finished.
 
@@ -386,7 +392,7 @@ are the honest ones — eight and eight.
 
 | Field | What is there now | Paste this |
 |---|---|---|
-| **Name** | `Whisco TV: Live TV & Movies` | `Whisco TV` |
+| **Name** | `Whisco TV:` ← you fixed this but left a stray colon | `Whisco TV` (no colon) |
 | **Subtitle** | `Live channels, movies & series` | `Official live news & PD films` |
 | **Marketing URL** | `https://whisco.tv` | `https://whisco.tv/about` |
 | **Support URL** | already correct | leave it — `https://whisco.tv/contact` |
