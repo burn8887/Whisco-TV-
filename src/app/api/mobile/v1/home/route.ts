@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getBrowseRows, getHomeStats } from "@/lib/cached";
-import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosLiveChannels, getIosShelves, getIosStats } from "@/lib/store-ios";
 
 // Mobile API v1 — home screen payload.
@@ -40,8 +40,8 @@ const slim = (t: {
 });
 
 export async function GET(req: Request) {
-  // ---------------------------------------------------------------- iOS store
-  if (isIosStore(req)) {
+  // -------------------------------------------------- cleared store (iOS/Android)
+  if (isClearedStore(req)) {
     const [stats, { featured, docs, publicDomain }, channels] = await Promise.all([
       getIosStats(),
       getIosShelves(),
@@ -56,7 +56,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(
       {
-        store: "ios",
+        store: requestedStore(req),
         // Counts of what this build actually offers — never the public totals.
         stats: { channels: stats.channels, titles: stats.titles },
         hero: featured.slice(0, 5).map(slim),
@@ -71,7 +71,7 @@ export async function GET(req: Request) {
           country: c.country,
         })),
       },
-      { headers: IOS_HEADERS }
+      { headers: CLEARED_HEADERS }
     );
   }
 

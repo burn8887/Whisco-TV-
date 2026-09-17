@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getTitlePageData } from "@/lib/cached";
-import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosTitle, getIosSimilar } from "@/lib/store-ios";
 
 // Mobile API v1 — full title detail (movie/doc streamUrl, or series with
@@ -14,9 +14,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   // ---------------------------------------------------------------- iOS store
   // An uncleared title is a 404 on the App Store build. No fallback, no partial
   // payload: a deep link must not be a way around the gate.
-  if (isIosStore(req)) {
+  if (isClearedStore(req)) {
     const title = await getIosTitle(slug);
-    if (!title) return NextResponse.json({ error: "not-found" }, { status: 404, headers: IOS_HEADERS });
+    if (!title) return NextResponse.json({ error: "not-found" }, { status: 404, headers: CLEARED_HEADERS });
     const similar = await getIosSimilar(title.id, title.collection);
 
     return NextResponse.json(
@@ -67,7 +67,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
           imdbRating: t.imdbRating,
         })),
       },
-      { headers: IOS_HEADERS }
+      { headers: CLEARED_HEADERS }
     );
   }
 
