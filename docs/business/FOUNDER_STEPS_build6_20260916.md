@@ -307,22 +307,78 @@ Skateboard Sense · More Dangerous Than Dynamite
 Nothing else should be listed in either tab, and **no channel count or title count should appear anywhere on screen.**
 If the lists do not match, tell me before going on to the screenshots.
 
-## TASK 4 — Replace the screenshots (they are currently wrong)
+## TASK 4 — Replace the screenshots
 
-**Delete all four iPhone and all four iPad screenshots in Connect.** They are from 2 Sep and show
-**"585 channels"** and **"Search 14,567+ titles"**, which is not this build.
+### First: the file in your hand cannot be uploaded anywhere
 
-Take these four, **twice** — once on an iPhone 6.7" (or 6.9") and once on an iPad:
+Build 6 is an **App Store distribution** IPA — signed with your Apple Distribution certificate and the "Whisco TV
+App Store" profile. That file installs **only** through TestFlight or the App Store. Browser simulators need
+something completely different:
+
+- **Appetize.io** (browser simulator): *"iOS currently only supports iOS Simulator builds (.app)… AppStore
+  distribution device builds (.ipa) are not currently supported."* Their support page: *"We do not support IPA files,
+  or any other way to install iOS apps from the App Store."*
+- **BrowserStack / LambdaTest**: install a real `.ipa`, but only one signed with a **development or ad-hoc** profile
+  containing *their* device UDIDs. An App Store profile is not accepted.
+- A simulator build cannot be produced from your IPA. It is a different artifact — unsigned, compiled for the
+  simulator architecture — and only Xcode or an EAS simulator build can make one.
+
+So: **do not upload build 6 to any preview service.** It will never work.
+
+### What Apple actually requires (verified today)
+
+| Slot | Size | Status |
+|---|---|---|
+| iPhone 6.9" | **1320×2868** (or accepted 1290×2796 / 1260×2736) | required |
+| iPad 13" | **2064×2752** (or accepted 2048×2732) | **required because the app declares iPad support** |
+
+Your Connect already holds an iPhone 6.7" set (1290×2796 — an **accepted** size) and an iPad 12.9" set
+(2048×2732 — also accepted). Both slots can keep their sizes; only the pictures must change.
+
+### The iPhone set — do this as soon as build 6 is on your phone
+
+Take these four on the iPhone, then check the pixel size of one of them (I can read it if you send it here):
 
 1. **Live TV list** — all eight channels visible.
-2. **A live channel playing** — YouTube's player, broadcaster's name and controls showing.
+2. **A live channel playing** — broadcaster's name and YouTube's controls showing.
 3. **On Demand list** — all eight films visible.
-4. **A film playing** — with the **Source** row visible under the player.
+4. **A film playing** — with the **Source** row visible.
 
-Rules for the shots: **no channel count and no title count anywhere on screen**; no dog; nothing that is not in
-this build. Shot 1 and shot 3 are the honest ones — eight and eight.
+**If your iPhone is a Pro Max (6.7"/6.9")** they drop straight into the existing slot. **If it is a smaller iPhone**
+(6.1" = 1170×2532), the capture does not match any accepted size and would have to be scaled — in that case tell me
+and we will handle it together.
 
-Where to put them: **version 1.0 → App Store tab → Screenshots** → delete the old set → drag in the new ones.
+### The iPad set — this is blocked, and needs a decision
+
+The existing iPad screenshots are from the old binary (they show "585 channels"), so they must be replaced. With no
+iPad and no Mac, there are two routes, and **both need one more EAS build**, so both need Grok's approval:
+
+**Route A — keep iPad support.** I add a *simulator* build profile to `eas.json`; you run one more build (it becomes
+build 7) and upload the simulator artifact — not the IPA — to a browser simulator, choose an iPad Pro 12.9", and
+capture. More moving parts, and I would verify the exact-capture size first.
+
+**Route B — drop iPad support.** One line in `app.json` (`"supportsTablet": false`), one more build (build 7), and
+**no iPad screenshots are required at all**. iPad users still get the app in iPhone compatibility mode. Fewer moving
+parts, and it removes the problem for every future release.
+
+**Neither route is authorised yet.** Send Grok this:
+
+> Build 6 passed the plist check (UIBackgroundModes ABSENT on the real artifact).
+>
+> Two questions:
+> 1. Getting build 6 onto my phone for the screenshots you asked for needs a TestFlight upload (`eas submit`).
+>    Expo's docs confirm it uploads to TestFlight only and never submits for review. Confirm that is fine.
+> 2. I have no iPad and no Mac, and the app declares iPad support, so Connect requires a 13" iPad screenshot set —
+>    the current one is from the old binary and shows "585 channels". Two options, both needing one more EAS build:
+>    (a) keep iPad support — build a simulator variant (build 7) and capture via a browser simulator;
+>    (b) drop iPad support (`supportsTablet: false`) — build 7 becomes iPhone-only and no iPad screenshots are
+>    required at all; iPad users still get the app in compatibility mode.
+>    Which do you want? Either way the iPhone screenshots come from build 6 on my own phone.
+
+### Rules for every screenshot
+
+**No channel count and no title count anywhere on screen.** No dog. Nothing that is not in this build. Shots 1 and 3
+are the honest ones — eight and eight.
 
 ## TASK 5 — Paste the listing text
 
