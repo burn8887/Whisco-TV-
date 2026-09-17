@@ -150,26 +150,45 @@ rm -rf ~/keys-src
 
 ---
 
-## TASK 1 — Run the build (5 minutes of typing, then it runs on its own)
+## TASK 1 — Install the project's dependencies, then run the build
 
-Open Terminal and paste this whole block:
+**First this — the repo was cloned but its dependencies were never installed**, which is why the build stopped with
+`Unable to resolve a valid config plugin for ./plugins/withNoBackgroundAudio`. That plugin is part of the app, and it
+needs the project's own packages to load. One command fixes it:
 
 ```
-cd whisco-mobile
+cd ~/whisco-mobile
+npm install
+```
+
+This takes 1–3 minutes and prints a lot of noise. It is done when you get your prompt back. **Do not** run
+`npm audit fix` or update anything — the repo pins exact versions for a reason.
+
+**Check it before you spend a build on it:**
+
+```
+npx expo config --type public > /dev/null && echo "CONFIG OK"
+```
+
+`CONFIG OK` means the app's configuration and that plugin now resolve. If it errors instead, send me the message.
+
+**Now the build:**
+
+```
 git checkout main
 git pull
 git log --oneline -1
 npx eas-cli@latest build --platform ios --profile production
 ```
 
-*(Use `npx eas-cli@latest`, not plain `eas` — `eas` alone is not installed anywhere yet, and `npx` fetches the
-tool without installing anything globally.)*
-
-- The `git log` line must print `3669584` or later. If it prints anything else, stop and tell me.
+- The `git log` line must print **`3669584`** or later.
+- The line *"Detected that your app uses Expo Go for development…"* is a **harmless warning** — Expo says it for
+  every project. Nothing to fix. (If it bothers you:
+  `export EAS_BUILD_NO_EXPO_GO_WARNING=true` first.)
+- **Write down the build number EAS gives you.** It is not necessarily 6 — EAS assigns it.
 - **Never run `eas submit`.** It is barred, and this project's submit profile points at a key path that only
   exists in my workspace, so it would fail anyway.
-- **Write down the build number EAS gives you.** It is not necessarily 6 — EAS assigns it.
-- Leave it running. It takes a while.
+- It takes 15–25 minutes. You can close the terminal; the build runs on Expo's servers.
 
 ## TASK 2 — Prove the build is clean (the plist check)
 
