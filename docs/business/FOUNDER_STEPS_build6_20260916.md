@@ -187,6 +187,13 @@ git log --oneline -1
 npx eas-cli@latest build --platform ios --profile production
 ```
 
+**You are building 7, not 6.** Grok ruled: drop iPad for this pass. That change is in `main` now
+(`supportsTablet: false`), so `git pull` is what picks it up. `git log` must print **`15075f7`** or later —
+if it still says `3669584`, the pull did not take and you would rebuild the iPad binary by mistake.
+
+Verified locally before you spend a build: the change produces `TARGETED_DEVICE_FAMILY = "1"` (iPhone only) and
+`UIBackgroundModes` still **ABSENT**. Build 6 stays in TestFlight as a leftover — ignore it.
+
 - The `git log` line must print **`3669584`** or later.
 - The line *"Detected that your app uses Expo Go for development…"* is a **harmless warning** — Expo says it for
   every project. Nothing to fix. (If it bothers you:
@@ -240,7 +247,7 @@ print('UIBackgroundModes:', d.get('UIBackgroundModes', 'ABSENT'))
 - **`UIBackgroundModes: ABSENT` → PASS.** Grok's condition 1 is met. Keep this output.
 - **`UIBackgroundModes: ['audio']` → STOP.** Do not upload anything. Tell me immediately.
 
-**Record for the report:** the EAS build number was **6** (the build log said *"Incremented buildNumber from 5 to 6"*).
+**Record for the report:** the EAS build number should be **7** — read it off the log, do not assume it.
 
 ## TASK 3 — Put build 6 on your phone (TestFlight)
 
@@ -354,32 +361,16 @@ Take these four on the iPhone, then check the pixel size of one of them (I can r
 (6.1" = 1170×2532), the capture does not match any accepted size and would have to be scaled — in that case tell me
 and we will handle it together.
 
-### The iPad set — this is blocked, and needs a decision
+### The iPad set — solved by dropping iPad
 
-The existing iPad screenshots are from the old binary (they show "585 channels"), so they must be replaced. With no
-iPad and no Mac, there are two routes, and **both need one more EAS build**, so both need Grok's approval:
+Grok ruled: **drop iPad for this pass.** Build 7 declares `supportsTablet: false`, so App Store Connect no longer
+asks for a 13" iPad set at all, and the stale iPad screenshots come out.
 
-**Route A — keep iPad support.** I add a *simulator* build profile to `eas.json`; you run one more build (it becomes
-build 7) and upload the simulator artifact — not the IPA — to a browser simulator, choose an iPad Pro 12.9", and
-capture. More moving parts, and I would verify the exact-capture size first.
+**In Connect: version 1.0 → App Store tab → Screenshots → delete the iPad Pro 12.9" set entirely** (the blocks with
+the old "585 channels" pictures). Nothing replaces them. iPad users still get the app in iPhone compatibility mode.
 
-**Route B — drop iPad support.** One line in `app.json` (`"supportsTablet": false`), one more build (build 7), and
-**no iPad screenshots are required at all**. iPad users still get the app in iPhone compatibility mode. Fewer moving
-parts, and it removes the problem for every future release.
-
-**Neither route is authorised yet.** Send Grok this:
-
-> Build 6 passed the plist check (UIBackgroundModes ABSENT on the real artifact).
->
-> Two questions:
-> 1. Getting build 6 onto my phone for the screenshots you asked for needs a TestFlight upload (`eas submit`).
->    Expo's docs confirm it uploads to TestFlight only and never submits for review. Confirm that is fine.
-> 2. I have no iPad and no Mac, and the app declares iPad support, so Connect requires a 13" iPad screenshot set —
->    the current one is from the old binary and shows "585 channels". Two options, both needing one more EAS build:
->    (a) keep iPad support — build a simulator variant (build 7) and capture via a browser simulator;
->    (b) drop iPad support (`supportsTablet: false`) — build 7 becomes iPhone-only and no iPad screenshots are
->    required at all; iPad users still get the app in compatibility mode.
->    Which do you want? Either way the iPhone screenshots come from build 6 on my own phone.
+Grok also chose the subtitle wording for the tap: **`Live news & public-domain film`** — exactly what is already
+pasted, so nothing to change there.
 
 ### Rules for every screenshot
 
@@ -480,9 +471,20 @@ docs/business/Whisco_TV_Content_Rights_Statement_build6.pdf
 
 Demo account: **still not required** — leave that switch off.
 
-## TASK 7 — Stop, and report these four things
+## TASK 7 — Submit build 7 for review, then report
 
-Do **not** press Submit. Send me these four, and Grok writes the Resolution Center letter:
+Grok's ruling, verbatim: *"Do now: supportsTablet: false → build 7 → same ABSENT check → TestFlight → iPhone shots
+on 7 → **Submit for Review on 7**. Build 6 stays in TestFlight as a leftover. Still no Resolution Center until the
+reviewing binary is the one you just submitted."*
+
+So the order is now explicit:
+
+1. Build 7 → plist check (`ABSENT`) → TestFlight → iPhone screenshots → put them in Connect.
+2. Then **Submit for Review** — on build 7, with the listing and notes already pasted.
+3. **Then** tell Grok, and he writes the Resolution Center letter. The letter waits until build 7 is the reviewing
+   binary — not before.
+
+Still do **not** press anything in the Resolution Center yourself. Send me these four, and Grok writes the Resolution Center letter:
 
 1. **The EAS build number**, and whether the plist check printed nothing.
 2. **Screenshots uploaded?** — yes/no, both device sizes.
