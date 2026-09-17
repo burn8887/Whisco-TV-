@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getChannelPageData } from "@/lib/cached";
-import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosChannel } from "@/lib/store-ios";
 
 // Mobile API v1 — single live channel + related channels.
@@ -14,9 +14,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   const { id } = await params;
 
   // ---------------------------------------------------------------- iOS store
-  if (isIosStore(req)) {
+  if (isClearedStore(req)) {
     const channel = await getIosChannel(id);
-    if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404, headers: IOS_HEADERS });
+    if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404, headers: CLEARED_HEADERS });
 
     return NextResponse.json(
       {
@@ -38,7 +38,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
         // channels into the app through the back door.
         related: [],
       },
-      { headers: IOS_HEADERS }
+      { headers: CLEARED_HEADERS }
     );
   }
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getVodShelves, getVodGrid } from "@/lib/cached";
-import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosVodTitles, getIosCollections } from "@/lib/store-ios";
 
 // Mobile API v1 — VOD.
@@ -74,7 +74,7 @@ export async function GET(req: Request) {
   // Cleared titles only. If a collection filter matches nothing cleared, this
   // returns an EMPTY grid — it never falls back to the public catalogue, because
   // a fallback would hand the reviewer exactly the content we are gating out.
-  if (isIosStore(req)) {
+  if (isClearedStore(req)) {
     if (!collection && !q) {
       const [items, collections] = await Promise.all([getIosVodTitles({ limit: 80 }), getIosCollections()]);
       return NextResponse.json(
@@ -91,7 +91,7 @@ export async function GET(req: Request) {
           })),
           items: items.map(slim),
         },
-        { headers: IOS_HEADERS }
+        { headers: CLEARED_HEADERS }
       );
     }
     const items = await getIosVodTitles({ collection, q, limit: 80 });
@@ -107,7 +107,7 @@ export async function GET(req: Request) {
         total: items.length,
         items: items.map(slim),
       },
-      { headers: IOS_HEADERS }
+      { headers: CLEARED_HEADERS }
     );
   }
 

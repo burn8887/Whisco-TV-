@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLivePageData } from "@/lib/cached";
-import { isIosStore, IOS_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosLiveChannels } from "@/lib/store-ios";
 import { excludeIosOnly } from "@/lib/store-public";
 
@@ -20,13 +20,13 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10) || 1);
 
-  // ---------------------------------------------------------------- iOS store
-  if (isIosStore(req)) {
+  // -------------------------------------------------- cleared store (iOS/Android)
+  if (isClearedStore(req)) {
     const channels = await getIosLiveChannels();
 
     return NextResponse.json(
       {
-        store: "ios",
+        store: requestedStore(req),
         page: 1,
         pageSize: channels.length,
         filteredCount: channels.length,
@@ -56,7 +56,7 @@ export async function GET(req: Request) {
         // as the doctrine above, without the crash.
         facets: { countries: [], categories: [], languages: [] },
       },
-      { headers: IOS_HEADERS }
+      { headers: CLEARED_HEADERS }
     );
   }
 
