@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getVodShelves, getVodGrid } from "@/lib/cached";
-import { isClearedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosVodTitles, getIosCollections } from "@/lib/store-ios";
 
 // Mobile API v1 — VOD.
@@ -79,7 +79,7 @@ export async function GET(req: Request) {
       const [items, collections] = await Promise.all([getIosVodTitles({ limit: 80 }), getIosCollections()]);
       return NextResponse.json(
         {
-          store: "ios",
+          store: requestedStore(req),
           mode: "shelves",
           total: items.length,
           // Shelves are derived from the CLEARED set, so no chip or count can
@@ -97,7 +97,7 @@ export async function GET(req: Request) {
     const items = await getIosVodTitles({ collection, q, limit: 80 });
     return NextResponse.json(
       {
-        store: "ios",
+        store: requestedStore(req),
         mode: "grid",
         collection,
         q,

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getChannelPageData } from "@/lib/cached";
-import { isClearedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosChannel } from "@/lib/store-ios";
 
 // Mobile API v1 — single live channel + related channels.
@@ -20,7 +20,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
 
     return NextResponse.json(
       {
-        store: "ios",
+        store: requestedStore(req),
         channel: {
           id: channel.id,
           name: channel.name,

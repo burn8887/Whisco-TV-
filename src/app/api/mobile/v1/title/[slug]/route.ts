@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getTitlePageData } from "@/lib/cached";
-import { isClearedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosTitle, getIosSimilar } from "@/lib/store-ios";
 
 // Mobile API v1 — full title detail (movie/doc streamUrl, or series with
@@ -21,7 +21,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
 
     return NextResponse.json(
       {
-        store: "ios",
+        store: requestedStore(req),
         title: {
           id: title.id,
           slug: title.slug,
