@@ -257,22 +257,35 @@ mv ~/AuthKey_B279KL3Y3K.p8 ~/whisco-keys/
 ls -l ~/whisco-keys/
 ```
 
-**Step 3.2 — upload.** `eas.json`'s key path points at my machine, so these three environment variables hand EAS the
-correct path instead — no file editing:
+**Step 3.2 — point `eas.json` at the key on your machine.** The path inside it was written for my sandbox. I read the
+eas-cli source: `eas submit` takes the key path from `eas.json` **only** — the `EXPO_ASC_*` environment variables
+apply to other commands, not this one. So fix the path once, locally (**do not commit this change**):
 
 ```
 cd ~/whisco-mobile
-EXPO_ASC_API_KEY_PATH="$HOME/whisco-keys/AuthKey_B279KL3Y3K.p8" \
-EXPO_ASC_KEY_ID="B279KL3Y3K" \
-EXPO_ASC_ISSUER_ID="b071aa69-7af0-411d-9019-9b9057882600" \
+sed -i 's|/home/user/.keys/AuthKey_B279KL3Y3K.p8|/home/burn8887/whisco-keys/AuthKey_B279KL3Y3K.p8|' eas.json
+grep ascApiKeyPath eas.json
+```
+
+`grep` must print your path, starting `/home/burn8887/`. If it still shows `/home/user/...`, the substitution did not
+take — tell me.
+
+**Step 3.3 — upload:**
+
+```
 npx eas-cli@latest submit --platform ios --profile production --latest
 ```
 
-- It may ask **"Do you want to submit the latest build?"** → yes, that is build 6.
-- `--latest` means it takes build 6 without asking which one.
-- **Do not** add `--auto-submit` or press anything in App Store Connect's review screens.
+- `--latest` takes build 6 without asking which build.
+- The key ID (`B279KL3Y3K`) is read automatically from the filename. If it asks for an **Issuer ID**, paste:
+  `b071aa69-7af0-411d-9019-9b9057882600`
+- If it still says the file does not exist and offers *"Path to App Store Connect API Key:"*, type the **absolute**
+  path (a `~` will not work there) and press Enter:
+  `/home/burn8887/whisco-keys/AuthKey_B279KL3Y3K.p8`
+- **Do not** add `--auto-submit`, and do not press anything in App Store Connect's review screens. This uploads the
+  binary to TestFlight and nothing more.
 
-**Step 3.3 — wait, then install.** Apple takes 5–15 minutes to process. Then:
+**Step 3.4 — wait, then install.** Apple takes 5–15 minutes to process. Then:
 
 1. On your iPhone, open **TestFlight**.
 2. **Whisco TV** appears with the new build → tap **Install**.
