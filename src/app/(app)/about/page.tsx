@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Tv2, Film, Globe2, ShieldCheck, Mail } from "lucide-react";
-import { getAboutStats } from "@/lib/cached";
+import { Mail } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+// NOTE (2026-09-17): this page carries no catalogue counts, by design.
+// /about is the App Store Marketing URL, and a reviewer comparing it against
+// the apps must never find two different catalogues described. The website
+// indexes broadly; the apps ship a smaller, fully documented catalogue. Say
+// that in words and never in numbers. Do not reintroduce a stat tile here.
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Whisco TV is a free, ad-supported streaming service for Gulf households — nationals and expats alike. Live TV and on-demand movies and series in 13 languages. No subscription, ever.",
+    "Whisco TV is a free, ad-supported service for Gulf households — nationals and expats alike. We host no video files: everything plays from the source that owns it. No subscription, ever.",
 };
 
 export default async function AboutPage() {
-  const { channels, titles, countryCount } = await getAboutStats();
-
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
       <h1 className="text-3xl font-extrabold mb-2">About Whisco TV</h1>
@@ -24,26 +26,31 @@ export default async function AboutPage() {
           <h2 className="text-lg font-bold text-white mb-2">What we are</h2>
           <p>
             Whisco TV is a <span className="text-emerald-400 font-semibold">100% free, ad-supported</span> streaming
-            service built for every household in Bahrain, Saudi Arabia, the UAE, Kuwait, Qatar, and Oman — Gulf nationals and the region’s expatriate communities alike —
-            and for anyone, anywhere, who wants TV from home. South Asian, Filipino, Arab, Indonesian, Nepali, Sri
-            Lankan, and Turkish-drama audiences all have a shelf here, in their own language. There is no subscription,
-            no credit card, and no catch: advertising keeps the lights on.
+            service built for every household in Bahrain, Saudi Arabia, the UAE, Kuwait, Qatar, and Oman — Gulf
+            nationals and the region’s expatriate communities alike — and for anyone, anywhere, who wants the news
+            from home. News, sport, and film in the languages the Gulf actually watches. There is no subscription, no
+            credit card, and no catch: advertising keeps the lights on.
           </p>
         </section>
 
-        <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { icon: Tv2, label: "Live channels", value: `${channels}+` },
-            { icon: Film, label: "On-demand titles", value: `${titles.toLocaleString()}+` },
-            { icon: Globe2, label: "Countries of origin", value: `${countryCount}+` },
-            { icon: ShieldCheck, label: "Languages", value: "13" },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl bg-zinc-900/70 ring-1 ring-white/5 p-4 text-center">
-              <s.icon size={18} className="mx-auto text-orange-400 mb-2" />
-              <p className="text-xl font-extrabold text-white">{s.value}</p>
-              <p className="text-[11px] text-zinc-500 mt-0.5">{s.label}</p>
-            </div>
-          ))}
+        <section>
+          <h2 className="text-lg font-bold text-white mb-2">The website and the apps</h2>
+          <p>
+            Whisco TV on the web is an <span className="text-white font-semibold">index</span>. It brings together live
+            channels and films that are streamed from the source that owns them — the broadcaster&apos;s own player, or
+            archive.org&apos;s own player. We host no video files of our own.
+          </p>
+          <p className="mt-3">
+            Our iPhone and Android apps carry a smaller, fully documented catalogue:{" "}
+            <span className="text-white font-semibold">live news from official broadcaster YouTube channels</span>, and{" "}
+            <span className="text-white font-semibold">public-domain short films from the Internet Archive</span>. Every
+            item in the apps shows the source it plays from, on that item&apos;s own page.
+          </p>
+          <p className="mt-3">
+            Rights holders: if you&apos;d like a source reviewed, updated, or removed, contact{" "}
+            <a href="mailto:legal@whisco.tv" className="text-orange-400 hover:underline">legal@whisco.tv</a> and
+            we&apos;ll respond promptly.
+          </p>
         </section>
 
         <section>

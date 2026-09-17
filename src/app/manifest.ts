@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Whisco TV — Free Live TV & Movies",
+    name: "Whisco TV — Live News & Public-Domain Film",
     short_name: "Whisco TV",
     description:
-      "500+ free live TV channels and 14,000+ free movies, series & documentaries. 100% free, ad-supported — no subscription, ever.",
+      "Live news from official broadcaster channels and public-domain films. Free, ad-supported, no subscription, ever.",
     id: "/",
     start_url: "/browse",
     scope: "/",
