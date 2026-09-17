@@ -43,11 +43,18 @@ export async function GET(req: Request) {
           rightsBasis: c.rightsBasis ?? null,
           evidenceUrl: c.evidenceUrl ?? null,
         })),
-        // Deliberately NO facets. The public directory advertises language chips
-        // ("Arabic 164", "Hindi 142") describing a catalogue this build does not
-        // carry — that is Guideline 2.3.1(a), promoting content the app does not
-        // offer, and it is also the exact frame Apple screenshotted on 15 Sep.
-        facets: null,
+        // Deliberately EMPTY facets — never null.
+        // The public directory advertises language chips ("Arabic 164", "Hindi 142")
+        // describing a catalogue this build does not carry — that is Guideline
+        // 2.3.1(a), promoting content the app does not offer, and it is the exact
+        // frame Apple screenshotted on 15 Sep. So there are no chips to show.
+        //
+        // But it must be an empty OBJECT, not null. The shipped build 6 renders
+        // `data?.facets.languages` — optional chaining guards `data`, not `facets`,
+        // so a null facets crashed the Live TV screen the moment the response
+        // arrived. Empty arrays render no chips, which has exactly the same effect
+        // as the doctrine above, without the crash.
+        facets: { countries: [], categories: [], languages: [] },
       },
       { headers: IOS_HEADERS }
     );
