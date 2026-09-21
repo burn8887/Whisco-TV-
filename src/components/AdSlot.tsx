@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+import { AD_UNIT_LIVE } from "@/lib/ads";
+
 // Display ad slot — provider-agnostic wrapper around Google AdSense.
 //
 // Behavior:
@@ -35,7 +37,7 @@ export default function AdSlot({
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (!CLIENT || pushed.current) return;
+    if (!CLIENT || !AD_UNIT_LIVE || pushed.current) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
       pushed.current = true;
@@ -44,7 +46,18 @@ export default function AdSlot({
     }
   }, []);
 
-  if (!CLIENT) return null;
+  // No approved, serving unit → render nothing at all.
+  //
+  // This used to render the <ins> regardless. AdSense's script then injected its
+  // host element and the slot painted as a WHITE ~90px bar captioned
+  // "ADVERTISEMENT" on production, measured at 1104x90 on the title page, /vod
+  // and /live. An unfilled reserved slot is not a neutral placeholder on a dark
+  // UI; it is a bright rectangle promising an ad we cannot show.
+  //
+  // The design system sanctions exactly this (§4.3: "Ad well has min-height OR
+  // collapses when empty"). When NEXT_PUBLIC_ADSENSE_SLOT is set, the reserve
+  // and the label both return automatically with no per-page edit.
+  if (!CLIENT || !AD_UNIT_LIVE) return null;
 
   return (
     <div className={`my-8 ${className}`}>

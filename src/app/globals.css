@@ -323,3 +323,59 @@ body {
   ::view-transition-new(*) { animation-duration: 0.001ms !important; }
   .w-shelf-track { scroll-behavior: auto; }
 }
+
+/* ============================================================================
+   TITLE PAGE — two-column layout with subgrid  (Design System §4.1)
+   Title + meta + actions and the related shelf share ONE column, so everything
+   below the header lines up under the title instead of running back under the
+   poster. Progressive: plain grid is the baseline, @supports adds real subgrid
+   so the content column is defined once and every band aligns to it by
+   construction rather than by a hard-coded offset.
+   ========================================================================= */
+
+.w-title-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--w-space-6);
+}
+
+@media (min-width: 768px) {
+  .w-title-layout {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    column-gap: var(--w-space-6);
+    row-gap: 0;               /* blocks below carry their own top margin */
+    align-items: start;
+  }
+  .w-title-poster  { grid-column: 1; grid-row: 1; }
+  .w-title-details { grid-column: 2; grid-row: 1; }
+
+  /* The band spans both tracks, then re-exposes them to its own children. */
+  .w-title-rest { grid-column: 1 / -1; }
+
+  @supports (grid-template-columns: subgrid) {
+    .w-title-rest {
+      display: grid;
+      grid-template-columns: subgrid;
+      column-gap: var(--w-space-6);
+    }
+    .w-title-rest > * { grid-column: 2; }
+  }
+}
+
+/* Legacy insurance only — every browser this product targets has grid. Kept
+   because the design system names a flex fallback explicitly. */
+@supports not (display: grid) {
+  .w-title-layout { display: flex; flex-wrap: wrap; gap: var(--w-space-6); }
+  .w-title-details { flex: 1 1 28rem; }
+}
+
+/* Collapsed ad well (Desk ruling 21 Sep, P1 — guide pages).
+   `min-height: 0` alone is not enough: .w-ad-well carries a 1px border and an
+   elevated background, so a zero-height well would still paint a visible line
+   across the page. Collapse means nothing is left to see. */
+.w-ad-well--empty {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
