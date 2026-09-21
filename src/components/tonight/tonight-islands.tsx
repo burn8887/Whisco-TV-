@@ -52,7 +52,7 @@ export function TonightPoster({ src, alt, communityLabel }: PosterProps) {
   if (failed || !src) {
     return (
       <div
-        className="flex aspect-[2/3] w-full flex-col items-center justify-center bg-gradient-to-br from-zinc-900 via-[#0a0a0f] to-orange-950/40 px-3 text-center"
+        className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-zinc-900 via-[#0a0a0f] to-orange-950/40 px-3 text-center"
         aria-hidden="true"
       >
         <span className="text-gradient text-lg font-extrabold tracking-tight">
@@ -69,14 +69,15 @@ export function TonightPoster({ src, alt, communityLabel }: PosterProps) {
     // Matching the existing homepage Featured row: raw <img>, not next/image.
     // Remote patterns for i.ytimg.com / archive.org are not assumed to be in next.config.
     // eslint-disable-next-line @next/next/no-img-element
+    // 16:9 letterbox on canvas inside the card well — never cover-and-crop.
     <img
       src={src}
       alt={alt}
-      width={190}
-      height={285}
+      width={480}
+      height={270}
       loading="lazy"
       decoding="async"
-      className="aspect-[2/3] w-full object-cover"
+      className="w-card-art"
       onError={() => setFailed(true)}
     />
   );

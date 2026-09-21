@@ -2,6 +2,7 @@ import { getVodShelves, getVodGrid } from "@/lib/cached";
 import TitleCard from "@/components/TitleCard";
 import AdSlot from "@/components/AdSlot";
 import Link from "next/link";
+import MaghribPhase from "@/components/MaghribPhase";
 import { Search, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -164,12 +165,10 @@ export default async function VodPage({
                   See all {counts.get(c)} <ArrowRight size={13} />
                 </Link>
               </div>
-              <div className="-mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto no-scrollbar">
-                <div className="flex gap-3 w-max">
-                  {shelfTitles[i].map((t) => (
-                    <TitleCard key={t.id} title={t as any} variant="row" />
-                  ))}
-                </div>
+              <div className="w-shelf-track w-shelf-track--inset no-scrollbar -mx-4 sm:-mx-6">
+                {shelfTitles[i].map((t) => (
+                  <TitleCard key={t.id} title={t as any} variant="row" />
+                ))}
               </div>
             </section>
           ))}
@@ -192,8 +191,9 @@ export default async function VodPage({
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-6 flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold">
+        <div className="w-hero-motif" id="hub-hero">
+          <MaghribPhase selector="#hub-hero" />
+          <h1 className="w-display text-2xl sm:text-3xl font-extrabold">
             {activeCollection ? `${COLLECTION_EMOJI[activeCollection] ?? ""} ${activeCollection}` : "Search results"}
           </h1>
           <p className="text-zinc-500 text-sm mt-1">
@@ -224,11 +224,22 @@ export default async function VodPage({
       </div>
 
       {titles.length === 0 && (
-        <div className="text-center py-20">
+        <div className="w-empty">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/whisco-mascot-alpha.png" alt="Whisco looking confused" className="w-28 mx-auto mb-4 opacity-90" />
-          <p className="text-zinc-400 font-medium">Even Whisco couldn't sniff any of these out.</p>
-          <p className="text-zinc-600 text-sm mt-1">Try a different search or collection.</p>
+          <img src="/whisco-mascot-280.webp" alt="" width={120} height={120} />
+          <p className="font-medium">Nothing matches. Try a title, a language, or a channel name.</p>
+          <Link
+            href="/vod"
+            className="w-focusable px-5 py-2.5 text-sm font-semibold"
+            style={{
+              background: "var(--w-bg-elev-2)",
+              border: "1px solid var(--w-chip-border)",
+              borderRadius: "var(--w-radius-pill)",
+              color: "var(--w-fg)",
+            }}
+          >
+            All collections
+          </Link>
         </div>
       )}
 

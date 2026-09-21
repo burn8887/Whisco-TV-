@@ -4,6 +4,8 @@ import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getHomeStats } from "@/lib/cached";
 import MascotVideo from "@/components/MascotVideo";
+import MaghribPhase from "@/components/MaghribPhase";
+import TitleCard from "@/components/TitleCard";
 import { SHOW_MASCOT_VIDEOS } from "@/config/features";
 import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Compass } from "lucide-react";
 
@@ -31,9 +33,14 @@ export default async function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden" id="hero">
+        {/* Maghrib hour — a CLASS on this hero, never a ticking clock in the DOM.
+            Bahrain sunset → +90m: ember lifts ~8%, aurora thickens. Home and hub
+            heroes only; never on /about, legal, the player or a guide body. */}
+        <MaghribPhase selector="#hero" />
+
         {/* aurora — ambient wash only, never a third brand colour in chrome */}
-        <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 -z-10 w-aurora" aria-hidden="true">
           <div
             className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full blur-3xl"
             style={{ background: "var(--w-aurora-a)" }}
@@ -60,7 +67,7 @@ export default async function Home() {
               </span>
 
               <h1
-                className="w-display text-4xl sm:text-6xl font-extrabold"
+                className="w-display text-4xl sm:text-6xl lg:text-7xl font-extrabold"
                 style={{ color: "var(--w-fg)" }}
               >
                 Free legal TV for Gulf households —{" "}
@@ -114,11 +121,26 @@ export default async function Home() {
                 className="absolute inset-0 m-auto w-72 h-72 sm:w-96 sm:h-96 rounded-full blur-3xl"
                 style={{ background: "var(--w-aurora-c)" }}
               />
+              {/* LCP KILL-LIST (design system §4.3, ranked fix #1 and #2).
+                  Measured before this change: LCP was this PNG — 398 kB, and at
+                  384×488 px it was 52% MORE PAINTED AREA than the H1, so it won
+                  the race no matter what order the bytes arrived in.
+                  fetchPriority only reorders bytes; LCP is decided by area. Two
+                  fixes, both named in §4.3:
+                    1. 280px WebP — 18.7 kB instead of 398 kB (95% smaller)
+                    2. sized a step below the H1 at every breakpoint, so the
+                       headline is the largest paint. The dog is still the dog.
+                  width/height carry the true intrinsic ratio (280×356) so the
+                  box is reserved before pixels arrive — no shift, no float. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/whisco-mascot-alpha.png"
+                src="/whisco-mascot-280.webp"
                 alt="Whisco, the Shih Tzu mascot of Whisco TV"
-                className="relative w-56 sm:w-80 lg:w-96 animate-float-gentle drop-shadow-2xl"
+                width={280}
+                height={356}
+                fetchPriority="low"
+                decoding="async"
+                className="w-hero-motif relative w-44 h-auto sm:w-52 lg:w-56 drop-shadow-2xl"
               />
             </div>
           </div>
@@ -128,7 +150,7 @@ export default async function Home() {
       {/* CINEMATIC STRIP — full-bleed Whisco clip, blended into the page with
           gradient bleeds top/bottom and side fades; no frame, no box. */}
       {SHOW_MASCOT_VIDEOS && (
-        <section aria-label="Whisco in action" className="relative overflow-hidden -mt-2">
+        <section aria-label="Whisco in action" className="relative overflow-hidden -mt-2 w-hero-motif">
           <MascotVideo
             src="/whisco-zoom-banner.mp4"
             poster="/whisco-zoom-banner-poster.jpg"
@@ -143,7 +165,7 @@ export default async function Home() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0f] to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-6 sm:bottom-10 text-center">
             <p className="text-sm sm:text-base font-bold text-white/90 drop-shadow-lg tracking-wide">
-              Life&apos;s better at full speed — <span className="w-gradient-text">and full free.</span>
+              One room for the household — <span className="w-gradient-text">no catch, no subscription.</span>
             </p>
           </div>
         </section>
@@ -262,29 +284,12 @@ export default async function Home() {
               Browse the full library →
             </Link>
           </div>
-          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+          {/* Was a hand-rolled strip forcing a 16:9 thumb into aspect-[2/3] with
+              object-cover — the same smear crop the card spec bans, on the page
+              most people land on first. Now the real card. */}
+          <div className="w-shelf-track w-shelf-track--inset no-scrollbar -mx-4 sm:-mx-6">
             {featuredTitles.map((t) => (
-              <Link
-                key={t.id}
-                href={`/title/${t.slug}`}
-                className="shrink-0 w-[160px] sm:w-[190px] overflow-hidden transition"
-                style={{
-                  borderRadius: "var(--w-radius-card)",
-                  background: "var(--w-bg-elev-1)",
-                  border: "1px solid var(--w-chip-border)",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={t.posterUrl} alt={t.name} className="w-full aspect-[2/3] object-cover" />
-                <div className="p-2.5">
-                  <p className="text-sm font-semibold truncate" style={{ color: "var(--w-fg)" }}>
-                    {t.name}
-                  </p>
-                  <p className="text-xs mt-0.5" style={{ color: "var(--w-fg-faint)" }}>
-                    {t.releaseYear}
-                  </p>
-                </div>
-              </Link>
+              <TitleCard key={t.id} title={t as any} variant="row" />
             ))}
           </div>
         </section>
