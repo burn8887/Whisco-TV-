@@ -9,7 +9,7 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 text-zinc-300 leading-relaxed">
       <h1 className="text-3xl font-extrabold text-white mb-2">Privacy Policy</h1>
-      <p className="text-sm text-zinc-500 mb-8">Last updated: August 2026</p>
+      <p className="text-sm text-zinc-500 mb-8">Last updated: September 2026</p>
 
       <div className="space-y-8 text-sm">
         <section>
@@ -86,7 +86,13 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-bold text-white mb-2">Your choices</h2>
           <ul className="list-disc pl-5 space-y-1">
             <li>You can use Whisco TV without an account.</li>
-            <li>You can delete your account and profiles at any time from the Account page.</li>
+            <li>
+              You can request deletion of your account and profile data at any time by emailing{" "}
+              <a className="text-orange-400 hover:underline" href="mailto:legal@whisco.tv">
+                legal@whisco.tv
+              </a>
+              .
+            </li>
             <li>You can control cookies through your browser settings and the ad-personalization links above.</li>
           </ul>
         </section>
