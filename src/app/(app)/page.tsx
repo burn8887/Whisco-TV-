@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { TonightOnWhisco } from "@/components/tonight/TonightOnWhisco";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
@@ -5,6 +6,13 @@ import { getHomeStats } from "@/lib/cached";
 import MascotVideo from "@/components/MascotVideo";
 import { SHOW_MASCOT_VIDEOS } from "@/config/features";
 import { Globe2, Tv2, Film, ShieldCheck, Smartphone, Compass } from "lucide-react";
+
+// The homepage was the one indexable page without an explicit canonical;
+// Google was inferring it. Declare it so it matches the sitemap and robots.txt
+// byte for byte.
+export const metadata: Metadata = {
+  alternates: { canonical: "https://www.whisco.tv/" },
+};
 
 export const dynamic = "force-dynamic";
 
