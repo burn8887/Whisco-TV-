@@ -141,11 +141,16 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
       </section>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 -mt-24 relative">
-        <div className="flex flex-col md:flex-row gap-8">
+        {/* Two columns on desktop. The poster takes column 1; title, meta and
+            actions take column 2 — and so does everything below, via the
+            .w-title-rest band (design system §4.1). Previously that block sat
+            outside the two-column row and ran the full container width, so it
+            started back under the poster and broke the alignment. */}
+        <div className="w-title-layout">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={title.posterUrl} alt={title.name} className="w-40 sm:w-56 rounded-xl ring-1 ring-white/10 shrink-0 shadow-2xl" />
+          <img src={title.posterUrl} alt={title.name} className="w-title-poster w-40 sm:w-56 rounded-xl ring-1 ring-white/10 shrink-0 shadow-2xl" />
 
-          <div className="flex-1 pt-4 md:pt-24">
+          <div className="w-title-details pt-4 md:pt-24">
             <span className="flex items-center gap-2 text-xs font-bold text-orange-400 uppercase tracking-wide">
               {title.type}
               <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full ring-1 ring-emerald-500/30 normal-case">Free</span>
@@ -216,7 +221,10 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
               />
             </div>
           </div>
-        </div>
+
+          {/* Everything below shares the content column with the title.
+              The band spans both tracks and re-exposes them as a subgrid. */}
+          <div className="w-title-rest">
 
         {title.type !== "MOVIE" && title.seasons.length > 0 && (
           <div className="mt-14">
@@ -293,6 +301,8 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
             build a watchlist and resume playback across devices.
           </p>
         </section>
+          </div>
+        </div>
       </div>
     </div>
   );
