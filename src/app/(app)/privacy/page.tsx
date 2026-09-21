@@ -107,7 +107,7 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-lg font-bold text-white mb-2">Contact</h2>
-          <p>Questions about this policy? Contact us at privacy@whisco.tv.</p>
+          <p>Questions about this policy? Contact us at legal@whisco.tv.</p>
         </section>
       </div>
     </div>
