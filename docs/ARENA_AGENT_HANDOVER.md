@@ -2,7 +2,7 @@
 
 **For the next Arena Agent Mode chat. Possibly tonight, possibly in a month.**
 **Written:** 2026-09-21 21:11 UTC · **2026-09-22 00:11 Asia/Bahrain**
-**Last measured:** 2026-09-21 21:11 UTC — except the `main` SHA in §6, corrected at **21:22 UTC** after this file's own commit landed (a docs-only commit still triggers a Vercel build; the site itself is unchanged).
+**Last measured:** 2026-09-21 21:11 UTC — the §6 `main` row deliberately names the last **site-affecting** merge, not `HEAD`, so it stays true as docs commit on top of it (a docs-only commit still triggers a Vercel build; the site itself is unchanged).
 
 Everything here is either **standing law** (does not expire) or a **dated snapshot** (re-measure it —
 the repo wins over this document). Where something is unchecked it says `NOT IN DATA`. There are **no
@@ -188,7 +188,7 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 
 | repo | branch | short | full | working tree |
 |---|---|---|---|---|
-| `Whisco-TV-` | `main` | **`1d4e43f`** | `1d4e43f` = **this handover's own commit**; parent `3378da2` = merge of PR #19 (`legal@` everywhere) | one known mode-only flap: `docs/business/make-signing-files.sh` (755→644, **zero content**) — never commit it |
+| `Whisco-TV-` | `main` | last **site-affecting** merge **`3378da2`** (PR #19) | this handover landed as docs-only commit(s) on top of `3378da2`. **Do not compare this line to `HEAD`** — run `git log --oneline -10` and check whether anything after `3378da2` touches `src/`; if it does, this document is stale | one known mode-only flap: `docs/business/make-signing-files.sh` (755→644, **zero content**) — never commit it |
 | `whisco-mobile` | `main` | **`3ad78c8`** | `3ad78c8831b35719d1f7e076e5f120df843ad4b6` | clean |
 | Vercel prod | — | renders `07cc2cb` | — | READY |
 
