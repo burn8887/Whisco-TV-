@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function GuidesIndex() {
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-      <h1 className="text-3xl font-extrabold mb-2">Guides</h1>
-      <p className="text-zinc-400 mb-8">
+    <div className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: "68ch" }}>
+      <h1 className="w-display text-3xl font-extrabold mb-2">Guides</h1>
+      <p className="mb-8" style={{ color: "var(--w-fg-muted)" }}>
         Written by us, for our viewers — honest orientation for the content we carry.
       </p>
       <div className="space-y-4">
@@ -21,10 +21,10 @@ export default function GuidesIndex() {
           <Link
             key={g.slug}
             href={`/guides/${g.slug}`}
-            className="block rounded-2xl bg-zinc-900/70 ring-1 ring-white/5 hover:ring-orange-500/40 transition p-5"
+            className="block rounded-2xl p-5 transition" style={{ background: "var(--w-bg-elev-1)", border: "1px solid var(--w-chip-border)" }}
           >
             <p className="font-bold">{g.h1}</p>
-            <p className="text-sm text-zinc-400 mt-1 line-clamp-2">{g.intro}</p>
+            <p className="text-sm mt-1 line-clamp-2" style={{ color: "var(--w-fg-muted)" }}>{g.intro}</p>
           </Link>
         ))}
       </div>

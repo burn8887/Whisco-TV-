@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GUIDES } from "@/lib/guides";
+import AdWell from "@/components/AdWell";
+
+// Slugs authorised a bespoke OG card (work order, 21 Sep 2026).
+const NEW_OG_SLUGS = new Set([
+  "free-legal-hd-turkish-series-english-subtitles",
+  "hindi-serials-firestick-uae-legal",
+  "telugu-live-tv-dubai-apartment-no-dish",
+  "indonesian-tv-qatar-legal",
+  "free-legal-arabic-series-smart-tv-gulf",
+]);
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +24,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: guide.intro.slice(0, 160),
     alternates: { canonical: `https://www.whisco.tv/guides/${guide.slug}` },
     robots: { index: true, follow: true },
+    // Share card: bespoke per-guide card for the five new slugs only, per the
+    // 21 Sep work order. Older guides inherit the generic site card from the
+    // root layout — so the key is omitted entirely rather than set undefined,
+    // which would clear the inherited image.
+    ...(NEW_OG_SLUGS.has(guide.slug)
+      ? {
+          openGraph: {
+            type: "article" as const,
+            title: guide.title,
+            description: guide.intro.slice(0, 160),
+            url: `https://www.whisco.tv/guides/${guide.slug}`,
+            images: [
+              {
+                url: `https://www.whisco.tv/api/og/guide/${guide.slug}`,
+                width: 1200,
+                height: 630,
+                alt: guide.h1,
+              },
+            ],
+          },
+        }
+      : {}),
   };
 }
 
@@ -34,22 +66,26 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <div className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: "68ch" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <p className="text-xs font-bold text-orange-400 uppercase tracking-wide mb-2">Whisco TV Guide</p>
-      <h1 className="text-3xl font-extrabold mb-4">{guide.h1}</h1>
-      <p className="text-zinc-300 leading-relaxed mb-8">{guide.intro}</p>
+      <p className="w-caps text-xs font-bold mb-2" style={{ color: "var(--w-ember)" }}>Whisco TV Guide</p>
+      <h1 className="w-display text-3xl font-extrabold mb-4">{guide.h1}</h1>
+      <p className="leading-relaxed mb-8" style={{ color: "var(--w-fg-muted)", fontSize: "var(--w-fs-4)" }}>{guide.intro}</p>
 
       <div className="space-y-8">
         {guide.sections.map((s) => (
           <section key={s.heading}>
-            <h2 className="text-xl font-bold text-white mb-2">{s.heading}</h2>
+            <h2 className="w-display text-xl font-bold mb-2" style={{ color: "var(--w-fg)" }}>{s.heading}</h2>
             {s.paragraphs.map((p, i) => (
-              <p key={i} className="text-sm text-zinc-400 leading-relaxed mb-3">{p}</p>
+              <p key={i} className="leading-relaxed mb-3" style={{ color: "var(--w-fg-muted)" }}>{p}</p>
             ))}
           </section>
         ))}
       </div>
+
+      {/* The single reserved ad position for guide pages — empty by design
+          (see AdWell). Never inside prose, never near a player. */}
+      <AdWell className="mt-12" minHeight={250} />
 
       {/* Related guides — internal link mesh so every guide is reachable from
           every other (Googlebot discovers via links; sitemap alone is slow). */}
@@ -58,21 +94,21 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <div className="grid sm:grid-cols-2 gap-3">
           {GUIDES.filter((g) => g.slug !== slug).map((g) => (
             <Link key={g.slug} href={`/guides/${g.slug}`}
-              className="block rounded-xl bg-zinc-900/70 ring-1 ring-white/5 hover:ring-orange-500/40 transition p-4">
+              className="block rounded-xl p-4 transition" style={{ background: "var(--w-bg-elev-1)", border: "1px solid var(--w-chip-border)" }}>
               <p className="text-sm font-semibold line-clamp-2">{g.h1}</p>
             </Link>
           ))}
         </div>
       </div>
 
-      <div className="mt-10 rounded-2xl bg-zinc-900/70 ring-1 ring-white/10 p-6">
+      <div className="mt-10 rounded-2xl p-6" style={{ background: "var(--w-bg-elev-1)", border: "1px solid var(--w-chip-border)" }}>
         <p className="font-bold mb-1">Start watching — it&apos;s free</p>
-        <p className="text-sm text-zinc-400 mb-4">No subscription, no signup. Just press play.</p>
+        <p className="text-sm mb-4" style={{ color: "var(--w-fg-muted)" }}>No subscription. Press play.</p>
         <div className="flex flex-wrap gap-3">
-          <Link href={guide.ctaHref} className="px-5 py-2.5 rounded-full text-sm font-semibold bg-gradient-to-r from-orange-500 to-pink-600">
+          <Link href={guide.ctaHref} className="w-focusable px-5 py-2.5 text-sm font-semibold" style={{ background: "var(--w-grad-cta)", borderRadius: "var(--w-radius-pill)", color: "var(--w-ink)" }}>
             {guide.ctaLabel}
           </Link>
-          <Link href="/guides" className="px-5 py-2.5 rounded-full text-sm font-semibold bg-white/5 ring-1 ring-white/10">
+          <Link href="/guides" className="w-focusable px-5 py-2.5 text-sm font-semibold" style={{ background: "var(--w-bg-elev-2)", border: "1px solid var(--w-chip-border)", borderRadius: "var(--w-radius-pill)" }}>
             More guides
           </Link>
         </div>
