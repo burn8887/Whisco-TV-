@@ -19,13 +19,23 @@ export default async function WatchlistPage() {
       </div>
 
       {items.length === 0 ? (
-        <p className="text-zinc-500 py-16 text-center">
-          Nothing here yet. Browse the{" "}
-          <a href="/vod" className="text-orange-400 hover:underline">
-            on-demand library
-          </a>{" "}
-          and tap "Add to My List" on anything you want to watch later.
-        </p>
+        <div className="w-empty">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/whisco-mascot-280.webp" alt="" width={120} height={120} />
+          <p className="font-medium">Your list lives on this device. Add something from On Demand.</p>
+          <a
+            href="/vod"
+            className="w-focusable px-5 py-2.5 text-sm font-semibold"
+            style={{
+              background: "var(--w-bg-elev-2)",
+              border: "1px solid var(--w-chip-border)",
+              borderRadius: "var(--w-radius-pill)",
+              color: "var(--w-fg)",
+            }}
+          >
+            Browse On Demand
+          </a>
+        </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {items.map((i) => (

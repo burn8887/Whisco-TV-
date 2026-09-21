@@ -72,3 +72,254 @@ body {
 .animate-float-gentle {
   animation: float-gentle 5s ease-in-out infinite;
 }
+
+/* ============================================================================
+   LIVING-ROOM LAYER  (Desk order 2026-09-21 · Design System v1.0)
+   Warm. Quiet. Household. Lamp-lit. Honest. RTL-first.
+   Everything here uses logical properties so Arabic mirrors without a second
+   stylesheet. Every motion rule is zeroed by prefers-reduced-motion at the end.
+   ========================================================================= */
+
+/* --- 1. POSTER CARD -------------------------------------------------------
+   The well is a 16:9 letterbox parked on canvas inside a 3:4 frame.
+   object-fit: contain — never cover. A 16:9 YouTube thumb forced into a
+   portrait crop cuts faces off and is the single strongest "cheap IPTV skin"
+   signal we can emit. Live channels keep 16:9 (they ARE television).        */
+
+.w-card { container-type: inline-size; container-name: card; width: 100%; }
+
+.w-card-hit {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--w-space-2);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--w-radius-card);
+}
+
+.w-card-well {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: var(--w-canvas-2);
+  border-radius: var(--w-radius-card);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.w-card-art {
+  position: absolute;
+  inset-inline: 0;
+  top: 12%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;         /* letterbox. never cover-and-crop faces off. */
+  background: var(--w-canvas); /* the pillars are canvas, not blur-upscale  */
+}
+
+.w-card-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 42%,
+    color-mix(in oklch, var(--w-canvas) 55%, transparent) 68%,
+    color-mix(in oklch, var(--w-canvas) 92%, transparent) 100%
+  );
+}
+
+/* bias light — the lamp behind the picture. 24-40px, soft, ember-tinted.
+   Sits OUTSIDE the well (the well clips), so it reads as ambient spill.     */
+.w-card-hit::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset-inline: -20px;
+  top: -20px;
+  height: 62%;
+  border-radius: 50%;
+  pointer-events: none;
+  background-image: radial-gradient(
+    60% 55% at 50% 50%,
+    color-mix(in oklch, var(--w-ember) 42%, transparent) 0%,
+    color-mix(in oklch, var(--w-bloom) 20%, transparent) 48%,
+    transparent 74%
+  );
+  /* CRITICAL: a radial-gradient tiles by default. Without this it repeats across
+     the ::before box and paints hard-edged slabs instead of one soft lamp. */
+  background-repeat: no-repeat;
+  filter: blur(26px);
+  opacity: 0.55;
+}
+
+/* The type field. §3.1 puts the art in the upper ~60% of a 3:4 frame "with a
+   gradient scrim and type in the remaining field" — so the title belongs INSIDE
+   the frame, anchored to its foot, not stacked underneath it as a second block.
+   Stacking it outside left a large empty band under the art and made the card
+   much taller than the row needed. */
+.w-card-body {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 5;
+  display: grid;
+  gap: 2px;
+  padding: var(--w-space-3);
+}
+
+.w-card-title {
+  font-size: var(--w-fs-2, 0.875rem);
+  font-weight: 600;
+  line-height: var(--w-lh-snug, 1.3);
+  color: var(--w-fg);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.w-card-meta {
+  font-size: var(--w-fs-0, 0.75rem);
+  color: var(--w-fg-faint);
+}
+
+.w-card-hit:focus-visible {
+  outline: none;
+  box-shadow: var(--w-elev-focus);
+}
+
+@container card (min-width: 280px) {
+  .w-card-title { font-size: var(--w-fs-4, 1.125rem); }
+}
+
+/* LIVE variant — 16:9, cover is correct here */
+.w-card-live .w-card-well { aspect-ratio: 16 / 9; }
+.w-card-live .w-card-body { padding: var(--w-space-2) var(--w-space-3); }
+.w-card-live .w-card-art {
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+/* hover choreography — pointer:fine ONLY. A touch device that latches :hover
+   leaves a card stuck mid-lift; this is the rule that prevents it.          */
+@media (hover: hover) and (pointer: fine) {
+  .w-card-hit { transition: transform var(--w-dur-2) var(--w-ease-out); }
+  .w-card-hit:hover { transform: translateY(-3px); }
+  .w-card-hit:hover .w-card-well::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--w-ember) 78%, transparent);
+  }
+  .w-card-hit:hover::before { opacity: 0.9; }
+  .w-card-hit::before { transition: opacity var(--w-dur-2) var(--w-ease-out); }
+}
+
+/* --- 2. SHELF -------------------------------------------------------------
+   content-visibility lets the browser skip offscreen shelves. No scroll-jack,
+   no pinned sections, snap stays native so RTL and TalkBack keep working.    */
+
+.w-shelf { display: grid; gap: var(--w-space-3); }
+.w-shelf-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 46%;
+  gap: var(--w-gutter-shelf);
+  overflow-x: auto;
+  padding-inline: var(--w-space-page-x);
+  padding-block: 18px 26px;            /* room for the bias light */
+  scroll-padding-inline: var(--w-space-page-x);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 340px;
+}
+.w-shelf-track > * { scroll-snap-align: start; }
+/* Aligns a shelf's internal gutter with a Tailwind px-4 / px-6 container it
+   sits inside, for shelves that are not full-bleed. */
+/* scroll-padding must track padding, or snap lands off by the difference. */
+.w-shelf-track--inset { padding-inline: 1rem; scroll-padding-inline: 1rem; }
+@media (min-width: 640px) {
+  .w-shelf-track--inset { padding-inline: 1.5rem; scroll-padding-inline: 1.5rem; }
+}
+
+@media (min-width: 768px)  { .w-shelf-track { grid-auto-columns: 196px; } }
+@media (min-width: 1280px) { .w-shelf-track { grid-auto-columns: 216px; } }
+
+/* --- 3. VIEW TRANSITIONS (catalog -> title only) --------------------------- */
+::view-transition-old(poster),
+::view-transition-new(poster) {
+  animation-duration: var(--w-dur-3);
+  animation-timing-function: var(--w-ease-snap);
+}
+
+/* --- 4. MAGHRIB HOUR -------------------------------------------------------
+   A class on the hero, never a ticking clock in the DOM. Applied client-side
+   after mount so the server HTML is phase-free and there is no flash of a
+   wrong phase. Ember lifts ~8% in lightness; the aurora thickens.            */
+
+.w-aurora { transition: filter var(--w-dur-5) var(--w-ease-out); }
+
+.w-phase-maghrib {
+  --w-ember: oklch(76.1% 0.196 47.6);            /* 70.5% -> 76.1% ≈ +8% */
+  --w-aurora-b: color-mix(in oklch, oklch(76.1% 0.196 47.6) 34%, transparent);
+  --w-aurora-c: color-mix(in oklch, var(--w-bloom) 30%, transparent);
+}
+.w-phase-maghrib .w-aurora { filter: blur(56px); transform: scale(1.07); }
+.w-phase-maghrib .w-hero-motif { opacity: 0.9; }
+
+/* --- 5. SCROLL-DRIVEN HERO MOTIF ------------------------------------------
+   One use only: the motif fades 100% -> 40% across the first 24vh. No
+   scroll-jacking, no pinned shelves. Degrades to a static motif.            */
+@supports (animation-timeline: scroll()) {
+  .w-hero-motif {
+    animation: w-hero-fade linear both;
+    animation-timeline: scroll();
+    animation-range: 0 24vh;
+    will-change: opacity;
+  }
+  @keyframes w-hero-fade { from { opacity: 1; } to { opacity: 0.4; } }
+}
+
+/* --- 6. EMPTY / 404 / OFFLINE ---------------------------------------------
+   The Announcer earns his keep here. Same layout everywhere: depiction,
+   one sentence, one action. Serious states (geo, 404) get no speech bubble.  */
+.w-empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--w-space-3);
+  padding: var(--w-space-7) var(--w-space-5);
+}
+.w-empty img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: var(--w-radius-lg);
+  opacity: 0.9;
+}
+.w-empty p { color: var(--w-fg-muted); max-width: 36ch; margin-inline: auto; }
+
+/* --- 7. REDUCED MOTION ----------------------------------------------------
+   Zeros every motion rule above. Content is identical; only movement stops.  */
+@media (prefers-reduced-motion: reduce) {
+  .w-card-hit:hover { transform: none; }
+  .w-card-hit::before { transition: none; }
+  .w-aurora { transition: none; }
+  .w-hero-motif { animation: none !important; opacity: 1; }
+  ::view-transition-old(poster),
+  ::view-transition-new(poster) { animation: none; }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation-duration: 0.001ms !important; }
+  .w-shelf-track { scroll-behavior: auto; }
+}

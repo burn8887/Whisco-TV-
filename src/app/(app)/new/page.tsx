@@ -36,8 +36,8 @@ export default async function NewThisWeekPage() {
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
             {data.updatedSeries.map((t) => (
               <Link key={t.slug} href={`/title/${t.slug}`} className="group">
-                <div className="relative aspect-[2/3] rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-orange-500/50 transition">
-                  <Image src={t.posterUrl} alt={t.name} fill sizes="200px" className="object-cover" />
+                <div className="w-card-well">
+                  <Image src={t.posterUrl} alt={t.name} fill sizes="(max-width:768px) 42vw, 200px" className="w-card-art" />
                 </div>
                 <p className="mt-2 text-sm font-medium line-clamp-2">{t.name}</p>
               </Link>
@@ -61,9 +61,17 @@ export default async function NewThisWeekPage() {
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
             {g.titles.slice(0, 12).map((t) => (
               <Link key={t.slug} href={`/title/${t.slug}`} className="group">
-                <div className="relative aspect-[2/3] rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-orange-500/50 transition">
-                  <Image src={t.posterUrl} alt={t.name} fill sizes="200px" className="object-cover" />
-                  <span className="absolute top-2 left-2 text-[10px] font-bold uppercase bg-orange-500 text-white rounded px-1.5 py-0.5">
+                <div className="w-card-well">
+                  <Image src={t.posterUrl} alt={t.name} fill sizes="(max-width:768px) 42vw, 200px" className="w-card-art" />
+                  <span className="w-card-scrim" aria-hidden="true" />
+                  <span
+                    className="absolute top-2 left-2 z-10 text-[10px] font-bold uppercase px-1.5 py-0.5"
+                    style={{
+                      borderRadius: "var(--w-radius-sm)",
+                      background: "var(--w-ember)",
+                      color: "var(--w-canvas)",
+                    }}
+                  >
                     New
                   </span>
                 </div>

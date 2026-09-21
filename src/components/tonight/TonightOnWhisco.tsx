@@ -29,13 +29,14 @@ function PickCard({ pick }: { pick: TonightPick }) {
       href={pick.href}
       className="group flex w-[168px] shrink-0 flex-col overflow-hidden rounded-2xl bg-zinc-900/80 ring-1 ring-white/5 transition hover:ring-orange-500/40 sm:w-[190px] lg:w-auto"
     >
-      <div className="relative overflow-hidden">
+      <div className="w-card-well">
         <TonightPoster
           src={pick.posterUrl}
           alt={pick.displayName}
           communityLabel={pick.community.languageChip}
         />
-        <span className="absolute left-2 top-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange-200 ring-1 ring-orange-400/30 backdrop-blur-sm">
+        <span className="w-card-scrim" aria-hidden="true" />
+        <span className="absolute left-2 top-2 z-10 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange-200 ring-1 ring-orange-400/30 backdrop-blur-sm">
           {pick.community.languageChip}
         </span>
       </div>
