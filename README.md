@@ -1,5 +1,16 @@
 # Whisco TV — Free Ad-Supported (FAST) TV Platform
 
+> ### 🤖 Working on this repo with an AI agent? Start here
+>
+> **Read [`docs/ARENA_AGENT_HANDOVER.md`](docs/ARENA_AGENT_HANDOVER.md) first.**
+> It carries the standing law (what may never be touched, who clicks what), the dated state snapshot
+> and SHAs, the secret **inventory** (names and locations only, never values), the never-do list, and a
+> first-30-minutes checklist. This README describes the product; that document describes how the work
+> is allowed to happen.
+>
+> Also relevant: `docs/business/Whisco_TV_Design_System.md` (design law) and
+> `docs/business/Whisco_TV_Operating_Rules_v2.md` (how the business is run).
+
 A full-stack, 100% free, ad-supported live TV + on-demand streaming
 platform: no subscriptions, no plans, no billing. Built with Next.js,
 Prisma, and NextAuth.
