@@ -2,7 +2,7 @@
 
 **For the next Arena Agent Mode chat. Possibly tonight, possibly in a month.**
 **Written:** 2026-09-21 21:11 UTC · **2026-09-22 00:11 Asia/Bahrain**
-**Last measured:** 2026-09-21 21:11 UTC (everything numeric below was read live at that timestamp)
+**Last measured:** 2026-09-21 21:11 UTC — except the `main` SHA in §6, corrected at **21:22 UTC** after this file's own commit landed (a docs-only commit still triggers a Vercel build; the site itself is unchanged).
 
 Everything here is either **standing law** (does not expire) or a **dated snapshot** (re-measure it —
 the repo wins over this document). Where something is unchecked it says `NOT IN DATA`. There are **no
@@ -188,9 +188,13 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 
 | repo | branch | short | full | working tree |
 |---|---|---|---|---|
-| `Whisco-TV-` | `main` | **`07cc2cb`** | `07cc2cb81bd5e397abc0d684bfa01038ed2ff95a` | one known mode-only flap: `docs/business/make-signing-files.sh` (755→644, **zero content**) — never commit it |
+| `Whisco-TV-` | `main` | **`1d4e43f`** | `1d4e43f` = **this handover's own commit**; parent `3378da2` = merge of PR #19 (`legal@` everywhere) | one known mode-only flap: `docs/business/make-signing-files.sh` (755→644, **zero content**) — never commit it |
 | `whisco-mobile` | `main` | **`3ad78c8`** | `3ad78c8831b35719d1f7e076e5f120df843ad4b6` | clean |
 | Vercel prod | — | renders `07cc2cb` | — | READY |
+
+**Today's web merges, for reference:** #8 `541e6c6` · #9 `eee89f4` · #10 `c75156c` · #11 `77b1ee2` ·
+#12 `caeda32` · #13 `321591c` · #14 `628582a` · #16 `9cbbafc` (living-room layer, P0) · #17 `4d64c85`
+(orphan mistake) · #18 `4833ac73` (P1 — the real change) · #19 `3378da2` (`legal@` everywhere).
 
 **Open PRs: 0 on both repos.** Remote branches: **16** on `Whisco-TV-` (`build6-store-gate`,
 `content-articles`, `feat/guides-desk-drafts`, `feat/guides-five-plus-chrome`, `feat/guides-wave2`,
