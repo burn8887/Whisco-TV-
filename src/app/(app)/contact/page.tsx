@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, Handshake, Scale, ShieldCheck } from "lucide-react";
+import { Mail, Handshake, Scale } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -18,16 +18,10 @@ const CONTACTS = [
   },
   {
     icon: Scale,
-    title: "Rights Holders & Legal",
+    title: "Rights Holders, Legal & Privacy",
     email: "legal@whisco.tv",
     blurb:
-      "If you are a rights holder and would like a content source reviewed, updated, or removed, contact us here — we respond promptly to all legitimate requests.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Privacy",
-    email: "privacy@whisco.tv",
-    blurb: "Questions about your data or our privacy practices. See also our Privacy Policy.",
+      "If you are a rights holder and would like a content source reviewed, updated, or removed, contact us here. Same inbox for legal requests and for questions about your data or our privacy practices — we respond promptly to all legitimate requests.",
   },
 ];
 

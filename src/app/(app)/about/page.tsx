@@ -86,12 +86,8 @@ export default async function AboutPage() {
               <a href="mailto:partnerships@whisco.tv" className="text-orange-400 hover:underline">partnerships@whisco.tv</a>
             </li>
             <li>
-              <span className="text-zinc-500 w-32 inline-block">Rights holders:</span>
+              <span className="text-zinc-500 w-32 inline-block">Rights &amp; privacy:</span>
               <a href="mailto:legal@whisco.tv" className="text-orange-400 hover:underline">legal@whisco.tv</a>
-            </li>
-            <li>
-              <span className="text-zinc-500 w-32 inline-block">Privacy:</span>
-              <a href="mailto:privacy@whisco.tv" className="text-orange-400 hover:underline">privacy@whisco.tv</a>
             </li>
           </ul>
           <p className="text-xs text-zinc-500 mt-4">
