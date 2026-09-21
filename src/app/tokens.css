@@ -1,0 +1,246 @@
+/* Whisco TV — design tokens
+ * Source of truth: docs/business/Whisco_TV_Design_System.md §2 (v1.0, 10 Sep 2026)
+ *
+ * Ship as CSS custom properties first; Tailwind reads the same variables.
+ * Hex primitives are kept alongside the OKLCH working copies so a mid-range
+ * Android WebView that does not understand OKLCH still paints the brand.
+ *
+ * Do not use the raw primitives in components. Use the semantic aliases.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* --- primitives (do not use raw in components) --- */
+  --w-hex-canvas: #0a0a0f;
+  --w-hex-canvas-2: #12121a;
+  --w-hex-canvas-3: #1a1a24;
+  --w-hex-ink: #f5f5f7;
+  --w-hex-ink-dim: #a1a1aa;
+  --w-hex-ink-faint: #71717a;
+  --w-hex-ember: #f97316;
+  --w-hex-bloom: #db2777;
+  --w-hex-live: #34d399; /* healthy channel — not a brand colour */
+  --w-hex-warn: #fbbf24;
+  --w-hex-danger: #fb7185;
+  --w-hex-legal: #7dd3fc; /* "official / FTA / PD" chip text */
+
+  /* --- OKLCH working copies (modern browsers) --- */
+  --w-canvas: oklch(13.2% 0.014 285);
+  --w-canvas-2: oklch(16.8% 0.016 285);
+  --w-canvas-3: oklch(20.4% 0.018 285);
+  --w-ink: oklch(96.7% 0.004 286);
+  --w-ink-dim: oklch(71.2% 0.016 286);
+  --w-ink-faint: oklch(55.4% 0.016 286);
+  --w-ember: oklch(70.5% 0.186 47.6);
+  --w-bloom: oklch(59.2% 0.214 355.4);
+  --w-live: oklch(78.4% 0.141 164);
+  --w-warn: oklch(83.7% 0.164 84);
+  --w-danger: oklch(71.2% 0.176 15);
+  --w-legal: oklch(84.2% 0.086 230);
+
+  /* mixes — degrade to hex in browsers without color-mix */
+  --w-ember-hover: color-mix(in oklch, var(--w-ember) 88%, white);
+  --w-bloom-hover: color-mix(in oklch, var(--w-bloom) 88%, white);
+  --w-ember-pressed: color-mix(in oklch, var(--w-ember) 82%, black);
+  --w-chip: color-mix(in oklch, var(--w-canvas-3) 82%, var(--w-ember) 18%);
+  --w-chip-border: color-mix(in oklch, var(--w-ink) 14%, transparent);
+  --w-scrim: color-mix(in oklch, var(--w-canvas) 72%, transparent);
+  --w-aurora-a: color-mix(in oklch, oklch(42% 0.18 300) 35%, transparent);
+  --w-aurora-b: color-mix(in oklch, var(--w-ember) 22%, transparent);
+  --w-aurora-c: color-mix(in oklch, var(--w-bloom) 18%, transparent);
+
+  /* --- semantic --- */
+  --w-bg: var(--w-canvas);
+  --w-bg-elev-1: var(--w-canvas-2);
+  --w-bg-elev-2: var(--w-canvas-3);
+  --w-fg: var(--w-ink);
+  --w-fg-muted: var(--w-ink-dim);
+  --w-fg-faint: var(--w-ink-faint);
+  --w-brand-from: var(--w-ember);
+  --w-brand-to: var(--w-bloom);
+  --w-focus: var(--w-ember);
+  --w-ad-frame: color-mix(in oklch, var(--w-ink) 10%, transparent);
+
+  /* --- gradients --- */
+  --w-grad-brand: linear-gradient(90deg, var(--w-ember), var(--w-bloom));
+  --w-grad-brand-180: linear-gradient(180deg, var(--w-ember), var(--w-bloom));
+  --w-grad-cta: linear-gradient(90deg, #f97316 0%, #fb7185 52%, #db2777 100%);
+}
+
+@supports not (color: oklch(0% 0 0)) {
+  /* Graceful hex fallback for engines without OKLCH. */
+  :root {
+    --w-canvas: #0a0a0f;
+    --w-canvas-2: #12121a;
+    --w-canvas-3: #1a1a24;
+    --w-ink: #f5f5f7;
+    --w-ink-dim: #a1a1aa;
+    --w-ink-faint: #71717a;
+    --w-ember: #f97316;
+    --w-bloom: #db2777;
+    --w-live: #34d399;
+    --w-warn: #fbbf24;
+    --w-danger: #fb7185;
+    --w-legal: #7dd3fc;
+  }
+}
+
+/* ---------------------------------------------------------------- type */
+
+:root {
+  --w-font-sans: "Geist", "Inter", ui-sans-serif, system-ui, "Segoe UI",
+    "IBM Plex Sans Arabic", "Noto Sans Arabic", "Noto Sans Devanagari",
+    "Noto Sans Malayalam", "Noto Sans Tamil", "Noto Sans Telugu",
+    "Noto Sans Bengali", "Noto Naskh Arabic", "Noto Sans Thai", sans-serif;
+  --w-font-display: "Geist", "Inter Tight", var(--w-font-sans);
+  --w-font-arabic: "IBM Plex Sans Arabic", "Noto Naskh Arabic", var(--w-font-sans);
+  --w-font-mono: "Geist Mono", ui-monospace, "Cascadia Code", monospace;
+
+  /* scale — 1.125 minor third from 16 */
+  --w-fs-0: 0.75rem; /* 12 — chips, clocks, ad label */
+  --w-fs-1: 0.8125rem; /* 13 — meta on cards */
+  --w-fs-2: 0.875rem; /* 14 — secondary UI */
+  --w-fs-3: 1rem; /* 16 — body, buttons */
+  --w-fs-4: 1.125rem; /* 18 — card titles */
+  --w-fs-5: 1.375rem; /* 22 — shelf titles */
+  --w-fs-6: 1.75rem; /* 28 — page titles */
+  --w-fs-7: 2.25rem; /* 36 — marketing H1 mobile */
+  --w-fs-8: 3.25rem; /* 52 — marketing H1 desktop */
+
+  --w-lh-tight: 1.15;
+  --w-lh-snug: 1.28;
+  --w-lh-body: 1.55;
+  --w-tracking-display: -0.03em;
+  --w-tracking-caps: 0.08em;
+}
+
+/* ------------------------------------------------- spacing / radius / z */
+
+:root {
+  --w-space-1: 4px;
+  --w-space-2: 8px;
+  --w-space-3: 12px;
+  --w-space-4: 16px;
+  --w-space-5: 24px;
+  --w-space-6: 32px;
+  --w-space-7: 48px;
+  --w-space-8: 64px;
+  --w-space-page-x: clamp(16px, 4vw, 48px);
+  --w-gutter-shelf: 12px;
+
+  --w-radius-sm: 8px;
+  --w-radius-md: 12px;
+  --w-radius-lg: 16px;
+  --w-radius-pill: 999px;
+  --w-radius-card: 12px;
+
+  --w-elev-0: none;
+  --w-elev-1: 0 1px 0 color-mix(in oklch, var(--w-ink) 6%, transparent);
+  --w-elev-2: 0 8px 24px -12px oklch(0% 0 0 / 0.55);
+  --w-elev-focus: 0 0 0 2px var(--w-canvas), 0 0 0 4px var(--w-ember);
+
+  --w-z-nav: 40;
+  --w-z-banner: 45;
+  --w-z-ad: 10;
+  --w-z-player: 30;
+  --w-z-toast: 60;
+
+  /* motion */
+  --w-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --w-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --w-ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --w-dur-1: 120ms; /* hover color */
+  --w-dur-2: 200ms; /* hover lift, chip */
+  --w-dur-3: 320ms; /* page / view transition */
+  --w-dur-4: 600ms; /* skeleton shimmer loop */
+  --w-dur-5: 900ms; /* hero aurora idle */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --w-dur-1: 0ms;
+    --w-dur-2: 0ms;
+    --w-dur-3: 0ms;
+    --w-dur-4: 0ms;
+    --w-dur-5: 0ms;
+  }
+}
+
+/* ------------------------------------------------------------ base */
+
+html,
+body {
+  font-family: var(--w-font-sans);
+  font-size: 16px;
+  line-height: var(--w-lh-body);
+  color: var(--w-fg);
+  background: var(--w-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+[dir="rtl"] body {
+  font-family: var(--w-font-arabic);
+}
+
+/* ------------------------------------------------------- utilities */
+
+.w-display {
+  font-family: var(--w-font-display);
+  letter-spacing: var(--w-tracking-display);
+  line-height: var(--w-lh-tight);
+  font-weight: 600;
+}
+
+.w-gradient-text {
+  background-image: var(--w-grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.w-caps {
+  letter-spacing: var(--w-tracking-caps);
+  text-transform: uppercase;
+}
+
+/* Reserved ad well — holds the slot's height before the unit loads so the
+   page never reflows. Doctrine: max one ad per page, never near the player. */
+.w-ad-well {
+  border: 1px solid var(--w-ad-frame);
+  border-radius: var(--w-radius-md);
+  background: var(--w-bg-elev-1);
+}
+
+/* Focus visibility — ember ring, never removed. */
+.w-focusable:focus-visible {
+  outline: none;
+  box-shadow: var(--w-elev-focus);
+}
+
+/* -------------------------------------------------- tailwind theme
+ * Tailwind v4 reads these; extend, do not replace the default palette. */
+@theme inline {
+  --color-canvas: var(--w-canvas);
+  --color-canvas-2: var(--w-canvas-2);
+  --color-canvas-3: var(--w-canvas-3);
+  --color-ink: var(--w-ink);
+  --color-ink-dim: var(--w-ink-dim);
+  --color-ink-faint: var(--w-ink-faint);
+  --color-ember: var(--w-ember);
+  --color-bloom: var(--w-bloom);
+  --color-live: var(--w-live);
+  --color-warn: var(--w-warn);
+  --color-danger: var(--w-danger);
+  --color-legal: var(--w-legal);
+
+  --font-sans: var(--w-font-sans);
+  --font-display: var(--w-font-display);
+  --font-arabic: var(--w-font-arabic);
+
+  --radius-sm: var(--w-radius-sm);
+  --radius-md: var(--w-radius-md);
+  --radius-lg: var(--w-radius-lg);
+  --radius-pill: var(--w-radius-pill);
+}
