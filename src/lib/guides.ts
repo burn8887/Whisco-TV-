@@ -71,7 +71,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Watching on your phone, TV and laptop",
         paragraphs: [
-          "whisco.tv works in any browser. On Android, our app is arriving on Google Play, and the site can be installed today from Chrome's menu (Add to Home Screen). On iPhone, Safari's Share → Add to Home Screen does the same. Nothing to pay, nothing to configure, no dish on the balcony.",
+          "whisco.tv works in any browser, and the site can be installed from Chrome's menu (Add to Home Screen) on Android, or Safari's Share menu on iPhone. On iPhone, Safari's Share → Add to Home Screen does the same. Nothing to pay, nothing to configure, no dish on the balcony.",
         ],
       },
     ],
@@ -227,7 +227,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "The 15-minute household setup",
         paragraphs: [
-          "On a Smart TV: open the browser to whisco.tv, or cast from your phone. On Android phones and tablets: our app is on Google Play. On iPhone: the App Store version is on its way, and Safari works today — Share, then Add to Home Screen. For the living room on a budget, any Android TV box running the official Play Store (not a 'loaded' one) does the job.",
+          "On a Smart TV: open the browser to whisco.tv, or cast from your phone. On Android phones and tablets, and on iPhone, the site installs from the browser — Chrome's menu on Android, Safari's Share menu on iPhone. For the living room on a budget, any Android TV box running the official Play Store (not a 'loaded' one) does the job.",
           "Set the language filter once — Malayalam, Tamil, Urdu, Tagalog, Bahasa, Arabic, Turkish, whatever home sounds like — and the lineup is yours. Add shows to My List, and your episodes resume where you stopped. If a channel ever dies upstream, our systems remove it automatically instead of leaving you staring at a frozen screen wondering if the seller will answer this time.",
         ],
       },
