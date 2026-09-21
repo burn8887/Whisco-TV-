@@ -9,23 +9,23 @@ import type { NextConfig } from "next";
 //
 // Targets verified 200 on production, 21 Sep 2026.
 //
-// NOTE on %2526: three collection names contain an ampersand. Next writes the
-// destination into the Location header after one decode pass, so a literal %26
-// arrives at the browser as a raw "&" and the query splits — the collection
-// filter then matches nothing and the page renders zero titles. Double-encoding
-// (%2526) survives that pass and lands as a real %26. Do not "simplify" these
-// three back to %26; verify by following the redirect and counting titles.
+// These point at ?shelf=<slug> rather than ?collection=<name> on purpose.
+// Three collection names contain an ampersand, and a Vercel edge function does
+// not perform the same number of URL decode passes as `next dev` — the same
+// destination emitted a literal %26 in one environment and %2526 in the other,
+// with only one of them resolving to a real collection. A slug sidesteps the
+// question entirely. See SHELF_ALIASES in src/app/(app)/vod/page.tsx.
 const HUB_REDIRECTS: { source: string; destination: string }[] = [
-  { source: "/turkish", destination: "/vod?collection=Turkish+Dizi" },
-  { source: "/hindi", destination: "/vod?collection=Hindi+Cinema" },
-  { source: "/telugu", destination: "/vod?collection=Telugu+Cinema" },
-  { source: "/indonesian", destination: "/vod?collection=Indonesian+Shows" },
-  { source: "/arabic", destination: "/vod?collection=Arabic+Series+%2526+Shows" },
-  { source: "/malayalam", destination: "/vod?collection=Malayalam+Cinema" },
-  { source: "/tamil", destination: "/vod?collection=Tamil+Cinema+%2526+Serials" },
-  { source: "/bengali", destination: "/vod?collection=Bangla+Natok+%2526+Cinema" },
-  { source: "/punjabi", destination: "/vod?collection=Punjabi+Cinema" },
-  { source: "/sinhala", destination: "/vod?collection=Sinhala+Teledramas" },
+  { source: "/turkish", destination: "/vod?shelf=turkish" },
+  { source: "/hindi", destination: "/vod?shelf=hindi" },
+  { source: "/telugu", destination: "/vod?shelf=telugu" },
+  { source: "/indonesian", destination: "/vod?shelf=indonesian" },
+  { source: "/arabic", destination: "/vod?shelf=arabic" },
+  { source: "/malayalam", destination: "/vod?shelf=malayalam" },
+  { source: "/tamil", destination: "/vod?shelf=tamil" },
+  { source: "/bengali", destination: "/vod?shelf=bengali" },
+  { source: "/punjabi", destination: "/vod?shelf=punjabi" },
+  { source: "/sinhala", destination: "/vod?shelf=sinhala" },
 ];
 
 const nextConfig: NextConfig = {

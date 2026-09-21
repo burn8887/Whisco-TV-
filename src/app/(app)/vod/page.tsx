@@ -71,13 +71,42 @@ const COLLECTION_EMOJI: Record<string, string> = {
   "History & War": "🪖",
 };
 
+// URL-safe shelf aliases.
+//
+// Three collection names contain an ampersand. Passing them as a ?collection=
+// value means the ampersand has to survive URL encoding, and Next's dev server
+// and Vercel's edge disagree about how many decode passes happen — the same
+// destination emitted a literal %26 in one and %2526 in the other, and only one
+// of those resolves. A slug avoids the question entirely: no special
+// characters, identical behaviour everywhere, and a cleaner URL to share.
+const SHELF_ALIASES: Record<string, string> = {
+  turkish: "Turkish Dizi",
+  hindi: "Hindi Cinema",
+  "hindi-serials": "Hindi Serials & Shows",
+  telugu: "Telugu Cinema",
+  tamil: "Tamil Cinema & Serials",
+  malayalam: "Malayalam Cinema",
+  indonesian: "Indonesian Shows",
+  arabic: "Arabic Series & Shows",
+  bengali: "Bangla Natok & Cinema",
+  punjabi: "Punjabi Cinema",
+  sinhala: "Sinhala Teledramas",
+  pakistani: "Pakistani Dramas",
+  nepali: "Nepali Cinema",
+  filipino: "Filipino Shows",
+  cartoons: "Cartoons & Kids",
+};
+
 export default async function VodPage({
   searchParams,
 }: {
-  searchParams: Promise<{ collection?: string; q?: string; page?: string }>;
+  searchParams: Promise<{ collection?: string; shelf?: string; q?: string; page?: string }>;
 }) {
   const sp = await searchParams;
-  const browsing = !sp.collection && !sp.q;
+  // Resolve a shelf alias into a real collection name before anything reads it.
+  const shelfCollection = sp.shelf ? SHELF_ALIASES[sp.shelf] ?? "" : "";
+  const activeCollection = sp.collection || shelfCollection;
+  const browsing = !activeCollection && !sp.q;
 
   // ------------------------------------------------------------------
   // BROWSE MODE (default): one horizontal shelf per collection.
@@ -153,11 +182,11 @@ export default async function VodPage({
   // FILTER MODE: grid of one collection and/or search results.
   // ------------------------------------------------------------------
   const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
-  const { titles, filteredCount } = await getVodGrid(sp.collection || "", sp.q || "", page, PAGE_SIZE);
+  const { titles, filteredCount } = await getVodGrid(activeCollection, sp.q || "", page, PAGE_SIZE);
 
   const totalPages = Math.max(1, Math.ceil(filteredCount / PAGE_SIZE));
   const baseQuery: Record<string, string> = {};
-  if (sp.collection) baseQuery.collection = sp.collection;
+  if (activeCollection) baseQuery.collection = activeCollection;
   if (sp.q) baseQuery.q = sp.q;
 
   return (
@@ -165,7 +194,7 @@ export default async function VodPage({
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold">
-            {sp.collection ? `${COLLECTION_EMOJI[sp.collection] ?? ""} ${sp.collection}` : "Search results"}
+            {activeCollection ? `${COLLECTION_EMOJI[activeCollection] ?? ""} ${activeCollection}` : "Search results"}
           </h1>
           <p className="text-zinc-500 text-sm mt-1">
             {filteredCount} title{filteredCount !== 1 ? "s" : ""}
@@ -178,12 +207,12 @@ export default async function VodPage({
       </div>
 
       <form className="relative mb-6" action="/vod">
-        {sp.collection && <input type="hidden" name="collection" value={sp.collection} />}
+        {activeCollection && <input type="hidden" name="collection" value={activeCollection} />}
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
         <input
           name="q"
           defaultValue={sp.q}
-          placeholder={sp.collection ? `Search in ${sp.collection}…` : "Search titles…"}
+          placeholder={activeCollection ? `Search in ${activeCollection}…` : "Search titles…"}
           className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-zinc-900 ring-1 ring-white/10 focus:ring-orange-500 outline-none text-sm"
         />
       </form>
