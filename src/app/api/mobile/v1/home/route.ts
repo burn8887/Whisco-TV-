@@ -48,11 +48,18 @@ export async function GET(req: Request) {
       getIosLiveChannels(15),
     ]);
 
+    // No "live" row here on purpose. It used to be emitted as a hardcoded empty
+    // `items: []` stub and kept by the filter, which rendered as a labelled,
+    // contentless shelf on the Home tab — the app draws that row and has nothing
+    // to put in it. The cleared live channels are already on this screen: they
+    // arrive as `featuredChannels` and the app lists all eight under its own
+    // "Featured live channels" heading. Removing the stub changes nothing a
+    // reviewer can reach; it removes a visibly broken shelf from the first screen
+    // they open. (Apple 5.2.2 round, 22 Sep 2026.)
     const rows = [
-      { key: "live", label: "Live News & Public Service", items: [] as ReturnType<typeof slim>[] },
       { key: "docs", label: "Documentaries", items: docs.map(slim) },
       { key: "publicdomain", label: "Public Domain Classics", items: publicDomain.map(slim) },
-    ].filter((r) => r.items.length > 0 || r.key === "live");
+    ].filter((r) => r.items.length > 0);
 
     return NextResponse.json(
       {
