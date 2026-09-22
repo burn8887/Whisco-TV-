@@ -184,12 +184,23 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 
 ## 6 · Snapshot — measured 2026-09-21 21:11 UTC (2026-09-22 00:11 Bahrain)
 
+> **2026-09-22 · iOS 5.2.2 RESUBMITTED — dated fact (founder-run, ~04:44 Asia/Bahrain = 01:44 UTC).**
+> Same binary **1.0 (7)** — no IPA, no EAS, no version bump. The App Review Information attachment was
+> **replaced**: was `Whisco tv content rights statement build 6 .pdf` → now
+> **`Whisco_TV_Build7_5.2.2_evidence.pdf`** (32,098 B: cover + build-7 rights statement + 16-row appendix).
+> The notes box keeps the reviewer path (8 live named + 8 PD films), with one optional line about the new PDF
+> above it. The Resolution Center carries the Desk letter. Connect status: **`READY_FOR_REVIEW`**; submission
+> `c80e30c4-5e07-4911-bb77-2ed58fd09caf` unchanged. Agent confirmed this **read-only via the ASC API** on
+> 2026-09-22 (attachment `fileName` match, `fileSize` 32098, `assetDeliveryState` `COMPLETE`). **Nothing else on
+> Apple was touched:** no upload, no RC reply, no listing/privacy/screenshot edit, no cancellation, no
+> announcement. **Now waiting on Apple — no ETA, do not inquire.**
+
 ### SHAs
 
 | repo | branch | short | full | working tree |
 |---|---|---|---|---|
-| `Whisco-TV-` | `main` | last **site-affecting** merge **`3378da2`** (PR #19) | this handover landed as docs-only commit(s) on top of `3378da2`. **Do not compare this line to `HEAD`** — run `git log --oneline -10` and check whether anything after `3378da2` touches `src/`; if it does, this document is stale | one known mode-only flap: `docs/business/make-signing-files.sh` (755→644, **zero content**) — never commit it |
-| `whisco-mobile` | `main` | **`3ad78c8`** | `3ad78c8831b35719d1f7e076e5f120df843ad4b6` | clean |
+| `Whisco-TV-` | `main` | last **site-affecting** merge **`9742914`** (PR #20 — `/home` cleared-store fix) | `main` = **`fc0544b`** (docs: resubmission draft set + Desk rulings log). **Do not compare this line to `HEAD`** — run `git log --oneline -10` and check whether anything after `9742914` touches `src/`; if it does, this document is stale | one known mode-only flap: `docs/business/make-signing-files.sh` (755→644, **zero content**) — never commit it |
+| `whisco-mobile` | `main` | **`a7bd3e7`** | `a7bd3e7` (raw + API: `store/listing.md` deleted) | clean |
 | Vercel prod | — | renders `07cc2cb` | — | READY |
 
 **Today's web merges, for reference:** #8 `541e6c6` · #9 `eee89f4` · #10 `c75156c` · #11 `77b1ee2` ·
@@ -222,6 +233,11 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 | `ios` | **8** | 1 | **8** |
 | `android` | **8** | 1 | **8** |
 
+**`/home` re-measured 2026-09-22 with the `ios` header:** `rows` = `docs` **8** + `publicdomain` **8**, and
+**no `live` row at all** — the empty labelled shelf was removed by `9742914`, so the count is **0 rows**
+(the 8 live channels render as `featuredChannels` = **8**, headed "Featured live channels"). `hero` = **0**
+(pre-existing, out of scope). Answer to "live row item count with the ios header": **0**.
+
 ### Ads
 
 | measure | value |
@@ -253,7 +269,7 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 | Play — public URL | **HTTP 404** (`tv.whisco.app`) → the gate on all promotion |
 | Play — contact | website `whisco.tv/about` · email `legal@whisco.tv` · locale `en-US` |
 | Play — Data safety | **Email + User ID** (unchanged, correct) |
-| iOS | version 1.0 **`REJECTED`** · review submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`UNRESOLVED_ISSUES`** · item `REJECTED` · build **7 VALID**, not expired · **reason: Guideline 5.2.2** (third-party content; documentary evidence or remove content) — the reviewer's message is not exposed by the API, it came from the founder's Resolution Center PDFs. Apple emailed 2026-09-22 ~02:50 Asia/Bahrain. **No reply sent, no resubmission, nothing touched.** **2.5.4 CLOSED** (cited 15 Sep, absent 21 Sep). See `/home/user/APPLE_REJECTION_20260922.md` |
+| iOS | version 1.0 · submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` (unchanged) · **RESUBMITTED by the founder 2026-09-22 ~04:44 Asia/Bahrain on the same binary 1.0 (7)** — Connect **`READY_FOR_REVIEW`** · attachment replaced with **`Whisco_TV_Build7_5.2.2_evidence.pdf`** (32,098 B) · Desk letter pasted in the Resolution Center · **2.5.4 CLOSED** (cited 15 Sep only) · **waiting on Apple, no ETA, do not inquire** · if 5.2.2 returns: **STOP**, send the letter + any screenshot to the Desk; do not invent Option B. Brief: `/home/user/APPLE_REJECTION_20260922.md` |
 
 ---
 
@@ -274,13 +290,13 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
    committing wiped four of five files; PR #17 shipped a 33-line orphan and prod stayed on old code
    while the merge read green. `#18` carries the real change. **A green merge says nothing about
    content — always confirm the deployed HTML.**
-6. **APPLE REJECTION — OPEN (2026-09-22).** iOS 1.0 `REJECTED` / `UNRESOLVED_ISSUES` under
-   **Guideline 5.2.2**. **2.5.4 is closed** (cited 15 Sep, absent 21 Sep). The store gate is verified
-   working, but the evidence attached was the **build-6** pack while **build 7** was reviewed — the
-   build-7 pack exists and was never attached. Also found: **`/home` returns an empty live row on iOS**
-   (server-side). Options A/B/C in the brief; **A recommended, C barred by Grok's RC-letter lock.**
-   **Barred until the Desk rules:** any Apple reply, RC letter, resubmission, new build, ASC edit,
-   public statement. Full brief: `/home/user/APPLE_REJECTION_20260922.md`.
+6. **APPLE 5.2.2 — RESUBMITTED, PARKED (2026-09-22).** Same binary **1.0 (7)**; App Review Information
+   attachment replaced with the build-7 evidence PDF; Desk letter pasted in the Resolution Center; Connect
+   `READY_FOR_REVIEW`. **Waiting on Apple — no ETA, do not inquire.** Barred: any RC reply, any build upload,
+   any listing/privacy/screenshot change, cancelling the submission, announcing. **If 5.2.2 returns: STOP —
+   send the letter + any screenshot to the Desk; do not invent Option B (dropping live news) unless the Desk
+   says so.** Brief: `/home/user/APPLE_REJECTION_20260922.md`; draft set:
+   `docs/business/APPLE_5.2.2_RESUBMISSION_DRAFT_20260922.md`.
 7. **Filmhub** — outreach/call prep exists (`docs/business/Filmhub_Call_Prep.md`); no deal, no
    commitment, nothing to action from an engineering seat.
 8. **W.L.L. (company formation)** — see
