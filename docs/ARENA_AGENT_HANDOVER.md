@@ -2,7 +2,7 @@
 
 **For the next Arena Agent Mode chat. Possibly tonight, possibly in a month.**
 **Written:** 2026-09-21 21:11 UTC · **2026-09-22 00:11 Asia/Bahrain**
-**Last measured:** 2026-09-21 21:11 UTC — the §6 `main` row deliberately names the last **site-affecting** merge, not `HEAD`, so it stays true as docs commit on top of it (a docs-only commit still triggers a Vercel build; the site itself is unchanged).
+**Last measured:** 2026-09-21 21:11 UTC — the iOS row in §6 was updated **2026-09-22 00:40 UTC** (rejection); otherwise the §6 `main` row deliberately names the last **site-affecting** merge, not `HEAD`, so it stays true as docs commit on top of it (a docs-only commit still triggers a Vercel build; the site itself is unchanged).
 
 Everything here is either **standing law** (does not expire) or a **dated snapshot** (re-measure it —
 the repo wins over this document). Where something is unchecked it says `NOT IN DATA`. There are **no
@@ -253,7 +253,7 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 | Play — public URL | **HTTP 404** (`tv.whisco.app`) → the gate on all promotion |
 | Play — contact | website `whisco.tv/about` · email `legal@whisco.tv` · locale `en-US` |
 | Play — Data safety | **Email + User ID** (unchanged, correct) |
-| iOS | version 1.0 **`WAITING_FOR_REVIEW`** since 2026-09-17T23:43:22.775Z · build **7 VALID** · no action taken, none permitted |
+| iOS | version 1.0 **`REJECTED`** · review submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`UNRESOLVED_ISSUES`** · item `REJECTED` · build **7 VALID**, not expired · **reason NOT IN DATA** (the API does not expose the reviewer's message — it is in the Resolution Center only). Apple emailed 2026-09-22 ~02:50 Asia/Bahrain. **No reply sent, no resubmission, nothing touched.** See `/home/user/APPLE_REJECTION_20260922.md` |
 
 ---
 
@@ -274,12 +274,17 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
    committing wiped four of five files; PR #17 shipped a 33-line orphan and prod stayed on old code
    while the merge read green. `#18` carries the real change. **A green merge says nothing about
    content — always confirm the deployed HTML.**
-6. **Filmhub** — outreach/call prep exists (`docs/business/Filmhub_Call_Prep.md`); no deal, no
+6. **APPLE REJECTION — OPEN (2026-09-22).** iOS 1.0 `REJECTED` / `UNRESOLVED_ISSUES`; the reviewer's
+   message is **not readable via API** and must be read by the founder in App Store Connect →
+   Resolution Center. **Barred until the Desk rules:** any Apple reply, any RC letter (Grok's lock: only
+   after a new binary in Connect), resubmission, new build, any ASC edit, any public statement. Full
+   brief: `/home/user/APPLE_REJECTION_20260922.md`.
+7. **Filmhub** — outreach/call prep exists (`docs/business/Filmhub_Call_Prep.md`); no deal, no
    commitment, nothing to action from an engineering seat.
-7. **W.L.L. (company formation)** — see
+8. **W.L.L. (company formation)** — see
    `docs/business/Whisco_TV_Bahrain_Company_Formation_Guide.md`. Founder/legal workstream, not yours.
-8. **Play review outcome** — unknown, no ETA, no API exposes it. Wait.
-9. **`whisco-mobile/store/play-listing.md`** — corrected `cd92f2a`. Kept truthful; re-check before any
+9. **Play review outcome** — unknown, no ETA, no API exposes it. Wait.
+10. **`whisco-mobile/store/play-listing.md`** — corrected `cd92f2a`. Kept truthful; re-check before any
    future listing work.
 
 ---
