@@ -253,7 +253,7 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 | Play — public URL | **HTTP 404** (`tv.whisco.app`) → the gate on all promotion |
 | Play — contact | website `whisco.tv/about` · email `legal@whisco.tv` · locale `en-US` |
 | Play — Data safety | **Email + User ID** (unchanged, correct) |
-| iOS | version 1.0 **`REJECTED`** · review submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`UNRESOLVED_ISSUES`** · item `REJECTED` · build **7 VALID**, not expired · **reason NOT IN DATA** (the API does not expose the reviewer's message — it is in the Resolution Center only). Apple emailed 2026-09-22 ~02:50 Asia/Bahrain. **No reply sent, no resubmission, nothing touched.** See `/home/user/APPLE_REJECTION_20260922.md` |
+| iOS | version 1.0 **`REJECTED`** · review submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`UNRESOLVED_ISSUES`** · item `REJECTED` · build **7 VALID**, not expired · **reason: Guideline 5.2.2** (third-party content; documentary evidence or remove content) — the reviewer's message is not exposed by the API, it came from the founder's Resolution Center PDFs. Apple emailed 2026-09-22 ~02:50 Asia/Bahrain. **No reply sent, no resubmission, nothing touched.** **2.5.4 CLOSED** (cited 15 Sep, absent 21 Sep). See `/home/user/APPLE_REJECTION_20260922.md` |
 
 ---
 
@@ -274,11 +274,13 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
    committing wiped four of five files; PR #17 shipped a 33-line orphan and prod stayed on old code
    while the merge read green. `#18` carries the real change. **A green merge says nothing about
    content — always confirm the deployed HTML.**
-6. **APPLE REJECTION — OPEN (2026-09-22).** iOS 1.0 `REJECTED` / `UNRESOLVED_ISSUES`; the reviewer's
-   message is **not readable via API** and must be read by the founder in App Store Connect →
-   Resolution Center. **Barred until the Desk rules:** any Apple reply, any RC letter (Grok's lock: only
-   after a new binary in Connect), resubmission, new build, any ASC edit, any public statement. Full
-   brief: `/home/user/APPLE_REJECTION_20260922.md`.
+6. **APPLE REJECTION — OPEN (2026-09-22).** iOS 1.0 `REJECTED` / `UNRESOLVED_ISSUES` under
+   **Guideline 5.2.2**. **2.5.4 is closed** (cited 15 Sep, absent 21 Sep). The store gate is verified
+   working, but the evidence attached was the **build-6** pack while **build 7** was reviewed — the
+   build-7 pack exists and was never attached. Also found: **`/home` returns an empty live row on iOS**
+   (server-side). Options A/B/C in the brief; **A recommended, C barred by Grok's RC-letter lock.**
+   **Barred until the Desk rules:** any Apple reply, RC letter, resubmission, new build, ASC edit,
+   public statement. Full brief: `/home/user/APPLE_REJECTION_20260922.md`.
 7. **Filmhub** — outreach/call prep exists (`docs/business/Filmhub_Call_Prep.md`); no deal, no
    commitment, nothing to action from an engineering seat.
 8. **W.L.L. (company formation)** — see
