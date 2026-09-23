@@ -194,6 +194,52 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 > 2026-09-22 (attachment `fileName` match, `fileSize` 32098, `assetDeliveryState` `COMPLETE`). **Nothing else on
 > Apple was touched:** no upload, no RC reply, no listing/privacy/screenshot edit, no cancellation, no
 > announcement. **Now waiting on Apple — no ETA, do not inquire.**
+>
+> ⚠️ **CORRECTED 2026-09-23 — the word “RESUBMITTED” was wrong.** No submission is queued with
+> Apple: `WAITING_FOR_REVIEW` / `IN_REVIEW` / `READY_FOR_REVIEW` submissions = **0**, and `c80e30c4…` is
+> still `UNRESOLVED_ISSUES`. The pack and the RC letter are in place; the **Submit for Review click is still
+> outstanding.** See the 23 Sep block below.
+>
+> **2026-09-23 · FOUNDER UPDATE (3 screenshots) — verified read-only.** Receipt and full tables:
+> `/home/user/FOUNDER_UPDATE_20260923.md`.
+>
+> **APPLE — first read at 15:20 (ten minutes before the click) found nothing queued:** submission
+> `c80e30c4…` was `UNRESOLVED_ISSUES` with
+> `submittedDate 2026-09-17T23:43:22.775Z`; the version and its item read `READY_FOR_REVIEW`, which in Apple's
+> model means **prepared, awaiting the developer's submit click — not a queue state.** Submissions in
+> `WAITING_FOR_REVIEW` = 0, `IN_REVIEW` = 0, `READY_FOR_REVIEW` = 0. Build **7 VALID**, not expired; the
+> attachment **is** `Whisco_TV_Build7_5.2.2_evidence.pdf` (32,098 B, `COMPLETE`); the RC letter is pasted.
+> ✅ **SUBMITTED 2026-09-23 15:32 Asia/Bahrain (12:32:39.246Z)** — founder click; same submission ID
+> `c80e30c4…`, now **`WAITING_FOR_REVIEW`**, version + item likewise, `UNRESOLVED_ISSUES` = 0. **With Apple =
+> wait, do not inquire, no RC reply.** App Review page (23 Sep): *Items Submitted (1) · iOS App 1.0 · 1.0 (7) ·
+> Waiting for Review*; **Messages = 5** (Apple 10 Sep · Ali 11 Sep · Apple 15 Sep + 615-channel shot · Apple
+> 22 Sep 02:50 rejection · Ali 22 Sep 04:44 Desk letter) — **no new Apple message**, so the red `1` badge is
+> the 22 Sep thread.
+>
+> **PLAY:** production `1.0.0 (7)` vc 7 `completed` (in Google's hands), internal `5`, test tracks `build 7` /
+> `whisco.tv test` vc 7 · Console home: app status **Closed testing**, update status **In review**, last
+> updated 21 Sep, installed audience **4** · **Android developer verification: registered** (Google's new
+> requirement satisfied) · public URL still **404**.
+>
+> **GSC — big move:** indexed share **22/30 = 73%** (was 14/30 = 47% on 21 Sep) · **+8, 0 slipped** ·
+> founder submitted **23 URLs on 23 Sep**, 16 already indexed, **8 still `Discovered`** · one URL
+> (`/guides/cut-the-pirate-box`) hit the quota and goes tomorrow. Agent clicks: **0**. **Flag: two properties
+> both carry a sitemap** — www (2,772, downloaded 22 Sep 15:28 UTC) **and apex** (2,760, downloaded 23 Sep
+> 06:27 UTC); hygiene rule is one host. All 24 submitted guide URLs returned **200**.
+>
+> **NEON — cost, not an outage:** *"100% of a $20.00 monthly spending notification threshold"* reached
+> 22 Sep 23:17; charges keep accruing. Site healthy (`/browse` 200, a real `/title/` 200, sitemap **2,111
+> `/title/` lines**). **DB-dependent:** `/browse`, `/title/*`, `/watch/*`, `/watchlist`, `/admin`, `cron/*`,
+> `health`. **Not DB-dependent:** mobile `X-Whisco-Store` endpoints, `/guides`, `/live`, `/vod`, `/`. A Neon
+> **spend cap** would suspend the DB and take the 2,111-URL `/title/` surface down while the store gate kept
+> answering — worth confirming the cap setting. `$20/mo` is under the "$100/mo → ask first" line: no gate
+> triggered. No Neon key exists in `.keys/`, so usage is not readable by the agent.
+>
+> **⚠️ GITHUB WRITES ARE BLOCKED (23 Sep):** the PAT in `.keys/github_pat.txt` returns **401 Bad
+> credentials** — `git push` rejected; a `git fetch` only appears to work because the repo is public
+> (anonymous read). GitHub `main` = **`d39abfc`**; the 23 Sep docs sit on **local `main`, unpushed**. Founder
+> must drop a replacement token (contents read+write on `Whisco-TV-`) into `.keys/github_pat.txt`. ASC, Play,
+> GSC, AdSense, Vercel and the site are unaffected — only GitHub writes.
 
 ### SHAs
 
@@ -252,10 +298,10 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 
 | measure | value |
 |---|---|
-| Indexed | **14 / 30 = 47%** — `/` · `/about` · `/guides` + **11 of 27** guide slugs |
-| Needing a founder click | **16** — 11 *Discovered – currently not indexed*, 5 *URL is unknown to Google* |
-| Crawled yet | **none of the 16** |
-| Sitemap | **not stale** — www submitted 2,778, downloaded 2026-09-21 12:22 UTC |
+| Indexed | **22 / 30 = 73%** *(re-measured 2026-09-23)* — was 14/30 = 47% on 21 Sep; **+8, 0 slipped** |
+| Needing a founder click | **8** *(2026-09-23)* — all *Discovered – currently not indexed*; 23 URLs were submitted 23 Sep |
+| Crawled yet | the newly indexed ones were crawled **21–23 Sep** (most on the 23rd) |
+| Sitemap | www 2,772 downloaded 2026-09-22 15:28 UTC · **⚠️ apex `https://whisco.tv/` also carries a sitemap (2,760, downloaded 2026-09-23 06:27 UTC)** — hygiene rule is one host |
 | `Clicked by me` | **0 (permanent — no logged-in GSC session exists for an agent)** |
 
 ### Stores
@@ -263,19 +309,19 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 | surface | state |
 |---|---|
 | Play — production access | **granted** · Dashboard 4/5 steps · last published 21 Sep 2026 |
-| Play — production track | **`1.0.0 (7)`** vc 7, status `completed`; **full rollout + corrected listing copy both IN REVIEW** |
+| Play — production track | **`1.0.0 (7)`** vc 7, status `completed`; **full rollout + corrected listing copy both IN REVIEW** · Console home 23 Sep: app status **Closed testing**, update status **In review**, last updated 21 Sep, installed audience **4** |
 | Play — other tracks | internal `5 (1.0.0)` vc 5 · `build 7` vc 7 · `whisco.tv test` vc 7 — all `completed` |
 | Play — Managed publishing | **OFF** → an approved change publishes with **no further click** |
-| Play — public URL | **HTTP 404** (`tv.whisco.app`) → the gate on all promotion |
+| Play — public URL | **HTTP 404** (`tv.whisco.app`) → the gate on all promotion · **Android developer verification: registered** (Google's new requirement, banner cleared 23 Sep) |
 | Play — contact | website `whisco.tv/about` · email `legal@whisco.tv` · locale `en-US` |
 | Play — Data safety | **Email + User ID** (unchanged, correct) |
-| iOS | version 1.0 · submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` (unchanged) · **RESUBMITTED by the founder 2026-09-22 ~04:44 Asia/Bahrain on the same binary 1.0 (7)** — Connect **`READY_FOR_REVIEW`** · attachment replaced with **`Whisco_TV_Build7_5.2.2_evidence.pdf`** (32,098 B) · Desk letter pasted in the Resolution Center · **2.5.4 CLOSED** (cited 15 Sep only) · **waiting on Apple, no ETA, do not inquire** · if 5.2.2 returns: **STOP**, send the letter + any screenshot to the Desk; do not invent Option B. Brief: `/home/user/APPLE_REJECTION_20260922.md` |
+| iOS | version 1.0 · submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`WAITING_FOR_REVIEW`** — **submitted 2026-09-23 15:32 Asia/Bahrain (12:32:39.246Z) by the founder on the same binary 1.0 (7)** · attachment **`Whisco_TV_Build7_5.2.2_evidence.pdf`** 32,098 B `COMPLETE` · Desk letter pasted 22 Sep in the RC · **2.5.4 CLOSED** (cited 15 Sep only) · **waiting on Apple — no ETA, do not inquire, no RC reply** · if 5.2.2 returns: **STOP**, letter + screenshot to the Desk, no invented Option B. Measured 2026-09-23. Brief: `/home/user/APPLE_REJECTION_20260922.md` |
 
 ---
 
 ## 7 · Standing backlog
 
-1. **GSC click list — 16 URLs** awaiting founder clicks, quota ≈10–12/day, top-down. Machine list:
+1. **GSC click list — 8 URLs** awaiting founder clicks *(23 Sep: 23 submitted, +8 indexed, 73%)*, quota ≈10–12/day, top-down. Machine list:
    `gsc_weekly/FOUNDERS_CLICK_LIST.md`; narrated path: `GSC_FOUNDER_CLICK_PATH_20260921.md`.
    The 5 *never-fetched* ones start the list.
 2. **Next guides need Desk-named slugs.** 2 per week. **HOLD (9.8)** — nothing starts until Grok names
@@ -290,13 +336,12 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
    committing wiped four of five files; PR #17 shipped a 33-line orphan and prod stayed on old code
    while the merge read green. `#18` carries the real change. **A green merge says nothing about
    content — always confirm the deployed HTML.**
-6. **APPLE 5.2.2 — RESUBMITTED, PARKED (2026-09-22).** Same binary **1.0 (7)**; App Review Information
-   attachment replaced with the build-7 evidence PDF; Desk letter pasted in the Resolution Center; Connect
-   `READY_FOR_REVIEW`. **Waiting on Apple — no ETA, do not inquire.** Barred: any RC reply, any build upload,
-   any listing/privacy/screenshot change, cancelling the submission, announcing. **If 5.2.2 returns: STOP —
-   send the letter + any screenshot to the Desk; do not invent Option B (dropping live news) unless the Desk
-   says so.** Brief: `/home/user/APPLE_REJECTION_20260922.md`; draft set:
-   `docs/business/APPLE_5.2.2_RESUBMISSION_DRAFT_20260922.md`.
+6. **APPLE 5.2.2 — SUBMITTED, WAITING ON APPLE (2026-09-23 15:32 Asia/Bahrain).** Same binary
+   **1.0 (7)**; attachment = the build-7 evidence PDF; Desk letter pasted. `c80e30c4…` =
+   `WAITING_FOR_REVIEW` (submittedDate 2026-09-23T12:32:39.246Z). **Nothing to press. Waiting on Apple — no
+   ETA, do not inquire, no RC reply.** Barred: build upload, listing/privacy/screenshot change, cancelling,
+   announcing. **If 5.2.2 returns: STOP — letter + any screenshot to the Desk; no invented Option B.**
+   Receipt: `/home/user/FOUNDER_UPDATE_20260923.md`; brief: `/home/user/APPLE_REJECTION_20260922.md`.
 7. **Filmhub** — outreach/call prep exists (`docs/business/Filmhub_Call_Prep.md`); no deal, no
    commitment, nothing to action from an engineering seat.
 8. **W.L.L. (company formation)** — see
