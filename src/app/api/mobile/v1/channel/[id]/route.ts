@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getChannelPageData } from "@/lib/cached";
-import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosChannel } from "@/lib/store-ios";
+import { getIosLiveOnlyChannel } from "@/lib/store-ios-live";
 
 // Mobile API v1 — single live channel + related channels.
 //
@@ -13,7 +14,39 @@ export const dynamic = "force-dynamic";
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  // ---------------------------------------------------------------- iOS store
+  // ------------------------------------- iOS BUILD 8: allow-listed lives only
+  // Any channel outside the eight is a hard 404 on the Apple build — including a
+  // channel that is merely marked cleared in the database. The allow-list, not a
+  // flag, decides; see src/lib/store-ios-live.ts.
+  if (isIosStore(req)) {
+    const channel = await getIosLiveOnlyChannel(id);
+    if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404, headers: CLEARED_HEADERS });
+
+    return NextResponse.json(
+      {
+        store: requestedStore(req),
+        channel: {
+          id: channel.id,
+          name: channel.name,
+          logoUrl: channel.logoUrl,
+          streamUrl: channel.streamUrl,
+          country: channel.country,
+          language: channel.language,
+          category: channel.category,
+          isHD: channel.isHD,
+          isActive: channel.isActive,
+          rightsBasis: channel.rightsBasis ?? null,
+          evidenceUrl: channel.evidenceUrl ?? null,
+        },
+        // No "related" rail: related rows would leak non-allow-listed channels
+        // into the Apple build through the back door.
+        related: [],
+      },
+      { headers: CLEARED_HEADERS }
+    );
+  }
+
+  // -------------------------------------------------- cleared store (Android/Play)
   if (isClearedStore(req)) {
     const channel = await getIosChannel(id);
     if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404, headers: CLEARED_HEADERS });
