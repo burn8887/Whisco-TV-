@@ -241,6 +241,16 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 > must drop a replacement token (contents read+write on `Whisco-TV-`) into `.keys/github_pat.txt`. ASC, Play,
 > GSC, AdSense, Vercel and the site are unaffected — only GitHub writes.
 
+> **2026-09-28 · APPLE REJECTED THE RESUBMISSION — dated fact.** Message arrived **5:22 PM Asia/Bahrain
+> (14:22 UTC)** on the same submission `c80e30c4…`, version reviewed **1.0 (7)**, review device iPad Air
+> 11-inch (M3), **no screenshot attached**, **guideline 5.2.2 only** (2.5.4 remains closed). Lead-in:
+> *“The issues we previously identified still need your attention.”* The issue description gained five words:
+> evidence **“from the rights holder”**. API now: version + item `REJECTED`, submission `UNRESOLVED_ISSUES`,
+> attachment and notes intact. Elapsed: **5 d 1 h 50 m** in queue — at 13:50 UTC today it was still
+> `WAITING_FOR_REVIEW`, so the flip happened within ~30 minutes of that read. **Agent took no action:** no
+> reply, no resubmit, no build, no ASC edit, no announcement. **Desk packet:
+> `/home/user/APPLE_REJECTION_2_20260928.md`.** Play is independent and untouched.
+
 ### SHAs
 
 | repo | branch | short | full | working tree |
@@ -315,7 +325,7 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 | Play — public URL | **HTTP 404** (`tv.whisco.app`) → the gate on all promotion · **Android developer verification: registered** (Google's new requirement, banner cleared 23 Sep) |
 | Play — contact | website `whisco.tv/about` · email `legal@whisco.tv` · locale `en-US` |
 | Play — Data safety | **Email + User ID** (unchanged, correct) |
-| iOS | version 1.0 · submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`WAITING_FOR_REVIEW`** — **submitted 2026-09-23 15:32 Asia/Bahrain (12:32:39.246Z) by the founder on the same binary 1.0 (7)** · attachment **`Whisco_TV_Build7_5.2.2_evidence.pdf`** 32,098 B `COMPLETE` · Desk letter pasted 22 Sep in the RC · **2.5.4 CLOSED** (cited 15 Sep only) · **waiting on Apple — no ETA, do not inquire, no RC reply** · if 5.2.2 returns: **STOP**, letter + screenshot to the Desk, no invented Option B. Measured 2026-09-23. Brief: `/home/user/APPLE_REJECTION_20260922.md` |
+| iOS | version 1.0 · submission `c80e30c4-5e07-4911-bb77-2ed58fd09caf` **`UNRESOLVED_ISSUES`** — **SECOND 5.2.2 REJECTION, 2026-09-28 14:22 UTC** (5 d 1 h after the 23 Sep resubmit) · version + item **`REJECTED`** · guideline **5.2.2 only** (2.5.4 stays closed) · **new wording: evidence “from the rights holder”** · no screenshot attached · attachment + notes still in place · **STOPPED — no reply, no resubmit, no build; Desk packet: `/home/user/APPLE_REJECTION_2_20260928.md`** · Play untouched |
 
 ---
 
@@ -336,12 +346,11 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
    committing wiped four of five files; PR #17 shipped a 33-line orphan and prod stayed on old code
    while the merge read green. `#18` carries the real change. **A green merge says nothing about
    content — always confirm the deployed HTML.**
-6. **APPLE 5.2.2 — SUBMITTED, WAITING ON APPLE (2026-09-23 15:32 Asia/Bahrain).** Same binary
-   **1.0 (7)**; attachment = the build-7 evidence PDF; Desk letter pasted. `c80e30c4…` =
-   `WAITING_FOR_REVIEW` (submittedDate 2026-09-23T12:32:39.246Z). **Nothing to press. Waiting on Apple — no
-   ETA, do not inquire, no RC reply.** Barred: build upload, listing/privacy/screenshot change, cancelling,
-   announcing. **If 5.2.2 returns: STOP — letter + any screenshot to the Desk; no invented Option B.**
-   Receipt: `/home/user/FOUNDER_UPDATE_20260923.md`; brief: `/home/user/APPLE_REJECTION_20260922.md`.
+6. **APPLE 5.2.2 — REJECTED AGAIN 2026-09-28, WAITING ON THE DESK.** Build 7, same submission,
+   message 5:22 PM Bahrain: 5.2.2 only, with the added words **“from the rights holder”**. The pack we
+   attached is ours + third-party pages; none of it is a grant issued by a rights holder — that is the
+   gap. **STOPPED:** no RC reply, no resubmit, no new binary, no ASC edit, no announcement. Options A′/B/B′/C/D/E
+   and the 5.2.5 question are laid out in **`/home/user/APPLE_REJECTION_2_20260928.md`** for the Desk.
 7. **Filmhub** — outreach/call prep exists (`docs/business/Filmhub_Call_Prep.md`); no deal, no
    commitment, nothing to action from an engineering seat.
 8. **W.L.L. (company formation)** — see
