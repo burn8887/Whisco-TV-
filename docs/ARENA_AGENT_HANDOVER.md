@@ -251,6 +251,19 @@ hand-off), and prints the indexed share, the click count and sitemap freshness. 
 > reply, no resubmit, no build, no ASC edit, no announcement. **Desk packet:
 > `/home/user/APPLE_REJECTION_2_20260928.md`.** Play is independent and untouched.
 
+> **2026-09-28 (later) · BUILD 8 WORK ORDER FROM THE DESK — EXECUTED EXCEPT THE EAS BUILD.** Apple's second
+> 5.2.2 rejection (28 Sep) led to a Desk ruling: the Apple binary carries **eight official news live streams and
+> nothing else**. Done and verified: **site `97dc225`** (PR #23 — iOS routes now return 8 allow-listed lives /
+> 0 vod / no rails; every `/title/<slug>` is 404; `android|play` unchanged 8+8; `cached.ts` untouched) and
+> **app `dfe0a24`** (PR #1 — `ios.buildNumber` 8, On Demand + My List removed from the tab bar, Home = live
+> eight, listing rewritten, one-page evidence PDF in `store/`). Production acceptance **18/18**. Local prebuild
+> proves `CFBundleVersion 8` + `UIBackgroundModes` ABSENT + iPhone-only. **BLOCKED: this session cannot reach
+> EAS** (`npx eas-cli whoami` → *Not logged in*; no token in the vault; Linux host cannot build). Founder runs
+> `npx eas-cli login` then `npx eas-cli build --platform ios --profile production`. **Watch the build number:**
+> `appVersionSource: remote` + `autoIncrement` decides it, and build 7 proved the remote counter wins — if it
+> lands as anything but 8, stop. **Nothing uploaded to Connect; no RC message; no resubmit.** Report:
+> `/home/user/REPORT_BUILD8_20260928.md`.
+
 ### SHAs
 
 | repo | branch | short | full | working tree |
