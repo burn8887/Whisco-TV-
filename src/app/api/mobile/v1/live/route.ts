@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getLivePageData } from "@/lib/cached";
-import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosLiveChannels } from "@/lib/store-ios";
+import { getIosLiveOnlyChannels, toIosLivePayload } from "@/lib/store-ios-live";
 import { excludeIosOnly } from "@/lib/store-public";
 
 // Mobile API v1 — live TV directory with the same filters as the web page.
@@ -20,7 +21,35 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10) || 1);
 
-  // -------------------------------------------------- cleared store (iOS/Android)
+  // ------------------------------------------- iOS BUILD 8: the live eight only
+  // Apple 5.2.2, second rejection (2026-09-28). The Apple binary carries eight
+  // official news live streams and nothing else. The list is an allow-list in
+  // src/lib/store-ios-live.ts, not a database flag: a row cannot reach this
+  // response unless its streamUrl is that broadcaster's own YouTube live embed.
+  if (isIosStore(req)) {
+    const channels = toIosLivePayload(await getIosLiveOnlyChannels());
+
+    return NextResponse.json(
+      {
+        store: requestedStore(req),
+        page: 1,
+        pageSize: channels.length,
+        filteredCount: channels.length,
+        total: channels.length,
+        channels,
+        // Empty facets, never null. The public directory advertises language
+        // chips describing a catalogue this build does not carry — Guideline
+        // 2.3.1(a), and the exact frame Apple screenshotted on 15 Sep. Build 6
+        // also taught us it must be an empty OBJECT: the shipped app renders
+        // `data?.facets.languages`, and optional chaining guards `data`, not
+        // `facets`, so a null facets crashed the Live screen on arrival.
+        facets: { countries: [], categories: [], languages: [] },
+      },
+      { headers: CLEARED_HEADERS }
+    );
+  }
+
+  // -------------------------------------------------- cleared store (Android/Play)
   if (isClearedStore(req)) {
     const channels = await getIosLiveChannels();
 

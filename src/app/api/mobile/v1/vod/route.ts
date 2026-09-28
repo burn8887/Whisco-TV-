@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getVodShelves, getVodGrid } from "@/lib/cached";
-import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosVodTitles, getIosCollections } from "@/lib/store-ios";
 
 // Mobile API v1 — VOD.
@@ -70,10 +70,39 @@ export async function GET(req: Request) {
   const q = url.searchParams.get("q") || "";
   const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10) || 1);
 
-  // ---------------------------------------------------------------- iOS store
-  // Cleared titles only. If a collection filter matches nothing cleared, this
-  // returns an EMPTY grid — it never falls back to the public catalogue, because
-  // a fallback would hand the reviewer exactly the content we are gating out.
+  // ------------------------------------------- iOS BUILD 8: NO ON-DEMAND, EVER
+  // Apple 5.2.2, second rejection (2026-09-28): "documentary evidence from the
+  // rights holder" for the films, or remove them. We have no signed carriage
+  // letters for films, and a public-domain declaration published by the Internet
+  // Archive is not a grant issued by a rights holder — nor is there a rights
+  // holder to write one for a public-domain work. So the films are gone from the
+  // Apple binary, and this endpoint answers EMPTY on every shape of request:
+  // shelves, collection, search.
+  //
+  // 200, not 500 — an app that errors is a different bug Apple would find. An
+  // empty list is the honest answer and the one the build renders.
+  if (isIosStore(req)) {
+    return NextResponse.json(
+      {
+        store: requestedStore(req),
+        mode: collection || q ? "grid" : "shelves",
+        onDemand: false,
+        collection,
+        q,
+        page: 1,
+        pageSize: 0,
+        filteredCount: 0,
+        total: 0,
+        shelves: [],
+        items: [],
+      },
+      { headers: CLEARED_HEADERS }
+    );
+  }
+
+  // -------------------------------------------------- cleared store (Android/Play)
+  // Unchanged: the Play packet in review carries 8 live + these 8 films. An
+  // Apple decision does not get to change what Google is reviewing.
   if (isClearedStore(req)) {
     if (!collection && !q) {
       const [items, collections] = await Promise.all([getIosVodTitles({ limit: 80 }), getIosCollections()]);

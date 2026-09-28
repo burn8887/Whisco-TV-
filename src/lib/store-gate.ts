@@ -49,6 +49,45 @@ export const STORE_PLAY = "play";
  *  One list, so the two stores cannot drift apart. */
 const CLEARED_STORES = [STORE_IOS, STORE_ANDROID, STORE_PLAY];
 
+/** The store value this request carries, or "public". One parse, used by every
+ *  predicate below so the three cases can never disagree about what was asked. */
+function requestedValue(req: Request): string {
+  try {
+    const header = (req.headers.get(STORE_HEADER) || "").trim().toLowerCase();
+    if (header) return header;
+    const url = new URL(req.url);
+    return (url.searchParams.get("store") || "").trim().toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+/**
+ * iOS App Store, BUILD 8 — the live-only binary.
+ *
+ * Apple rejected 1.0 (7) again on 2026-09-28 under 5.2.2, this time asking for
+ * documentary evidence "from the rights holder". Build 7's pack was ours plus
+ * third-party pages; a public-domain declaration on an archive.org item page is
+ * not a grant issued by a rights holder, and there is no rights holder for a
+ * public-domain film to write one.
+ *
+ * The Desk's ruling for build 8 (2026-09-28): the Apple binary carries EIGHT
+ * OFFICIAL NEWS LIVE STREAMS AND NOTHING ELSE. No films, no series, no poster
+ * wall, no on-demand rail. This predicate is the switch for that behaviour, and
+ * it is deliberately NARROWER than `isClearedStore`: Android/Play keep the
+ * 8 + 8 catalogue they are already in review with, and must not be dragged
+ * along by an Apple decision.
+ */
+export function isIosStore(req: Request): boolean {
+  return requestedValue(req) === STORE_IOS;
+}
+
+/** Android / Play. Unchanged behaviour: the cleared 8 live + 8 films. */
+export function isAndroidStore(req: Request): boolean {
+  const v = requestedValue(req);
+  return v === STORE_ANDROID || v === STORE_PLAY;
+}
+
 /** True when the caller identifies as an app-store client (iOS or Android/Play). */
 export function isClearedStore(req: Request): boolean {
   try {
@@ -76,9 +115,19 @@ export function requestedStore(req: Request): string {
   }
 }
 
-/** Older name for the same check. Kept so an import that was missed cannot break a
- *  route silently — but new code should call `isClearedStore`. */
-export const isIosStore = isClearedStore;
+/* REMOVED 2026-09-28 — the old `export const isIosStore = isClearedStore` alias.
+ *
+ * It existed so a missed import could not break a route silently. It has to go,
+ * because the name now means something NARROWER and opposite in effect:
+ * `isIosStore` is Apple's build 8 (eight live streams, zero on-demand) while
+ * `isClearedStore` is every app store (8 live + 8 films). Leaving the alias would
+ * let a future route import `isIosStore` believing it gets the cleared catalogue
+ * and silently get the live-only one — or worse, believe it is gating Apple while
+ * it is really serving the films to both stores. A name that can mean both is
+ * exactly how a 5.2.2 gate springs a leak.
+ *
+ * Nothing imported it: verified by grep across src/ and the repo on 2026-09-28.
+ */
 
 /** Headers for a cleared-store response: never cached by a shared cache, because the
  *  body depends on a request header that shared caches do not vary on by default. */

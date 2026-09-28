@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getBrowseRows, getHomeStats } from "@/lib/cached";
-import { isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
+import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
 import { getIosLiveChannels, getIosShelves, getIosStats } from "@/lib/store-ios";
+import { getIosLiveOnlyChannels, toIosLivePayload } from "@/lib/store-ios-live";
 
 // Mobile API v1 — home screen payload.
 // Public, read-only, served from the same cache layer as the website so the
@@ -40,7 +41,38 @@ const slim = (t: {
 });
 
 export async function GET(req: Request) {
-  // -------------------------------------------------- cleared store (iOS/Android)
+  // ------------------------------------------- iOS BUILD 8: live eight, no rails
+  // Apple 5.2.2, second rejection (2026-09-28). The Home payload for the Apple
+  // binary is the eight live rows and nothing else:
+  //   hero        -> [] (hero renders on-demand artwork — a poster wall)
+  //   rows        -> [] (the docs / publicdomain rails were the films)
+  //   stats.titles-> 0  (this build carries no on-demand title at all)
+  // featuredChannels keeps the eight, because that is the list the Home screen
+  // draws and the reviewer's path starts there.
+  if (isIosStore(req)) {
+    const channels = toIosLivePayload(await getIosLiveOnlyChannels());
+
+    return NextResponse.json(
+      {
+        store: requestedStore(req),
+        // Counts of what this binary actually offers. Never the public totals:
+        // advertising titles the build does not carry is Guideline 2.3.1(a).
+        stats: { channels: channels.length, titles: 0 },
+        hero: [],
+        rows: [],
+        featuredChannels: channels.map((c) => ({
+          id: c.id,
+          name: c.name,
+          logoUrl: c.logoUrl,
+          category: c.category,
+          country: c.country,
+        })),
+      },
+      { headers: CLEARED_HEADERS }
+    );
+  }
+
+  // -------------------------------------------------- cleared store (Android/Play)
   if (isClearedStore(req)) {
     const [stats, { featured, docs, publicDomain }, channels] = await Promise.all([
       getIosStats(),
