@@ -9,6 +9,14 @@ export const dynamic = "force-dynamic";
 // the apps must never find two different catalogues described. The website
 // indexes broadly; the apps ship a smaller, fully documented catalogue. Say
 // that in words and never in numbers. Do not reintroduce a stat tile here.
+//
+// NOTE (2026-10-04): the iOS 1.0 build 8 app is live-news only. The old
+// sentence here ("Our iPhone and Android apps carry ... public-domain short
+// films") described the Android app's shelf as if it were both apps' shelf —
+// false for iOS, and visible to an Apple reviewer through this page. The
+// paragraph below now states each platform separately: website = full index,
+// iPhone app = eight news lives only, Android app = the same eight plus the
+// Archive films. Do not merge the platforms back into one sentence.
 export const metadata: Metadata = {
   title: "About Us",
   description:
@@ -36,15 +44,26 @@ export default async function AboutPage() {
         <section>
           <h2 className="text-lg font-bold text-white mb-2">The website and the apps</h2>
           <p>
-            Whisco TV on the web is an <span className="text-white font-semibold">index</span>. It brings together live
-            channels and films that are streamed from the source that owns them — the broadcaster&apos;s own player, or
-            archive.org&apos;s own player. We host no video files of our own.
+            Whisco TV on the web is the <span className="text-white font-semibold">full index</span>. It brings together
+            live channels and films that are streamed from the source that owns them — the broadcaster&apos;s own
+            player, or archive.org&apos;s own player. We host no video files of our own.
           </p>
           <p className="mt-3">
-            Our iPhone and Android apps carry a smaller, fully documented catalogue:{" "}
-            <span className="text-white font-semibold">live news from official broadcaster YouTube channels</span>, and{" "}
-            <span className="text-white font-semibold">public-domain short films from the Internet Archive</span>. Every
-            item in the apps shows the source it plays from, on that item&apos;s own page.
+            The <span className="text-white font-semibold">iPhone app</span> (1.0 build 8, still in Apple review)
+            plays <span className="text-white font-semibold">eight official news live streams only</span> — no films,
+            no series, no downloads. The <span className="text-white font-semibold">Android app on Google Play</span>{" "}
+            plays those same eight news streams plus{" "}
+            <span className="text-white font-semibold">eight public-domain short films from the Internet Archive</span>.
+            Neither app is an Android TV or Fire TV app. There is no subscription in either app.
+          </p>
+          <p className="mt-3">
+            Google Play:{" "}
+            <a
+              href="https://play.google.com/store/apps/details?id=tv.whisco.app"
+              className="text-orange-400 hover:underline"
+            >
+              Android phone and tablet
+            </a>
           </p>
           <p className="mt-3">
             Rights holders: if you&apos;d like a source reviewed, updated, or removed, contact{" "}

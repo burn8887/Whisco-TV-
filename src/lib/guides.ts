@@ -65,7 +65,7 @@ export const GUIDES: Guide[] = [
         heading: "What's legally free right now",
         paragraphs: [
           "News and general entertainment from most home countries broadcasts free-to-air: Indian, Pakistani, Bangladeshi, Filipino, Indonesian, Nepali, Sri Lankan and Arabic channels stream legally without any subscription. Production houses like Goldmines and Shemaroo publish full Bollywood movies on their official channels; HUM, ARY and GEO do the same for Pakistani dramas — with English subtitles.",
-          "Whisco TV brings these legitimate sources together in one place, organized by language and community and checked automatically around the clock so dead links never waste your evening. Everything plays from an official broadcaster channel or a public-domain archive; we host no video files of our own. Our apps carry a smaller, fully documented shelf — official YouTube news live, plus public-domain films from archive.org. It costs nothing because it's advertising-supported — the same model as broadcast TV back home.",
+          "Whisco TV brings these legitimate sources together in one place, organized by language and community and checked automatically around the clock so dead links never waste your evening. Everything plays from an official broadcaster channel or a public-domain archive; we host no video files of our own. Our Android app carries a smaller, fully documented shelf — official YouTube news live, plus public-domain films from archive.org; the iPhone app plays the eight official news streams only. It costs nothing because it's advertising-supported — the same model as broadcast TV back home.",
         ],
       },
       {
