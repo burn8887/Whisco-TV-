@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getVodShelves, getVodGrid } from "@/lib/cached";
 import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
-import { getIosVodTitles, getIosCollections } from "@/lib/store-ios";
+import { ANDROID_SHELF_LABEL, getAndroidFilms } from "@/lib/store-android";
 
 // Mobile API v1 — VOD.
 //  GET /api/mobile/v1/vod                    → shelves (browse mode)
@@ -101,29 +101,30 @@ export async function GET(req: Request) {
   }
 
   // -------------------------------------------------- cleared store (Android/Play)
-  // Unchanged: the Play packet in review carries 8 live + these 8 films. An
-  // Apple decision does not get to change what Google is reviewing.
+  // THE ANDROID SHELF (Desk work order, 2026-10-05 21:30 AST). The eight Archive
+  // scans from 1906-1964 that used to be this shelf are gone from it — the
+  // website keeps them. What ships instead is the colour shelf from
+  // src/lib/store-android.ts: public-domain and Creative Commons features whose
+  // item page declares the licence we ship them under, declares the picture is
+  // colour, and whose poster pixels measure colour. Newest year first. One shelf,
+  // because one shelf is what passes; the count is the count of what is here.
   if (isClearedStore(req)) {
+    const shelf = await getAndroidFilms();
     if (!collection && !q) {
-      const [items, collections] = await Promise.all([getIosVodTitles({ limit: 80 }), getIosCollections()]);
       return NextResponse.json(
         {
           store: requestedStore(req),
           mode: "shelves",
-          total: items.length,
-          // Shelves are derived from the CLEARED set, so no chip or count can
-          // advertise a catalogue this build does not carry.
-          shelves: collections.map((c) => ({
-            name: c.collection,
-            count: c.count,
-            items: items.filter((t) => t.collection === c.collection).map(slim),
-          })),
-          items: items.map(slim),
+          total: shelf.length,
+          shelves: [{ name: ANDROID_SHELF_LABEL, count: shelf.length, items: shelf.map(slim) }],
+          items: shelf.map(slim),
         },
         { headers: CLEARED_HEADERS }
       );
     }
-    const items = await getIosVodTitles({ collection, q, limit: 80 });
+    const items = q
+      ? shelf.filter((t) => t.name.toLowerCase().includes(q.toLowerCase()))
+      : shelf.filter((t) => t.collection === collection);
     return NextResponse.json(
       {
         store: requestedStore(req),

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getChannelPageData } from "@/lib/cached";
 import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
-import { getIosChannel } from "@/lib/store-ios";
+import { getAndroidChannel } from "@/lib/store-android";
 import { getIosLiveOnlyChannel } from "@/lib/store-ios-live";
 
 // Mobile API v1 — single live channel + related channels.
@@ -47,8 +47,11 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   }
 
   // -------------------------------------------------- cleared store (Android/Play)
+  // THE ANDROID SHELF (Desk work order, 2026-10-05): the allow-list in
+  // src/lib/store-android.ts, not a database flag. A channel that is not in that
+  // file is a hard 404 here even if some catalogue row says otherwise.
   if (isClearedStore(req)) {
-    const channel = await getIosChannel(id);
+    const channel = getAndroidChannel(id);
     if (!channel) return NextResponse.json({ error: "not-found" }, { status: 404, headers: CLEARED_HEADERS });
 
     return NextResponse.json(
@@ -67,7 +70,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
           rightsBasis: channel.rightsBasis ?? null,
           evidenceUrl: channel.evidenceUrl ?? null,
         },
-        // No "related" rail on the iOS store: related rows would leak uncleared
+        // No "related" rail: related rows would leak uncleared
         // channels into the app through the back door.
         related: [],
       },

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getTitlePageData } from "@/lib/cached";
 import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
-import { getIosTitle, getIosSimilar } from "@/lib/store-ios";
+import { getAndroidFilm, getAndroidSimilar } from "@/lib/store-android";
 
 // Mobile API v1 — full title detail (movie/doc streamUrl, or series with
 // seasons+episodes) + similar titles.
@@ -22,11 +22,14 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   }
 
   // ------------------------------------------- cleared store (Android/Play)
-  // Unchanged: Play keeps the cleared 8 + 8 catalogue it is in review with.
+  // THE ANDROID SHELF (Desk work order, 2026-10-05): one film can be reached here
+  // only if its slug is in ANDROID_FILMS, and it is served with the item page and
+  // the licence statement that were read off that page — not with our editorial
+  // row's own words. The eight Archive scans that used to be reachable are not.
   if (isClearedStore(req)) {
-    const title = await getIosTitle(slug);
+    const title = await getAndroidFilm(slug);
     if (!title) return NextResponse.json({ error: "not-found" }, { status: 404, headers: CLEARED_HEADERS });
-    const similar = await getIosSimilar(title.id, title.collection);
+    const similar = await getAndroidSimilar(title.slug);
 
     return NextResponse.json(
       {
