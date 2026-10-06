@@ -80,6 +80,21 @@ export default async function LivePage({
         <p className="text-zinc-500 text-sm mt-1">
           {total}+ live channels from around the globe — <span className="text-emerald-400 font-semibold">100% free, ad-supported</span>.
         </p>
+        {/* Original paragraph (Desk work order, 6 Oct 2026). Written for the
+            households this site is for, and honest about where the picture
+            comes from: rows that are a broadcaster's own channel play inside
+            that broadcaster's player, and everything else plays from the source
+            that publishes it. Whisco hosts no video of its own — so when a
+            channel goes dark the honest result is an empty player, never a
+            substitute stream from somewhere else. */}
+        <p className="text-zinc-400 text-sm mt-3 max-w-3xl leading-relaxed">
+          Written for households in the Gulf who want the news and channels from
+          home without a dish, a box, or a seller. A row that comes from a
+          broadcaster&apos;s own channel plays inside that broadcaster&apos;s own
+          player, with their advertising; the rest play from the source that
+          publishes them. We host no video of our own, so if a channel goes dark
+          the player stays empty — we do not swap in a copy from somewhere else.
+        </p>
         {sp.language && (
           <div className="mt-2">
             <HomeTime language={sp.language} />

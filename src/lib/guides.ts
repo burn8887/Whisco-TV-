@@ -1762,4 +1762,210 @@ export const GUIDES: Guide[] = [
     ctaLabel: "Browse Arabic Series & Shows",
     ctaHref: "/vod?collection=Arabic+Series+%26+Shows"
   },
+  {
+    slug: "news-from-home-smart-tv-gulf",
+    title: "News from home on a Gulf smart TV, without a dish or a seller",
+    h1: "News from home on a Gulf smart TV, without a dish or a seller",
+    intro:
+      "A rented flat in Bahrain, Dubai, Doha or Riyadh rarely comes with a dish pointed at the country you left. The evening news is still the programme people miss first. The legal way to get it is the broadcaster’s own live stream, usually on that broadcaster’s own YouTube channel, played on the television you already have.",
+    sections: [
+      {
+        heading: "What you need",
+        paragraphs: [
+          "A smart TV, a Fire TV stick, a Chromecast, or a phone that can show its screen on the TV. A normal home connection. No loaded box, no playlist file, and no one on WhatsApp selling “all channels.”",
+          "Open YouTube on the television and search for the broadcaster by its real name: Al Jazeera, Al Arabiya, France 24, India TV, Asianet News, TV9, Somoy TV, GMA News. If the channel is live, YouTube shows a live badge. That picture is coming from the broadcaster. They keep their own advertising inside the player. You are not downloading the channel, and you are not paying a middleman for it.",
+        ],
+      },
+      {
+        heading: "A simple evening setup",
+        paragraphs: [
+          "Sign the television into YouTube once. Subscribe to three or four news channels from home, not thirty. Subscriptions are a reminder, not a bundle you own. When you sit down, open Subscriptions and pick the one that is live. If a channel is dark, it is off air or the broadcaster has ended the stream. Waiting does not fix a channel that has signed off.",
+          "Whisco TV’s news shelf is the same idea in one list: official live streams, opened in YouTube’s player. If a channel on that shelf is down, the honest result is a dead player, not a secret backup stream from somewhere else.",
+        ],
+      },
+      {
+        heading: "What not to add",
+        paragraphs: [
+          "A seller who wants a yearly fee for a stick has mixed a few of these free news channels with channels he has no right to sell. The news would have been free. The rest is why the stick dies when the seller’s line is cut. Sports is the usual bait. A live cricket or football feed on a random playlist is not the same thing as a news channel’s own YouTube page, and it does not belong in this setup.",
+          "If the television cannot install YouTube, the broadcaster’s own website is the second stop. A downloaded playlist is not.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live",
+  },
+  {
+    slug: "filipino-shows-gulf-legal",
+    title: "Filipino shows in the Gulf, from the channels that own them",
+    h1: "Filipino shows in the Gulf, from the channels that own them",
+    intro:
+      "Filipino households in Bahrain, the UAE, Qatar and Saudi Arabia already know the titles. The hard part is watching them without a box that quits, and without paying a stranger for a channel ABS-CBN or GMA already puts out itself.",
+    sections: [
+      {
+        heading: "Where the official copies are",
+        paragraphs: [
+          "GMA and ABS-CBN publish news and a large share of entertainment on their own YouTube channels. A full episode that carries the network’s name, on that network’s channel, is the copy to use. The player is YouTube’s. The network keeps the ads inside it. A re-upload with a slightly wrong logo, or a Telegram folder of the same episode, is not the same thing and is the one to skip.",
+          "Whisco’s Filipino shelf, where a title is listed, is meant to point at those official uploads. If a title is missing, it is missing because that official copy was not the row we could verify. It is not a prompt to go looking for a copied file.",
+        ],
+      },
+      {
+        heading: "What a week of watching looks like",
+        paragraphs: [
+          "News is the easy part. GMA News and UNTV run live streams on their own channels, and those are the ones worth saving on the television. Teleserye episodes are slower. Networks put some full episodes up and hold others for their own app or for a partner. If this week’s episode is not on the official channel, it is not “free somewhere else.” It is not out for this kind of viewing yet.",
+          "iWant, Kapamilya Channel arrangements, and GMA’s own app are the paid or registered doors for what YouTube does not carry. A Gulf card sometimes fails on those apps. That is a billing limit, not a reason to switch to a playlist.",
+        ],
+      },
+      {
+        heading: "A practical setup",
+        paragraphs: [
+          "On the television, subscribe to GMA News, GMA Network, and ABS-CBN News. Use those subscriptions for the evening bulletin. For a series, open the network channel and look for the episode with the network’s own title card. If Whisco has the series, start there and confirm the player is YouTube, not a bare video file.",
+          "No seller in a compound has a special Filipino package that the networks forgot to charge for. If the price is a few dinars for “all teleserye,” the supply is not official, and it will break the week the source is cut.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live",
+  },
+  {
+    slug: "what-whisco-plays",
+    title: "What Whisco plays, and what it will not",
+    h1: "What Whisco plays, and what it will not",
+    intro:
+      "Whisco is a free, ad-supported index for households in the Gulf. It does not sell a subscription, and it does not rehost a channel that belongs to someone else. The picture comes from the place that owns it: a broadcaster’s own YouTube player, or the Internet Archive’s own player for a film marked public domain or Creative Commons.",
+    sections: [
+      {
+        heading: "What you can press play on",
+        paragraphs: [
+          "News is the clearest case. If a row is Al Jazeera, France 24, GMA News, Somoy TV or another named broadcaster, the stream is that broadcaster’s live embed. Their player stays on screen. Their ads, if they run any, stay theirs.",
+          "Films on the public-domain shelf are old titles whose Archive page says they are free to share. Those pages are the record. A recent cinema release is not in that set, because a film from this decade is still under copyright and we do not have a licence to host the file.",
+          "Series rows on the website, where they exist, point at uploads identified as the broadcaster’s own. If that check fails, the row does not belong on a shelf we are willing to defend.",
+        ],
+      },
+      {
+        heading: "What we will not add",
+        paragraphs: [
+          "A playlist file, a sticker on a Fire stick, or a “lifetime” line sold in a compound is not a source. Those bundles mix a few legal news channels with channels the seller does not own. We do not carry the second kind to make the first kind look bigger.",
+          "The phone app is a shorter shelf than the website. It is limited to official news and a small set of films we can point at. A title on the website is not a promise that the same title is inside the app.",
+          "If a rights holder wants a row reviewed or removed, legal@whisco.tv is the address. A valid notice takes the row down. That mailbox is not a place to buy a channel.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse films",
+    ctaHref: "/vod",
+  },
+  {
+    slug: "nepali-tv-gulf-no-dish",
+    title: "Nepali TV in the Gulf, without a dish on the roof",
+    h1: "Nepali TV in the Gulf, without a dish on the roof",
+    intro:
+      "Nepali households in the UAE, Qatar, Bahrain and Saudi Arabia are used to a dish for Kantipur, Nepal Television or News 24. A rented flat often forbids the dish, and a shared roof is a bad place to argue. The legal substitute is the station’s own stream, not a box that also claims Indian cinema and Premier League.",
+    sections: [
+      {
+        heading: "Start with the station’s own channel",
+        paragraphs: [
+          "Search YouTube on the television for the station by name. A live badge on Nepal Television, Kantipur or News 24 means that station is streaming. Play that. If there is no live badge, the station has not opened a stream right now. Another website offering the same logo on a bare player is not a fallback we recommend, because the rights are no longer obvious.",
+          "Whisco lists a Nepali news row only when that official live embed is up and the channel page matches the station. A dark evening is a dark evening. It is not filled with a copied feed.",
+        ],
+      },
+      {
+        heading: "Serials and films",
+        paragraphs: [
+          "Nepali serials and films on official YouTube channels are the ones worth watching here. A Facebook rip with a phone number across the picture is not. Full films that are still in cinemas at home are not free just because a file has appeared. If it is not on the producer’s or the station’s channel, leave it.",
+        ],
+      },
+      {
+        heading: "A setup that survives a flat move",
+        paragraphs: [
+          "Subscribe to two station channels on the television, not to a playlist. When you move from one camp to another, you sign in again and the subscriptions come with the account. A stick you bought in the old building does not. The station’s app, where they have one, is the other official door. A Gulf phone number is sometimes rejected by those apps. YouTube on the television is the door that usually opens.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live",
+  },
+  {
+    slug: "official-channel-or-copy",
+    title: "How to tell an official channel from a copy",
+    h1: "How to tell an official channel from a copy",
+    intro:
+      "The thumbnails look the same. The difference is who uploaded the video, and that is the whole test.",
+    sections: [
+      {
+        heading: "The checks that take a minute",
+        paragraphs: [
+          "Open the channel page, not just the video. The name should be the broadcaster’s, and the page should carry the same logo you know from home. A channel called “GMA News Replay 4K” with a few thousand subscribers is not GMA. A channel that posts today’s episode an hour after the network, with no network in the name, is a copy.",
+          "On a live stream, the address should be that channel’s own live. YouTube shows the channel name under the picture. If the name is a person, or a shop, it is not the bulletin.",
+          "On Whisco, a news row is built from that channel page. The player that opens is YouTube’s, with YouTube’s controls. A page that jumps straight to a bare video file, with no broadcaster name, is not a row we treat as official.",
+        ],
+      },
+      {
+        heading: "Copies to skip even if they play",
+        paragraphs: [
+          "A full episode with a watermark, a Telegram link in the title, or a request to subscribe to a “backup” channel is someone else’s upload of a programme they do not own. It may play today. It is the upload that disappears when the real owner files a notice, and it is the kind of page that gets a free site into trouble.",
+          "Archive films are a different case. The record is the Archive item page, and it should say public domain or Creative Commons. A film page that does not say that is not made official by being old.",
+          "If you are unsure, play the broadcaster’s own channel and ignore the lookalike. The picture is the same. The permission is not.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live",
+  },
+  {
+    slug: "first-week-gulf-flat-tv",
+    title: "The first week of television in a Gulf flat",
+    h1: "The first week of television in a Gulf flat",
+    intro:
+      "The keys work, the air conditioning works, and the television on the wall plays whatever the last tenant left on it. Here is a setup that does not depend on that tenant’s stick.",
+    sections: [
+      {
+        heading: "Day one",
+        paragraphs: [
+          "Connect the television to the flat’s internet. Install YouTube if it is not there. Sign in with your own account, not the one saved on the stick you were offered downstairs. Subscribe to the news channel from home and one entertainment channel you already trust. Play a live news stream and leave it on for ten minutes. If it holds, the line is good enough.",
+          "Delete leftover paid apps you do not have an account for. A saved login on a second-hand stick is someone else’s bill, and it stops the week they change the password.",
+        ],
+      },
+      {
+        heading: "What to ignore in the building chat",
+        paragraphs: [
+          "The first message in a new compound chat is often a menu: sports, films, a yearly price. The news on that menu is already free on YouTube. The sports are the part the seller cannot legally include. You do not need the menu to watch the bulletin tonight.",
+          "Whisco is the other list: official news embeds, and films whose Archive page says they are free. It is not a replacement for a sports package, and it will not pretend to be one.",
+        ],
+      },
+      {
+        heading: "If the television is dumb",
+        paragraphs: [
+          "A Chromecast or a Fire TV stick you buy yourself, signed into your account, is enough. The stick is a remote for YouTube. It is not a product that should arrive “already loaded.” Loaded means someone else chose the channels, and you will not be able to explain those channels if the account is asked.",
+          "By the end of the week you want three subscriptions, a working live news channel, and no number in your phone labelled “channels.” That is the setup that still works after the seller leaves the building.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live",
+  },
+  {
+    slug: "arabic-news-without-a-dish",
+    title: "Arabic news in the Gulf, without a second dish",
+    h1: "Arabic news in the Gulf, without a second dish",
+    intro:
+      "Arabic news does not require a satellite pointing at a specific beam. The big stations already run a live stream on their own YouTube channels, and a television in Manama, Jeddah or Kuwait City can open those channels with the account you already use.",
+    sections: [
+      {
+        heading: "The channels worth saving",
+        paragraphs: [
+          "Al Jazeera Arabic, Al Arabiya, and France 24 Arabic are the three to subscribe to first. Each is the station’s own channel. A live badge means the bulletin is on. France 24 also runs an English channel, which helps in a flat where not everyone wants the same language. Al Jazeera English is the same idea for the English bulletin.",
+          "Play them from YouTube on the television, or from the news shelf on Whisco, which opens the same kind of embed. The station keeps the player. A third-party app that hides the station’s name and asks for a yearly code is not a better picture. It is a different supply.",
+        ],
+      },
+      {
+        heading: "What this does not include",
+        paragraphs: [
+          "A drama that aired last night on a Gulf network is not granted to you because the news from that country is free. Series rights are sold separately. If the episode is not on the network’s own channel, this setup does not have it. MBC, Rotana and the national broadcasters have their own apps for a reason.",
+          "Sport is the other gap. A live match is almost never part of a free news embed. Anyone offering the match inside a news package is selling something the news channel did not include.",
+          "Subscribe to the three Arabic news channels, leave the codes alone, and the bulletin is there on an ordinary weeknight.",
+        ],
+      },
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live",
+  },
 ];
