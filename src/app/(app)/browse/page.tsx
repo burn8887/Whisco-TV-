@@ -58,6 +58,18 @@ export default async function BrowsePage() {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8">
+        {/* Original paragraph (Desk work order, 6 Oct 2026). /browse carried no
+            prose of its own — only a hero image and rails — so it says here who
+            it is for and where the picture comes from. */}
+        <p className="text-zinc-400 text-sm max-w-3xl leading-relaxed mb-8">
+          Browse everything the website carries in one place: live news, films,
+          series, and documentaries, in the languages Gulf households watch at
+          home. Films stream from the Internet Archive&apos;s own servers and each
+          one&apos;s item page is the record of why we may carry it; live rows play
+          from the source that publishes them, in the broadcaster&apos;s own player
+          where the row is that broadcaster&apos;s channel. We host no video file
+          ourselves.
+        </p>
         {progress.length > 0 && (
           <Row title="Continue Watching">
             {progress.map((p) => (

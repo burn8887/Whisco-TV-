@@ -123,6 +123,18 @@ export default async function VodPage({
           <p className="text-zinc-500 text-sm mt-1">
             {total}+ movies, series, and documentaries — <span className="text-emerald-400 font-semibold">100% free, ad-supported</span>.
           </p>
+          {/* Original paragraph (Desk work order, 6 Oct 2026): who this is for,
+              and where the file actually comes from. Films stream from the
+              Internet Archive's own servers, on the terms of the item page they
+              came from; series play as the upload they were listed from. */}
+          <p className="text-zinc-400 text-sm mt-3 max-w-3xl leading-relaxed">
+            For viewers in the Gulf who want the films and series they grew up
+            with, in the languages they speak at home. A film streams from the
+            Internet Archive&apos;s own servers, and the item page it came from
+            is the record of why we may carry it; a series plays as the upload it
+            was listed from, in that uploader&apos;s player. We keep no copy of
+            any file ourselves.
+          </p>
         </div>
 
         {/* Search + collection pills */}
