@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { getBrowseRows, getHomeStats } from "@/lib/cached";
 import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
-import { getIosLiveChannels, getIosShelves, getIosStats } from "@/lib/store-ios";
 import { getIosLiveOnlyChannels, toIosLivePayload } from "@/lib/store-ios-live";
+import { getAndroidFilms, getAndroidLiveChannels, ANDROID_SHELF_LABEL } from "@/lib/store-android";
 
 // Mobile API v1 — home screen payload.
 // Public, read-only, served from the same cache layer as the website so the
@@ -73,35 +73,32 @@ export async function GET(req: Request) {
   }
 
   // -------------------------------------------------- cleared store (Android/Play)
+  // THE ANDROID HOME (Desk work order, 2026-10-05 21:30 AST): news first, then the
+  // colour shelf.
+  //
+  //   featuredChannels -> the thirty official news lives, first in the payload
+  //                       and first on the screen, which is where the home has
+  //                       started since build 8;
+  //   rows             -> ONE shelf: the colour on-demand titles, no others. The
+  //                       shelf that used to be here was the eight Archive scans
+  //                       (seven of them black and white) and it is gone from the
+  //                       Android store;
+  //   hero             -> [] — the hero was five black-and-white posters. No
+  //                       black-and-white card sits anywhere on this home;
+  //   stats            -> not sent. "No 'Free'. No 600 or 15,000." (Desk order.)
+  //                       Build 8's home screen stopped drawing the count line; the
+  //                       payload now stops carrying the numbers as well. Nothing
+  //                       in the app reads `stats` (grep across app/ and src/ of
+  //                       whisco-mobile, 2026-10-05).
+  //
+  // No "Movies" row and no "Series" row: this surface must not read as a
+  // cinema/dizi storefront (Grok's lock, item 4).
   if (isClearedStore(req)) {
-    const [stats, { featured, docs, publicDomain }, channels] = await Promise.all([
-      getIosStats(),
-      getIosShelves(),
-      getIosLiveChannels(15),
-    ]);
-
-    // No "live" row here on purpose. It used to be emitted as a hardcoded empty
-    // `items: []` stub and kept by the filter, which rendered as a labelled,
-    // contentless shelf on the Home tab — the app draws that row and has nothing
-    // to put in it. The cleared live channels are already on this screen: they
-    // arrive as `featuredChannels` and the app lists all eight under its own
-    // "Featured live channels" heading. Removing the stub changes nothing a
-    // reviewer can reach; it removes a visibly broken shelf from the first screen
-    // they open. (Apple 5.2.2 round, 22 Sep 2026.)
-    const rows = [
-      { key: "docs", label: "Documentaries", items: docs.map(slim) },
-      { key: "publicdomain", label: "Public Domain Classics", items: publicDomain.map(slim) },
-    ].filter((r) => r.items.length > 0);
+    const [films, channels] = [await getAndroidFilms(), getAndroidLiveChannels()];
 
     return NextResponse.json(
       {
         store: requestedStore(req),
-        // Counts of what this build actually offers — never the public totals.
-        stats: { channels: stats.channels, titles: stats.titles },
-        hero: featured.slice(0, 5).map(slim),
-        rows,
-        // No "Movies" row and no "Series" row: the iOS On Demand surface must not
-        // read as a cinema/dizi storefront (Grok's lock, item 4).
         featuredChannels: channels.map((c) => ({
           id: c.id,
           name: c.name,
@@ -109,6 +106,8 @@ export async function GET(req: Request) {
           category: c.category,
           country: c.country,
         })),
+        hero: [],
+        rows: [{ key: "pdcc", label: ANDROID_SHELF_LABEL, items: films.map(slim) }],
       },
       { headers: CLEARED_HEADERS }
     );

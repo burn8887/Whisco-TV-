@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { getLivePageData } from "@/lib/cached";
 import { isIosStore, isClearedStore, requestedStore, CLEARED_HEADERS, PUBLIC_HEADERS } from "@/lib/store-gate";
-import { getIosLiveChannels } from "@/lib/store-ios";
 import { getIosLiveOnlyChannels, toIosLivePayload } from "@/lib/store-ios-live";
+import { getAndroidLiveChannels } from "@/lib/store-android";
 import { excludeIosOnly } from "@/lib/store-public";
 
 // Mobile API v1 — live TV directory with the same filters as the web page.
@@ -50,8 +50,14 @@ export async function GET(req: Request) {
   }
 
   // -------------------------------------------------- cleared store (Android/Play)
+  // THE ANDROID SHELF (Desk work order, 2026-10-05 21:30 AST): thirty official
+  // news lives, from src/lib/store-android.ts. Keep the eight that already ship;
+  // every addition had to be the broadcaster's own YouTube channel, live when it
+  // was checked, and its embed has to be the channel form. This list is the
+  // catalogue — no database flag, no fallback to the public directory, so a row
+  // that is not in that file cannot appear in this response.
   if (isClearedStore(req)) {
-    const channels = await getIosLiveChannels();
+    const channels = getAndroidLiveChannels();
 
     return NextResponse.json(
       {
