@@ -2301,5 +2301,234 @@ export const GUIDES: Guide[] = [
     ],
     "ctaLabel": "Browse live channels",
     "ctaHref": "/live"
+  },
+  // Official-source checks for the five new guides (checked 2026-10-11).
+  // Punjabi: https://www.youtube.com/c/WhiteHillEntertainment ; https://www.youtube.com/@PTCPUNJABIGOLD ; https://www.youtube.com/channel/UCxQRUQmsAHA5GMAI4nddx_w ; https://play.google.com/store/apps/details?id=com.ptcplayapp ; https://play.google.com/store/apps/details?id=tv.chaupal.android ; https://help.netflix.com/en/node/125344 ; https://www.amazon.in/Movies-Punjabi-Prime-Video/s?rh=n%3A15487480031%2Cp_n_feature_two_browse-bin%3A15629554031&hidden-keywords=-set
+  // Sri Lankan: https://tv.rupavahini.lk/ ; https://www.hirutv.lk/ ; https://www.youtube.com/@swarnavahinitv ; https://sinhala.newsfirst.lk/ ; https://www.youtube.com/NewsFirstSrilanka ; https://www.yupptv.com/sinhala-tv-channels-europe.html
+  // Arabic and platform terms: https://www.alarabiya.net/live-stream ; https://www.aljazeera.net/live ; https://embed.france24.com/ar/live ; https://www.youtube.com/static?template=terms
+  {
+    slug: "punjabi-films-music-gulf-legal",
+    title: "Punjabi films and music in the Gulf — free legal layer",
+    h1: "Punjabi films and music in the Gulf — the free legal layer",
+    intro: "Punjabi households across the UAE, Saudi Arabia and Kuwait have a dense free legal layer of films, music and variety on official channels. Newer theatrical releases are usually paid. This guide maps what is actually free tonight and where the paid apps still matter.",
+    sections: [
+      {
+        heading: "Why Punjabi content travels so well in the Gulf",
+        paragraphs: [
+          "Punjabi viewing in the Gulf does not mean one format or one platform. In one household, a search for Punjabi may mean a full comedy after work; in another, the latest song, a devotional programme, a live discussion or a film that relatives remember from home. Treating these as separate needs makes the evening easier: a label’s video playlist can cover songs, a broadcaster’s official channel may carry shows or news, and a movie distributor’s catalogue may include complete features. A film’s lead actor, music label and broadcaster can all be different rights-holders, so one channel rarely represents the whole scene. Start with the kind of programme rather than a promise that one app has everything.",
+          "The language crosses borders and formats: Punjabi stories are watched with family, while music clips travel easily between phones, homes and gatherings. The Gulf adds a practical wrinkle because households may use different scripts, spellings and transliterations when searching. Try the Punjabi title as well as a romanized spelling, and look for the original label or broadcaster in the channel’s About page. Search results can mix a full film with a trailer, a reaction clip or a re-upload that has copied the poster. A careful source check matters more than a polished thumbnail, especially when the screen will be shared."
+        ]
+      },
+      {
+        heading: "Official YouTube channels that still upload full films",
+        paragraphs: [
+          "Start with official studio and network channels rather than a general search-results page. White Hill Entertainment is a distributor and label whose official YouTube presence includes Punjabi film and music work; PTC’s official channels also publish film and television material. Some uploads are complete films; others are trailers, clips or material that points viewers to the PTC Play app. Do not assume that a film poster means the whole feature is there. Open the channel page, check that the broadcaster or studio links to it, and inspect the upload’s title, description and runtime before settling in.",
+          "For tonight’s choice, browse the publisher’s own video tab or playlists and distinguish a complete story from an excerpt. If the description names an official app or service as the place to watch the full film, follow that route and its local terms. Uploads may be removed, region-limited or replaced when distribution rights change; a channel that carried an older title does not promise a new theatrical film will appear there. If playback stops at a trailer, choose another authorized upload or wait for the studio’s release rather than following an anonymous copy."
+        ]
+      },
+      {
+        heading: "Music and live shows — different rights patterns",
+        paragraphs: [
+          "Music follows a different rights chain from films. A label such as White Hill Music or Speed Records may post official songs, video singles, lyric videos, interviews or short performances; a song being viewable does not mean its full album, concert recording or broadcast event is also available. The channel owner may be the label, the artist’s team or a network, so confirm the publisher for each upload. For an evening built around music, the official label’s playlists are usually a better start than a movie shelf, but not every release is put on the same channel and older playlists can contain unavailable tracks.",
+          "Live shows and awards are another case: a teaser or highlights package is not a live feed, and an event may be carried through a broadcaster’s app or television partner. PTC Play’s official app listing describes live channels plus on-demand Punjabi films and programmes, notes that features can vary by country or region, and identifies paid access for full use. Check the current store listing, local plan and specific programme before subscribing. If you need a particular event tonight, use the broadcaster’s schedule or the event’s own official notice rather than assuming a music channel will carry it."
+        ]
+      },
+      {
+        heading: "What Netflix, Amazon and others actually hold",
+        paragraphs: [
+          "Netflix and Prime Video can be useful for selected Punjabi films or series, but neither should be treated as a complete Punjabi television package. Rights are sold title by title and can differ between India and the Gulf. Netflix’s own help page says a title may be missing because it has not been released in a country or its regional rights are unavailable. Amazon India’s Punjabi search pages show why a listing needs a close read: a title may be part of Prime, available to rent, or offered through a separate add-on. Those India storefront results are examples of payment models, not proof of Bahrain access.",
+          "Chaupal is a more language-focused paid option: its official app listing describes Punjabi, Haryanvi and Bhojpuri movies and series as premium content with in-app purchases. PTC Play also lists Punjabi films and live channels, with paid access and regional variation. The right answer depends on the film, your country and the device you use. Search from the account and store you will actually use in the Gulf; open the exact title page; confirm whether it is included, rental or a separate subscription; and read renewal and cancellation terms before paying. If a new cinema release is the must-have, a legitimate paid rental or service can simply be the practical answer."
+        ]
+      },
+      {
+        heading: "How to start on Whisco without expecting every new release",
+        paragraphs: [
+          "Whisco’s Punjabi shelf is a discovery route to the titles currently listed under Punjabi; it is not a promise of every fresh release or every official upload. Open a title, confirm the named source, and check captions and playback on the screen you plan to use. The shelf route is /vod?shelf=punjabi. If a title is not listed or its source is unavailable, return to the studio or broadcaster’s own channel and search there; a listing on a shelf does not override the publisher’s rights or regional rules.",
+          "An easy routine is to decide first whether the room wants a song, a show or a film. For songs, open the label’s official channel; for a feature, inspect the studio’s own uploads; for a current theatrical title, check the local app or rental page. Keep a short list of official channels you recognise and use the platform’s normal app or website on the television. When there is no authorized upload, the answer may be a paid release or a wait. That is less exciting than a promise of everything, but more dependable than a copied stream. Keep the source visible when sharing a link with relatives: send the broadcaster or studio page, not a saved copy or shortened third-party link. If someone else will press play, ask them to check that the title and publisher still match before signing in or paying. This small habit prevents a copied result from looking like an official recommendation."
+        ]
+      }
+    ],
+    ctaLabel: "Browse Punjabi",
+    ctaHref: "/vod?shelf=punjabi"
+  },
+  {
+    slug: "sri-lankan-teledrama-news-gulf-legal",
+    title: "Sri Lankan teledrama and news — legal options in the Gulf",
+    h1: "Sri Lankan teledrama and news — legal options in the Gulf",
+    intro: "Sinhala teledramas and news are still followed closely by Sri Lankan households in the GCC. The free legal layer is thinner than Hindi or Turkish, but it exists. This page separates the official free options from the copies and from the paid apps.",
+    sections: [
+      {
+        heading: "What is free on official Sri Lankan channels tonight",
+        paragraphs: [
+          "Start with broadcasters’ own pages, not a fan list. Sri Lanka Rupavahini’s official TV site has a teledrama section, a Sinhala news area and links to its webcast and YouTube channel. Hiru TV’s official site links its YouTube destination and carries an online live player; its current programme pages also point to episode uploads. Swarnavahini’s official YouTube channel describes its uploads as Sinhala teledramas and television programmes. These are useful routes to check tonight because the publisher is identifiable, but each programme has its own upload, rights and regional conditions. Look at the date and episode number rather than assuming a channel’s whole archive is on demand.",
+          "For news, Newsfirst Sri Lanka publishes Sinhala news on its own site and official video channels; Hiru News and Rupavahini also have first-party news pages. A clip, a full bulletin, a live player and a television schedule are different things. When a page says live, open it and check that the current programme is actually playing. A current upload can help when a stream is unavailable, but a replay is not a live service. These broadcasters are sensible places to begin because the publisher is visible; a copied stream using a familiar logo is not the same source."
+        ]
+      },
+      {
+        heading: "Teledrama reality — English subtitles are rare",
+        paragraphs: [
+          "The heading is deliberately frank: English subtitles are not something to assume for Sinhala drama. Official episodes often have Sinhala titles and descriptions, and their pages do not consistently promise English caption tracks. Some uploads may include subtitles or captions, but the availability belongs to the exact episode, not the series name. Open the player’s caption menu before inviting everyone to watch; do not rely on a fan-made playlist or a search snippet that says subtitles without showing the track on the video you plan to play.",
+          "Also distinguish authored captions from automatic speech recognition. Sinhala names, fast dialogue, music and regional expressions can make generated text incomplete or misleading, and caption availability can differ between the television app and phone. If English is important, test one episode and confirm both that captions appear and that they are readable on the living-room screen. If the official upload has no track, treat it as Sinhala-only rather than promising a translation. A paid service might have a different version, but check the title’s own audio and subtitle details before purchasing."
+        ]
+      },
+      {
+        heading: "News channels that work on a Gulf IP",
+        paragraphs: [
+          "Rupavahini’s official site has a Sinhala News page and a webcast route. Newsfirst’s Sinhala site and YouTube channels carry current reporting, while Hiru News publishes bulletins on its official channel. Those are legitimate starting points for a viewer in the Gulf. We have not verified video playback on a Gulf IP for every feed, and an official page being reachable does not prove its player works from Bahrain, Saudi Arabia, Kuwait or another GCC network. Check the actual live player from your connection; if it is blocked or stalls, move to another official broadcaster page or its verified YouTube channel, not to a mirror.",
+          "News access can vary by format. A publisher may leave clips and past bulletins on YouTube while its live stream is restricted, or may offer a live player on its site that behaves differently in a television browser. Confirm the date, language and live indicator, and use the broadcaster’s own schedule to understand when the bulletin is expected. If your family mainly needs headlines, official clips can be enough; if you need an uninterrupted channel feed, test that exact feed and device before relying on it for an event or work shift."
+        ]
+      },
+      {
+        heading: "Paid apps that fill the gaps",
+        paragraphs: [
+          "YuppTV is one licensed aggregator to investigate when a household needs linear Sri Lankan channels rather than scattered episodes. Its public Sinhala package pages are market-specific—for example, its site has separate pages for Europe, the United States, Australia and other regions—and the channels listed in one country do not establish what is sold in Bahrain. A YuppTV blog records an earlier Sri Lankan-channel launch, but that historic announcement is not a current GCC package list. Before paying, open the plan for your actual country, check the channel names, device support, price and renewal conditions, and confirm the channel plays. Before subscribing, open the service’s own catalogue while signed in from the country where you will watch and search for the precise channel or episode, not just a package name. Confirm that the stream works on the screen you plan to use and that checkout identifies the billing country, renewal date and cancellation path. A package in a foreign storefront can still omit the programme the family came for.",
+          "Not every broadcaster’s own app is a full international catch-up service, and a download page alone does not prove overseas access. If a drama is available only through a paid app, that is a normal licensing boundary; use the provider named by the rights-holder and inspect the exact title before committing. A paid live-TV pack may solve the channel problem without including every episode, subtitle track or past season. Do not pay a reseller who promises the entire Sinhala catalogue through an unbranded player."
+        ]
+      },
+      {
+        heading: "Starting point on Whisco",
+        paragraphs: [
+          "Whisco’s Sinhala shelf is a browse-first way to see the titles currently listed for this language. Open the Sri Lankan shelf at /vod?shelf=sinhala, then follow the item to its source and check whether the episode is complete, current and playable from your location. The shelf can help you find a starting point, but it is not a subtitle label or a guarantee that each broadcaster’s latest programme appears there. If a title is missing, go back to Rupavahini, Hiru, Swarnavahini or the rights-holder’s own page.",
+          "Keep the evening practical: choose whether you want a live news bulletin, a teledrama episode or a catch-up package, then open the official source that matches that format. For a series, save the broadcaster’s channel and check the episode number so a clip is not mistaken for the next instalment. For news, verify the date and live status. For subtitles or an exclusive archive, check the paid provider’s local terms. The best legal option is sometimes an official online episode and sometimes a paid service; the title page, not a broad promise, decides. When a programme is missing, try the broadcaster’s own site and search the exact original spelling; if that official source points to a paid partner, check that partner’s local title page. If neither confirms Gulf access, choose another official bulletin or episode instead of buying a plan on a guess. Keep the route saved only after the sample plays on your television or phone."
+        ]
+      }
+    ],
+    ctaLabel: "Browse Sri Lankan",
+    ctaHref: "/vod?shelf=sinhala"
+  },
+  {
+    slug: "multi-language-living-room-gulf-legal",
+    title: "Building a multi-language living room without a pirate box",
+    h1: "Building a multi-language living room without a pirate box",
+    intro: "Most Gulf households are not single-language. One room needs Hindi news, Turkish dizi, Arabic series and a kids block. This guide shows how to assemble that stack from official sources only, without a loaded box.",
+    sections: [
+      {
+        heading: "Map the languages the household actually watches",
+        paragraphs: [
+          "Begin with the people in the room, not the device or a long channel list. Ask what each person wants to watch in each language: live headlines, a daily serial, a full film, music, sport or something for younger viewers. A household that wants Hindi headlines and Turkish drama has two distinct needs, even if both are described as home television. Note the preferred language, whether subtitles matter, the time of day and which screen is used. That short conversation can prevent a paid app being bought for one person’s cartoons when the household actually needs an Arabic drama or a news feed. A practical note can also record the device everyone uses, whether a programme should be watched live or later, and the person responsible for a subscription. That small shared picture exposes overlap: two official channels may both cover headlines, while no one has confirmed the Turkish series’ local source. Use it to avoid buying for a need the family has not actually named.",
+          "Keep a small household viewing note with the programme, rights-holder, official source, caption situation and any payment requirement. The point is not to create an elaborate media system; it is to remember that one channel rarely covers news, drama, film and children’s programming across several languages. A few trusted official links are better than a pile of vague search results. Revisit the note when a show moves or a broadcaster changes its channel name, and keep the source route next to the programme name rather than saving a thumbnail alone."
+        ]
+      },
+      {
+        heading: "Free official layers for each language",
+        paragraphs: [
+          "Each language needs its own source check. For Punjabi, an official studio or label channel such as White Hill’s and publisher networks such as PTC may offer selected music, films, news or variety. For Sinhala, Rupavahini, Hiru and Swarnavahini have their own online and YouTube destinations. For Arabic news, Al Arabiya and Al Jazeera publish from their official pages; Turkish dizi and Hindi news should be found through the broadcaster or distributor’s own channel, not a lookalike result. These examples are starting points, not a promise that every catalogue is open in every Gulf country.",
+          "Use the official website to follow the link to a YouTube channel or video player. A rights-holder can publish a complete episode one week, a short clip the next, and direct viewers to an app for a premium season. Check the exact upload’s runtime and description; a logo alone is not enough. Captions, language tracks and regional playback also vary by title. If the official source shows no complete programme, do not treat a repost as the missing authorized layer. The useful habit is to follow what the rights-holder actually publishes, rather than assuming every language has the same online catalogue. The official pages are especially useful when there are several similar accounts: a station may have a news channel, entertainment channel and a separate language feed. Follow the link from the broadcaster’s current homepage, and save the exact channel name alongside the show. If the channel’s latest posts are only promotional clips, return to the official programme page for the longer version or its documented service. This way, the household can tell a limited catalogue from an accidental search problem."
+        ]
+      },
+      {
+        heading: "What still needs one paid app",
+        paragraphs: [
+          "Some viewing can be assembled from broadcaster sites and official channels, but new theatrical films, complete back-catalogues, originals and certain live events may require a licensed subscription or rental. The important word is may: rights are sold by title, season and country, so there is no single rule for every Hindi, Turkish, Arabic or Punjabi programme. A title search in the app you already pay for can be worth doing before adding another service; if the exact programme is not in its Bahrain catalogue, that subscription does not solve the gap.",
+          "Netflix and Prime Video can carry selected films or series in a market; Chaupal focuses on Punjabi, Haryanvi and Bhojpuri; YuppTV packages live regional channels where its local plan lists them. These services do different jobs, and their libraries and payment terms differ by country. Look up the exact title from the account you will use, check whether it is included or separately charged, and confirm the service accepts your device and payment method. Pay only when that specific gap matters to the household. One subscription should not be expected to solve every language on the screen."
+        ]
+      },
+      {
+        heading: "Device setup that stays legal (Smart TV browser, phone cast, official apps)",
+        paragraphs: [
+          "On a Smart TV, start with its built-in YouTube app or browser and navigate to a broadcaster’s own page. Check the publisher identity and use its official link to the channel; do not install a random player because a search result says it unlocks more streams. If the television supports casting, open the official video in YouTube on the phone and use the app’s own Cast control to send it to the television. This keeps the viewing path inside the service that hosts the content and avoids the uncertainty of unfamiliar apps or playlists.",
+          "For a broadcaster app or paid streaming service, install only the app published through your television or phone’s official store, verify the publisher name, and check the service’s regional terms before signing in. Keep each household member’s profile and age settings current; a children’s block is a genre label, not a guarantee that every episode suits every child. Avoid a preloaded box or subscription where the seller cannot identify the broadcaster and rights. A simple browser, cast button and verified app are enough for a straightforward legal setup."
+        ]
+      },
+      {
+        heading: "How Whisco fits as the free index, not the replacement for everything",
+        paragraphs: [
+          "Whisco is a discovery index for the sources represented in its catalogue, not a replacement for broadcasters, studios or paid services. The full-library page at /vod is a place to begin browsing; an item’s source and details should guide the next step. A title card does not mean every language, subtitle or version is available, and a service that is not listed will not appear just because a household needs it. Use the index to discover, then confirm any current conditions on the rights-holder’s own page.",
+          "Think of the household’s stack as several small, honest layers: official live news, selected complete episodes or films, an app for the one catalogue that matters most, and separate viewing profiles for age-rating settings. Keep the no-subscription sources organized without pretending they cover every current release. If a new title is not available through an official source, choose the licensed paid service if it carries it, or wait. The right setup is the one that does not make an expat household pay for access it does not use and does not depend on an unknown seller."
+        ]
+      }
+    ],
+    ctaLabel: "Browse the full library",
+    ctaHref: "/vod"
+  },
+  {
+    slug: "arabic-news-current-affairs-gulf-legal",
+    title: "Arabic news and current affairs — free legal sources",
+    h1: "Arabic news and current affairs — free legal sources",
+    intro: "Arabic news is widely available free from the broadcasters themselves. This guide lists the official live and on-demand options that work on a Gulf IP and explains why most ‘free Arabic news’ apps are unnecessary.",
+    sections: [
+      {
+        heading: "Official Arabic news channels on YouTube and their own players",
+        paragraphs: [
+          "Start at the broadcaster, not a random app directory. Al Arabiya Arabic’s official live page has its own player and links viewers to its YouTube live destination. Al Jazeera’s Arabic live pages provide the network’s live and current-programme routes, while France 24 Arabic has a first-party live page. These pages are useful starting points because they belong to the publisher or point to its own channel. They also give the viewer a way to compare the network’s current schedule and on-demand reports rather than relying on a copied stream labelled news.",
+          "A live badge, however, is not a Gulf-IP playback guarantee. In our source check we confirmed the official pages and their live-player routes, not that every stream successfully plays through every Gulf ISP, television or phone. Open the player in your own country, wait for it to load, and confirm that the picture and audio continue. A page may load while a video stream is restricted or temporarily down. If one service fails, try the broadcaster’s own YouTube channel or another established outlet’s official page; do not take a third-party mirror as proof that the feed is available. When comparing alternatives, check whether each page is the broadcaster’s own channel and whether the player is a live bulletin, a replay or a stream of another service. A test made on a phone is useful, but it does not prove the television browser will behave the same way. Note the result and keep a second official outlet ready for breaking news or an evening routine."
+        ]
+      },
+      {
+        heading: "What is free-to-air vs what is still satellite-only",
+        paragraphs: [
+          "Free-to-air describes a satellite transmission that viewers can receive without a subscription, subject to coverage, equipment and channel conditions. It is not a synonym for a web page with a player. A broadcaster can have an online stream with separate territorial rights, or a satellite channel that sits inside a paid television package in one country. YouTube availability, a website player and satellite status are three separate questions. Check the broadcaster’s own distribution information and your local TV provider’s package before assuming one answers the others. For an expat household, the key question is where the picture is actually delivered: a dish receiver, a licensed local operator, the broadcaster’s public site or an official platform channel. Each may have separate schedules, language options and access rules. If a service asks for a subscription, read the channel list; if a web player is public, test it without assuming it is part of any satellite package.",
+          "Likewise, a channel can be carried unencrypted on one satellite footprint and unavailable or part of a package elsewhere. Whether a particular signal reaches a home depends on the official broadcast footprint and local equipment; a web viewer does not need to research satellite settings to use a broadcaster’s public player. For a living-room setup, first try the official online source; if you want satellite reception, confirm the current local listing with the channel and provider. Do not buy a box on the basis of a seller’s unverified claim."
+        ]
+      },
+      {
+        heading: "Regional vs international Arabic news",
+        paragraphs: [
+          "Regional Arabic channels and international Arabic services can both be useful, but they answer different editorial needs. Al Arabiya and Al Jazeera Arabic focus much of their output on regional developments and the wider Arab public sphere. France 24 Arabic offers an international newsroom’s Arabic-language coverage and programmes. That is a practical distinction, not a ranking: compare the subject, guests, location and format of the specific bulletin. A channel’s language tells you how a programme is delivered, not which country or perspective every report will prioritize.",
+          "Arabic news itself is not one uniform listening experience. Presenters may use Modern Standard Arabic for bulletins, while guests or reports include regional dialects; a discussion programme can move faster than a headline recap. If a viewer wants local Gulf headlines, a regional desk may be a more relevant starting point; if they want international coverage, a global Arabic service might suit them. Watch a short segment, check the programme title, and pick the source that matches the household’s interest rather than assuming one feed covers every angle."
+        ]
+      },
+      {
+        heading: "How to keep it on official sources",
+        paragraphs: [
+          "The safest way to keep sources official is to reach a channel through its broadcaster website or the official YouTube link published there. A verification badge or familiar logo can help, but check the channel name, About page and external links; impersonators can copy artwork. Follow the broadcaster’s own pages and use its own app or website, not an unbranded player or a playlist from an unknown account. If an official service offers a paid archive or app, use it only if its local terms and the particular programme make it worthwhile.",
+          "News apps from general app stores are often just alternate interfaces to the same broadcaster feeds. If a broadcaster already exposes an official web player and an official YouTube live channel, another app may add little beyond notifications or a television-specific layout. Install additional software only when the publisher identifies it, the device needs it or a specific feature matters. Use the store’s developer name to confirm the publisher. Never treat a third-party directory as the rights-holder, and do not assume every news stream is available from every Gulf connection. Before installing, read the store description and privacy permissions, check the publisher’s own website for a matching link, and confirm that the app supports your television model. A broadcaster app can make navigation easier, yet it may open the same player as the website and add no new channels. If all you need is a quick bulletin, a direct official stream can be simpler."
+        ]
+      },
+      {
+        heading: "Finding them on Whisco",
+        paragraphs: [
+          "Whisco’s live page is a discovery route for the channels currently represented in the catalogue; it is not a certification that every station is live at this moment, that a particular feed is available from every Gulf IP, or that every programme is on demand. Open a listing and check its source, current status and channel name. If you do not see the Arabic newsroom you want, visit the official broadcaster directly. The site can help you browse, but the broadcaster’s own player remains the authority on its schedule and access conditions.",
+          "Before you rely on a channel for a household news routine, test it at the time and on the screen you normally use. Check whether the feed starts, whether captions are offered and whether the bulletin is live or a replay. Keep a few official options bookmarked so one temporary outage does not leave you searching through lookalike apps. The useful shortcut is not another subscription; it is knowing which broadcaster owns the programme and using the source it publishes itself."
+        ]
+      }
+    ],
+    ctaLabel: "Browse live news",
+    ctaHref: "/live"
+  },
+  {
+    slug: "official-youtube-layer-gulf-expats",
+    title: "Why the official YouTube layer is the real free TV for Gulf expats",
+    h1: "Why the official YouTube layer is the real free TV for Gulf expats",
+    intro: "For most languages spoken in the GCC, the largest free legal catalog is not a streaming app. It is the collection of official broadcaster and studio YouTube channels that publish full films, serials and live news. This page explains how that layer works, what it does not cover, and how to use it without falling for copies.",
+    sections: [
+      {
+        heading: "What ‘official channel’ actually means",
+        paragraphs: [
+          "Official is a relationship between the channel and the rights-holder, not a style of logo. The strongest check is to start at the broadcaster’s or studio’s own website and follow the link it publishes to a YouTube channel. Check that the channel name, description, linked domain and video credits identify the same organization. A verification badge is useful context but not enough by itself: a genuine channel may host only clips, and a convincing copy may reuse an old poster. For a specific film or episode, look at the uploader and the description, not just the search ranking.",
+          "Then inspect the individual upload. Does the title say full film, episode, live or trailer? Is the runtime plausible for that format? Does the video description credit the studio, broadcaster or label and direct viewers to its own services? A channel can be official while one particular video is a teaser, a licensed clip or a time-limited live replay. If the source is unclear, use the broadcaster’s own catalogue or leave that result alone. Watching inside YouTube’s official player is different from downloading a copy, rehosting it or selling access to somebody else’s upload. If the video gives a different studio name, link or contact from the channel page, stop and check the publisher’s website. Look for an episode number or title credits that match the programme, and compare the upload date with the rights-holder’s announcement. These checks do not prove that a video will always stay online, but they reduce the chance of mistaking a lookalike for the licensed source."
+        ]
+      },
+      {
+        heading: "How much of the free legal catalog lives on YouTube",
+        paragraphs: [
+          "There is no public, current inventory that counts every authorized upload across all languages, so largest is best understood as a practical observation rather than a measured global ranking. For many expats, YouTube brings together some full films, serial episodes, music programmes, local news bulletins and live feeds in one familiar service. Punjabi studios and networks such as White Hill and PTC publish selected work; Sri Lankan broadcasters Hiru and Rupavahini post current programmes; Al Arabiya and Al Jazeera have official Arabic live destinations. Each example is a starting point, not a claim that its complete archive is there.",
+          "Rights-holders decide what to upload and for how long. A broadcaster may put up daily headlines, a studio may release an older feature, and a music label may post a new video, while the full season or latest cinema title remains elsewhere. A public upload can be removed, limited to certain regions or placed behind a channel membership or another paid option. Ads and data use also remain part of the viewing experience. The useful thing is breadth across separate publishers, not one universal catalogue with every episode in order."
+        ]
+      },
+      {
+        heading: "Quality, subtitles and geo notes",
+        paragraphs: [
+          "Picture quality starts with the source file and the publisher’s encoding; an official channel is not a guarantee of restoration, subtitles or high resolution. Open the player’s quality menu if the connection stutters, and check the captions menu on the exact video. Captions may be professionally authored, automatically generated or absent. The label CC on another episode does not prove this one carries the same track. For music and news, on-screen text can also be incomplete or differ from the spoken language, so test a short section before settling on a programme.",
+          "Regional access is another separate check. A video may appear in search but fail to play in the viewer’s country; a live stream may be visible as a page and still be blocked or offline. Rights can change after a distribution window ends, so an old bookmark is not proof of present access. If a channel says the video is unavailable, use another official title or the rights-holder’s listed app. Do not confuse availability on one Gulf network or device with guaranteed playback on every Gulf connection. A quick test is to open the official video on the device intended for viewing, confirm audio and captions for a few minutes, and then check again after switching to the intended network. Treat an absent caption track as absent rather than assuming the upload description will supply one. If a video is live, verify it is current and not a saved replay before planning around it."
+        ]
+      },
+      {
+        heading: "What still requires a paid licence",
+        paragraphs: [
+          "Some titles are intentionally not in the open YouTube catalogue. New theatrical films, complete recent seasons, exclusive originals, premium sports and catch-up libraries can be licensed to a subscription, rental store, television operator or specialist app. That is not a failure of the official-channel model; it is how separate rights are distributed. If you want a just-released film or a particular season, check the studio’s own release information before deciding that a video search has missed something. The correct source may be paid.",
+          "Netflix, Prime Video, Chaupal and YuppTV are examples of services whose local catalogues and access rules differ. Search for the exact title from the country account you will use, verify whether it is included, rented or sold as an add-on, and check captions and supported devices. A result in an India or Europe storefront is not proof the title is licensed in Bahrain or another Gulf market. When the rights-holder points to a paid service and that service confirms local access, paying for it is the honest answer; otherwise wait for an authorized release. The best source may be an official rental page rather than a subscription app, so compare the exact checkout and whether the title can play on the family’s device. A service’s general subscription page does not establish that a particular film is included."
+        ]
+      },
+      {
+        heading: "How Whisco indexes only the official layer",
+        paragraphs: [
+          "For the official YouTube entries discussed here, Whisco’s role is to index uploads published by channels tied to broadcasters, studios, labels or other rights-holders, rather than search results or anonymous copies. It points viewers to the publisher’s player instead of presenting the video as Whisco-owned. This selected index does not cover every channel or programme. A title card is a discovery aid, not a guarantee about captions, territory, age rating or future uptime; follow the source attached to the item for the current details.",
+          "Use Whisco to discover a title, then confirm the publisher and playback in the official service. If the source is removed, fails in your area or redirects to a paid app, treat that as the current rights position rather than searching for a copied stream. The official YouTube layer is most useful when it is handled as a set of doors opened by studios and broadcasters themselves: varied, convenient and partial. It can be the first stop for a household’s nightly TV without pretending to replace every subscription or release window."
+        ]
+      }
+    ],
+    ctaLabel: "Start watching",
+    ctaHref: "/browse"
   }
 ];
