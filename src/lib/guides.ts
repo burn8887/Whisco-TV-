@@ -1968,4 +1968,338 @@ export const GUIDES: Guide[] = [
     ctaLabel: "Browse live news",
     ctaHref: "/live",
   },
+
+  // Editorial fact-check references for this guide batch (reviewed 2026-10-11; not rendered):
+  // Telugu: https://www.youtube.com/@telugufilmnagar and https://www.youtube.com/@adityacinemalu
+  // Tamil/Telugu catalogue and in-app purchases: https://www.sunnxt.com/aboutUs and https://play.google.com/store/apps/details?id=com.suntv.sunnxt
+  // Bengali official channels/services and country terms: https://www.youtube.com/@ntvnatok, https://www.youtube.com/@DeeptoNatok,
+  // https://hoichoi.tv/about-us, https://helpcenter.zee5.com/portal/en/kb/articles/can-i-use-my-zee5-subscription-in-another-country
+  // Indonesian RCTI+ listing and official channels: https://play.google.com/store/apps/details?id=com.fta.rctitv, https://www.youtube.com/@RCTILAYARDRAMAINDONESIA,
+  // https://www.youtube.com/@SinetronSCTV
+  // Child controls/availability: https://support.google.com/youtubekids/answer/10495678?hl=en
+  // Public-domain item metadata:
+  // https://archive.org/metadata/mclintok_widescreen
+  // https://archive.org/metadata/cco_swordoflancelot
+  // https://archive.org/metadata/SonofHerculesTheLandofDarkness
+  // https://archive.org/metadata/TheTerror
+  // https://archive.org/metadata/TheMagicSword
+  // Sports rights table: https://www.premierleague.com/en/media/broadcasters
+  {
+    "slug": "telugu-cinema-serials-gulf-legal",
+    "title": "Telugu Cinema and Serials in the Gulf: A Legal Viewing Guide",
+    "h1": "Where to Watch Telugu Cinema and Serials in the Gulf",
+    "intro": "Telugu viewing is easier to navigate when you separate an official upload from a title that merely appears in search. Rights-holder channels publish complete films and selected serial episodes, while newer releases and dependable catch-up libraries may require a paid service. A video playing from a Gulf connection today is not a promise that its next episode, subtitles or another film will remain available. This guide offers a practical route from Bahrain and the wider Gulf without recommending pirate boxes or guessing about territory rights.",
+    "sections": [
+      {
+        "heading": "Start with the upload, not the search result",
+        "paragraphs": [
+          "Open the channel page, not a third-party search result. Telugu Filmnagar and Aditya Cinemalu are established YouTube channels whose own pages describe Telugu full-length movies; their libraries also mix trailers, scenes, songs and interviews. That mix matters. Search results can place a short promo beside a complete film, and a thumbnail alone proves neither ownership nor completeness. Treat the channel’s identity and the specific upload as two separate checks.",
+          "On a candidate upload, confirm that the name and handle match the studio, broadcaster or rights-holder’s official page; inspect the description and runtime; and look for the original producer or distributor credits. A long runtime is useful but not proof by itself. If the upload is a teaser, recap, short clip or fan account, do not call it a legitimate catch-up option. Even an authentic upload can later be removed or restricted, so treat availability as temporary rather than guaranteed."
+        ]
+      },
+      {
+        "heading": "A complete movie and a serial episode are different searches",
+        "paragraphs": [
+          "For films, search the official channel’s movie playlists and verify that the video is presented as the full film rather than a scene compilation. Older catalogue titles may appear in more than one dub or edit. Read the description before choosing, and do not assume that the language in the thumbnail is the audio language. If captions matter, open the player’s caption menu and check the actual track instead of relying on a translated title or a search snippet.",
+          "Serials create a different problem: a channel may publish promos, recaps, selected full episodes or a short-form version rather than every episode in order. Check the episode number and date, and compare it with the broadcaster’s own programme page when available. A legal episode can still be unavailable outside its home territory. If only a preview plays from Bahrain, that is a real gap, not a reason to search for a copied file or a reseller’s playlist."
+        ]
+      },
+      {
+        "heading": "When a paid service is the practical answer",
+        "paragraphs": [
+          "For a wider library of Sun Network films and television, Sun NXT is the network’s own streaming platform. Its official app listing names Telugu among its languages and indicates in-app purchases. That makes it a paid option to consider, not a promise that a particular title is included in a Gulf plan. The catalogue, account rules and payment options can be different by country, and rights change title by title.",
+          "Before paying, search for the exact film or serial inside the official service while connected from your current Gulf location. Confirm the season or episode you need, the audio and subtitle options, supported screens, and the renewal or cancellation terms shown at checkout. Do not buy an India-only or other country-specific subscription on the assumption that it will travel with you. If the local page does not clearly show what you want, ask support before paying."
+        ]
+      },
+      {
+        "heading": "Check from Bahrain before committing",
+        "paragraphs": [
+          "A quick test saves more frustration than a long comparison article. On the same Wi-Fi and account you intend to use, open the official service, search the title, start playback for a few minutes and check that sound, captions and the TV or casting method work. A listing visible in a search engine can be a catalogue page without a playable stream. A title that works on a phone may have different device or account conditions on a television.",
+          "If the service says the programme is not available in your region, respect that result and ask the rights-holder about a locally supported option. Do not rely on a VPN workaround or a seller promising every channel and new release. Streaming rights are sold by territory; payment to an unauthorised middleman does not create permission. For recurring serials, confirm that the service carries the next episodes before setting your household’s routine around it."
+        ]
+      },
+      {
+        "heading": "Use Whisco as a browse layer, not a promise",
+        "paragraphs": [
+          "Whisco’s Telugu shelf is a convenient place to discover listed titles, but a shelf is not a studio, a rights guarantee for every future episode or a promise about subtitles. The rows can change as source pages change, and a card does not tell you that every version is current in every Gulf country. Open the title page, inspect the available source and test playback from your own connection before planning a watch night around it.",
+          "If the exact film or episode is missing, use the rights-holder’s official page or the local subscription service that confirms it is included. That may mean paying for a recent release; it may also mean waiting for a legitimate upload. The useful distinction is not free versus paid by itself, but whether the uploader has the rights and whether the stream actually works where you live."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse Telugu Cinema",
+    "ctaHref": "/vod?shelf=telugu"
+  },
+  {
+    "slug": "tamil-films-serials-gulf-legal",
+    "title": "Tamil Films and Serials in the Gulf: Legal Viewing Without Guesswork",
+    "h1": "Tamil Films and Serials in Bahrain and the Gulf",
+    "intro": "Tamil speakers in the Gulf can find official trailers, serial material and complete films online, but they do not all sit in the same place. The owner’s YouTube page can be a useful starting point; a current film or full catch-up library may instead be behind a paid service. This guide separates those cases, explains what to verify before subscribing, and avoids promising that a title visible from India will play from Bahrain.",
+    "sections": [
+      {
+        "heading": "Look for the rights-holder’s own channel",
+        "paragraphs": [
+          "Sun TV’s official YouTube channel describes its Tamil output as movie videos, songs, full serials and promos. That is a real legal starting point, but the description does not mean every serial episode or film is available there. The page holds several formats at once. Open the channel itself, then check the title and runtime of the exact video. A promo, song, scene compilation and complete episode serve different purposes, even when their thumbnails look similar.",
+          "For films from other producers, use the studio, distributor or broadcaster’s verified channel rather than a search result that only repeats the film’s name. Read the description for release and rights-holder information, and confirm that the upload is a complete version. If a video is copied by a fan page, re-uploaded with a new logo or split into scenes, do not treat it as authorized simply because it plays. Official ownership is the first legal test; regional playback is a separate one."
+        ]
+      },
+      {
+        "heading": "A clip is not serial catch-up",
+        "paragraphs": [
+          "Serial channels commonly publish a mixture of episode previews, promos, recaps and full episodes. Before making one your daily source, check the episode number, date and runtime, and see whether the broadcaster labels it as a complete episode. Some channels keep only selected episodes online. Others move older episodes into an app or a subscription library. Do not infer a full season from a few recent uploads or from a playlist title.",
+          "Subtitles are also title-specific. Tamil audio, Tamil captions and English subtitles are three different things, and automatic captions can mishear names or dialogue. Use the video’s caption menu and test it on the screen you plan to watch. If the show is available only with a dubbed soundtrack, verify that before pressing play. These small checks matter in a mixed-language household and prevent a paid plan from turning out to be the wrong version."
+        ]
+      },
+      {
+        "heading": "When a paid app is the honest answer",
+        "paragraphs": [
+          "Sun NXT is operated by Sun TV Network and its official store listing includes Tamil among the supported content languages, along with in-app purchases. It can be a practical route for network-owned movies, serials and live channels when the exact title is offered in your country. It is still a commercial service: the catalogue and price shown at checkout, not a search snippet or an old review, are what matter to a Gulf viewer.",
+          "If a new release, complete back catalogue or ordered episode run is the goal, a paid rights-holder service may be the only reliable answer. Check the exact title in the official app or website from Bahrain, then confirm the plan, supported device, subtitle track and renewal conditions. A plan sold for one country may not work after travel, and a language catalogue is not proof that every programme in that language is included. Pay only after the local listing answers the question you actually have."
+        ]
+      },
+      {
+        "heading": "Make the Gulf playback check before subscribing",
+        "paragraphs": [
+          "Search from the same network and account you will use at home. Open the title page, start an episode, and verify that it continues beyond a preview. Check whether the service supports your television, casting setup or browser, and whether captions remain available on that device. If a programme is shown in a region-specific search result but the play button is blocked, count that as unavailable for your current location rather than assuming payment will unlock it.",
+          "Avoid sellers who promise thousands of channels, recent films and sports in one private package. That is not the same as an official broadcaster subscription. Do not install an unknown player or a playlist file to make a regional block disappear. When a legitimate service does not carry the title in Bahrain, ask its support team about the local catalogue or wait for a rights-holder release. A clear gap is better than a stream whose source cannot be checked."
+        ]
+      },
+      {
+        "heading": "Browse the Tamil shelf with realistic expectations",
+        "paragraphs": [
+          "Whisco’s Tamil shelf is a discovery route for titles currently listed under Tamil Cinema and Serials. It is not a promise that the newest cinema release, every Sun TV episode or any particular subtitle track is present. Collection pages change as their source listings change. Open the title details and confirm the source before you plan around a specific programme, especially when the household is waiting for the next episode in a serial.",
+          "If the shelf does not have the exact programme, return to the official publisher page or a local subscription service that shows the title as playable from your country. Some viewing will be an official upload; some will require payment; some will not be available in the Gulf at that moment. This is the honest trade-off for a legal catalogue: browse what is actually there, and do not mistake a name on a poster for a guaranteed stream."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse Tamil Cinema & Serials",
+    "ctaHref": "/vod?shelf=tamil"
+  },
+  {
+    "slug": "bengali-films-natok-gulf-legal",
+    "title": "Bengali Films and Natok in the Gulf: A Legal Viewing Guide",
+    "h1": "Bangla Films and Natok Abroad: Official Uploads, Paid Libraries, and Limits",
+    "intro": "A Bengali-speaking household may be looking for a Bangladesh natok, a West Bengal film, a serial or a web original; those are not one rights catalogue. Official YouTube channels can publish selected full dramas, while a dedicated streaming service may charge for a broader library. This guide explains how to tell those routes apart, why a country-specific account matters, and what a viewer in Bahrain should verify before relying on a stream.",
+    "sections": [
+      {
+        "heading": "Bengali is a language, not a single catalogue",
+        "paragraphs": [
+          "The same language connects very different production and distribution worlds. A Bangladeshi natok on a broadcaster’s digital channel is not automatically part of an Indian Bengali film subscription, and a web original may be licensed separately from a television serial. Search results often blend the regions, spellings and formats together. Start by identifying the programme, its production country and its original broadcaster or distributor, then look for that owner’s official page.",
+          "This distinction is useful even when you speak Bengali fluently. A result may be a trailer, a fan upload, a dubbed version or a short excerpt rather than the full title you meant. Check the description, channel identity, runtime and original credits. If the source does not identify a rights-holder, do not assume that a clean picture or a familiar title makes the upload legitimate. Ownership and territory are separate checks, and both matter for a Gulf viewer."
+        ]
+      },
+      {
+        "heading": "Official natok channels can be the best starting point",
+        "paragraphs": [
+          "NTV Natok and Deepto Natok are official YouTube destinations associated with Bangladeshi broadcasters. Their current pages include full-length drama or web-film uploads alongside previews, compilations and other material. That makes them useful places to look for selected complete works without paying a third-party seller. It does not mean every broadcast episode is posted, every upload remains available, or every video will play from a Gulf IP address.",
+          "Open the publisher’s channel and check the specific video rather than trusting a copied playlist. A full runtime, an episode title and a description that credits the broadcaster are stronger signs than a thumbnail. If the page points viewers to the broadcaster’s own streaming service for the complete film, use that service’s terms and local availability. If a video is blocked or removed, do not switch to an anonymous mirror; ask the rights-holder or choose another official upload."
+        ]
+      },
+      {
+        "heading": "A paid Bengali library may be the practical option",
+        "paragraphs": [
+          "Hoichoi describes itself as an on-demand Bengali service and advertises films, original series and English and Bengali subtitle options. Its own site also describes premium content and payment methods, so do not treat it as an unlimited no-cost public archive. The catalogue, plan and payment options presented to a customer can depend on the country. Check the current checkout and the title page from Bahrain before subscribing; the service’s global marketing language is not a guarantee that every title is licensed in every Gulf market.",
+          "ZEE5 is another example of why the purchase country matters: its help centre says subscriptions are specific to the country in which they are bought and that the same subscription will not work in another country. That warning is useful beyond one platform. Do not buy an India plan because a search result shows a Bengali pack and then assume it travels. Confirm the local plan, the exact content and the cancellation terms with the service directly."
+        ]
+      },
+      {
+        "heading": "Check subtitles and territory title by title",
+        "paragraphs": [
+          "A service can advertise subtitles without placing the same tracks on every film. Open the individual title page, check the audio and caption menu, and test playback on your actual television or phone. A Bengali title may have English subtitles, no subtitles, or an alternate dub; a programme label alone cannot settle that question. For shared viewing, test the first few minutes before paying for a full month or planning around an event episode.",
+          "Regional availability can change when rights expire or a new distributor takes over. The same account may work in one country and show a blocked programme in another. If the official service says the title is not licensed where you are, respect the message and ask support about a local option. There is no reliable legal shortcut through private IPTV lists, sideloaded apps or a copied stream. A clear catalogue gap is preferable to an upload whose owner cannot be established."
+        ]
+      },
+      {
+        "heading": "Use Whisco’s Bangla shelf as a browse-first route",
+        "paragraphs": [
+          "Whisco’s Bangla Natok and Cinema shelf is a way to browse the titles currently listed in that collection. It is not a complete Bengali library, a promise of the latest episode, or a guarantee that English captions appear on every item. Follow the title details to the source and test the stream from your Gulf connection. A result in a language shelf means it was grouped for discovery; it does not replace the rights-holder’s own information about a programme.",
+          "For a specific film or natok, search its official broadcaster or distributor after checking the shelf. If that owner offers a paid subscription and confirms the title in Bahrain, the payment may be the straightforward answer. If it does not, wait for a lawful release rather than following a repost. A useful viewing routine is modest: save trusted official channels, keep the source visible, and verify each new title instead of trusting an old link."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse Bangla Natok & Cinema",
+    "ctaHref": "/vod?shelf=bengali"
+  },
+  {
+    "slug": "indonesian-sinetron-gulf-legal",
+    "title": "Indonesian Sinetron in the Gulf: Official Episodes and Legal Options",
+    "h1": "Indonesian Sinetron Abroad: Find the Official Episode First",
+    "intro": "For Indonesians living in the Gulf, the challenge is rarely a lack of search results; it is finding an official episode that still plays from Bahrain or a neighbouring country. Broadcaster channels publish selected full dramas, while short previews and highlight compilations are common too. An official Indonesian app may offer particular complete episodes, but its listing does not prove that every title is available abroad. Here is a practical way to check before you settle in for a series.",
+    "sections": [
+      {
+        "heading": "Start with the broadcaster-owned page",
+        "paragraphs": [
+          "RCTI’s Layar Drama Indonesia channel identifies itself as the network’s official sinetron channel. That is a stronger starting point than a lookalike account using a programme poster. Search there for the exact show, then check whether the upload is a complete episode, a live broadcast, a recap or a scene. The distinction matters: a title in the video heading does not mean the whole story is available on demand.",
+          "SCTV also has an official Sinetron channel, but its channel description and current page include compilations, previews and behind-the-scenes material. It may be useful for discovery, yet it is not automatically a complete-episode archive. Check the video length, title and description for each episode, and use the broadcaster’s own app or website if it directs viewers there. A real network channel can publish many formats; the channel badge alone does not tell you which one you opened."
+        ]
+      },
+      {
+        "heading": "RCTI+ is official, but check each programme",
+        "paragraphs": [
+          "The RCTI+ listing on Google Play identifies PT MNC Digital Indonesia as the developer and describes live television plus full episodes for selected shows. It presents the app as free to use and contains advertising. That is useful evidence about the service, not a guarantee that every named programme, episode or live feed is available from a Gulf IP address. The actual title page and playback result from your location should decide whether it works for you.",
+          "If the app asks you to sign in, checks your region or shows an upgrade or access message, read the official terms before proceeding. Do not assume that a free download means every programme has the same access conditions. The catalogue can mix live channels, on-demand episodes and other services. Confirm the season and episode number, and avoid a private seller claiming to unlock the whole Indonesian catalogue through an unknown player or subscription code."
+        ]
+      },
+      {
+        "heading": "Tell a complete episode from a teaser",
+        "paragraphs": [
+          "A useful episode check takes seconds: open the channel page, read the full title and description, inspect the runtime, and confirm that the upload is presented as a complete instalment by the broadcaster. A one-minute preview or a highlight compilation can be entirely legitimate, but it is not catch-up. If a playlist is maintained by a fan or an unrelated account, do not use it as evidence that the episode is authorized.",
+          "Use the platform’s own captions or language options where present, and verify them on the screen you plan to use. Do not expect every upload to have English subtitles or a dubbed version. An Indonesian-language description may be the only useful metadata, so save the official channel and search with the exact original title. If the source has been deleted or blocked, move to the broadcaster’s official service instead of following a mirror."
+        ]
+      },
+      {
+        "heading": "Treat Gulf access as a separate test",
+        "paragraphs": [
+          "A service created for Indonesian viewers may have licensing or payment rules that differ abroad. Before subscribing, check whether the app or website accepts your location and payment method, whether the exact episode plays, and whether your chosen device is supported. A search result from Indonesia is not proof of access in Bahrain. The same caution applies to live television: schedules, regional restrictions and available programmes can change without warning.",
+          "If the official page gives a region message, accept it and ask the publisher about a supported international route. Do not use VPN instructions, modified apps or reseller playlists to bypass a restriction. Those workarounds do not create rights and can disappear without notice. If no official Gulf option is listed, the honest answer is that this episode may not currently be available to you. Waiting for an authorized upload is safer than trusting an anonymous copy."
+        ]
+      },
+      {
+        "heading": "Browse Whisco’s Indonesian shelf without assuming completeness",
+        "paragraphs": [
+          "Whisco’s Indonesian Shows shelf groups titles currently listed for browsing, but it is not a complete sinetron service and does not promise every current RCTI or SCTV episode. A card is a discovery aid, not a guarantee of subtitles, release timing or future playback. Open the title details, look at the source and test it from your own connection. If the listing is a clip, recap or unrelated programme, return to the official channel page.",
+          "For a continuing series, save the broadcaster’s verified page and check the latest episode there as well. Some viewers will find selected official uploads; others will need an official paid entitlement or may have to wait for regional rights to permit access. Those are real differences, not a problem solved by a bigger pirate playlist. A trustworthy route keeps the publisher visible and says clearly when it does not have the episode."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse Indonesian Shows",
+    "ctaHref": "/vod?shelf=indonesian"
+  },
+  {
+    "slug": "legal-kids-family-viewing-gulf",
+    "title": "Legal Kids’ and Family Viewing in the Gulf: A Practical Guide",
+    "h1": "Legal Family Viewing in the Gulf: Availability Is Not a Safety Rating",
+    "intro": "A lawful source, a stream that works in Bahrain and content suitable for a child are three separate questions. A cartoon label or a public-domain notice answers none of them by itself. This guide gives parents a cautious routine for finding official material, checking age and territory, and deciding when a paid family service is the more sensible choice. It does not certify any individual film or promise that a catalogue shelf is child-safe.",
+    "sections": [
+      {
+        "heading": "Separate rights, age suitability and privacy",
+        "paragraphs": [
+          "Start with the source: is the video on a broadcaster’s or rights-holder’s own channel, or on a platform that has permission to carry it? Then make a separate judgement about age suitability. A legal stream can contain frightening scenes, adult themes, dated stereotypes or language a parent does not want a child to encounter. A platform’s general label is not a replacement for checking the specific episode, film and local classification information.",
+          "Privacy and recommendations deserve their own check too. A service may be lawful yet still collect watch history, show adverts or suggest other videos after a programme ends. Review the account and device settings with the child’s age in mind, and avoid sharing an adult account that exposes unrelated viewing. No guide can make that decision for a family. The reliable approach is to keep a parent in control of the profile and review the actual controls before handing over a remote."
+        ]
+      },
+      {
+        "heading": "Official no-cost options on a Gulf connection",
+        "paragraphs": [
+          "Official broadcaster uploads and rights-holder channels can provide selected films, serial episodes and short programmes without buying a private IPTV bundle. The key words are selected and official. Check that the channel really belongs to the publisher, that the video is complete if you intend to watch a full episode, and that it plays from your Gulf connection. A result copied by a fan page or a third-party playlist is not made authorized by having a familiar logo in its thumbnail.",
+          "YouTube Kids can provide parental settings where the service is available in the viewer’s location. Google’s help pages describe content-level settings and an option to approve content yourself, but also caution that automated selection is not a perfect review of every video. Availability itself varies by location. Check the current country support, set up the child’s own supervised profile and review what is presented; do not treat the app name as a guarantee about every item or every recommendation."
+        ]
+      },
+      {
+        "heading": "Public-domain shorts and classics still need a preview",
+        "paragraphs": [
+          "Short cartoons, educational films and old screen classics can make a brief shared viewing session, especially when a parent chooses the exact title first. But public-domain status is about rights, not quality, tone or suitability for a particular age. Older material may contain peril, frightening images, stereotypes or social attitudes that a family would rather discuss or skip. Read the item description and watch it yourself before deciding that it belongs in a child’s playlist.",
+          "Whisco’s collection names and catalog cards are discovery labels, not child-protection ratings. A title grouped near animation or children’s programming may still need an adult check, and older films can be very different from modern children’s television. If you cannot confirm the item’s source or understand what it contains, choose a better-described official programme. Do not promise children that a whole shelf is safe simply because the collection name sounds reassuring."
+        ]
+      },
+      {
+        "heading": "Use parental controls as a routine, not a substitute for watching",
+        "paragraphs": [
+          "Where supported, use the platform’s child profile rather than a general adult account. Look for age-level settings, approved-content controls, search restrictions, autoplay options and a way to clear or pause watch history. Google’s current help documentation lists several of these controls for YouTube Kids and supervised accounts; the exact options depend on the account, device and location. Set them before the first session, then check what the child can actually open on the television.",
+          "For a first viewing, preview the programme or watch together, especially when it is an older film or a series with a long episode list. A two-minute trailer may not reveal the scenes that matter to your family. Keep the remote nearby, turn off features you do not want, and talk about how to leave or report a video that feels wrong. These simple steps are more dependable than an unverified promise in a description or a seller’s claim that a service is family-safe."
+        ]
+      },
+      {
+        "heading": "When a paid family plan is the honest answer",
+        "paragraphs": [
+          "A paid service may be the better fit when you need a clearly described catalogue, child profiles, parental controls, reliable subtitles or a supported television app. Before paying, check that the plan is sold in your country, that its child settings are available on your device, and that the programme you want is included. Paid does not automatically mean age-appropriate, ad-free or available in every Gulf market; verify those terms on the official plan page.",
+          "If no service shows the title and controls you need, it is reasonable to choose a different programme rather than make an uncertain source work. Whisco is a general browsing catalogue, not a children’s app, an age-rating authority or a parental-control system. Use the video catalogue only with an adult choosing what to open, and rely on a dedicated service when the family needs a curated child account. The responsibility remains with the parent, not the shelf label."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse the video catalogue",
+    "ctaHref": "/vod"
+  },
+  {
+    "slug": "public-domain-classics-gulf",
+    "title": "Public-Domain Classics in the Gulf: Five Films and the Rights Check",
+    "h1": "Five Archive-Sourced Classics to Browse—and the Gulf Rights Check",
+    "intro": "Public domain is not a universal stamp that settles every country’s law. The Archive item records behind these five Whisco listings expose a Creative Commons Public Domain license URL, but that record is a starting point, not legal advice for every Gulf jurisdiction. The films are worth exploring for viewers who enjoy older genre cinema; availability, copy quality and captions can change. Treat the catalogue as a place to browse, and check the source record before relying on a title.",
+    "sections": [
+      {
+        "heading": "What a public-domain label does—and does not—tell you",
+        "paragraphs": [
+          "The films below appear in Whisco’s existing Archive-sourced catalogue, and the associated Internet Archive metadata currently links to a Creative Commons Public Domain license. That is a concrete reason to investigate the item, not a blanket promise about every copy on the internet. Rights are territorial, source records can be incomplete, and a different transfer or soundtrack may raise separate questions. Do not assume that age alone puts a film in the public domain.",
+          "For Gulf viewing, open the item page and look for its rights and source information. If the record is unclear, use a verified rights-holder or seek qualified legal advice rather than treating a search snippet as a ruling. This guide describes the metadata attached to these catalogue copies; it does not give a legal opinion for Bahrain, Oman, Saudi Arabia or any other country. The actual player can also change or go offline independently of the rights label."
+        ]
+      },
+      {
+        "heading": "Five older films that may still reward a curious viewer",
+        "paragraphs": [
+          "McLintock! (1963) is a John Wayne comedy-western in the Archive description. Its appeal is the big, broad studio-era mix of western setting and comic conflict, rather than modern pacing. Viewers who enjoy classic westerns may find it an easy entry point; others may notice jokes and attitudes that have aged. The rights record is not an age rating, so parents should preview it instead of assuming that a comic tone means children will enjoy or understand it.",
+          "Sword of Lancelot (1963), also described as Lancelot and Guinevere, is presented in the Archive record as a romantic epic about the Arthurian pair. It can suit a viewer looking for courtly legend and an old-fashioned period romance more than historically detailed realism. The draw is the familiar myth, not a promise of fast action or contemporary effects. Its catalogue listing gives viewers a place to start, while the source page remains the place to confirm the copy and rights metadata.",
+          "The Sons of Hercules: Land of Darkness (1963) offers the sword-and-sandal adventure many classic-film viewers seek. The Archive description says the story follows a hero who leaves to slay a beast and returns to find his home taken; it also notes that the film originated in Italy and was later dubbed into English. That makes it a useful pick for a viewer curious about dubbed genre cinema, with the caveat that the audio and presentation belong to their period.",
+          "The Terror (1963), directed by Roger Corman according to its Archive record, leans toward gothic mystery: a young officer, a mysterious woman, a castle and an old witch. Its appeal is atmosphere and low-budget genre craft rather than polished modern horror. If you are choosing for a mixed-age household, preview it first; the word classic does not mean gentle. A viewer interested in early-sixties horror may find the production history as enjoyable to notice as the story itself.",
+          "The Magic Sword (1962) is described in the Archive item as a fantasy loosely based on the story of Saint George and the dragon, with a kidnapped princess and a sorcerer. It has a fairy-tale shape that may appeal to fans of vintage fantasy, though its pacing and effects are unmistakably of their era. The plot includes peril, so it is not an automatic children’s recommendation. Think of the five titles as a varied sampler, not a ranking or a promise that one style suits every viewer."
+        ]
+      },
+      {
+        "heading": "Check the copy, captions and playback separately",
+        "paragraphs": [
+          "An Archive item can contain more than one file or transfer, and the Whisco title page may point to a particular source version. Picture quality, aspect ratio, audio and captions can therefore differ from another upload bearing the same film title. Read the item details, look at the file information provided by the archive, and test a short section from your own Gulf connection. Do not infer HD quality, subtitles or uninterrupted playback from the phrase public domain.",
+          "If the title page fails, returns an error or has a broken source, do not search for an anonymous mirror. Use the Archive record or wait for a checked replacement. A legal source can still have technical faults, and an old file can be lower resolution than a modern streaming release. Keep the rights question separate from the playback question: one concerns permission, the other whether this particular copy works on your screen today."
+        ]
+      },
+      {
+        "heading": "Do not confuse old, public-domain and family-friendly",
+        "paragraphs": [
+          "A film can be old without being public domain, and a public-domain film can still contain violence, frightening images, adult themes or attitudes that need context. The five examples span comedy, romance, adventure and horror, so no single audience description fits them all. Read the plot note and preview the film before sharing it with children or anyone who needs specific content guidance. No catalogue category can replace that judgement.",
+          "The same caution applies to copies outside the Archive record. An unofficial upload does not inherit rights just because it uses the same title or a restored poster. Follow the source attached to the listing, check the item’s current rights metadata and remember that territorial rules may differ. If anything about the record is uncertain, choose a clearly authorized contemporary source or leave the title unwatched until the rights question is resolved."
+        ]
+      },
+      {
+        "heading": "Browse the catalogue as a changing shelf",
+        "paragraphs": [
+          "Whisco’s video catalogue includes multiple kinds of films and programmes; the general catalogue is not a public-domain-only section. Use the title details and source information to understand what a card points to. This guide names five existing Archive-sourced entries as examples, but a listing does not guarantee that a file will remain online, that the same version will continue to be used or that captions are available.",
+          "For a classic-film evening, choose a title, inspect its source record, test the opening minutes and make an age decision before everyone gathers. If the file is unavailable, do not substitute a pirate copy. The honest benefit of a public-domain catalogue is lawful access to some older works, not an unlimited modern film service. Browse what is actually listed and keep the distinction between rights, quality and taste clear."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse the video catalogue",
+    "ctaHref": "/vod"
+  },
+  {
+    "slug": "honest-sports-companion-gulf",
+    "title": "Sports Viewing in the Gulf: Official Highlights and Licensed Live Matches",
+    "h1": "The Honest Sports Companion: Highlights, Rights and What Whisco Does Not Stream",
+    "intro": "Sports search results blur together clips, highlights, live matches and copied feeds. They are not interchangeable. Official highlights may be published without a live-match package, while full matches are licensed by competition and territory. For the Premier League, its current 2025/26–2027/28 broadcaster table lists beIN Sports for the Middle East and North Africa. This guide explains how to verify the right source from Bahrain and where Whisco’s live catalogue fits.",
+    "sections": [
+      {
+        "heading": "Highlights and live rights are different products",
+        "paragraphs": [
+          "A short official highlight, interview, press conference or preview can be a legitimate way to follow a team without buying the live package. It is still not the match. A ninety-minute or full-event live feed is a separate right, usually sold for a particular competition, territory and season. A search result that says live may be an old replay, a commentary stream or a copied broadcast, so check the publisher, event and date before pressing play.",
+          "Use the league, federation, tournament or club’s official site to locate its verified video channel and rights-holder information. If that source offers highlights in your country, it will say what it carries; if it only posts clips, do not treat the channel as a live broadcaster. Availability can be restricted even for official videos. The safest expectation is that highlights and live matches have different access rules, and that one does not imply the other."
+        ]
+      },
+      {
+        "heading": "Check the rights-holder for your territory and season",
+        "paragraphs": [
+          "Broadcast rights change by sport, competition and season. The Premier League’s own 2025/26–2027/28 table names beIN Sports for the MENA region. That is the authoritative starting point for that competition’s regional partner, not a promise that one plan, device or match is included for every household in Bahrain. Check the broadcaster’s current Bahrain offer and the league’s latest rights table before buying a package.",
+          "Do the same for cricket, motorsport, tennis or a national league instead of assuming one broadcaster owns every sport. Open the competition’s official broadcaster directory, identify the partner for your country, then follow that partner’s official subscription or TV instructions. Confirm the package name, event coverage, language, device limit and renewal terms. A plan sold in another country can have different rights, and a visiting household may need a local option rather than the subscription it used at home."
+        ]
+      },
+      {
+        "heading": "Use official video channels for clips, not copied live feeds",
+        "paragraphs": [
+          "A verified league or broadcaster channel is a sensible place to look for official highlights and news. Read the channel name, video description and published date; an account that reposts a match with a similar logo is not the rights-holder. If a video is blocked from Bahrain, look for the official local partner rather than a mirror. Geo-restrictions are part of the licence, not a technical puzzle that a viewer should bypass.",
+          "Do not trust a thumbnail, a title promising every fixture or a playlist that asks you to install a player. Unofficial streams can be interrupted, collect account data or disappear during the event, and paying the reseller does not grant rights. This guide does not provide VPN instructions, sideloading steps, playlist files or pirate setup. When a match matters, use the service the competition lists for your territory and test its app before kickoff."
+        ]
+      },
+      {
+        "heading": "When paid access is the honest answer",
+        "paragraphs": [
+          "If the live rights-holder sells the event as part of a subscription or a paid package, payment is the ordinary legal route. Compare the monthly or event plan, supported screens, stream quality, language options and cancellation deadline in the broadcaster’s own checkout. Do not infer a price from a foreign blog or pay an unknown seller who promises sports, films and thousands of channels together. The official plan page is the current answer for your location.",
+          "If you only want post-match discussion, check whether the competition or local rights-holder publishes a recap without a live subscription. If you need every fixture or a particular team’s match, verify that exact event in the package description. A package can cover a competition but still have conditions on streaming location, simultaneous screens or device support. Take a screenshot of the official plan details for your own records and contact the provider before the event if anything is ambiguous."
+        ]
+      },
+      {
+        "heading": "What Whisco’s live page is—and is not",
+        "paragraphs": [
+          "Whisco’s live page is a way to browse live-channel listings; it is not a promise that a specific sports match, league feed or live event is included. Listings can change, and a channel’s schedule is controlled by its broadcaster. Open the channel’s own information and check whether it actually carries the event in your country. For a premium match, use the competition’s listed rights-holder rather than expecting a general live catalogue to replace a sports package.",
+          "The same rule keeps the choice simple: official highlight when you only want a short recap, local rights-holder when you need the live event, and no private IPTV reseller in the middle. If Whisco does not show the match, that is a clear limit, not a signal to search for a copied feed. Browse the live channels for what is genuinely listed, and verify sports rights separately for each competition and season."
+        ]
+      }
+    ],
+    "ctaLabel": "Browse live channels",
+    "ctaHref": "/live"
+  }
 ];
