@@ -99,6 +99,11 @@ export async function GET(req: Request) {
     return NextResponse.json(
       {
         store: requestedStore(req),
+        // Backward compatibility for the Play versionCode 7 client: its bundled
+        // HomeScreen dereferences data.stats before it renders. This API field was
+        // removed before that client could be replaced; derive truthful counts
+        // from the exact Android allow-lists returned in this same response.
+        stats: { channels: channels.length, titles: films.length },
         featuredChannels: channels.map((c) => ({
           id: c.id,
           name: c.name,
