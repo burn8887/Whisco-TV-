@@ -1977,8 +1977,12 @@ export const GUIDES: Guide[] = [
   // Indonesian RCTI+ listing and official channels: https://play.google.com/store/apps/details?id=com.fta.rctitv, https://www.youtube.com/@RCTILAYARDRAMAINDONESIA,
   // https://www.youtube.com/@SinetronSCTV
   // Child controls/availability: https://support.google.com/youtubekids/answer/10495678?hl=en
-  // Public-domain item metadata: https://archive.org/metadata/mclintok_widescreen, /metadata/cco_swordoflancelot,
-  // /metadata/SonofHerculesTheLandofDarkness, /metadata/TheTerror, /metadata/TheMagicSword
+  // Public-domain item metadata:
+  // https://archive.org/metadata/mclintok_widescreen
+  // https://archive.org/metadata/cco_swordoflancelot
+  // https://archive.org/metadata/SonofHerculesTheLandofDarkness
+  // https://archive.org/metadata/TheTerror
+  // https://archive.org/metadata/TheMagicSword
   // Sports rights table: https://www.premierleague.com/en/media/broadcasters
   {
     "slug": "telugu-cinema-serials-gulf-legal",
