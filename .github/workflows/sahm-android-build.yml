@@ -14,29 +14,44 @@ concurrency:
   cancel-in-progress: true
 jobs:
   android:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.13'
           cache-disabled: true
       - name: Materialize only Sahm outside the host checkout
         run: python3 sahm-workspace/tools/materialize.py --output "$RUNNER_TEMP/sahm"
-      - name: Install Sahm SDK
-        run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - name: Install Sahm SDK using the runner's native Android tooling
+        run: |
+          test -n "$ANDROID_HOME"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;36.0.0'
+
       - name: Compile, unit test, lint and package Sahm only
         working-directory: ${{ runner.temp }}/sahm/apps/sahm-android
-        run: gradle --no-daemon :core:test :app:lintDebug :app:assembleDebug :app:bundleRelease :app:assembleDebugAndroidTest
+        run: |
+          set +e
+          gradle --no-daemon :core:test :app:assembleDebug :app:bundleRelease :app:assembleDebugAndroidTest :app:lintDebug 2>&1 | tee "$RUNNER_TEMP/sahm-android-build.log"
+          result=${PIPESTATUS[0]}
+          if [ "$result" -ne 0 ]; then
+            python3 - <<'PYERROR'
+          import os
+          from pathlib import Path
+          text=Path(os.environ['RUNNER_TEMP']+'/sahm-android-build.log').read_text(errors='replace')
+          tail='\n'.join(text.splitlines()[-130:])[-16000:]
+          print('::error title=Sahm Android build::'+tail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PYERROR
+          fi
+          exit "$result"
       - name: Retain native test artifacts (not a store upload)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: sahm-android-test-build
           retention-days: 14
@@ -58,7 +73,7 @@ jobs:
           script: gradle --no-daemon :app:connectedDebugAndroidTest
       - name: Retain on-device test report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: sahm-android-device-tests
           retention-days: 14
