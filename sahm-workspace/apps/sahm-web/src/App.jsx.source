@@ -1,57 +1,1202 @@
-import {useEffect,useRef,useState} from 'react';
-import {Activity,ArrowDownToLine,ArrowRight,ArrowUpRight,Bell,Camera,Check,ChevronDown,ChevronRight,CircleHelp,Flag,House,Layers,LocateFixed,Map,MapPin,Menu,Minus,Navigation,Navigation2,Plus,Route,Search,Settings2,ShieldCheck,Smartphone,Square,TriangleAlert,Users,Volume2,VolumeX,WifiOff,X} from 'lucide-react';
-import RoadMap,{alerts,AlertIcon} from './Map';
-function stored(key,fallback){try{const value=JSON.parse(localStorage.getItem('sahm.'+key));return value===null?fallback:Array.isArray(fallback)?Array.isArray(value)?value:fallback:typeof value===typeof fallback?value:fallback}catch{return fallback}}
-function save(key,value){try{localStorage.setItem('sahm.'+key,JSON.stringify(value))}catch{/* A storage restriction must not crash a drive. */}}
-function Toggle({value,onChange,label}){return <button role="switch" aria-checked={value} aria-label={label} className={`toggle ${value?'on':''}`} onClick={()=>onChange(!value)}><span/></button>}
-const places=['Bahrain International Airport','City Centre Bahrain','Bahrain Bay','The Avenues Bahrain','Bahrain Financial Harbour'];
-export default function App(){
- const [page,setPage]=useState('Overview'),[menu,setMenu]=useState(false),[modal,setModal]=useState(null),[toast,setToast]=useState('');
- const [driving,setDriving]=useState(false),[seconds,setSeconds]=useState(0),[voice,setVoice]=useState(()=>stored('voice',true));
- const [trips,setTrips]=useState(()=>stored('trips',[])),[reports,setReports]=useState(()=>stored('reports',[]));
- const [query,setQuery]=useState(''),[destination,setDestination]=useState(''),[search,setSearch]=useState(false);
- const [zoom,setZoom]=useState(1),[layers,setLayers]=useState(false),[cameras,setCameras]=useState(true),[traffic,setTraffic]=useState(true),[selected,setSelected]=useState(null),[filter,setFilter]=useState('All alerts');
- const [country,setCountry]=useState('Bahrain'),[location,setLocation]=useState('Demo location');
- const [reportKind,setReportKind]=useState('Road hazard'),[road,setRoad]=useState(''),[notes,setNotes]=useState('');
- const input=useRef(null),voiceRef=useRef(voice);voiceRef.current=voice;
- const current=alerts.find(a=>a.id===selected)||alerts[0];
- useEffect(()=>save('voice',voice),[voice]);useEffect(()=>save('trips',trips),[trips]);useEffect(()=>save('reports',reports),[reports]);
- useEffect(()=>{if(!toast)return;const id=setTimeout(()=>setToast(''),4500);return()=>clearTimeout(id)},[toast]);
- useEffect(()=>{if(!driving)return;const start=performance.now();const timer=setInterval(()=>setSeconds(Math.floor((performance.now()-start)/1000)),500);return()=>clearInterval(timer)},[driving]);
- const warned=useRef(false);
- useEffect(()=>{if(!driving||seconds<8||warned.current)return;warned.current=true;setToast('Demo alert: speed camera ahead. Observe posted limits.');if(voiceRef.current&&'speechSynthesis' in window)window.speechSynthesis.speak(new SpeechSynthesisUtterance('Demo alert. Speed camera ahead. Always observe the posted speed limit.'))},[driving,seconds]);
- useEffect(()=>{function shortcut(e){if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();setPage('Overview');requestAnimationFrame(()=>{input.current?.focus();setSearch(true)})}if(e.key==='Escape'){setModal(null);setSearch(false);setMenu(false)}}window.addEventListener('keydown',shortcut);return()=>window.removeEventListener('keydown',shortcut)},[]);
- useEffect(()=>{if(!modal)return;const previous=document.activeElement;const handler=e=>{if(e.key!=='Tab')return;const items=[...document.querySelectorAll('.modal button,.modal input,.modal textarea')].filter(el=>!el.disabled);const first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}};document.addEventListener('keydown',handler);return()=>{document.removeEventListener('keydown',handler);previous?.focus()}},[modal]);
- function navigate(p){setPage(p);setMenu(false)}
- function drive(){if(driving){setTrips(t=>[{id:Date.now().toString(),date:new Date().toISOString(),destination:destination||'Manama demo drive',seconds,alerts:warned.current?1:0},...t].slice(0,200));setDriving(false);window.speechSynthesis?.cancel();setToast('Drive saved on this device. Find it in My trips.')}else{setSeconds(0);warned.current=false;setDriving(true);navigate('Overview');setToast('Simulated drive started. GPS, speed and alerts are demo data.')}}
- function locate(){if(!navigator.geolocation){setToast('This browser does not support location.');return}setLocation('Requesting GPS…');navigator.geolocation.getCurrentPosition(p=>{setLocation(`${p.coords.latitude.toFixed(3)}°, ${p.coords.longitude.toFixed(3)}°`);setToast('Location received. The illustrative map remains centered on Manama.')},()=>{setLocation('Demo location');setToast('Location unavailable. Check your browser permissions.')},{timeout:10000,maximumAge:30000})}
- function download(){const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,demo:true,country:'BH',alerts},null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='sahm-bahrain-demo.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setToast('Demo pack downloaded. This is not verified road data.')}
- const headings={Overview:['A little awareness. A better drive.','Your eyes on the road. We’ll keep an eye on what’s ahead.'],'Live map':['Know what’s around the bend.','Explore the Bahrain demo map and nearby road alerts.'],'My trips':['Every journey, a little smarter.','Session summaries stay on this device. No precise route history is stored.'],Community:['Better roads start with us.','A small heads-up can make a big difference.'],Settings:['Your drive. Your preferences.','Make Sahm feel right for you, on every journey.']};
- return <div className="shell">{menu&&<div className="scrim" onClick={()=>setMenu(false)}/>}
- <aside className={`sidebar ${menu?'open':''}`}><button className="brand" onClick={()=>navigate('Overview')}><Navigation fill="currentColor" size={32}/><span>sahm<span>.</span></span></button><div className="nav-label">YOUR DRIVING COMPANION</div>
- <nav>{[['Overview',House],['Live map',Map],['My trips',Route],['Community',Users]].map(([name,Icon])=><button key={name} className={`nav-item ${page===name?'active':''}`} onClick={()=>navigate(name)}><Icon size={19}/>{name}{name==='Live map'&&<i/>}</button>)}</nav><div className="sidebar-divider"/><div className="nav-label preferences">PREFERENCES</div><button className={`nav-item ${page==='Settings'?'active':''}`} onClick={()=>navigate('Settings')}><Settings2 size={19}/>Settings</button><button className="nav-item" onClick={()=>setModal('help')}><CircleHelp size={19}/>Help & safety</button>
- <div className="sidebar-bottom"><div className="mobile-card"><Smartphone size={25}/><h3>Better behind the wheel.</h3><p>Take your road companion<br/>wherever you go.</p><button onClick={()=>setModal('native')}>Get the mobile app<ArrowUpRight size={14}/></button><small>MADE FOR iOS & ANDROID</small></div><div className="profile"><span className="avatar">Y</span><div><strong>Your workspace</strong><small>Personal account · Local</small></div><button aria-label="Profile settings" onClick={()=>navigate('Settings')}><ChevronDown size={15}/></button></div></div></aside>
- <div className="main-shell"><header className="topbar"><div className="breadcrumb"><button className="menu-button icon-button" aria-label="Open navigation" onClick={()=>setMenu(true)}><Menu size={20}/></button><span>Workspace</span><ChevronRight size={14}/><strong>{page}</strong></div><div className="top-actions"><span className="ready"><i/>Preview ready</span><div className="country"><span className="flag"/><select aria-label="Country" value={country} onChange={e=>{setCountry(e.target.value);if(e.target.value!=='Bahrain')setToast(`${e.target.value} coverage is not connected. Showing the Bahrain demo.`)}}>{['Bahrain','Saudi Arabia','United Arab Emirates','Kuwait','Qatar','Oman'].map(c=><option key={c}>{c}</option>)}</select><ChevronDown size={12}/></div><button className="icon-button notification" aria-label="Notifications" onClick={()=>setModal('notifications')}><Bell size={19}/><i/></button></div></header>
- <main><section className="page-heading"><div><div className="eyebrow">• YOUR ROAD. ONE STEP AHEAD.</div><h1>{headings[page][0]}</h1><p>{headings[page][1]}</p></div><button className="primary start-drive" onClick={drive}>{driving?<Square size={16}/>:<Navigation size={18}/>} {driving?'End demo drive':'Start a drive'} {!driving&&<ArrowUpRight size={17}/>}</button></section>
- {(page==='Overview'||page==='Live map')&&<><div className="stats"><Stat icon={ShieldCheck} label="AWARENESS STATUS" value={driving?'Drive active':'Ready to go'} footer={driving?'Simulated session in progress':'Your next drive, covered'} green/><Stat icon={Camera} label="NEARBY CAMERAS" value="12" suffix="in your area" footer="Within a 10 km radius" demo/><Stat icon={TriangleAlert} label="ROAD ALERTS" value="3" suffix="to keep in mind" footer="2 roadworks · 1 road hazard" demo/><Stat icon={Users} label="COMMUNITY ON THE ROAD" value="1,248" footer="A more aware Bahrain" demo/></div>
- <div className="dashboard-grid"><section className="panel map-panel"><div className="panel-title"><div><Map size={18}/><h2>Your surroundings</h2><span className="badge">Bahrain</span></div><span className="live-label">• Demo preview</span></div><div className="map-container"><RoadMap zoom={zoom} cameras={cameras} traffic={traffic} selected={selected} onSelect={setSelected} progress={driving?Math.min(seconds*.65,95):0}/>
- <div className="map-search"><Search size={17}/><input ref={input} aria-label="Search a destination" placeholder="Where are you heading?" value={query} onFocus={()=>setSearch(true)} onChange={e=>{setQuery(e.target.value);setSearch(true)}}/>{query?<button aria-label="Clear destination" onClick={()=>{setQuery('');setDestination('');setSearch(false)}}><X size={14}/></button>:<kbd>⌘ K</kbd>}{search&&<div className="search-results"><div className="search-label">BAHRAIN DESTINATIONS<button aria-label="Close search" onClick={()=>setSearch(false)}><X size={13}/></button></div>{places.filter(p=>p.toLowerCase().includes(query.toLowerCase())).map(p=><button key={p} onClick={()=>{setDestination(p);setQuery(p);setSearch(false);setToast('Destination selected. The preview does not calculate a real route.')}}><MapPin size={16}/><span>{p}<small>Manama, Bahrain</small></span><ArrowUpRight size={14}/></button>)}{!places.some(p=>p.toLowerCase().includes(query.toLowerCase()))&&<p>No demo destinations found.</p>}</div>}</div>
- <div className="layer-control"><button aria-label="Map layers" onClick={()=>setLayers(!layers)}><Layers size={18}/></button>{layers&&<div className="layer-menu"><strong>Map layers</strong><label>Speed cameras<Toggle value={cameras} onChange={setCameras} label="Show speed cameras"/></label><label>Traffic conditions<Toggle value={traffic} onChange={setTraffic} label="Show traffic conditions"/></label></div>}</div><div className="compass"><Navigation2 size={20}/><span>N</span></div><div className="zoom-controls"><button aria-label="Zoom in" onClick={()=>setZoom(z=>Math.min(1.8,z+.2))}><Plus size={18}/></button><button aria-label="Zoom out" onClick={()=>setZoom(z=>Math.max(1,z-.2))}><Minus size={18}/></button><button aria-label="Get current location" onClick={locate}><LocateFixed size={18}/></button></div>
- {selected&&<div className="marker-detail"><button aria-label="Close alert details" onClick={()=>setSelected(null)}><X size={15}/></button><AlertIcon kind={current.kind}/><strong>{current.title}</strong><p>{current.road}</p><small>Demo location · {current.distance}</small></div>}
- <div className="speed-card"><div><strong>{driving?'65':'0'}</strong><small>km/h</small></div><span className="limit">80</span><p>{driving?'Demo speed':'You’re parked'}<small>Demo limit · Follow road signs</small></p></div><button className="report-map" disabled={driving} onClick={()=>setModal('report')}><Plus size={17}/>Report</button></div><div className="map-footer"><span><i/>{location==='Demo location'?'Manama, Bahrain':location}<small>· {driving?'Simulated drive':'Demo location'}</small></span><span><b className="clear"/>Clear <b className="moderate"/>Moderate <b className="busy"/>Busy</span></div></section>
- <aside className="radar-column"><section className="panel radar"><div className="radar-label"><span>◉ ON YOUR RADAR</span><span className="badge">Nearby</span></div><div className="radar-heading"><span className="camera-tile"><AlertIcon kind={current.kind} size={25}/></span><div><h3>{current.title}</h3><p>Stay aware. Stay within the limit.</p></div></div><p className="road-label"><MapPin size={13}/>{current.road}</p><div className="distance"><span><strong>{current.distance.split(' ')[0]}</strong> {current.distance.split(' ').slice(1).join(' ')} ahead</span><small><ShieldCheck size={13}/>Demo alert</small></div><div className="distance-track"><span style={{width:driving?`${30+Math.min(seconds,50)}%`:'32%'}}/></div><div className="voice-row">{voice?<Volume2 size={17}/>:<VolumeX size={17}/>}<span>Voice alerts</span><Toggle value={voice} onChange={v=>{setVoice(v);if(!v)window.speechSynthesis?.cancel()}} label="Voice alerts"/></div></section>
- <section className="panel nearby"><div className="panel-title"><h2>Nearby activity</h2><span className="badge">4</span></div><div className="filters">{['All alerts','Cameras','Hazards'].map(f=><button key={f} className={filter===f?'selected':''} onClick={()=>setFilter(f)}>{f}</button>)}</div><div className="nearby-list">{alerts.filter(a=>filter==='All alerts'||(filter==='Cameras'?a.kind==='camera':a.kind!=='camera')).map(a=><button key={a.id} className={`nearby-item ${selected===a.id?'selected':''}`} onClick={()=>setSelected(a.id)}><span className={`alert-icon ${a.kind}`}><AlertIcon kind={a.kind}/></span><div><strong>{a.title}</strong><span>{a.road}</span><small>{a.time} · {a.distance}</small></div><ChevronRight size={13}/></button>)}</div><button className="view-all" onClick={()=>navigate(page==='Live map'?'Community':'Live map')}>Explore all alerts<ArrowRight size={14}/></button></section></aside></div>
- {page==='Overview'&&<div className="bottom-grid"><section className="panel drive-card"><span className="route-icon"><Route size={24}/></span><div><h3>{driving?'A calmer drive is underway.':destination?'Your destination is set.':'Good journeys start with peace of mind.'}</h3><p>{driving?`${Math.floor(seconds/60)}m ${seconds%60}s elapsed · ${seconds>=8?1:0} demo alerts`:destination||'Start a drive for timely alerts, without the distractions.'}</p></div><button aria-label={driving?'Finish demo drive':'Start demo drive'} onClick={drive}><ArrowUpRight size={20}/></button></section><section className="panel community-card"><Users size={32}/><div><h3>A little heads-up. A safer road.</h3><p>See something? Help your fellow drivers.</p><button disabled={driving} onClick={()=>setModal('report')}>Share a road update<ArrowRight size={14}/></button></div></section></div>}
- <footer><span><ShieldCheck size={14}/>Built for awareness. Designed for safer roads.</span><span>Always follow posted speed limits. · Demo data, not a navigation service.</span></footer></>}
- {page==='My trips'&&<section className="panel content-panel"><div className="panel-title"><h2>Recent journeys</h2><span className="badge">Stored on this device</span></div>{!trips.length?<div className="empty"><Route size={36}/><h2>Your next journey starts here.</h2><p>Start and finish a demo drive to save a session.</p><button className="primary" onClick={drive}>{driving?'Finish current drive':'Take a demo drive'}</button></div>:<>{trips.map(t=><div className="data-row" key={t.id}><span className="route-icon"><Route size={22}/></span><div><strong>{t.destination}</strong><small>{new Date(t.date).toLocaleString()} · Demo session</small></div><span>{Math.floor(t.seconds/60)}m {t.seconds%60}s</span><span>{t.alerts} alerts</span></div>)}<button className="secondary danger" onClick={()=>{if(confirm('Delete all local trip history?'))setTrips([])}}>Clear trip history</button></>}</section>}
- {page==='Community'&&<><section className="panel community-hero"><div><div className="eyebrow">AWARENESS IS A SHARED EFFORT</div><h2>A heads-up can change someone’s journey.</h2><p>Report only when safely parked. Updates in this preview are private local drafts, not verified or published to other drivers.</p><button className="primary" disabled={driving} onClick={()=>setModal('report')}><Plus size={17}/>Share a road update</button></div><Users size={90} strokeWidth={1}/></section><section className="panel content-panel"><div className="panel-title"><h2>Your local reports</h2><span className="badge">{reports.length} drafts</span></div>{!reports.length?<div className="empty"><Flag size={32}/><h2>Clear roads. A fresh start.</h2><p>Your saved road updates will appear here.</p></div>:reports.map(r=><div key={r.id} className="data-row"><span className="alert-icon hazard"><TriangleAlert size={19}/></span><div><strong>{r.kind}</strong><small>{r.road} · Local draft · Unverified</small>{r.notes&&<small>{r.notes}</small>}</div><button aria-label={`Delete report on ${r.road}`} onClick={()=>setReports(items=>items.filter(i=>i.id!==r.id))}><X size={17}/></button></div>)}</section></>}
- {page==='Settings'&&<div className="settings-grid"><section className="panel"><div className="panel-title"><h2>Driving preferences</h2></div><Setting icon={Volume2} title="Voice alerts" detail="Hear a heads-up during your simulated drive."><Toggle value={voice} onChange={setVoice} label="Enable voice alerts"/></Setting><Setting icon={Camera} title="Camera awareness" detail="Show camera markers on the demo map."><Toggle value={cameras} onChange={setCameras} label="Enable camera markers"/></Setting><Setting icon={Activity} title="Traffic layer" detail="Illustrative traffic conditions, not live feeds."><Toggle value={traffic} onChange={setTraffic} label="Enable traffic layer"/></Setting><Setting icon={ShieldCheck} title="Background awareness" detail="Native apps only. This browser demo must remain open."><span className="badge">Native only</span></Setting></section><div><section className="panel offline"><span className="route-icon"><WifiOff size={22}/></span><h3>A little preparation.<br/>A lot of confidence.</h3><p>Download a sample Bahrain alert pack. Map tiles and verified camera data are not included.</p><div className="pack"><span className="flag"/>Bahrain <small>Demo pack · JSON</small></div><button className="primary" onClick={download}><ArrowDownToLine size={17}/>Download demo pack</button></section><div className="privacy"><ShieldCheck size={22}/><div><strong>Your journey stays yours.</strong><p>Trips and reports remain in this browser. No precise location history is uploaded.</p></div></div></div></div>}
- </main></div>
- {toast&&<div className="toast" role="status"><Check size={17}/><span>{toast}</span><button aria-label="Dismiss notification" onClick={()=>setToast('')}><X size={16}/></button></div>}
- {modal&&<div className="modal-overlay" onClick={e=>{if(e.target===e.currentTarget)setModal(null)}}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close icon-button" autoFocus aria-label="Close dialog" onClick={()=>setModal(null)}><X size={20}/></button><span className="modal-symbol">{modal==='report'?<Flag size={25}/>:modal==='native'?<Smartphone size={25}/>:<ShieldCheck size={25}/>}</span>
- {modal==='report'?<><div className="eyebrow">LOOKING OUT FOR EACH OTHER</div><h2 id="modal-title">Share a road update.</h2><p>A small heads-up for the journey ahead.</p><div className="notice">Only report when safely parked. This saves a local draft, not a public alert.</div><form onSubmit={e=>{e.preventDefault();if(driving||!road.trim())return;setReports(r=>[{id:Date.now().toString(),kind:reportKind,road:road.trim(),notes:notes.trim()},...r]);setRoad('');setNotes('');setModal(null);setToast('Local report saved. No live submission service is connected.')}}><label>What did you notice?</label><div className="report-types">{['Road hazard','Speed camera','Roadworks'].map((r,i)=><button type="button" key={r} className={reportKind===r?'selected':''} onClick={()=>setReportKind(r)}><AlertIcon kind={i===1?'camera':i===2?'roadwork':'hazard'}/>{r}</button>)}</div><label htmlFor="road">Road or location</label><input id="road" value={road} onChange={e=>setRoad(e.target.value)} placeholder="e.g. King Faisal Highway" required maxLength={120}/><label htmlFor="notes">Additional detail (optional)</label><textarea id="notes" value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Which direction or lane?" maxLength={400}/><button className="primary full" disabled={driving} type="submit">Save local report<ArrowRight size={16}/></button></form></>:modal==='native'?<><h2 id="modal-title">Made for the road ahead.</h2><p>Native Android and iOS builds are in development. This is a browser demonstration—not an APK, IPA, or store release.</p><div className="notice">Source recovery and release verification are in progress. Closed testing and TestFlight require native SDK builds, signing, device tests and platform approvals.</div></>:modal==='notifications'?<><h2 id="modal-title">You’re all caught up.</h2><p>Start a simulated drive to experience a voice alert after eight seconds.</p><div className="notice">All camera locations, limits, traffic and community counts are illustrative. No live road feed is connected.</div></>:<><h2 id="modal-title">Awareness, not distraction.</h2><p>Always follow posted limits. Set up before moving, report only when parked, and never rely on an alert to guarantee a clear road.</p><div className="notice">This preview is not a navigation or emergency service. For emergencies in Bahrain, call 999.</div></>}
- </section></div>}
- </div>
+import { useEffect, useRef, useState } from "react";
+import {
+  Activity,
+  ArrowDownToLine,
+  ArrowRight,
+  ArrowUpRight,
+  Bell,
+  Camera,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  CircleHelp,
+  Flag,
+  House,
+  Layers,
+  LocateFixed,
+  Map,
+  MapPin,
+  Menu,
+  Minus,
+  Navigation,
+  Navigation2,
+  Plus,
+  Route,
+  Search,
+  Settings2,
+  ShieldCheck,
+  Smartphone,
+  Square,
+  TriangleAlert,
+  Users,
+  Volume2,
+  VolumeX,
+  WifiOff,
+  X,
+} from "lucide-react";
+import RoadMap, { alerts, AlertIcon } from "./Map";
+function stored(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem("sahm." + key));
+    return value === null
+      ? fallback
+      : Array.isArray(fallback)
+        ? Array.isArray(value)
+          ? value
+          : fallback
+        : typeof value === typeof fallback
+          ? value
+          : fallback;
+  } catch {
+    return fallback;
+  }
 }
-function Stat({icon:Icon,label,value,suffix,footer,green,demo}){return <section className={`stat ${green?'green':''}`}><div className="stat-top"><span>{label}</span><Icon size={17}/></div><div className="stat-value"><strong>{value}</strong>{suffix&&<span>{suffix}</span>}</div><div className="stat-footer">{green&&<i/>}{footer}{demo&&<span>DEMO</span>}</div></section>}
-function Setting({icon:Icon,title,detail,children}){return <div className="setting"><Icon size={21}/><div><h3>{title}</h3><p>{detail}</p></div>{children}</div>}
+function save(key, value) {
+  try {
+    localStorage.setItem("sahm." + key, JSON.stringify(value));
+  } catch {
+    /* A storage restriction must not crash a drive. */
+  }
+}
+function Toggle({ value, onChange, label }) {
+  return (
+    <button
+      role="switch"
+      aria-checked={value}
+      aria-label={label}
+      className={`toggle ${value ? "on" : ""}`}
+      onClick={() => onChange(!value)}
+    >
+      <span />
+    </button>
+  );
+}
+const places = [
+  "Bahrain International Airport",
+  "City Centre Bahrain",
+  "Bahrain Bay",
+  "The Avenues Bahrain",
+  "Bahrain Financial Harbour",
+];
+export default function App() {
+  const [page, setPage] = useState("Overview"),
+    [menu, setMenu] = useState(false),
+    [modal, setModal] = useState(null),
+    [toast, setToast] = useState("");
+  const [driving, setDriving] = useState(false),
+    [seconds, setSeconds] = useState(0),
+    [voice, setVoice] = useState(() => stored("voice", true));
+  const [trips, setTrips] = useState(() => stored("trips", [])),
+    [reports, setReports] = useState(() => stored("reports", []));
+  const [query, setQuery] = useState(""),
+    [destination, setDestination] = useState(""),
+    [search, setSearch] = useState(false);
+  const [zoom, setZoom] = useState(1),
+    [layers, setLayers] = useState(false),
+    [cameras, setCameras] = useState(true),
+    [traffic, setTraffic] = useState(true),
+    [selected, setSelected] = useState(null),
+    [filter, setFilter] = useState("All alerts");
+  const [country, setCountry] = useState("Bahrain"),
+    [location, setLocation] = useState("Demo location");
+  const [reportKind, setReportKind] = useState("Road hazard"),
+    [road, setRoad] = useState(""),
+    [notes, setNotes] = useState("");
+  const input = useRef(null),
+    voiceRef = useRef(voice);
+  voiceRef.current = voice;
+  const current = alerts.find((a) => a.id === selected) || alerts[0];
+  useEffect(() => save("voice", voice), [voice]);
+  useEffect(() => save("trips", trips), [trips]);
+  useEffect(() => save("reports", reports), [reports]);
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(() => setToast(""), 4500);
+    return () => clearTimeout(id);
+  }, [toast]);
+  useEffect(() => {
+    if (!driving) return;
+    const start = performance.now();
+    const timer = setInterval(
+      () => setSeconds(Math.floor((performance.now() - start) / 1000)),
+      500,
+    );
+    return () => clearInterval(timer);
+  }, [driving]);
+  const warned = useRef(false);
+  useEffect(() => {
+    if (!driving || seconds < 8 || warned.current) return;
+    warned.current = true;
+    setToast("Demo alert: speed camera ahead. Observe posted limits.");
+    if (voiceRef.current && "speechSynthesis" in window)
+      window.speechSynthesis.speak(
+        new SpeechSynthesisUtterance(
+          "Demo alert. Speed camera ahead. Always observe the posted speed limit.",
+        ),
+      );
+  }, [driving, seconds]);
+  useEffect(() => {
+    function shortcut(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPage("Overview");
+        requestAnimationFrame(() => {
+          input.current?.focus();
+          setSearch(true);
+        });
+      }
+      if (e.key === "Escape") {
+        setModal(null);
+        setSearch(false);
+        setMenu(false);
+      }
+    }
+    window.addEventListener("keydown", shortcut);
+    return () => window.removeEventListener("keydown", shortcut);
+  }, []);
+  useEffect(() => {
+    if (!modal) return;
+    const previous = document.activeElement;
+    const handler = (e) => {
+      if (e.key !== "Tab") return;
+      const items = [
+        ...document.querySelectorAll(
+          ".modal button,.modal input,.modal textarea",
+        ),
+      ].filter((el) => !el.disabled);
+      const first = items[0],
+        last = items.at(-1);
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      }
+      if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => {
+      document.removeEventListener("keydown", handler);
+      previous?.focus();
+    };
+  }, [modal]);
+  function navigate(p) {
+    setPage(p);
+    setMenu(false);
+  }
+  function drive() {
+    if (driving) {
+      setTrips((t) =>
+        [
+          {
+            id: Date.now().toString(),
+            date: new Date().toISOString(),
+            destination: destination || "Manama demo drive",
+            seconds,
+            alerts: warned.current ? 1 : 0,
+          },
+          ...t,
+        ].slice(0, 200),
+      );
+      setDriving(false);
+      window.speechSynthesis?.cancel();
+      setToast("Drive saved on this device. Find it in My trips.");
+    } else {
+      setSeconds(0);
+      warned.current = false;
+      setDriving(true);
+      navigate("Overview");
+      setToast("Simulated drive started. GPS, speed and alerts are demo data.");
+    }
+  }
+  function locate() {
+    if (!navigator.geolocation) {
+      setToast("This browser does not support location.");
+      return;
+    }
+    setLocation("Requesting GPS…");
+    navigator.geolocation.getCurrentPosition(
+      (p) => {
+        setLocation(
+          `${p.coords.latitude.toFixed(3)}°, ${p.coords.longitude.toFixed(3)}°`,
+        );
+        setToast(
+          "Location received. The illustrative map remains centered on Manama.",
+        );
+      },
+      () => {
+        setLocation("Demo location");
+        setToast("Location unavailable. Check your browser permissions.");
+      },
+      { timeout: 10000, maximumAge: 30000 },
+    );
+  }
+  function download() {
+    const url = URL.createObjectURL(
+      new Blob(
+        [
+          JSON.stringify(
+            { schemaVersion: 1, demo: true, country: "BH", alerts },
+            null,
+            2,
+          ),
+        ],
+        { type: "application/json" },
+      ),
+    );
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "sahm-bahrain-demo.json";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setToast("Demo pack downloaded. This is not verified road data.");
+  }
+  const headings = {
+    Overview: [
+      "A little awareness. A better drive.",
+      "Your eyes on the road. We’ll keep an eye on what’s ahead.",
+    ],
+    "Live map": [
+      "Know what’s around the bend.",
+      "Explore the Bahrain demo map and nearby road alerts.",
+    ],
+    "My trips": [
+      "Every journey, a little smarter.",
+      "Session summaries stay on this device. No precise route history is stored.",
+    ],
+    Community: [
+      "Better roads start with us.",
+      "A small heads-up can make a big difference.",
+    ],
+    Settings: [
+      "Your drive. Your preferences.",
+      "Make Sahm feel right for you, on every journey.",
+    ],
+  };
+  return (
+    <div className="shell">
+      {menu && <div className="scrim" onClick={() => setMenu(false)} />}
+      <aside className={`sidebar ${menu ? "open" : ""}`}>
+        <button className="brand" onClick={() => navigate("Overview")}>
+          <Navigation fill="currentColor" size={32} />
+          <span>
+            sahm<span>.</span>
+          </span>
+        </button>
+        <div className="nav-label">YOUR DRIVING COMPANION</div>
+        <nav>
+          {[
+            ["Overview", House],
+            ["Live map", Map],
+            ["My trips", Route],
+            ["Community", Users],
+          ].map(([name, Icon]) => (
+            <button
+              key={name}
+              className={`nav-item ${page === name ? "active" : ""}`}
+              onClick={() => navigate(name)}
+            >
+              <Icon size={19} />
+              {name}
+              {name === "Live map" && <i />}
+            </button>
+          ))}
+        </nav>
+        <div className="sidebar-divider" />
+        <div className="nav-label preferences">PREFERENCES</div>
+        <button
+          className={`nav-item ${page === "Settings" ? "active" : ""}`}
+          onClick={() => navigate("Settings")}
+        >
+          <Settings2 size={19} />
+          Settings
+        </button>
+        <button className="nav-item" onClick={() => setModal("help")}>
+          <CircleHelp size={19} />
+          Help & safety
+        </button>
+        <div className="sidebar-bottom">
+          <div className="mobile-card">
+            <Smartphone size={25} />
+            <h3>Better behind the wheel.</h3>
+            <p>
+              Take your road companion
+              <br />
+              wherever you go.
+            </p>
+            <button onClick={() => setModal("native")}>
+              Get the mobile app
+              <ArrowUpRight size={14} />
+            </button>
+            <small>MADE FOR iOS & ANDROID</small>
+          </div>
+          <div className="profile">
+            <span className="avatar">Y</span>
+            <div>
+              <strong>Your workspace</strong>
+              <small>Personal account · Local</small>
+            </div>
+            <button
+              aria-label="Profile settings"
+              onClick={() => navigate("Settings")}
+            >
+              <ChevronDown size={15} />
+            </button>
+          </div>
+        </div>
+      </aside>
+      <div className="main-shell">
+        <header className="topbar">
+          <div className="breadcrumb">
+            <button
+              className="menu-button icon-button"
+              aria-label="Open navigation"
+              onClick={() => setMenu(true)}
+            >
+              <Menu size={20} />
+            </button>
+            <span>Workspace</span>
+            <ChevronRight size={14} />
+            <strong>{page}</strong>
+          </div>
+          <div className="top-actions">
+            <span className="ready">
+              <i />
+              Preview ready
+            </span>
+            <div className="country">
+              <span className="flag" />
+              <select
+                aria-label="Country"
+                value={country}
+                onChange={(e) => {
+                  setCountry(e.target.value);
+                  if (e.target.value !== "Bahrain")
+                    setToast(
+                      `${e.target.value} coverage is not connected. Showing the Bahrain demo.`,
+                    );
+                }}
+              >
+                {[
+                  "Bahrain",
+                  "Saudi Arabia",
+                  "United Arab Emirates",
+                  "Kuwait",
+                  "Qatar",
+                  "Oman",
+                ].map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+              <ChevronDown size={12} />
+            </div>
+            <button
+              className="icon-button notification"
+              aria-label="Notifications"
+              onClick={() => setModal("notifications")}
+            >
+              <Bell size={19} />
+              <i />
+            </button>
+          </div>
+        </header>
+        <main>
+          <section className="page-heading">
+            <div>
+              <div className="eyebrow">• YOUR ROAD. ONE STEP AHEAD.</div>
+              <h1>{headings[page][0]}</h1>
+              <p>{headings[page][1]}</p>
+            </div>
+            <button className="primary start-drive" onClick={drive}>
+              {driving ? <Square size={16} /> : <Navigation size={18} />}{" "}
+              {driving ? "End demo drive" : "Start a drive"}{" "}
+              {!driving && <ArrowUpRight size={17} />}
+            </button>
+          </section>
+          {(page === "Overview" || page === "Live map") && (
+            <>
+              <div className="stats">
+                <Stat
+                  icon={ShieldCheck}
+                  label="AWARENESS STATUS"
+                  value={driving ? "Drive active" : "Ready to go"}
+                  footer={
+                    driving
+                      ? "Simulated session in progress"
+                      : "Your next drive, covered"
+                  }
+                  green
+                />
+                <Stat
+                  icon={Camera}
+                  label="NEARBY CAMERAS"
+                  value="12"
+                  suffix="in your area"
+                  footer="Within a 10 km radius"
+                  demo
+                />
+                <Stat
+                  icon={TriangleAlert}
+                  label="ROAD ALERTS"
+                  value="3"
+                  suffix="to keep in mind"
+                  footer="2 roadworks · 1 road hazard"
+                  demo
+                />
+                <Stat
+                  icon={Users}
+                  label="COMMUNITY ON THE ROAD"
+                  value="1,248"
+                  footer="A more aware Bahrain"
+                  demo
+                />
+              </div>
+              <div className="dashboard-grid">
+                <section className="panel map-panel">
+                  <div className="panel-title">
+                    <div>
+                      <Map size={18} />
+                      <h2>Your surroundings</h2>
+                      <span className="badge">Bahrain</span>
+                    </div>
+                    <span className="live-label">• Demo preview</span>
+                  </div>
+                  <div className="map-container">
+                    <RoadMap
+                      zoom={zoom}
+                      cameras={cameras}
+                      traffic={traffic}
+                      selected={selected}
+                      onSelect={setSelected}
+                      progress={driving ? Math.min(seconds * 0.65, 95) : 0}
+                    />
+                    <div className="map-search">
+                      <Search size={17} />
+                      <input
+                        ref={input}
+                        aria-label="Search a destination"
+                        placeholder="Where are you heading?"
+                        value={query}
+                        onFocus={() => setSearch(true)}
+                        onChange={(e) => {
+                          setQuery(e.target.value);
+                          setSearch(true);
+                        }}
+                      />
+                      {query ? (
+                        <button
+                          aria-label="Clear destination"
+                          onClick={() => {
+                            setQuery("");
+                            setDestination("");
+                            setSearch(false);
+                          }}
+                        >
+                          <X size={14} />
+                        </button>
+                      ) : (
+                        <kbd>⌘ K</kbd>
+                      )}
+                      {search && (
+                        <div className="search-results">
+                          <div className="search-label">
+                            BAHRAIN DESTINATIONS
+                            <button
+                              aria-label="Close search"
+                              onClick={() => setSearch(false)}
+                            >
+                              <X size={13} />
+                            </button>
+                          </div>
+                          {places
+                            .filter((p) =>
+                              p.toLowerCase().includes(query.toLowerCase()),
+                            )
+                            .map((p) => (
+                              <button
+                                key={p}
+                                onClick={() => {
+                                  setDestination(p);
+                                  setQuery(p);
+                                  setSearch(false);
+                                  setToast(
+                                    "Destination selected. The preview does not calculate a real route.",
+                                  );
+                                }}
+                              >
+                                <MapPin size={16} />
+                                <span>
+                                  {p}
+                                  <small>Manama, Bahrain</small>
+                                </span>
+                                <ArrowUpRight size={14} />
+                              </button>
+                            ))}
+                          {!places.some((p) =>
+                            p.toLowerCase().includes(query.toLowerCase()),
+                          ) && <p>No demo destinations found.</p>}
+                        </div>
+                      )}
+                    </div>
+                    <div className="layer-control">
+                      <button
+                        aria-label="Map layers"
+                        onClick={() => setLayers(!layers)}
+                      >
+                        <Layers size={18} />
+                      </button>
+                      {layers && (
+                        <div className="layer-menu">
+                          <strong>Map layers</strong>
+                          <label>
+                            Speed cameras
+                            <Toggle
+                              value={cameras}
+                              onChange={setCameras}
+                              label="Show speed cameras"
+                            />
+                          </label>
+                          <label>
+                            Traffic conditions
+                            <Toggle
+                              value={traffic}
+                              onChange={setTraffic}
+                              label="Show traffic conditions"
+                            />
+                          </label>
+                        </div>
+                      )}
+                    </div>
+                    <div className="compass">
+                      <Navigation2 size={20} />
+                      <span>N</span>
+                    </div>
+                    <div className="zoom-controls">
+                      <button
+                        aria-label="Zoom in"
+                        onClick={() => setZoom((z) => Math.min(1.8, z + 0.2))}
+                      >
+                        <Plus size={18} />
+                      </button>
+                      <button
+                        aria-label="Zoom out"
+                        onClick={() => setZoom((z) => Math.max(1, z - 0.2))}
+                      >
+                        <Minus size={18} />
+                      </button>
+                      <button
+                        aria-label="Get current location"
+                        onClick={locate}
+                      >
+                        <LocateFixed size={18} />
+                      </button>
+                    </div>
+                    {selected && (
+                      <div className="marker-detail">
+                        <button
+                          aria-label="Close alert details"
+                          onClick={() => setSelected(null)}
+                        >
+                          <X size={15} />
+                        </button>
+                        <AlertIcon kind={current.kind} />
+                        <strong>{current.title}</strong>
+                        <p>{current.road}</p>
+                        <small>Demo location · {current.distance}</small>
+                      </div>
+                    )}
+                    <div className="speed-card">
+                      <div>
+                        <strong>{driving ? "65" : "0"}</strong>
+                        <small>km/h</small>
+                      </div>
+                      <span className="limit">80</span>
+                      <p>
+                        {driving ? "Demo speed" : "You’re parked"}
+                        <small>Demo limit · Follow road signs</small>
+                      </p>
+                    </div>
+                    <button
+                      className="report-map"
+                      disabled={driving}
+                      onClick={() => setModal("report")}
+                    >
+                      <Plus size={17} />
+                      Report
+                    </button>
+                  </div>
+                  <div className="map-footer">
+                    <span>
+                      <i />
+                      {location === "Demo location"
+                        ? "Manama, Bahrain"
+                        : location}
+                      <small>
+                        · {driving ? "Simulated drive" : "Demo location"}
+                      </small>
+                    </span>
+                    <span>
+                      <b className="clear" />
+                      Clear <b className="moderate" />
+                      Moderate <b className="busy" />
+                      Busy
+                    </span>
+                  </div>
+                </section>
+                <aside className="radar-column">
+                  <section className="panel radar">
+                    <div className="radar-label">
+                      <span>◉ ON YOUR RADAR</span>
+                      <span className="badge">Nearby</span>
+                    </div>
+                    <div className="radar-heading">
+                      <span className="camera-tile">
+                        <AlertIcon kind={current.kind} size={25} />
+                      </span>
+                      <div>
+                        <h3>{current.title}</h3>
+                        <p>Stay aware. Stay within the limit.</p>
+                      </div>
+                    </div>
+                    <p className="road-label">
+                      <MapPin size={13} />
+                      {current.road}
+                    </p>
+                    <div className="distance">
+                      <span>
+                        <strong>{current.distance.split(" ")[0]}</strong>{" "}
+                        {current.distance.split(" ").slice(1).join(" ")} ahead
+                      </span>
+                      <small>
+                        <ShieldCheck size={13} />
+                        Demo alert
+                      </small>
+                    </div>
+                    <div className="distance-track">
+                      <span
+                        style={{
+                          width: driving
+                            ? `${30 + Math.min(seconds, 50)}%`
+                            : "32%",
+                        }}
+                      />
+                    </div>
+                    <div className="voice-row">
+                      {voice ? <Volume2 size={17} /> : <VolumeX size={17} />}
+                      <span>Voice alerts</span>
+                      <Toggle
+                        value={voice}
+                        onChange={(v) => {
+                          setVoice(v);
+                          if (!v) window.speechSynthesis?.cancel();
+                        }}
+                        label="Voice alerts"
+                      />
+                    </div>
+                  </section>
+                  <section className="panel nearby">
+                    <div className="panel-title">
+                      <h2>Nearby activity</h2>
+                      <span className="badge">4</span>
+                    </div>
+                    <div className="filters">
+                      {["All alerts", "Cameras", "Hazards"].map((f) => (
+                        <button
+                          key={f}
+                          className={filter === f ? "selected" : ""}
+                          onClick={() => setFilter(f)}
+                        >
+                          {f}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="nearby-list">
+                      {alerts
+                        .filter(
+                          (a) =>
+                            filter === "All alerts" ||
+                            (filter === "Cameras"
+                              ? a.kind === "camera"
+                              : a.kind !== "camera"),
+                        )
+                        .map((a) => (
+                          <button
+                            key={a.id}
+                            className={`nearby-item ${selected === a.id ? "selected" : ""}`}
+                            onClick={() => setSelected(a.id)}
+                          >
+                            <span className={`alert-icon ${a.kind}`}>
+                              <AlertIcon kind={a.kind} />
+                            </span>
+                            <div>
+                              <strong>{a.title}</strong>
+                              <span>{a.road}</span>
+                              <small>
+                                {a.time} · {a.distance}
+                              </small>
+                            </div>
+                            <ChevronRight size={13} />
+                          </button>
+                        ))}
+                    </div>
+                    <button
+                      className="view-all"
+                      onClick={() =>
+                        navigate(page === "Live map" ? "Community" : "Live map")
+                      }
+                    >
+                      Explore all alerts
+                      <ArrowRight size={14} />
+                    </button>
+                  </section>
+                </aside>
+              </div>
+              {page === "Overview" && (
+                <div className="bottom-grid">
+                  <section className="panel drive-card">
+                    <span className="route-icon">
+                      <Route size={24} />
+                    </span>
+                    <div>
+                      <h3>
+                        {driving
+                          ? "A calmer drive is underway."
+                          : destination
+                            ? "Your destination is set."
+                            : "Good journeys start with peace of mind."}
+                      </h3>
+                      <p>
+                        {driving
+                          ? `${Math.floor(seconds / 60)}m ${seconds % 60}s elapsed · ${seconds >= 8 ? 1 : 0} demo alerts`
+                          : destination ||
+                            "Start a drive for timely alerts, without the distractions."}
+                      </p>
+                    </div>
+                    <button
+                      aria-label={
+                        driving ? "Finish demo drive" : "Start demo drive"
+                      }
+                      onClick={drive}
+                    >
+                      <ArrowUpRight size={20} />
+                    </button>
+                  </section>
+                  <section className="panel community-card">
+                    <Users size={32} />
+                    <div>
+                      <h3>A little heads-up. A safer road.</h3>
+                      <p>See something? Help your fellow drivers.</p>
+                      <button
+                        disabled={driving}
+                        onClick={() => setModal("report")}
+                      >
+                        Share a road update
+                        <ArrowRight size={14} />
+                      </button>
+                    </div>
+                  </section>
+                </div>
+              )}
+              <footer>
+                <span>
+                  <ShieldCheck size={14} />
+                  Built for awareness. Designed for safer roads.
+                </span>
+                <span>
+                  Always follow posted speed limits. · Demo data, not a
+                  navigation service.
+                </span>
+              </footer>
+            </>
+          )}
+          {page === "My trips" && (
+            <section className="panel content-panel">
+              <div className="panel-title">
+                <h2>Recent journeys</h2>
+                <span className="badge">Stored on this device</span>
+              </div>
+              {!trips.length ? (
+                <div className="empty">
+                  <Route size={36} />
+                  <h2>Your next journey starts here.</h2>
+                  <p>Start and finish a demo drive to save a session.</p>
+                  <button className="primary" onClick={drive}>
+                    {driving ? "Finish current drive" : "Take a demo drive"}
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {trips.map((t) => (
+                    <div className="data-row" key={t.id}>
+                      <span className="route-icon">
+                        <Route size={22} />
+                      </span>
+                      <div>
+                        <strong>{t.destination}</strong>
+                        <small>
+                          {new Date(t.date).toLocaleString()} · Demo session
+                        </small>
+                      </div>
+                      <span>
+                        {Math.floor(t.seconds / 60)}m {t.seconds % 60}s
+                      </span>
+                      <span>{t.alerts} alerts</span>
+                    </div>
+                  ))}
+                  <button
+                    className="secondary danger"
+                    onClick={() => {
+                      if (confirm("Delete all local trip history?"))
+                        setTrips([]);
+                    }}
+                  >
+                    Clear trip history
+                  </button>
+                </>
+              )}
+            </section>
+          )}
+          {page === "Community" && (
+            <>
+              <section className="panel community-hero">
+                <div>
+                  <div className="eyebrow">AWARENESS IS A SHARED EFFORT</div>
+                  <h2>A heads-up can change someone’s journey.</h2>
+                  <p>
+                    Report only when safely parked. Updates in this preview are
+                    private local drafts, not verified or published to other
+                    drivers.
+                  </p>
+                  <button
+                    className="primary"
+                    disabled={driving}
+                    onClick={() => setModal("report")}
+                  >
+                    <Plus size={17} />
+                    Share a road update
+                  </button>
+                </div>
+                <Users size={90} strokeWidth={1} />
+              </section>
+              <section className="panel content-panel">
+                <div className="panel-title">
+                  <h2>Your local reports</h2>
+                  <span className="badge">{reports.length} drafts</span>
+                </div>
+                {!reports.length ? (
+                  <div className="empty">
+                    <Flag size={32} />
+                    <h2>Clear roads. A fresh start.</h2>
+                    <p>Your saved road updates will appear here.</p>
+                  </div>
+                ) : (
+                  reports.map((r) => (
+                    <div key={r.id} className="data-row">
+                      <span className="alert-icon hazard">
+                        <TriangleAlert size={19} />
+                      </span>
+                      <div>
+                        <strong>{r.kind}</strong>
+                        <small>{r.road} · Local draft · Unverified</small>
+                        {r.notes && <small>{r.notes}</small>}
+                      </div>
+                      <button
+                        aria-label={`Delete report on ${r.road}`}
+                        onClick={() =>
+                          setReports((items) =>
+                            items.filter((i) => i.id !== r.id),
+                          )
+                        }
+                      >
+                        <X size={17} />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </section>
+            </>
+          )}
+          {page === "Settings" && (
+            <div className="settings-grid">
+              <section className="panel">
+                <div className="panel-title">
+                  <h2>Driving preferences</h2>
+                </div>
+                <Setting
+                  icon={Volume2}
+                  title="Voice alerts"
+                  detail="Hear a heads-up during your simulated drive."
+                >
+                  <Toggle
+                    value={voice}
+                    onChange={setVoice}
+                    label="Enable voice alerts"
+                  />
+                </Setting>
+                <Setting
+                  icon={Camera}
+                  title="Camera awareness"
+                  detail="Show camera markers on the demo map."
+                >
+                  <Toggle
+                    value={cameras}
+                    onChange={setCameras}
+                    label="Enable camera markers"
+                  />
+                </Setting>
+                <Setting
+                  icon={Activity}
+                  title="Traffic layer"
+                  detail="Illustrative traffic conditions, not live feeds."
+                >
+                  <Toggle
+                    value={traffic}
+                    onChange={setTraffic}
+                    label="Enable traffic layer"
+                  />
+                </Setting>
+                <Setting
+                  icon={ShieldCheck}
+                  title="Background awareness"
+                  detail="Native apps only. This browser demo must remain open."
+                >
+                  <span className="badge">Native only</span>
+                </Setting>
+              </section>
+              <div>
+                <section className="panel offline">
+                  <span className="route-icon">
+                    <WifiOff size={22} />
+                  </span>
+                  <h3>
+                    A little preparation.
+                    <br />A lot of confidence.
+                  </h3>
+                  <p>
+                    Download a sample Bahrain alert pack. Map tiles and verified
+                    camera data are not included.
+                  </p>
+                  <div className="pack">
+                    <span className="flag" />
+                    Bahrain <small>Demo pack · JSON</small>
+                  </div>
+                  <button className="primary" onClick={download}>
+                    <ArrowDownToLine size={17} />
+                    Download demo pack
+                  </button>
+                </section>
+                <div className="privacy">
+                  <ShieldCheck size={22} />
+                  <div>
+                    <strong>Your journey stays yours.</strong>
+                    <p>
+                      Trips and reports remain in this browser. No precise
+                      location history is uploaded.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </main>
+      </div>
+      {toast && (
+        <div className="toast" role="status">
+          <Check size={17} />
+          <span>{toast}</span>
+          <button
+            aria-label="Dismiss notification"
+            onClick={() => setToast("")}
+          >
+            <X size={16} />
+          </button>
+        </div>
+      )}
+      {modal && (
+        <div
+          className="modal-overlay"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setModal(null);
+          }}
+        >
+          <section
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+          >
+            <button
+              className="modal-close icon-button"
+              autoFocus
+              aria-label="Close dialog"
+              onClick={() => setModal(null)}
+            >
+              <X size={20} />
+            </button>
+            <span className="modal-symbol">
+              {modal === "report" ? (
+                <Flag size={25} />
+              ) : modal === "native" ? (
+                <Smartphone size={25} />
+              ) : (
+                <ShieldCheck size={25} />
+              )}
+            </span>
+            {modal === "report" ? (
+              <>
+                <div className="eyebrow">LOOKING OUT FOR EACH OTHER</div>
+                <h2 id="modal-title">Share a road update.</h2>
+                <p>A small heads-up for the journey ahead.</p>
+                <div className="notice">
+                  Only report when safely parked. This saves a local draft, not
+                  a public alert.
+                </div>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (driving || !road.trim()) return;
+                    setReports((r) => [
+                      {
+                        id: Date.now().toString(),
+                        kind: reportKind,
+                        road: road.trim(),
+                        notes: notes.trim(),
+                      },
+                      ...r,
+                    ]);
+                    setRoad("");
+                    setNotes("");
+                    setModal(null);
+                    setToast(
+                      "Local report saved. No live submission service is connected.",
+                    );
+                  }}
+                >
+                  <label>What did you notice?</label>
+                  <div className="report-types">
+                    {["Road hazard", "Speed camera", "Roadworks"].map(
+                      (r, i) => (
+                        <button
+                          type="button"
+                          key={r}
+                          className={reportKind === r ? "selected" : ""}
+                          onClick={() => setReportKind(r)}
+                        >
+                          <AlertIcon
+                            kind={
+                              i === 1
+                                ? "camera"
+                                : i === 2
+                                  ? "roadwork"
+                                  : "hazard"
+                            }
+                          />
+                          {r}
+                        </button>
+                      ),
+                    )}
+                  </div>
+                  <label htmlFor="road">Road or location</label>
+                  <input
+                    id="road"
+                    value={road}
+                    onChange={(e) => setRoad(e.target.value)}
+                    placeholder="e.g. King Faisal Highway"
+                    required
+                    maxLength={120}
+                  />
+                  <label htmlFor="notes">Additional detail (optional)</label>
+                  <textarea
+                    id="notes"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    placeholder="Which direction or lane?"
+                    maxLength={400}
+                  />
+                  <button
+                    className="primary full"
+                    disabled={driving}
+                    type="submit"
+                  >
+                    Save local report
+                    <ArrowRight size={16} />
+                  </button>
+                </form>
+              </>
+            ) : modal === "native" ? (
+              <>
+                <h2 id="modal-title">Made for the road ahead.</h2>
+                <p>
+                  Native Android and iOS builds are in development. This is a
+                  browser demonstration—not an APK, IPA, or store release.
+                </p>
+                <div className="notice">
+                  Source recovery and release verification are in progress.
+                  Closed testing and TestFlight require native SDK builds,
+                  signing, device tests and platform approvals.
+                </div>
+              </>
+            ) : modal === "notifications" ? (
+              <>
+                <h2 id="modal-title">You’re all caught up.</h2>
+                <p>
+                  Start a simulated drive to experience a voice alert after
+                  eight seconds.
+                </p>
+                <div className="notice">
+                  All camera locations, limits, traffic and community counts are
+                  illustrative. No live road feed is connected.
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 id="modal-title">Awareness, not distraction.</h2>
+                <p>
+                  Always follow posted limits. Set up before moving, report only
+                  when parked, and never rely on an alert to guarantee a clear
+                  road.
+                </p>
+                <div className="notice">
+                  This preview is not a navigation or emergency service. For
+                  emergencies in Bahrain, call 999.
+                </div>
+              </>
+            )}
+          </section>
+        </div>
+      )}
+    </div>
+  );
+}
+function Stat({ icon: Icon, label, value, suffix, footer, green, demo }) {
+  return (
+    <section className={`stat ${green ? "green" : ""}`}>
+      <div className="stat-top">
+        <span>{label}</span>
+        <Icon size={17} />
+      </div>
+      <div className="stat-value">
+        <strong>{value}</strong>
+        {suffix && <span>{suffix}</span>}
+      </div>
+      <div className="stat-footer">
+        {green && <i />}
+        {footer}
+        {demo && <span>DEMO</span>}
+      </div>
+    </section>
+  );
+}
+function Setting({ icon: Icon, title, detail, children }) {
+  return (
+    <div className="setting">
+      <Icon size={21} />
+      <div>
+        <h3>{title}</h3>
+        <p>{detail}</p>
+      </div>
+      {children}
+    </div>
+  );
+}

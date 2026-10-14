@@ -1,8 +1,86 @@
-import{test}from'node:test';import assert from'node:assert/strict';import{distance,angle,bearing,AlertEngine,SpatialIndex}from'./index.mjs';
-const now=1800000000000,fix={lat:26.21,lon:50.54,speed:20,course:0,accuracy:5,timestamp:now},a={id:'one',lat:26.214,lon:50.54,heading:0,expiresAt:now+3600000};
-test('distance and wraparound bearing',()=>{assert.ok(Math.abs(distance(fix,a)-444.8)<1);assert.equal(bearing(fix,a),0);assert.equal(angle(359,1),2)});
-test('nearest ahead; suppresses repeated warning',()=>{const e=new AlertEngine([a,{...a,id:'far',lat:26.218}]);assert.equal(e.evaluate(fix,now).alert.id,'one');assert.equal(e.evaluate(fix,now),null)});
-test('opposite direction, behind, expiry and stationary rejection',()=>{for(const x of [{...a,heading:180},{...a,lat:26.208},{...a,expiresAt:now}])assert.equal(new AlertEngine([x]).evaluate(fix,now),null);assert.equal(new AlertEngine([a]).evaluate({...fix,speed:0},now),null)});
-test('bad/stale/future fixes are rejected',()=>{for(const patch of[{accuracy:51},{accuracy:-1},{accuracy:NaN},{timestamp:now-15001},{timestamp:now+3000},{timestamp:NaN},{course:-1},{course:NaN},{speed:NaN},{lat:91},{lon:NaN}])assert.equal(new AlertEngine([a]).evaluate({...fix,...patch},now),null)});
-test('rearming requires cooldown and leaving the area',()=>{const e=new AlertEngine([a]);assert.ok(e.evaluate(fix,now));assert.equal(e.evaluate({...fix,timestamp:now+200000},now+200000),null);e.evaluate({...fix,lat:26.18,timestamp:now+200001},now+200001);assert.ok(e.evaluate({...fix,timestamp:now+200002},now+200002))});
-test('cell borders and dateline are included',()=>{assert.equal(new SpatialIndex([a]).nearby({lat:26.2099,lon:50.5399},600).length,1);assert.equal(new SpatialIndex([{lat:0,lon:-179.999}]).nearby({lat:0,lon:179.999},400).length,1)});
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import {
+  distance,
+  angle,
+  bearing,
+  AlertEngine,
+  SpatialIndex,
+} from "./index.mjs";
+const now = 1800000000000,
+  fix = {
+    lat: 26.21,
+    lon: 50.54,
+    speed: 20,
+    course: 0,
+    accuracy: 5,
+    timestamp: now,
+  },
+  a = {
+    id: "one",
+    lat: 26.214,
+    lon: 50.54,
+    heading: 0,
+    expiresAt: now + 3600000,
+  };
+test("distance and wraparound bearing", () => {
+  assert.ok(Math.abs(distance(fix, a) - 444.8) < 1);
+  assert.equal(bearing(fix, a), 0);
+  assert.equal(angle(359, 1), 2);
+});
+test("nearest ahead; suppresses repeated warning", () => {
+  const e = new AlertEngine([a, { ...a, id: "far", lat: 26.218 }]);
+  assert.equal(e.evaluate(fix, now).alert.id, "one");
+  assert.equal(e.evaluate(fix, now), null);
+});
+test("opposite direction, behind, expiry and stationary rejection", () => {
+  for (const x of [
+    { ...a, heading: 180 },
+    { ...a, lat: 26.208 },
+    { ...a, expiresAt: now },
+  ])
+    assert.equal(new AlertEngine([x]).evaluate(fix, now), null);
+  assert.equal(new AlertEngine([a]).evaluate({ ...fix, speed: 0 }, now), null);
+});
+test("bad/stale/future fixes are rejected", () => {
+  for (const patch of [
+    { accuracy: 51 },
+    { accuracy: -1 },
+    { accuracy: NaN },
+    { timestamp: now - 15001 },
+    { timestamp: now + 3000 },
+    { timestamp: NaN },
+    { course: -1 },
+    { course: NaN },
+    { speed: NaN },
+    { lat: 91 },
+    { lon: NaN },
+  ])
+    assert.equal(
+      new AlertEngine([a]).evaluate({ ...fix, ...patch }, now),
+      null,
+    );
+});
+test("rearming requires cooldown and leaving the area", () => {
+  const e = new AlertEngine([a]);
+  assert.ok(e.evaluate(fix, now));
+  assert.equal(
+    e.evaluate({ ...fix, timestamp: now + 200000 }, now + 200000),
+    null,
+  );
+  e.evaluate({ ...fix, lat: 26.18, timestamp: now + 200001 }, now + 200001);
+  assert.ok(e.evaluate({ ...fix, timestamp: now + 200002 }, now + 200002));
+});
+test("cell borders and dateline are included", () => {
+  assert.equal(
+    new SpatialIndex([a]).nearby({ lat: 26.2099, lon: 50.5399 }, 600).length,
+    1,
+  );
+  assert.equal(
+    new SpatialIndex([{ lat: 0, lon: -179.999 }]).nearby(
+      { lat: 0, lon: 179.999 },
+      400,
+    ).length,
+    1,
+  );
+});
