@@ -62,7 +62,8 @@ def materialize(source, output, host):
         dest = output / key
         if dest.is_symlink() or any(p.is_symlink() for p in dest.parents):
             raise ValueError(f'Output symlink blocked: {key}')
-        if dest.exists() and (key not in old or digest(dest) != old[key]):
+        already_matches_source = key in files and dest.is_file() and digest(dest) == digest(files[key])
+        if dest.exists() and not already_matches_source and (key not in old or digest(dest) != old[key]):
             raise ValueError(f'Edited or unmanaged runtime file: {key}. Recover the edit into tracked source first.')
     output.mkdir(parents=True, exist_ok=True)
     hashes = {}

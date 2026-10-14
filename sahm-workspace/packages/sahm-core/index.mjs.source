@@ -1,0 +1,31 @@
+// Reference geospatial core. Meters, m/s, degrees, epoch milliseconds.
+const R=6371008.8,rad=x=>x*Math.PI/180;
+export const validCoordinate=p=>Number.isFinite(p.lat)&&Math.abs(p.lat)<=90&&Number.isFinite(p.lon)&&Math.abs(p.lon)<=180;
+export const angle=(a,b)=>Math.abs(((a-b+540)%360)-180);
+export function distance(a,b){const h=Math.sin(rad(b.lat-a.lat)/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(rad(b.lon-a.lon)/2)**2;return 2*R*Math.asin(Math.sqrt(Math.min(1,Math.max(0,h))))}
+export function bearing(a,b){const p=rad(a.lat),q=rad(b.lat),d=rad(b.lon-a.lon);return (Math.atan2(Math.sin(d)*Math.cos(q),Math.cos(p)*Math.sin(q)-Math.sin(p)*Math.cos(q)*Math.cos(d))*180/Math.PI+360)%360}
+export class SpatialIndex{
+ constructor(alerts){this.alerts=alerts;this.cells=new Map();for(const a of alerts){const k=`${Math.floor(a.lat*100)}:${Math.floor(a.lon*100)}`;this.cells.set(k,[...(this.cells.get(k)||[]),a])}}
+ nearby(p,radius){
+  // Avoid excessive longitudinal cells near a pole; GCC queries use the indexed path.
+  if(Math.abs(p.lat)>85)return this.alerts.filter(a=>distance(p,a)<=radius);
+  const dy=radius/110574,dx=radius/(111320*Math.cos(rad(p.lat))),found=[];
+  for(let lat=Math.floor((p.lat-dy)*100);lat<=Math.floor((p.lat+dy)*100);lat++)for(let lon=Math.floor((p.lon-dx)*100);lon<=Math.floor((p.lon+dx)*100);lon++){
+   const wrapped=((lon+18000)%36000+36000)%36000-18000;
+   for(const a of this.cells.get(`${lat}:${wrapped}`)||[])if(distance(p,a)<=radius)found.push(a);
+  }
+  return found;
+ }
+}
+export class AlertEngine{
+ constructor(alerts){this.index=new SpatialIndex(alerts);this.seen=new Map()}
+ reset(){this.seen.clear()}
+ evaluate(fix,now=Date.now()){
+  if(!validCoordinate(fix)||!Number.isFinite(fix.accuracy)||fix.accuracy<0||fix.accuracy>50||!Number.isFinite(fix.timestamp)||now-fix.timestamp>15000||fix.timestamp>now+2000||!Number.isFinite(fix.speed)||fix.speed<2||!Number.isFinite(fix.course)||fix.course<0||fix.course>=360)return null;
+  for(const [id,s]of this.seen)if(now-s.time>120000&&distance(fix,s.alert)>1500)this.seen.delete(id);
+  const threshold=Math.max(400,Math.min(1000,fix.speed*30));
+  const next=this.index.nearby(fix,threshold).filter(a=>a.expiresAt>now&&!this.seen.has(a.id)&&angle(fix.course,bearing(fix,a))<=55&&(a.heading==null||angle(fix.course,a.heading)<=55)).sort((a,b)=>distance(fix,a)-distance(fix,b))[0];
+  if(!next)return null;
+  this.seen.set(next.id,{time:now,alert:next});return {alert:next,meters:Math.round(distance(fix,next)),threshold};
+ }
+}

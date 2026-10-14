@@ -24,3 +24,19 @@ The materializer refuses to write inside the host repository or overwrite an unr
 ## Release status
 
 No APK, AAB or IPA has been produced from this checkpoint. Android closed testing and iOS TestFlight require restored native sources, full SDK builds, device verification and dedicated signing configuration. All camera data must remain explicitly demo-only until an authoritative provider is integrated.
+
+## Preview (restored and build-tested)
+
+```sh
+python3 sahm-workspace/tools/materialize.py --output /home/user/Sahm
+cd /home/user/Sahm/apps/sahm-web
+npm ci
+npm run dev
+# Listens on 0.0.0.0:5174; accepts Arena preview hosts.
+```
+
+`npm run build` builds only Sahm. `npm test` runs the reference geospatial tests. It is a browser demo, not a native binary. See `docs/RECOVERY-AND-RELEASE.md` for the actual recovery/release scope.
+
+## Checkpoint discipline
+
+Before materializing new source, explicitly stage it by exact path and commit it on the session branch. Do not use broad `git add -f .`. Run `python3 sahm-workspace/tools/verify_isolation.py` before pushing. Recreate the runtime after a reset; never assume it exists.

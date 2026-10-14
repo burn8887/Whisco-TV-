@@ -44,6 +44,12 @@ class MaterializerTests(unittest.TestCase):
     def test_only_stale_managed_files_removed(self):
         self.copy(); (self.source / 'demo.ts.source').unlink(); self.copy()
         self.assertFalse((self.output / 'demo.ts').exists())
+    def test_explicitly_recovered_runtime_file_can_be_adopted(self):
+        self.copy()
+        (self.output / 'package-lock.json').write_text('{}')
+        (self.source / 'package-lock.json').write_text('{}')
+        self.copy()
+        self.assertEqual((self.output / 'package-lock.json').read_text(), '{}')
     def test_secrets_excluded(self):
         (self.source / '.env.production').write_text('private'); self.copy()
         self.assertFalse((self.output / '.env.production').exists())
