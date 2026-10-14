@@ -129,7 +129,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         // Core Location exposes epoch timestamps, so bridge sample age to the monotonic clock.
         receive(Fix(point:Point(lat:value.coordinate.latitude,lon:value.coordinate.longitude),speed:value.speed,course:value.course>=0 ? value.course : nil,accuracy:value.horizontalAccuracy,time:value.timestamp.timeIntervalSince1970,elapsed:ProcessInfo.processInfo.systemUptime-(now-value.timestamp.timeIntervalSince1970)))
     }
-    func locationManager(_ manager:CLLocationManager,didFailWithError error:Error) {fix=nil;warning=nil;average=nil;audio.stop();status="GPS unavailable · Alerts paused"}
+    func locationManager(_ manager:CLLocationManager,didFailWithError error:Error) {fix=nil;warning=nil;average=nil;sections.reset();audio.stop();status="GPS unavailable · Alerts paused"}
     func clearTrips() {trips=[];saveTrips()}
     private func saveTrips() {trips=Array(trips.prefix(200));if let data=try? JSONEncoder().encode(trips) {UserDefaults.standard.set(data,forKey:"trips")}}
     func addDraft(road:String,kind:String) {guard mode == .idle,!road.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty else{return};drafts.insert(Draft(id:UUID(),kind:kind,road:String(road.prefix(120))),at:0);saveDrafts()}

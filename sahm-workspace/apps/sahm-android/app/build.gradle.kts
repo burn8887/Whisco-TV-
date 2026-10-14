@@ -1,4 +1,14 @@
 plugins { id("com.android.application"); kotlin("android"); id("org.jetbrains.kotlin.plugin.compose") }
+val signingKeys = listOf("SAHM_ANDROID_KEYSTORE_PATH", "SAHM_ANDROID_KEYSTORE_PASSWORD", "SAHM_ANDROID_KEY_ALIAS", "SAHM_ANDROID_KEY_PASSWORD")
+val signingValues = signingKeys.associateWith { System.getenv(it).orEmpty() }
+val hasSigning = signingValues.values.any { it.isNotBlank() }
+if (hasSigning) {
+    require(signingValues.values.all { it.isNotBlank() }) { "Supply all four Sahm signing environment variables; partial signing configuration is refused." }
+    require(file(signingValues.getValue("SAHM_ANDROID_KEYSTORE_PATH")).isFile) { "Sahm keystore file is unavailable." }
+}
+tasks.register("verifyReleaseSigning") {
+    doLast { check(hasSigning) { "Unsigned demo build only. Configure a dedicated Sahm upload key before store distribution." } }
+}
 android {
     namespace = "app.sahm"
     compileSdk = 36
@@ -13,7 +23,18 @@ android {
     }
     buildFeatures { compose = true; buildConfig = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
-    buildTypes { release { isMinifyEnabled = false } }
+    signingConfigs {
+        if (hasSigning) create("sahmRelease") {
+            storeFile = file(signingValues.getValue("SAHM_ANDROID_KEYSTORE_PATH"))
+            storePassword = signingValues.getValue("SAHM_ANDROID_KEYSTORE_PASSWORD")
+            keyAlias = signingValues.getValue("SAHM_ANDROID_KEY_ALIAS")
+            keyPassword = signingValues.getValue("SAHM_ANDROID_KEY_PASSWORD")
+        }
+    }
+    buildTypes { release {
+        isMinifyEnabled = false
+        if (hasSigning) signingConfig = signingConfigs.getByName("sahmRelease")
+    } }
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
 }
 kotlin { jvmToolchain(17) }

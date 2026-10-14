@@ -18,6 +18,11 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
+      - name: Select installed Xcode 26.3
+        run: |
+          sudo xcode-select --switch /Applications/Xcode_26.3.app/Contents/Developer
+          xcodebuild -version
+          echo "::notice title=Sahm Apple SDK::$(xcodebuild -version | tr '\n' ' ')"
       - name: Prepare Sahm source and Xcode project
         run: |
           python3 sahm-workspace/tools/materialize.py --output "$RUNNER_TEMP/sahm"
@@ -42,7 +47,27 @@ jobs:
           PYERROR
           fi
           exit "$result"
-      - name: Retain simulator-only app and test results
+      - name: Compile unsigned device archive (not installable or uploadable)
+        working-directory: ${{ runner.temp }}/sahm/apps/sahm-ios
+        run: |
+          set +e
+          xcodebuild -project Sahm.xcodeproj -scheme Sahm -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/Sahm-unsigned.xcarchive" CODE_SIGNING_ALLOWED=NO archive 2>&1 | tee "$RUNNER_TEMP/sahm-ios-archive.log"
+          result=${PIPESTATUS[0]}
+          if [ "$result" -ne 0 ]; then
+            python3 - <<'PYERROR'
+          import os
+          from pathlib import Path
+          lines=Path(os.environ['RUNNER_TEMP']+'/sahm-ios-archive.log').read_text(errors='replace').splitlines()
+          text='\n'.join([x for x in lines if 'error:' in x.lower()][-30:]+lines[-20:])[-14000:]
+          print('::error title=Sahm device archive::'+text.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PYERROR
+          fi
+          exit "$result"
+      - name: Preserve app permissions in download archives
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent "$RUNNER_TEMP/sahm-derived/Build/Products/Debug-iphonesimulator/Sahm.app" "$RUNNER_TEMP/Sahm-simulator.zip"
+          ditto -c -k --sequesterRsrc --keepParent "$RUNNER_TEMP/Sahm-unsigned.xcarchive" "$RUNNER_TEMP/Sahm-unsigned-device-archive.zip"
+      - name: Retain unsigned app and test results
         if: always()
         uses: actions/upload-artifact@v5
         with:
@@ -50,6 +75,8 @@ jobs:
           retention-days: 14
           if-no-files-found: warn
           path: |
-            ${{ runner.temp }}/sahm-derived/Build/Products/Debug-iphonesimulator/*.app
+            ${{ runner.temp }}/Sahm-simulator.zip
+            ${{ runner.temp }}/Sahm-unsigned-device-archive.zip
+            ${{ runner.temp }}/sahm-ios-archive.log
             ${{ runner.temp }}/sahm-ios-results.xcresult
             ${{ runner.temp }}/sahm-ios-build.log
