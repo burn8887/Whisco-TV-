@@ -1,10 +1,10 @@
 # Sahm — isolated, persistent source workspace
 
-This folder belongs exclusively to Sahm. Existing Whisco application files, root configuration, dependencies and workflows must not be changed to build Sahm.
+This folder belongs exclusively to Sahm. Existing Whisco application files, root configuration, dependencies and workflows must not be changed to build Sahm. The Founder approved exactly two new Sahm-only native build workflows; see the exception below.
 
 ## Recovery checkpoint — 14 October 2026
 
-The earlier standalone `/home/user/Sahm` directory did not survive a session restart. A subsequent move to an ignored source folder was also lost before staging. This checkpoint corrects the persistence procedure. It does **not** claim that the missing expanded implementation or prior build artifacts have been recovered.
+The earlier standalone `/home/user/Sahm` directory did not survive a session restart. A subsequent move to an ignored source folder was also lost before staging. This checkpoint corrects the persistence procedure. Native sources have since been rebuilt and checkpointed here. Only the current runner evidence below establishes their verification status; remembered historical builds are not evidence.
 
 - Canonical source must be tracked under `sahm-workspace/` **before** starting long-running work.
 - Runnable JavaScript/TypeScript is stored with a final `.source` suffix, so the host project's recursive compiler/linter cannot discover it.
@@ -23,7 +23,7 @@ The materializer refuses to write inside the host repository or overwrite an unr
 
 ## Release status
 
-No APK, AAB or IPA has been produced from this checkpoint. Android closed testing and iOS TestFlight require restored native sources, full SDK builds, device verification and dedicated signing configuration. All camera data must remain explicitly demo-only until an authoritative provider is integrated.
+Native Android APK/unsigned-AAB packaging and iOS simulator/unsigned-device-archive builds are now exercised by isolated hosted runners. These are not signed Play/TestFlight releases. See [actual build/test evidence](docs/RECOVERY-AND-RELEASE.md) and the [store release checklist](docs/STORE-RELEASE-CHECKLIST.md) for results and remaining signing, privacy, store and device gates. All camera data remains explicitly fictional; no live provider is connected.
 
 ## Preview (restored and build-tested)
 
