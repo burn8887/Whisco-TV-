@@ -6,6 +6,7 @@ on:
       - 'sahm-workspace/apps/sahm-android/**'
       - 'sahm-workspace/tools/materialize.py'
       - 'sahm-workspace/tools/report_native_tests.py'
+      - 'sahm-workspace/tools/check_android_apk.py'
       - '.github/workflows/sahm-android-build.yml'
   workflow_dispatch: {}
 permissions:
@@ -61,6 +62,12 @@ jobs:
           PYERROR
           fi
           exit "$result"
+      - name: Check APK ZIP and 64-bit ELF alignment
+        run: |
+          apk="$RUNNER_TEMP/sahm/apps/sahm-android/app/build/outputs/apk/debug/app-debug.apk"
+          "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 4 "$apk"
+          python3 sahm-workspace/tools/check_android_apk.py "$apk"
+          echo '::notice title=Sahm APK packaging::ZIP alignment verified at 16 KB'
       - name: Retain native test artifacts (not a store upload)
         if: always()
         uses: actions/upload-artifact@v5
