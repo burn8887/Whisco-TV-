@@ -1,0 +1,25 @@
+import {Camera,Construction,TriangleAlert,Navigation2} from 'lucide-react';
+export const alerts=[
+ {id:'c1',kind:'camera',title:'Speed camera',road:'Sheikh Khalifa bin Salman Hwy',distance:'800 m',time:'Just now',x:44,y:64},
+ {id:'r1',kind:'roadwork',title:'Roadworks ahead',road:'King Faisal Highway',distance:'2.4 km',time:'4 min ago',x:56,y:35},
+ {id:'h1',kind:'hazard',title:'Object on the road',road:'Shaikh Isa bin Salman Hwy',distance:'3.1 km',time:'8 min ago',x:63,y:76},
+ {id:'c2',kind:'camera',title:'Speed camera',road:'Al Fateh Highway',distance:'4.6 km',time:'12 min ago',x:78,y:59},
+];
+export function AlertIcon({kind,size=18}){const Icon=kind==='camera'?Camera:kind==='roadwork'?Construction:TriangleAlert;return <Icon size={size}/>}
+export default function RoadMap({zoom,cameras,traffic,selected,onSelect,progress}){
+return <div className="road-map"><div className="map-transform" style={{transform:`scale(${zoom})`}}>
+<svg className="map-art" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative map of Manama. Not for navigation.">
+<defs><pattern id="blocks" width="45" height="37" patternUnits="userSpaceOnUse" patternTransform="rotate(-17)"><rect width="45" height="37" fill="#eeede5"/><rect x="5" y="5" width="34" height="26" rx="3" fill="#e4e5dc" stroke="#f7f6ee" strokeWidth="2"/></pattern><clipPath id="land"><path d="M0 112 L87 109 144 138 236 118 296 106 361 116 403 150 420 163 463 145 494 157 516 148 539 176 555 191 605 182 644 204 672 237 719 248 754 226 766 268 808 280 816 329 854 327 875 380 907 390 913 450 1000 459 1000 620 0 620Z"/></clipPath></defs>
+<rect width="1000" height="620" fill="#d9e9e5"/>
+<path d="M722 36 L755 30 781 52 826 33 868 63 943 66 1000 96 1000 247 931 249 893 219 845 214 802 181 777 144 738 138 708 93Z" fill="url(#blocks)" stroke="#d0ddd2" strokeWidth="3"/>
+<g clipPath="url(#land)"><rect width="1000" height="620" fill="url(#blocks)"/><path d="M95 248 l61 -36 29 68 -49 39Z M355 303 l53 -9 12 38 -56 21Z M595 406 l40 -18 32 61 -40 20Z M823 479 l62 12 -9 90 -48 -15Z" fill="#cbdac0"/>
+<g stroke="#f9f8f2" strokeWidth="5" fill="none">{Array.from({length:25},(_,i)=><path key={'v'+i} d={`M${80+i*28} ${110+i%4*12} Q${20+i*28} 285 ${104+i*28} 388 T${160+i*28} 650`}/>)}{Array.from({length:13},(_,i)=><path key={'h'+i} d={`M0 ${175+i*33} Q260 ${115+i*38} 540 ${203+i*29} T1000 ${230+i*36}`}/>)}</g>
+{['#dedccc','#fffdf5'].map((color,i)=><g key={color} fill="none" stroke={color} strokeWidth={i?10:15}><path d="M-30 325 Q130 283 290 273 T547 232 Q699 228 830 358 L1060 424"/><path d="M252 650 Q300 478 386 388 T457 237 L481 153"/><path d="M-15 470 Q243 391 465 458 T979 493"/><path d="M657 619 Q669 479 665 383 T650 218"/><path d="M87 115 Q173 253 172 437 T226 650"/></g>)}</g>
+<path d="M650 241 L767 127 M701 250 L823 197" stroke="#fffef6" strokeWidth="7" fill="none"/>
+{traffic&&<g fill="none" strokeLinecap="round" strokeWidth="4"><path d="M-15 470 Q185 407 320 434" stroke="#82b28d"/><path d="M561 232 Q608 231 650 242" stroke="#d9ab55"/><path d="M687 257 L732 280" stroke="#db8366"/></g>}
+<path d="M355 500 Q364 433 400 373 Q446 321 450 271 Q453 248 470 243 L542 233" fill="none" stroke="#fff" strokeWidth="11" strokeLinecap="round"/><path d="M355 500 Q364 433 400 373 Q446 321 450 271 Q453 248 470 243 L542 233" fill="none" stroke="#428d72" strokeWidth="6" strokeLinecap="round"/>
+<g fill="#828d7f" fontFamily="Arial,sans-serif" fontSize="12" textAnchor="middle"><text x="224" y="216" letterSpacing="2">SEEF</text><text x="350" y="195">Sanabis</text><text x="543" y="322" fontSize="22" fontWeight="600">Manama</text><text x="543" y="345" fontSize="14">المنامة</text><text x="856" y="126" fontSize="17">Muharraq</text><text x="188" y="391" letterSpacing="1">JIDHAFS</text><text x="497" y="544" letterSpacing="1">ADLIYA</text><text x="784" y="464" letterSpacing="2">JUFFAIR</text><text x="238" y="562">Tubli</text><text x="94" y="199">Karbabad</text><text x="530" y="92" fill="#82a69e" fontStyle="italic" letterSpacing="2">Arabian Gulf</text><text x="260" y="281" transform="rotate(-7 260 281)" fontSize="10">King Faisal Highway</text><text x="438" y="413" transform="rotate(-64 438 413)" fontSize="10">Sheikh Khalifa bin Salman Hwy</text></g>
+</svg>
+{alerts.filter(a=>cameras||a.kind!=='camera').map(a=><button key={a.id} className={`map-marker ${a.kind} ${selected===a.id?'selected':''}`} style={{left:`${a.x}%`,top:`${a.y}%`}} onClick={()=>onSelect(a.id)} aria-label={`${a.title}, ${a.road}`}><AlertIcon kind={a.kind} size={16}/></button>)}
+<div className="position" style={{left:`${38+progress*.08}%`,top:`${79-progress*.37}%`}}><Navigation2 size={23} fill="white"/></div></div><small className="attribution">Illustrative map · Demo locations · Not for navigation</small></div>
+}
