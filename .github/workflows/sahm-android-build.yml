@@ -45,6 +45,9 @@ jobs:
           import os
           from pathlib import Path
           text=Path(os.environ['RUNNER_TEMP']+'/sahm-android-build.log').read_text(errors='replace')
+          compiler='\n'.join(line for line in text.splitlines() if line.startswith('e:'))[:3000]
+          if compiler:
+              print('::error title=Sahm Kotlin compiler::'+compiler.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
           tail='\n'.join(text.splitlines()[-45:])[-3500:]
           print('::error title=Sahm Android build::'+tail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
           import xml.etree.ElementTree as ET

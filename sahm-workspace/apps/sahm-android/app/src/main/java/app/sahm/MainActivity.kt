@@ -149,7 +149,14 @@ class MainActivity: ComponentActivity() {
 @Composable private fun Preferences(state: DriveState) {
     val context=LocalContext.current
     var privacy by remember { mutableStateOf(false) }
-    if(privacy)AlertDialog(onDismissRequest={privacy=false},title={Text("Privacy notice")},text={Text(PrivacyNotice.text,modifier=Modifier.verticalScroll(rememberScrollState()))},confirmButton={TextButton(onClick={privacy=false}){Text("Close")}}
+    if (privacy) {
+        AlertDialog(
+            onDismissRequest = { privacy = false },
+            title = { Text("Privacy notice") },
+            text = { Text(PrivacyNotice.text, modifier = Modifier.verticalScroll(rememberScrollState())) },
+            confirmButton = { TextButton(onClick = { privacy = false }) { Text("Close") } }
+        )
+    }
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(20.dp)) {
         item {Row(verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text("Voice alerts",fontWeight=FontWeight.Medium);Text("Temporarily ducks audio when supported",fontSize=11.sp,color=Color.Gray)};Switch(checked=state.voice,onCheckedChange=DriveStore::setVoice)}}
         item {Text("COUNTRY",fontSize=10.sp,color=Forest);Column {listOf("BH","SA","AE","QA","KW","OM").chunked(3).forEach {row->Row(horizontalArrangement=Arrangement.spacedBy(10.dp)){row.forEach {code->FilterChip(selected=state.country==code,onClick={DriveStore.country(code)},label={Text(code)},enabled=state.mode==Mode.IDLE)}}}}}
