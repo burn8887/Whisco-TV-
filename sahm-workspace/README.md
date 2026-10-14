@@ -40,3 +40,7 @@ npm run dev
 ## Checkpoint discipline
 
 Before materializing new source, explicitly stage it by exact path and commit it on the session branch. Do not use broad `git add -f .`. Run `python3 sahm-workspace/tools/verify_isolation.py` before pushing. Recreate the runtime after a reset; never assume it exists.
+
+### Founder-approved native build workflow exception
+
+The Founder explicitly approved adding new **Sahm-only Android and iOS build workflows**. These are the only authorized paths outside the source capsule: `.github/workflows/sahm-android-build.yml` and `.github/workflows/sahm-ios-build.yml`. They do not modify or invoke existing Whisco workflows, use other applications' signing secrets, upload to stores, or deploy production. The isolation checker now permits exactly these two new paths and checks they do not replace existing files.

@@ -1,0 +1,66 @@
+name: Sahm Android build
+on:
+  push:
+    branches: [arena/3070ca80-whisco-tv]
+    paths:
+      - 'sahm-workspace/apps/sahm-android/**'
+      - 'sahm-workspace/tools/materialize.py'
+      - '.github/workflows/sahm-android-build.yml'
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: sahm-android-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+          cache-disabled: true
+      - name: Materialize only Sahm outside the host checkout
+        run: python3 sahm-workspace/tools/materialize.py --output "$RUNNER_TEMP/sahm"
+      - name: Install Sahm SDK
+        run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - name: Compile, unit test, lint and package Sahm only
+        working-directory: ${{ runner.temp }}/sahm/apps/sahm-android
+        run: gradle --no-daemon :core:test :app:lintDebug :app:assembleDebug :app:bundleRelease :app:assembleDebugAndroidTest
+      - name: Retain native test artifacts (not a store upload)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sahm-android-test-build
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/sahm/apps/sahm-android/app/build/outputs/apk/**/*.apk
+            ${{ runner.temp }}/sahm/apps/sahm-android/app/build/outputs/bundle/**/*.aab
+            ${{ runner.temp }}/sahm/apps/sahm-android/app/build/reports/**
+            ${{ runner.temp }}/sahm/apps/sahm-android/core/build/reports/**
+            ${{ runner.temp }}/sahm/apps/sahm-android/core/build/test-results/**
+      - name: Emulator database verification
+        if: success()
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          working-directory: ${{ runner.temp }}/sahm/apps/sahm-android
+          script: gradle --no-daemon :app:connectedDebugAndroidTest
+      - name: Retain on-device test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sahm-android-device-tests
+          retention-days: 14
+          if-no-files-found: ignore
+          path: ${{ runner.temp }}/sahm/apps/sahm-android/app/build/reports/androidTests/**
