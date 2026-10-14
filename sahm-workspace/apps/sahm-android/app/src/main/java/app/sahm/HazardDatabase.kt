@@ -29,7 +29,7 @@ class HazardDatabase(context: Context, name: String = "sahm-hazards.db") : SQLit
             if(current>=revision)return@transaction
             db.delete("hazards","country=? AND layer='static'",arrayOf(country))
             hazards.forEach { put(db,it,"static") }
-            db.execSQL("INSERT OR REPLACE INTO packs VALUES(?,?)",arrayOf(country,revision))
+            db.execSQL("INSERT OR REPLACE INTO packs VALUES(?,?)",arrayOf<Any>(country,revision))
         }
     }
     fun cursor(scope: Scope): Cursor = readableDatabase.rawQuery("SELECT epoch,cursor FROM sync_meta WHERE scope=?",arrayOf(scope.key)).use {
@@ -59,10 +59,10 @@ class HazardDatabase(context: Context, name: String = "sahm-hazards.db") : SQLit
                         put(db,hazard,"live")
                         db.execSQL("INSERT OR IGNORE INTO memberships VALUES(?,?)",arrayOf(scope.key,change.id))
                     }
-                    db.execSQL("INSERT OR REPLACE INTO versions VALUES(?,?,?)",arrayOf(change.id,scope.country,change.sequence))
+                    db.execSQL("INSERT OR REPLACE INTO versions VALUES(?,?,?)",arrayOf<Any>(change.id,scope.country,change.sequence))
                 }
             }
-            db.execSQL("INSERT OR REPLACE INTO sync_meta VALUES(?,?,?,?,?)",arrayOf(scope.key,scope.country,delta.epoch,delta.next,now))
+            db.execSQL("INSERT OR REPLACE INTO sync_meta VALUES(?,?,?,?,?)",arrayOf<Any>(scope.key,scope.country,delta.epoch,delta.next,now))
             // Bound regional working-set storage. Deleting a membership must not remove shared rows.
             db.execSQL("DELETE FROM memberships WHERE scope IN (SELECT scope FROM sync_meta ORDER BY checked DESC LIMIT -1 OFFSET 32)")
             db.execSQL("DELETE FROM sync_meta WHERE scope IN (SELECT scope FROM sync_meta ORDER BY checked DESC LIMIT -1 OFFSET 32)")

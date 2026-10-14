@@ -45,8 +45,16 @@ jobs:
           import os
           from pathlib import Path
           text=Path(os.environ['RUNNER_TEMP']+'/sahm-android-build.log').read_text(errors='replace')
-          tail='\n'.join(text.splitlines()[-130:])[-16000:]
+          tail='\n'.join(text.splitlines()[-45:])[-3500:]
           print('::error title=Sahm Android build::'+tail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          import xml.etree.ElementTree as ET
+          report=Path('app/build/reports/lint-results-debug.xml')
+          if report.exists():
+              for issue in ET.parse(report).getroot().findall('issue'):
+                  if issue.get('severity') not in ('Error','Fatal'): continue
+                  location=issue.find('location')
+                  message=str(issue.attrib)+' '+str(location.attrib if location is not None else '')
+                  print('::error title=Sahm lint::'+message[:3000].replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
           PYERROR
           fi
           exit "$result"
