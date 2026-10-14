@@ -1,0 +1,55 @@
+name: Sahm iOS simulator build
+on:
+  push:
+    branches: [arena/3070ca80-whisco-tv]
+    paths:
+      - 'sahm-workspace/apps/sahm-ios/**'
+      - 'sahm-workspace/tools/materialize.py'
+      - '.github/workflows/sahm-ios-build.yml'
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: sahm-ios-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - name: Prepare Sahm source and Xcode project
+        run: |
+          python3 sahm-workspace/tools/materialize.py --output "$RUNNER_TEMP/sahm"
+          brew install xcodegen
+          cd "$RUNNER_TEMP/sahm/apps/sahm-ios"
+          xcodegen generate
+      - name: Build and test unsigned simulator app
+        working-directory: ${{ runner.temp }}/sahm/apps/sahm-ios
+        run: |
+          device=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; data=json.load(sys.stdin); print(next(d["udid"] for runtime,devices in data["devices"].items() if "iOS" in runtime for d in devices if d["name"].startswith("iPhone")))')
+          set +e
+          xcodebuild -project Sahm.xcodeproj -scheme Sahm -destination "id=$device" -derivedDataPath "$RUNNER_TEMP/sahm-derived" -resultBundlePath "$RUNNER_TEMP/sahm-ios-results.xcresult" CODE_SIGNING_ALLOWED=NO test 2>&1 | tee "$RUNNER_TEMP/sahm-ios-build.log"
+          result=${PIPESTATUS[0]}
+          if [ "$result" -ne 0 ]; then
+            python3 - <<'PYERROR'
+          import os
+          from pathlib import Path
+          text=Path(os.environ['RUNNER_TEMP']+'/sahm-ios-build.log').read_text(errors='replace')
+          errors=[line for line in text.splitlines() if 'error:' in line.lower() or 'failed' in line.lower()]
+          tail='\n'.join(errors[-40:]+text.splitlines()[-30:])[-16000:]
+          print('::error title=Sahm iOS build::'+tail.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PYERROR
+          fi
+          exit "$result"
+      - name: Retain simulator-only app and test results
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: sahm-ios-simulator
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/sahm-derived/Build/Products/Debug-iphonesimulator/*.app
+            ${{ runner.temp }}/sahm-ios-results.xcresult
+            ${{ runner.temp }}/sahm-ios-build.log
