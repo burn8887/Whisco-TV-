@@ -101,6 +101,7 @@ struct SettingsView:View {
             Section("Awareness") {Toggle("Spoken road alerts",isOn:$model.voice);Picker("Country",selection:Binding(get:{model.country},set:{model.selectCountry($0)})){ForEach(DemoData.countries,id:\.self){Text($0).tag($0)}}.disabled(model.mode != .idle);Text("Only Bahrain has a bundled fictional pack. No country has verified coverage in this build.").font(.caption).foregroundStyle(.secondary)}
             Section("Offline pack") {Text(model.feed).font(.caption);Button("Reload local pack"){Task{await model.reload()}};Text("This iOS build is offline demo-only. Live delta-feed integration is not enabled.").font(.caption)}
             Section("Permissions") {Button("Open system settings"){if let url=URL(string:UIApplication.openSettingsURLString){UIApplication.shared.open(url)}};Text("GPS testing requires precise location. Ending a session stops location updates and releases audio. OS force-quit can stop background awareness.").font(.caption)}
+            Section("Privacy") {NavigationLink("Read privacy notice") {PrivacyNotice()}}
             Section("Release status") {Text("CarPlay, watchOS, vehicle-triggered startup, subscriptions and internal 3D navigation are not enabled in this build. No account or advertising SDK is active. In an emergency in Bahrain, call 999.").font(.caption).foregroundStyle(.secondary)}
         }.navigationTitle("Settings")
     }

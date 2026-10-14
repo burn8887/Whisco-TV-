@@ -12,6 +12,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -146,12 +148,15 @@ class MainActivity: ComponentActivity() {
 }
 @Composable private fun Preferences(state: DriveState) {
     val context=LocalContext.current
+    var privacy by remember { mutableStateOf(false) }
+    if(privacy)AlertDialog(onDismissRequest={privacy=false},title={Text("Privacy notice")},text={Text(PrivacyNotice.text,modifier=Modifier.verticalScroll(rememberScrollState()))},confirmButton={TextButton(onClick={privacy=false}){Text("Close")}}
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(20.dp)) {
         item {Row(verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text("Voice alerts",fontWeight=FontWeight.Medium);Text("Temporarily ducks audio when supported",fontSize=11.sp,color=Color.Gray)};Switch(checked=state.voice,onCheckedChange=DriveStore::setVoice)}}
         item {Text("COUNTRY",fontSize=10.sp,color=Forest);Column {listOf("BH","SA","AE","QA","KW","OM").chunked(3).forEach {row->Row(horizontalArrangement=Arrangement.spacedBy(10.dp)){row.forEach {code->FilterChip(selected=state.country==code,onClick={DriveStore.country(code)},label={Text(code)},enabled=state.mode==Mode.IDLE)}}}}}
         item {Text("Only Bahrain has a bundled fictional pack. No country has verified live coverage in this test build.",fontSize=12.sp,color=Color.Gray)}
         item {Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFEAF0E1))){Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)){Icon(Icons.Outlined.Shield,null,tint=Forest);Text("Your journey stays yours.",fontWeight=FontWeight.Medium);Text("No account, ads or billing SDKs are active in this test build. Static alerts remain in SQLite offline. No route is uploaded. If configured later, regional sync reveals only a coarse tile.",fontSize=12.sp,lineHeight=19.sp)}}}
         item {OutlinedButton(onClick={context.startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.parse("package:${context.packageName}")))},modifier=Modifier.fillMaxWidth()){Text("Open system permissions")}}
+        item {OutlinedButton(onClick={privacy=true},modifier=Modifier.fillMaxWidth()){Text("Read privacy notice")}}
         item {Text("Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay/Android Auto, watches, automatic vehicle startup, premium 3D navigation and billing are not enabled in this build. In an emergency in Bahrain, call 999.",fontSize=11.sp,lineHeight=18.sp,color=Color.Gray)}
     }
 }

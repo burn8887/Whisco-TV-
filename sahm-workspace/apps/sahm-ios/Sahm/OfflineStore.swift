@@ -40,11 +40,14 @@ actor OfflineStore {
         defer {sqlite3_finalize(stmt)}
         sqlite3_bind_text(stmt,1,country,-1,transient);sqlite3_bind_double(stmt,2,point.lat-dy);sqlite3_bind_double(stmt,3,point.lat+dy);sqlite3_bind_double(stmt,4,point.lon-dx);sqlite3_bind_double(stmt,5,point.lon+dx);sqlite3_bind_double(stmt,6,now)
         var result:[Hazard]=[]
-        while sqlite3_step(stmt)==SQLITE_ROW {
-            guard let bytes=sqlite3_column_blob(stmt,0) else {continue}
+        var step=sqlite3_step(stmt)
+        while step==SQLITE_ROW {
+            guard let bytes=sqlite3_column_blob(stmt,0) else {throw URLError(.cannotParseResponse)}
             let data=Data(bytes:bytes,count:Int(sqlite3_column_bytes(stmt,0)))
             let hazard=try JSONDecoder().decode(Hazard.self,from:data);try hazard.validate();result.append(hazard)
+            step=sqlite3_step(stmt)
         }
+        guard step==SQLITE_DONE else {throw URLError(.cannotParseResponse)}
         return result
     }
 }

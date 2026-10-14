@@ -31,4 +31,28 @@ final class EngineTests:XCTestCase {
         let expired=try await store.nearby(country:"BH",point:DemoData.center,now:DemoData.expiry+1)
         XCTAssertTrue(expired.isEmpty)
     }
+    func testSectionCompletionUsesGateCrossingTimes() {
+        let zone=SectionZone(id:"s",country:"BH",entry:Gate(point:Point(lat:26,lon:50),heading:0,halfWidth:15),exit:Gate(point:Point(lat:26.001,lon:50),heading:0,halfWidth:15),meters:111.195,limit:80,expiresAt:now+3600)
+        func sample(_ m:Double,_ t:Double)->Fix {Fix(point:Point(lat:26+m/111195,lon:50),speed:10,course:0,accuracy:3,time:now+t,elapsed:100+t)}
+        let e=SectionEngine([zone])
+        for (m,t) in [(-10.0,0.0),(10,2),(80,11)] {_ = e.evaluate(sample(m,t),now:now+t,elapsed:100+t,country:"BH")}
+        let result=e.evaluate(sample(120,15),now:now+15,elapsed:115,country:"BH")
+        XCTAssertEqual(result.completed.count,1)
+        XCTAssertEqual(result.completed.first!.seconds,13.1195,accuracy:0.001)
+        XCTAssertFalse(result.completed.first!.estimated)
+        XCTAssertTrue(result.active.isEmpty)
+    }
+    func testSQLiteRejectsInvalidSeedBeforeModifyingPack() async throws {
+        let url=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString+".sqlite")
+        defer {try? FileManager.default.removeItem(at:url)}
+        let store=try OfflineStore(url:url)
+        try await store.seed(DemoData.hazards)
+        let bad=Hazard(id:"bad",country:"BH",kind:"CAMERA",point:Point(lat:91,lon:50),heading:nil,road:"bad",expiresAt:now+60)
+        do {try await store.seed([bad]);XCTFail("Invalid coordinates accepted")} catch {}
+        let values=try await store.nearby(country:"BH",point:DemoData.center,now:now)
+        XCTAssertEqual(values.count,4)
+        let other=try await store.nearby(country:"SA",point:DemoData.center,now:now)
+        XCTAssertTrue(other.isEmpty)
+    }
+
 }
