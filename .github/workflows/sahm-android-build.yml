@@ -5,6 +5,7 @@ on:
     paths:
       - 'sahm-workspace/apps/sahm-android/**'
       - 'sahm-workspace/tools/materialize.py'
+      - 'sahm-workspace/tools/report_native_tests.py'
       - '.github/workflows/sahm-android-build.yml'
   workflow_dispatch: {}
 permissions:
@@ -61,7 +62,10 @@ jobs:
             ${{ runner.temp }}/sahm/apps/sahm-android/app/build/reports/**
             ${{ runner.temp }}/sahm/apps/sahm-android/core/build/reports/**
             ${{ runner.temp }}/sahm/apps/sahm-android/core/build/test-results/**
-      - name: Emulator database verification
+      - name: Permit emulator acceleration on this disposable runner
+        if: success()
+        run: sudo chmod a+rw /dev/kvm
+      - name: Emulator database and lifecycle verification
         if: success()
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -70,7 +74,10 @@ jobs:
           profile: pixel_2
           disable-animations: true
           working-directory: ${{ runner.temp }}/sahm/apps/sahm-android
-          script: gradle --no-daemon :app:connectedDebugAndroidTest
+          script: gradle --no-daemon :app:connectedDebugAndroidTest --stacktrace
+      - name: Expose actual native test results
+        if: always()
+        run: python3 sahm-workspace/tools/report_native_tests.py "$RUNNER_TEMP/sahm/apps/sahm-android"
       - name: Retain on-device test report
         if: always()
         uses: actions/upload-artifact@v5
@@ -78,4 +85,7 @@ jobs:
           name: sahm-android-device-tests
           retention-days: 14
           if-no-files-found: ignore
-          path: ${{ runner.temp }}/sahm/apps/sahm-android/app/build/reports/androidTests/**
+          path: |
+            ${{ runner.temp }}/sahm/apps/sahm-android/app/build/reports/androidTests/**
+            ${{ runner.temp }}/sahm/apps/sahm-android/app/build/outputs/androidTest-results/**
+            ${{ runner.temp }}/sahm/apps/sahm-android/native-test-summary.json

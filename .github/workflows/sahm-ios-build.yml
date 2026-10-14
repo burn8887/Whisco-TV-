@@ -67,6 +67,19 @@ jobs:
         run: |
           ditto -c -k --sequesterRsrc --keepParent "$RUNNER_TEMP/sahm-derived/Build/Products/Debug-iphonesimulator/Sahm.app" "$RUNNER_TEMP/Sahm-simulator.zip"
           ditto -c -k --sequesterRsrc --keepParent "$RUNNER_TEMP/Sahm-unsigned.xcarchive" "$RUNNER_TEMP/Sahm-unsigned-device-archive.zip"
+      - name: Expose actual XCTest results
+        if: always()
+        run: |
+          if [ -d "$RUNNER_TEMP/sahm-ios-results.xcresult" ]; then
+            xcrun xcresulttool get test-results summary --path "$RUNNER_TEMP/sahm-ios-results.xcresult" > "$RUNNER_TEMP/sahm-ios-test-summary.json"
+            python3 - <<'PYRESULT'
+          import json,os
+          from pathlib import Path
+          result=json.loads(Path(os.environ['RUNNER_TEMP']+'/sahm-ios-test-summary.json').read_text())
+          text=json.dumps(result)[:15000]
+          print('::notice title=Sahm XCTest evidence::'+text.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PYRESULT
+          fi
       - name: Retain unsigned app and test results
         if: always()
         uses: actions/upload-artifact@v5
@@ -80,3 +93,4 @@ jobs:
             ${{ runner.temp }}/sahm-ios-archive.log
             ${{ runner.temp }}/sahm-ios-results.xcresult
             ${{ runner.temp }}/sahm-ios-build.log
+            ${{ runner.temp }}/sahm-ios-test-summary.json
