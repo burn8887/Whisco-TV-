@@ -19,8 +19,8 @@ Both native demos include heading-aware proximity filtering, sample section-cont
 ### Android
 
 - [Run 38561259145](https://github.com/burn8887/Whisco-TV-/actions/runs/38561259145), source commit `cb5ef28`: compilation, unit tests, lint, debug APK, unsigned release AAB and instrumentation APK packaging **passed**; ZIP/64-bit ELF 16 KB alignment checks **passed**.
-- Database/lifecycle emulator phase was still running when this checkpoint was written; do not treat its 10 authored cases as executed passes until the final run summary confirms them.
-- The earlier diagnostic run independently confirmed **14 JVM cases passed, 0 failed, 0 skipped**.
+- **Full run passed**, including API 35 emulator verification: **24 JUnit cases passed, 0 failed, 0 skipped** (14 JVM, 6 SQLite, 4 native lifecycle cases).
+- The 64-bit native libraries for arm64-v8a and x86_64 each have 16,384-byte ELF LOAD alignment. APK ZIP alignment also passed. This is static packaging evidence, not testing on a physical 16 KB-page device.
 - Artifacts are retained in GitHub Actions, not committed into this repository. `sahm-android-test-build` contains native packages/reports; `sahm-android-device-tests` contains the connected-test reports and exact JUnit summary.
 - Debug signing is for direct developer testing only and may change between clean runners. The release AAB is **unsigned**, not Play-uploadable. Dedicated Sahm signing remains unconfigured.
 
