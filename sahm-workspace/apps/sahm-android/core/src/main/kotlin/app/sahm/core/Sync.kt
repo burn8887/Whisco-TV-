@@ -13,7 +13,7 @@ data class Delta(val schemaVersion: Int,val scope: String,val epoch: String,val 
     fun validate(expected: Scope,current: Cursor) {
         require(schemaVersion==1 && scope==expected.key && epoch.isNotBlank() && epoch.length<=120)
         require(from>=0 && next>=from && changes.size<=1000)
-        if(reset)require(from==0 && !hasMore) else require(epoch==current.epoch && from==current.value)
+        if(reset)require(from==0L && !hasMore) else require(epoch==current.epoch && from==current.value)
         require(!hasMore || next>from)
         require(changes.map { it.sequence }.distinct().size==changes.size)
         require(changes.zipWithNext().all { (a,b)->a.sequence<b.sequence })

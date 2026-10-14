@@ -12,5 +12,5 @@ class SyncTest {
             try { bad.validate(scope,cursor);fail("Expected malformed delta rejection") } catch(_:IllegalArgumentException) { }
         }
     }
-    @Test fun retriesBackOffAndReset() { val gate=RetryGate();assertTrue(gate.ready(0));gate.failure(0,9999);assertEquals(13_000,gate.nextAttempt);assertFalse(gate.ready(1000));repeat(20){gate.failure(1000,0)};assertEquals(301_000,gate.nextAttempt);gate.success(10_000);assertEquals(0,gate.failures);assertEquals(40_000,gate.nextAttempt) }
+    @Test fun retriesBackOffAndReset() { val gate=RetryGate();assertTrue(gate.ready(0));gate.failure(0,9999);assertEquals(13_000L,gate.nextAttempt);assertFalse(gate.ready(1000));repeat(20){gate.failure(1000,0)};assertEquals(301_000L,gate.nextAttempt);gate.success(10_000);assertEquals(0,gate.failures);assertEquals(40_000L,gate.nextAttempt) }
 }
