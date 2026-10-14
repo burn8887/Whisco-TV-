@@ -52,10 +52,11 @@ class HazardDatabase(context: Context, name: String = "sahm-hazards.db") : SQLit
             delta.changes.forEach { change ->
                 val version=db.rawQuery("SELECT revision FROM versions WHERE id=? AND country=?",arrayOf(change.id,scope.country)).use { if(it.moveToFirst())it.getLong(0) else -1L }
                 if(change.sequence>=version) {
-                    if(change.hazard==null) {
+                    val hazard=change.hazard
+                    if(hazard==null) {
                         db.delete("hazards","id=? AND country=? AND layer='live'",arrayOf(change.id,scope.country))
                     } else {
-                        put(db,change.hazard,"live")
+                        put(db,hazard,"live")
                         db.execSQL("INSERT OR IGNORE INTO memberships VALUES(?,?)",arrayOf(scope.key,change.id))
                     }
                     db.execSQL("INSERT OR REPLACE INTO versions VALUES(?,?,?)",arrayOf(change.id,scope.country,change.sequence))
