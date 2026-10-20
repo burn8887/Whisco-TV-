@@ -1,16 +1,17 @@
-# Native recovery and release status — 14 October 2026
+# Native recovery and release status — 20 October 2026
 
 ## Persisted implementation
 
 Canonical source is tracked under `salim-workspace/`; builds materialize a separate disposable tree. Android is native Kotlin/Compose; iOS is native SwiftUI. The browser dashboard remains a separate demonstrator, not a native binary.
 
-Both native demos include heading-aware proximity filtering, sample section-control entry/exit gates and speed integration, explicit simulated versus device-GPS sessions, bounded spoken alerts/audio restoration, SQLite fictional alert packs, local trip summaries and report drafts, permission disclosures, app icons and in-app privacy notices. Android additionally contains a validated regional delta adapter, disabled by its empty feed URL. iOS remains offline demo-only and has no remote delta synchronization.
+Both native demos are branded **Salim — سليم** and include heading-aware proximity filtering, sample section-control entry/exit gates and speed integration, explicit simulated versus device-GPS sessions, bounded spoken alerts/audio restoration, SQLite fictional alert packs, local trip summaries and report drafts, permission disclosures, app icons and in-app privacy notices. Android additionally contains a validated regional delta adapter, disabled by its empty feed URL. iOS remains offline demo-only and has no remote delta synchronization.
 
 ## Verified runner evidence
 
 ### Apple
 
-- [Run 38559900113](https://github.com/burn8887/Whisco-TV-/actions/runs/38559900113), source commit `8880afd`: **passed**.
+- [Run 39418444930](https://github.com/burn8887/Whisco-TV-/actions/runs/39418444930), source commit `b790ebe` (Salim rename): **passed**.
+- Pre-rename run 38559900113, source `8880afd`, also passed.
 - Xcode **26.3**, **9 XCTest cases passed, 0 failed, 0 skipped**; iPhone 16 Pro / iOS 18.5 simulator.
 - Unsigned arm64 device archive built successfully, in addition to the simulator app.
 - Artifact `salim-ios-simulator` contains `Salim-simulator.zip`, `Salim-unsigned-device-archive.zip`, build logs, result bundle and machine-readable XCTest summary. Artifact retention is 14 days.
@@ -18,8 +19,10 @@ Both native demos include heading-aware proximity filtering, sample section-cont
 
 ### Android
 
-- [Run 38561259145](https://github.com/burn8887/Whisco-TV-/actions/runs/38561259145), source commit `cb5ef28`: compilation, unit tests, lint, debug APK, unsigned release AAB and instrumentation APK packaging **passed**; ZIP/64-bit ELF 16 KB alignment checks **passed**.
-- **Full run passed**, including API 35 emulator verification: **24 JUnit cases passed, 0 failed, 0 skipped** (14 JVM, 6 SQLite, 4 native lifecycle cases).
+- [Run 39418531146](https://github.com/burn8887/Whisco-TV-/actions/runs/39418531146), source commit `829c630` (Salim rename and icon fix): full run **passed**, including the API 35 emulator.
+- Annotations report **24 JUnit cases passed, 0 failed, 0 skipped**, `Salim APK packaging :: ZIP alignment verified at 16 KB`, and arm64-v8a/x86_64 `libandroidx.graphics.path.so` LOAD alignments `[16384, 16384, 16384]`.
+- Pre-rename run 38561259145, source `cb5ef28`, also passed with the same test counts.
+- Test mix is unchanged: **14 JVM engine/sync, 6 SQLite and 4 native lifecycle cases**.
 - The 64-bit native libraries for arm64-v8a and x86_64 each have 16,384-byte ELF LOAD alignment. APK ZIP alignment also passed. This is static packaging evidence, not testing on a physical 16 KB-page device.
 - Artifacts are retained in GitHub Actions, not committed into this repository. `salim-android-test-build` contains native packages/reports; `salim-android-device-tests` contains the connected-test reports and exact JUnit summary.
 - Debug signing is for direct developer testing only and may change between clean runners. The release AAB is **unsigned**, not Play-uploadable. Dedicated Salim signing remains unconfigured.
