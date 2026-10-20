@@ -118,6 +118,28 @@ commit time: every `salim-workspace/` path they reference must exist, the pre-re
 workflow must stay `workflow_dispatch`-only with **every** job in `salim-release`. It was written
 after a stale `sahm-workspace/` path was found in the Android verification step of this workflow.
 
+## Activation: the workflow cannot be dispatched yet
+
+GitHub registers a `workflow_dispatch` workflow only when the file exists on the repository's
+**default branch** (`main`). This file currently lives only on `arena/3070ca80-whisco-tv`, so it does
+**not** appear under Actions and the *Run workflow* button is absent. This was verified against the
+API on 20 October 2026: only the Android and iOS build workflows are registered, and those appear
+solely because they have already run.
+
+It therefore cannot be executed until it reaches `main`. That is a Founder decision: PR #32 is
+intentionally draft and unmerged, and merging is explicitly out of scope for this work.
+
+When the time comes there are two clean routes:
+
+1. **Merge PR #32** (or a trimmed PR containing only this workflow) into `main`. The workflow then
+   registers and can be dispatched against any branch.
+2. **Land only the workflow first**: open a small separate PR containing just
+   `.github/workflows/salim-release-signing.yml`, merge that, and keep the rest of the capsule
+   unmerged. `workflow_dispatch` accepts a `ref`, so the signed build can then be run against this
+   feature branch once the file exists on `main`.
+
+Until one of those happens, the signed-release path is **written and checked, but not operational**.
+
 ## Known limitations, stated honestly
 
 - **No signed build has ever run.** This workflow is unexercised: it needs real secrets, and those
