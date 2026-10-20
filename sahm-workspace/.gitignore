@@ -1,3 +1,0 @@
-# Keep Sahm out of the host project's automatic content scans.
-# Reviewed source is explicitly tracked; dependency/build output must never be added.
-*

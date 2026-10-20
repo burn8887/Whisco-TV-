@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.Salim.Base" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorAccent">#1F5C47</item>
+        <item name="android:windowBackground">#F6F8F2</item>
+    </style>
+    <style name="Theme.Salim" parent="Theme.Salim.Base"/>
+</resources>

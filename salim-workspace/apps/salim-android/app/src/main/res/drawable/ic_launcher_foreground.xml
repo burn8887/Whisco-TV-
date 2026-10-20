@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Salim mark: an S-shaped road with a continuous centre line, drawn inside
+     the 66dp adaptive-icon safe zone of the 108dp viewport. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M42.0,76.6 C42.0,62.1 66.0,64.0 66.0,50.4 C66.0,36.8 42.0,38.7 42.0,24.2"
+        android:strokeColor="#F5F1E6"
+        android:strokeWidth="16.4"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"/>
+    <path
+        android:pathData="M42.0,76.6 C42.0,62.1 66.0,64.0 66.0,50.4 C66.0,36.8 42.0,38.7 42.0,24.2"
+        android:strokeColor="#1F5C47"
+        android:strokeWidth="5.7"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"/>
+</vector>

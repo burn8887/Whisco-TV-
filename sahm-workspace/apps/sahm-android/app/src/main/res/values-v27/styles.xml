@@ -1,5 +1,0 @@
-<resources>
-    <style name="Theme.Sahm" parent="Theme.Sahm.Base">
-        <item name="android:windowLightNavigationBar">true</item>
-    </style>
-</resources>
