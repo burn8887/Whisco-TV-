@@ -146,8 +146,10 @@ def main(argv: list[str] | None = None) -> int:
 
     (OUT / "_redirects").write_text(REDIRECTS, encoding="utf-8")
     (OUT / "_headers").write_text(HEADERS, encoding="utf-8")
+    # These pages are the public store-facing privacy and support URLs, so they
+    # must stay crawlable; only the app demo root is excluded from indexing.
     (OUT / "robots.txt").write_text(
-        "User-agent: *\nDisallow: /\n", encoding="utf-8"
+        "User-agent: *\nAllow: /privacy\nAllow: /support\n", encoding="utf-8"
     )
 
     sizes = {p.name: p.stat().st_size for p in sorted(OUT.iterdir())}

@@ -51,4 +51,12 @@ Before materializing new source, explicitly stage it by exact path and commit it
 
 ### Founder-approved native build workflow exception
 
-The Founder explicitly approved adding new **Salim-only Android and iOS build workflows**. These are the only authorized paths outside the source capsule: `.github/workflows/salim-android-build.yml` and `.github/workflows/salim-ios-build.yml`. They do not modify or invoke existing Whisco workflows, use other applications' signing secrets, upload to stores, or deploy production. The isolation checker now permits exactly these two new paths and checks they do not replace existing files.
+The Founder explicitly approved adding new **Salim-only** workflows. These are the only authorized paths outside the source capsule:
+
+| Workflow | Trigger | Purpose |
+| --- | --- | --- |
+| `.github/workflows/salim-android-build.yml` | push to this branch, manual | Compile, test, lint, emulator, unsigned artifacts |
+| `.github/workflows/salim-ios-build.yml` | push to this branch, manual | Simulator tests, unsigned device archive |
+| `.github/workflows/salim-release-signing.yml` | **manual only** | Signed AAB/APK and IPA via the `salim-release` environment |
+
+They do not modify or invoke existing Whisco workflows, use other applications' signing secrets, upload to stores, or deploy production. The isolation checker permits exactly these three paths and verifies they do not replace existing files. The signed-release workflow has never run: it fails closed until the Founder creates the `salim-release` environment and Salim-specific secrets. See [docs/RELEASE-SIGNING.md](docs/RELEASE-SIGNING.md).

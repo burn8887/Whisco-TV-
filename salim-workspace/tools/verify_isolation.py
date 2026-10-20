@@ -15,11 +15,13 @@ def git(*args):return subprocess.check_output(['git','-C',str(ROOT),*args],text=
 # The capsule was renamed from sahm-workspace/ to salim-workspace/ after the founder chose the
 # Salim brand. Historical commits still reference the old prefix; both are Salim-only content.
 CAPSULE_PREFIXES=('salim-workspace/','sahm-workspace/')
-# Exactly four Salim-only workflow paths exist: the current names plus the pre-rename names that
-# remain in earlier commits on this branch. No host workflow may be added, edited or removed.
+# Exactly five Salim-only workflow paths exist: two build workflows, the Founder-approved signed
+# release workflow, and the two pre-rename names still present in earlier commits. No host workflow
+# may be added, edited or removed.
 APPROVED_WORKFLOWS={
     '.github/workflows/salim-android-build.yml',
     '.github/workflows/salim-ios-build.yml',
+    '.github/workflows/salim-release-signing.yml',
     '.github/workflows/sahm-android-build.yml',
     '.github/workflows/sahm-ios-build.yml',
 }

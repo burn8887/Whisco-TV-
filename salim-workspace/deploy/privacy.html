@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy — Salim</title>
+    <meta name="description" content="How the Salim driving-awareness app handles location, local storage and system services." />
+    <meta name="theme-color" content="#1f5c47" />
+    <style>
+/* Salim — static site styles.
+   Brand: Salim Green #1F5C47, Sand #F5F1E6, Calm Canvas #F5F7F0, Ink #293D2F. */
+:root {
+  color-scheme: light;
+  --green: #1f5c47;
+  --green-dark: #17483a;
+  --sand: #f5f1e6;
+  --canvas: #f5f7f0;
+  --ink: #293d2f;
+  --muted: #5f6f65;
+  --amber: #d99a2b;
+  --rule: #dde5d9;
+  --max: 44rem;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font: 400 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+a { color: var(--green-dark); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid #85aa70; outline-offset: 2px; border-radius: 4px; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+header.site {
+  background: var(--green);
+  color: var(--sand);
+  padding: 26px 0;
+}
+header.site .wrap { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+header.site a.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--sand); text-decoration: none;
+  font: 800 26px/1 "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: -0.5px;
+}
+header.site a.brand svg { flex: none; }
+header.site nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+header.site nav a { color: var(--sand); opacity: 0.9; text-decoration: none; }
+header.site nav a:hover, header.site nav a[aria-current="page"] { opacity: 1; text-decoration: underline; }
+
+main { padding: 46px 0 60px; }
+main.home { padding-top: 64px; }
+
+h1 { font-size: 2.15rem; line-height: 1.15; letter-spacing: -0.9px; margin: 0 0 8px; }
+h2 { font-size: 1.22rem; line-height: 1.3; margin: 2.2rem 0 0.5rem; }
+h3 { font-size: 1.02rem; margin: 1.5rem 0 0.35rem; }
+p, li { color: var(--ink); }
+.lede { font-size: 1.12rem; color: var(--muted); max-width: 34rem; }
+.arabic { direction: rtl; text-align: right; font-size: 1.15rem; color: var(--muted); margin-top: -4px; }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin: 26px 0;
+}
+.card h2 { margin-top: 0; }
+
+.note {
+  border-left: 4px solid var(--amber);
+  background: #fdf6e6;
+  padding: 14px 18px;
+  border-radius: 0 10px 10px 0;
+  margin: 22px 0;
+  font-size: 0.97rem;
+}
+.note strong { color: #7a5410; }
+
+dl.faq { margin: 0; }
+dl.faq dt { font-weight: 600; margin-top: 1.35rem; }
+dl.faq dd { margin: 0.25rem 0 0; color: var(--muted); }
+
+ul.plain { padding-left: 1.2rem; }
+ul.plain li { margin: 0.4rem 0; }
+
+.meta { color: var(--muted); font-size: 0.95rem; }
+.placeholder {
+  background: #fff3c4;
+  border: 1px dashed #b98900;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+footer.site {
+  border-top: 1px solid var(--rule);
+  padding: 26px 0 40px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+footer.site .wrap { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+footer.site a { color: var(--muted); }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --canvas: #101915;
+    --ink: #e8eee9;
+    --muted: #a8b8ad;
+    --rule: #26332c;
+    --green: #1f5c47;
+    --green-dark: #9fd3bb;
+  }
+  .card { background: #16211c; }
+  a { color: #9fd3bb; }
+  .note { background: #2a2416; border-left-color: var(--amber); }
+  .note strong { color: #f0c46a; }
+  .placeholder { background: #3a3a1c; border-color: #b9a44a; }
+}
+
+</style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="Salim home">
+          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
+                  fill="none" stroke="#F5F1E6" stroke-width="5.2" stroke-linecap="round" />
+            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
+                  fill="none" stroke="#1F5C47" stroke-width="1.9" stroke-linecap="round" />
+          </svg>
+          salim<span aria-hidden="true">.</span>
+        </a>
+        <nav aria-label="Main">
+          <a href="/">Home</a>
+          <a href="/support">Support</a>
+          <a href="/privacy" aria-current="page">Privacy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <h1>Privacy policy</h1>
+        <p class="meta">
+          Applies to the Salim Android and iOS applications.
+          Effective 20 October 2026.
+          Last updated 20 October 2026.
+        </p>
+
+        <div class="note">
+          <strong>Draft for preview — not yet submitted to a store.</strong> The registered operating
+          entity still has to be named, and the policy must be reviewed again before live regional
+          data, accounts, subscriptions or reporting back-ends are enabled. This text describes the
+          current demonstration build.
+        </div>
+
+        <h2>Who we are</h2>
+        <p>
+          Salim is operated by <span class="placeholder">OPERATING ENTITY</span> (“we”, “us”), the
+          entity responsible for the app and this website. Privacy requests:
+          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>.
+        </p>
+
+        <h2>What the app does</h2>
+        <p>
+          Salim provides road-awareness prompts — such as upcoming cameras, road hazards, speed
+          bumps and average-speed sections — based on your device’s location, speed and direction of
+          travel. The current demonstration build ships a fictional Bahrain data pack and has no
+          account, advertising, analytics SDK, billing or connected live feed.
+        </p>
+
+        <h2>Location</h2>
+        <p>
+          A simulated drive inside the app needs no location permission. When you explicitly start a
+          device GPS test or drive, we process precise coordinates, speed, heading, accuracy and
+          sample timing in memory to match nearby alerts and calculate section averages. On Android
+          this runs in a foreground service with a visible ongoing notification; on iOS it uses
+          location updates, which may continue while the test is active in the background.
+        </p>
+        <p>
+          Ending the session in the app, or from its Android notification, stops location updates.
+          You can also revoke permission in system settings. Operating-system suspension or
+          force-quitting the app can interrupt awareness. In this build, precise routes are not
+          stored and are not uploaded to a Salim server.
+        </p>
+
+        <h2>Stored on your device</h2>
+        <p>
+          The app stores your voice preference, the local alert pack, trip date/duration/alert count
+          and test mode, and any community report drafts you type. Drafts are not transmitted or
+          published. Trip summaries are capped at 200 and drafts at 100; older items are removed when
+          the cap is exceeded. You can delete trip history in <em>My trips</em> and individual drafts
+          in <em>Community</em>. Deleting the app removes its local app storage, subject to your
+          device’s backup and restore behaviour. Android backup is disabled in this build; iOS device
+          backups may include local records according to your settings.
+        </p>
+
+        <h2>System and third-party services</h2>
+        <ul class="plain">
+          <li><strong>Maps.</strong> On iOS, Apple MapKit may request map tiles and related content from Apple. Offline alert matching does not require those tiles.</li>
+          <li><strong>External navigation.</strong> If you open a destination in another maps app, the destination you entered is shared with that app and its provider.</li>
+          <li><strong>Speech and notifications.</strong> Text-to-speech and notifications use operating-system services. An installed Android speech engine may use its own network services.</li>
+        </ul>
+        <p>
+          These providers’ own terms and privacy practices apply. No third-party analytics SDK is
+          included.
+        </p>
+
+        <h2>What we do not do</h2>
+        <ul class="plain">
+          <li>We do not sell personal data.</li>
+          <li>We do not run advertising or tracking SDKs in this build.</li>
+          <li>We do not publish your community drafts.</li>
+          <li>We do not keep a server-side copy of your precise route.</li>
+        </ul>
+
+        <h2>Children</h2>
+        <p>
+          Salim is a driving-awareness tool intended for licensed drivers and their passengers. It is
+          not directed at children.
+        </p>
+
+        <h2>Your choices and rights</h2>
+        <p>
+          You can revoke location permission at any time, end a session to stop processing, and delete
+          local summaries and drafts inside the app. For access, correction or deletion requests
+          relating to anything we hold, contact
+          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>. Depending on where you live, you may have
+          additional rights under applicable data-protection law; we will respond within the period
+          required by that law.
+        </p>
+
+        <h2>Changes</h2>
+        <p>
+          If the app begins using live regional data, accounts, payments or a reporting back-end, this
+          policy will be updated before those features are enabled, and the effective date above will
+          change.
+        </p>
+
+        <h2>Not a safety or emergency service</h2>
+        <p>
+          Salim is an awareness aid. It does not guarantee that you will avoid a hazard, a fine or a
+          collision, and it is not a substitute for attention, posted signs or traffic law. In an
+          emergency in Bahrain, call 999.
+        </p>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <span>© 2026 <span class="placeholder">OPERATING ENTITY</span></span>
+        <a href="/privacy">Privacy</a>
+        <a href="/support">Support</a>
+      </div>
+    </footer>
+  </body>
+</html>

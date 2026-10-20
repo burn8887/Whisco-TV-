@@ -36,6 +36,22 @@ Both native demos are branded **Salim — سليم** and include heading-aware p
 
 Actions artifact/log downloads are blocked by this sandbox's outbound host restrictions. Runner status, exact test summaries and artifact metadata are available through the GitHub API; download retained files from the corresponding Actions run in your browser. No binary has been locally installed or tested in this Linux sandbox.
 
+## Signed release workflow — prepared, never run
+
+`.github/workflows/salim-release-signing.yml` is the Founder-approved third Salim workflow. It is
+manual-only, runs in the `salim-release` GitHub environment, verifies the Android certificate
+fingerprint and the iOS provisioning profile identity before signing, deletes key material in an
+`always()` step, and **does not upload anywhere**. No environment, secret or signed artifact exists
+yet, so it has never executed. Setup: [RELEASE-SIGNING.md](RELEASE-SIGNING.md).
+
+## Public pages — authored, not published
+
+`site/` holds the home, privacy and support pages for the approved domain `www.salimdrive.com`.
+`deploy/` holds the uploadable bundle: a single self-contained `index.html` app preview plus
+inlined `privacy.html` and `support.html`. The domain did not resolve on 20 October 2026 and
+nothing has been deployed. The operating entity is still an unfilled placeholder, and
+`tools/check_site.py` fails until it is supplied.
+
 ## Store-readiness gates
 
 See [STORE-RELEASE-CHECKLIST.md](STORE-RELEASE-CHECKLIST.md) for dedicated identities/signing, store declarations and the physical-device acceptance matrix; [STORE-LISTING-DRAFT.md](STORE-LISTING-DRAFT.md) and [PRIVACY-PUBLICATION-DRAFT.md](PRIVACY-PUBLICATION-DRAFT.md) are review drafts, not submitted or published materials.

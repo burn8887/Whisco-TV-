@@ -9,6 +9,10 @@ if (hasSigning) {
 tasks.register("verifyReleaseSigning") {
     doLast { check(hasSigning) { "Unsigned demo build only. Configure a dedicated Salim upload key before store distribution." } }
 }
+// Release runs pass -PversionName / -PversionCode so a signed build never needs a
+// source edit. Local and CI demo builds keep the checked-in defaults.
+val releaseVersionName = providers.gradleProperty("versionName").orNull
+val releaseVersionCode = providers.gradleProperty("versionCode").orNull?.toIntOrNull()
 android {
     namespace = "app.salim"
     compileSdk = 36
@@ -16,8 +20,8 @@ android {
         applicationId = "app.salim.android.demo"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.2.0-demo"
+        versionCode = releaseVersionCode ?: 2
+        versionName = releaseVersionName ?: "0.2.0-demo"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FEED_URL", "\"\"")
     }

@@ -31,7 +31,9 @@ Confirm these are the permanent **separate demonstration app** identifiers befor
 - [ ] Bundle signed, signature verified against the Salim upload certificate, version code unused, then uploaded only with separate explicit authorization.
 - [ ] Review approved; tester opt-in URL opened on an authorized Google account; installation from Play and update path confirmed.
 
-Signing support is opt-in. CI intentionally supplies **none** of these variables and creates an unsigned release AAB:
+A manual, environment-gated signed build now exists: `.github/workflows/salim-release-signing.yml` with the `salim-release` environment. It has **never been run** and fails closed until Salim-specific secrets are configured; it does not upload. Setup and security properties: [RELEASE-SIGNING.md](RELEASE-SIGNING.md).
+
+Signing support is opt-in. The push-triggered CI intentionally supplies **none** of these variables and creates an unsigned release AAB:
 
 - `SALIM_ANDROID_KEYSTORE_PATH` — dedicated key outside all source checkouts/artifacts
 - `SALIM_ANDROID_KEYSTORE_PASSWORD`
