@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy — Salim</title>
+    <meta name="description" content="How the Salim driving-awareness app handles location, local storage and system services." />
+    <meta name="theme-color" content="#1f5c47" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="index.html" aria-label="Salim home">
+          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
+                  fill="none" stroke="#F5F1E6" stroke-width="5.2" stroke-linecap="round" />
+            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
+                  fill="none" stroke="#1F5C47" stroke-width="1.9" stroke-linecap="round" />
+          </svg>
+          salim<span aria-hidden="true">.</span>
+        </a>
+        <nav aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="support.html">Support</a>
+          <a href="privacy.html" aria-current="page">Privacy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <h1>Privacy policy</h1>
+        <p class="meta">
+          Applies to the Salim Android and iOS applications.
+          Effective 20 October 2026.
+          Last updated 20 October 2026.
+        </p>
+
+        <div class="note">
+          <strong>Draft for preview — not yet submitted to a store.</strong> The registered operating
+          entity still has to be named, and the policy must be reviewed again before live regional
+          data, accounts, subscriptions or reporting back-ends are enabled. This text describes the
+          current demonstration build.
+        </div>
+
+        <h2>Who we are</h2>
+        <p>
+          Salim is operated by <span class="placeholder">OPERATING ENTITY</span> (“we”, “us”), the
+          entity responsible for the app and this website. Privacy requests:
+          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>.
+        </p>
+
+        <h2>What the app does</h2>
+        <p>
+          Salim provides road-awareness prompts — such as upcoming cameras, road hazards, speed
+          bumps and average-speed sections — based on your device’s location, speed and direction of
+          travel. The current demonstration build ships a fictional Bahrain data pack and has no
+          account, advertising, analytics SDK, billing or connected live feed.
+        </p>
+
+        <h2>Location</h2>
+        <p>
+          A simulated drive inside the app needs no location permission. When you explicitly start a
+          device GPS test or drive, we process precise coordinates, speed, heading, accuracy and
+          sample timing in memory to match nearby alerts and calculate section averages. On Android
+          this runs in a foreground service with a visible ongoing notification; on iOS it uses
+          location updates, which may continue while the test is active in the background.
+        </p>
+        <p>
+          Ending the session in the app, or from its Android notification, stops location updates.
+          You can also revoke permission in system settings. Operating-system suspension or
+          force-quitting the app can interrupt awareness. In this build, precise routes are not
+          stored and are not uploaded to a Salim server.
+        </p>
+
+        <h2>Stored on your device</h2>
+        <p>
+          The app stores your voice preference, the local alert pack, trip date/duration/alert count
+          and test mode, and any community report drafts you type. Drafts are not transmitted or
+          published. Trip summaries are capped at 200 and drafts at 100; older items are removed when
+          the cap is exceeded. You can delete trip history in <em>My trips</em> and individual drafts
+          in <em>Community</em>. Deleting the app removes its local app storage, subject to your
+          device’s backup and restore behaviour. Android backup is disabled in this build; iOS device
+          backups may include local records according to your settings.
+        </p>
+
+        <h2>System and third-party services</h2>
+        <ul class="plain">
+          <li><strong>Maps.</strong> On iOS, Apple MapKit may request map tiles and related content from Apple. Offline alert matching does not require those tiles.</li>
+          <li><strong>External navigation.</strong> If you open a destination in another maps app, the destination you entered is shared with that app and its provider.</li>
+          <li><strong>Speech and notifications.</strong> Text-to-speech and notifications use operating-system services. An installed Android speech engine may use its own network services.</li>
+        </ul>
+        <p>
+          These providers’ own terms and privacy practices apply. No third-party analytics SDK is
+          included.
+        </p>
+
+        <h2>What we do not do</h2>
+        <ul class="plain">
+          <li>We do not sell personal data.</li>
+          <li>We do not run advertising or tracking SDKs in this build.</li>
+          <li>We do not publish your community drafts.</li>
+          <li>We do not keep a server-side copy of your precise route.</li>
+        </ul>
+
+        <h2>Children</h2>
+        <p>
+          Salim is a driving-awareness tool intended for licensed drivers and their passengers. It is
+          not directed at children.
+        </p>
+
+        <h2>Your choices and rights</h2>
+        <p>
+          You can revoke location permission at any time, end a session to stop processing, and delete
+          local summaries and drafts inside the app. For access, correction or deletion requests
+          relating to anything we hold, contact
+          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>. Depending on where you live, you may have
+          additional rights under applicable data-protection law; we will respond within the period
+          required by that law.
+        </p>
+
+        <h2>Changes</h2>
+        <p>
+          If the app begins using live regional data, accounts, payments or a reporting back-end, this
+          policy will be updated before those features are enabled, and the effective date above will
+          change.
+        </p>
+
+        <h2>Not a safety or emergency service</h2>
+        <p>
+          Salim is an awareness aid. It does not guarantee that you will avoid a hazard, a fine or a
+          collision, and it is not a substitute for attention, posted signs or traffic law. In an
+          emergency in Bahrain, call 999.
+        </p>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <span>© 2026 <span class="placeholder">OPERATING ENTITY</span></span>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </div>
+    </footer>
+  </body>
+</html>

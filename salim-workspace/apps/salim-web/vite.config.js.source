@@ -1,0 +1,19 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+// SALIM_INLINE_ASSETS lets the single-file build inline fonts and images as data URIs,
+// so the published preview is one HTML document with no external asset requests.
+const inlineLimit = Number(process.env.SALIM_INLINE_ASSETS || 4096);
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    assetsInlineLimit: inlineLimit,
+    cssCodeSplit: false,
+    rollupOptions: { output: { inlineDynamicImports: true } },
+  },
+  server: {
+    host: "0.0.0.0",
+    port: 5174,
+    strictPort: true,
+    allowedHosts: [".e2b.app"],
+  },
+});

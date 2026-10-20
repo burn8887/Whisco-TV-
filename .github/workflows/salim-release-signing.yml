@@ -1,0 +1,362 @@
+name: Salim signed release
+
+# Founder-approved third Salim-only workflow. Manual trigger only: it never runs on a
+# push, so no signing material is consumed by ordinary development.
+#
+# Scope, agreed with the Founder:
+#   * Salim secrets only, from the dedicated `salim-release` environment.
+#   * Produces signed artifacts and retains them for download.
+#   * Does NOT upload to Play, App Store Connect or TestFlight.
+#   * Does not touch any existing Whisco workflow, secret, record or store listing.
+# The job fails closed: if any required secret is missing it stops before building.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: Marketing version for this build (e.g. 0.3.0)
+        required: true
+        type: string
+      version_code:
+        description: Android versionCode and iOS build number (a fresh positive integer)
+        required: true
+        type: string
+      platform:
+        description: Which platform to sign
+        required: true
+        default: both
+        type: choice
+        options: [both, android, ios]
+      confirm_identity:
+        description: Type the application id to confirm you are signing Salim, not another app
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: salim-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    name: Confirm scope before any secret is used
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Refuse to sign anything but Salim
+        env:
+          CONFIRM: ${{ inputs.confirm_identity }}
+          VERSION_CODE: ${{ inputs.version_code }}
+          VERSION_NAME: ${{ inputs.version_name }}
+        run: |
+          set -euo pipefail
+          expected="app.salim.android.demo"
+          if [ "$CONFIRM" != "$expected" ]; then
+            echo "::error title=Identity mismatch::Expected '$expected'. This workflow signs Salim only."
+            exit 1
+          fi
+          case "$VERSION_CODE" in
+            ''|*[!0-9]*) echo "::error title=Invalid version code::Must be a positive integer."; exit 1 ;;
+          esac
+          if [ "$VERSION_CODE" -le 0 ]; then
+            echo "::error title=Invalid version code::Must be greater than zero."; exit 1
+          fi
+          case "$VERSION_NAME" in
+            *[!0-9A-Za-z.-]*) echo "::error title=Invalid version name::Use digits, letters, dots or dashes only."; exit 1 ;;
+          esac
+          echo "::notice title=Scope confirmed::Signing Salim $VERSION_NAME ($VERSION_CODE) only."
+
+  android:
+    name: Signed Android app bundle
+    needs: guard
+    if: ${{ inputs.platform == 'both' || inputs.platform == 'android' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    environment: salim-release
+    env:
+      SALIM_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.SALIM_ANDROID_KEYSTORE_PASSWORD }}
+      SALIM_ANDROID_KEY_ALIAS: ${{ secrets.SALIM_ANDROID_KEY_ALIAS }}
+      SALIM_ANDROID_KEY_PASSWORD: ${{ secrets.SALIM_ANDROID_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+          cache-disabled: true
+
+      - name: Require Android signing secrets
+        env:
+          KEYSTORE_B64: ${{ secrets.SALIM_ANDROID_KEYSTORE_BASE64 }}
+          EXPECTED_FINGERPRINT: ${{ secrets.SALIM_ANDROID_CERT_SHA256 }}
+        run: |
+          set -euo pipefail
+          missing=""
+          for name in KEYSTORE_B64 SALIM_ANDROID_KEYSTORE_PASSWORD SALIM_ANDROID_KEY_ALIAS SALIM_ANDROID_KEY_PASSWORD EXPECTED_FINGERPRINT; do
+            eval "value=\$$name"
+            [ -n "${value:-}" ] || missing="$missing $name"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error title=Android secrets missing::Configure these in the salim-release environment:$missing"
+            exit 1
+          fi
+          echo "All required Android signing secrets are present."
+
+      - name: Unlock the upload key for this job only
+        env:
+          KEYSTORE_B64: ${{ secrets.SALIM_ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/salim-upload.jks"
+          chmod 600 "$RUNNER_TEMP/salim-upload.jks"
+          echo "SALIM_ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/salim-upload.jks" >> "$GITHUB_ENV"
+
+      - name: Check the key matches the expected Salim certificate
+        env:
+          EXPECTED_FINGERPRINT: ${{ secrets.SALIM_ANDROID_CERT_SHA256 }}
+        run: |
+          set -euo pipefail
+          actual=$(keytool -list -v -keystore "$RUNNER_TEMP/salim-upload.jks" \
+            -alias "$SALIM_ANDROID_KEY_ALIAS" -storepass "$SALIM_ANDROID_KEYSTORE_PASSWORD" \
+            | awk -F': ' '/SHA256:/{print $2; exit}' | tr -d ' ' | tr 'A-F' 'a-f')
+          expected=$(printf '%s' "$EXPECTED_FINGERPRINT" | tr -d ': ' | tr 'A-F' 'a-f')
+          if [ "$actual" != "$expected" ]; then
+            echo "::error title=Wrong signing key::The keystore does not match the recorded Salim upload certificate."
+            exit 1
+          fi
+          echo "::notice title=Upload key verified::SHA-256 $actual"
+
+      - name: Materialize only Salim outside the host checkout
+        run: python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
+
+      - name: Install the Android platform used by Salim
+        run: |
+          test -n "$ANDROID_HOME"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;36.0.0'
+
+      - name: Build and sign the release bundle
+        working-directory: ${{ runner.temp }}/salim/apps/salim-android
+        run: |
+          gradle --no-daemon \
+            -PversionName="${{ inputs.version_name }}" \
+            -PversionCode="${{ inputs.version_code }}" \
+            :app:verifyReleaseSigning :app:bundleRelease :app:assembleRelease
+
+      - name: Verify the signed bundle and APK
+        working-directory: ${{ runner.temp }}/salim/apps/salim-android
+        run: |
+          set -euo pipefail
+          aab=app/build/outputs/bundle/release/app-release.aab
+          apk=app/build/outputs/apk/release/app-release.apk
+          test -f "$aab" && test -f "$apk"
+          jarsigner -verify -strict -certs "$aab" | tail -3
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs "$apk" | head -5
+          "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 4 "$apk"
+          python3 "$GITHUB_WORKSPACE/salim-workspace/tools/check_android_apk.py" "$apk"
+          echo "::notice title=Signed Android artifacts::Signature, 16 KB alignment and packaging verified."
+
+      - name: Remove the signing key before upload
+        if: always()
+        run: rm -f "$RUNNER_TEMP/salim-upload.jks"
+
+      - name: Retain signed Android artifacts
+        if: success()
+        uses: actions/upload-artifact@v5
+        with:
+          name: salim-android-signed
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/salim/apps/salim-android/app/build/outputs/bundle/release/*.aab
+            ${{ runner.temp }}/salim/apps/salim-android/app/build/outputs/apk/release/*.apk
+
+  ios:
+    name: Signed iOS archive and IPA
+    needs: guard
+    if: ${{ inputs.platform == 'both' || inputs.platform == 'ios' }}
+    runs-on: macos-15
+    timeout-minutes: 45
+    environment: salim-release
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Select installed Xcode 26.3
+        run: |
+          sudo xcode-select --switch /Applications/Xcode_26.3.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Require Apple signing secrets
+        env:
+          TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
+          CERT_B64: ${{ secrets.SALIM_APPLE_CERT_P12_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.SALIM_APPLE_CERT_PASSWORD }}
+          PROFILE_B64: ${{ secrets.SALIM_APPLE_PROFILE_BASE64 }}
+          PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
+        run: |
+          set -euo pipefail
+          missing=""
+          for name in TEAM_ID CERT_B64 CERT_PASSWORD PROFILE_B64 PROFILE_NAME; do
+            eval "value=\$$name"
+            [ -n "${value:-}" ] || missing="$missing $name"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error title=Apple secrets missing::Configure these in the salim-release environment:$missing"
+            exit 1
+          fi
+          echo "All required Apple signing secrets are present."
+
+      - name: Install the Salim distribution identity in a temporary keychain
+        env:
+          CERT_B64: ${{ secrets.SALIM_APPLE_CERT_P12_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.SALIM_APPLE_CERT_PASSWORD }}
+          PROFILE_B64: ${{ secrets.SALIM_APPLE_PROFILE_BASE64 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          keychain="$RUNNER_TEMP/salim-signing.keychain-db"
+          keychain_password=$(python3 -c 'import secrets;print(secrets.token_urlsafe(32))')
+          echo "KEYCHAIN_PATH=$keychain" >> "$GITHUB_ENV"
+          echo "KEYCHAIN_PASSWORD=$keychain_password" >> "$GITHUB_ENV"
+
+          security create-keychain -p "$keychain_password" "$keychain"
+          security set-keychain-settings -lut 21600 "$keychain"
+          security unlock-keychain -p "$keychain_password" "$keychain"
+
+          printf '%s' "$CERT_B64" | base64 --decode > "$RUNNER_TEMP/salim.p12"
+          security import "$RUNNER_TEMP/salim.p12" -k "$keychain" -P "$CERT_PASSWORD" \
+            -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple:,codesign: \
+            -s -k "$keychain_password" "$keychain" > /dev/null
+          security list-keychains -d user -s "$keychain" login.keychain-db
+
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          printf '%s' "$PROFILE_B64" | base64 --decode \
+            > "$HOME/Library/MobileDevice/Provisioning Profiles/salim.mobileprovision"
+          security cms -D -i "$HOME/Library/MobileDevice/Provisioning Profiles/salim.mobileprovision" \
+            > "$RUNNER_TEMP/salim-profile.plist"
+          profile_uuid=$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$RUNNER_TEMP/salim-profile.plist")
+          echo "PROFILE_UUID=$profile_uuid" >> "$GITHUB_ENV"
+          app_id=$(/usr/libexec/PlistBuddy -c 'Print :Entitlements:application-identifier' "$RUNNER_TEMP/salim-profile.plist")
+          echo "::notice title=Provisioning profile::authorises $app_id ($profile_uuid)"
+          case "$app_id" in
+            *app.salim.ios.demo) ;;
+            *) echo "::error title=Wrong provisioning profile::This profile is not for Salim."; exit 1 ;;
+          esac
+
+      - name: Prepare Salim source and Xcode project
+        run: |
+          set -euo pipefail
+          python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
+          brew install xcodegen
+          cd "$RUNNER_TEMP/salim/apps/salim-ios"
+          xcodegen generate
+
+      - name: Archive with the Salim distribution identity
+        working-directory: ${{ runner.temp }}/salim/apps/salim-ios
+        env:
+          TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
+          PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
+        run: |
+          set -euo pipefail
+          xcodebuild -project Salim.xcodeproj -scheme Salim -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/Salim.xcarchive" \
+            MARKETING_VERSION="${{ inputs.version_name }}" \
+            CURRENT_PROJECT_VERSION="${{ inputs.version_code }}" \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            CODE_SIGN_IDENTITY='Apple Distribution' \
+            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
+            OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
+            archive
+
+      - name: Export an App Store IPA without uploading it
+        working-directory: ${{ runner.temp }}/salim/apps/salim-ios
+        env:
+          TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
+          PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>export</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>signingCertificate</key><string>Apple Distribution</string>
+            <key>teamID</key><string>$TEAM_ID</string>
+            <key>provisioningProfiles</key>
+            <dict><key>app.salim.ios.demo</key><string>$PROFILE_NAME</string></dict>
+            <key>uploadSymbols</key><true/>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+          </dict></plist>
+          PLIST
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/Salim.xcarchive" \
+            -exportPath "$RUNNER_TEMP/Salim-ipa" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
+
+      - name: Verify the IPA signature and identity
+        run: |
+          set -euo pipefail
+          ipa=$(find "$RUNNER_TEMP/Salim-ipa" -name '*.ipa' -maxdepth 1 | head -1)
+          test -n "$ipa" || { echo "::error title=IPA missing::Export produced no .ipa"; exit 1; }
+          unzip -q "$ipa" -d "$RUNNER_TEMP/ipa-check"
+          app="$RUNNER_TEMP/ipa-check/Payload/Salim.app"
+          test -d "$app" || { echo "::error title=Unexpected IPA::No Salim.app in Payload"; exit 1; }
+          codesign --verify --deep --strict --verbose=2 "$app"
+          codesign -dvvv "$app" 2>&1 | grep -E 'Authority=|TeamIdentifier=|Identifier=' | head -5
+          bundle_id=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Info.plist")
+          [ "$bundle_id" = "app.salim.ios.demo" ] || { echo "::error title=Wrong bundle id::$bundle_id"; exit 1; }
+          echo "::notice title=Signed IPA verified::$bundle_id"
+
+      - name: Delete the temporary keychain
+        if: always()
+        run: |
+          security delete-keychain "$KEYCHAIN_PATH" 2>/dev/null || true
+          rm -rf "$RUNNER_TEMP/salim.p12" "$RUNNER_TEMP/Salim-ipa" "$RUNNER_TEMP/ipa-check"
+
+      - name: Retain the signed IPA and archive
+        if: success()
+        uses: actions/upload-artifact@v5
+        with:
+          name: salim-ios-signed
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/Salim-ipa/*.ipa
+            ${{ runner.temp }}/Salim.xcarchive
+
+  summary:
+    name: Signed build summary
+    needs: [android, ios]
+    if: always() && (needs.android.result != 'skipped' || needs.ios.result != 'skipped')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Report what was produced
+        env:
+          ANDROID: ${{ needs.android.result }}
+          IOS: ${{ needs.ios.result }}
+          VERSION_NAME: ${{ inputs.version_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: |
+          {
+            echo "### Salim signed release $VERSION_NAME ($VERSION_CODE)"
+            echo
+            echo "| Platform | Result |"
+            echo "| --- | --- |"
+            [ "$ANDROID" = "skipped" ] || echo "| Android | $ANDROID |"
+            [ "$IOS" = "skipped" ] || echo "| iOS | $IOS |"
+            echo
+            echo "Artifacts are retained in this run for 14 days. **Nothing was uploaded to Google Play, App Store Connect or TestFlight.** Uploading is a separate, explicit Founder decision."
+          } >> "$GITHUB_STEP_SUMMARY"

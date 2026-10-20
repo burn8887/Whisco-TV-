@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support — Salim</title>
+    <meta name="description" content="Getting started with Salim, permissions, battery use, audio behaviour and how to reach us." />
+    <meta name="theme-color" content="#1f5c47" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="index.html" aria-label="Salim home">
+          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
+                  fill="none" stroke="#F5F1E6" stroke-width="5.2" stroke-linecap="round" />
+            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
+                  fill="none" stroke="#1F5C47" stroke-width="1.9" stroke-linecap="round" />
+          </svg>
+          salim<span aria-hidden="true">.</span>
+        </a>
+        <nav aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="support.html" aria-current="page">Support</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <h1>Support</h1>
+        <p class="lede">
+          Set everything up while safely parked. Never adjust the app while driving.
+        </p>
+
+        <div class="note">
+          <strong>Demonstration build.</strong> Alerts currently use fictional Bahrain data. Do not
+          rely on them for road-safety decisions. In an emergency in Bahrain, call 999.
+        </div>
+
+        <h2>Contact</h2>
+        <p>
+          Email <a href="mailto:support@salimdrive.com">support@salimdrive.com</a>. Please include your device model, OS
+          version, app version and, if possible, the road name and approximate time. Do not send
+          screenshots containing your home address or other personal detail.
+        </p>
+        <p class="meta">
+          Data corrections: tell us the road, direction of travel, alert type and what you observed.
+          Camera and hazard locations change; reported corrections are reviewed before any future
+          data release.
+        </p>
+
+        <h2>Getting started</h2>
+        <dl class="faq">
+          <dt>Do I need an account?</dt>
+          <dd>No. There is no sign-in, subscription or purchase.</dd>
+
+          <dt>Can I try it without granting location?</dt>
+          <dd>
+            Yes. Choose <em>Run a simulated drive</em>. The simulation is foreground-only and ends
+            when you leave the app.
+          </dd>
+
+          <dt>What does the device GPS test actually do?</dt>
+          <dd>
+            It uses precise location, speed and heading to match nearby demo alerts and calculate
+            section averages. It is started explicitly, may continue in the background until you end
+            it, and shows an ongoing notification on Android.
+          </dd>
+        </dl>
+
+        <h2>Permissions and battery</h2>
+        <dl class="faq">
+          <dt>Why does Salim need location “all the time” on iOS?</dt>
+          <dd>
+            Only so an explicitly started session can keep working while the screen is locked or
+            another app is in front. Ending the session stops updates.
+          </dd>
+
+          <dt>Will it drain my battery?</dt>
+          <dd>
+            Continuous location does use power. End sessions you are not using. Some devices apply
+            aggressive battery optimisation that can interrupt background work; if awareness stops
+            while locked, check your device’s battery settings for Salim.
+          </dd>
+
+          <dt>Location permission was denied or set to approximate</dt>
+          <dd>
+            Simulation still works. The device GPS test needs precise location; without it, Salim
+            will not invent a position or an average.
+          </dd>
+        </dl>
+
+        <h2>Audio</h2>
+        <dl class="faq">
+          <dt>Salim talks over my music or navigation</dt>
+          <dd>
+            Prompts are short and should duck other audio briefly. If another app stays quiet after a
+            prompt, end the session and reopen the app; report it with your device and OS version so
+            we can reproduce it.
+          </dd>
+
+          <dt>Can I mute speech?</dt>
+          <dd>Yes. Turn off <em>Voice alerts</em> in the app or in Settings.</dd>
+        </dl>
+
+        <h2>Privacy</h2>
+        <p>
+          Read the <a href="privacy.html">privacy policy</a> for exactly what is processed, what is
+          stored on the device and how to delete it.
+        </p>
+
+        <h2>Accessibility</h2>
+        <p>
+          If you use a screen reader or large text and something is hard to reach or read, tell us.
+          Accessibility feedback is treated as a bug, not a preference.
+        </p>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <span>© 2026 <span class="placeholder">OPERATING ENTITY</span></span>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </div>
+    </footer>
+  </body>
+</html>
