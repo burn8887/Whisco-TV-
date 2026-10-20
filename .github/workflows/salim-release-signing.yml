@@ -160,7 +160,7 @@ jobs:
           jarsigner -verify -strict -certs "$aab" | tail -3
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs "$apk" | head -5
           "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 4 "$apk"
-          python3 "$GITHUB_WORKSPACE/sahm-workspace/tools/check_android_apk.py" "$apk"
+          python3 "$GITHUB_WORKSPACE/salim-workspace/tools/check_android_apk.py" "$apk"
           echo "::notice title=Signed Android artifacts::Signature, 16 KB alignment and packaging verified."
 
       - name: Remove the signing key before upload

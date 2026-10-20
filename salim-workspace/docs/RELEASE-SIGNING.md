@@ -28,6 +28,11 @@ Recommended settings:
 
 Do not reuse an environment, secret or certificate from any other application in this account.
 
+> **Create it before the first run.** GitHub silently creates a missing environment the first time a
+> workflow names it — with **no protection rules**. If that happens, delete the empty environment and
+> recreate it with the reviewers and branch restrictions above, so a signed build always needs a
+> human approval.
+
 ## Android secrets
 
 Generate a **new upload key** for Salim. Never reuse another app's keystore.
@@ -104,6 +109,14 @@ The run summary states plainly that nothing was uploaded.
 - **Ephemeral key material.** The keystore and keychain are written to `$RUNNER_TEMP`, deleted in an
   `always()` step, and never uploaded. Nothing is printed except the public certificate fingerprint.
 - **No upload path.** There is no Play Publisher, `altool`, `notarytool` or `xcrun` upload step.
+
+## Verification of the workflow itself
+
+`python3 salim-workspace/tools/check_workflows.py` (7 tests) checks the three Salim workflows at
+commit time: every `salim-workspace/` path they reference must exist, the pre-rename
+`sahm-workspace/` name must not reappear, no store-upload command may be present, and the signing
+workflow must stay `workflow_dispatch`-only with **every** job in `salim-release`. It was written
+after a stale `sahm-workspace/` path was found in the Android verification step of this workflow.
 
 ## Known limitations, stated honestly
 
