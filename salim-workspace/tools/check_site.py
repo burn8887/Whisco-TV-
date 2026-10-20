@@ -21,6 +21,8 @@ FORBIDDEN_CLAIMS = (
     "official partner",
     "officially endorsed",
     "100% accurate",
+    "we guarantee",
+    "guarantees you",
     "never miss",
     "avoid every fine",
     "avoid all fines",
