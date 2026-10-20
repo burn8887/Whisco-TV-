@@ -3,13 +3,28 @@
 Brand system: [BRAND-IDENTITY.md](BRAND-IDENTITY.md). Name risks: [NAME-CLEARANCE.md](NAME-CLEARANCE.md).
 Nothing here is published or reserved.
 
-## Proposed store title
+## Approved store title
 
 - Google Play: **Salim — Road Awareness**
-- App Store: **Salim: Road Awareness**, subtitle **Know what's ahead.**
+- App Store: **Salim — Road Awareness**, subtitle **Know what's ahead.**
 
-A bare “Salim” title is unlikely to be available or discoverable; same-name apps already exist on
-both stores. Confirm the exact title in each console before designing screenshots.
+Approved by the Founder on 20 October 2026. Use this exact form in listings, screenshots and
+promotional graphics. Storefront limits still apply (Play 30 characters, App Store 30 characters
+plus a 30-character subtitle) and availability of the exact title is **not** confirmed — check in
+each console before finalising artwork. A bare “Salim” title is unlikely to be available or
+discoverable; same-name apps already exist on both stores.
+
+## Public URLs
+
+| Purpose | URL | Status |
+| --- | --- | --- |
+| Website | `https://www.salimdrive.com` | approved domain, **not yet live** |
+| Privacy policy | `https://www.salimdrive.com/privacy` | source in `site/privacy.html`, **not yet published** |
+| Support | `https://www.salimdrive.com/support` | source in `site/support.html`, **not yet published** |
+
+Do not enter these URLs in Play Console or App Store Connect until each one loads over HTTPS in a
+private browser window. Publication is a separate decision requiring the Founder’s approval; see
+`site/README.md`.
 
 ## Short description (Play, 80 characters)
 

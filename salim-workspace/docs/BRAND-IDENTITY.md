@@ -4,6 +4,18 @@ Status: **founder-selected name, applied to the demonstration apps.** This docum
 system as implemented. It is not a claim of trademark, domain or store-name availability — see
 [NAME-CLEARANCE.md](NAME-CLEARANCE.md).
 
+## 0. Approved decisions
+
+| Decision | Value | Approved | Consequence |
+| --- | --- | --- | --- |
+| Product name | **Salim — سليم** | 20 Oct 2026 | Applied to code, icons and CI |
+| Store title | **Salim — Road Awareness** | 20 Oct 2026 | Screenshots, listings and keywords are built around this |
+| Brand domain | **www.salimdrive.com** | 20 Oct 2026 | Privacy and support pages authored in `site/`; **not live yet** |
+
+The domain was chosen but did not resolve in DNS on 20 October 2026, and no page was reachable.
+Store review requires working HTTPS URLs, so the pages must be published before submission. See
+`site/README.md` for the publication checklist and `tools/check_site.py` for the pre-publish check.
+
 ## 1. The name
 
 **Salim** · **سليم** · pronounced *sa-LEEM* (Arabic: /saˈliːm/).
@@ -114,7 +126,7 @@ Amber is reserved for genuine caution. If everything is amber, nothing is.
 - **Product name:** Salim — never “Salim App”, “Salim Road” or “Salim Drive” in body copy.
 - **Arabic:** سليم. Do not add the definite article (السليم) in the product name.
 - **Signature:** `salim.` in the wordmark; “Salim” in running text.
-- **Store title (proposed, unverified):** `Salim — Road Awareness` (see §7).
+- **Store title (approved):** `Salim — Road Awareness`.
 - **Demo builds:** “Salim Demo”, so nobody mistakes a fictional-data build for a released product.
 
 ### Taglines
@@ -152,12 +164,12 @@ market.
 2. **Register the composite, not just the word.** File the stylised wordmark/logo and, if possible,
    a compound mark. Word-only “Salim” in Class 9/42 faces descriptive/laudatory objections and
    prior common-law uses. Take local counsel in Bahrain (MOIC) and Saudi Arabia (SAIP).
-3. **Own the domain before printing anything.** No domain has been secured. `salim.com`, `.app`,
-   `.io`, `.ae`, `.sa` and `salimapp.com` already resolve (i.e. are in use); `salim.bh`,
-   `salimdrive.com`, `trysalim.com` and `salimroad.com` did not resolve on a DNS check, which is
-   **not** proof they are unregistered.
-4. **Use a consistent handle** (`@salimdrive` or similar) across platforms; `@salim` will not be
-   available. Reserve before announcing.
+3. **Publish the chosen domain before printing anything.** `www.salimdrive.com` is the brand domain.
+   DNS did not resolve on 20 October 2026, so it must be confirmed as registered, pointed at a host
+   and serving HTTPS before the URL appears in a store record, a screenshot or a press kit. Keep
+   `/privacy` and `/support` stable once submitted.
+4. **Use a consistent handle** matching the domain (`@salimdrive`) across platforms; `@salim` will
+   not be available. Reserve before announcing.
 5. **Keep the legal entity separate from the product name.** The operating company name does not
    have to be “Salim”; a distinct legal entity reduces exposure if the brand has to change.
 

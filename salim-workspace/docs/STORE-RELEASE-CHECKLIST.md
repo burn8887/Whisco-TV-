@@ -8,6 +8,9 @@ Brand: **Salim — سليم**. Store titles, taglines and clearance notes are in
 [STORE-LISTING-DRAFT.md](STORE-LISTING-DRAFT.md), [BRAND-IDENTITY.md](BRAND-IDENTITY.md) and
 [NAME-CLEARANCE.md](NAME-CLEARANCE.md). A bare “Salim” store title is unlikely to be available.
 
+Approved store title: **Salim — Road Awareness**. Approved brand domain: **www.salimdrive.com**
+(not yet live). Public URLs: [STORE-LISTING-DRAFT.md](STORE-LISTING-DRAFT.md#public-urls).
+
 | Platform | Current provisional identifier | Display name | Version/build |
 | --- | --- | --- | --- |
 | Android | `app.salim.android.demo` | Salim Demo | `0.2.0-demo` / 2 |
@@ -20,7 +23,9 @@ Confirm these are the permanent **separate demonstration app** identifiers befor
 - [ ] Android CI green: 14 JVM contracts; 6 SQLite and 4 lifecycle instrumentation cases; lint; debug APK; unsigned release AAB. Use the actual run report, not source test counts.
 - [ ] Dedicated Salim app created in Play Console, independent upload key and Play App Signing configured; upload certificate fingerprint recorded securely.
 - [ ] Physical device testing completed below. Verify current Play target-SDK and 16 KB page-size requirements against the exact signed artifact, including Compose native dependencies.
-- [ ] Published Salim privacy-policy URL and functioning support contact approved. Complete Data safety against actual behavior and all system/provider interactions; do not declare background location absent merely because `ACCESS_BACKGROUND_LOCATION` is not requested.
+- [ ] `https://www.salimdrive.com/privacy` and `/support` live over HTTPS, placeholders replaced and
+      `python3 salim-workspace/tools/check_site.py salim-workspace/site` passing; contact address
+      monitored. The domain did not resolve on 20 October 2026. Complete Data safety against actual behavior and all system/provider interactions; do not declare background location absent merely because `ACCESS_BACKGROUND_LOCATION` is not requested.
 - [ ] Foreground-service `location` declaration/review evidence, prominent in-app disclosure, content rating, app access (no account), ads declaration (none), countries and closed tester group configured in the **Salim** record only.
 - [ ] Current store screenshots and graphic supplied from the built app. `store-icon-512.png` is the new Salim mark (road-S ribbon on `#1F5C47`); screenshots must be captured from the signed build. Brand system: [BRAND-IDENTITY.md](BRAND-IDENTITY.md).
 - [ ] Bundle signed, signature verified against the Salim upload certificate, version code unused, then uploaded only with separate explicit authorization.

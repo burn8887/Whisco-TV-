@@ -45,7 +45,8 @@ availability.**
 | --- | --- |
 | `salim.com`, `salim.app`, `salim.io`, `salim.ae`, `salim.sa`, `salim.xyz` | resolves (in use) |
 | `salimapp.com`, `drivesalim.com`, `getsalim.com` | resolves (in use) |
-| `salim.bh`, `salimdrive.com`, `trysalim.com`, `salimroad.com` | no A record (status unknown) |
+| `salim.bh`, `trysalim.com`, `salimroad.com` | no A record (status unknown) |
+| **`salimdrive.com`, `www.salimdrive.com`** — the approved brand domain | no A record on 20 Oct 2026; not reachable over HTTPS |
 
 `@salim` on any major platform should be assumed taken. Choose and reserve a qualified handle
 (e.g. `@salimdrive`, `@salimroad`) before any public announcement.
@@ -65,15 +66,18 @@ availability.**
    devices, in the actual storefronts. Screenshot the results as evidence.
 5. **Avoid official-looking cues.** No police shield, no radar dish, no “official”, no government
    colours. Salim must never look like a traffic authority.
-6. **Protect the brand in use.** Consistent mark, consistent spelling, `™` once a filing exists, `®`
+6. **Keep the domain registration and the trademark filing in the same name** wherever possible.
+   Mismatched ownership is a recurring problem in later enforcement and store disputes.
+7. **Protect the brand in use.** Consistent mark, consistent spelling, `™` once a filing exists, `®`
    only after registration. Keep dated evidence of first use in commerce.
-7. **Re-check after launch.** Same-name apps appear often; set a quarterly store and register check.
+8. **Re-check after launch.** Same-name apps appear often; set a quarterly store and register check.
 
 ## 6. Still unknown
 
 - Any registered or pending trademark for “Salim”/“سليم” in Classes 9, 39 or 42 in Bahrain, Saudi
   Arabia, the UAE, Qatar, Kuwait, Oman, the EU or the US.
-- Whether `salim.bh` or any proposed domain is registrable.
+- Whether the approved domain `salimdrive.com` is registered to the operating entity, and whether
+  `salim.bh` or the other proposed domains are registrable.
 - Exact availability of the proposed store titles, subtitles and keywords.
 - Social handles.
 - Native-speaker judgement on the Arabic taglines and on the name’s feel in each GCC market.

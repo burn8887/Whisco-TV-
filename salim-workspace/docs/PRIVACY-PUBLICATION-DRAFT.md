@@ -1,6 +1,10 @@
 # Salim Demo privacy policy — publication draft
 
-**Not yet published or legally approved.** Founder must supply the operating entity, support/privacy contact, effective date and a dedicated public HTTPS URL before external distribution. Do not publish missing or invented contact information. This draft describes the current demonstration build only.
+**Not yet published or legally approved.** The public version is authored at `site/privacy.html`
+and is intended for `https://www.salimdrive.com/privacy`; that domain did not resolve on
+20 October 2026 and nothing has been deployed. The Founder must still supply the operating entity,
+privacy/support contact and effective date. Do not publish missing or invented contact information.
+This draft describes the current demonstration build only.
 
 ## What the app does
 
