@@ -31,6 +31,31 @@ sudo apt update && sudo apt install -y zip unzip
 Then re-run the SDKMAN installer. This is also why the setup script installs `zip` first and
 downloads Gradle directly instead of going through SDKMAN — one less thing that can fail.
 
+## The terminal closes in the middle of a build
+
+That is not a Gradle failure. Gradle exiting would print an error and leave the shell
+prompt. A window that disappears means the process running it was killed - on ChromeOS
+almost always because the Linux environment ran out of memory and was restarted.
+
+The project's `gradle.properties` asks for `-Xmx3g`, and the Kotlin compiler starts a
+second JVM on top. Peak is roughly 5-6 GB. Crostini is often given 4 GB. ChromeOS then
+kills the container, and every terminal window goes with it.
+
+The setup script now checks `/proc/meminfo` and, below 7 GB, builds with a 1536 MB heap,
+in-process Kotlin compilation (no second JVM) and at most two workers. Those are
+command-line properties, so `gradle.properties` and CI are unchanged.
+
+Every run also writes `~/salim-android-setup.log`, so the evidence survives a dead
+terminal. After a crash:
+
+```sh
+tail -40 ~/salim-android-setup.log
+free -h
+```
+
+If `free -h` shows a small total, giving the Linux environment more memory is the real
+fix - ChromeOS allocates it from the machine, not from disk.
+
 ## Two JDK requirements, not one
 
 Both Android modules pin `jvmToolchain(17)`, and CI installs Temurin 17. That means a

@@ -43,6 +43,7 @@ SYSTEM_PACKAGES=(zip unzip curl ca-certificates)
 JAVA_PACKAGES=(openjdk-17-jdk openjdk-17-jdk-headless openjdk-21-jdk-headless openjdk-21-jdk)
 
 ANDROID_HOME_DEFAULT="${HOME}/android-sdk"
+LOG_FILE="${HOME}/salim-android-setup.log"
 TOOLS_DIR="${HOME}/.local/share/salim-tools"
 ENV_FILE="${HOME}/.salim-android-env"
 
@@ -156,6 +157,36 @@ java_home_of() {
   printf '%s\n' "${real%/bin/java}"
 }
 
+# ---------------------------------------------------------------- memory
+
+# Total usable memory in MiB, or empty if it cannot be read.
+total_mem_mb() {
+  awk '/^MemTotal:/ {printf "%d", $2/1024}' /proc/meminfo 2>/dev/null
+}
+
+# The project's gradle.properties asks for a 3 GB heap, and the Kotlin compiler
+# starts a second JVM. On a small Linux container - a Chromebook is typically
+# given 4-8 GB total - that can starve ChromeOS badly enough that the whole
+# Linux environment is killed. A terminal window that closes mid-build is that
+# symptom: it is not a Gradle error, the machine went away.
+#
+# When memory is tight the build gets a smaller heap and compiles Kotlin inside
+# Gradle's own JVM instead of spawning another one. These are command-line
+# properties, so the checked-in gradle.properties and CI stay untouched.
+low_memory() {
+  local total
+  total="$(total_mem_mb)"
+  [ -n "${total}" ] || return 1
+  [ "${total}" -lt 7000 ]
+}
+
+gradle_memory_flags() {
+  if low_memory; then
+    printf '%s\n' "-Dorg.gradle.jvmargs=-Xmx1536m -XX:MaxMetaspaceSize=512m" \
+                   "-Pkotlin.compiler.execution.strategy=in-process" "--max-workers=2"
+  fi
+}
+
 # ---------------------------------------------------------------- prerequisites
 
 version_of() {
@@ -221,6 +252,16 @@ run_check() {
   fi
 
   head2 "Hardware"
+  local total
+  total="$(total_mem_mb)"
+  if [ -n "${total}" ]; then
+    if low_memory; then
+      warn "${total} MiB of memory - the build uses a 1536 MB heap with in-process"
+      say  "Kotlin compilation, because this project asks for 3 GB by default"
+    else
+      ok "${total} MiB of memory"
+    fi
+  fi
   if [ -w /dev/kvm ] 2>/dev/null; then
     ok "/dev/kvm available — the emulator can run"
   else
@@ -510,9 +551,14 @@ maybe_wrapper() {
 smoke_build() {
   head2 "Smoke build"
   say "cd ${ANDROID_MODULE} && gradle :core:test :app:assembleDebug"
-  local log
+  local log flags
   log="$(mktemp)"
-  if ( cd "${ANDROID_MODULE}" && gradle --no-daemon :core:test :app:assembleDebug ) 2>&1 | tee "${log}"; then
+  flags="$(gradle_memory_flags)"
+  if [ -n "${flags}" ]; then
+    say "low-memory machine: 1536 MB heap, in-process Kotlin, 2 workers"
+  fi
+  # shellcheck disable=SC2086
+  if ( cd "${ANDROID_MODULE}" && gradle --no-daemon ${flags} :core:test :app:assembleDebug ) 2>&1 | tee "${log}"; then
     local apk="${ANDROID_MODULE}/app/build/outputs/apk/debug/app-debug.apk"
     if [ -f "${apk}" ]; then
       ok "APK: ${apk} ($(du -h "${apk}" | cut -f1))"
@@ -543,6 +589,14 @@ if [ "${PRINT_MODULE}" -eq 1 ]; then
   [ -n "${ANDROID_MODULE}" ] || exit 1
   printf '%s\n' "${ANDROID_MODULE}"
   exit 0
+fi
+
+# Everything goes to a log as well as the screen. If the terminal window
+# disappears mid-build, the log survives on disk and shows how far it got.
+if [ -z "${SALIM_SETUP_LOGGED:-}" ] && command -v tee >/dev/null 2>&1; then
+  export SALIM_SETUP_LOGGED=1
+  exec > >(tee -a "${LOG_FILE}") 2>&1
+  printf 'Logging to %s\n' "${LOG_FILE}"
 fi
 
 printf 'Salim Android setup — %s\n' "$(date +%Y-%m-%d)"
