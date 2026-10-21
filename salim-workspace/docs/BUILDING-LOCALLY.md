@@ -156,7 +156,46 @@ adb devices
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Enable USB debugging on the phone; Crostini passes the device through.
+Enable USB debugging on the phone, and share the device with Linux when ChromeOS
+prompts for it.
+
+### `insufficient permissions for device: user is not in the plugdev group`
+
+The phone is being seen — this is a permission on the device node, not a connection
+problem. The account needs to be in `plugdev`, and group membership only applies to
+sessions started *after* the change:
+
+```sh
+sudo usermod -aG plugdev $USER
+adb kill-server
+```
+
+Then shut down the Linux environment completely (right-click the Terminal icon →
+**Shut down Linux**), reopen it, and confirm:
+
+```sh
+groups | grep plugdev
+adb devices
+```
+
+If `adb devices` now lists the phone as `device` rather than `no permissions` or
+`unauthorized`, tap **Allow** on the phone's own prompt. The authorisation dialog only
+appears once the permission problem is gone.
+
+### When USB refuses to cooperate: wireless debugging
+
+Android 11 and later can be reached over the network, which sidesteps USB passthrough
+entirely. On the phone: *Developer options → Wireless debugging → Pair device with
+pairing code*. It shows an address, a port and a six-digit code.
+
+```sh
+adb pair 192.168.1.50:41234      # the pairing address and port from the dialog
+adb connect 192.168.1.50:5555    # the connect address, a different port
+adb devices
+```
+
+The phone and the Chromebook must be on the same network. This is often the faster route
+on Crostini, and it keeps working with the phone on a charger across the room.
 
 ## iOS
 
