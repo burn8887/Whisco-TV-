@@ -112,11 +112,12 @@ The run summary states plainly that nothing was uploaded.
 
 ## Verification of the workflow itself
 
-`python3 salim-workspace/tools/check_workflows.py` (7 tests) checks the three Salim workflows at
-commit time: every `salim-workspace/` path they reference must exist, the pre-rename
-`sahm-workspace/` name must not reappear, no store-upload command may be present, and the signing
-workflow must stay `workflow_dispatch`-only with **every** job in `salim-release`. It was written
-after a stale `sahm-workspace/` path was found in the Android verification step of this workflow.
+`python3 salim-workspace/tools/check_workflows.py` (9 checks) verifies the three Salim workflows at
+commit time: every source path they reference must exist, the pre-rename capsule name must not
+reappear, no store-upload command may be present, and the signing workflow must stay
+`workflow_dispatch`-only with **every** job in `salim-release`. It was written after a stale
+pre-rename path was found in the Android verification step of this workflow. The same script runs
+in the generated standalone repository, where it also rejects any surviving capsule path.
 
 ## Activation: the workflow cannot be dispatched yet
 

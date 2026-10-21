@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble the uploadable Netlify bundle in `salim-workspace/deploy/`.
+"""Assemble the uploadable Netlify bundle in the sibling `deploy/` directory.
 
 `index.html` is the interactive Salim web demonstrator compiled to a single
 self-contained document: CSS, JavaScript and fonts are inlined, so the file works
@@ -24,7 +24,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 CAPSULE = HERE.parent
-WEB = CAPSULE / "apps" / "salim-web"
+# Inside the capsule the web app is apps/salim-web; standalone it is web/ at the root.
+WEB = CAPSULE / "apps" / "salim-web" if (CAPSULE / "apps" / "salim-web").is_dir() else CAPSULE / "web"
 SITE = CAPSULE / "site"
 OUT = CAPSULE / "deploy"
 
@@ -127,9 +128,15 @@ def main(argv: list[str] | None = None) -> int:
     if not (dist / "index.html").is_file():
         raise SystemExit("web build produced no index.html")
 
+    # deploy/README.md documents the Netlify hand-off; it is not a build output and must
+    # survive the rebuild of the generated pages.
+    readme = OUT / "README.md"
+    preserved = readme.read_text(encoding="utf-8") if readme.is_file() else None
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
+    if preserved is not None:
+        readme.write_text(preserved, encoding="utf-8")
 
     problems: list[str] = []
 
@@ -157,7 +164,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"FAIL {problem}", file=sys.stderr)
     if problems:
         return 1
-    print("Deploy bundle ready in salim-workspace/deploy/")
+    print(f"Deploy bundle ready in {OUT}")
     for name, size in sizes.items():
         print(f"  {name:14} {size / 1024:8.1f} KiB")
     return 0

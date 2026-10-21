@@ -12,6 +12,13 @@ import re
 import sys
 from pathlib import Path
 
+TOOLS = Path(__file__).resolve().parent
+
+# The site sits beside the tools in the standalone repository and one level below the
+# repository root inside the capsule. Use one default for whichever layout is present.
+ROOT = TOOLS.parent
+DEFAULT_SITE = ROOT / "site" if (ROOT / "site").is_dir() else ROOT / "salim-workspace" / "site"
+
 REQUIRED_PAGES = ("index.html", "privacy.html", "support.html")
 REQUIRED_FILES = REQUIRED_PAGES + ("style.css",)
 PLACEHOLDER_RE = re.compile(r"<span class=\"placeholder\">([A-Z][A-Z ]*)</span>")
@@ -80,7 +87,7 @@ def check(root: Path, allow_placeholders: bool = False) -> list[str]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("root", nargs="?", default="salim-workspace/site", type=Path)
+    parser.add_argument("root", nargs="?", default=DEFAULT_SITE, type=Path)
     parser.add_argument(
         "--allow-placeholders",
         action="store_true",
