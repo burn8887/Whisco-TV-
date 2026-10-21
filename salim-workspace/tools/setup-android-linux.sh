@@ -396,7 +396,7 @@ install_sdk() {
 
   # sdkmanager is a Java program; make sure the JDK we found is visible to it.
   local java_bin home
-  if java_bin="$(find_java)"; then
+  if java_bin="$(find_java 17)"; then
     home="$(cd "$(dirname "${java_bin}")/.." && pwd)"
     export JAVA_HOME="${home}"
     export PATH="${home}/bin:${PATH}"
@@ -564,11 +564,12 @@ if [ -z "${ANDROID_MODULE}" ]; then
 fi
 
 install_system_packages
-if ! install_java || ! find_java >/dev/null; then
+if ! install_java || ! find_java 17 >/dev/null; then
   echo >&2
   echo "No JDK 17 or newer could be installed, so nothing else can be built." >&2
-  echo "Report the output above; on Debian the fix is usually 'sudo apt-get update'" >&2
-  echo "followed by installing any openjdk-17 package the release offers." >&2
+  echo "Debian 13 ships openjdk-21 rather than 17, so this script provisions 17" >&2
+  echo "itself when apt has none; that needs a working connection to" >&2
+  echo "api.adoptium.net. Fix the network or install a JDK 17 by hand, then re-run." >&2
   exit 1
 fi
 install_sdk
