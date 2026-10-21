@@ -38,6 +38,11 @@ header.site a.brand {
   letter-spacing: -0.5px;
 }
 header.site a.brand svg { flex: none; }
+header.site a.brand .brand-ar {
+  font: 600 16px/1 "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0; opacity: 0.85;
+}
+@media (max-width: 520px) { header.site a.brand .brand-ar { display: none; } }
 header.site nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
 header.site nav a { color: var(--sand); opacity: 0.9; text-decoration: none; }
 header.site nav a:hover, header.site nav a[aria-current="page"] { opacity: 1; text-decoration: underline; }

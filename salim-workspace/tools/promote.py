@@ -50,7 +50,7 @@ KEEP_TOOLS = {
 
 # Documents that describe the capsule itself. Their old identifiers and old paths are the
 # subject matter, so rewriting them would falsify the record.
-NO_REWRITE = {"MIGRATION-TO-OWN-REPO.md", "PROJECT-HISTORY.md"}
+NO_REWRITE = {"MIGRATION-TO-OWN-REPO.md", "PROJECT-HISTORY.md", "SESSION-HANDOFF.md"}
 
 WORKFLOW_FILES = (
     ("salim-android-build.yml", "android.yml"),

@@ -128,6 +128,10 @@ Amber is reserved for genuine caution. If everything is amber, nothing is.
 - **Product name:** Salim — never “Salim App”, “Salim Road” or “Salim Drive” in body copy.
 - **Arabic:** سالم. Do not add the definite article (السالم) in the product name. Never write سليم — that is a different word.
 - **Signature:** `salim.` in the wordmark; “Salim” in running text.
+- **Bilingual lockup:** where the name is shown in both scripts, Latin first then Arabic —
+  `salim.` **سالم** — never the Arabic alone and never the old spelling. Used on the site
+  header and the browser demonstrator; the native apps show the Latin wordmark only, because
+  their Arabic strings are taglines, not the product name.
 - **Store title (approved):** `Salim — Road Awareness`.
 - **Demo builds:** “Salim Demo”, so nobody mistakes a fictional-data build for a released product.
 
