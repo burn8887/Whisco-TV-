@@ -41,9 +41,23 @@ The project's `gradle.properties` asks for `-Xmx3g`, and the Kotlin compiler sta
 second JVM on top. Peak is roughly 5-6 GB. Crostini is often given 4 GB. ChromeOS then
 kills the container, and every terminal window goes with it.
 
-The setup script now checks `/proc/meminfo` and, below 7 GB, builds with a 1536 MB heap,
-in-process Kotlin compilation (no second JVM) and at most two workers. Those are
-command-line properties, so `gradle.properties` and CI are unchanged.
+The setup script checks `/proc/meminfo` and scales the build to the machine:
+
+| Total memory | Heap | Workers | Kotlin |
+| --- | --- | --- | --- |
+| 7 GB or more | project default (3 GB) | default | daemon |
+| 5–7 GB | 2048 MB | 2 | in-process |
+| 3.5–5 GB | 1536 MB | 2 | in-process |
+| under 3.5 GB | 1024 MB | 1 | in-process |
+
+Those are command-line properties, so `gradle.properties` and CI are unchanged.
+
+**Under 3.5 GB a full Compose build is marginal even with a small heap.** A Chromebook
+that reports ~2.7 GB total is below what this project needs; expect the environment to be
+killed at the dependency-download stage. Two honest ways out: close Chrome before
+building, since Crostini's allocation is dynamic and Chrome is the largest consumer, or
+build in CI and install the APK from the run's artifacts. Building is only a means to
+testing on a device, and the artifact gets you there.
 
 Every run also writes `~/salim-android-setup.log`, so the evidence survives a dead
 terminal. After a crash:

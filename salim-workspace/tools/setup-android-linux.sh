@@ -180,11 +180,32 @@ low_memory() {
   [ "${total}" -lt 7000 ]
 }
 
-gradle_memory_flags() {
-  if low_memory; then
-    printf '%s\n' "-Dorg.gradle.jvmargs=-Xmx1536m -XX:MaxMetaspaceSize=512m" \
-                   "-Pkotlin.compiler.execution.strategy=in-process" "--max-workers=2"
+# Flags for a small machine, as an array. They must not be a string: the value of
+# -Dorg.gradle.jvmargs contains spaces, and splitting it produces a stray -XX:
+# argument that makes Gradle abort with "Unknown command-line option '-X'".
+GRADLE_MEMORY_ARGS=()
+
+compute_gradle_memory_args() {
+  GRADLE_MEMORY_ARGS=()
+  local total heap metaspace workers
+  total="$(total_mem_mb)"
+  [ -n "${total}" ] || return 0
+  if [ "${total}" -ge 7000 ]; then
+    return 0
+  elif [ "${total}" -ge 5000 ]; then
+    heap=2048m; metaspace=512m; workers=2
+  elif [ "${total}" -ge 3500 ]; then
+    heap=1536m; metaspace=512m; workers=2
+  else
+    # Under 3.5 GB total there is very little headroom; take the smallest heap
+    # that still compiles Compose, and a single worker.
+    heap=1024m; metaspace=384m; workers=1
   fi
+  GRADLE_MEMORY_ARGS=(
+    "-Dorg.gradle.jvmargs=-Xmx${heap} -XX:MaxMetaspaceSize=${metaspace} -Dfile.encoding=UTF-8"
+    "-Pkotlin.compiler.execution.strategy=in-process"
+    "--max-workers=${workers}"
+  )
 }
 
 # ---------------------------------------------------------------- prerequisites
@@ -256,8 +277,13 @@ run_check() {
   total="$(total_mem_mb)"
   if [ -n "${total}" ]; then
     if low_memory; then
-      warn "${total} MiB of memory - the build uses a 1536 MB heap with in-process"
-      say  "Kotlin compilation, because this project asks for 3 GB by default"
+      compute_gradle_memory_args
+      warn "${total} MiB of total memory - below the 7 GB this project expects"
+      say  "build will use: ${GRADLE_MEMORY_ARGS[0]#-Dorg.gradle.jvmargs=}"
+      if [ "${total}" -lt 3500 ]; then
+        warn "under 3.5 GB a full Compose build may still be killed; close Chrome"
+        say  "before building, or build on a machine with more memory"
+      fi
     else
       ok "${total} MiB of memory"
     fi
@@ -445,7 +471,7 @@ install_sdk() {
 
   say "accepting SDK licences"
   # A rejected licence blocks every later Gradle build with an unrelated message.
-  yes | "${sdkmanager}" --licenses >/dev/null 2>&1 || true
+  yes 2>/dev/null | "${sdkmanager}" --licenses >/dev/null 2>&1 || true
   say "installing ${ANDROID_PACKAGES[*]}"
   "${sdkmanager}" "${ANDROID_PACKAGES[@]}" >/dev/null
   ok "SDK packages installed"
@@ -551,14 +577,16 @@ maybe_wrapper() {
 smoke_build() {
   head2 "Smoke build"
   say "cd ${ANDROID_MODULE} && gradle :core:test :app:assembleDebug"
-  local log flags
+  local log
   log="$(mktemp)"
-  flags="$(gradle_memory_flags)"
-  if [ -n "${flags}" ]; then
-    say "low-memory machine: 1536 MB heap, in-process Kotlin, 2 workers"
+  compute_gradle_memory_args
+  if [ "${#GRADLE_MEMORY_ARGS[@]}" -gt 0 ]; then
+    say "reduced-memory build: ${GRADLE_MEMORY_ARGS[0]#-Dorg.gradle.jvmargs=}"
   fi
-  # shellcheck disable=SC2086
-  if ( cd "${ANDROID_MODULE}" && gradle --no-daemon ${flags} :core:test :app:assembleDebug ) 2>&1 | tee "${log}"; then
+  # The array is expanded as a quoted list, so the jvmargs value keeps its spaces
+  # and reaches Gradle as one argument.
+  if ( cd "${ANDROID_MODULE}" \
+       && gradle --no-daemon ${GRADLE_MEMORY_ARGS[@]+"${GRADLE_MEMORY_ARGS[@]}"} :core:test :app:assembleDebug ) 2>&1 | tee "${log}"; then
     local apk="${ANDROID_MODULE}/app/build/outputs/apk/debug/app-debug.apk"
     if [ -f "${apk}" ]; then
       ok "APK: ${apk} ($(du -h "${apk}" | cut -f1))"
