@@ -4,7 +4,7 @@ This is a **demonstration distribution**, not verified camera coverage or a prod
 
 ## Independent app identity — Founder confirmation required
 
-Brand: **Salim — سليم**. Store titles, taglines and clearance notes are in
+Brand: **Salim — سالم**. Store titles, taglines and clearance notes are in
 [STORE-LISTING-DRAFT.md](STORE-LISTING-DRAFT.md), [BRAND-IDENTITY.md](BRAND-IDENTITY.md) and
 [NAME-CLEARANCE.md](NAME-CLEARANCE.md). A bare “Salim” store title is unlikely to be available.
 

@@ -23,7 +23,7 @@ The materializer refuses to write inside the host repository or overwrite an unr
 
 ## Brand
 
-The product is **Salim — سليم** (“safe, sound”), positioned as the calm co-pilot for the road ahead:
+The product is **Salim — سالم** (“safe, sound”), positioned as the calm co-pilot for the road ahead:
 *Know what's ahead. Keep your calm.* The visual system is an S-shaped road ribbon on Salim Green
 `#1F5C47`. Read [the brand identity](docs/BRAND-IDENTITY.md) before writing copy, drawing screens or
 naming anything, and [the name-clearance notes](docs/NAME-CLEARANCE.md) before making any public

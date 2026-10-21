@@ -8,7 +8,7 @@ system as implemented. It is not a claim of trademark, domain or store-name avai
 
 | Decision | Value | Approved | Consequence |
 | --- | --- | --- | --- |
-| Product name | **Salim — سليم** | 20 Oct 2026 | Applied to code, icons and CI |
+| Product name | **Salim — سالم** | 20 Oct 2026 | Applied to code, icons and CI |
 | Store title | **Salim — Road Awareness** | 20 Oct 2026 | Screenshots, listings and keywords are built around this |
 | Brand domain | **www.salimdrive.com** | 20 Oct 2026 | Privacy and support pages authored in `site/`; **not live yet** |
 
@@ -18,7 +18,9 @@ Store review requires working HTTPS URLs, so the pages must be published before 
 
 ## 1. The name
 
-**Salim** · **سليم** · pronounced *sa-LEEM* (Arabic: /saˈliːm/).
+**Salim** · **سالم** · pronounced *SAA-lim* (Arabic: /ˈsaːlim/).
+
+The Latin spelling stays **Salim**; the Arabic is **سالم** (Sālim), the ordinary Gulf male name and the adjective for “safe, sound, healthy”. An earlier draft used **سليم** (Salīm), which is a different word and reads as *Saleem*; it was replaced on 21 October 2026 so the Arabic and the Latin agree.
 
 From the Arabic root **س-ل-م (s-l-m)**: safe, sound, whole, unblemished, free of defect. The same
 root gives *salām* (peace), *salāma* (safety) and *Islam*. It is one of the most widely understood
@@ -124,7 +126,7 @@ Amber is reserved for genuine caution. If everything is amber, nothing is.
 ## 5. Language and naming conventions
 
 - **Product name:** Salim — never “Salim App”, “Salim Road” or “Salim Drive” in body copy.
-- **Arabic:** سليم. Do not add the definite article (السليم) in the product name.
+- **Arabic:** سالم. Do not add the definite article (السالم) in the product name. Never write سليم — that is a different word.
 - **Signature:** `salim.` in the wordmark; “Salim” in running text.
 - **Store title (approved):** `Salim — Road Awareness`.
 - **Demo builds:** “Salim Demo”, so nobody mistakes a fictional-data build for a released product.
@@ -145,7 +147,9 @@ market.
 
 - **Saudi Arabia:** the largest market and the reason the previous name failed. Salim is common and
   neutral there; no finance, no state and no competing automotive brand is implied. Verify store
-  search for `سليم` before launch — a diet app and medical apps already use the name in Arabic.
+  search for `سالم` before launch. The earlier Arabic spelling `سليم` had known diet and
+  medical apps; the collision set for `سالم` has not been checked and must not be assumed
+  smaller — it is an extremely common given name.
 - **UAE/Qatar/Kuwait/Oman:** same pronunciation, same meaning, no dialect friction.
 - **Türkiye and the Balkans:** *Selim* is a familiar form (including an Ottoman sultan’s name) —
   a curiosity, not a conflict; keep the Latin spelling `Salim`.

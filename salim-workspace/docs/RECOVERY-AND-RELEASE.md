@@ -4,7 +4,7 @@
 
 Canonical source is tracked under `salim-workspace/`; builds materialize a separate disposable tree. Android is native Kotlin/Compose; iOS is native SwiftUI. The browser dashboard remains a separate demonstrator, not a native binary.
 
-Both native demos are branded **Salim — سليم** and include heading-aware proximity filtering, sample section-control entry/exit gates and speed integration, explicit simulated versus device-GPS sessions, bounded spoken alerts/audio restoration, SQLite fictional alert packs, local trip summaries and report drafts, permission disclosures, app icons and in-app privacy notices. Android additionally contains a validated regional delta adapter, disabled by its empty feed URL. iOS remains offline demo-only and has no remote delta synchronization.
+Both native demos are branded **Salim — سالم** and include heading-aware proximity filtering, sample section-control entry/exit gates and speed integration, explicit simulated versus device-GPS sessions, bounded spoken alerts/audio restoration, SQLite fictional alert packs, local trip summaries and report drafts, permission disclosures, app icons and in-app privacy notices. Android additionally contains a validated regional delta adapter, disabled by its empty feed URL. iOS remains offline demo-only and has no remote delta synchronization.
 
 ## Verified runner evidence
 

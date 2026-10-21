@@ -443,7 +443,7 @@ DerivedData/
 .vscode/
 """
 
-README = """# Salim / \u0633\u0644\u064a\u0645
+README = """# Salim / \u0633\u0627\u0644\u0645
 
 **Know what's ahead. Keep your calm.**
 
