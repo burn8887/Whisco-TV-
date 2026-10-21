@@ -13,12 +13,20 @@ import androidx.core.content.ContextCompat
 import app.salim.core.*
 import kotlinx.coroutines.*
 
-/** Explicitly user-started, non-sticky. No boot receiver, hidden tracking, or other-app integration. */
+/**
+ * Explicitly user-started, non-sticky. No boot receiver, hidden tracking, or other-app integration.
+ *
+ * Two providers are requested. GPS alone never fixes indoors or in a car park, and a
+ * network fix is coarse but arrives in seconds, which is enough to prove the location
+ * pipeline works while the satellites are still locking.
+ */
 class DriveService: Service(), LocationListener {
     private lateinit var locations: LocationManager
     private val scope=CoroutineScope(SupervisorJob()+Dispatchers.Main.immediate)
     private var started=false
     private var failure: String?=null
+    private var previous: Location?=null
+    private var lastBearing: Double?=null
     override fun onCreate() {
         super.onCreate();DriveStore.initialize(this);locations=getSystemService(LocationManager::class.java)
         val manager=getSystemService(NotificationManager::class.java)
@@ -39,6 +47,9 @@ class DriveService: Service(), LocationListener {
             started=true;DriveStore.begin(Mode.GPS);DriveStore.onWarning={showAlert(it)}
             if(!locations.isProviderEnabled(LocationManager.GPS_PROVIDER)) { fail("Enable device GPS before starting a test");return START_NOT_STICKY }
             locations.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,0f,this,Looper.getMainLooper())
+            // Coarse fallback. Failure is not an error: the device may have no network
+            // provider augmenting GPS, in which case GPS alone is all there is.
+            runCatching { locations.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,2000,5f,this,Looper.getMainLooper()) }
         } catch(_: SecurityException) { fail("Location permission is unavailable; test stopped") }
           catch(_: IllegalStateException) { fail("Android rejected a background start. Open Salim and try again.") }
         if(started)scope.launch { while(isActive) { delay(2000);if(!precise()) {fail("Location permission revoked; GPS test stopped");break} } }
@@ -48,9 +59,30 @@ class DriveService: Service(), LocationListener {
     private fun fail(message: String) { failure=message;DriveStore.message(message);stopSelf() }
     override fun onLocationChanged(location: Location) {
         if(!started || DriveStore.state.value.mode!=Mode.GPS)return
-        DriveStore.receive(Fix(Point(location.latitude,location.longitude),if(location.hasSpeed())location.speed.toDouble() else -1.0,if(location.hasBearing())location.bearing.toDouble() else null,if(location.hasAccuracy())location.accuracy.toDouble() else -1.0,location.time,location.elapsedRealtimeNanos/1_000_000))
+        val from=previous
+        previous=location
+        // Android omits speed, bearing and sometimes accuracy. The service used to
+        // forward -1.0 for "unknown", and Geo.usable rejects any negative value, so
+        // every fix from a device that does not report speed was discarded and the
+        // app reported no GPS while the phone had one.
+        val seconds=if(from==null)0.0 else (location.elapsedRealtimeNanos-from.elapsedRealtimeNanos)/1_000_000_000.0
+        val moved=if(from==null)0.0 else Geo.distance(Point(from.latitude,from.longitude),Point(location.latitude,location.longitude))
+        val speed=when {
+            location.hasSpeed() -> location.speed.toDouble()
+            seconds>0.0 && moved>0.0 -> (moved/seconds).coerceIn(0.0,70.0)
+            else -> 0.0
+        }
+        val derivedCourse=when {
+            location.hasBearing() -> location.bearing.toDouble()
+            from!=null && moved>3.0 -> Geo.bearing(Point(from.latitude,from.longitude),Point(location.latitude,location.longitude))
+            else -> lastBearing
+        }
+        val course=derivedCourse?.takeIf { it.isFinite() && it>=0.0 && it<360.0 }
+        if(course!=null)lastBearing=course
+        val accuracy=if(location.hasAccuracy())location.accuracy.toDouble() else 50.0
+        DriveStore.receive(Fix(Point(location.latitude,location.longitude),speed,course,accuracy,location.time,location.elapsedRealtimeNanos/1_000_000))
     }
-    override fun onProviderDisabled(provider: String) { if(provider==LocationManager.GPS_PROVIDER)fail("GPS was disabled; test stopped") }
+    override fun onProviderDisabled(provider: String) { if(provider==LocationManager.GPS_PROVIDER && !locations.isProviderEnabled(LocationManager.NETWORK_PROVIDER))fail("GPS was disabled; test stopped") }
     override fun onProviderEnabled(provider: String) {}
     @Deprecated("Legacy location callback") override fun onStatusChanged(provider: String?,status: Int,extras: Bundle?) {}
     private fun showAlert(match: AlertMatch) {
