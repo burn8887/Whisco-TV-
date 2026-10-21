@@ -18,7 +18,13 @@
 # What it installs:
 #   zip, unzip, curl        SDKMAN and unzip both need zip; its absence is the most
 #                           common Crostini failure and stops SDKMAN at the first step
-#   openjdk-17-jdk          AGP 8.13 and Kotlin 2.2 compile against Java 17
+#   a JDK 17 or newer       any JDK already on the machine is used if it is new
+#                           enough; otherwise openjdk-17-jdk, openjdk-17-jdk-headless
+#                           and openjdk-21-jdk-headless are tried in turn, and if apt
+#                           has none of them a Temurin build is unpacked into
+#                           ~/.local/share/salim-tools. Package names differ between
+#                           Debian releases, so a hard dependency on one apt package
+#                           name is a bug.
 #   Android command line tools, platforms;android-36, build-tools;36.0.0
 #   Gradle 8.13             downloaded directly, not through SDKMAN
 #
@@ -31,7 +37,10 @@ GRADLE_URL="https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-b
 CMDLINE_TOOLS_ZIP="commandlinetools-linux-11076708_latest.zip"
 CMDLINE_TOOLS_URL="https://dl.google.com/android/repository/${CMDLINE_TOOLS_ZIP}"
 ANDROID_PACKAGES=("platforms;android-36" "build-tools;36.0.0" "platform-tools")
-APT_PACKAGES=(zip unzip curl openjdk-17-jdk)
+SYSTEM_PACKAGES=(zip unzip curl ca-certificates)
+# Tried in order. Debian bookworm has openjdk-17-jdk; some images only expose the
+# headless variant; anything 17 or newer is fine for AGP 8.13 and Kotlin 2.2.
+JAVA_PACKAGES=(openjdk-17-jdk openjdk-17-jdk-headless openjdk-21-jdk-headless openjdk-21-jdk)
 
 ANDROID_HOME_DEFAULT="${HOME}/android-sdk"
 TOOLS_DIR="${HOME}/.local/share/salim-tools"
@@ -78,14 +87,55 @@ find_android_module() {
   return 1
 }
 
+# ---------------------------------------------------------------- java discovery
+
+# Prints the major version of the given java binary: 17, 21, 8, ...
+java_major() {
+  local bin="$1" version
+  [ -x "${bin}" ] || return 1
+  version="$("${bin}" -version 2>&1 | head -1 | sed -nE 's/.*version "([^"]+)".*/\1/p')"
+  [ -n "${version}" ] || return 1
+  case "${version}" in
+    1.*) printf '%s\n' "${version#1.}" | cut -d. -f1 ;;
+    *)   printf '%s\n' "${version}"   | cut -d. -f1 ;;
+  esac
+}
+
+# Prints the path of a java executable new enough to build with, if one exists.
+# Checks PATH, JAVA_HOME, a previously unpacked Temurin, and JDK tarballs the user
+# has already extracted into their home directory (common on Crostini: people
+# download a JDK before they have a package manager that offers one).
+find_java() {
+  local candidate major
+  local -a candidates=()
+  if command -v java >/dev/null 2>&1; then
+    candidates+=("$(command -v java)")
+  fi
+  if [ -n "${JAVA_HOME:-}" ] && [ -x "${JAVA_HOME}/bin/java" ]; then
+    candidates+=("${JAVA_HOME}/bin/java")
+  fi
+  candidates+=("${TOOLS_DIR}/jdk-17/bin/java")
+  for candidate in "${HOME}"/jdk/bin/java "${HOME}"/jdk/*/bin/java \
+                   "${HOME}"/jdk-*/bin/java "${HOME}"/jdk-*/*/bin/java; do
+    candidates+=("${candidate}")
+  done
+  for candidate in "${candidates[@]}"; do
+    [ -x "${candidate}" ] || continue
+    major="$(java_major "${candidate}" || true)"
+    if [ -n "${major}" ] && [ "${major}" -ge 17 ] 2>/dev/null; then
+      printf '%s\n' "${candidate}"
+      return 0
+    fi
+  done
+  return 1
+}
+
 # ---------------------------------------------------------------- prerequisites
 
 version_of() {
-  # zip and unzip both print banners rather than clean versions, so report the path.
   case "$1" in
-    java)  java -version 2>&1 | head -1 | sed 's/.*version "\([^"]*\)".*/\1/' ;;
-    curl)  curl --version | head -1 | cut -d' ' -f2 ;;
-    *)     command -v "$1" ;;
+    curl) curl --version | head -1 | cut -d' ' -f2 ;;
+    *)    command -v "$1" ;;
   esac
 }
 
@@ -100,10 +150,16 @@ check_command() {
 
 run_check() {
   head2 "Prerequisites"
-  check_command zip   "needed by SDKMAN and by unzip tooling: apt install zip"
+  check_command zip   "apt install zip"
   check_command unzip "apt install unzip"
-  check_command java  "apt install openjdk-17-jdk"
   check_command curl  "apt install curl"
+
+  local java_bin
+  if java_bin="$(find_java)"; then
+    ok "java $(java_major "${java_bin}") at ${java_bin}"
+  else
+    fail "no JDK 17 or newer — the setup script installs one"
+  fi
 
   head2 "Android SDK"
   if [ -n "${ANDROID_HOME:-}" ] && [ -d "${ANDROID_HOME}" ]; then
@@ -111,11 +167,7 @@ run_check() {
   elif [ -d "${ANDROID_HOME_DEFAULT}" ]; then
     ok "Android SDK found at ${ANDROID_HOME_DEFAULT} (not yet on PATH)"
   else
-    if [ -n "${ANDROID_HOME:-}" ]; then
-      fail "ANDROID_HOME=${ANDROID_HOME} does not exist"
-    else
-      fail "no Android SDK: ANDROID_HOME unset and ${ANDROID_HOME_DEFAULT} absent"
-    fi
+    fail "no Android SDK at ANDROID_HOME or ${ANDROID_HOME_DEFAULT}"
   fi
 
   head2 "Gradle"
@@ -162,10 +214,25 @@ if [ "$(id -u)" -ne 0 ]; then
   fi
 fi
 
-install_apt() {
+apt_install() {
+  local pkg="$1"
+  if [ -z "${SUDO}" ] && [ "$(id -u)" -ne 0 ]; then
+    return 1
+  fi
+  DEBIAN_FRONTEND=noninteractive ${SUDO} apt-get install -y -qq "${pkg}" >/dev/null 2>&1
+}
+
+apt_refresh() {
+  say "refreshing package lists"
+  if ! ${SUDO} apt-get update -qq 2>/dev/null; then
+    warn "apt-get update failed; continuing with whatever lists are cached"
+  fi
+}
+
+install_system_packages() {
   head2 "System packages"
-  local missing=()
-  for pkg in "${APT_PACKAGES[@]}"; do
+  local missing=() pkg
+  for pkg in "${SYSTEM_PACKAGES[@]}"; do
     if dpkg -s "${pkg}" >/dev/null 2>&1; then
       ok "${pkg}"
     else
@@ -175,14 +242,90 @@ install_apt() {
   if [ "${#missing[@]}" -eq 0 ]; then
     return 0
   fi
-  say "installing: ${missing[*]}"
-  if [ -z "${SUDO}" ] && [ "$(id -u)" -ne 0 ]; then
-    echo "need root or sudo to install: ${missing[*]}" >&2
-    exit 1
+  apt_refresh
+  for pkg in "${missing[@]}"; do
+    if apt_install "${pkg}"; then
+      ok "installed ${pkg}"
+    else
+      warn "could not install ${pkg} from apt"
+    fi
+  done
+}
+
+install_java() {
+  head2 "Java"
+  local existing
+  if existing="$(find_java)"; then
+    ok "using java $(java_major "${existing}") at ${existing}"
+    return 0
   fi
-  ${SUDO} apt-get update -qq
-  DEBIAN_FRONTEND=noninteractive ${SUDO} apt-get install -y -qq "${missing[@]}"
-  ok "installed ${missing[*]}"
+
+  apt_refresh
+  local pkg
+  for pkg in "${JAVA_PACKAGES[@]}"; do
+    if apt_install "${pkg}"; then
+      hash -r 2>/dev/null || true
+      if existing="$(find_java)"; then
+        ok "installed ${pkg} — java $(java_major "${existing}")"
+        return 0
+      fi
+      warn "${pkg} installed but no java new enough appeared on PATH"
+    fi
+  done
+
+  warn "apt offers no JDK 17 or newer here (package names vary by Debian release)"
+  install_temurin
+}
+
+install_temurin() {
+  local arch
+  case "$(uname -m)" in
+    x86_64|amd64)  arch="x64" ;;
+    aarch64|arm64) arch="aarch64" ;;
+    *) warn "unsupported architecture $(uname -m)"; return 1 ;;
+  esac
+
+  local dest="${TOOLS_DIR}/jdk-17"
+  if [ -x "${dest}/bin/java" ]; then
+    ok "Temurin 17 already unpacked at ${dest}"
+    return 0
+  fi
+
+  local tmp
+  tmp="$(mktemp -d)"
+  say "downloading Temurin 17 for ${arch} (~190 MB)"
+  if ! curl -fsSL -o "${tmp}/jdk.tar.gz" \
+      "https://api.adoptium.net/v3/binary/latest/17/ga/linux/${arch}/jdk/hotspot/normal/eclipse?project=jdk"; then
+    warn "download failed — check the network, then re-run"
+    rm -rf "${tmp}"
+    return 1
+  fi
+
+  say "unpacking"
+  if ! tar -xzf "${tmp}/jdk.tar.gz" -C "${tmp}" 2>/dev/null; then
+    warn "the archive did not unpack"
+    rm -rf "${tmp}"
+    return 1
+  fi
+
+  local extracted
+  extracted="$(find "${tmp}" -maxdepth 1 -mindepth 1 -type d | head -1)"
+  if [ -z "${extracted}" ]; then
+    warn "no directory inside the archive"
+    rm -rf "${tmp}"
+    return 1
+  fi
+  mkdir -p "${TOOLS_DIR}"
+  rm -rf "${dest}"
+  mv "${extracted}" "${dest}"
+  rm -rf "${tmp}"
+
+  if [ -x "${dest}/bin/java" ]; then
+    ok "Temurin $(java_major "${dest}/bin/java") installed at ${dest}"
+  else
+    warn "unpacked, but no bin/java inside"
+    return 1
+  fi
 }
 
 install_sdk() {
@@ -202,6 +345,14 @@ install_sdk() {
     mv "${tmp}/cmdline-tools" "${sdk}/cmdline-tools/latest"
     rm -rf "${tmp}"
     ok "installed into ${sdk}"
+  fi
+
+  # sdkmanager is a Java program; make sure the JDK we found is visible to it.
+  local java_bin home
+  if java_bin="$(find_java)"; then
+    home="$(cd "$(dirname "${java_bin}")/.." && pwd)"
+    export JAVA_HOME="${home}"
+    export PATH="${home}/bin:${PATH}"
   fi
 
   say "accepting SDK licences"
@@ -243,12 +394,20 @@ write_env() {
   head2 "Environment"
   local sdk="${ANDROID_HOME:-${ANDROID_HOME_DEFAULT}}"
   local gradle_bin="${TOOLS_DIR}/gradle-${GRADLE_VERSION}/bin"
+  local java_home=""
+  local java_bin real
+  if java_bin="$(find_java)"; then
+    real="$(readlink -f "${java_bin}")"
+    java_home="${real%/bin/java}"
+  fi
+
   cat > "${ENV_FILE}" <<ENV
 # Salim Android build environment. Add this to ~/.bashrc:
 #   . "${ENV_FILE}"
+export JAVA_HOME="${java_home}"
 export ANDROID_HOME="${sdk}"
 export ANDROID_SDK_ROOT="${sdk}"
-export PATH="\${ANDROID_HOME}/cmdline-tools/latest/bin:\${ANDROID_HOME}/platform-tools:${gradle_bin}:\${PATH}"
+export PATH="\${JAVA_HOME}/bin:\${ANDROID_HOME}/cmdline-tools/latest/bin:\${ANDROID_HOME}/platform-tools:${gradle_bin}:\${PATH}"
 ENV
   ok "wrote ${ENV_FILE}"
   # shellcheck disable=SC1090
@@ -314,7 +473,14 @@ if [ -z "${ANDROID_MODULE}" ]; then
   exit 1
 fi
 
-install_apt
+install_system_packages
+if ! install_java || ! find_java >/dev/null; then
+  echo >&2
+  echo "No JDK 17 or newer could be installed, so nothing else can be built." >&2
+  echo "Report the output above; on Debian the fix is usually 'sudo apt-get update'" >&2
+  echo "followed by installing any openjdk-17 package the release offers." >&2
+  exit 1
+fi
 install_sdk
 install_gradle
 write_env

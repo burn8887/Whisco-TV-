@@ -31,6 +31,26 @@ sudo apt update && sudo apt install -y zip unzip
 Then re-run the SDKMAN installer. This is also why the setup script installs `zip` first and
 downloads Gradle directly instead of going through SDKMAN — one less thing that can fail.
 
+## If the JDK will not install
+
+`E: Unable to locate package openjdk-17-jdk` means the package name does not exist in
+whatever Debian release the container is running, or the package lists have never been
+fetched. Package names move between releases. Check what this machine actually offers:
+
+```sh
+sudo apt-get update
+apt-cache search openjdk | grep -E 'jdk|headless'
+```
+
+Then install any 17-or-newer package that appears, for example
+`sudo apt-get install -y openjdk-21-jdk-headless`. Anything 17 or newer builds this
+project; the exact version does not matter.
+
+The setup script now handles this itself. It uses any JDK 17+ already on the machine,
+including one unpacked into `~/jdk`, then tries four apt package names in turn, and if
+apt offers none of them it downloads a Temurin 17 build into
+`~/.local/share/salim-tools` — no apt, no administrator rights.
+
 ## Android on Linux, including ChromeOS Crostini
 
 From the repository root:
