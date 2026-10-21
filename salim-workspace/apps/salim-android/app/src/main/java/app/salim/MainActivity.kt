@@ -43,6 +43,10 @@ import java.util.Date
 
 private val Forest=Color(0xFF1F5C47)
 private val CanvasColor=Color(0xFFF5F7F0)
+// Secondary and tertiary ink. The framework grey it replaces was 3.54:1 on white,
+// under the 4.5:1 readability floor, so labels read as decoration rather than text.
+private val Muted=Color(0xFF55655A)       // 6.2:1 on white, 5.3:1 on the card tint
+private val AmberInk=Color(0xFF6B5320)    // 6.2:1 on the amber cards
 class MainActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +72,7 @@ class MainActivity: ComponentActivity() {
         } else DriveStore.message("Precise location was denied. Demo mode still works; check system settings for GPS tests.")
     }
     fun stop() { if(state.mode==Mode.GPS)context.stopService(Intent(context,DriveService::class.java)) else DriveStore.end() }
-    Scaffold(topBar={TopAppBar(title={Text(if(tab==0)"salim." else tabs[tab],fontSize=29.sp,fontWeight=FontWeight.Bold)},actions={Text("DEMO · ${state.country}",fontSize=10.sp,color=Forest,modifier=Modifier.padding(end=18.dp))},colors=TopAppBarDefaults.topAppBarColors(containerColor=CanvasColor))},bottomBar={NavigationBar(containerColor=Color.White) { tabs.forEachIndexed { i,title -> NavigationBarItem(selected=tab==i,onClick={tab=i},icon={Icon(icons[i],title)},label={Text(title,fontSize=10.sp)}) } }},containerColor=CanvasColor) { inset ->
+    Scaffold(topBar={TopAppBar(title={Text(if(tab==0)"salim." else tabs[tab],fontSize=29.sp,fontWeight=FontWeight.Bold)},actions={Text("DEMO · ${state.country}",fontSize=12.sp,color=Forest,modifier=Modifier.padding(end=18.dp))},colors=TopAppBarDefaults.topAppBarColors(containerColor=CanvasColor))},bottomBar={NavigationBar(containerColor=Color.White) { tabs.forEachIndexed { i,title -> NavigationBarItem(selected=tab==i,onClick={tab=i},icon={Icon(icons[i],title)},label={Text(title,fontSize=12.sp)}) } }},containerColor=CanvasColor) { inset ->
         Box(Modifier.padding(inset)) {
             when(tab) {
                 0->Dashboard(state,onDemo={DriveStore.begin(Mode.DEMO)},onGPS={disclosure=true},onStop={stop()})
@@ -90,29 +94,29 @@ class MainActivity: ComponentActivity() {
     var destination by remember { mutableStateOf("") }
     val active=state.mode!=Mode.IDLE
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(18.dp)) {
-        item { Column(verticalArrangement=Arrangement.spacedBy(10.dp)) { Text("AWARE, NOT ALARMED",fontSize=9.sp,letterSpacing=1.4.sp,color=Forest);Text("Know what’s ahead.\nKeep your calm.",fontSize=31.sp,lineHeight=39.sp,fontWeight=FontWeight.SemiBold);Text("اعرف ما أمامك. قُد بهدوء.",fontSize=14.sp,color=Color(0xFF6B7A6E));Text("Fictional data · Not for real driving guidance",fontSize=12.sp,color=Color(0xFF9A7144)) } }
+        item { Column(verticalArrangement=Arrangement.spacedBy(10.dp)) { Text("AWARE, NOT ALARMED",fontSize=11.sp,letterSpacing=1.4.sp,color=Forest);Text("Know what’s ahead.\nKeep your calm.",fontSize=31.sp,lineHeight=39.sp,fontWeight=FontWeight.SemiBold);Text("اعرف ما أمامك. قُد بهدوء.",fontSize=14.sp,color=Muted);Text("Fictional data · Not for real driving guidance",fontSize=13.sp,color=AmberInk) } }
         item { Row(horizontalArrangement=Arrangement.spacedBy(12.dp)) { Metric("AWARENESS",if(active)"Test active" else "Ready to go",Modifier.weight(1f));Metric("LOCAL PACK","${state.hazards.size} alerts",Modifier.weight(1f)) } }
         item { Card(colors=CardDefaults.cardColors(containerColor=Color.White),shape=RoundedCornerShape(16.dp)) {
-            Row(Modifier.fillMaxWidth().padding(16.dp),horizontalArrangement=Arrangement.SpaceBetween) { Text("Your surroundings",fontWeight=FontWeight.Medium);Text("Bahrain demo",fontSize=11.sp,color=Forest) }
+            Row(Modifier.fillMaxWidth().padding(16.dp),horizontalArrangement=Arrangement.SpaceBetween) { Text("Your surroundings",fontWeight=FontWeight.Medium);Text("Bahrain demo",fontSize=12.sp,color=Forest) }
             Illustration()
-            Row(Modifier.fillMaxWidth().padding(16.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Column { Text("${state.fix?.let { (it.speed*3.6).toInt() } ?: "—"} km/h",fontSize=28.sp,fontWeight=FontWeight.SemiBold);Text(if(state.mode==Mode.DEMO)"SIMULATED SPEED" else "DEVICE GPS",fontSize=8.sp,color=Color.Gray) };Row(verticalAlignment=Alignment.CenterVertically) { Icon(Icons.Outlined.VolumeUp,"Voice alerts",tint=Forest);Switch(checked=state.voice,onCheckedChange=DriveStore::setVoice) } }
-            Text("Illustrative map · No live navigation",fontSize=9.sp,color=Color.Gray,modifier=Modifier.padding(start=16.dp,bottom=14.dp))
+            Row(Modifier.fillMaxWidth().padding(16.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) { Column { Text("${state.fix?.let { (it.speed*3.6).toInt() } ?: "—"} km/h",fontSize=28.sp,fontWeight=FontWeight.SemiBold);Text(if(state.mode==Mode.DEMO)"SIMULATED SPEED" else "DEVICE GPS",fontSize=11.sp,color=Muted) };Row(verticalAlignment=Alignment.CenterVertically) { Icon(Icons.Outlined.VolumeUp,"Voice alerts",tint=Forest);Switch(checked=state.voice,onCheckedChange=DriveStore::setVoice) } }
+            Text("Illustrative map · No live navigation",fontSize=11.sp,color=Muted,modifier=Modifier.padding(start=16.dp,bottom=14.dp))
         } }
-        state.average?.let { average -> item { Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFE9F0DE))) { Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) { Text("DEMO SECTION CONTROL",fontSize=10.sp,color=Forest);Text("${"%.1f".format(average.kmh)} km/h",fontSize=30.sp,fontWeight=FontWeight.SemiBold);Text(if(average.estimated)"Estimated GPS average · Includes stopped time" else "Completed · Sample surveyed-length average",fontSize=11.sp);Text("Sample limit ${average.limit} km/h. Not an enforcement measurement.",fontSize=10.sp,color=Color.Gray) } } } }
-        state.warning?.let { warning -> item { Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFF4EDD7))) { Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) { Text("ON YOUR RADAR · DEMO",fontSize=10.sp);Text(warning.hazard.title,fontSize=23.sp,fontWeight=FontWeight.SemiBold);Text(warning.hazard.road,fontSize=12.sp);Text("${warning.meters.toInt()} m at alert time",fontWeight=FontWeight.Medium);Text("Always follow actual posted signs.",fontSize=10.sp) } } } }
+        state.average?.let { average -> item { Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFE9F0DE))) { Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) { Text("DEMO SECTION CONTROL",fontSize=12.sp,color=Forest);Text("${"%.1f".format(average.kmh)} km/h",fontSize=30.sp,fontWeight=FontWeight.SemiBold);Text(if(average.estimated)"Estimated GPS average · Includes stopped time" else "Completed · Sample surveyed-length average",fontSize=12.sp);Text("Sample limit ${average.limit} km/h. Not an enforcement measurement.",fontSize=12.sp,color=Muted) } } } }
+        state.warning?.let { warning -> item { Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFF4EDD7))) { Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) { Text("ON YOUR RADAR · DEMO",fontSize=12.sp);Text(warning.hazard.title,fontSize=23.sp,fontWeight=FontWeight.SemiBold);Text(warning.hazard.road,fontSize=13.sp);Text("${warning.meters.toInt()} m at alert time",fontWeight=FontWeight.Medium);Text("Always follow actual posted signs.",fontSize=12.sp) } } } }
         item { Column(verticalArrangement=Arrangement.spacedBy(10.dp)) {
-            Text(state.status,fontSize=12.sp,color=Forest)
-            Text(state.feed,fontSize=10.sp,color=Color.Gray)
+            Text(state.status,fontSize=13.sp,color=Forest)
+            Text(state.feed,fontSize=12.sp,color=Muted)
             if(active)Button(onClick=onStop,modifier=Modifier.fillMaxWidth().height(50.dp),shape=RoundedCornerShape(9.dp)){Icon(Icons.Outlined.Stop,null);Spacer(Modifier.width(8.dp));Text("End test · ${state.seconds/60}m ${state.seconds%60}s")}
             else { Button(onClick=onDemo,enabled=state.country=="BH",modifier=Modifier.fillMaxWidth().height(50.dp),shape=RoundedCornerShape(9.dp)){Icon(Icons.Outlined.PlayArrow,null);Spacer(Modifier.width(8.dp));Text("Run a simulated drive")};OutlinedButton(onClick=onGPS,modifier=Modifier.fillMaxWidth()){Text("Start device GPS test")} }
         } }
-        item { Text("NEARBY DEMO ALERTS",fontSize=10.sp,letterSpacing=1.sp,color=Forest) }
-        items(state.hazards,key={it.id}) { hazard -> Card(colors=CardDefaults.cardColors(containerColor=Color.White)) { Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(12.dp)) { Icon(Icons.Outlined.Warning,null,tint=Color(0xFFAE9861));Column {Text(hazard.title,fontWeight=FontWeight.Medium);Text(hazard.road,fontSize=11.sp,color=Color.Gray)} } } }
+        item { Text("NEARBY DEMO ALERTS",fontSize=12.sp,letterSpacing=1.sp,color=Forest) }
+        items(state.hazards,key={it.id}) { hazard -> Card(colors=CardDefaults.cardColors(containerColor=Color.White)) { Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(12.dp)) { Icon(Icons.Outlined.Warning,null,tint=AmberInk);Column {Text(hazard.title,fontWeight=FontWeight.Medium);Text(hazard.road,fontSize=12.sp,color=Muted)} } } }
         item { OutlinedTextField(value=destination,onValueChange={destination=it.take(120)},enabled=!active,label={Text("Where are you heading?")},singleLine=true,modifier=Modifier.fillMaxWidth());OutlinedButton(onClick={runCatching {context.startActivity(Intent(Intent.ACTION_VIEW,Uri.parse("geo:26.22,50.55?q=${Uri.encode(destination)}")))}.onFailure{DriveStore.message("No compatible maps app is installed")}},enabled=destination.isNotBlank()&&!active,modifier=Modifier.fillMaxWidth()){Text("Open destination in Maps")} }
-        item { Text("Simulation runs only while this app is in the foreground. A GPS test uses a visible location service. OS force-stop and battery restrictions may interrupt it. End the test when finished.",fontSize=10.sp,lineHeight=17.sp,color=Color.Gray) }
+        item { Text("Simulation runs only while this app is in the foreground. A GPS test uses a visible location service. OS force-stop and battery restrictions may interrupt it. End the test when finished.",fontSize=12.sp,lineHeight=17.sp,color=Muted) }
     }
 }
-@Composable private fun Metric(label: String,value: String,modifier: Modifier) { Card(modifier,colors=CardDefaults.cardColors(containerColor=Color.White),shape=RoundedCornerShape(13.dp)) { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {Text(label,fontSize=8.sp,color=Color.Gray);Text(value,fontSize=19.sp,fontWeight=FontWeight.SemiBold)} } }
+@Composable private fun Metric(label: String,value: String,modifier: Modifier) { Card(modifier,colors=CardDefaults.cardColors(containerColor=Color.White),shape=RoundedCornerShape(13.dp)) { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(10.dp)) {Text(label,fontSize=11.sp,color=Muted);Text(value,fontSize=19.sp,fontWeight=FontWeight.SemiBold)} } }
 @Composable private fun Illustration() {
     Canvas(Modifier.fillMaxWidth().height(235.dp).semantics { contentDescription="Illustration of Bahrain roads. Not a navigation map." }) {
         drawRect(Color(0xFFDCEBE5))
@@ -129,9 +133,9 @@ class MainActivity: ComponentActivity() {
 @Composable private fun Trips(state: DriveState) {
     var clear by remember { mutableStateOf(false) }
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)) {
-        item { Text("Session summaries stay on this device. Precise routes are not saved.",fontSize=12.sp,color=Color.Gray) }
+        item { Text("Session summaries stay on this device. Precise routes are not saved.",fontSize=13.sp,color=Muted) }
         if(state.trips.isEmpty())item { Text("Your next journey starts here. Run a demo and finish it to see a summary.",modifier=Modifier.padding(vertical=60.dp)) }
-        items(state.trips,key={it.id}) { trip->Card(colors=CardDefaults.cardColors(containerColor=Color.White)) { Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) { Text(if(trip.interrupted)"Interrupted session · Duration unknown" else if(trip.demo)"Simulated drive" else "Device GPS test",fontWeight=FontWeight.Medium);Text(DateFormat.getDateTimeInstance().format(Date(trip.at)),fontSize=11.sp,color=Color.Gray);if(!trip.interrupted)Text("${trip.seconds/60}m ${trip.seconds%60}s · ${trip.alerts} alerts",fontSize=12.sp) } } }
+        items(state.trips,key={it.id}) { trip->Card(colors=CardDefaults.cardColors(containerColor=Color.White)) { Column(Modifier.fillMaxWidth().padding(20.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) { Text(if(trip.interrupted)"Interrupted session · Duration unknown" else if(trip.demo)"Simulated drive" else "Device GPS test",fontWeight=FontWeight.Medium);Text(DateFormat.getDateTimeInstance().format(Date(trip.at)),fontSize=12.sp,color=Muted);if(!trip.interrupted)Text("${trip.seconds/60}m ${trip.seconds%60}s · ${trip.alerts} alerts",fontSize=13.sp) } } }
         if(state.trips.isNotEmpty())item {TextButton(onClick={clear=true}){Text("Delete local trip history")}}
     }
     if(clear)AlertDialog(onDismissRequest={clear=false},title={Text("Delete trip history?")},text={Text("This removes local summaries and cannot be undone.")},confirmButton={TextButton(onClick={DriveStore.clearTrips();clear=false}){Text("Delete")}},dismissButton={TextButton(onClick={clear=false}){Text("Cancel")}})
@@ -139,11 +143,11 @@ class MainActivity: ComponentActivity() {
 @Composable private fun Community(state: DriveState) {
     var road by remember {mutableStateOf("")};var kind by remember {mutableStateOf("Road hazard")}
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(16.dp)) {
-        item {Text("A little heads-up. A safer road.",fontSize=25.sp,fontWeight=FontWeight.SemiBold);Spacer(Modifier.height(12.dp));Text("Only report when safely parked. These are local drafts, not published community alerts.",fontSize=12.sp,color=Color.Gray)}
+        item {Text("A little heads-up. A safer road.",fontSize=25.sp,fontWeight=FontWeight.SemiBold);Spacer(Modifier.height(12.dp));Text("Only report when safely parked. These are local drafts, not published community alerts.",fontSize=13.sp,color=Muted)}
         item {Column {listOf("Road hazard","Roadworks","Speed camera","Traffic congestion").forEach {type->Row(verticalAlignment=Alignment.CenterVertically){RadioButton(selected=kind==type,onClick={kind=type},enabled=state.mode==Mode.IDLE);Text(type,fontSize=13.sp)}}}}
         item {OutlinedTextField(value=road,onValueChange={road=it.take(120)},label={Text("Road or location")},enabled=state.mode==Mode.IDLE,modifier=Modifier.fillMaxWidth())}
         item {Button(onClick={DriveStore.draft(road,kind);road=""},enabled=road.isNotBlank()&&state.mode==Mode.IDLE,modifier=Modifier.fillMaxWidth()){Text("Save local draft")}}
-        items(state.drafts,key={it.id}) {draft->Card(colors=CardDefaults.cardColors(containerColor=Color.White)){Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text(draft.kind);Text(draft.road,fontSize=11.sp,color=Color.Gray);Text("Local · Unverified",fontSize=9.sp,color=Color.Gray)};IconButton(onClick={DriveStore.deleteDraft(draft.id)}){Icon(Icons.Outlined.Delete,"Delete report")}}}}
+        items(state.drafts,key={it.id}) {draft->Card(colors=CardDefaults.cardColors(containerColor=Color.White)){Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text(draft.kind);Text(draft.road,fontSize=12.sp,color=Muted);Text("Local · Unverified",fontSize=11.sp,color=Muted)};IconButton(onClick={DriveStore.deleteDraft(draft.id)}){Icon(Icons.Outlined.Delete,"Delete report")}}}}
     }
 }
 @Composable private fun Preferences(state: DriveState) {
@@ -158,12 +162,12 @@ class MainActivity: ComponentActivity() {
         )
     }
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(20.dp)) {
-        item {Row(verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text("Voice alerts",fontWeight=FontWeight.Medium);Text("Temporarily ducks audio when supported",fontSize=11.sp,color=Color.Gray)};Switch(checked=state.voice,onCheckedChange=DriveStore::setVoice)}}
-        item {Text("COUNTRY",fontSize=10.sp,color=Forest);Column {listOf("BH","SA","AE","QA","KW","OM").chunked(3).forEach {row->Row(horizontalArrangement=Arrangement.spacedBy(10.dp)){row.forEach {code->FilterChip(selected=state.country==code,onClick={DriveStore.country(code)},label={Text(code)},enabled=state.mode==Mode.IDLE)}}}}}
-        item {Text("Only Bahrain has a bundled fictional pack. No country has verified live coverage in this test build.",fontSize=12.sp,color=Color.Gray)}
-        item {Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFEAF0E1))){Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)){Icon(Icons.Outlined.Shield,null,tint=Forest);Text("Your journey stays yours.",fontWeight=FontWeight.Medium);Text("No account, ads or billing SDKs are active in this test build. Static alerts remain in SQLite offline. No route is uploaded. If configured later, regional sync reveals only a coarse tile.",fontSize=12.sp,lineHeight=19.sp)}}}
+        item {Row(verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text("Voice alerts",fontWeight=FontWeight.Medium);Text("Temporarily ducks audio when supported",fontSize=12.sp,color=Muted)};Switch(checked=state.voice,onCheckedChange=DriveStore::setVoice)}}
+        item {Text("COUNTRY",fontSize=12.sp,color=Forest);Column {listOf("BH","SA","AE","QA","KW","OM").chunked(3).forEach {row->Row(horizontalArrangement=Arrangement.spacedBy(10.dp)){row.forEach {code->FilterChip(selected=state.country==code,onClick={DriveStore.country(code)},label={Text(code)},enabled=state.mode==Mode.IDLE)}}}}}
+        item {Text("Only Bahrain has a bundled fictional pack. No country has verified live coverage in this test build.",fontSize=13.sp,color=Muted)}
+        item {Card(colors=CardDefaults.cardColors(containerColor=Color(0xFFEAF0E1))){Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)){Icon(Icons.Outlined.Shield,null,tint=Forest);Text("Your journey stays yours.",fontWeight=FontWeight.Medium);Text("No account, ads or billing SDKs are active in this test build. Static alerts remain in SQLite offline. No route is uploaded. If configured later, regional sync reveals only a coarse tile.",fontSize=13.sp,lineHeight=19.sp)}}}
         item {OutlinedButton(onClick={context.startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.parse("package:${context.packageName}")))},modifier=Modifier.fillMaxWidth()){Text("Open system permissions")}}
         item {OutlinedButton(onClick={privacy=true},modifier=Modifier.fillMaxWidth()){Text("Read privacy notice")}}
-        item {Text("Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay/Android Auto, watches, automatic vehicle startup, premium 3D navigation and billing are not enabled in this build. In an emergency in Bahrain, call 999.",fontSize=11.sp,lineHeight=18.sp,color=Color.Gray)}
+        item {Text("Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay/Android Auto, watches, automatic vehicle startup, premium 3D navigation and billing are not enabled in this build. In an emergency in Bahrain, call 999.",fontSize=12.sp,lineHeight=18.sp,color=Muted)}
     }
 }

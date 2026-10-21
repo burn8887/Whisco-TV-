@@ -3,7 +3,7 @@
   color: #2c3d32;
   background: #f7f9f6;
   font-synthesis: none;
-  font-size: 13px;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
   --green: #1f5c47;
   --muted: #929d8e;
@@ -81,14 +81,14 @@ p {
   flex: none;
 }
 .brand span span {
-  color: #8fab83;
+  color: #55655a;
 }
 .brand .brand-ar {
   font:
     600 15px Manrope,
     sans-serif;
   letter-spacing: 0;
-  color: #98a18f;
+  color: #55655a;
   align-self: center;
 }
 @media (max-width: 720px) {
@@ -97,10 +97,10 @@ p {
   }
 }
 .nav-label {
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 1.6px;
   font-weight: 600;
-  color: #98a18f;
+  color: #55655a;
   margin: 35px 14px 17px;
 }
 .nav-item {
@@ -114,8 +114,8 @@ p {
   margin-bottom: 5px;
   text-align: left;
   border-radius: 7px;
-  color: #7d8977;
-  font-size: 12px;
+  color: #55655a;
+  font-size: 14px;
 }
 .nav-item svg {
   stroke-width: 1.6;
@@ -165,7 +165,7 @@ p {
   border: 1px solid #e2e9d7;
   border-radius: 10px;
   padding: 21px 16px;
-  color: #778b61;
+  color: #55655a;
 }
 .mobile-card:after {
   content: "";
@@ -183,15 +183,15 @@ p {
   pointer-events: none;
 }
 .mobile-card h3 {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: #3c4e34;
   margin-top: 17px;
 }
 .mobile-card p {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.8;
-  color: #879779;
+  color: #55655a;
   margin-top: 8px;
 }
 .mobile-card button {
@@ -203,17 +203,17 @@ p {
   border-radius: 5px;
   width: 100%;
   padding: 9px;
-  font-size: 10px;
+  font-size: 11px;
   margin-top: 16px;
   color: #536944;
 }
 .mobile-card small {
   display: block;
   text-align: center;
-  font-size: 7px;
+  font-size: 9px;
   letter-spacing: 1.4px;
   margin-top: 12px;
-  color: #9caa8b;
+  color: #55655a;
 }
 .profile {
   display: flex;
@@ -232,18 +232,18 @@ p {
   display: grid;
   place-items: center;
   font-family: serif;
-  color: #6f885a;
+  color: #55655a;
 }
 .profile strong {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 .profile small {
   display: block;
-  font-size: 8px;
+  font-size: 10px;
   margin-top: 4px;
-  color: #9da891;
+  color: #55655a;
 }
 .profile button {
   margin-left: auto;
@@ -267,16 +267,16 @@ p {
   display: flex;
   align-items: center;
   gap: 17px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .breadcrumb > span {
-  color: #9aa490;
+  color: #55655a;
 }
 .breadcrumb strong {
   font-weight: 500;
 }
 .breadcrumb > svg {
-  color: #b6c0ac;
+  color: #55655a;
 }
 .top-actions {
   display: flex;
@@ -287,8 +287,8 @@ p {
   display: flex;
   gap: 7px;
   align-items: center;
-  color: #839476;
-  font-size: 10px;
+  color: #55655a;
+  font-size: 11px;
 }
 .country {
   display: flex;
@@ -302,8 +302,8 @@ p {
   appearance: none;
   border: 0;
   background: none;
-  color: #6e7c62;
-  font-size: 11px;
+  color: #55655a;
+  font-size: 12px;
   cursor: pointer;
 }
 .flag {
@@ -342,7 +342,7 @@ p {
   padding: 8px;
   display: grid;
   place-items: center;
-  color: #7b8b6d;
+  color: #55655a;
 }
 .notification {
   position: relative;
@@ -375,9 +375,9 @@ main {
   margin-bottom: 28px;
 }
 .eyebrow {
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 1.8px;
-  color: #78916c;
+  color: #55655a;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -388,8 +388,8 @@ h1 {
   letter-spacing: -1.05px;
 }
 .page-heading p {
-  font-size: 11px;
-  color: #929e88;
+  font-size: 12px;
+  color: #55655a;
   margin-top: 8px;
 }
 .primary {
@@ -403,7 +403,7 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
   white-space: nowrap;
 }
 .primary:hover {
@@ -434,13 +434,13 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #819574;
+  color: #55655a;
   gap: 4px;
 }
 .stat-top > span {
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 1px;
-  color: #8e9b82;
+  color: #55655a;
   white-space: nowrap;
 }
 .stat-value {
@@ -460,20 +460,20 @@ h1 {
   font-size: 24px;
 }
 .stat-value > span {
-  font-size: 9px;
-  color: #9ca68f;
+  font-size: 10px;
+  color: #55655a;
 }
 .stat-footer {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 8px;
+  font-size: 10px;
   margin-top: 14px;
-  color: #97a488;
+  color: #55655a;
   white-space: nowrap;
 }
 .stat-footer > span {
-  font-size: 6px;
+  font-size: 8px;
   letter-spacing: 0.7px;
   margin-left: auto;
   border: 1px solid #e5ebdc;
@@ -509,26 +509,26 @@ h1 {
   gap: 9px;
 }
 .panel-title svg {
-  color: #859875;
+  color: #55655a;
   stroke-width: 1.5;
 }
 h2 {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.15px;
 }
 .badge {
   padding: 3px 6px;
-  font-size: 8px;
+  font-size: 10px;
   border: 1px solid #e6ecdb;
   background: #f3f7ec;
   border-radius: 4px;
-  color: #90a07c;
+  color: #55655a;
   white-space: nowrap;
 }
 .live-label {
-  font-size: 8px;
-  color: #8b9d78;
+  font-size: 10px;
+  color: #55655a;
 }
 .map-container {
   position: relative;
@@ -557,9 +557,9 @@ h2 {
   position: absolute;
   bottom: 3px;
   right: 4px;
-  font-size: 6px;
+  font-size: 8px;
   background: #f8faedcc;
-  color: #8d977f;
+  color: #55655a;
   padding: 2px 3px;
   pointer-events: none;
 }
@@ -574,7 +574,7 @@ h2 {
   place-items: center;
   box-shadow: 0 2px 8px #354b392b;
   background: #e7cf8e;
-  color: #84784b;
+  color: #6b5320;
   z-index: 3;
 }
 .map-marker:after {
@@ -589,7 +589,7 @@ h2 {
 }
 .map-marker.roadwork {
   background: #e2a579;
-  color: #8e623e;
+  color: #6b5320;
 }
 .map-marker.hazard {
   background: #dca18a;
@@ -634,23 +634,23 @@ h2 {
   border-radius: 6px;
   padding: 0 12px;
   box-shadow: 0 3px 10px #36523113;
-  color: #93a184;
+  color: #55655a;
   z-index: 12;
 }
 .map-search input {
   border: 0;
   outline: none;
   background: none;
-  font-size: 10px;
+  font-size: 11px;
   min-width: 0;
   width: 100%;
-  color: #61774f;
+  color: #456a53;
 }
 .map-search input::placeholder {
-  color: #9ca68d;
+  color: #55655a;
 }
 .map-search kbd {
-  font-size: 8px;
+  font-size: 10px;
   background: #f7f9f2;
   border: 1px solid #e7ecdd;
   border-radius: 3px;
@@ -677,7 +677,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  font-size: 7px;
+  font-size: 9px;
   letter-spacing: 1px;
 }
 .search-results > button {
@@ -694,18 +694,18 @@ h2 {
 }
 .search-results > button span {
   flex: 1;
-  font-size: 10px;
-  color: #627652;
+  font-size: 11px;
+  color: #456a53;
 }
 .search-results small {
   display: block;
-  font-size: 8px;
+  font-size: 10px;
   margin-top: 4px;
-  color: #a0ad91;
+  color: #55655a;
 }
 .search-results p {
   padding: 10px;
-  font-size: 10px;
+  font-size: 11px;
 }
 .layer-control {
   position: absolute;
@@ -721,7 +721,7 @@ h2 {
   background: white;
   border: 1px solid #dfe7d6;
   border-radius: 6px;
-  color: #849674;
+  color: #55655a;
 }
 .layer-menu {
   position: absolute;
@@ -735,7 +735,7 @@ h2 {
   box-shadow: 0 5px 20px #36573120;
 }
 .layer-menu strong {
-  font-size: 11px;
+  font-size: 12px;
   display: block;
   margin-bottom: 10px;
 }
@@ -744,8 +744,8 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  font-size: 10px;
-  color: #889a75;
+  font-size: 11px;
+  color: #55655a;
 }
 .compass {
   position: absolute;
@@ -755,8 +755,8 @@ h2 {
   flex-direction: column;
   gap: 4px;
   align-items: center;
-  font-size: 8px;
-  color: #768968;
+  font-size: 10px;
+  color: #55655a;
 }
 .compass svg {
   transform: rotate(-14deg);
@@ -776,7 +776,7 @@ h2 {
   width: 33px;
   height: 34px;
   border-bottom: 1px solid #e8eddf;
-  color: #839672;
+  color: #55655a;
 }
 .zoom-controls button:last-child {
   border: 0;
@@ -807,8 +807,8 @@ h2 {
 }
 .speed-card small {
   display: block;
-  font-size: 7px;
-  color: #9aa78c;
+  font-size: 9px;
+  color: #55655a;
   margin-top: 4px;
 }
 .limit {
@@ -819,16 +819,16 @@ h2 {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   margin-left: 6px;
 }
 .speed-card p {
-  font-size: 9px;
-  color: #849674;
+  font-size: 10px;
+  color: #55655a;
 }
 .speed-card p small {
-  font-size: 6px;
+  font-size: 8px;
   margin-top: 5px;
 }
 .report-map {
@@ -842,7 +842,7 @@ h2 {
   align-items: center;
   gap: 6px;
   padding: 10px 13px;
-  font-size: 10px;
+  font-size: 11px;
 }
 .marker-detail {
   position: absolute;
@@ -855,7 +855,7 @@ h2 {
   z-index: 10;
   box-shadow: 0 5px 25px #35532c29;
   max-width: 230px;
-  color: #869a73;
+  color: #55655a;
 }
 .marker-detail > button {
   position: absolute;
@@ -866,16 +866,16 @@ h2 {
 }
 .marker-detail strong {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   color: #4d6940;
   margin-top: 9px;
 }
 .marker-detail p {
-  font-size: 9px;
+  font-size: 10px;
   margin-top: 6px;
 }
 .marker-detail small {
-  font-size: 8px;
+  font-size: 10px;
   display: block;
   margin-top: 8px;
 }
@@ -887,8 +887,8 @@ h2 {
   justify-content: space-between;
   padding: 0 16px;
   gap: 8px;
-  color: #93a382;
-  font-size: 8px;
+  color: #55655a;
+  font-size: 10px;
 }
 .map-footer > span {
   display: flex;
@@ -897,8 +897,8 @@ h2 {
   white-space: nowrap;
 }
 .map-footer small {
-  font-size: 7px;
-  color: #a2ae92;
+  font-size: 9px;
+  color: #55655a;
 }
 .map-footer b {
   width: 9px;
@@ -933,9 +933,9 @@ h2 {
   margin-bottom: 21px;
 }
 .radar-label > span:first-child {
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 1.4px;
-  color: #889d72;
+  color: #55655a;
 }
 .radar-heading {
   display: flex;
@@ -950,7 +950,7 @@ h2 {
   background: #f2ecd9;
   border: 1px solid #e9dfc0;
   border-radius: 10px;
-  color: #a9955c;
+  color: #6b5320;
   flex-shrink: 0;
 }
 .radar h3 {
@@ -959,16 +959,16 @@ h2 {
   font-weight: 600;
 }
 .radar-heading p {
-  font-size: 8px;
-  color: #9aa98c;
+  font-size: 10px;
+  color: #55655a;
   margin-top: 6px;
 }
 .road-label {
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #8fa180;
-  font-size: 8px;
+  color: #55655a;
+  font-size: 10px;
   margin: 13px 0 16px;
 }
 .distance {
@@ -978,8 +978,8 @@ h2 {
   gap: 10px;
 }
 .distance > span {
-  font-size: 10px;
-  color: #8fa080;
+  font-size: 11px;
+  color: #55655a;
   white-space: nowrap;
 }
 .distance strong {
@@ -994,8 +994,8 @@ h2 {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 7px;
-  color: #92a27d;
+  font-size: 9px;
+  color: #55655a;
 }
 .distance-track {
   height: 4px;
@@ -1016,8 +1016,8 @@ h2 {
   align-items: center;
   border-top: 1px solid #e8eddf;
   padding: 13px 0;
-  font-size: 9px;
-  color: #8b9d78;
+  font-size: 10px;
+  color: #55655a;
 }
 .voice-row > span {
   flex: 1;
@@ -1058,16 +1058,16 @@ h2 {
   margin: 0 16px 6px;
 }
 .filters button {
-  font-size: 8px;
+  font-size: 10px;
   padding: 5px 9px;
-  color: #98a58a;
+  color: #55655a;
   border: 1px solid transparent;
   border-radius: 4px;
 }
 .filters .selected {
   background: #f1f5e9;
   border-color: #e3ebd7;
-  color: #768c63;
+  color: #55655a;
 }
 .nearby-list {
   padding: 0 16px;
@@ -1093,14 +1093,14 @@ h2 {
 }
 .nearby-item strong {
   display: block;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
-  color: #627c50;
+  color: #456a53;
 }
 .nearby-item > div > span {
   display: block;
-  font-size: 7px;
-  color: #9eae8b;
+  font-size: 9px;
+  color: #55655a;
   margin-top: 5px;
   white-space: nowrap;
   overflow: hidden;
@@ -1108,12 +1108,12 @@ h2 {
 }
 .nearby-item small {
   display: block;
-  font-size: 7px;
-  color: #a8b498;
+  font-size: 9px;
+  color: #55655a;
   margin-top: 5px;
 }
 .nearby-item > svg {
-  color: #bdc8ae;
+  color: #55655a;
 }
 .alert-icon {
   width: 31px;
@@ -1123,18 +1123,18 @@ h2 {
   place-items: center;
   background: #f8f3e4;
   border: 1px solid #eee5c9;
-  color: #ad9b64;
+  color: #6b5320;
   border-radius: 7px;
 }
 .alert-icon.roadwork {
   background: #faf0e7;
   border-color: #f1dfcb;
-  color: #c09d76;
+  color: #6b5320;
 }
 .alert-icon.hazard {
   background: #faefea;
   border-color: #f0ded3;
-  color: #be9581;
+  color: #7c4835;
 }
 .view-all {
   display: flex;
@@ -1144,8 +1144,8 @@ h2 {
   width: 100%;
   border-top: 1px solid #eaf0e0;
   padding: 12px;
-  font-size: 8px;
-  color: #789166;
+  font-size: 10px;
+  color: #55655a;
 }
 .bottom-grid {
   display: grid;
@@ -1168,17 +1168,17 @@ h2 {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  color: #89a074;
+  color: #55655a;
 }
 .drive-card h3,
 .community-card h3 {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 .drive-card p,
 .community-card p {
-  font-size: 8px;
-  color: #9dab8d;
+  font-size: 10px;
+  color: #55655a;
   margin-top: 7px;
   line-height: 1.8;
 }
@@ -1191,7 +1191,7 @@ h2 {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  color: #8aa377;
+  color: #55655a;
 }
 .community-card {
   background: #f1f5e8;
@@ -1200,7 +1200,7 @@ h2 {
   align-items: center;
   gap: 18px;
   padding: 20px;
-  color: #8ca274;
+  color: #55655a;
 }
 .community-card h3 {
   color: #4d683d;
@@ -1210,8 +1210,8 @@ h2 {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 8px;
-  color: #799260;
+  font-size: 10px;
+  color: #55655a;
   margin-top: 10px;
 }
 footer {
@@ -1220,8 +1220,8 @@ footer {
   justify-content: space-between;
   gap: 10px;
   margin-top: 21px;
-  font-size: 7px;
-  color: #a1af93;
+  font-size: 9px;
+  color: #55655a;
 }
 footer > span {
   display: flex;
@@ -1243,7 +1243,7 @@ footer > span {
   gap: 20px;
   padding: 25px;
   text-align: center;
-  color: #8fa67b;
+  color: #55655a;
 }
 .empty h2 {
   font:
@@ -1252,8 +1252,8 @@ footer > span {
   color: #526e40;
 }
 .empty p {
-  font-size: 12px;
-  color: #99aa87;
+  font-size: 13px;
+  color: #55655a;
   line-height: 1.8;
 }
 .data-row {
@@ -1268,28 +1268,28 @@ footer > span {
   min-width: 0;
 }
 .data-row strong {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
 }
 .data-row small {
   display: block;
-  font-size: 9px;
-  color: #95a582;
+  font-size: 10px;
+  color: #55655a;
   margin-top: 6px;
 }
 .data-row > span:not(.route-icon):not(.alert-icon) {
-  font-size: 10px;
-  color: #8a9f76;
+  font-size: 11px;
+  color: #55655a;
 }
 .secondary {
   border: 1px solid #e3ead9;
   padding: 10px 14px;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 12px;
   margin: 20px 22px 0;
 }
 .danger {
-  color: #ae7864;
+  color: #7c4835;
 }
 .community-hero {
   display: flex;
@@ -1308,14 +1308,14 @@ footer > span {
   max-width: 450px;
 }
 .community-hero p {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.8;
   max-width: 530px;
-  color: #8c9e7a;
+  color: #55655a;
   margin: 16px 0 22px;
 }
 .community-hero > svg {
-  color: #a2b48b;
+  color: #55655a;
   flex-shrink: 0;
 }
 .settings-grid {
@@ -1331,20 +1331,20 @@ footer > span {
   padding: 24px 22px;
 }
 .setting > svg {
-  color: #8ea77a;
+  color: #55655a;
   flex-shrink: 0;
 }
 .setting > div {
   flex: 1;
 }
 .setting h3 {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
 }
 .setting p {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.7;
-  color: #9aac89;
+  color: #55655a;
   margin-top: 6px;
 }
 .offline {
@@ -1357,9 +1357,9 @@ footer > span {
   font-weight: 500;
 }
 .offline p {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
-  color: #95a883;
+  color: #55655a;
   margin: 12px 0 20px;
 }
 .pack {
@@ -1368,12 +1368,12 @@ footer > span {
   gap: 9px;
   border-top: 1px solid var(--border);
   padding: 18px 0;
-  font-size: 11px;
+  font-size: 12px;
 }
 .pack small {
   margin-left: auto;
-  font-size: 8px;
-  color: #9eae8d;
+  font-size: 10px;
+  color: #55655a;
 }
 .offline .primary {
   width: 100%;
@@ -1382,20 +1382,20 @@ footer > span {
   display: flex;
   gap: 13px;
   padding: 25px 12px;
-  color: #859f71;
+  color: #55655a;
 }
 .privacy > svg {
   flex-shrink: 0;
 }
 .privacy strong {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
 }
 .privacy p {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.8;
   margin-top: 8px;
-  color: #9bad88;
+  color: #55655a;
 }
 .toast {
   position: fixed;
@@ -1414,7 +1414,7 @@ footer > span {
   box-shadow: 0 5px 30px #29422725;
   z-index: 100;
   padding: 15px 17px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .toast > svg {
   color: #bfd0a8;
@@ -1461,7 +1461,7 @@ footer > span {
   border-radius: 12px;
   background: #eef4e4;
   border: 1px solid #dfe8d1;
-  color: #819c68;
+  color: #55655a;
   margin-bottom: 24px;
 }
 .modal h2 {
@@ -1471,9 +1471,9 @@ footer > span {
   letter-spacing: -0.7px;
 }
 .modal > p {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.9;
-  color: #92a67f;
+  color: #55655a;
   margin-top: 12px;
 }
 .notice {
@@ -1481,15 +1481,15 @@ footer > span {
   background: #f1f5e8;
   border: 1px solid #e2ebd4;
   border-radius: 7px;
-  color: #879e73;
-  font-size: 10px;
+  color: #55655a;
+  font-size: 11px;
   line-height: 1.8;
   margin: 20px 0;
 }
 .modal form > label {
   display: block;
-  font-size: 10px;
-  color: #738c5e;
+  font-size: 11px;
+  color: #55655a;
   margin: 20px 0 10px;
 }
 .report-types {
@@ -1506,13 +1506,13 @@ footer > span {
   border: 1px solid #e0e8d3;
   border-radius: 7px;
   padding: 14px 7px;
-  font-size: 9px;
-  color: #93a580;
+  font-size: 10px;
+  color: #55655a;
 }
 .report-types .selected {
   background: #eef4e4;
   border-color: #99b082;
-  color: #6b8955;
+  color: #55655a;
 }
 .modal input,
 .modal textarea {
@@ -1522,12 +1522,12 @@ footer > span {
   border: 1px solid #dfe7d1;
   border-radius: 6px;
   padding: 12px;
-  font-size: 11px;
-  color: #66814f;
+  font-size: 12px;
+  color: #456a53;
 }
 .modal input::placeholder,
 .modal textarea::placeholder {
-  color: #a8b596;
+  color: #55655a;
 }
 .modal textarea {
   min-height: 70px;
@@ -1569,10 +1569,10 @@ footer > span {
     padding: 23px 22px 0;
   }
   .stat-top > span {
-    font-size: 9px;
+    font-size: 10px;
   }
   .stat-footer {
-    font-size: 9px;
+    font-size: 10px;
   }
   .stat-value strong {
     font-size: 30px;
@@ -1605,7 +1605,7 @@ footer > span {
     padding: 15px 13px;
   }
   .stat-top > span {
-    font-size: 7px;
+    font-size: 9px;
     letter-spacing: 0.6px;
   }
   .stat-value strong {
@@ -1615,14 +1615,14 @@ footer > span {
     font-size: 22px;
   }
   .stat-value > span {
-    font-size: 7px;
+    font-size: 9px;
   }
   .stat-footer {
-    font-size: 7px;
+    font-size: 9px;
     gap: 4px;
   }
   .stat-footer > span {
-    font-size: 5px;
+    font-size: 7px;
   }
   .bottom-grid {
     grid-template-columns: minmax(0, 1fr) 310px;
@@ -1634,17 +1634,17 @@ footer > span {
   }
   .drive-card h3,
   .community-card h3 {
-    font-size: 10px;
+    font-size: 11px;
   }
   .community-card {
     gap: 10px;
   }
   .map-footer {
     padding: 0 10px;
-    font-size: 7px;
+    font-size: 9px;
   }
   .map-footer small {
-    font-size: 6px;
+    font-size: 8px;
   }
   .map-footer > span {
     gap: 3px;
@@ -1659,13 +1659,13 @@ footer > span {
     right: -12px;
   }
   footer {
-    font-size: 6px;
+    font-size: 8px;
   }
   .radar h3 {
     font-size: 14px;
   }
   .radar-heading p {
-    font-size: 7px;
+    font-size: 9px;
   }
   .map-search {
     width: 260px;
@@ -1686,12 +1686,12 @@ footer > span {
     font-size: 32px;
   }
   .nav-label {
-    font-size: 7px;
+    font-size: 9px;
     letter-spacing: 1.1px;
     margin-left: 8px;
   }
   .nav-item {
-    font-size: 11px;
+    font-size: 12px;
     padding: 0 10px;
     gap: 9px;
   }
@@ -1699,22 +1699,22 @@ footer > span {
     padding: 16px 11px;
   }
   .mobile-card h3 {
-    font-size: 10px;
+    font-size: 11px;
   }
   .mobile-card p {
-    font-size: 9px;
+    font-size: 10px;
   }
   .mobile-card button {
-    font-size: 9px;
+    font-size: 10px;
   }
   .profile {
     gap: 5px;
   }
   .profile small {
-    font-size: 7px;
+    font-size: 9px;
   }
   .profile strong {
-    font-size: 9px;
+    font-size: 10px;
   }
   .avatar {
     width: 27px;
@@ -1743,7 +1743,7 @@ footer > span {
     font-size: 16px;
   }
   .radar-heading p {
-    font-size: 8px;
+    font-size: 10px;
   }
   .radar-label {
     margin-bottom: 24px;
@@ -1764,16 +1764,16 @@ footer > span {
     padding: 17px 19px;
   }
   .stat-top > span {
-    font-size: 8px;
+    font-size: 10px;
   }
   .stat-value strong {
     font-size: 27px;
   }
   .stat-footer {
-    font-size: 8px;
+    font-size: 10px;
   }
   .stat-value > span {
-    font-size: 9px;
+    font-size: 10px;
   }
   .stat.green .stat-value strong {
     font-size: 24px;
@@ -1788,22 +1788,22 @@ footer > span {
   .start-drive {
     min-width: 120px;
     padding: 11px 12px;
-    font-size: 10px;
+    font-size: 11px;
     gap: 6px;
     margin-top: 23px;
   }
   .page-heading p {
-    font-size: 10px;
+    font-size: 11px;
     max-width: 310px;
     line-height: 1.8;
   }
   footer {
     flex-direction: column;
     gap: 10px;
-    font-size: 7px;
+    font-size: 9px;
   }
   .map-footer {
-    font-size: 8px;
+    font-size: 10px;
     padding: 0 17px;
   }
   .settings-grid {
@@ -1856,7 +1856,7 @@ footer > span {
   }
   .breadcrumb {
     gap: 12px;
-    font-size: 10px;
+    font-size: 11px;
   }
   .top-actions {
     gap: 13px;
@@ -1874,7 +1874,7 @@ footer > span {
   }
   .country select {
     max-width: 65px;
-    font-size: 10px;
+    font-size: 11px;
   }
   main {
     padding: 25px 18px 20px;
@@ -1884,7 +1884,7 @@ footer > span {
     margin-bottom: 22px;
   }
   .eyebrow {
-    font-size: 7px;
+    font-size: 9px;
     letter-spacing: 1.4px;
     margin-bottom: 8px;
   }
@@ -1895,7 +1895,7 @@ footer > span {
     line-height: 1.45;
   }
   .page-heading p {
-    font-size: 10px;
+    font-size: 11px;
     max-width: 100%;
     margin-top: 9px;
   }
@@ -1913,7 +1913,7 @@ footer > span {
     min-height: 113px;
   }
   .stat-top > span {
-    font-size: 6.5px;
+    font-size: 8px;
     letter-spacing: 0.5px;
   }
   .stat-top svg {
@@ -1923,7 +1923,7 @@ footer > span {
     font-size: 24px;
   }
   .stat-value > span {
-    font-size: 7px;
+    font-size: 9px;
   }
   .stat-value {
     gap: 6px;
@@ -1932,10 +1932,10 @@ footer > span {
     font-size: 22px;
   }
   .stat-footer {
-    font-size: 6.5px;
+    font-size: 8px;
   }
   .stat-footer > span {
-    font-size: 5px;
+    font-size: 7px;
     padding: 1px 2px;
   }
   .panel-title {
@@ -1943,13 +1943,13 @@ footer > span {
     min-height: 54px;
   }
   h2 {
-    font-size: 11px;
+    font-size: 12px;
   }
   .badge {
-    font-size: 7px;
+    font-size: 9px;
   }
   .live-label {
-    font-size: 7px;
+    font-size: 9px;
   }
   .panel-title > div {
     gap: 6px;
@@ -1971,7 +1971,7 @@ footer > span {
     right: 21px;
   }
   .map-search input {
-    font-size: 9px;
+    font-size: 10px;
   }
   .speed-card {
     left: 12px;
@@ -1986,13 +1986,13 @@ footer > span {
     right: 12px;
   }
   .map-footer {
-    font-size: 6px;
+    font-size: 8px;
     padding: 0 12px;
     height: 40px;
     gap: 3px;
   }
   .map-footer small {
-    font-size: 6px;
+    font-size: 8px;
   }
   .map-footer > span {
     gap: 4px;
@@ -2019,30 +2019,30 @@ footer > span {
     font-size: 17px;
   }
   .radar-heading p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .road-label {
-    font-size: 10px;
+    font-size: 11px;
     margin: 15px 0;
   }
   .distance-track {
     margin-bottom: 17px;
   }
   .voice-row {
-    font-size: 11px;
+    font-size: 12px;
     padding: 14px 0;
   }
   .nearby .panel-title {
     padding: 17px 19px 12px;
   }
   .nearby h2 {
-    font-size: 13px;
+    font-size: 14px;
   }
   .filters {
     margin-left: 19px;
   }
   .filters button {
-    font-size: 10px;
+    font-size: 11px;
     padding: 7px 12px;
   }
   .nearby-list {
@@ -2052,20 +2052,20 @@ footer > span {
     padding: 14px 0;
   }
   .nearby-item strong {
-    font-size: 11px;
+    font-size: 12px;
   }
   .nearby-item > div > span {
-    font-size: 9px;
+    font-size: 10px;
   }
   .nearby-item small {
-    font-size: 8px;
+    font-size: 10px;
   }
   .alert-icon {
     width: 35px;
     height: 35px;
   }
   .view-all {
-    font-size: 10px;
+    font-size: 11px;
     padding: 14px;
   }
   .bottom-grid {
@@ -2076,11 +2076,11 @@ footer > span {
     padding: 20px 14px;
   }
   .drive-card h3 {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.6;
   }
   .drive-card p {
-    font-size: 8px;
+    font-size: 10px;
   }
   .route-icon {
     width: 37px;
@@ -2091,7 +2091,7 @@ footer > span {
     height: 29px;
   }
   footer {
-    font-size: 6.5px;
+    font-size: 8px;
     gap: 12px;
   }
   .toast {
@@ -2100,7 +2100,7 @@ footer > span {
     transform: none;
     width: auto;
     max-width: none;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.7;
     bottom: 18px;
   }
@@ -2118,13 +2118,13 @@ footer > span {
     gap: 10px;
   }
   .data-row strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .data-row small {
-    font-size: 8px;
+    font-size: 10px;
   }
   .data-row > span:not(.route-icon):not(.alert-icon) {
-    font-size: 8px;
+    font-size: 10px;
     white-space: nowrap;
   }
   .modal {
@@ -2144,23 +2144,23 @@ footer > span {
     font-size: 19px;
   }
   .empty p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .setting {
     padding: 22px 17px;
     gap: 12px;
   }
   .setting p {
-    font-size: 9px;
+    font-size: 10px;
   }
   .setting h3 {
-    font-size: 11px;
+    font-size: 12px;
   }
   .mobile-card h3 {
-    font-size: 11px;
+    font-size: 12px;
   }
   .nav-label {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 1.4px;
   }
   .profile button {
@@ -2170,17 +2170,17 @@ footer > span {
     gap: 10px;
   }
   .profile strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .profile small {
-    font-size: 8px;
+    font-size: 10px;
   }
   .avatar {
     width: 32px;
     height: 32px;
   }
   .nav-item {
-    font-size: 12px;
+    font-size: 13px;
     padding: 0 13px;
   }
   .brand {
@@ -2198,4 +2198,177 @@ footer > span {
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* ---------- Full-screen drive view ----------
+   Opened when a drive starts, so the road fills the screen the way a navigation
+   app does. Everything sits on a scrim or a solid surface, never on the map
+   alone, so text keeps its contrast whatever the illustration does underneath. */
+.drive-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: #d9e9e5;
+  overflow: hidden;
+  animation: drive-in 0.22s ease-out;
+}
+@keyframes drive-in {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+.drive-map {
+  position: absolute;
+  inset: 0;
+}
+.drive-map .map-container,
+.drive-map .road-map {
+  border: 0;
+  min-height: 0;
+}
+.drive-map .road-map > svg { transform: scale(1.08); transform-origin: 50% 56%; }
+.drive-top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px 44px;
+  background: linear-gradient(#0f2018d9 0%, #0f201800 100%);
+  color: #f7faf3;
+}
+.drive-where { display: grid; gap: 3px; min-width: 0; }
+.drive-where span {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: #cfe0c6;
+}
+.drive-where strong {
+  font: 600 19px/1.2 Manrope, sans-serif;
+  letter-spacing: -0.4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.drive-actions { display: flex; align-items: center; gap: 9px; }
+.drive-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffffff1f;
+  border: 1px solid #ffffff3d;
+  color: #f7faf3;
+  backdrop-filter: blur(6px);
+}
+.drive-icon:hover { background: #ffffff2e; }
+.drive-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 21px;
+  background: #f7faf3;
+  color: #22332a;
+  font-weight: 600;
+  font-size: 12px;
+  border: 1px solid #ffffff;
+}
+.drive-alert {
+  position: absolute;
+  left: 50%;
+  top: 86px;
+  transform: translateX(-50%);
+  width: min(520px, calc(100% - 32px));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: #fdf7e6f2;
+  border: 1px solid #e8d9ac;
+  box-shadow: 0 10px 30px #10231a2e;
+  color: #3f3517;
+}
+.drive-alert.roadwork { background: #fdf0e4f2; border-color: #eccfb2; color: #4a3520; }
+.drive-alert.hazard { background: #fbeae5f2; border-color: #eec3b6; color: #4a2b22; }
+.drive-alert > svg { flex: none; }
+.drive-alert > div { display: grid; gap: 2px; min-width: 0; }
+.drive-alert strong { font-size: 15px; }
+.drive-alert span {
+  font-size: 12px;
+  color: #5f5340;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.drive-alert > b {
+  margin-left: auto;
+  font: 600 15px Manrope, sans-serif;
+  white-space: nowrap;
+}
+.drive-speed {
+  position: absolute;
+  left: 22px;
+  bottom: 84px;
+  display: grid;
+  gap: 8px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: #ffffffed;
+  border: 1px solid #d7e2d0;
+  box-shadow: 0 12px 34px #10231a24;
+  min-width: 148px;
+}
+.drive-readout { display: flex; align-items: baseline; gap: 7px; }
+.drive-readout strong {
+  font: 700 54px/1 Manrope, sans-serif;
+  letter-spacing: -2px;
+  color: #22332a;
+  font-variant-numeric: tabular-nums;
+}
+.drive-readout span { font-size: 13px; color: #55655a; font-weight: 600; }
+.drive-limit {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: max-content;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 2px solid #b4402c;
+  color: #8f2f1f;
+}
+.drive-limit span { font-size: 9px; letter-spacing: 1px; font-weight: 700; }
+.drive-limit b { font-size: 15px; }
+.drive-speed p { font-size: 11px; color: #55655a; margin: 0; }
+.drive-foot {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 22px 16px;
+  background: linear-gradient(#0f201800 0%, #0f2018cc 55%);
+  color: #e9f1e2;
+  font-size: 12px;
+}
+.drive-clock {
+  font: 600 15px Manrope, sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+}
+.drive-warn { margin-left: auto; color: #ffffff; font-weight: 600; }
+@media (max-width: 640px) {
+  .drive-top { padding: 14px 14px 38px; }
+  .drive-where strong { font-size: 16px; }
+  .drive-icon { width: 38px; height: 38px; }
+  .drive-alert { top: 78px; }
+  .drive-speed { left: 14px; bottom: 72px; padding: 12px 15px; min-width: 126px; }
+  .drive-readout strong { font-size: 42px; }
+  .drive-foot { gap: 12px; font-size: 11px; padding: 18px 14px 12px; }
+  .drive-warn { display: none; }
 }

@@ -104,7 +104,8 @@ export default function App() {
     [reports, setReports] = useState(() => stored("reports", []));
   const [query, setQuery] = useState(""),
     [destination, setDestination] = useState(""),
-    [search, setSearch] = useState(false);
+    [search, setSearch] = useState(false),
+    [immersive, setImmersive] = useState(false);
   const [zoom, setZoom] = useState(1),
     [layers, setLayers] = useState(false),
     [cameras, setCameras] = useState(true),
@@ -201,29 +202,54 @@ export default function App() {
   }
   function drive() {
     if (driving) {
-      setTrips((t) =>
-        [
-          {
-            id: Date.now().toString(),
-            date: new Date().toISOString(),
-            destination: destination || "Manama demo drive",
-            seconds,
-            alerts: warned.current ? 1 : 0,
-          },
-          ...t,
-        ].slice(0, 200),
-      );
-      setDriving(false);
-      window.speechSynthesis?.cancel();
-      setToast("Drive saved on this device. Find it in My trips.");
+      endDrive();
     } else {
       setSeconds(0);
       warned.current = false;
       setDriving(true);
+      // A drive opens on the full-screen road view, the way a navigation app does.
+      setImmersive(true);
       navigate("Overview");
       setToast("Simulated drive started. GPS, speed and alerts are demo data.");
     }
   }
+  function endDrive() {
+    setImmersive(false);
+    if (!driving) return;
+    setTrips((t) =>
+      [
+        {
+          id: Date.now().toString(),
+          date: new Date().toISOString(),
+          destination: destination || "Manama demo drive",
+          seconds,
+          alerts: warned.current ? 1 : 0,
+        },
+        ...t,
+      ].slice(0, 200),
+    );
+    setDriving(false);
+    window.speechSynthesis?.cancel();
+    setToast("Drive saved on this device. Find it in My trips.");
+  }
+  // Escape leaves the full-screen view without ending the drive: the session keeps
+  // running so the dashboard stays live behind it.
+  useEffect(() => {
+    if (!immersive) return;
+    const leave = (e) => {
+      if (e.key === "Escape") setImmersive(false);
+    };
+    window.addEventListener("keydown", leave);
+    return () => window.removeEventListener("keydown", leave);
+  }, [immersive]);
+  // Smooth, obviously-simulated speed. Nothing here reads a real sensor.
+  const speed = driving
+    ? Math.max(
+        0,
+        Math.round(52 + 21 * Math.sin(seconds / 9) + 7 * Math.sin(seconds / 2.7)),
+      )
+    : 0;
+  const clock = `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
   function locate() {
     if (!navigator.geolocation) {
       setToast("This browser does not support location.");
@@ -1018,6 +1044,81 @@ export default function App() {
           )}
         </main>
       </div>
+      {immersive && (
+        <div
+          className="drive-shell"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Full-screen drive view"
+        >
+          <div className="drive-map">
+            <RoadMap
+              /* Markers are positioned as percentages of the untransformed map, so the
+                 drive view keeps zoom at 1 and lets the viewport crop instead. */
+              zoom={1}
+              cameras={cameras}
+              traffic={traffic}
+              selected={selected}
+              onSelect={setSelected}
+              progress={Math.min(seconds * 0.65, 95)}
+            />
+          </div>
+          <header className="drive-top">
+            <div className="drive-where">
+              <span>DEMO DRIVE · SIMULATED</span>
+              <strong>{destination || "Manama demo drive"}</strong>
+            </div>
+            <div className="drive-actions">
+              <button
+                className="drive-icon"
+                aria-label={voice ? "Mute spoken alerts" : "Unmute spoken alerts"}
+                onClick={() => setVoice(!voice)}
+              >
+                {voice ? <Volume2 size={20} /> : <VolumeX size={20} />}
+              </button>
+              <button
+                className="drive-icon"
+                aria-label="Leave full-screen view"
+                onClick={() => setImmersive(false)}
+              >
+                <Minus size={20} />
+              </button>
+              <button className="drive-end" onClick={endDrive}>
+                <Square size={15} /> End drive
+              </button>
+            </div>
+          </header>
+
+          <div className={`drive-alert ${current.kind}`}>
+            <AlertIcon kind={current.kind} size={22} />
+            <div>
+              <strong>{current.title}</strong>
+              <span>{current.road}</span>
+            </div>
+            <b>{current.distance}</b>
+          </div>
+
+          <div className="drive-speed">
+            <div className="drive-readout">
+              <strong>{speed}</strong>
+              <span>km/h</span>
+            </div>
+            <div className="drive-limit">
+              <span>LIMIT</span>
+              <b>80</b>
+            </div>
+            <p>Demo speed · Follow posted signs</p>
+          </div>
+
+          <footer className="drive-foot">
+            <span className="drive-clock">{clock}</span>
+            <span>Bahrain · demo pack</span>
+            <span className="drive-warn">
+              Fictional data. Not for real driving guidance.
+            </span>
+          </footer>
+        </div>
+      )}
       {toast && (
         <div className="toast" role="status">
           <Check size={17} />
