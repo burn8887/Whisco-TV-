@@ -182,6 +182,51 @@ If `adb devices` now lists the phone as `device` rather than `no permissions` or
 `unauthorized`, tap **Allow** on the phone's own prompt. The authorisation dialog only
 appears once the permission problem is gone.
 
+### `missing udev rules? user is in the plugdev group`
+
+Group membership is necessary but not sufficient. Debian and Ubuntu grant USB access
+through udev rules, and **Crostini runs no udev daemon** — the container has no `/run/udev`
+and `udevadm` does nothing useful there. So the account can be in `plugdev` and still get
+`no permissions` on the device node.
+
+Check what the node looks like:
+
+```sh
+ls -l /dev/bus/usb/*/*
+```
+
+If it reads `crw-rw-r-- root root`, that is the problem: group `root`, and nobody in
+`plugdev` can open it.
+
+The immediate fix grants access to the USB nodes in the container — no udev needed, no
+reboot:
+
+```sh
+sudo chmod -R 777 /dev/bus/usb
+adb kill-server
+adb devices
+```
+
+`777` rather than `666` because the bus directories need the execute bit to be traversed;
+`666` on a directory removes it and breaks access further.
+
+This is a container, and the USB nodes it exposes are transient devices, not files that
+matter. The permission resets when the device is unplugged or the phone re-enumerates, so
+run it again after replugging.
+
+If `adb devices` then says `unauthorized` rather than `device`, the permission worked and
+the phone is asking for consent — tap **Allow** on the phone.
+
+A rule file can be written for the sake of completeness, but expect it to have no effect
+until something triggers udev:
+
+```sh
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="plugdev"' \
+  | sudo tee /etc/udev/rules.d/51-android.rules
+```
+
+`04e8` is Samsung. For another vendor, read it from `lsusb`.
+
 ### When USB refuses to cooperate: wireless debugging
 
 Android 11 and later can be reached over the network, which sidesteps USB passthrough
