@@ -43,6 +43,7 @@ KEEP_TOOLS = {
     "check_workflows.py",
     "promote.py",
     "report_native_tests.py",
+    "setup-android-linux.sh",
     "test_android_apk.py",
     "test_check_site.py",
     "test_check_workflows.py",
