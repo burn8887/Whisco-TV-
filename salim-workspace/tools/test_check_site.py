@@ -24,6 +24,11 @@ class SiteCheckTests(unittest.TestCase):
         self.assertEqual(problems, [], problems)
 
     def test_unfilled_placeholders_fail_by_default(self):
+        # Inject one, so this asserts the checker's behaviour rather than the repository's
+        # current placeholder state (all publication placeholders are now filled).
+        path = self.tmp / "index.html"
+        path.write_text(path.read_text().replace(
+            "</body>", '<span class="placeholder">OPERATING ENTITY</span></body>', 1))
         problems = check_site.check(self.tmp)
         self.assertTrue(any("placeholder" in p for p in problems), problems)
 

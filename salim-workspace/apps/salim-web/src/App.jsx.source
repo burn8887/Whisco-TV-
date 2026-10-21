@@ -297,6 +297,9 @@ export default function App() {
           <span>
             salim<span>.</span>
           </span>
+          <span className="brand-ar" lang="ar" dir="rtl">
+            سالم
+          </span>
         </button>
         <div className="nav-label">THE CALM CO-PILOT · الرفيق الهادئ</div>
         <nav>

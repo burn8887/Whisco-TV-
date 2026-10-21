@@ -25,7 +25,7 @@ Replace every highlighted placeholder. The checker refuses to pass while any rem
 
 | Placeholder | Needed value |
 | --- | --- |
-| `OPERATING ENTITY` | Registered company name that will own the app records |
+| `OPERATING ENTITY` | Owner of the app records — **filled**: Ali Sameer Sadeq Mohamed Albaharna |
 | `SUPPORT EMAIL` | Monitored support address on the domain, e.g. `support@salimdrive.com` |
 | `PRIVACY EMAIL` | Address for privacy requests, e.g. `privacy@salimdrive.com` |
 | `EFFECTIVE DATE` | Date the policy takes effect |
