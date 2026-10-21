@@ -101,33 +101,59 @@ java_major() {
   esac
 }
 
-# Prints the path of a java executable new enough to build with, if one exists.
-# Checks PATH, JAVA_HOME, a previously unpacked Temurin, and JDK tarballs the user
-# has already extracted into their home directory (common on Crostini: people
-# download a JDK before they have a package manager that offers one).
-find_java() {
-  local candidate major
-  local -a candidates=()
+# Every java binary worth testing, one per line. Unmatched globs are filtered by
+# the -x test in the callers, not here.
+java_candidates() {
   if command -v java >/dev/null 2>&1; then
-    candidates+=("$(command -v java)")
+    command -v java
   fi
   if [ -n "${JAVA_HOME:-}" ] && [ -x "${JAVA_HOME}/bin/java" ]; then
-    candidates+=("${JAVA_HOME}/bin/java")
+    printf '%s\n' "${JAVA_HOME}/bin/java"
   fi
-  candidates+=("${TOOLS_DIR}/jdk-17/bin/java")
-  for candidate in "${HOME}"/jdk/bin/java "${HOME}"/jdk/*/bin/java \
-                   "${HOME}"/jdk-*/bin/java "${HOME}"/jdk-*/*/bin/java; do
-    candidates+=("${candidate}")
+  printf '%s\n' "${TOOLS_DIR}/jdk-17/bin/java"
+  local f
+  for f in "${HOME}"/jdk/bin/java "${HOME}"/jdk/*/bin/java \
+           "${HOME}"/jdk-*/bin/java "${HOME}"/jdk-*/*/bin/java; do
+    printf '%s\n' "${f}"
   done
-  for candidate in "${candidates[@]}"; do
+}
+
+# Prints the first java binary with major version >= $1.
+find_java() {
+  local want="$1" candidate major
+  while IFS= read -r candidate; do
     [ -x "${candidate}" ] || continue
     major="$(java_major "${candidate}" || true)"
-    if [ -n "${major}" ] && [ "${major}" -ge 17 ] 2>/dev/null; then
+    [ -n "${major}" ] || continue
+    if [ "${major}" -ge "${want}" ] 2>/dev/null; then
       printf '%s\n' "${candidate}"
       return 0
     fi
-  done
+  done < <(java_candidates)
   return 1
+}
+
+# Prints the first java binary with exactly major version $1. The project pins
+# jvmToolchain(17), and a toolchain request for 17 is not satisfied by 21.
+find_java_major() {
+  local want="$1" candidate major
+  while IFS= read -r candidate; do
+    [ -x "${candidate}" ] || continue
+    major="$(java_major "${candidate}" || true)"
+    [ -n "${major}" ] || continue
+    if [ "${major}" = "${want}" ]; then
+      printf '%s\n' "${candidate}"
+      return 0
+    fi
+  done < <(java_candidates)
+  return 1
+}
+
+# Directory above bin/java, with symlinks resolved.
+java_home_of() {
+  local bin="$1" real
+  real="$(readlink -f "${bin}" 2>/dev/null || printf '%s' "${bin}")"
+  printf '%s\n' "${real%/bin/java}"
 }
 
 # ---------------------------------------------------------------- prerequisites
@@ -155,10 +181,16 @@ run_check() {
   check_command curl  "apt install curl"
 
   local java_bin
-  if java_bin="$(find_java)"; then
+  if java_bin="$(find_java 17)"; then
     ok "java $(java_major "${java_bin}") at ${java_bin}"
   else
     fail "no JDK 17 or newer — the setup script installs one"
+  fi
+  local seventeen
+  if seventeen="$(find_java_major 17)"; then
+    ok "JDK 17 toolchain at ${seventeen} (both modules pin jvmToolchain(17))"
+  else
+    fail "no JDK 17 — the project pins jvmToolchain(17); the script provisions one"
   fi
 
   head2 "Android SDK"
@@ -255,26 +287,41 @@ install_system_packages() {
 install_java() {
   head2 "Java"
   local existing
-  if existing="$(find_java)"; then
+  if existing="$(find_java 17)"; then
     ok "using java $(java_major "${existing}") at ${existing}"
-    return 0
+  else
+    apt_refresh
+    local pkg
+    for pkg in "${JAVA_PACKAGES[@]}"; do
+      if apt_install "${pkg}"; then
+        hash -r 2>/dev/null || true
+        if existing="$(find_java 17)"; then
+          ok "installed ${pkg} — java $(java_major "${existing}")"
+          break
+        fi
+        warn "${pkg} installed but no java 17+ appeared on PATH"
+      fi
+    done
+    if ! find_java 17 >/dev/null; then
+      warn "apt offers no JDK here (package names vary by Debian release)"
+      install_temurin || return 1
+    fi
   fi
 
-  apt_refresh
-  local pkg
-  for pkg in "${JAVA_PACKAGES[@]}"; do
-    if apt_install "${pkg}"; then
-      hash -r 2>/dev/null || true
-      if existing="$(find_java)"; then
-        ok "installed ${pkg} — java $(java_major "${existing}")"
-        return 0
-      fi
-      warn "${pkg} installed but no java new enough appeared on PATH"
+  # The project pins jvmToolchain(17) in both modules, so a machine with only a
+  # newer JDK still fails to configure. Provision 17 explicitly.
+  local seventeen
+  if seventeen="$(find_java_major 17)"; then
+    ok "JDK 17 toolchain: ${seventeen}"
+  else
+    warn "no JDK 17 found, and both modules ask for a 17 toolchain"
+    say  "downloading one rather than editing the build to match this machine"
+    if install_temurin; then
+      ok "JDK 17 toolchain: $(java_major "${TOOLS_DIR}/jdk-17/bin/java") at ${TOOLS_DIR}/jdk-17"
+    else
+      warn "could not obtain JDK 17 — the build will fail at toolchain resolution"
     fi
-  done
-
-  warn "apt offers no JDK 17 or newer here (package names vary by Debian release)"
-  install_temurin
+  fi
 }
 
 install_temurin() {
@@ -394,22 +441,51 @@ write_env() {
   head2 "Environment"
   local sdk="${ANDROID_HOME:-${ANDROID_HOME_DEFAULT}}"
   local gradle_bin="${TOOLS_DIR}/gradle-${GRADLE_VERSION}/bin"
-  local java_home=""
-  local java_bin real
-  if java_bin="$(find_java)"; then
-    real="$(readlink -f "${java_bin}")"
-    java_home="${real%/bin/java}"
+
+  # JAVA_HOME should be the 17 the project asks for when it exists, because the
+  # JDK running Gradle also satisfies its own toolchain request.
+  local chosen="" seventeen="" runtime=""
+  if seventeen="$(find_java_major 17)"; then
+    chosen="${seventeen}"
+  elif runtime="$(find_java 17)"; then
+    chosen="${runtime}"
+  fi
+  local java_home="" installations=""
+  if [ -n "${chosen}" ]; then
+    java_home="$(java_home_of "${chosen}")"
+    installations="${java_home}"
+  fi
+  if [ -n "${runtime}" ]; then
+    local runtime_home
+    runtime_home="$(java_home_of "${runtime}")"
+    if [ -n "${installations}" ] && [ "${runtime_home}" != "${installations}" ]; then
+      installations="${installations},${runtime_home}"
+    elif [ -z "${installations}" ]; then
+      installations="${runtime_home}"
+    fi
+  fi
+
+  # GRADLE_OPTS is assigned outright, not appended to its previous value: the
+  # file is re-sourced by every interactive shell, and appending would grow the
+  # property list each time a child shell starts.
+  local gradle_opts_line=""
+  if [ -n "${installations}" ]; then
+    gradle_opts_line="export GRADLE_OPTS=\"-Dorg.gradle.java.installations.paths=${installations}\""
   fi
 
   cat > "${ENV_FILE}" <<ENV
 # Salim Android build environment. Add this to ~/.bashrc:
 #   . "${ENV_FILE}"
 export JAVA_HOME="${java_home}"
+${gradle_opts_line}
 export ANDROID_HOME="${sdk}"
 export ANDROID_SDK_ROOT="${sdk}"
 export PATH="\${JAVA_HOME}/bin:\${ANDROID_HOME}/cmdline-tools/latest/bin:\${ANDROID_HOME}/platform-tools:${gradle_bin}:\${PATH}"
 ENV
   ok "wrote ${ENV_FILE}"
+  if [ -n "${java_home}" ]; then
+    ok "JAVA_HOME=${java_home}"
+  fi
   # shellcheck disable=SC1090
   . "${ENV_FILE}"
   if ! grep -q "salim-android-env" "${HOME}/.bashrc" 2>/dev/null; then
@@ -434,14 +510,28 @@ maybe_wrapper() {
 smoke_build() {
   head2 "Smoke build"
   say "cd ${ANDROID_MODULE} && gradle :core:test :app:assembleDebug"
-  ( cd "${ANDROID_MODULE}" && gradle --no-daemon :core:test :app:assembleDebug )
-  local apk="${ANDROID_MODULE}/app/build/outputs/apk/debug/app-debug.apk"
-  if [ -f "${apk}" ]; then
-    ok "APK: ${apk} ($(du -h "${apk}" | cut -f1))"
-    say "install on a phone with: adb install -r ${apk}"
-  else
-    warn "build finished but no debug APK was produced"
+  local log
+  log="$(mktemp)"
+  if ( cd "${ANDROID_MODULE}" && gradle --no-daemon :core:test :app:assembleDebug ) 2>&1 | tee "${log}"; then
+    local apk="${ANDROID_MODULE}/app/build/outputs/apk/debug/app-debug.apk"
+    if [ -f "${apk}" ]; then
+      ok "APK: ${apk} ($(du -h "${apk}" | cut -f1))"
+      say "install on a phone with: adb install -r ${apk}"
+    else
+      warn "build finished but no debug APK was produced"
+    fi
+    rm -f "${log}"
+    return 0
   fi
+  if grep -q "No matching toolchains" "${log}"; then
+    warn "Gradle could not find the JDK 17 toolchain the project pins"
+    say  "Fix: re-run this script so it provisions one, or point Gradle at a JDK 17"
+    say  "with -Dorg.gradle.java.installations.paths=/path/to/jdk-17"
+  elif grep -qE "Unresolved reference|e: file:" "${log}"; then
+    warn "a Kotlin compilation error — the toolchain is fine, the source is not"
+  fi
+  rm -f "${log}"
+  return 1
 }
 
 # ---------------------------------------------------------------- main
@@ -492,7 +582,11 @@ if [ "${NO_BUILD}" -eq 1 ]; then
   exit 0
 fi
 
-smoke_build
+if ! smoke_build; then
+  echo >&2
+  echo "Smoke build failed; the output above explains why." >&2
+  exit 1
+fi
 
 head2 "Done"
 ok "Android builds locally"

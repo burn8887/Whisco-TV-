@@ -31,6 +31,26 @@ sudo apt update && sudo apt install -y zip unzip
 Then re-run the SDKMAN installer. This is also why the setup script installs `zip` first and
 downloads Gradle directly instead of going through SDKMAN — one less thing that can fail.
 
+## Two JDK requirements, not one
+
+Both Android modules pin `jvmToolchain(17)`, and CI installs Temurin 17. That means a
+machine with **only** JDK 21 still fails, at configuration time:
+
+```
+No matching toolchains found for requested specification:
+  {languageVersion=17, vendor=any, implementation=vendor-specific}
+```
+
+A toolchain request for 17 is not satisfied by 21. Gradle needs an actual 17, either
+running Gradle itself (`JAVA_HOME`) or discoverable as an installation.
+
+The setup script handles this: it uses a JDK 17 if one exists anywhere it can see,
+including a tarball unpacked into `~/jdk`, otherwise it downloads Temurin 17 into
+`~/.local/share/salim-tools` and points Gradle at it through
+`-Dorg.gradle.java.installations.paths`. Editing the build files to match whatever
+version happens to be installed would work locally and quietly diverge from CI, so the
+script moves the machine instead of the project.
+
 ## If the JDK will not install
 
 `E: Unable to locate package openjdk-17-jdk` means the package name does not exist in
