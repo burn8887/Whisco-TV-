@@ -227,6 +227,34 @@ echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="plugdev"' \
 
 `04e8` is Samsung. For another vendor, read it from `lsusb`.
 
+### `adb devices` is empty and `lsusb` does not list the phone
+
+This is the ChromeOS side, not the container. `lsusb` shows only the devices ChromeOS
+has handed to Linux, so a phone missing from that list was never shared and no permission
+change inside Linux can reach it.
+
+```sh
+lsusb                          # is the phone here at all?
+ls -l /dev/bus/usb/*/*         # is there a node for it?
+```
+
+A healthy passthrough looks like this — the phone appears as a device entry, not just a
+root hub and peripherals:
+
+```
+Bus 001 Device 004: ID 18d1:4ee7 Google Inc. Nexus/Pixel Device (MTP + debug)
+```
+
+Fix it from ChromeOS:
+
+1. Unlock the phone. A locked phone can refuse to enumerate.
+2. Pull down the notification shade on the phone and set the USB mode to **File transfer**,
+   not "Charging only".
+3. Unplug and replug. ChromeOS raises a **"USB device detected"** notification — click it
+   and choose **Connect to Linux**. Miss that notification and Linux never sees the phone.
+4. If the notification never appears, restart the Linux environment and try again; the
+   grant is lost whenever the container restarts.
+
 ### When USB refuses to cooperate: wireless debugging
 
 Android 11 and later can be reached over the network, which sidesteps USB passthrough
@@ -241,6 +269,27 @@ adb devices
 
 The phone and the Chromebook must be on the same network. This is often the faster route
 on Crostini, and it keeps working with the phone on a charger across the room.
+
+If `adb connect` hangs, the two devices are probably on different subnets, or the router
+has client isolation enabled — common on guest networks. Check both are on the same
+`192.168.x.*` range.
+
+### Installing without adb at all
+
+When the phone simply cannot be reached, the APK can be transferred any other way and
+installed by tapping it. This gets a device test started without solving USB:
+
+```sh
+cp apps/android/app/build/outputs/apk/debug/app-debug.apk ~/Downloads/salim-0.3.0-demo.apk
+```
+
+Move that file to the phone by Google Drive, a USB stick, or email, then open it on the
+phone and allow **Install unknown apps** for whichever app is doing the opening. Debug
+signing is fine for this; the phone only warns that the installer is unknown.
+
+The cost is `adb logcat`. If GPS misbehaves on the device, that log is the fastest way to
+see whether fixes are arriving at all, so it is worth one more attempt at `adb pair`
+before giving up on adb.
 
 ## iOS
 
