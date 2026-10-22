@@ -267,6 +267,21 @@ adb connect 192.168.1.50:5555    # the connect address, a different port
 adb devices
 ```
 
+**The pairing code is shown only on the phone.** Android generates six digits when the
+dialog opens, displays them there, and discards them when it closes. Nothing else can know
+them — not this documentation, not a build tool, not a support conversation. Read the code
+from the phone screen and type it at the `Enter pairing code:` prompt that `adb pair`
+prints; the code is not an argument to the command itself.
+
+```
+adb pair 192.168.1.50:41234
+Enter pairing code: 123456          <- typed here, from the phone's dialog
+Successfully paired to 192.168.1.50:41234
+```
+
+If the dialog is closed before the code is entered, the code is gone: open it again and a
+different one appears.
+
 The phone and the Chromebook must be on the same network. This is often the faster route
 on Crostini, and it keeps working with the phone on a charger across the room.
 
