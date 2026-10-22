@@ -88,3 +88,51 @@ iOS already has MapKit.
 The Kotlin in `0.3.0-demo` was written without a compiler. No JDK, Android SDK or Xcode
 exists in the environment that produced it. The Founder's Chromebook now builds locally,
 so `bash tools/setup-android-linux*` is the check, and CI builds on push.
+
+---
+
+# Second review — 22 October 2026
+
+> "Pathetic. The app is really lacking. It looks like a startup dentist clinic next to a
+> giant competitor like Radarbot."
+
+The design language survives that comparison; the *emptiness* does not. Dark scheme,
+contrast and type are holding up in the screenshots. What is missing is a product: four
+static fictional alerts and a hand-drawn road grid, with no map and nothing live.
+
+## A rule was being broken in the shipped build
+
+The Founder said **"Drop police detection for now."** The `0.2.0-demo` and `0.3.0-demo`
+builds still shipped two speed cameras (`static:demo-camera-1`, `-2`), and the Community
+tab still offered "Speed camera" as a report type. The website guard rejected radar
+language while the app quietly did the thing the guard exists to prevent.
+
+Fixed: the demo pack is now roadwork, hazard, traffic and road bump; the report options are
+road hazard, roadworks, traffic congestion and road bump. `Kind.CAMERA` and
+`Kind.MOBILE_CAMERA` remain in the core enum because removing them touches the engine and
+its tests, but nothing in the app can produce or display one.
+
+## The structural gap
+
+The web demo has had a full-screen drive view since `46f06ae`. The Android app never did:
+a running drive stayed inside the scrolling card dashboard, which reads as a settings form.
+A navigation product is map-first, and ours was list-first.
+
+`DriveScreen` now takes the whole screen while a session runs: full-bleed road view, speed
+at 78sp, elapsed time, alert banner, end and minimise. Minimising keeps the session running
+and returns to the dashboard. The map is still an illustration, and the drive screen says
+so in the corner rather than implying otherwise.
+
+## What is honestly missing
+
+**A real map.** Everything else is cosmetic next to this. The "Your surroundings" card is a
+`Canvas` grid; Radarbot is a live vector map with a speed overlay. No amount of colour,
+type or spacing closes that gap.
+
+Deferred three times now, for a legitimate reason and an illegitimate one. The legitimate
+reason: a tile source is a network dependency, and the demo has no map engine at all. The
+illegitimate one: it kept being easier to polish something else.
+
+The blocker is narrow and worth stating plainly. MapLibre GL needs a style URL. This
+environment reaches GitHub, npm and PyPI only, so no tile endpoint can be verified from
+here — and shipping an unverified URL is how a build works in testing and fails in a car.

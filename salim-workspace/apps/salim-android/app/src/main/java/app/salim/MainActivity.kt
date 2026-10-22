@@ -102,6 +102,11 @@ class MainActivity: ComponentActivity() {
     val context=LocalContext.current
     var tab by remember { mutableIntStateOf(0) }
     var disclosure by remember { mutableStateOf(false) }
+    // A running session takes the whole screen. Minimising keeps it running and
+    // returns to the dashboard; ending it drops back automatically.
+    var minimised by remember { mutableStateOf(false) }
+    LaunchedEffect(state.mode) { if(state.mode==Mode.IDLE) minimised=false }
+    if(state.mode!=Mode.IDLE && !minimised) { DriveScreen(state,onMinimise={minimised=true}); return }
     val tabs=listOf("Overview","My trips","Community","Settings")
     val icons=listOf(Icons.Outlined.Dashboard,Icons.Outlined.Route,Icons.Outlined.People,Icons.Outlined.Tune)
     val scheme=MaterialTheme.colorScheme
@@ -189,7 +194,8 @@ class MainActivity: ComponentActivity() {
         Column(Modifier.padding(22.dp),verticalArrangement=Arrangement.spacedBy(9.dp)) {
             Text("AWARE, NOT ALARMED",fontSize=11.sp,letterSpacing=1.5.sp,color=Color.White.copy(alpha=.78f))
             Text("Know what’s ahead.\nKeep your calm.",fontSize=29.sp,lineHeight=36.sp,fontWeight=FontWeight.SemiBold,color=Color.White)
-            Text("اعرف ما أمامك. قُد بهدوء.",fontSize=14.sp,color=Color.White.copy(alpha=.92f))
+            Text("اعرف ما أمامك.",fontSize=15.sp,color=Color.White.copy(alpha=.92f))
+            Text("قُد بهدوء.",fontSize=15.sp,color=Color.White.copy(alpha=.92f))
             Spacer(Modifier.height(2.dp))
             Text("Fictional data · Not for real driving guidance",fontSize=12.sp,color=Color.White.copy(alpha=.82f))
         }
@@ -248,7 +254,7 @@ class MainActivity: ComponentActivity() {
     val scheme=MaterialTheme.colorScheme
     LazyColumn(contentPadding=PaddingValues(20.dp),verticalArrangement=Arrangement.spacedBy(16.dp)) {
         item {Text("A little heads-up. A safer road.",fontSize=25.sp,fontWeight=FontWeight.SemiBold);Spacer(Modifier.height(12.dp));Text("Only report when safely parked. These are local drafts, not published community alerts.",fontSize=13.sp,color=scheme.onSurfaceVariant)}
-        item {Column {listOf("Road hazard","Roadworks","Speed camera","Traffic congestion").forEach {type->Row(verticalAlignment=Alignment.CenterVertically){RadioButton(selected=kind==type,onClick={kind=type},enabled=state.mode==Mode.IDLE);Text(type,fontSize=13.sp)}}}}
+        item {Column {listOf("Road hazard","Roadworks","Traffic congestion","Road bump").forEach {type->Row(verticalAlignment=Alignment.CenterVertically){RadioButton(selected=kind==type,onClick={kind=type},enabled=state.mode==Mode.IDLE);Text(type,fontSize=13.sp)}}}}
         item {OutlinedTextField(value=road,onValueChange={road=it.take(120)},label={Text("Road or location")},enabled=state.mode==Mode.IDLE,modifier=Modifier.fillMaxWidth())}
         item {Button(onClick={DriveStore.draft(road,kind);road=""},enabled=road.isNotBlank()&&state.mode==Mode.IDLE,modifier=Modifier.fillMaxWidth()){Text("Save local draft")}}
         items(state.drafts,key={it.id}) {draft->Card(colors=CardDefaults.cardColors(containerColor=scheme.surface)){Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment=Alignment.CenterVertically){Column(Modifier.weight(1f)){Text(draft.kind);Text(draft.road,fontSize=12.sp,color=scheme.onSurfaceVariant);Text("Local · Unverified",fontSize=11.sp,color=scheme.onSurfaceVariant)};IconButton(onClick={DriveStore.deleteDraft(draft.id)}){Icon(Icons.Outlined.Delete,"Delete report")}}}}
@@ -295,5 +301,96 @@ class MainActivity: ComponentActivity() {
     Row(verticalAlignment=Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) { Text(title,fontWeight=FontWeight.Medium);Text(detail,fontSize=12.sp,color=MaterialTheme.colorScheme.onSurfaceVariant) }
         Switch(checked=checked,onCheckedChange=onChange)
+    }
+}
+
+/**
+ * Full-screen drive view. The dashboard is a list of cards, which reads as a form; a
+ * running drive should read as navigation. Everything here sits over the map rather
+ * than beside it, so the road is the subject and the numbers are the overlay.
+ */
+@Composable private fun DriveScreen(state: DriveState, onMinimise: ()->Unit) {
+    val context=LocalContext.current
+    val scheme=MaterialTheme.colorScheme
+    fun end() { if(state.mode==Mode.GPS)context.stopService(Intent(context,DriveService::class.java)) else DriveStore.end() }
+    Box(Modifier.fillMaxSize().background(scheme.background)) {
+        DriveMap(state)
+        // The map is an illustration, and saying so on the drive screen is the only
+        // honest option until a real tile source is wired in.
+        Text("Illustrative map · Fictional demo data",fontSize=10.sp,color=scheme.onSurfaceVariant,
+            modifier=Modifier.align(Alignment.BottomCenter).systemBarsPadding().padding(bottom=6.dp))
+
+        Row(Modifier.fillMaxWidth().systemBarsPadding().padding(horizontal=12.dp,vertical=8.dp),
+            verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(4.dp)) {
+            Column(Modifier.weight(1f)) {
+                Text(if(state.mode==Mode.DEMO)"DEMO DRIVE" else "GPS TEST",fontSize=10.sp,letterSpacing=1.6.sp,color=scheme.primary)
+                Text(if(state.mode==Mode.DEMO)"Simulated · no device GPS" else state.status,fontSize=12.sp,color=scheme.onSurfaceVariant,maxLines=1)
+            }
+            IconButton(onClick={DriveStore.setVoice(!state.voice)}) {
+                Icon(if(state.voice)Icons.Outlined.VolumeUp else Icons.Outlined.VolumeOff,"Voice alerts",tint=scheme.onSurface)
+            }
+            IconButton(onClick=onMinimise) { Icon(Icons.Outlined.KeyboardArrowDown,"Minimise",tint=scheme.onSurface) }
+            Button(onClick={end()},shape=RoundedCornerShape(10.dp),
+                colors=ButtonDefaults.buttonColors(containerColor=scheme.error,contentColor=scheme.onError),
+                contentPadding=PaddingValues(horizontal=18.dp,vertical=8.dp)) { Text("End",fontWeight=FontWeight.SemiBold) }
+        }
+
+        if(state.mode==Mode.GPS && !state.acquired)
+            Box(Modifier.align(Alignment.Center).padding(horizontal=28.dp)) { Acquiring(state) }
+
+        state.warning?.let { warning ->
+            Card(Modifier.align(Alignment.TopCenter).systemBarsPadding().padding(top=64.dp,start=16.dp,end=16.dp),
+                colors=CardDefaults.cardColors(containerColor=scheme.surfaceVariant),shape=RoundedCornerShape(16.dp)) {
+                Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+                    Icon(Icons.Outlined.Warning,null,tint=scheme.tertiary)
+                    Column { Text("${warning.meters.toInt()} m",fontSize=22.sp,fontWeight=FontWeight.Bold);Text(warning.hazard.title,fontSize=14.sp) }
+                }
+            }
+        }
+
+        Row(Modifier.align(Alignment.BottomStart).systemBarsPadding().padding(start=22.dp,bottom=34.dp),
+            verticalAlignment=Alignment.Bottom,horizontalArrangement=Arrangement.spacedBy(10.dp)) {
+            Text("${state.fix?.let { (it.speed*3.6).toInt() } ?: 0}",fontSize=78.sp,fontWeight=FontWeight.Bold,lineHeight=82.sp,
+                color=if(state.acquired||state.mode==Mode.DEMO)scheme.onSurface else scheme.onSurfaceVariant)
+            Column(Modifier.padding(bottom=14.dp)) {
+                Text("km/h",fontSize=15.sp,color=scheme.onSurfaceVariant)
+                Text("${state.seconds/60}:${(state.seconds%60).toString().padStart(2,'0')}",fontSize=13.sp,color=scheme.onSurfaceVariant)
+            }
+        }
+    }
+}
+
+/**
+ * Full-bleed road sketch. The route advances with elapsed time so the view is alive
+ * rather than a static picture; the marker moves along it. Deliberately abstract: it is
+ * not claiming to be a position.
+ */
+@Composable private fun DriveMap(state: DriveState) {
+    val ink=MaterialTheme.colorScheme.primary
+    val seconds=state.seconds%75
+    Canvas(Modifier.fillMaxSize().semantics { contentDescription="Illustrative demo road view. Not a navigation map." }) {
+        drawRect(Color(0xFF13301F))
+        // Land masses, kept dark so the overlay text keeps its contrast.
+        val land=Path().apply { moveTo(0f,size.height*.30f);lineTo(size.width*.55f,size.height*.20f)
+            lineTo(size.width*.85f,size.height*.46f);lineTo(size.width,size.height*.58f)
+            lineTo(size.width,size.height);lineTo(0f,size.height);close() }
+        drawPath(land,Color(0xFF1A3B28))
+        // Minor roads.
+        for(i in 0..9) drawLine(Color(0xFF2B5238),Offset(0f,size.height*(.30f+i*.09f)),Offset(size.width,size.height*(.16f+i*.09f)),3f)
+        for(i in 0..6) drawLine(Color(0xFF2B5238),Offset(i*size.width/6,size.height*.2f),Offset(i*size.width/6+90,size.height),3f)
+        // The route.
+        val route=Path().apply {
+            moveTo(size.width*.18f,size.height*.94f)
+            cubicTo(size.width*.26f,size.height*.72f,size.width*.52f,size.height*.78f,size.width*.50f,size.height*.52f)
+            cubicTo(size.width*.48f,size.height*.30f,size.width*.76f,size.height*.30f,size.width*.82f,size.height*.16f)
+        }
+        drawPath(route,Color(0xFF0B1F15),style=Stroke(22f,cap=StrokeCap.Round))
+        drawPath(route,ink.copy(alpha=.85f),style=Stroke(11f,cap=StrokeCap.Round))
+        // Progress marker, looping so the view keeps moving during a long session.
+        val t=(seconds/75f).coerceIn(0f,1f)
+        val marker=Offset(size.width*(0.18f+0.64f*t),size.height*(0.94f-0.78f*t))
+        drawCircle(Color(0xFF0B1F15),26f,marker)
+        drawCircle(ink,17f,marker)
+        drawCircle(Color.White,7f,marker)
     }
 }
