@@ -1,6 +1,6 @@
 # Salim — Play closed testing / TestFlight release gates
 
-This is a production-build preparation checklist, not approval to upload. Android/iOS native ad and subscription code is being integrated, but the latest source edits are not yet compiled. Historical signed artifacts predate this work and are not valid candidates. The eight approximate Bahrain pack entries and live OpenStreetMap queries do not constitute complete GCC coverage. No store upload is authorized.
+This is a production-build preparation checklist, not approval to upload. Current source commit `0915dfa` passed Android CI run `40316308868` (24 tests, zero failures, 16 KB alignment) and iOS CI run `40316308926` (17 XCTest cases; unsigned device archive compiled). These are not signed release artifacts. Historical signed artifacts predate the current changes and are not valid candidates. The eight approximate Bahrain pack entries and live OpenStreetMap queries do not constitute complete GCC coverage. No store upload is authorized.
 
 ## Independent app identity — Founder confirmation required
 
@@ -59,7 +59,7 @@ keytool -printcert -jarfile app/build/outputs/bundle/release/app-release.aab
 - [ ] Signed archive exported and validated on an authorized isolated macOS machine, then uploaded only with separate authorization. Simulator ZIP and unsigned archive ZIP cannot be installed through TestFlight.
 - [ ] TestFlight processing complete; marketing associates assigned as appropriate internal/external testers. External beta review, if required, is complete and invitation installation succeeds.
 
-The simulator build/test workflow builds/archives **without signing**. The separate approved release workflow signs but never uploads to App Store Connect. A protected signed distribution workflow would need separate Founder approval. On an already authorized Mac with the dedicated certificate and profile installed, the archive step is conceptually:
+The simulator build/test workflow builds/archives **without signing**. The separate approved release workflow signs but never uploads to App Store Connect. The agent cannot dispatch the signing workflow; a fresh signed release run must be initiated through the authorized manual process. On an already authorized Mac with the dedicated certificate and profile installed, the archive step is conceptually:
 
 ```sh
 xcodegen generate

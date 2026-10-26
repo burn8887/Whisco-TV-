@@ -127,8 +127,10 @@ can be run against the Salim feature branch after selecting the correct ref and 
 
 Historical signed artifacts exist: Android run `40311763923` and iOS run `40298809146`. They were
 built before the current AdMob, consent, synthetic-data removal and trip-history changes. They are
-stale and must not be distributed or uploaded. Rerun both platform builds after the current source
-passes CI and after verifying the production AdMob variables and store IDs. The next release version
+stale and must not be distributed or uploaded. Current source commit `0915dfa` passed unsigned CI:
+Android run `40316308868` (24 tests, zero failures, 16 KB alignment) and iOS run `40316308926`
+(17 XCTest cases and an unsigned device archive). Rerun both signed platform builds after verifying
+the production AdMob variables and store IDs; the agent cannot dispatch the signing workflow. The next release version
 is `0.7.0` / build `7`; the Android release build also needs an unused Play version code.
 
 The signed workflow performs release identity promotion to the permanent `com.salimdrive.app`
