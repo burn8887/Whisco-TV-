@@ -254,7 +254,7 @@ jobs:
       - name: Prepare Salim source and Xcode project
         run: |
           set -euo pipefail
-          python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
+          python3 salim-workspace/tools/promote.py --output "$RUNNER_TEMP/salim"
           brew install xcodegen
           cd "$RUNNER_TEMP/salim/apps/ios"
           xcodegen generate
