@@ -130,9 +130,11 @@ struct BrandLockup: View {
 struct Dashboard: View {
     @EnvironmentObject var model: DriveModel
     let theme: Theme
+    // Opens on the simulated corridor, so the first frame contains the cameras the
+    // demo is about. The first real fix re-centres this immediately.
     @State private var camera = MapCameraPosition.region(
-        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 26.223, longitude: 50.565),
-                           span: MKCoordinateSpan(latitudeDelta: 0.07, longitudeDelta: 0.07)))
+        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 26.2335, longitude: 50.5360),
+                           span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045)))
     @State private var consent = false
     @State private var destination = ""
     @State private var centred = false
@@ -414,8 +416,8 @@ struct DriveScreen: View {
     let theme: Theme
     @Binding var minimised: Bool
     @State private var camera = MapCameraPosition.region(
-        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 26.223, longitude: 50.565),
-                           span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
+        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 26.2312, longitude: 50.5330),
+                           span: MKCoordinateSpan(latitudeDelta: 0.012, longitudeDelta: 0.012)))
 
     var body: some View {
         ZStack {
