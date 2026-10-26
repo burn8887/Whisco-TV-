@@ -111,6 +111,10 @@ class MainActivity : ComponentActivity() {
         DriveStore.initialize(this)
         setContent { Salim() }
     }
+    override fun onPostResume() {
+        super.onPostResume()
+        if (BuildConfig.ADS_ENABLED) SalimAdConsent.refresh(this)
+    }
     override fun onStop() {
         if (!isChangingConfigurations && DriveStore.state.value.mode == Mode.DEMO)
             DriveStore.end("Simulation paused when app left foreground · Saved")
@@ -135,7 +139,14 @@ private fun SalimBody(state: DriveState) {
     val context = LocalContext.current
     // Billing lives with the activity, not the composition: a purchase can complete after a
     // rotation, and the listener has to outlive the recomposition that opened the dialog.
-    val billing = remember(context) { (context as? Activity)?.let { Billing(it) } }
+    val activity = context as? Activity
+    val billing = remember(context) { activity?.let { Billing(it) } }
+    val isPremium by (billing?.premium ?: emptyFlow()).collectAsStateWithLifecycle(initialValue = false)
+    val entitlementChecked by (billing?.entitlementChecked ?: emptyFlow()).collectAsStateWithLifecycle(initialValue = false)
+    val canShowAds = entitlementChecked && !isPremium && state.mode == Mode.IDLE
+    LaunchedEffect(entitlementChecked, isPremium) {
+        DriveStore.applyPremiumEntitlement(entitlementChecked, isPremium)
+    }
     DisposableEffect(billing) {
         billing?.start()
         onDispose { billing?.close() }
@@ -158,7 +169,7 @@ private fun SalimBody(state: DriveState) {
                 if (DriveStore.state.value.mode == Mode.IDLE)
                     runCatching { ContextCompat.startForegroundService(context, Intent(context, DriveService::class.java)) }
                         .onFailure { DriveStore.message("Open Salim and check permissions before starting GPS") }
-            } else DriveStore.message("Precise location was denied. A simulated drive still works.")
+            } else DriveStore.message("Precise location denied. Enable it to start a drive.")
         }
         fun stop() {
             if (state.mode == Mode.GPS) context.stopService(Intent(context, DriveService::class.java)) else DriveStore.end()
@@ -199,10 +210,10 @@ private fun SalimBody(state: DriveState) {
         ) { inset ->
             Box(Modifier.padding(inset)) {
                 when (tab) {
-                    0 -> Dashboard(state, onDemo = { DriveStore.begin(Mode.DEMO) }, onGPS = { disclosure = true }, onStop = { stop() })
+                    0 -> Dashboard(state, onDemo = { DriveStore.begin(Mode.DEMO) }, onGPS = { disclosure = true }, onStop = { stop() }, showAds = canShowAds)
                     1 -> Trips(state)
                     2 -> Community(state)
-                    3 -> Settings(state, billing)
+                    3 -> Settings(state, billing, showAds = canShowAds, activity = activity)
                 }
             }
         }
@@ -210,7 +221,7 @@ private fun SalimBody(state: DriveState) {
             onDismissRequest = { disclosure = false },
             icon = { Icon(Icons.Outlined.Shield, null) },
             title = { Text("Start a GPS test?") },
-            text = { Text("Set up only while safely parked. Salim uses precise device location during this test, including in the background, until you end it. Road data is fictional and not for driving decisions. No route is uploaded.") },
+            text = { Text("Set up only while safely parked. Salim uses precise device location during this test, including in the background, until you end it. Camera coverage varies by area and mapped positions may be incomplete or out of date. No route is uploaded.") },
             confirmButton = {
                 TextButton(onClick = {
                     disclosure = false
@@ -276,7 +287,7 @@ private fun cameraPins(lat: Double, lon: Double, hazards: List<Hazard>): List<Ma
         }
 
 @Composable
-private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, onStop: () -> Unit) {
+private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, onStop: () -> Unit, showAds: Boolean) {
     val context = LocalContext.current
     val scheme = MaterialTheme.colorScheme
     var destination by remember { mutableStateOf("") }
@@ -308,6 +319,7 @@ private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, 
         if (state.mode == Mode.GPS && !state.acquired) item { Acquiring(state) }
         item { Text(state.status, fontSize = 12.sp, color = scheme.primary, fontFamily = Readout) }
         item { Text(state.feed, fontSize = 12.sp, color = scheme.onSurfaceVariant) }
+        if (showAds) item { SalimAdBanner() }
 
         val currentWarning = state.warning
         if (currentWarning != null) item { AlertBanner(currentWarning) }
@@ -382,7 +394,7 @@ private fun Statement(state: DriveState) {
         Text("اعرف ما أمامك.", fontSize = 14.sp, color = scheme.onSurfaceVariant)
         Text("قُد بهدوء.", fontSize = 14.sp, color = scheme.onSurfaceVariant)
         Hairline(Modifier.padding(vertical = 4.dp))
-        Text("FICTIONAL DATA · NOT FOR DRIVING GUIDANCE", fontSize = 10.sp, letterSpacing = 1.1.sp, color = scheme.tertiary, fontFamily = Readout)
+        Text("COVERAGE VARIES · FOLLOW POSTED SIGNS", fontSize = 10.sp, letterSpacing = 1.1.sp, color = scheme.tertiary, fontFamily = Readout)
     }
 }
 
@@ -427,13 +439,15 @@ private fun MapCard(
                     Text("END · ${state.seconds / 60}:${(state.seconds % 60).toString().padStart(2, '0')}", fontWeight = FontWeight.Bold, fontFamily = Readout)
                 }
             } else {
-                Button(
-                    onClick = onDemo, enabled = state.country == "BH", shape = Sharp,
-                    modifier = Modifier.fillMaxWidth().height(50.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Signal, contentColor = Color(0xFF04180F))
-                ) {
-                    Icon(Icons.Outlined.PlayArrow, null); Spacer(Modifier.width(8.dp))
-                    Text("RUN SIMULATED DRIVE", fontWeight = FontWeight.Bold, fontFamily = Readout, letterSpacing = .6.sp)
+                if (BuildConfig.DEBUG) {
+                    Button(
+                        onClick = onDemo, enabled = state.country == "BH", shape = Sharp,
+                        modifier = Modifier.fillMaxWidth().height(50.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Signal, contentColor = Color(0xFF04180F))
+                    ) {
+                        Icon(Icons.Outlined.PlayArrow, null); Spacer(Modifier.width(8.dp))
+                        Text("RUN SIMULATED DRIVE · TEST ONLY", fontWeight = FontWeight.Bold, fontFamily = Readout, letterSpacing = .6.sp)
+                    }
                 }
                 OutlinedButton(
                     onClick = onGPS, shape = Sharp, modifier = Modifier.fillMaxWidth().height(46.dp),
@@ -562,7 +576,7 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
             Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(
-                        if (state.mode == Mode.DEMO) "SIMULATED DRIVE" else "GPS TEST",
+                        if (state.mode == Mode.DEMO) "SIMULATED DRIVE" else "DRIVE",
                         fontSize = 10.sp, letterSpacing = 2.sp, color = Signal, fontFamily = Readout
                     )
                     Text(
@@ -629,7 +643,7 @@ private fun Trips(state: DriveState) {
             Row(Modifier.fillMaxWidth().clip(Sharper).background(scheme.surface).border(1.dp, scheme.outline, Sharper).padding(13.dp)) {
                 Column(Modifier.weight(1f)) {
                     Text(
-                        if (trip.interrupted) "INTERRUPTED" else if (trip.demo) "SIMULATED" else "GPS TEST",
+                        if (trip.interrupted) "INTERRUPTED" else if (trip.demo) "SIMULATED" else "DRIVE",
                         fontSize = 10.sp, letterSpacing = 1.4.sp, color = scheme.primary, fontFamily = Readout
                     )
                     Text(DateFormat.getDateTimeInstance().format(Date(trip.at)), fontSize = 12.sp, color = scheme.onSurfaceVariant)
@@ -698,7 +712,7 @@ private fun Community(state: DriveState) {
 }
 
 @Composable
-private fun Settings(state: DriveState, billing: Billing?) {
+private fun Settings(state: DriveState, billing: Billing?, showAds: Boolean, activity: Activity?) {
     val context = LocalContext.current
     val scheme = MaterialTheme.colorScheme
     var privacy by remember { mutableStateOf(false) }
@@ -706,6 +720,7 @@ private fun Settings(state: DriveState, billing: Billing?) {
     // Collected unconditionally: a null billing client still needs a flow here, or the
     // composable call would be conditional.
     val isPremium by (billing?.premium ?: emptyFlow()).collectAsStateWithLifecycle(initialValue = false)
+    val privacyOptionsRequired by SalimAdConsent.privacyOptionsRequired.collectAsStateWithLifecycle()
     if (premium && billing != null) PremiumDialog(billing, onDismiss = { premium = false })
     if (privacy) AlertDialog(
         onDismissRequest = { privacy = false }, title = { Text("Privacy notice") },
@@ -755,7 +770,13 @@ private fun Settings(state: DriveState, billing: Billing?) {
                 }
             }
         }
-        item { Text("Only Bahrain has a bundled fictional pack. No country has verified live coverage in this build.", fontSize = 11.sp, color = scheme.onSurfaceVariant) }
+        item { Text("Coverage varies by area. Live cameras are mapped by OpenStreetMap; known approximate Bahrain sites are marked ≈. Camera data may be incomplete or out of date.", fontSize = 11.sp, color = scheme.onSurfaceVariant) }
+        if (showAds) item { SalimAdBanner() }
+        if (privacyOptionsRequired && activity != null) item {
+            OutlinedButton(onClick = { SalimAdConsent.showPrivacyOptions(activity) }, shape = Sharp, modifier = Modifier.fillMaxWidth()) {
+                Text("Advertising privacy choices")
+            }
+        }
         item { SectionLabel("SALIM PREMIUM") }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -776,7 +797,7 @@ private fun Settings(state: DriveState, billing: Billing?) {
         item {
             Column(Modifier.fillMaxWidth().clip(Sharp).background(scheme.surface).border(1.dp, scheme.outline, Sharp).padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text("YOUR JOURNEY STAYS YOURS", fontSize = 10.sp, letterSpacing = 1.4.sp, color = scheme.primary, fontFamily = Readout)
-                Text("No account and no advertising SDK. Camera positions come from OpenStreetMap, fetched for the area around you and cached on the device; the query carries no identifier. No route is uploaded. Subscriptions are handled by Google Play, which never passes Salim a card number.", fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant)
+                Text("No Salim account or route upload. Google AdMob serves ads only on Overview and Settings while idle, never during a drive. Its consent form controls whether ads may be requested. Google Play handles subscriptions; Salim never receives your card number. Camera requests use a coarse area and are cached on this device.", fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant)
             }
         }
         item {
@@ -788,7 +809,7 @@ private fun Settings(state: DriveState, billing: Billing?) {
         item { OutlinedButton(onClick = { privacy = true }, shape = Sharp, modifier = Modifier.fillMaxWidth()) { Text("Privacy notice") } }
         item {
             Text(
-                "Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay, Android Auto and watches are not enabled. In an emergency in Bahrain, call 999.",
+                "Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay, Android Auto and watches are not enabled. Camera coverage varies; follow posted signs. In an emergency in Bahrain, call 999.",
                 fontSize = 10.sp, lineHeight = 15.sp, color = scheme.onSurfaceVariant, fontFamily = Readout
             )
         }

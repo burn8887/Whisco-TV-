@@ -37,7 +37,7 @@ jobs:
         run: |
           device=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; data=json.load(sys.stdin); print(next(d["udid"] for runtime,devices in data["devices"].items() if "iOS" in runtime for d in devices if d["name"].startswith("iPhone")))')
           set +e
-          xcodebuild -project Salim.xcodeproj -scheme Salim -destination "id=$device" -derivedDataPath "$RUNNER_TEMP/salim-derived" -resultBundlePath "$RUNNER_TEMP/salim-ios-results.xcresult" CODE_SIGNING_ALLOWED=NO test 2>&1 | tee "$RUNNER_TEMP/salim-ios-build.log"
+          xcodebuild -project Salim.xcodeproj -scheme Salim -destination "id=$device" -derivedDataPath "$RUNNER_TEMP/salim-derived" -resultBundlePath "$RUNNER_TEMP/salim-ios-results.xcresult" CODE_SIGNING_ALLOWED=NO ADMOB_APP_ID="${SALIM_ADMOB_APP_ID_IOS:-ca-app-pub-3940256099942544~1458002511}" ADMOB_BANNER_ID="${SALIM_ADMOB_BANNER_IOS:-ca-app-pub-3940256099942544/2934735716}" test 2>&1 | tee "$RUNNER_TEMP/salim-ios-build.log"
           result=${PIPESTATUS[0]}
           if [ "$result" -ne 0 ]; then
             python3 - <<'PYERROR'
@@ -54,7 +54,7 @@ jobs:
         working-directory: ${{ runner.temp }}/salim/apps/salim-ios
         run: |
           set +e
-          xcodebuild -project Salim.xcodeproj -scheme Salim -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/Salim-unsigned.xcarchive" CODE_SIGNING_ALLOWED=NO archive 2>&1 | tee "$RUNNER_TEMP/salim-ios-archive.log"
+          xcodebuild -project Salim.xcodeproj -scheme Salim -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/Salim-unsigned.xcarchive" CODE_SIGNING_ALLOWED=NO ADMOB_APP_ID="${SALIM_ADMOB_APP_ID_IOS:-ca-app-pub-3940256099942544~1458002511}" ADMOB_BANNER_ID="${SALIM_ADMOB_BANNER_IOS:-ca-app-pub-3940256099942544/2934735716}" archive 2>&1 | tee "$RUNNER_TEMP/salim-ios-archive.log"
           result=${PIPESTATUS[0]}
           if [ "$result" -ne 0 ]; then
             python3 - <<'PYERROR'

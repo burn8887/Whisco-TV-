@@ -20,16 +20,16 @@ class HazardRepository(context: Context) {
     private var seeded=false
     private var lastScope: String?=null
     private fun initialize() { if(!seeded) {
-        // Revision 2 adds the camera pack. The seed is idempotent per revision, so an
-        // existing install picks up new cameras on the next launch without a wipe.
-        database.seed("BH",2,DemoData.hazards+CameraPack.hazards())
+        // Revision 3 replaces the old synthetic test rows with the disclosed camera pack.
+        // Existing installations discard the previous static layer atomically.
+        database.seed("BH",3,CameraPack.hazards())
         seeded=true
     } }
     suspend fun local(country: String,point: Point): List<Hazard> = withContext(Dispatchers.IO) { lock.withLock { initialize(); database.nearby(country,point,System.currentTimeMillis()) } }
     suspend fun refresh(country: String,point: Point): PackResult = withContext(Dispatchers.IO) { lock.withLock {
         initialize()
         fun cached(status: String)=PackResult(database.nearby(country,point,System.currentTimeMillis()),status)
-        if(BuildConfig.FEED_URL.isBlank())return@withLock cached(if(country=="BH")"Bundled demo pack · Offline detection ready" else "No verified coverage for $country")
+        if(BuildConfig.FEED_URL.isBlank())return@withLock cached(if(country=="BH")"Approximate Bahrain pack · OpenStreetMap coverage varies" else "No verified static pack for $country · live coverage may be incomplete")
         val scope=runCatching { Scope.at(country,point) }.getOrNull() ?: return@withLock cached("Outside configured GCC sync area")
         val now=SystemClock.elapsedRealtime()
         if(!retry.ready(now) && lastScope==scope.key)return@withLock cached("Cached regional alerts")

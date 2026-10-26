@@ -18,6 +18,7 @@ struct Paywall: View {
                 promise
                 plans
                 benefits
+                coverageDisclosure
                 footer
             }
             .padding(22)
@@ -91,7 +92,7 @@ struct Paywall: View {
                                 Text(product.displayName)
                                     .font(.system(size: 14, weight: .semibold))
                                     .foregroundStyle(theme.ink)
-                                Text(Store.period(for: product))
+                                Text(Store.offerSummary(for: product))
                                     .font(.system(size: 11, weight: .regular, design: .monospaced))
                                     .tracking(0.8)
                                     .foregroundStyle(theme.muted)
@@ -132,6 +133,13 @@ struct Paywall: View {
         }
     }
 
+    private var coverageDisclosure: some View {
+        Text("This build does not include a complete, verified GCC offline camera pack. Live camera coverage can be incomplete or out of date; always follow posted signs.")
+            .font(.system(size: 11))
+            .foregroundStyle(theme.muted)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
     private var footer: some View {
         VStack(alignment: .leading, spacing: 10) {
             if let message = store.message {
@@ -152,7 +160,7 @@ struct Paywall: View {
             .buttonStyle(.plain)
             .disabled(store.loading)
 
-            Text("Payment is charged to your Apple ID at confirmation. The subscription renews automatically unless it is cancelled at least 24 hours before the period ends. Cancel any time in Settings → Apple ID → Subscriptions. Ending a subscription never removes a warning from the road.")
+            Text("Any free-trial period and renewal price are shown above and on Apple’s confirmation screen. After a trial, payment is charged to your Apple ID and renews automatically unless cancelled at least 24 hours before renewal. Cancel in Settings → Apple ID → Subscriptions. Ending a subscription never removes a warning from the road.")
                 .font(.system(size: 11))
                 .foregroundStyle(theme.muted)
                 .fixedSize(horizontal: false, vertical: true)

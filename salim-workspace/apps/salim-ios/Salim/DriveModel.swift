@@ -3,12 +3,11 @@ import CoreLocation
 import UserNotifications
 
 enum DriveMode {case idle,demo,gps}
-/// The bundled camera pack plus the in-memory demo rows, resolved once. Kept outside the
-/// main-actor class so it can be read from a property initialiser without an isolation hop.
+/// Disclosed bundled camera records, resolved once outside the main-actor class.
 enum BundledPack {
     static let rows:[Hazard] = {
-        let pack=CameraPack.load()
-        return pack.isEmpty ? DemoData.hazards : pack+DemoData.hazards
+        CameraPack.load()
+        return CameraPack.hazards()
     }()
 }
 struct Trip:Codable,Identifiable {let id:UUID;let at:Date;let seconds:Int;let alerts:Int;let demo:Bool;let interrupted:Bool}
@@ -16,14 +15,16 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
 @MainActor final class DriveModel:NSObject,ObservableObject,CLLocationManagerDelegate {
     @Published var mode:DriveMode = .idle
     @Published var country="BH"
-    @Published var status="Ready for a simulated drive"
-    @Published var feed="Demo data only · Offline pack"
+    @Published var status="Ready to start a drive"
+    @Published var feed="Waiting for nearby camera data"
     @Published var hazards:[Hazard]=BundledPack.rows
     @Published var fix:Fix?
     @Published var warning:AlertMatch?
     @Published var average:Average?
     @Published var seconds=0
     @Published var trips:[Trip]=[]
+    private var premiumEntitlementResolved=false
+    private var premiumEntitled=false
     @Published var drafts:[Draft]=[]
     @Published var voice=UserDefaults.standard.object(forKey:"voice") as? Bool ?? true {didSet{UserDefaults.standard.set(voice,forKey:"voice");if !voice {audio.stop()}}}
     @Published var tone=UserDefaults.standard.object(forKey:"tone") as? Bool ?? true {didSet{UserDefaults.standard.set(tone,forKey:"tone")}}
@@ -35,7 +36,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     @Published var acquired=false
     private let manager=CLLocationManager()
     private let engine=AlertEngine()
-    private let sections=SectionEngine(DemoData.sections)
+    private let sections=SectionEngine([]) // No verified average-speed zones are bundled.
     private let audio=AudioAlerts()
     private let database:OfflineStore?
     private var demoTask:Task<Void,Never>?
@@ -53,16 +54,25 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         manager.delegate=self;manager.activityType = .automotiveNavigation
         manager.desiredAccuracy=kCLLocationAccuracyBestForNavigation;manager.distanceFilter=kCLDistanceFilterNone
         manager.pausesLocationUpdatesAutomatically=false;manager.showsBackgroundLocationIndicator=true
-        trips=Self.load("trips",fallback:[]);drafts=Self.load("drafts",fallback:[])
+        let savedTrips:[Trip]=Self.load("trips",fallback:[])
+        #if DEBUG
+        trips=savedTrips
+        #else
+        trips=savedTrips.filter { !$0.demo }
+        #endif
+        drafts=Self.load("drafts",fallback:[])
         if let date=UserDefaults.standard.object(forKey:"running") as? Date {
             trips.insert(Trip(id:UUID(),at:date,seconds:0,alerts:0,demo:UserDefaults.standard.bool(forKey:"runningDemo"),interrupted:true),at:0)
-            UserDefaults.standard.removeObject(forKey:"running");saveTrips();status="Previous session interrupted · Start a new test"
+            UserDefaults.standard.removeObject(forKey:"running");saveTrips();status="Previous session interrupted · Start a new drive"
         }
         engine.replace(hazards)
         if let cached=CameraFeed.cached().first, cached.id.hasPrefix("osm:") {liveCameras=CameraFeed.cached()}
         Task { [weak self] in
             guard let self else {return}
-            if let database {try? await database.seed(BundledPack.rows)}
+            if let database {
+                try? await database.removeSyntheticDemoRows()
+                try? await database.seed(BundledPack.rows)
+            }
             await self.reload()
             if let last=self.manager.location?.coordinate {
                 self.refreshCameras(Point(lat:last.latitude,lon:last.longitude))
@@ -99,7 +109,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         guard let database else {feed="SQLite unavailable · Bundled demo memory fallback";return}
         do {let values=try await database.nearby(country:code,point:point ?? DemoData.center,now:Date().timeIntervalSince1970);guard token==generation else{return};let combined=merged(values);hazards=combined;engine.replace(combined)
             let live=liveCameras.count
-            feed=code=="BH" ? (live>0 ? "Bundled pack + \(live) live cameras · OpenStreetMap" : "Bundled pack · No live cameras in range") : (live>0 ? "OpenStreetMap · \(live) live cameras" : "No local pack for \(code)")}
+            feed=code=="BH" ? (live>0 ? "Approximate Bahrain pack + \(live) mapped cameras · OpenStreetMap" : "Approximate Bahrain pack · Live camera coverage varies") : (live>0 ? "OpenStreetMap · \(live) mapped cameras · coverage may be incomplete" : "No bundled pack for \(code) · live coverage may be incomplete")}
         catch {if token==generation {feed="Local read failed · Previous alerts retained"}}
     }
     func startGPS() {
@@ -109,12 +119,13 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         case .notDetermined:manager.requestWhenInUseAuthorization()
         case .authorizedAlways,.authorizedWhenInUse:
             pendingStart=false
-            guard manager.accuracyAuthorization == .fullAccuracy else {status="Enable Precise Location before a GPS test";return}
+            guard manager.accuracyAuthorization == .fullAccuracy else {status="Enable Precise Location before a drive";return}
             begin(.gps);manager.allowsBackgroundLocationUpdates=true;manager.startUpdatingLocation()
-        default:pendingStart=false;status="Location denied. Demo mode still works; check system permissions for GPS."
+        default:pendingStart=false;status="Location denied. Enable location before a drive."
         }
     }
     func startDemo() {
+        #if DEBUG
         guard mode == .idle,country=="BH" else{return}
         begin(.demo)
         demoTask=Task { [weak self] in
@@ -127,11 +138,14 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
             }
             self?.stop()
         }
+        #else
+        status="Simulation is unavailable in the store build. Start a live drive instead."
+        #endif
     }
     private func begin(_ value:DriveMode) {
         generation+=1;mode=value;started=ProcessInfo.processInfo.systemUptime;lastGood=started;localAt=0;seconds=0;alertCount=0;warning=nil;average=nil;engine.reset();sections.reset()
         acquired = value == .demo
-        status=value == .demo ? "Simulation · No device GPS" : "Acquiring GPS…"
+        status=value == .demo ? "Test simulation · No device GPS" : "Acquiring GPS…"
         UserDefaults.standard.set(Date(),forKey:"running");UserDefaults.standard.set(value == .demo,forKey:"runningDemo")
         Task {_ = try? await UNUserNotificationCenter.current().requestAuthorization(options:[.alert,.sound])}
         ticker=Task { [weak self] in
@@ -152,7 +166,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         guard mode != .idle else{return}
         let trip=Trip(id:UUID(),at:Date(),seconds:Int(max(0,ProcessInfo.processInfo.systemUptime-started)),alerts:alertCount,demo:mode == .demo,interrupted:false)
         generation+=1;manager.stopUpdatingLocation();manager.allowsBackgroundLocationUpdates=false;demoTask?.cancel();ticker?.cancel();demoTask=nil;ticker=nil;audio.stop();sections.reset();engine.reset()
-        mode = .idle;pendingStart=false;fix=nil;warning=nil;average=nil;acquired=false;status="Test ended · Saved on this device"
+        mode = .idle;pendingStart=false;fix=nil;warning=nil;average=nil;acquired=false;status="Drive ended · Saved on this device"
         trips.insert(trip,at:0);saveTrips();UserDefaults.standard.removeObject(forKey:"running")
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers:["salim.road"])
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers:["salim.road"])
@@ -162,7 +176,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         let now=Date().timeIntervalSince1970,elapsed=ProcessInfo.processInfo.systemUptime
         guard Geo.usable(sample,now:now,elapsed:elapsed) else {if acquired {fix=nil;warning=nil;average=nil;sections.reset();audio.stop();status="Weak or stale GPS · Alerts paused"};return}
         lastGood=elapsed;fix=sample;acquired=true
-        status=mode == .demo ? "Simulation · Demo alerts only" : sample.speed>=2 && sample.course==nil ? "Heading unavailable · Proximity alerts paused" : "GPS test active · Demo data only"
+        status=mode == .demo ? "Simulation · Demo alerts only" : sample.speed>=2 && sample.course==nil ? "Heading unavailable · Proximity alerts paused" : "GPS drive active · Camera coverage varies"
         let result=sections.evaluate(sample,now:now,elapsed:elapsed,country:country);average=result.active.first ?? result.completed.first
         if elapsed-localAt>10 {localAt=elapsed;Task{await reload(point:sample.point)}}
         // One query per area per half hour, run off the drive loop: the next stretch of road
@@ -170,7 +184,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         if elapsed-feedAt>600 {feedAt=elapsed;refreshCameras(sample.point)}
         guard let match=engine.evaluate(sample,now:now,elapsed:elapsed,country:country) else{return}
         warning=match;alertCount+=1
-        let message="Demo alert. \(match.hazard.title) in \(Int(match.meters)) meters. Follow actual posted signs."
+        let message="\(match.hazard.title) in \(Int(match.meters)) meters. Follow posted signs."
         if tone {audio.beep()}
         if voice {audio.speak(message)}
         if UIApplication.shared.applicationState != .active {
@@ -181,7 +195,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     func locationManagerDidChangeAuthorization(_ manager:CLLocationManager) {
         if mode == .gps && (manager.accuracyAuthorization != .fullAccuracy || [.denied,.restricted].contains(manager.authorizationStatus)) {stop();status="Location permission changed · GPS test stopped"}
         if pendingStart && [.authorizedAlways,.authorizedWhenInUse].contains(manager.authorizationStatus) {startGPS()}
-        else if [.denied,.restricted].contains(manager.authorizationStatus) {pendingStart=false;status="Location permission unavailable · Demo remains available"}
+        else if [.denied,.restricted].contains(manager.authorizationStatus) {pendingStart=false;status="Location permission unavailable · Review Settings"}
     }
     func locationManager(_ manager:CLLocationManager,didUpdateLocations locations:[CLLocation]) {
         guard mode == .gps,let value=locations.last else{return}
@@ -190,8 +204,17 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         receive(Fix(point:Point(lat:value.coordinate.latitude,lon:value.coordinate.longitude),speed:value.speed,course:value.course>=0 ? value.course : nil,accuracy:value.horizontalAccuracy,time:value.timestamp.timeIntervalSince1970,elapsed:ProcessInfo.processInfo.systemUptime-(now-value.timestamp.timeIntervalSince1970)))
     }
     func locationManager(_ manager:CLLocationManager,didFailWithError error:Error) {fix=nil;warning=nil;average=nil;sections.reset();audio.stop();status="GPS unavailable · Alerts paused"}
+    func applyPremiumEntitlement(_ active:Bool) {
+        premiumEntitlementResolved=true
+        premiumEntitled=active
+        if !active { trips=Array(trips.prefix(20));saveTrips() }
+    }
     func clearTrips() {trips=[];saveTrips()}
-    private func saveTrips() {trips=Array(trips.prefix(200));if let data=try? JSONEncoder().encode(trips) {UserDefaults.standard.set(data,forKey:"trips")}}
+    private func saveTrips() {
+        let limit = premiumEntitlementResolved ? (premiumEntitled ? Int.max : 20) : 200
+        trips=Array(trips.prefix(limit))
+        if let data=try? JSONEncoder().encode(trips) {UserDefaults.standard.set(data,forKey:"trips")}
+    }
     func addDraft(road:String,kind:String) {guard mode == .idle,!road.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty else{return};drafts.insert(Draft(id:UUID(),kind:kind,road:String(road.prefix(120))),at:0);saveDrafts()}
     func deleteDrafts(at offsets:IndexSet) {drafts.remove(atOffsets:offsets);saveDrafts()}
     private func saveDrafts() {drafts=Array(drafts.prefix(100));if let data=try? JSONEncoder().encode(drafts) {UserDefaults.standard.set(data,forKey:"drafts")}}

@@ -47,7 +47,7 @@ import kotlinx.coroutines.flow.asStateFlow
  *
  * The entitlement rule is the one written into the paywall: every camera and hazard warning
  * works without this, and nothing here can withhold one. Premium buys a history kept without
- * limit, and later the absence of advertising.
+ * limit and removes ads from Overview and Settings.
  *
  * Nothing is ever charged in a build with no products configured: Play returns no
  * ProductDetails, the dialog says so, and no button is offered.
@@ -62,6 +62,8 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
 
     private val _premium = MutableStateFlow(false)
     val premium: StateFlow<Boolean> = _premium.asStateFlow()
+    private val _entitlementChecked = MutableStateFlow(false)
+    val entitlementChecked: StateFlow<Boolean> = _entitlementChecked.asStateFlow()
 
     private val _plans = MutableStateFlow<List<ProductDetails>>(emptyList())
     val plans: StateFlow<List<ProductDetails>> = _plans.asStateFlow()
@@ -127,12 +129,13 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
                     purchase.purchaseState == Purchase.PurchaseState.PURCHASED &&
                         purchase.products.any { it == MONTHLY || it == YEARLY }
                 }
+                _entitlementChecked.value = true
             }
         }
     }
 
     fun buy(details: ProductDetails) {
-        val offer = details.subscriptionOfferDetails?.firstOrNull()
+        val offer = selectedOffer(details)
         if (offer == null) {
             _message.value = "This subscription has no offer available."
             return
@@ -184,17 +187,21 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
         const val YEARLY = "salim_premium_yearly"
 
         /** The price of the first paying phase, in micros, for ordering the two plans. */
-        fun priceMicros(details: ProductDetails): Long =
-            details.subscriptionOfferDetails?.firstOrNull()
-                ?.pricingPhases?.pricingPhaseList?.firstOrNull()?.priceAmountMicros ?: 0L
+        private fun selectedOffer(details: ProductDetails) =
+            details.subscriptionOfferDetails?.firstOrNull { offer ->
+                offer.pricingPhases.pricingPhaseList.any { it.priceAmountMicros == 0L && it.billingCycleCount > 0 }
+            } ?: details.subscriptionOfferDetails?.firstOrNull()
 
-        /**
-         * Play reports each phase as an ISO-8601 duration — P1M, P3M, P1Y — rather than a
-         * count and a unit, so the two have to be read back out of the string.
-         */
-        fun period(details: ProductDetails): String {
-            val iso = details.subscriptionOfferDetails?.firstOrNull()
-                ?.pricingPhases?.pricingPhaseList?.firstOrNull()?.billingPeriod ?: return ""
+        private fun pricingPhases(details: ProductDetails) =
+            selectedOffer(details)?.pricingPhases?.pricingPhaseList.orEmpty()
+
+        private fun paidPhase(details: ProductDetails) =
+            pricingPhases(details).lastOrNull { it.priceAmountMicros > 0L }
+
+        fun priceMicros(details: ProductDetails): Long = paidPhase(details)?.priceAmountMicros ?: 0L
+
+        /** Play periods are ISO-8601 durations (P1M, P1Y), not localized labels. */
+        private fun period(iso: String): String {
             val count = iso.filter { it.isDigit() }.toIntOrNull() ?: 0
             if (count <= 0) return ""
             val noun = when (iso.lastOrNull()?.uppercaseChar()) {
@@ -204,7 +211,17 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
                 'Y' -> "year"
                 else -> return ""
             }
-            return if (count == 1) "per $noun" else "every $count ${noun}s"
+            return if (count == 1) noun else "$count ${noun}s"
+        }
+
+        fun offerSummary(details: ProductDetails): String {
+            val phases = pricingPhases(details)
+            val paid = paidPhase(details)
+            val trial = phases.firstOrNull { it.priceAmountMicros == 0L && it.billingCycleCount > 0 }
+            if (trial != null && paid != null) {
+                return "${period(trial.billingPeriod)} free, then ${paid.formattedPrice} per ${period(paid.billingPeriod)}"
+            }
+            return paid?.let { "${it.formattedPrice} per ${period(it.billingPeriod)}" }.orEmpty()
         }
     }
 }
@@ -237,10 +254,16 @@ fun PremiumDialog(billing: Billing, onDismiss: () -> Unit) {
                     color = scheme.onSurface
                 )
                 Text(
-                    "Premium keeps your trip history without limit. Advertising never appears on the " +
-                        "drive screen in any version of Salim.",
+                    "Premium keeps your trip history without limit and removes Overview and Settings ads. " +
+                        "Advertising never appears on the drive screen in any version of Salim.",
                     fontSize = 12.sp,
                     lineHeight = 18.sp,
+                    color = scheme.onSurfaceVariant
+                )
+                Text(
+                    "This build does not include a complete, verified GCC offline camera pack. Live coverage can be incomplete or out of date; follow posted signs.",
+                    fontSize = 11.sp,
+                    lineHeight = 16.sp,
                     color = scheme.onSurfaceVariant
                 )
                 if (premium) {
@@ -266,16 +289,15 @@ fun PremiumDialog(billing: Billing, onDismiss: () -> Unit) {
                             Column {
                                 Text(details.name, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                                 Text(
-                                    Billing.period(details),
+                                    Billing.offerSummary(details),
                                     fontSize = 11.sp,
+                                    lineHeight = 15.sp,
                                     fontFamily = FontFamily.Monospace,
                                     color = scheme.onSurfaceVariant
                                 )
                             }
                             TextButton(onClick = { billing.buy(details) }) {
-                                Text(details.subscriptionOfferDetails?.firstOrNull()
-                                    ?.pricingPhases?.pricingPhaseList?.firstOrNull()?.formattedPrice ?: "",
-                                    fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = scheme.primary)
+                                Text("Continue", fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = scheme.primary)
                             }
                         }
                     }
@@ -284,8 +306,9 @@ fun PremiumDialog(billing: Billing, onDismiss: () -> Unit) {
                     Text(it, fontSize = 12.sp, color = scheme.onSurfaceVariant)
                 }
                 Text(
-                    "Payment is taken by Google Play at confirmation and renews automatically unless " +
-                        "cancelled at least 24 hours before the period ends. Cancel any time in Play Store " +
+                    "Any free-trial period and renewal price are shown above and on Google Play’s confirmation screen. " +
+                        "After a trial, payment is taken by Google Play and renews automatically unless " +
+                        "cancelled at least 24 hours before renewal. Cancel any time in Play Store " +
                         "→ Payments and subscriptions. Ending it never removes a warning from the road.",
                     fontSize = 11.sp,
                     lineHeight = 16.sp,

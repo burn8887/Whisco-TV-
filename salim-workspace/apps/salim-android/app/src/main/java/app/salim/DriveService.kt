@@ -41,7 +41,7 @@ class DriveService: Service(), LocationListener {
         if(DriveStore.state.value.mode!=Mode.IDLE) { stopSelf();return START_NOT_STICKY }
         val stop=PendingIntent.getService(this,2,Intent(this,DriveService::class.java).setAction("STOP"),PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val open=PendingIntent.getActivity(this,1,Intent(this,MainActivity::class.java),PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val notification=NotificationCompat.Builder(this,"session").setSmallIcon(android.R.drawable.ic_menu_mylocation).setContentTitle("Salim Demo · GPS test active").setContentText("Fictional alert pack. End the test to stop location.").setContentIntent(open).setOngoing(true).addAction(android.R.drawable.ic_media_pause,"End test",stop).build()
+        val notification=NotificationCompat.Builder(this,"session").setSmallIcon(android.R.drawable.ic_menu_mylocation).setContentTitle("Salim · Drive active").setContentText("Camera coverage varies. End the drive to stop location.").setContentIntent(open).setOngoing(true).addAction(android.R.drawable.ic_media_pause,"End drive",stop).build()
         try {
             if(Build.VERSION.SDK_INT>=29)startForeground(10,notification,ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION) else startForeground(10,notification)
             started=true;DriveStore.begin(Mode.GPS);DriveStore.onWarning={showAlert(it)}

@@ -3,7 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Salim Demo</string>
+	<string>Salim</string>
+	<key>GADApplicationIdentifier</key>
+	<string>$(ADMOB_APP_ID)</string>
+	<key>SalimAdsEnabled</key>
+	<string>$(SALIM_ADS_ENABLED)</string>
+	<key>SalimAdMobBannerID</key>
+	<string>$(ADMOB_BANNER_ID)</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
@@ -21,7 +27,7 @@
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>During a GPS test, Salim uses your precise location to calculate nearby demo alerts. End the test to stop updates. Precise routes are not uploaded.</string>
+	<string>During a drive session, Salim uses precise location, speed and heading to calculate nearby road alerts. Location updates stop when you end the session. Precise routes are not uploaded.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

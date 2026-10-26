@@ -13,6 +13,15 @@ tasks.register("verifyReleaseSigning") {
 // source edit. Local and CI demo builds keep the checked-in defaults.
 val releaseVersionName = providers.gradleProperty("versionName").orNull
 val releaseVersionCode = providers.gradleProperty("versionCode").orNull?.toIntOrNull()
+val admobAppId = System.getenv("SALIM_ADMOB_APP_ID_ANDROID").orEmpty()
+val admobBannerId = System.getenv("SALIM_ADMOB_BANNER_ANDROID").orEmpty()
+val productionAdsConfigured = admobAppId.isNotBlank() && admobBannerId.isNotBlank()
+val salimAdsEnabled = releaseVersionName != null
+if (releaseVersionName != null) {
+    require(productionAdsConfigured) { "Signed store builds require SALIM_ADMOB_APP_ID_ANDROID and SALIM_ADMOB_BANNER_ANDROID repository variables." }
+}
+val resolvedAdmobAppId = admobAppId.ifBlank { "ca-app-pub-3940256099942544~3347511713" }
+val resolvedAdmobBannerId = admobBannerId.ifBlank { "ca-app-pub-3940256099942544/6300978111" }
 android {
     namespace = "app.salim"
     compileSdk = 36
@@ -20,10 +29,13 @@ android {
         applicationId = "app.salim.android.demo"
         minSdk = 26
         targetSdk = 36
-        versionCode = releaseVersionCode ?: 6
-        versionName = releaseVersionName ?: "0.6.0-demo"
+        versionCode = releaseVersionCode ?: 7
+        versionName = releaseVersionName ?: "0.7.0-demo"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FEED_URL", "\"\"")
+        buildConfigField("String", "ADMOB_BANNER_ID", "\"$resolvedAdmobBannerId\"")
+        buildConfigField("Boolean", "ADS_ENABLED", salimAdsEnabled.toString())
+        manifestPlaceholders["admobAppId"] = resolvedAdmobAppId
     }
     buildFeatures { compose = true; buildConfig = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
@@ -54,6 +66,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     implementation("com.android.billingclient:billing-ktx:7.1.1")
+    implementation("com.google.android.gms:play-services-ads:25.5.0")
+    implementation("com.google.android.ump:user-messaging-platform:4.0.0")
     androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test:core:1.6.1")

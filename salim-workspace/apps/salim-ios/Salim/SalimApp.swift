@@ -61,6 +61,7 @@ struct Theme {
 @main struct SalimApp: App {
     @StateObject private var model = DriveModel()
     @StateObject private var store = Store()
+    @StateObject private var adConsent = SalimAdConsent.shared
     @Environment(\.scenePhase) private var phase
 
     var body: some Scene {
@@ -68,6 +69,17 @@ struct Theme {
             RootView(appearance: model.appearance)
                 .environmentObject(model)
                 .environmentObject(store)
+                .environmentObject(adConsent)
+                .onAppear {
+                    if SalimAdConsent.isEnabled { adConsent.refresh() }
+                    if store.entitlementsLoaded { model.applyPremiumEntitlement(store.premium) }
+                }
+                .onChange(of: store.entitlementsLoaded) { _, loaded in
+                    if loaded { model.applyPremiumEntitlement(store.premium) }
+                }
+                .onChange(of: store.premium) { _, active in
+                    if store.entitlementsLoaded { model.applyPremiumEntitlement(active) }
+                }
                 .preferredColorScheme(model.appearance == "dark" ? .dark : model.appearance == "light" ? .light : nil)
                 .onChange(of: phase) { _, value in
                     if value == .background && model.mode == .demo { model.stop() }
@@ -131,6 +143,8 @@ struct BrandLockup: View {
 
 struct Dashboard: View {
     @EnvironmentObject var model: DriveModel
+    @EnvironmentObject var store: Store
+    @EnvironmentObject var adConsent: SalimAdConsent
     let theme: Theme
     // Opens on the simulated corridor, so the first frame contains the cameras the
     // demo is about. The first real fix re-centres this immediately.
@@ -150,6 +164,9 @@ struct Dashboard: View {
                 statement
                 mapCard
                 metrics
+                if model.mode == .idle && store.entitlementsLoaded && !store.premium && adConsent.canRequestAds {
+                    SalimAdBanner().frame(height: 50).frame(maxWidth: .infinity)
+                }
                 if model.mode == .idle { startRow }
                 if model.mode == .gps && !model.acquired { acquiring }
 
@@ -219,11 +236,11 @@ struct Dashboard: View {
                     .foregroundStyle(theme.muted)
             }
         }
-        .alert("Start a GPS test?", isPresented: $consent) {
-            Button("Start GPS test") { model.startGPS() }
+        .alert("Start a drive?", isPresented: $consent) {
+            Button("Start drive") { model.startGPS() }
             Button("Not now", role: .cancel) {}
         } message: {
-            Text("Set up while safely parked. Salim uses precise location during this test, including in the background, until you end it. Camera positions come from OpenStreetMap for the area around you. No route is uploaded.")
+            Text("Set up only while safely parked. Salim uses precise location, speed and heading during a drive, including in the background, until you end it. Camera coverage varies; mapped positions may be incomplete or out of date. No route is uploaded.")
         }
     }
 
@@ -231,8 +248,9 @@ struct Dashboard: View {
     /// GPS test make different promises, and the driver should know which one they chose.
     private var startRow: some View {
         VStack(spacing: 8) {
+            #if DEBUG
             Button { model.startDemo() } label: {
-                Text("START SIMULATED DRIVE")
+                Text("START SIMULATION · TEST ONLY")
                     .font(.system(size: 13, weight: .bold, design: .monospaced)).tracking(1)
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
                     .background(theme.accent, in: RoundedRectangle(cornerRadius: 6))
@@ -240,9 +258,10 @@ struct Dashboard: View {
             }
             .buttonStyle(.plain)
             .disabled(model.country != "BH")
+            #endif
 
             Button { consent = true } label: {
-                Text("START GPS TEST")
+                Text("START DRIVE")
                     .font(.system(size: 13, weight: .bold, design: .monospaced)).tracking(1)
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
                     .foregroundStyle(theme.ink)
@@ -251,7 +270,7 @@ struct Dashboard: View {
             .buttonStyle(.plain)
 
             if model.country != "BH" {
-                Text("The simulation drives the Bahrain pack. A GPS test works anywhere in the Gulf.")
+                Text("Live camera coverage may be incomplete in this area. Follow posted signs.")
                     .font(.system(size: 11)).foregroundStyle(theme.muted)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -269,7 +288,7 @@ struct Dashboard: View {
             Text("اعرف ما أمامك.").font(.system(size: 14)).foregroundStyle(theme.muted)
             Text("قُد بهدوء.").font(.system(size: 14)).foregroundStyle(theme.muted)
             Rectangle().fill(theme.line).frame(height: 1).padding(.vertical, 4)
-            Text("FICTIONAL ROAD DATA · NOT FOR DRIVING GUIDANCE")
+            Text("CAMERA COVERAGE VARIES · FOLLOW POSTED SIGNS")
                 .font(.system(size: 10, design: .monospaced)).tracking(1.1)
                 .foregroundStyle(theme.caution)
         }
@@ -465,7 +484,7 @@ struct DriveScreen: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 4) {
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(model.mode == .demo ? "SIMULATED DRIVE" : "GPS TEST")
+                        Text(model.mode == .demo ? "SIMULATED DRIVE" : "DRIVE")
                             .font(.system(size: 10, design: .monospaced)).tracking(2).foregroundStyle(Color.signal)
                         Text(model.mode == .demo ? "Fictional route · no device GPS" : model.status)
                             .font(.system(size: 11)).foregroundStyle(Color.nightMuted).lineLimit(1)
@@ -550,7 +569,7 @@ struct TripsView: View {
             }
             ForEach(model.trips) { trip in
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(trip.interrupted ? "INTERRUPTED" : trip.demo ? "SIMULATED" : "GPS TEST")
+                    Text(trip.interrupted ? "INTERRUPTED" : trip.demo ? "SIMULATED" : "DRIVE")
                         .font(.system(size: 10, design: .monospaced)).tracking(1.2).foregroundStyle(theme.accent)
                     Text(trip.at.formatted()).font(.caption).foregroundStyle(theme.muted)
                     if !trip.interrupted {
@@ -607,6 +626,7 @@ struct CommunityView: View {
 struct SettingsView: View {
     @EnvironmentObject var model: DriveModel
     @EnvironmentObject var store: Store
+    @EnvironmentObject var adConsent: SalimAdConsent
     let theme: Theme
     @State private var showPaywall = false
 
@@ -634,7 +654,7 @@ struct SettingsView: View {
                     ForEach(DemoData.countries, id: \.self) { Text($0).tag($0) }
                 }
                 .disabled(model.mode != .idle)
-                Text("The bundled pack covers Bahrain. For the rest of the Gulf, every camera comes from OpenStreetMap for the area around you.")
+                Text("The Bahrain pack contains approximate sites marked ≈. OpenStreetMap provides mapped speed-camera data nearby; GCC coverage is incomplete and may be out of date.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
             Section("Data") {
@@ -643,11 +663,21 @@ struct SettingsView: View {
                 Text("Camera positions come from OpenStreetMap, fetched for the area around you and cached on the device. The query carries no identifier. No route is uploaded.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
+            if SalimAdConsent.isEnabled { Section("Advertising") {
+                Text("Google AdMob may show banners on Overview and Settings while no drive is active. Ads never appear on the drive screen. Google's UMP consent flow controls ad requests and provides a privacy-options form where required. The SDK may process device identifiers, IP address and ad interactions under Google's policy; Salim does not provide AdMob with your route or precise GPS for targeting.")
+                    .font(.caption).foregroundStyle(theme.muted)
+                if store.entitlementsLoaded && !store.premium && adConsent.canRequestAds {
+                    SalimAdBanner().frame(height: 50).frame(maxWidth: .infinity)
+                }
+                if adConsent.privacyOptionsRequired {
+                    Button("Advertising privacy choices") { adConsent.showPrivacyOptions() }
+                }
+            } }
             Section("Permissions") {
                 Button("Open system settings") {
                     if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
                 }
-                Text("GPS testing requires precise location. Ending a session stops location updates and releases audio.")
+                Text("A drive requires precise location. Ending a session stops location updates and releases audio.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
             Section("Salim Premium") {
@@ -661,7 +691,7 @@ struct SettingsView: View {
             }
             Section("Privacy") { NavigationLink("Read privacy notice") { PrivacyNotice() } }
             Section("Release status") {
-                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. No account exists and no advertising SDK is active. In an emergency in Bahrain, call 999.")
+                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. Camera coverage varies by area; mapped and approximate sites can be missing or out of date. In an emergency in Bahrain, call 999.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
         }

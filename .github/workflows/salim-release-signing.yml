@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       version_name:
-        description: Marketing version for this build (e.g. 0.3.0)
+        description: Marketing version for this build (e.g. 0.7.0)
         required: true
         type: string
       version_code:
@@ -162,6 +162,9 @@ jobs:
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;36.0.0'
 
       - name: Build and sign the release bundle
+        env:
+          SALIM_ADMOB_APP_ID_ANDROID: ${{ vars.SALIM_ADMOB_APP_ID_ANDROID }}
+          SALIM_ADMOB_BANNER_ANDROID: ${{ vars.SALIM_ADMOB_BANNER_ANDROID }}
         working-directory: ${{ runner.temp }}/salim/apps/android
         run: |
           gradle --no-daemon \
@@ -225,6 +228,17 @@ jobs:
         run: |
           sudo xcode-select --switch /Applications/Xcode_26.3.app/Contents/Developer
           xcodebuild -version
+
+      - name: Require production iOS AdMob variables
+        env:
+          APP_ID: ${{ vars.SALIM_ADMOB_APP_ID_IOS }}
+          BANNER_ID: ${{ vars.SALIM_ADMOB_BANNER_IOS }}
+        run: |
+          set -euo pipefail
+          if [ -z "$APP_ID" ] || [ -z "$BANNER_ID" ]; then
+            echo "::error title=iOS AdMob configuration missing::Set SALIM_ADMOB_APP_ID_IOS and SALIM_ADMOB_BANNER_IOS as repository variables before signing a store build."
+            exit 1
+          fi
 
       - name: Require Apple signing secrets
         env:
@@ -297,6 +311,8 @@ jobs:
         env:
           TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
           PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
+          SALIM_ADMOB_APP_ID_IOS: ${{ vars.SALIM_ADMOB_APP_ID_IOS }}
+          SALIM_ADMOB_BANNER_IOS: ${{ vars.SALIM_ADMOB_BANNER_IOS }}
         run: |
           set -euo pipefail
           xcodebuild -project Salim.xcodeproj -scheme Salim -configuration Release \
@@ -309,6 +325,9 @@ jobs:
             CODE_SIGN_IDENTITY='Apple Distribution' \
             PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
+            ADMOB_APP_ID="$SALIM_ADMOB_APP_ID_IOS" \
+            ADMOB_BANNER_ID="$SALIM_ADMOB_BANNER_IOS" \
+            SALIM_ADS_ENABLED=YES \
             archive
 
       - name: Export an App Store IPA without uploading it

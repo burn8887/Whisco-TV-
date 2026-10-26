@@ -11,7 +11,7 @@ import Foundation
 ///   highway=enforcement + enforcement=maxspeed newer scheme
 enum CameraFeed {
     private static let endpoint = URL(string: "https://overpass-api.de/api/interpreter")!
-    private static let userAgent = "SalimDemo/0.6 (iOS; road-awareness; support@salimdrive.com)"
+    private static let userAgent = "Salim/0.6 (iOS; road-awareness; support@salimdrive.com)"
     private static let radiusMeters = 12_000.0
     private static let minimumInterval: TimeInterval = 30 * 60
     private static let cacheKey = "salim.cameras"

@@ -1,3 +1,17 @@
 # Keep Salim out of the host project's automatic content scans.
 # Reviewed source is explicitly tracked; dependency/build output must never be added.
 *
+
+# Explicitly tracked native advertising integration; every other new capsule file stays ignored.
+!apps/
+!apps/salim-android/
+!apps/salim-android/app/
+!apps/salim-android/app/src/
+!apps/salim-android/app/src/main/
+!apps/salim-android/app/src/main/java/
+!apps/salim-android/app/src/main/java/app/
+!apps/salim-android/app/src/main/java/app/salim/
+!apps/salim-android/app/src/main/java/app/salim/AdMob.kt
+!apps/salim-ios/
+!apps/salim-ios/Salim/
+!apps/salim-ios/Salim/Ads.swift

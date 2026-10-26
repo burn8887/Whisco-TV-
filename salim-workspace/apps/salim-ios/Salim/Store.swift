@@ -19,16 +19,16 @@ final class Store: ObservableObject {
     static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
     static let privacyURL = URL(string: "https://docs.google.com/document/d/1gv7tD1tYx3aMiLptPBw4nXSRWDwqexy_Tk_e6WcaSHY/view")!
 
-    /// What Premium actually does in this build. Kept in one place so the paywall cannot
-    /// drift from the product: advertising joins this list when AdMob is wired, and the
-    /// GCC offline pack when that pack ships.
+    /// Benefits currently implemented in this build; every safety warning remains free.
     static let benefits = [
         "Trip history kept without limit. The free tier keeps the last 20 runs.",
+        "No Overview or Settings ads. Ads never appear on the drive screen.",
         "Every camera and hazard warning, free, forever — nothing here is behind this paywall.",
     ]
 
     @Published private(set) var products: [Product] = []
     @Published private(set) var premium = false
+    @Published private(set) var entitlementsLoaded = false
     @Published private(set) var loading = false
     @Published private(set) var message: String?
 
@@ -69,6 +69,10 @@ final class Store: ObservableObject {
     /// The period Apple reports for this product, in words a driver reads in one glance.
     static func period(for product: Product) -> String {
         guard let span = product.subscription?.subscriptionPeriod else { return "" }
+        return period(span)
+    }
+
+    private static func period(_ span: Product.SubscriptionPeriod) -> String {
         let unit: String
         switch span.unit {
         case .day: unit = "day"
@@ -77,7 +81,29 @@ final class Store: ObservableObject {
         case .year: unit = "year"
         @unknown default: return ""
         }
-        return span.value == 1 ? "per \(unit)" : "every \(span.value) \(unit)s"
+        return span.value == 1 ? unit : "\(span.value) \(unit)s"
+    }
+
+    private static func period(_ span: Product.SubscriptionPeriod, count: Int) -> String {
+        let amount = span.value * count
+        let noun: String
+        switch span.unit {
+        case .day: noun = "day"
+        case .week: noun = "week"
+        case .month: noun = "month"
+        case .year: noun = "year"
+        @unknown default: return "trial period"
+        }
+        return amount == 1 ? "1 \(noun)" : "\(amount) \(noun)s"
+    }
+
+    static func offerSummary(for product: Product) -> String {
+        guard let offer = product.subscription?.introductoryOffer,
+              offer.paymentMode == .freeTrial else {
+            return "\(product.displayPrice) per \(period(for: product))"
+        }
+        let freePeriod = period(offer.period, count: offer.periodCount)
+        return "\(freePeriod) free, then \(product.displayPrice) per \(period(for: product))"
     }
 
     // MARK: - Entitlement
@@ -91,6 +117,7 @@ final class Store: ObservableObject {
             }
         }
         premium = active
+        entitlementsLoaded = true
     }
 
     private func apply(_ result: VerificationResult<Transaction>) async {

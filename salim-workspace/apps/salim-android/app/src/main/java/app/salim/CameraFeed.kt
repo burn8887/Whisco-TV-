@@ -35,7 +35,7 @@ import java.net.URLEncoder
 object CameraFeed {
 
     private const val ENDPOINT = "https://overpass-api.de/api/interpreter"
-    private const val USER_AGENT = "SalimDemo/0.6 (Android; road-awareness; support@salimdrive.com)"
+    private const val USER_AGENT = "Salim/0.6 (Android; road-awareness; support@salimdrive.com)"
 
     /** Metres around the driver to ask about. Wider than the alert radius, narrower than a country. */
     private const val RADIUS_M = 12_000.0

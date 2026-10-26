@@ -16,8 +16,8 @@ data class Trip(val id: String,val at: Long,val seconds: Int,val alerts: Int,val
 data class Draft(val id: String,val road: String,val kind: String)
 data class DriveState(
     val mode: Mode=Mode.IDLE,
-    val status: String="Ready for a demo",
-    val feed: String="Demo data only · Not driving guidance",
+    val status: String="Ready to start a drive",
+    val feed: String="Waiting for nearby camera data",
     val country: String="BH",
     val voice: Boolean=true,
     val tone: Boolean=true,
@@ -35,7 +35,9 @@ data class DriveState(
     val liveCameras: Int=0,
     val hazards: List<Hazard> = emptyList(),
     val trips: List<Trip> = emptyList(),
-    val drafts: List<Draft> = emptyList()
+    val drafts: List<Draft> = emptyList(),
+    val premium: Boolean = false,
+    val entitlementChecked: Boolean = false
 )
 /** Main-thread owner. GPS callbacks never perform SQL or network requests synchronously. */
 object DriveStore {
@@ -45,7 +47,7 @@ object DriveStore {
     private lateinit var repository: HazardRepository
     private val scope=CoroutineScope(SupervisorJob()+Dispatchers.Main.immediate)
     private val engine=AlertEngine()
-    private var sections=SectionEngine(DemoData.sections)
+    private var sections=SectionEngine(if (BuildConfig.DEBUG) DemoData.sections else emptyList())
     private var initialized=false
     private var generation=0L
     private var startedAt=0L
@@ -72,7 +74,7 @@ object DriveStore {
         // A process-death marker is a failed/incomplete session, never a resurrected active drive.
         if(p.contains("running")) {
             val interrupted=Trip(UUID.randomUUID().toString(),p.getLong("running",System.currentTimeMillis()),0,0,p.getBoolean("runningDemo",false),true)
-            mutable.update { it.copy(trips=(listOf(interrupted)+it.trips).take(200),status="Previous session was interrupted; start a new test") }
+            mutable.update { it.copy(trips=(listOf(interrupted)+it.trips).let { list -> if(it.entitlementChecked && !it.premium) list.take(20) else list },status="Previous session was interrupted; start a new drive") }
             p.edit().remove("running").remove("runningDemo").apply();saveTrips()
         }
         refreshIdle()
@@ -109,7 +111,8 @@ object DriveStore {
     private fun refreshIdle() {
         val token=generation;val country=state.value.country
         scope.launch {
-            runCatching { repository.refresh(country,DemoData.center) }
+            val startingPoint=MapTiles.lastKnown(context)?.let { Point(it.first,it.second) } ?: DemoData.center
+            runCatching { repository.refresh(country,startingPoint) }
                 .onSuccess { result->if(token==generation && state.value.mode==Mode.IDLE)mutable.update { it.copy(hazards=withFeed(result.hazards),feed=result.status) } }
                 .onFailure { mutable.update { s->s.copy(feed="Local pack unavailable; no alerts will be claimed") } }
             // Real cameras come from the device position when there is one, so a driver in
@@ -120,6 +123,7 @@ object DriveStore {
     }
     fun begin(mode: Mode) {
         if(state.value.mode!=Mode.IDLE)return
+        if(mode==Mode.DEMO && !BuildConfig.DEBUG)return
         require(mode!=Mode.IDLE)
         generation++;startedAt=SystemClock.elapsedRealtime();lastGood=startedAt;localAt=0;engine.reset();sections.reset();audio=AudioAlerts(context)
         engine.replace(state.value.hazards)
@@ -171,7 +175,7 @@ object DriveStore {
         val country=state.value.country
         val measurement=sections.evaluate(fix,now,elapsed,country)
         val average=measurement.active.firstOrNull() ?: measurement.completed.firstOrNull()
-        mutable.update { it.copy(acquired=true,fix=fix,average=average,status=when { it.mode==Mode.DEMO->"Simulation · Demo alerts only";fix.speed>=2 && fix.course==null->"Heading unavailable · Proximity alerts paused";else->"GPS test active · Demo data only" }) }
+        mutable.update { it.copy(acquired=true,fix=fix,average=average,status=when { it.mode==Mode.DEMO->"Simulation · Demo alerts only";fix.speed>=2 && fix.course==null->"Heading unavailable · Proximity alerts paused";else->"GPS drive active · Camera coverage varies" }) }
         if(elapsed-localAt>10_000 && localJob?.isActive!=true) {
             localAt=elapsed;val token=generation
             localJob=scope.launch { runCatching { repository.local(country,fix.point) }.onSuccess { hazards->if(token==generation) { val merged=withFeed(hazards);engine.replace(merged);mutable.update { it.copy(hazards=merged) } } }.onFailure { if(it is CancellationException)throw it } }
@@ -187,8 +191,13 @@ object DriveStore {
         val old=state.value
         generation++;ticker?.cancel();syncJob?.cancel();localJob?.cancel();demoJob?.cancel();audio?.close();audio=null;sections.reset();engine.reset()
         val trip=Trip(UUID.randomUUID().toString(),System.currentTimeMillis(),((SystemClock.elapsedRealtime()-startedAt)/1000).toInt(),old.count,old.mode==Mode.DEMO)
-        mutable.update { it.copy(mode=Mode.IDLE,fix=null,warning=null,average=null,acquired=false,status=status,trips=(listOf(trip)+it.trips).take(200)) }
+        mutable.update { it.copy(mode=Mode.IDLE,fix=null,warning=null,average=null,acquired=false,status=status,trips=(listOf(trip)+it.trips).let { trips -> if(it.entitlementChecked && !it.premium) trips.take(20) else trips }) }
         prefs().edit().remove("running").remove("runningDemo").apply();saveTrips()
+    }
+    fun applyPremiumEntitlement(checked: Boolean, active: Boolean) {
+        if (!checked) return
+        mutable.update { it.copy(premium=active,entitlementChecked=true,trips=if(active) it.trips else it.trips.take(20)) }
+        saveTrips()
     }
     fun clearTrips() { mutable.update { it.copy(trips=emptyList()) };saveTrips() }
     fun draft(road: String,kind: String) {

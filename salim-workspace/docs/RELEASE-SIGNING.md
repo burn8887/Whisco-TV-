@@ -119,39 +119,23 @@ reappear, no store-upload command may be present, and the signing workflow must 
 pre-rename path was found in the Android verification step of this workflow. The same script runs
 in the generated standalone repository, where it also rejects any surviving capsule path.
 
-## Activation: the workflow cannot be dispatched yet
+## Operational status (26 October 2026)
 
-GitHub registers a `workflow_dispatch` workflow only when the file exists on the repository's
-**default branch** (`main`). This file currently lives only on `arena/3070ca80-whisco-tv`, so it does
-**not** appear under Actions and the *Run workflow* button is absent. This was verified against the
-API on 20 October 2026: only the Android and iOS build workflows are registered, and those appear
-solely because they have already run.
+The manual `workflow_dispatch` signing workflow is present on the repository default branch and
+can be run against the Salim feature branch after selecting the correct ref and approving the
+`salim-release` environment. It signs Salim artifacts only and has no store-upload step.
 
-It therefore cannot be executed until it reaches `main`. That is a Founder decision: PR #32 is
-intentionally draft and unmerged, and merging is explicitly out of scope for this work.
+Historical signed artifacts exist: Android run `40311763923` and iOS run `40298809146`. They were
+built before the current AdMob, consent, synthetic-data removal and trip-history changes. They are
+stale and must not be distributed or uploaded. Rerun both platform builds after the current source
+passes CI and after verifying the production AdMob variables and store IDs. The next release version
+is `0.7.0` / build `7`; the Android release build also needs an unused Play version code.
 
-When the time comes there are two clean routes:
-
-1. **Merge PR #32** (or a trimmed PR containing only this workflow) into `main`. The workflow then
-   registers and can be dispatched against any branch.
-2. **Land only the workflow first**: open a small separate PR containing just
-   `.github/workflows/salim-release-signing.yml`, merge that, and keep the rest of the capsule
-   unmerged. `workflow_dispatch` accepts a `ref`, so the signed build can then be run against this
-   feature branch once the file exists on `main`.
-
-Until one of those happens, the signed-release path is **written and checked, but not operational**.
-
-## Known limitations, stated honestly
-
-- **No signed build has ever run.** This workflow is unexercised: it needs real secrets, and those
-  have not been supplied. Treat the first execution as a test, not a release.
-- Bundle identifiers are still the provisional `.demo` values. If permanent identifiers are chosen,
-  update the guard, the `ExportOptions.plist` bundle ID, `project.yml` and the Android
-  `applicationId` **before** installing new profiles, or signing will fail by design.
-- The Apple export method `app-store-connect` matches current Xcode 26 tooling; confirm against the
-  Xcode version on the runner if Apple renames it again.
-- Play App Signing enrolment and App Store Connect app-record creation are **not** automated and
-  are not authorised here.
+The signed workflow performs release identity promotion to the permanent `com.salimdrive.app`
+bundle/application ID. Verify that value in the exported IPA and Android package before accepting
+any artifact. The checked-in development IDs remain `.demo` identities. App Store Connect and Play
+Console product configuration, free-trial setup, real GCC data, physical-device testing and final
+store screenshots remain separate acceptance gates.
 
 ## What still requires separate approval
 

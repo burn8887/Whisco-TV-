@@ -148,9 +148,14 @@ enum DemoData {
     static let countries=["BH","SA","AE","QA","KW","OM"]
     static let center=Point(lat:26.22,lon:50.55)
     static let expiry=1_893_456_000.0
+    #if DEBUG
     static let hazards=[
         Hazard(id:"static:demo-roadwork",country:"BH",kind:"ROADWORK",point:Point(lat:26.2353,lon:50.5655),heading:90,road:"King Faisal Highway",expiresAt:expiry),
         Hazard(id:"static:demo-hazard",country:"BH",kind:"HAZARD",point:Point(lat:26.2003,lon:50.5768),heading:nil,road:"Shaikh Isa bin Salman Highway",expiresAt:expiry)
     ]
     static let sections=[SectionZone(id:"demo-section",country:"BH",entry:Gate(point:Point(lat:26.231925,lon:50.533399),heading:26.3,halfWidth:18),exit:Gate(point:Point(lat:26.237725,lon:50.536589),heading:26.3,halfWidth:18),meters:720,limit:80,expiresAt:expiry)]
+    #else
+    static let hazards:[Hazard]=[]
+    static let sections:[SectionZone]=[]
+    #endif
 }
