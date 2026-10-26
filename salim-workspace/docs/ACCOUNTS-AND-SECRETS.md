@@ -179,9 +179,12 @@ automatic deploys; the Docs links remain valid until then.
 
 ## 7. Before you press "run" on the signing workflow
 
-- The release workflow currently builds the **capsule** tree, whose IDs are
-  `app.salim.android.demo` / `app.salim.ios.demo`. Store artifacts must carry
-  **`com.salimdrive.app`**, and an application ID cannot be changed after the first upload.
-  This is being fixed; do not upload an artifact until the log shows `com.salimdrive.app`.
+- The release workflow used to build the **capsule** tree, whose IDs are
+  `app.salim.android.demo` / `app.salim.ios.demo`. An application ID cannot be changed after
+  the first upload, so this was a trap. It now builds the **promoted** tree, which carries
+  **`com.salimdrive.app`**, and both the guard and the archive checks assert that ID. The
+  `confirm_identity` value to pass is therefore `com.salimdrive.app`.
+- The signing keystore must live in `salim-release`. Nothing else in this runbook is secret
+  except the Apple `.p12` password.
 - The advertising SDK and the subscription purchases are not wired into the apps yet. The
   free-tier limits above are the specification they will be built against.

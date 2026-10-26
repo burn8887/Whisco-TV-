@@ -52,7 +52,7 @@ jobs:
           VERSION_NAME: ${{ inputs.version_name }}
         run: |
           set -euo pipefail
-          expected="app.salim.android.demo"
+          expected="com.salimdrive.app"
           if [ "$CONFIRM" != "$expected" ]; then
             echo "::error title=Identity mismatch::Expected '$expected'. This workflow signs Salim only."
             exit 1
@@ -135,7 +135,7 @@ jobs:
           echo "::notice title=Upload key verified::SHA-256 $actual"
 
       - name: Materialize only Salim outside the host checkout
-        run: python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
+        run: python3 salim-workspace/tools/promote.py --output "$RUNNER_TEMP/salim"
 
       - name: Install the Android platform used by Salim
         run: |
@@ -143,7 +143,7 @@ jobs:
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;36.0.0'
 
       - name: Build and sign the release bundle
-        working-directory: ${{ runner.temp }}/salim/apps/salim-android
+        working-directory: ${{ runner.temp }}/salim/apps/android
         run: |
           gradle --no-daemon \
             -PversionName="${{ inputs.version_name }}" \
@@ -151,7 +151,7 @@ jobs:
             :app:verifyReleaseSigning :app:bundleRelease :app:assembleRelease
 
       - name: Verify the signed bundle and APK
-        working-directory: ${{ runner.temp }}/salim/apps/salim-android
+        working-directory: ${{ runner.temp }}/salim/apps/android
         run: |
           set -euo pipefail
           aab=app/build/outputs/bundle/release/app-release.aab
@@ -175,8 +175,8 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/salim/apps/salim-android/app/build/outputs/bundle/release/*.aab
-            ${{ runner.temp }}/salim/apps/salim-android/app/build/outputs/apk/release/*.apk
+            ${{ runner.temp }}/salim/apps/android/app/build/outputs/bundle/release/*.aab
+            ${{ runner.temp }}/salim/apps/android/app/build/outputs/apk/release/*.apk
 
   ios:
     name: Signed iOS archive and IPA
@@ -247,7 +247,7 @@ jobs:
           app_id=$(/usr/libexec/PlistBuddy -c 'Print :Entitlements:application-identifier' "$RUNNER_TEMP/salim-profile.plist")
           echo "::notice title=Provisioning profile::authorises $app_id ($profile_uuid)"
           case "$app_id" in
-            *app.salim.ios.demo) ;;
+            *com.salimdrive.app) ;;
             *) echo "::error title=Wrong provisioning profile::This profile is not for Salim."; exit 1 ;;
           esac
 
@@ -256,11 +256,11 @@ jobs:
           set -euo pipefail
           python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
           brew install xcodegen
-          cd "$RUNNER_TEMP/salim/apps/salim-ios"
+          cd "$RUNNER_TEMP/salim/apps/ios"
           xcodegen generate
 
       - name: Archive with the Salim distribution identity
-        working-directory: ${{ runner.temp }}/salim/apps/salim-ios
+        working-directory: ${{ runner.temp }}/salim/apps/ios
         env:
           TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
           PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
@@ -279,7 +279,7 @@ jobs:
             archive
 
       - name: Export an App Store IPA without uploading it
-        working-directory: ${{ runner.temp }}/salim/apps/salim-ios
+        working-directory: ${{ runner.temp }}/salim/apps/ios
         env:
           TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
           PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
@@ -295,7 +295,7 @@ jobs:
             <key>signingCertificate</key><string>Apple Distribution</string>
             <key>teamID</key><string>$TEAM_ID</string>
             <key>provisioningProfiles</key>
-            <dict><key>app.salim.ios.demo</key><string>$PROFILE_NAME</string></dict>
+            <dict><key>com.salimdrive.app</key><string>$PROFILE_NAME</string></dict>
             <key>uploadSymbols</key><true/>
             <key>manageAppVersionAndBuildNumber</key><false/>
           </dict></plist>
@@ -316,7 +316,7 @@ jobs:
           codesign --verify --deep --strict --verbose=2 "$app"
           codesign -dvvv "$app" 2>&1 | grep -E 'Authority=|TeamIdentifier=|Identifier=' | head -5
           bundle_id=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Info.plist")
-          [ "$bundle_id" = "app.salim.ios.demo" ] || { echo "::error title=Wrong bundle id::$bundle_id"; exit 1; }
+          [ "$bundle_id" = "com.salimdrive.app" ] || { echo "::error title=Wrong bundle id::$bundle_id"; exit 1; }
           echo "::notice title=Signed IPA verified::$bundle_id"
 
       - name: Delete the temporary keychain
