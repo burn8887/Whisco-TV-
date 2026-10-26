@@ -137,6 +137,12 @@ enable **In-App Purchase** → Register. Then the certificate, then Profiles →
 → that App ID → that certificate → Download. The profile's *name* as typed in the portal is
 `SALIM_APPLE_PROFILE_NAME`.
 
+**A profile embeds the certificate it was made against.** If you downloaded a profile before
+this certificate existed, open it again (Profiles → the profile → Edit), select the new
+**Apple Distribution** certificate, save, and download it once more. A profile built around a
+different certificate will not sign a build made with this one, and the failure surfaces late,
+as `No signing certificate "Apple Distribution" found`.
+
 `salim-dist.key` is the only irreplaceable file here. Back it up with the keystore.
 
 ---
