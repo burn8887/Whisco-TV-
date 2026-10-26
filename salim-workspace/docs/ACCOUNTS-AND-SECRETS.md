@@ -35,7 +35,11 @@ keytool -genkeypair -v -keystore salim-upload.jks -alias salim-upload \
   -dname "CN=Salim, O=Ali Sameer Sadeq Mohamed Albaharna, C=BH"
 
 base64 -w0 salim-upload.jks > salim-upload.jks.b64
-keytool -list -v -keystore salim-upload.jks -alias salim-upload | grep SHA256
+keytool -list -v -keystore salim-upload.jks -alias salim-upload | grep -iE 'sha-?256'
+
+The filter is deliberately loose: some JDK builds print `SHA256:` and others print
+`SHA-256:`. A stale JDK is also why the bare `grep SHA256` from an earlier draft of these
+notes printed nothing on a keystore that was perfectly good.
 ```
 
 | Secret name (exact) | Value |

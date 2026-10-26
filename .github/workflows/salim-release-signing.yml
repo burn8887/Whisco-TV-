@@ -126,7 +126,7 @@ jobs:
           set -euo pipefail
           actual=$(keytool -list -v -keystore "$RUNNER_TEMP/salim-upload.jks" \
             -alias "$SALIM_ANDROID_KEY_ALIAS" -storepass "$SALIM_ANDROID_KEYSTORE_PASSWORD" \
-            | awk -F': ' '/SHA256:/{print $2; exit}' | tr -d ' ' | tr 'A-F' 'a-f')
+            | awk -F': ' '/SHA-?256:/{print $2; exit}' | tr -d ': ' | tr 'A-F' 'a-f')
           expected=$(printf '%s' "$EXPECTED_FINGERPRINT" | tr -d ': ' | tr 'A-F' 'a-f')
           if [ "$actual" != "$expected" ]; then
             echo "::error title=Wrong signing key::The keystore does not match the recorded Salim upload certificate."
