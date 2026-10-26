@@ -99,13 +99,19 @@ class OverpassTests(unittest.TestCase):
       {"type":"node","id":4,"lat":51.5074,"lon":-0.1278,
        "tags":{"highway":"speed_camera"}},
       {"type":"node","id":5,"lat":26.25,"lon":50.60},
-      {"type":"way","id":6,"tags":{"highway":"speed_camera"}}
+      {"type":"way","id":6,"tags":{"highway":"speed_camera"}},
+      {"type":"node","id":7,"lat":26.20,"lon":50.58,
+       "tags":{"highway":"enforcement","enforcement":"traffic_signals","name":"Signal 7"}},
+      {"type":"node","id":8,"lat":26.21,"lon":50.59,
+       "tags":{"highway":"enforcement","enforcement":"seatbelt","name":"Seatbelt 8"}}
     ]}"""
 
     def test_gcc_cameras_convert(self):
         rows, _ = importer.convert(self.RESPONSE)
-        self.assertEqual(len(rows), 3)
-        self.assertEqual({r["id"] for r in rows}, {"osm:node/1", "osm:node/2", "osm:node/3"})
+        self.assertEqual(len(rows), 5)
+        self.assertEqual({r["id"] for r in rows}, {"osm:node/1", "osm:node/2", "osm:node/3", "osm:node/7", "osm:node/8"})
+        self.assertEqual({r["id"]: r["kind"] for r in rows}["osm:node/7"], "RED_LIGHT")
+        self.assertEqual({r["id"]: r["kind"] for r in rows}["osm:node/8"], "SEATBELT")
 
     def test_outside_gcc_is_dropped(self):
         rows, _ = importer.convert(self.RESPONSE)
@@ -125,7 +131,8 @@ class OverpassTests(unittest.TestCase):
 
     def test_source_names_the_node(self):
         rows, _ = importer.convert(self.RESPONSE)
-        self.assertEqual(rows[0]["source"], "OpenStreetMap node 1")
+        by_id = {row["id"]: row for row in rows}
+        self.assertEqual(by_id["osm:node/1"]["source"], "OpenStreetMap node 1")
 
     def test_complete_nonsense_is_not_json(self):
         rows, warnings = importer.convert('{"elements": broken')

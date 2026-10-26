@@ -9,7 +9,7 @@
 # source        where this row came from; keep it short and truthful
 #
 # Edit this file, rebuild, and the app uses the new data. Nothing is hidden in code.
-# Rows outside Bahrain's bounding box, or with an unreadable coordinate, are skipped
+# Rows outside the GCC envelope, or with an unreadable coordinate, are skipped
 # rather than crashing the app, so a bad line costs one camera and nothing else.
 id,kind,lat,lon,road,speed_limit,heading,precision,source
 camera:causeway-1,CAMERA,26.0560,50.4230,King Fahd Causeway,100,315,approximate,MOI announcement Nov 2019

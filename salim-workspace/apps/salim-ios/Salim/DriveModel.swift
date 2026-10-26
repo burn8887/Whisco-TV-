@@ -63,7 +63,9 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
             UserDefaults.standard.removeObject(forKey:"running");saveTrips();status="Previous session interrupted · Start a new drive"
         }
         engine.replace(hazards)
-        if let cached=CameraFeed.cached().first, cached.id.hasPrefix("osm:") {liveCameras=CameraFeed.cached()}
+        if let last=manager.location?.coordinate {
+            liveCameras=CameraFeed.cachedNear(Point(lat:last.latitude,lon:last.longitude))
+        }
         Task { [weak self] in
             guard let self else {return}
             if let database {
@@ -93,7 +95,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
             // A failed fetch keeps what we hold — but only what is still about this area.
             // Keeping last night's city would be a false alert, not a saved one.
             self.liveCameras=fetched.isEmpty
-                ? self.liveCameras.filter { Geo.distance($0.point, point) <= 25_000 }
+                ? self.liveCameras.filter { $0.expiresAt > Date().timeIntervalSince1970 && Geo.distance($0.point, point) <= 25_000 }
                 : fetched
             let combined=self.merged(self.hazards.filter{!$0.id.hasPrefix("osm:")})
             self.hazards=combined;self.engine.replace(combined)
@@ -140,7 +142,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         #endif
     }
     private func begin(_ value:DriveMode) {
-        generation+=1;mode=value;started=ProcessInfo.processInfo.systemUptime;lastGood=started;localAt=0;seconds=0;alertCount=0;warning=nil;average=nil;engine.reset();sections.reset()
+        generation+=1;mode=value;started=ProcessInfo.processInfo.systemUptime;lastGood=started;localAt=0;feedAt=started-601;seconds=0;alertCount=0;warning=nil;average=nil;engine.reset();sections.reset()
         acquired = value == .demo
         status=value == .demo ? "Test simulation · No device GPS" : "Acquiring GPS…"
         UserDefaults.standard.set(Date(),forKey:"running");UserDefaults.standard.set(value == .demo,forKey:"runningDemo")
@@ -173,6 +175,13 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         let now=Date().timeIntervalSince1970,elapsed=ProcessInfo.processInfo.systemUptime
         guard Geo.usable(sample,now:now,elapsed:elapsed) else {if acquired {fix=nil;warning=nil;average=nil;sections.reset();audio.stop();status="Weak or stale GPS · Alerts paused"};return}
         lastGood=elapsed;fix=sample;acquired=true
+        if let detected=CameraFeed.country(at:sample.point),detected != country {
+            country=detected
+            hazards=hazards.filter { $0.country==detected }
+            engine.replace(hazards)
+            localAt=elapsed
+            Task { await reload(point:sample.point) }
+        }
         status=mode == .demo ? "Simulation · Demo alerts only" : sample.speed>=2 && sample.course==nil ? "Heading unavailable · Proximity alerts paused" : "GPS drive active · Camera coverage varies"
         let result=sections.evaluate(sample,now:now,elapsed:elapsed,country:country);average=result.active.first ?? result.completed.first
         if elapsed-localAt>10 {localAt=elapsed;Task{await reload(point:sample.point)}}

@@ -115,10 +115,9 @@ object DriveStore {
             runCatching { repository.refresh(country,startingPoint) }
                 .onSuccess { result->if(token==generation && state.value.mode==Mode.IDLE)mutable.update { it.copy(hazards=withFeed(result.hazards),feed=result.status) } }
                 .onFailure { mutable.update { s->s.copy(feed="Local pack unavailable; no alerts will be claimed") } }
-            // Real cameras come from the device position when there is one, so a driver in
-            // Doha gets Doha's cameras rather than Bahrain's.
-            val here=MapTiles.lastKnown(context)?.let { Point(it.first,it.second) } ?: DemoData.center
-            refreshCameras(here)
+            // Do not query an invented/default Bahrain point. Real camera requests begin
+            // only from a device-derived location, including a last-known fix.
+            MapTiles.lastKnown(context)?.let { refreshCameras(Point(it.first,it.second)) }
         }
     }
     fun begin(mode: Mode) {
@@ -147,8 +146,12 @@ object DriveStore {
         } }
         val token=generation
         syncJob=scope.launch { while(isActive) {
-            val point=state.value.fix?.point ?: DemoData.center
-            runCatching { repository.refresh(state.value.country,point) }.onSuccess { result -> if(token==generation) { mutable.update { it.copy(hazards=withFeed(result.hazards),feed=result.status) };engine.replace(state.value.hazards) } }.onFailure { if(it is CancellationException)throw it;message("Offline cache unavailable") }
+            val fix=state.value.fix
+            if (fix == null || !state.value.acquired) { delay(1_000); continue }
+            val point=fix.point
+            val country=CameraFeed.countryAt(point) ?: state.value.country
+            if (country != state.value.country) mutable.update { it.copy(country=country,hazards=it.hazards.filter { h -> h.country==country }) }
+            runCatching { repository.refresh(country,point) }.onSuccess { result -> if(token==generation) { mutable.update { s -> if(s.country==country) s.copy(hazards=withFeed(result.hazards),feed=result.status) else s };engine.replace(state.value.hazards) } }.onFailure { if(it is CancellationException)throw it;message("Offline cache unavailable") }
             refreshCameras(point)
             delay(30_000)
         } }
@@ -172,7 +175,11 @@ object DriveStore {
             return
         }
         lastGood=elapsed
-        val country=state.value.country
+        val detectedCountry=CameraFeed.countryAt(fix.point)
+        val country=detectedCountry ?: state.value.country
+        if (country != state.value.country) {
+            mutable.update { it.copy(country=country,hazards=it.hazards.filter { h -> h.country==country }) }
+        }
         val measurement=sections.evaluate(fix,now,elapsed,country)
         val average=measurement.active.firstOrNull() ?: measurement.completed.firstOrNull()
         mutable.update { it.copy(acquired=true,fix=fix,average=average,status=when { it.mode==Mode.DEMO->"Simulation · Demo alerts only";fix.speed>=2 && fix.course==null->"Heading unavailable · Proximity alerts paused";else->"GPS drive active · Camera coverage varies" }) }

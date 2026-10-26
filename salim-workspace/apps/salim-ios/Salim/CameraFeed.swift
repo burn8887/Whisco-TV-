@@ -16,6 +16,8 @@ enum CameraFeed {
     private static let minimumInterval: TimeInterval = 30 * 60
     private static let cacheKey = "salim.cameras"
     private static let stampKey = "salim.cameras.stamp"
+    private static let areaLatStep = 0.12
+    private static let areaLonStep = 0.15
 
     /// Country boxes as (code, south, west, north, east). Small states first, because Saudi
     /// Arabia's rectangle would otherwise swallow Qatar, Bahrain and the UAE coast.
@@ -39,17 +41,26 @@ enum CameraFeed {
         return values
     }
 
-    /// Cached rows close enough to be about *this* area. The cache survives between drives,
-    /// and a drive from Manama to Dubai would otherwise keep showing Manama's cameras:
-    /// caching must not turn yesterday's city into today's false alert.
-    private static func cachedNear(_ point: Point) -> [Hazard] {
-        cached().filter { Geo.distance(point, $0.point) <= 25_000 }
+    /// Cached rows close enough to be about this area. Multiple areas are retained so a trip
+    /// across the GCC does not replace the previous city or suppress a new-area fetch.
+    static func cachedNear(_ point: Point, now: TimeInterval = Date().timeIntervalSince1970) -> [Hazard] {
+        cached().filter { $0.expiresAt > now && Geo.distance(point, $0.point) <= 25_000 }
     }
 
-    private static func store(_ hazards: [Hazard]) {
-        guard let data = try? JSONEncoder().encode(hazards) else { return }
+    private static func areaKey(_ point: Point) -> String {
+        let country = country(at: point) ?? "outside"
+        return "\(country):\(Int(floor(point.lat / areaLatStep))):\(Int(floor(point.lon / areaLonStep)))"
+    }
+
+    private static func store(_ hazards: [Hazard], near point: Point, now: TimeInterval) {
+        let current = cached().filter { $0.expiresAt > now }
+        var merged: [String: Hazard] = [:]
+        for hazard in current { merged[hazard.id] = hazard }
+        for hazard in hazards { merged[hazard.id] = hazard }
+        let retained = Array(merged.values.sorted { $0.expiresAt > $1.expiresAt }.prefix(5_000))
+        guard let data = try? JSONEncoder().encode(retained) else { return }
         UserDefaults.standard.set(data, forKey: cacheKey)
-        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: stampKey)
+        UserDefaults.standard.set(now, forKey: "\(stampKey).\(areaKey(point))")
     }
 
     /// Cameras near a point. Falls back to the cache when the request is still fresh, when
@@ -57,12 +68,21 @@ enum CameraFeed {
     /// driver an alert they already had.
     static func fetch(near point: Point) async -> [Hazard] {
         guard country(at: point) != nil else { return cachedNear(point) }
-        let last = UserDefaults.standard.double(forKey: stampKey)
-        if last > 0, Date().timeIntervalSince1970 - last < minimumInterval { return cachedNear(point) }
+        let now = Date().timeIntervalSince1970
+        let area = areaKey(point)
+        let last = UserDefaults.standard.double(forKey: "\(stampKey).\(area)")
+        let retryAfterKey = "\(stampKey).retry.\(area)"
+        if (last > 0 && now - last < minimumInterval) || now < UserDefaults.standard.double(forKey: retryAfterKey) {
+            return cachedNear(point, now: now)
+        }
 
-        guard let body = await query(point) else { return cachedNear(point) }
-        store(body)
-        return body
+        guard let body = await query(point) else {
+            UserDefaults.standard.set(now + 60, forKey: retryAfterKey)
+            return cachedNear(point, now: now)
+        }
+        UserDefaults.standard.removeObject(forKey: retryAfterKey)
+        store(body, near: point, now: now)
+        return cachedNear(point, now: now)
     }
 
     private static func query(_ point: Point) async -> [Hazard]? {
@@ -73,7 +93,7 @@ enum CameraFeed {
         // Two taggings, one request. `out body` keeps the payload to the tags we read.
         let overpass = "[out:json][timeout:25];" +
             "(node[\"highway\"=\"speed_camera\"](\(box));" +
-            "node[\"highway\"=\"enforcement\"][\"enforcement\"=\"maxspeed\"](\(box));" +
+            "node[\"highway\"=\"enforcement\"][\"enforcement\"~\"^(maxspeed|average_speed|traffic_signals|red_light|seatbelt|seat_belt)$\"](\(box));" +
             ");out body;"
 
         var request = URLRequest(url: endpoint)
@@ -116,7 +136,10 @@ enum CameraFeed {
             // Only genuine camera tags. An untagged node would become a phantom alert.
             let highway = tags["highway"] as? String ?? ""
             let enforcement = tags["enforcement"] as? String ?? ""
-            guard highway == "speed_camera" || (highway == "enforcement" && enforcement == "maxspeed") else { continue }
+            let supportedEnforcement = ["maxspeed", "average_speed", "traffic_signals", "red_light", "seatbelt", "seat_belt"]
+            guard highway == "speed_camera" || (highway == "enforcement" && supportedEnforcement.contains(enforcement)) else { continue }
+            let kind = ["traffic_signals", "red_light"].contains(enforcement) ? "RED_LIGHT"
+                : ["seatbelt", "seat_belt"].contains(enforcement) ? "SEATBELT" : "CAMERA"
 
             let name = (tags["name"] as? String).flatMap { $0.isEmpty ? nil : $0 }
                 ?? (tags["ref"] as? String).flatMap { $0.isEmpty ? nil : $0 }
@@ -127,7 +150,7 @@ enum CameraFeed {
             let hazard = Hazard(
                 id: "osm:node/\(id)",
                 country: country,
-                kind: "CAMERA",
+                kind: kind,
                 point: point,
                 heading: heading,
                 road: String(name.prefix(200)),

@@ -80,17 +80,17 @@ HEADER = [
     "id", "kind", "lat", "lon", "road", "speed_limit", "heading", "precision", "source",
 ]
 
-def default_pack_path() -> Path:
-    """Locate the pack by glob.
-
-    The Android app sits at a different depth in the capsule and in the promoted
-    repository, so a literal path here would be wrong in one of them.
-    """
+def default_pack_paths() -> list[Path]:
+    """Locate the Android and iOS bundled copies in either workspace layout."""
     root = Path(__file__).resolve().parent.parent
-    matches = sorted(root.glob("apps/*/app/src/main/assets/cameras.csv"))
-    if matches:
-        return matches[0]
-    return root / "apps" / "missing" / "assets" / "cameras.csv"
+    android = sorted(root.glob("apps/*/app/src/main/assets/cameras.csv"))
+    ios = sorted(root.glob("apps/*/Salim/Resources/cameras.csv"))
+    return android + ios
+
+
+def default_pack_path() -> Path:
+    paths = default_pack_paths()
+    return paths[0] if paths else Path(__file__).resolve().parent.parent / "apps/missing/assets/cameras.csv"
 
 ALIASES = {
     "lat": "lat", "latitude": "lat",
@@ -199,7 +199,7 @@ def convert_overpass(text: str) -> tuple[list[dict], list[str]]:
 
         [out:json][timeout:180];
         (node["highway"="speed_camera"](16,34,33,60);
-         node["highway"="enforcement"]["enforcement"="maxspeed"](16,34,33,60));
+         node["highway"="enforcement"]["enforcement"~"^(maxspeed|average_speed|traffic_signals|red_light|seatbelt|seat_belt)$"](16,34,33,60));
         out body;
 
     Only nodes are read. Camera ways and relations exist in OSM but are rare, and guessing
@@ -235,8 +235,12 @@ def convert_overpass(text: str) -> tuple[list[dict], list[str]]:
         # phantom alert, which is worse than a missing one.
         highway = str(tags.get("highway", ""))
         enforcement = str(tags.get("enforcement", ""))
-        if not (highway == "speed_camera" or (highway == "enforcement" and enforcement == "maxspeed")):
+        supported_enforcement = {"maxspeed", "average_speed", "traffic_signals", "red_light", "seatbelt", "seat_belt"}
+        if not (highway == "speed_camera" or (highway == "enforcement" and enforcement in supported_enforcement)):
             continue
+        kind = ("RED_LIGHT" if enforcement in {"traffic_signals", "red_light"}
+                else "SEATBELT" if enforcement in {"seatbelt", "seat_belt"}
+                else "CAMERA")
         road = (tags.get("name") or tags.get("ref") or "Mapped camera").strip()
         heading = ""
         direction = tags.get("direction")
@@ -254,7 +258,7 @@ def convert_overpass(text: str) -> tuple[list[dict], list[str]]:
         seen.add(key)
         rows.append({
             "id": key,
-            "kind": "CAMERA",
+            "kind": kind,
             "lat": f"{lat:.6f}",
             "lon": f"{lon:.6f}",
             "road": road[:200],
@@ -320,7 +324,7 @@ def write_pack(rows: list[dict], destination: Path) -> None:
         "# source        where this row came from; keep it short and truthful\n"
         "#\n"
         "# Edit this file, rebuild, and the app uses the new data. Nothing is hidden in code.\n"
-        "# Rows outside Bahrain, or with an unreadable coordinate, are skipped rather than\n"
+        "# Rows outside the GCC envelope, or with an unreadable coordinate, are skipped rather than\n"
         "# crashing the app, so a bad line costs one camera and nothing else.\n"
     )
     buffer = io.StringIO()
@@ -400,11 +404,16 @@ def main() -> int:
         print("no convertible rows", file=sys.stderr)
         return 1
 
-    destination = args.output or default_pack_path()
-    write_pack(rows, destination)
+    destinations = [args.output] if args.output else default_pack_paths()
+    if not destinations:
+        destinations = [default_pack_path()]
+    for destination in destinations:
+        write_pack(rows, destination)
     exact = sum(1 for r in rows if r["precision"] == "exact")
-    print(f"wrote {len(rows)} cameras to {destination} ({exact} exact, {len(rows) - exact} approximate)")
-    print("rebuild the Android app for the change to take effect, then reinstall.")
+    print(f"wrote {len(rows)} cameras to {len(destinations)} pack(s) ({exact} exact, {len(rows) - exact} approximate)")
+    for destination in destinations:
+        print(f"  {destination}")
+    print("rebuild both native apps for the change to take effect, then reinstall.")
     return 0
 
 

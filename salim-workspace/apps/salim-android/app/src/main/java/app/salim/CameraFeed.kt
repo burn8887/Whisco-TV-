@@ -46,6 +46,8 @@ object CameraFeed {
     private const val PREF = "salim_cameras"
     private const val KEY_LAST = "last_fetch"
     private const val KEY_DATA = "cached"
+    private const val AREA_LAT_STEP = 0.12
+    private const val AREA_LON_STEP = 0.15
 
     /**
      * Country boxes as (code, south, west, north, east). Small states are tested before
@@ -60,17 +62,20 @@ object CameraFeed {
         "SA" to doubleArrayOf(16.00, 34.50, 32.20, 55.70),
     )
 
-    private fun countryAt(point: Point): String? = BOXES.firstOrNull { (_, b) ->
+    fun countryAt(point: Point): String? = BOXES.firstOrNull { (_, b) ->
         point.lat in b[0]..b[2] && point.lon in b[1]..b[3]
     }?.first?.takeIf { it in COUNTRIES }
 
-    /** Cameras cached from the last successful query, if any. */
-    fun cached(context: Context): List<Hazard> {
-        val raw = runCatching {
-            context.getSharedPreferences(PREF, 0).getString(KEY_DATA, null)
-        }.getOrNull() ?: return emptyList()
-        return runCatching { decode(raw) }.getOrDefault(emptyList())
+    /** Cached OSM rows from all queried GCC areas, with expired entries discarded. */
+    fun cached(context: Context, now: Long = System.currentTimeMillis()): List<Hazard> {
+        val raw = runCatching { context.getSharedPreferences(PREF, 0).getString(KEY_DATA, null) }.getOrNull()
+            ?: return emptyList()
+        return runCatching { decode(raw).filter { it.expiresAt > now } }.getOrDefault(emptyList())
     }
+
+    /** Small spatial cells keep throttling local to an area instead of blocking a whole country. */
+    fun areaKey(point: Point, country: String = countryAt(point) ?: "outside"): String =
+        "$country:${kotlin.math.floor(point.lat / AREA_LAT_STEP).toInt()}:${kotlin.math.floor(point.lon / AREA_LON_STEP).toInt()}"
 
     /**
      * Cached rows close enough to be about *this* area. The cache persists across drives, and
@@ -80,8 +85,8 @@ object CameraFeed {
     fun cachedNear(context: Context, point: Point): List<Hazard> = near(cached(context), point)
 
     /** The same 25 km bound, applied to rows already held in memory. */
-    fun near(rows: List<Hazard>, point: Point): List<Hazard> =
-        rows.filter { haversine(point, it.point) <= 25_000 }
+    fun near(rows: List<Hazard>, point: Point, now: Long = System.currentTimeMillis()): List<Hazard> =
+        rows.filter { it.expiresAt > now && haversine(point, it.point) <= 25_000 }
 
     private fun haversine(a: Point, b: Point): Double {
         val r = Math.PI / 180
@@ -138,13 +143,26 @@ object CameraFeed {
     suspend fun fetch(context: Context, point: Point, now: Long = System.currentTimeMillis()): List<Hazard> {
         val country = countryAt(point) ?: return cachedNear(context, point)
         val prefs = context.getSharedPreferences(PREF, 0)
-        val last = prefs.getLong(KEY_LAST, 0L)
-        if (now - last < MIN_INTERVAL_MS) return cachedNear(context, point)
+        val area = areaKey(point, country)
+        val areaLastKey = "${KEY_LAST}_$area"
+        val retryKey = "retry_after_$area"
+        val last = prefs.getLong(areaLastKey, 0L)
+        if (now - last in 0 until MIN_INTERVAL_MS || now < prefs.getLong(retryKey, 0L)) {
+            return cachedNear(context, point)
+        }
 
-        val fresh = query(point) ?: return cachedNear(context, point)
-        val stamped = fresh.map { it.copy(expiresAt = now + 30L * 24 * 60 * 60 * 1000) }
-        prefs.edit().putLong(KEY_LAST, now).putString(KEY_DATA, encode(stamped)).apply()
-        return stamped
+        val fresh = query(point)
+        if (fresh == null) {
+            prefs.edit().putLong(retryKey, now + 60_000L).apply()
+            return cachedNear(context, point)
+        }
+        val expiry = now + 30L * 24 * 60 * 60 * 1000
+        val mergedById = cached(context, now).associateBy { it.id }.toMutableMap()
+        fresh.map { it.copy(expiresAt = expiry) }.forEach { mergedById[it.id] = it }
+        val merged = mergedById.values.sortedByDescending { it.expiresAt }.take(5_000)
+        // Cache even an empty successful query so the same area is not repeatedly sent to Overpass.
+        prefs.edit().putLong(areaLastKey, now).remove(retryKey).putString(KEY_DATA, encode(merged)).apply()
+        return near(merged, point)
     }
 
     private fun box(point: Point): DoubleArray {
@@ -159,7 +177,7 @@ object CameraFeed {
         val body = "[out:json][timeout:25];" +
             "(" +
             "node[\"highway\"=\"speed_camera\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
-            "node[\"highway\"=\"enforcement\"][\"enforcement\"=\"maxspeed\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
+            "node[\"highway\"=\"enforcement\"][\"enforcement\"~\"^(maxspeed|average_speed|traffic_signals|red_light|seatbelt|seat_belt)$\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
             ");out body;"
 
         var connection: HttpURLConnection? = null
@@ -199,17 +217,24 @@ object CameraFeed {
             if (!p.valid()) continue
             val country = countryAt(p) ?: continue
             val tags = element.optJSONObject("tags") ?: JSONObject()
+            val highway = tags.optString("highway")
+            val enforcement = tags.optString("enforcement")
+            val supportedEnforcement = setOf("maxspeed", "average_speed", "traffic_signals", "red_light", "seatbelt", "seat_belt")
+            if (!(highway == "speed_camera" || (highway == "enforcement" && enforcement in supportedEnforcement))) continue
             val road = (tags.optString("name").takeIf { it.isNotBlank() }
                 ?: tags.optString("ref").takeIf { it.isNotBlank() }
                 ?: "Mapped camera").take(200)
             val heading = tags.optString("direction").toDoubleOrNull()?.takeIf { it in 0.0..359.0 }
-            // OSM does not distinguish speed from red-light cameras in this tagging, so
-            // everything from here is a speed camera and says so.
+            val kind = when {
+                enforcement in setOf("traffic_signals", "red_light") -> Kind.RED_LIGHT
+                enforcement in setOf("seatbelt", "seat_belt") -> Kind.SEATBELT
+                else -> Kind.CAMERA
+            }
             val hazard = runCatching {
                 Hazard(
                     id = "osm:node/$id",
                     country = country,
-                    kind = Kind.CAMERA,
+                    kind = kind,
                     point = p,
                     heading = heading,
                     road = road,
