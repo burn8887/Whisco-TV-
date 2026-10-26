@@ -89,6 +89,56 @@ The team ID is the 10-character identifier at the top right of the portal.
 
 **Clickpath:** same place as the Android ones — `salim-release` → **Add secret** ×5.
 
+### Making the certificate without a Mac
+
+The portal asks for a Certificate Signing Request. Keychain Access is the usual way to make
+one, but it is only a wrapper around `openssl`, and every step below runs on Linux. The macOS
+runner does the actual signing; your machine only has to produce a key, a request and two
+files.
+
+**1. Create the private key and the request.** The `.key` never leaves your machine — Apple
+only ever sees the public half:
+
+```sh
+openssl req -new -newkey rsa:2048 -nodes \
+  -keyout salim-dist.key -out salim-dist.csr \
+  -subj "/CN=Salim Distribution/O=Ali Sameer Sadeq Mohamed Albaharna/C=BH"
+```
+
+**2. Portal → Certificates, Identifiers & Profiles → Certificates → ＋ → Apple Distribution**
+→ choose `salim-dist.csr` → Continue → **Download** (`distribution.cer`).
+
+**3. Pair Apple's certificate with your private key.** `-legacy` matters: OpenSSL 3 defaults
+to a format macOS `security import` rejects, and the runner imports this file with
+`security import`. Without it the failure reads "MAC verification failed", which looks like a
+wrong password and is not:
+
+```sh
+openssl x509 -inform DER -in distribution.cer -out distribution.pem
+openssl pkcs12 -export -legacy -inkey salim-dist.key -in distribution.pem \
+  -out distribution.p12 -name "Salim Distribution"
+```
+
+If your OpenSSL is 1.1.1 it has no `-legacy` flag and does not need one. The password it asks
+for is `SALIM_APPLE_CERT_PASSWORD`.
+
+**4. Base64 both files**, in a form that needs no shell redirect:
+
+```sh
+openssl base64 -A -in distribution.p12 -out distribution.b64
+openssl base64 -A -in Salim_AppStore.mobileprovision -out profile.b64
+```
+
+`distribution.b64` is `SALIM_APPLE_CERT_P12_BASE64`; `profile.b64` is
+`SALIM_APPLE_PROFILE_BASE64`.
+
+**Order in the portal:** Identifiers → App IDs → ＋ → App → bundle ID `com.salimdrive.app` →
+enable **In-App Purchase** → Register. Then the certificate, then Profiles → ＋ → **App Store**
+→ that App ID → that certificate → Download. The profile's *name* as typed in the portal is
+`SALIM_APPLE_PROFILE_NAME`.
+
+`salim-dist.key` is the only irreplaceable file here. Back it up with the keystore.
+
 ---
 
 ## 4. Advertising: the network and its IDs
