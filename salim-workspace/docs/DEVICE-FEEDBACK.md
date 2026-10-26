@@ -136,3 +136,80 @@ illegitimate one: it kept being easier to polish something else.
 The blocker is narrow and worth stating plainly. MapLibre GL needs a style URL. This
 environment reaches GitHub, npm and PyPI only, so no tile endpoint can be verified from
 here — and shipping an unverified URL is how a build works in testing and fails in a car.
+
+---
+
+# Third pass — 0.4.0-demo, 22 October 2026
+
+> "Style itself being too soft and generic... I want to see a working app with full view map,
+> real location and real radar warnings."
+
+## Style: from wellness app to instrument panel
+
+The criticism was specific and correct. The old system was soft by construction: 13–22dp
+corner radii, a gradient hero, pastel greens, no lines anywhere, and generous empty space.
+That vocabulary belongs to a health app.
+
+The new system is the opposite in every dimension that matters:
+
+| | 0.3.0 | 0.4.0 |
+| --- | --- | --- |
+| Corner radius | 13–22dp | 4–8dp |
+| Separation | white space | 1dp hairline rules |
+| Ground | `#F5F7F0` | `#0A0D0B` (dark) |
+| Accent | muted forest | `#4ADE9B` signal green |
+| Numerals | default proportional | monospace, tabular |
+| Headings | gradient card | type on ground, no container |
+
+Measurements moved into a bordered metric strip rather than three floating cards. Alerts
+became dense rows with a 3dp colour bar. Section labels are monospace uppercase with 2sp
+tracking. The brand mark is a square tile, not a rounded one.
+
+## Map: real, and no new dependency
+
+The blocker was stated as: a map engine is a dependency whose exact coordinates could not
+be verified from the environment that writes this code. Every unverified dependency so far
+cost a failed build.
+
+Rather than accept a fourth failure, the map is built on raster tiles — 256px PNGs in the
+standard z/x/y scheme — drawn straight into a Compose canvas. No SDK, no version to
+resolve, no native library. Web Mercator projection, tile cache bounded at 24 MB, four
+parallel fetches, a descriptive User-Agent and OSM attribution, all of which the OSM tile
+policy requires.
+
+What is given up: vector crispness when zooming and offline caching. What is gained: a real
+map of real streets, panning and pinching, with the illustration grid showing through if
+tiles cannot be fetched, so an offline phone degrades instead of going blank.
+
+## Location
+
+The idle map centres on the device's last known position from GPS, network or passive
+providers rather than a hard-coded Manama point, and says "MANAMA · NO FIX" when it has
+nothing, so the state is never guessed.
+
+## "Real radar warnings"
+
+Recorded here rather than acted on, because it reverses a written instruction.
+
+On 21 October the instruction was **"Drop police detection for now."** Speed cameras were
+removed from the app in `fde77d2` for exactly that reason, and `check_site.py` fails the
+build on radar-detector language.
+
+"Real radar warnings" can mean two different things:
+
+1. **Warnings that fire from real position rather than a script.** This is what the engine
+   now does — real GPS, real coordinates, the alert threshold crossed by actual movement.
+   Delivered.
+2. **Police and speed-camera detection, as Radarbot sells it.** Not delivered, because it
+   contradicts the instruction above, and because it carries store-review and legal risk in
+   several Gulf markets.
+
+Point 1 is implemented. Point 2 needs the Founder to reverse the 21 October instruction in
+writing; until then building it would be re-introducing something explicitly removed one
+day earlier.
+
+There is also a factual constraint worth stating plainly: **there is no reliable public
+dataset of Bahrain speed-camera locations.** Radarbot's coverage there is community-supplied
+and unverified. Even with the instruction reversed, the honest version is crowd-sourced
+reporting with confidence decay, not a definitive camera map — and presenting unverified
+camera positions to a driver is a safety claim, not a feature.
