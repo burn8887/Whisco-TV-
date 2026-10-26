@@ -213,3 +213,49 @@ dataset of Bahrain speed-camera locations.** Radarbot's coverage there is commun
 and unverified. Even with the instruction reversed, the honest version is crowd-sourced
 reporting with confidence decay, not a definitive camera map — and presenting unverified
 camera positions to a driver is a safety claim, not a feature.
+
+---
+
+# Cameras — 0.5.0-demo, 22 October 2026
+
+The Founder reinstated camera warnings with a source:
+`reddit.com/r/Bahrain/comments/1wcxzdr/all_speed_cameras_mapped`.
+
+## What I could and could not read
+
+Reddit returns **403 to every route available here** — `www`, `old`, and the `.json` API.
+The thread itself is therefore not in this build. Search surfaced the surrounding facts:
+GDT's official eTraffic locator, the 258-camera smart rollout, the four King Fahd Causeway
+cameras announced in 2019, and the districts named in official reporting.
+
+## What is implemented
+
+- `Kind.SEATBELT` and `Kind.RED_LIGHT` in the core enum, with every `when` branch covered —
+  an added enum constant is a compile error in an exhaustive `when`, so this was the first
+  thing checked.
+- `assets/cameras.csv` — the entire camera dataset as a file, not code. Nine columns,
+  validated on load. A malformed row costs one camera, not the drive.
+- `CameraPack` parses it, seeds the existing hazard table at revision 2 so alerts flow
+  through the engine unchanged, and keeps per-site metadata for display.
+- `tools/import-cameras.py` converts any pasted table (CSV or TSV, any column order) into
+  the pack, rejecting coordinates outside Bahrain, impossible speed limits, unknown kinds
+  and duplicates. 15 tests, run as part of the suite.
+- Map pins, hollow for approximate sites. A camera list separated from road conditions.
+
+## The eight shipped rows are all approximate
+
+Four on the King Fahd Causeway from the 2019 MOI announcement; one each for the Diplomatic
+Area, Seef, Riffa and Muharraq from the 2026 smart-camera rollout. Those sources name roads
+and districts, not surveyed coordinates, so the rows say `approximate` and the app shows a
+`≈` and a hollow ring. Claiming metre accuracy from a press release would be a lie a driver
+could act on.
+
+## Loading the real list
+
+```sh
+python3 tools/import-cameras.py --input pasted.csv --output apps/salim-android/app/src/main/assets/cameras.csv
+python3 tools/import-cameras.py --check
+```
+
+Columns are matched by name, so a copy-paste from a table works. Rows marked `exact` draw as
+filled pins.

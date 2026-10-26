@@ -19,7 +19,12 @@ class HazardRepository(context: Context) {
     private val retry=RetryGate()
     private var seeded=false
     private var lastScope: String?=null
-    private fun initialize() { if(!seeded) { database.seed("BH",1,DemoData.hazards); seeded=true } }
+    private fun initialize() { if(!seeded) {
+        // Revision 2 adds the camera pack. The seed is idempotent per revision, so an
+        // existing install picks up new cameras on the next launch without a wipe.
+        database.seed("BH",2,DemoData.hazards+CameraPack.hazards())
+        seeded=true
+    } }
     suspend fun local(country: String,point: Point): List<Hazard> = withContext(Dispatchers.IO) { lock.withLock { initialize(); database.nearby(country,point,System.currentTimeMillis()) } }
     suspend fun refresh(country: String,point: Point): PackResult = withContext(Dispatchers.IO) { lock.withLock {
         initialize()

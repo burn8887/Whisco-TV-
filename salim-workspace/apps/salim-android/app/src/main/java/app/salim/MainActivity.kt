@@ -37,6 +37,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.salim.core.AlertMatch
+import app.salim.core.Geo
+import app.salim.core.Hazard
+import app.salim.core.Point
 import java.text.DateFormat
 import java.util.Date
 
@@ -245,6 +248,22 @@ private fun Hairline(modifier: Modifier = Modifier, width: Int? = null) {
     )
 }
 
+/**
+ * Cameras near a point, as map pins. Radius is generous so the sheet shows what is
+ * coming rather than only what is beside the car.
+ */
+private fun cameraPins(lat: Double, lon: Double, hazards: List<Hazard>): List<MapPin> =
+    hazards.filter { it.kind.isCamera }
+        .filter { Geo.distance(Point(lat, lon), it.point) < 3000 }
+        .mapNotNull { hazard ->
+            val record = CameraPack.info(hazard.id)
+            MapPin(
+                lat = hazard.point.lat, lon = hazard.point.lon,
+                label = record?.label ?: hazard.road,
+                exact = record?.precision == CameraRecord.Precision.EXACT
+            )
+        }
+
 @Composable
 private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, onStop: () -> Unit) {
     val context = LocalContext.current
@@ -283,13 +302,29 @@ private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, 
         if (currentWarning != null) item { AlertBanner(currentWarning) }
 
         if (state.hazards.isNotEmpty()) {
-            item { SectionLabel("NEARBY · FICTIONAL PACK") }
-            items(state.hazards, key = { it.id }) { hazard ->
-                AlertRow(hazard.title, hazard.road, when (hazard.kind.name) {
-                    "ROADWORK" -> Warn
-                    "TRAFFIC" -> Danger
-                    else -> Signal
-                })
+            val cameras = state.hazards.filter { it.kind.isCamera }
+            if (cameras.isNotEmpty()) {
+                item { SectionLabel("CAMERAS · ${cameras.size}") }
+                items(cameras, key = { it.id }) { hazard ->
+                    val record = CameraPack.info(hazard.id)
+                    AlertRow(
+                        title = hazard.title,
+                        subtitle = record?.label ?: hazard.road,
+                        accent = Warn,
+                        trailing = if (record?.precision == CameraRecord.Precision.APPROXIMATE) "≈" else null
+                    )
+                }
+            }
+            val others = state.hazards.filter { !it.kind.isCamera }
+            if (others.isNotEmpty()) {
+                item { SectionLabel("ROAD CONDITIONS") }
+                items(others, key = { it.id }) { hazard ->
+                    AlertRow(hazard.title, hazard.road, when (hazard.kind.name) {
+                        "ROADWORK" -> Warn
+                        "TRAFFIC" -> Danger
+                        else -> Signal
+                    })
+                }
             }
         }
 
@@ -352,7 +387,8 @@ private fun MapCard(
             centerLat = lat, centerLon = lon, zoom = 14.5f,
             markerLat = if (located) lat else null, markerLon = if (located) lon else null,
             accent = Signal, surface = NightGround, grid = NightLine,
-            interactive = true
+            interactive = true,
+            pins = cameraPins(lat, lon, state.hazards)
         )
         // Scrim so the overlay text keeps its contrast over pale map tiles.
         Box(Modifier.fillMaxWidth().height(96.dp).align(Alignment.TopCenter).background(
@@ -418,17 +454,21 @@ private fun Metric(label: String, value: String, modifier: Modifier) {
 }
 
 @Composable
-private fun AlertRow(title: String, subtitle: String, accent: Color) {
+private fun AlertRow(title: String, subtitle: String, accent: Color, trailing: String? = null) {
     val scheme = MaterialTheme.colorScheme
     Row(
         Modifier.fillMaxWidth().height(IntrinsicSize.Min).clip(Sharper).background(scheme.surface)
             .border(1.dp, scheme.outline, Sharper)
     ) {
         Box(Modifier.width(3.dp).fillMaxHeight().background(accent))
-        Column(Modifier.padding(horizontal = 13.dp, vertical = 11.dp)) {
+        Column(Modifier.weight(1f).padding(horizontal = 13.dp, vertical = 11.dp)) {
             Text(title, fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = scheme.onSurface)
             Text(subtitle, fontSize = 12.sp, color = scheme.onSurfaceVariant)
         }
+        if (trailing != null) Text(
+            trailing, fontSize = 15.sp, color = scheme.tertiary, fontFamily = Readout,
+            modifier = Modifier.align(Alignment.CenterVertically).padding(end = 13.dp)
+        )
     }
 }
 
@@ -497,7 +537,8 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
             centerLat = lat, centerLon = lon, zoom = 16.2f,
             markerLat = fix?.lat, markerLon = fix?.lon,
             accent = Signal, surface = NightGround, grid = NightLine,
-            interactive = true
+            interactive = true,
+            pins = cameraPins(lat, lon, state.hazards)
         )
         // Top scrim, bottom scrim: the overlays own the contrast, not the tiles.
         Box(Modifier.fillMaxWidth().height(140.dp).background(Brush.verticalGradient(listOf(Color(0xE60A0D0B), Color(0x000A0D0B)))))

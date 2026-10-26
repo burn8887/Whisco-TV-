@@ -29,6 +29,9 @@ import kotlinx.coroutines.launch
 import kotlin.math.floor
 import kotlin.math.pow
 
+/** A camera or other point rendered on the map. `exact=false` draws a hollow ring. */
+data class MapPin(val lat: Double, val lon: Double, val label: String, val exact: Boolean = true)
+
 /**
  * A slippy map drawn directly into a Compose canvas.
  *
@@ -49,6 +52,7 @@ fun OsmMap(
     surface: Color = Color(0xFF0A0D0B),
     grid: Color = Color(0xFF1E2A23),
     interactive: Boolean = true,
+    pins: List<MapPin> = emptyList(),
     onCameraMove: (Double, Double, Float) -> Unit = { _, _, _ -> },
 ) {
     val scope = rememberCoroutineScope()
@@ -152,6 +156,12 @@ fun OsmMap(
                     dstSize = IntSize(size, size)
                 )
             }
+            for (pin in pins) {
+                val px = (width / 2.0 + (Mercator.x(pin.lon, tileZoom) - centerWorldX) * scale).toFloat()
+                val py = (height / 2.0 + (Mercator.y(pin.lat, tileZoom) - centerWorldY) * scale).toFloat()
+                if (px < -40f || py < -40f || px > width + 40f || py > height + 40f) continue
+                drawPin(px, py, pin.exact)
+            }
             if (markerLat != null && markerLon != null) {
                 val markerX = (width / 2.0 + (Mercator.x(markerLon, tileZoom) - centerWorldX) * scale).toFloat()
                 val markerY = (height / 2.0 + (Mercator.y(markerLat, tileZoom) - centerWorldY) * scale).toFloat()
@@ -170,6 +180,23 @@ private fun DrawScope.drawFallbackGrid(grid: Color) {
     for (i in 0..6) {
         val x = i * size.width / 6f
         drawLine(grid, Offset(x, 0f), Offset(x + size.width * .12f, size.height), 1.5f)
+    }
+}
+
+/**
+ * Camera marker. Approximate sites are hollow: a filled dot claims a precision the data
+ * does not have, and a driver reads markers as certainty.
+ */
+private fun DrawScope.drawPin(x: Float, y: Float, exact: Boolean) {
+    val halo = Color(0xFFFFC24B)
+    val ring = Color(0xFF0A0D0B)
+    drawCircle(ring, 13f, Offset(x, y))
+    if (exact) {
+        drawCircle(halo, 9.5f, Offset(x, y))
+        drawCircle(ring, 4f, Offset(x, y))
+    } else {
+        drawCircle(halo, 9.5f, Offset(x, y), style = Stroke(2.5f))
+        drawCircle(halo, 2.5f, Offset(x, y))
     }
 }
 

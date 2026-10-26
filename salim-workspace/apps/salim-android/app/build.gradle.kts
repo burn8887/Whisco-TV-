@@ -20,8 +20,8 @@ android {
         applicationId = "app.salim.android.demo"
         minSdk = 26
         targetSdk = 36
-        versionCode = releaseVersionCode ?: 4
-        versionName = releaseVersionName ?: "0.4.0-demo"
+        versionCode = releaseVersionCode ?: 5
+        versionName = releaseVersionName ?: "0.5.0-demo"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FEED_URL", "\"\"")
     }

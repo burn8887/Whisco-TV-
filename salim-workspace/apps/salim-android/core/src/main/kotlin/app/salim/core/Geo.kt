@@ -7,14 +7,30 @@ data class Point(val lat: Double, val lon: Double) {
 }
 /** elapsedMs comes from the device's monotonic clock, never wall-clock elapsed time. */
 data class Fix(val point: Point, val speed: Double, val course: Double?, val accuracy: Double, val timeMs: Long, val elapsedMs: Long)
-enum class Kind { CAMERA, MOBILE_CAMERA, HAZARD, ROADWORK, TRAFFIC, BUMP }
+enum class Kind {
+    CAMERA,          // fixed speed camera
+    MOBILE_CAMERA,   // reported mobile unit
+    SEATBELT,        // multi-offence camera: seatbelt, phone, speed
+    RED_LIGHT,
+    HAZARD, ROADWORK, TRAFFIC, BUMP;
+    val isCamera: Boolean get() = this == CAMERA || this == MOBILE_CAMERA || this == SEATBELT || this == RED_LIGHT
+}
 data class Hazard(val id: String, val country: String, val kind: Kind, val point: Point, val heading: Double?, val road: String, val expiresAt: Long, val demo: Boolean = true, val revision: Long = 0) {
     init {
         require(id.isNotBlank() && id.length <= 120 && country in COUNTRIES && point.valid())
         require(heading == null || (heading.isFinite() && heading >= 0 && heading < 360))
         require(road.isNotBlank() && road.length <= 200 && expiresAt > 0 && revision >= 0)
     }
-    val title: String get() = when(kind) { Kind.CAMERA -> "Speed camera"; Kind.MOBILE_CAMERA -> "Mobile camera report"; Kind.HAZARD -> "Road hazard"; Kind.ROADWORK -> "Roadworks ahead"; Kind.TRAFFIC -> "Traffic congestion"; Kind.BUMP -> "Road bump" }
+    val title: String get() = when(kind) {
+        Kind.CAMERA -> "Speed camera"
+        Kind.MOBILE_CAMERA -> "Mobile camera"
+        Kind.SEATBELT -> "Seatbelt & phone camera"
+        Kind.RED_LIGHT -> "Red light camera"
+        Kind.HAZARD -> "Road hazard"
+        Kind.ROADWORK -> "Roadworks ahead"
+        Kind.TRAFFIC -> "Traffic congestion"
+        Kind.BUMP -> "Road bump"
+    }
 }
 val COUNTRIES = setOf("BH", "SA", "AE", "QA", "KW", "OM")
 object Geo {

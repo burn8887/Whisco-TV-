@@ -58,7 +58,10 @@ object DriveStore {
     private fun prefs()=context.getSharedPreferences("salim",0)
     fun initialize(app: Context) {
         if(initialized)return
-        initialized=true;context=app.applicationContext;repository=HazardRepository(context)
+        initialized=true;context=app.applicationContext
+        // Camera pack first: the repository seeds from it.
+        CameraPack.load(context)
+        repository=HazardRepository(context)
         val p=prefs()
         val trips=runCatching { val a=JSONArray(p.getString("trips","[]"));(0 until a.length()).map { val t=a.getJSONObject(it);Trip(t.getString("id"),t.getLong("at"),t.getInt("seconds"),t.getInt("alerts"),t.getBoolean("demo"),t.optBoolean("interrupted")) } }.getOrDefault(emptyList())
         val drafts=runCatching { val a=JSONArray(p.getString("drafts","[]"));(0 until a.length()).map { val t=a.getJSONObject(it);Draft(t.getString("id"),t.getString("road"),t.getString("kind")) } }.getOrDefault(emptyList())

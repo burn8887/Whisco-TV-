@@ -1,0 +1,22 @@
+# Salim camera pack. One row per camera site.
+#
+#   id,kind,lat,lon,road,speed_limit,heading,precision,source
+#
+# kind          CAMERA | SEATBELT | RED_LIGHT | MOBILE_CAMERA
+# speed_limit   posted limit in km/h, blank if unknown
+# heading       bearing the camera watches, blank if it watches both directions
+# precision     exact | approximate   ("approximate" is shown to the driver as ≈)
+# source        where this row came from; keep it short and truthful
+#
+# Edit this file, rebuild, and the app uses the new data. Nothing is hidden in code.
+# Rows outside Bahrain's bounding box, or with an unreadable coordinate, are skipped
+# rather than crashing the app, so a bad line costs one camera and nothing else.
+id,kind,lat,lon,road,speed_limit,heading,precision,source
+camera:causeway-1,CAMERA,26.0560,50.4230,King Fahd Causeway,100,315,approximate,MOI announcement Nov 2019
+camera:causeway-2,CAMERA,26.0740,50.4010,King Fahd Causeway,100,315,approximate,MOI announcement Nov 2019
+camera:causeway-3,CAMERA,26.0920,50.3790,King Fahd Causeway,100,135,approximate,MOI announcement Nov 2019
+camera:causeway-4,CAMERA,26.1100,50.3570,King Fahd Causeway,100,135,approximate,MOI announcement Nov 2019
+camera:diplomatic,SEATBELT,26.2166,50.5846,Diplomatic Area,50,,approximate,GDT smart camera rollout 2026
+camera:seef,SEATBELT,26.2390,50.5390,Seef District,60,,approximate,GDT smart camera rollout 2026
+camera:riffa,RED_LIGHT,26.1300,50.5550,Riffa,80,,approximate,GDT smart camera rollout 2026
+camera:muharraq,SEATBELT,26.2570,50.6100,Muharraq,60,,approximate,GDT smart camera rollout 2026

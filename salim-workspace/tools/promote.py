@@ -41,12 +41,14 @@ KEEP_TOOLS = {
     "check_android_apk.py",
     "check_site.py",
     "check_workflows.py",
+    "import-cameras.py",
     "promote.py",
     "report_native_tests.py",
     "setup-android-linux.sh",
     "test_android_apk.py",
     "test_check_site.py",
     "test_check_workflows.py",
+    "test_import_cameras.py",
 }
 
 # Documents that describe the capsule itself. Their old identifiers and old paths are the
