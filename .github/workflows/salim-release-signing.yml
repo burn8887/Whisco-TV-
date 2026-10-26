@@ -176,7 +176,21 @@ jobs:
           aab=app/build/outputs/bundle/release/app-release.aab
           apk=app/build/outputs/apk/release/app-release.apk
           test -f "$aab" && test -f "$apk"
-          jarsigner -verify -strict -certs "$aab" | tail -3
+          # AABs produced by bundletool place META-INF/MANIFEST.MF after the entries.
+          # JDK 17 strict mode treats that known JarFile/JarInputStream ordering warning,
+          # and the normal self-signed upload certificate, as fatal even when signatures
+          # verify. Keep cryptographic verification, but do not promote warnings to errors.
+          jarsigner -verify -certs "$aab" > "$RUNNER_TEMP/salim-aab-jarsigner.log" 2>&1 || {
+            cat "$RUNNER_TEMP/salim-aab-jarsigner.log"
+            echo "::error title=Invalid Android App Bundle signature::jarsigner could not verify the AAB signature."
+            exit 1
+          }
+          grep -qi 'jar verified' "$RUNNER_TEMP/salim-aab-jarsigner.log" || {
+            cat "$RUNNER_TEMP/salim-aab-jarsigner.log"
+            echo "::error title=Android App Bundle signature unconfirmed::jarsigner did not report a verified AAB."
+            exit 1
+          }
+          tail -8 "$RUNNER_TEMP/salim-aab-jarsigner.log"
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs "$apk" | head -5
           "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 4 "$apk"
           python3 "$GITHUB_WORKSPACE/salim-workspace/tools/check_android_apk.py" "$apk"
