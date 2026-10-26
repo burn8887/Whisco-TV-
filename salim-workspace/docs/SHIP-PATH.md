@@ -95,8 +95,20 @@ endpoint, same 30-minute and 12 km limits, same 25 km bound on the cache), the s
 instrument-panel visual system, a synthesised alert chime, and an explicit cold-start
 "acquiring GPS" state so a first fix no longer reads as a failure.
 
-Neither app has been through its compiler in this environment. The claim here is parity of
-source, not a verified binary: `xcodebuild` and Gradle runs are the next evidence required.
+## Build evidence — 26 October 2026
+
+Both apps are green. This was the first time either had been through a compiler, and the
+first time any test had executed on a real toolchain.
+
+| Target | What ran |
+| --- | --- |
+| Android (`Salim Android build`, run 40258809823) | 24 JUnit tests, 0 failed; `assembleDebug`, `bundleRelease`, `assembleDebugAndroidTest`, `lintDebug`; APK ZIP alignment verified at 16 KB; both shipped `.so` files 16 KB aligned; emulator database and lifecycle check passed |
+| iOS (`Salim iOS simulator build`, run 40258829042) | 17 XCTests passed, 0 failed, iPhone 16 Pro simulator (iOS 18.5), Xcode 26.3; unsigned device archive also built |
+
+Two errors were found on the way, both now fixed: `Hairline` took an `Int?` width while its
+callers passed `Dp`, and the new pack test declared a labelled parameter its call sites passed
+positionally. The remaining Swift and Kotlin compiled first time, including the Overpass
+client, the pack reader and the whole drive view.
 
 ## Order of operations
 
@@ -106,7 +118,7 @@ source, not a verified binary: `xcodebuild` and Gradle runs are the next evidenc
 | Today | Point `www.salimdrive.com` at Netlify, deploy `site/` | Founder |
 | This week | Merge to `main`, configure secrets | Founder + agent |
 | This week | Signed Android AAB, upload, start the 14-day closed test | Founder |
-| Next | Compile both apps on a real toolchain; fix what the compiler says | Founder + agent |
+| Next | Store assets (feature graphic, screenshots) and the signing secrets | Founder + agent |
 | After the 14 days | Production rollout on Play | Founder |
 
 The 14-day Play clock is the binding constraint, and it cannot start until the first

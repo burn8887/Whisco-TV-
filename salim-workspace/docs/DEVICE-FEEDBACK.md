@@ -340,3 +340,21 @@ Three fixes came with the port, and the first two apply to Android as well:
 - **The cache is bounded by distance**, not just by time. See above.
 - **A cold start says "acquiring"**, not "stale". First fixes take 30–60 seconds outdoors; the
   old copy called that a failure before it had a chance to work.
+
+## First green build — 26 October
+
+Both apps compile and their tests run on real toolchains, for the first time.
+
+- **Android** — 24 JUnit tests pass, debug APK, release AAB, androidTest APK and lint all
+  build, APK ZIP alignment verified for 16 KB pages, both `.so` files 16 KB aligned, emulator
+  database and lifecycle check passed.
+- **iOS** — 17 XCTests pass on an iPhone 16 Pro simulator under Xcode 26.3, and an unsigned
+  device archive builds.
+
+The compile caught exactly two things, both fixed and both mine: `Hairline` wanted an `Int`
+width while its callers wrote `34.dp`, and the new pack test passed a labelled parameter
+positionally. Everything else — the Overpass client, the pack reader, the drive view, the
+SQLite store — compiled clean first time.
+
+The build now runs on every push to the working branch, so the next error is minutes away
+rather than waiting for a manual dispatch.
