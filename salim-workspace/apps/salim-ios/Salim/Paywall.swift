@@ -61,7 +61,7 @@ struct Paywall: View {
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(theme.raised, in: RoundedRectangle(cornerRadius: 8))
+        .background(theme.surface, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(theme.line, lineWidth: 1))
     }
 
@@ -104,7 +104,7 @@ struct Paywall: View {
                         .padding(.horizontal, 14)
                         .padding(.vertical, 14)
                         .frame(maxWidth: .infinity)
-                        .background(theme.raised, in: RoundedRectangle(cornerRadius: 8))
+                        .background(theme.surface, in: RoundedRectangle(cornerRadius: 8))
                         .overlay(RoundedRectangle(cornerRadius: 8).stroke(theme.line, lineWidth: 1))
                     }
                     .buttonStyle(.plain)
