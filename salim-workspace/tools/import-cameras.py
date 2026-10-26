@@ -48,9 +48,30 @@ import io
 import sys
 from pathlib import Path
 
-# Bahrain and its immediate approaches. A row outside this box is a typo, not a camera.
-LAT_RANGE = (25.60, 26.40)
-LON_RANGE = (50.20, 50.85)
+# The GCC-6 envelope. A row outside it is a typo, not a camera.
+LAT_RANGE = (16.00, 32.20)
+LON_RANGE = (34.50, 60.00)
+
+# Country boxes as (code, south, west, north, east), mirrored exactly from CameraFeed.kt so
+# an offline pack and the live feed classify a camera the same way. Small states are listed
+# before Saudi Arabia, which would otherwise swallow Qatar, Bahrain and the UAE coast.
+# A rectangle is an approximation: near a border the assigned country can be wrong, which
+# is why every row also carries its source.
+COUNTRY_BOXES = (
+    ("BH", 25.50, 50.20, 26.40, 50.90),
+    ("QA", 24.40, 50.70, 26.20, 51.70),
+    ("KW", 28.50, 46.50, 30.10, 48.50),
+    ("AE", 22.60, 51.50, 26.10, 56.40),
+    ("OM", 16.60, 52.00, 26.40, 59.90),
+    ("SA", 16.00, 34.50, 32.20, 55.70),
+)
+
+
+def country_at(lat: float, lon: float) -> str | None:
+    for code, south, west, north, east in COUNTRY_BOXES:
+        if south <= lat <= north and west <= lon <= east:
+            return code
+    return None
 
 KINDS = {"CAMERA", "SEATBELT", "RED_LIGHT", "MOBILE_CAMERA"}
 PRECISIONS = {"exact", "approximate"}
@@ -113,8 +134,8 @@ def convert_row(cells: list[str], columns: dict[str, int], seq: int) -> tuple[di
     except ValueError:
         return None, f"row {seq}: unreadable coordinate '{lat_text},{lon_text}'"
 
-    if not (LAT_RANGE[0] <= lat <= LAT_RANGE[1] and LON_RANGE[0] <= lon <= LON_RANGE[1]):
-        return None, f"row {seq}: {lat},{lon} is outside Bahrain"
+    if country_at(lat, lon) is None:
+        return None, f"row {seq}: {lat},{lon} is outside the GCC"
 
     kind = (cell("kind") or "CAMERA").upper().replace(" ", "_")
     if kind not in KINDS:
@@ -148,8 +169,12 @@ def convert_row(cells: list[str], columns: dict[str, int], seq: int) -> tuple[di
     road = cell("road") or "Unnamed road"
     source = cell("source") or "unspecified"
 
+    explicit_id = cell("id")
+    identifier = explicit_id if (explicit_id.startswith("camera:") or explicit_id.startswith("osm:node/")) \
+                 else f"camera:{slug(road, 'site')}-{seq}"
+
     return {
-        "id": f"camera:{slug(road, 'site')}-{seq}",
+        "id": identifier,
         "kind": kind,
         "lat": f"{lat:.6f}",
         "lon": f"{lon:.6f}",
@@ -161,11 +186,96 @@ def convert_row(cells: list[str], columns: dict[str, int], seq: int) -> tuple[di
     }, None
 
 
+def looks_like_overpass(text: str) -> bool:
+    head = text.lstrip()[:200]
+    return head.startswith("{") and '"elements"' in head
+
+
+def convert_overpass(text: str) -> tuple[list[dict], list[str]]:
+    """Converts an Overpass API response.
+
+    Query it in a browser or with curl, save the JSON, and pass it here. That is how a
+    full GCC pack gets built without the app making hundreds of requests:
+
+        [out:json][timeout:180];
+        (node["highway"="speed_camera"](16,34,33,60);
+         node["highway"="enforcement"]["enforcement"="maxspeed"](16,34,33,60));
+        out body;
+
+    Only nodes are read. Camera ways and relations exist in OSM but are rare, and guessing
+    a position from a way's geometry would put a marker in the wrong place.
+    """
+    import json
+
+    warnings: list[str] = []
+    rows: list[dict] = []
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as error:
+        return [], [f"not valid JSON: {error}"]
+
+    elements = data.get("elements") or []
+    if not isinstance(elements, list):
+        return [], ["response has no elements array"]
+
+    seen: set[str] = set()
+    for element in elements:
+        if not isinstance(element, dict) or element.get("type") != "node":
+            continue
+        node_id = element.get("id")
+        try:
+            lat = float(element.get("lat"))
+            lon = float(element.get("lon"))
+        except (TypeError, ValueError):
+            continue
+        if country_at(lat, lon) is None:
+            continue
+        tags = element.get("tags") or {}
+        # Only genuine camera tags. An untagged node in a response would otherwise become a
+        # phantom alert, which is worse than a missing one.
+        highway = str(tags.get("highway", ""))
+        enforcement = str(tags.get("enforcement", ""))
+        if not (highway == "speed_camera" or (highway == "enforcement" and enforcement == "maxspeed")):
+            continue
+        road = (tags.get("name") or tags.get("ref") or "Mapped camera").strip()
+        heading = ""
+        direction = tags.get("direction")
+        if direction:
+            digits = "".join(c for c in str(direction) if c.isdigit() or c == ".")
+            try:
+                bearing = float(digits)
+                if 0 <= bearing < 360:
+                    heading = f"{bearing:g}"
+            except ValueError:
+                pass
+        key = f"osm:node/{node_id}"
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append({
+            "id": key,
+            "kind": "CAMERA",
+            "lat": f"{lat:.6f}",
+            "lon": f"{lon:.6f}",
+            "road": road[:200],
+            "speed_limit": str(tags.get("maxspeed", "")).strip() if str(tags.get("maxspeed", "")).strip().isdigit() else "",
+            "heading": heading,
+            # OSM coordinates are mapped positions, not press-release approximations.
+            "precision": "exact",
+            "source": f"OpenStreetMap node {node_id}",
+        })
+    if not rows:
+        warnings.append("no usable camera nodes in the response")
+    return rows, warnings
+
+
 def convert(text: str) -> tuple[list[dict], list[str]]:
     """Returns (rows, warnings). The first line is a header if it names lat and lon."""
     sample = text.strip()
     if not sample:
         return [], ["input is empty"]
+    if looks_like_overpass(sample):
+        return convert_overpass(sample)
     delimiter = "\t" if "\t" in sample.splitlines()[0] else ","
     reader = list(csv.reader(io.StringIO(sample), delimiter=delimiter))
     reader = [r for r in reader if any(c.strip() for c in r) and not r[0].lstrip().startswith("#")]
@@ -244,8 +354,8 @@ def read_pack(path: Path) -> tuple[list[dict], list[str]]:
             warnings.append(str(problem))
             continue
         assert row is not None
-        if not row["id"].startswith("camera:"):
-            warnings.append(f"row {seq}: id '{row['id']}' must start with camera:")
+        if not (row["id"].startswith("camera:") or row["id"].startswith("osm:node/")):
+            warnings.append(f"row {seq}: id '{row['id']}' must start with camera: or osm:node/")
             continue
         if row["id"] in ids:
             warnings.append(f"row {seq}: duplicate id '{row['id']}'")

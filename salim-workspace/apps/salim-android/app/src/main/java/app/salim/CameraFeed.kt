@@ -1,0 +1,206 @@
+package app.salim
+
+import android.content.Context
+import app.salim.core.COUNTRIES
+import app.salim.core.Hazard
+import app.salim.core.Kind
+import app.salim.core.Point
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
+
+/**
+ * Live camera data from OpenStreetMap, fetched on the device.
+ *
+ * Why here rather than baked into the APK: a camera list inside a binary is a snapshot, and
+ * a snapshot of enforcement infrastructure is wrong within months. The phone always has a
+ * current network, so it asks for the cameras near it and caches the answer.
+ *
+ * Source is OpenStreetMap, licensed ODbL. Two taggings are read, because OSM has moved:
+ *
+ *   highway=speed_camera                     the original tagging, still the most common
+ *   highway=enforcement + enforcement=maxspeed   the newer scheme
+ *
+ * Coverage is what volunteer mappers have surveyed — dense on motorways in the UAE and
+ * Bahrain, patchier elsewhere. The app never claims more certainty than the coordinate it
+ * was given, and a camera is only ever reported where OSM says one exists.
+ *
+ * Overpass usage policy is respected: one identifying User-Agent, at most one query per
+ * area per 30 minutes, a 12 km window, and results cached on disk so a second drive costs
+ * nothing.
+ */
+object CameraFeed {
+
+    private const val ENDPOINT = "https://overpass-api.de/api/interpreter"
+    private const val USER_AGENT = "SalimDemo/0.6 (Android; road-awareness; support@salimdrive.com)"
+
+    /** Metres around the driver to ask about. Wider than the alert radius, narrower than a country. */
+    private const val RADIUS_M = 12_000.0
+
+    /** Minimum gap between live queries for the same area. Overpass is a shared resource. */
+    private const val MIN_INTERVAL_MS = 30 * 60 * 1000L
+
+    private const val PREF = "salim_cameras"
+    private const val KEY_LAST = "last_fetch"
+    private const val KEY_DATA = "cached"
+
+    /**
+     * Country boxes as (code, south, west, north, east). Small states are tested before
+     * Saudi Arabia, which would otherwise swallow Qatar, Bahrain and the UAE coast.
+     */
+    private val BOXES = listOf(
+        "BH" to doubleArrayOf(25.50, 50.20, 26.40, 50.90),
+        "QA" to doubleArrayOf(24.40, 50.70, 26.20, 51.70),
+        "KW" to doubleArrayOf(28.50, 46.50, 30.10, 48.50),
+        "AE" to doubleArrayOf(22.60, 51.50, 26.10, 56.40),
+        "OM" to doubleArrayOf(16.60, 52.00, 26.40, 59.90),
+        "SA" to doubleArrayOf(16.00, 34.50, 32.20, 55.70),
+    )
+
+    private fun countryAt(point: Point): String? = BOXES.firstOrNull { (_, b) ->
+        point.lat in b[0]..b[2] && point.lon in b[1]..b[3]
+    }?.first?.takeIf { it in COUNTRIES }
+
+    /** Cameras cached from the last successful query, if any. */
+    fun cached(context: Context): List<Hazard> {
+        val raw = runCatching {
+            context.getSharedPreferences(PREF, 0).getString(KEY_DATA, null)
+        }.getOrNull() ?: return emptyList()
+        return runCatching { decode(raw) }.getOrDefault(emptyList())
+    }
+
+    private fun decode(raw: String): List<Hazard> {
+        val array = org.json.JSONArray(raw)
+        return buildList {
+            for (i in 0 until array.length()) {
+                val o = array.getJSONObject(i)
+                runCatching {
+                    add(
+                        Hazard(
+                            id = o.getString("id"),
+                            country = o.getString("country"),
+                            kind = Kind.valueOf(o.getString("kind")),
+                            point = Point(o.getDouble("lat"), o.getDouble("lon")),
+                            heading = if (o.has("heading") && !o.isNull("heading")) o.getDouble("heading") else null,
+                            road = o.getString("road"),
+                            expiresAt = o.getLong("expiresAt"),
+                            demo = false,
+                            revision = 0,
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    private fun encode(hazards: List<Hazard>): String {
+        val array = org.json.JSONArray()
+        hazards.forEach { h ->
+            array.put(
+                JSONObject()
+                    .put("id", h.id).put("country", h.country).put("kind", h.kind.name)
+                    .put("lat", h.point.lat).put("lon", h.point.lon)
+                    .put("heading", h.heading ?: JSONObject.NULL)
+                    .put("road", h.road).put("expiresAt", h.expiresAt)
+            )
+        }
+        return array.toString()
+    }
+
+    /**
+     * Cameras near a point. Returns cached data when the last query is still fresh, when
+     * the device is offline, or when Overpass is unavailable — a missing network must never
+     * cost the driver an alert they already had.
+     */
+    suspend fun fetch(context: Context, point: Point, now: Long = System.currentTimeMillis()): List<Hazard> {
+        val country = countryAt(point) ?: return cached(context)
+        val prefs = context.getSharedPreferences(PREF, 0)
+        val last = prefs.getLong(KEY_LAST, 0L)
+        if (now - last < MIN_INTERVAL_MS) return cached(context)
+
+        val fresh = query(point) ?: return cached(context)
+        val stamped = fresh.map { it.copy(expiresAt = now + 30L * 24 * 60 * 60 * 1000) }
+        prefs.edit().putLong(KEY_LAST, now).putString(KEY_DATA, encode(stamped)).apply()
+        return stamped
+    }
+
+    private fun box(point: Point): DoubleArray {
+        val dLat = RADIUS_M / 111_574.0
+        val dLon = RADIUS_M / (111_320.0 * kotlin.math.cos(Math.toRadians(point.lat)).coerceAtLeast(0.05))
+        return doubleArrayOf(point.lat - dLat, point.lon - dLon, point.lat + dLat, point.lon + dLon)
+    }
+
+    private fun query(point: Point): List<Hazard>? = runCatching {
+        val b = box(point)
+        // Two taggings, one request. `out body` keeps the payload to the tags we read.
+        val body = "[out:json][timeout:25];" +
+            "(" +
+            "node[\"highway\"=\"speed_camera\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
+            "node[\"highway\"=\"enforcement\"][\"enforcement\"=\"maxspeed\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
+            ");out body;"
+
+        var connection: HttpURLConnection? = null
+        try {
+            connection = (URL(ENDPOINT).openConnection() as HttpURLConnection).apply {
+                requestMethod = "POST"
+                connectTimeout = 12_000
+                readTimeout = 25_000
+                doOutput = true
+                setRequestProperty("User-Agent", USER_AGENT)
+                setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
+            }
+            val payload = "data=" + URLEncoder.encode(body, "UTF-8")
+            connection.outputStream.use { it.write(payload.toByteArray()) }
+            if (connection.responseCode != HttpURLConnection.HTTP_OK) return@runCatching null
+            val text = connection.inputStream.bufferedReader().use { it.readText() }
+            parse(text, point)
+        } finally {
+            runCatching { connection?.disconnect() }
+        }
+    }.getOrNull()
+
+    /** Also used by the offline importer, so the parsing rules exist in exactly one place. */
+    fun parse(text: String, near: Point): List<Hazard> {
+        val root = JSONObject(text)
+        val elements = root.optJSONArray("elements") ?: return emptyList()
+        val out = LinkedHashMap<String, Hazard>()
+        for (i in 0 until elements.length()) {
+            val element = elements.optJSONObject(i) ?: continue
+            if (element.optString("type") != "node") continue
+            val id = element.optLong("id", 0L)
+            if (id == 0L) continue
+            val lat = element.optDouble("lat", Double.NaN)
+            val lon = element.optDouble("lon", Double.NaN)
+            if (!lat.isFinite() || !lon.isFinite()) continue
+            val p = Point(lat, lon)
+            if (!p.valid()) continue
+            val country = countryAt(p) ?: continue
+            val tags = element.optJSONObject("tags") ?: JSONObject()
+            val road = (tags.optString("name").takeIf { it.isNotBlank() }
+                ?: tags.optString("ref").takeIf { it.isNotBlank() }
+                ?: "Mapped camera").take(200)
+            val heading = tags.optString("direction").toDoubleOrNull()?.takeIf { it in 0.0..359.0 }
+            // OSM does not distinguish speed from red-light cameras in this tagging, so
+            // everything from here is a speed camera and says so.
+            val hazard = runCatching {
+                Hazard(
+                    id = "osm:node/$id",
+                    country = country,
+                    kind = Kind.CAMERA,
+                    point = p,
+                    heading = heading,
+                    road = road,
+                    // A live row is refreshed by the next query; this bounds the cache.
+                    expiresAt = System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000,
+                    demo = false,
+                    revision = 0,
+                )
+            }.getOrNull() ?: continue
+            out[hazard.id] = hazard
+        }
+        return out.values.toList()
+    }
+}

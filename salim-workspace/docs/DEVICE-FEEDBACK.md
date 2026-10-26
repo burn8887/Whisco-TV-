@@ -259,3 +259,67 @@ python3 tools/import-cameras.py --check
 
 Columns are matched by name, so a copy-paste from a table works. Rows marked `exact` draw as
 filled pins.
+
+---
+
+# Live GCC camera data — 0.6.0-demo, 22 October 2026
+
+> "I need the app to have all cameras in the gcc. real data. real build. don't cut corners."
+
+Agreed, and the constraint that shaped it: this build environment reaches GitHub, npm and
+PyPI only. Overpass, Geofabrik, Reddit and the eTraffic service all return nothing from
+here. Two things follow, and neither is a corner cut:
+
+**I will not invent coordinates.** A fabricated camera list presented as real data is worse
+than no list, because a driver acts on it.
+
+**The phone has a network even when the build machine does not.** So the real data is
+fetched on the device, where it also stays current — which is the right architecture
+regardless of this sandbox. A camera list compiled into an APK is a snapshot that starts
+expiring the day it ships.
+
+## What is in 0.6.0-demo
+
+`CameraFeed.kt` queries the Overpass API for OpenStreetMap camera nodes within 12 km of the
+driver, caching the result on disk:
+
+- Both OSM taggings: `highway=speed_camera`, and the newer
+  `highway=enforcement` + `enforcement=maxspeed`.
+- One identifying User-Agent, at most one query per area per 30 minutes, cached result
+  returned offline. Overpass is a shared volunteer resource and is treated as one.
+- Results merge with the bundled pack rather than replacing it, so losing signal never costs
+  an alert already held.
+- Country derived per row from GCC bounding boxes, so a drive in Doha shows Doha.
+
+`DriveStore` merges live rows into the hazard list and the alert engine, so a fetched camera
+is a working alert, not a decoration on the map.
+
+## Bulk offline pack
+
+For a GCC-wide list baked into the build, one command on a machine with a network:
+
+```sh
+curl -s -X POST https://overpass-api.de/api/interpreter \
+  --data-urlencode 'data=[out:json][timeout:180];
+    (node["highway"="speed_camera"](16,34,33,60);
+     node["highway"="enforcement"]["enforcement"="maxspeed"](16,34,33,60));
+    out body;' > /tmp/gcc.json
+
+python3 tools/import-cameras.py --input /tmp/gcc.json
+python3 tools/import-cameras.py --check
+```
+
+The importer now reads Overpass JSON directly. It rejects anything outside the GCC, any node
+without a genuine camera tag, and any way or relation (guessing a position from a way's
+geometry would place a marker where there is no camera). 51 tests cover both the CSV and the
+OSM paths, including one per GCC country.
+
+## What is still true about coverage
+
+OSM camera coverage is volunteer-surveyed. It is dense on the UAE and Bahrain motorway
+networks and patchier elsewhere, and it will not be complete. The app never claims otherwise:
+each row says where it came from, and the camera section reports how many are live.
+
+The official source remains GDT's eTraffic app for Bahrain, which has published camera
+positions since 2019. It has no public API, so it cannot be read from the app — but it is the
+authority, and a report that disagrees with it should be treated as wrong.

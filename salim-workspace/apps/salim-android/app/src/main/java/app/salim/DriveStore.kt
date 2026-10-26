@@ -31,6 +31,8 @@ data class DriveState(
     // this the app could only say "stale", never "still looking", so a cold start
     // that legitimately needs 30-60 seconds read as a failure.
     val acquired: Boolean=false,
+    /** Cameras fetched live from OpenStreetMap for the current area. */
+    val liveCameras: Int=0,
     val hazards: List<Hazard> = emptyList(),
     val trips: List<Trip> = emptyList(),
     val drafts: List<Draft> = emptyList()
@@ -75,6 +77,29 @@ object DriveStore {
         }
         refreshIdle()
     }
+    /**
+     * Pack rows plus whatever OSM returned for this area. Live cameras are appended rather
+     * than replacing the pack: if the network drops between drives the driver keeps the
+     * alerts they already had.
+     */
+    private fun withFeed(pack: List<Hazard>): List<Hazard> =
+        (pack + liveCameras).distinctBy { it.id }
+
+    private var liveCameras: List<Hazard> = emptyList()
+
+    /** Refreshes live cameras without blocking the caller; the feed updates on success. */
+    private fun refreshCameras(point: Point) {
+        val token=generation
+        scope.launch {
+            val fetched=runCatching { CameraFeed.fetch(context,point) }.getOrDefault(emptyList())
+            if(token!=generation)return@launch
+            if(fetched.isEmpty() && liveCameras.isNotEmpty())return@launch
+            liveCameras=fetched
+            mutable.update { it.copy(hazards=withFeed(it.hazards.filter { h->!h.id.startsWith("osm:") }),liveCameras=fetched.size) }
+            engine.replace(state.value.hazards)
+        }
+    }
+
     fun message(text: String) { mutable.update { it.copy(status=text) } }
     fun setVoice(value: Boolean) { mutable.update { it.copy(voice=value) };prefs().edit().putBoolean("voice",value).apply();if(!value)audio?.stop() }
     fun setTone(value: Boolean) { mutable.update { it.copy(tone=value) };prefs().edit().putBoolean("tone",value).apply() }
@@ -82,7 +107,15 @@ object DriveStore {
     fun country(code: String) { if(state.value.mode!=Mode.IDLE || code !in COUNTRIES)return;generation++;mutable.update { it.copy(country=code,hazards=emptyList(),warning=null,average=null) };refreshIdle() }
     private fun refreshIdle() {
         val token=generation;val country=state.value.country
-        scope.launch { runCatching { repository.refresh(country,DemoData.center) }.onSuccess { result->if(token==generation && state.value.mode==Mode.IDLE)mutable.update { it.copy(hazards=result.hazards,feed=result.status) } }.onFailure { mutable.update { s->s.copy(feed="Local pack unavailable; no alerts will be claimed") } } }
+        scope.launch {
+            runCatching { repository.refresh(country,DemoData.center) }
+                .onSuccess { result->if(token==generation && state.value.mode==Mode.IDLE)mutable.update { it.copy(hazards=withFeed(result.hazards),feed=result.status) } }
+                .onFailure { mutable.update { s->s.copy(feed="Local pack unavailable; no alerts will be claimed") } }
+            // Real cameras come from the device position when there is one, so a driver in
+            // Doha gets Doha's cameras rather than Bahrain's.
+            val here=MapTiles.lastKnown(context)?.let { Point(it.first,it.second) } ?: DemoData.center
+            refreshCameras(here)
+        }
     }
     fun begin(mode: Mode) {
         if(state.value.mode!=Mode.IDLE)return
@@ -110,7 +143,8 @@ object DriveStore {
         val token=generation
         syncJob=scope.launch { while(isActive) {
             val point=state.value.fix?.point ?: DemoData.center
-            runCatching { repository.refresh(state.value.country,point) }.onSuccess { result -> if(token==generation) { engine.replace(result.hazards);mutable.update { it.copy(hazards=result.hazards,feed=result.status) } } }.onFailure { if(it is CancellationException)throw it;message("Offline cache unavailable") }
+            runCatching { repository.refresh(state.value.country,point) }.onSuccess { result -> if(token==generation) { mutable.update { it.copy(hazards=withFeed(result.hazards),feed=result.status) };engine.replace(state.value.hazards) } }.onFailure { if(it is CancellationException)throw it;message("Offline cache unavailable") }
+            refreshCameras(point)
             delay(30_000)
         } }
         if(mode==Mode.DEMO)demoJob=scope.launch {
@@ -136,7 +170,7 @@ object DriveStore {
         mutable.update { it.copy(acquired=true,fix=fix,average=average,status=when { it.mode==Mode.DEMO->"Simulation · Demo alerts only";fix.speed>=2 && fix.course==null->"Heading unavailable · Proximity alerts paused";else->"GPS test active · Demo data only" }) }
         if(elapsed-localAt>10_000 && localJob?.isActive!=true) {
             localAt=elapsed;val token=generation
-            localJob=scope.launch { runCatching { repository.local(country,fix.point) }.onSuccess { hazards->if(token==generation) { engine.replace(hazards);mutable.update { it.copy(hazards=hazards) } } }.onFailure { if(it is CancellationException)throw it } }
+            localJob=scope.launch { runCatching { repository.local(country,fix.point) }.onSuccess { hazards->if(token==generation) { val merged=withFeed(hazards);engine.replace(merged);mutable.update { it.copy(hazards=merged) } } }.onFailure { if(it is CancellationException)throw it } }
         }
         val match=engine.evaluate(fix,now,elapsed,country) ?: return
         mutable.update { it.copy(warning=match,count=it.count+1) }

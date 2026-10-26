@@ -32,11 +32,20 @@ class ConvertTests(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["road"], "Budaiya Road")
 
-    def test_outside_bahrain_is_rejected(self):
-        rows, warnings = importer.convert("lat,lon,road\n25.20,51.50,Doha\n")
+    def test_outside_gcc_is_rejected(self):
+        # Doha used to fail this test; the pack is GCC-wide now, so the boundary moved.
+        rows, warnings = importer.convert("lat,lon,road\n51.5074,-0.1278,London\n")
         self.assertEqual(rows, [])
         self.assertEqual(len(warnings), 1)
-        self.assertIn("outside Bahrain", warnings[0])
+        self.assertIn("outside the GCC", warnings[0])
+
+    def test_each_gcc_country_is_inside(self):
+        for name, lat, lon in [
+            ("Bahrain", 26.22, 50.58), ("Qatar", 25.29, 51.53), ("Kuwait", 29.37, 47.98),
+            ("UAE", 25.20, 55.27), ("Oman", 23.59, 58.41), ("Saudi", 24.71, 46.68),
+        ]:
+            rows, warnings = importer.convert(f"lat,lon,road\n{lat},{lon},{name}\n")
+            self.assertEqual(len(rows), 1, f"{name} should be accepted: {warnings}")
 
     def test_unreadable_coordinate_is_rejected(self):
         rows, warnings = importer.convert("lat,lon,road\nnorth,50.5,Somewhere\n")
@@ -75,6 +84,58 @@ class ConvertTests(unittest.TestCase):
         rows, _ = importer.convert("lat,lon,road\n26.21,50.54,Sheikh Khalifa bin Salman Highway\n")
         self.assertEqual(rows[0]["id"], "camera:sheikh-khalifa-bin-salman-highway-1")
         self.assertTrue(rows[0]["id"].startswith("camera:"))
+
+
+class OverpassTests(unittest.TestCase):
+    """OSM is the live source, so its converter has to reject as firmly as the CSV one."""
+
+    RESPONSE = """{"elements":[
+      {"type":"node","id":1,"lat":26.2195,"lon":50.5470,
+       "tags":{"highway":"speed_camera","name":"Sheikh Khalifa bin Salman Highway"}},
+      {"type":"node","id":2,"lat":25.2854,"lon":51.5310,
+       "tags":{"highway":"speed_camera","ref":"Al Corniche"}},
+      {"type":"node","id":3,"lat":24.7136,"lon":46.6753,
+       "tags":{"highway":"enforcement","enforcement":"maxspeed","name":"King Fahd Road"}},
+      {"type":"node","id":4,"lat":51.5074,"lon":-0.1278,
+       "tags":{"highway":"speed_camera"}},
+      {"type":"node","id":5,"lat":26.25,"lon":50.60},
+      {"type":"way","id":6,"tags":{"highway":"speed_camera"}}
+    ]}"""
+
+    def test_gcc_cameras_convert(self):
+        rows, _ = importer.convert(self.RESPONSE)
+        self.assertEqual(len(rows), 3)
+        self.assertEqual({r["id"] for r in rows}, {"osm:node/1", "osm:node/2", "osm:node/3"})
+
+    def test_outside_gcc_is_dropped(self):
+        rows, _ = importer.convert(self.RESPONSE)
+        self.assertNotIn("osm:node/4", {r["id"] for r in rows})
+
+    def test_untagged_node_is_dropped(self):
+        rows, _ = importer.convert(self.RESPONSE)
+        self.assertNotIn("osm:node/5", {r["id"] for r in rows})
+
+    def test_way_is_ignored(self):
+        rows, _ = importer.convert(self.RESPONSE)
+        self.assertNotIn(6, [r for r in rows if "way" in r["id"]])
+
+    def test_osm_rows_are_exact(self):
+        rows, _ = importer.convert(self.RESPONSE)
+        self.assertTrue(all(r["precision"] == "exact" for r in rows))
+
+    def test_source_names_the_node(self):
+        rows, _ = importer.convert(self.RESPONSE)
+        self.assertEqual(rows[0]["source"], "OpenStreetMap node 1")
+
+    def test_complete_nonsense_is_not_json(self):
+        rows, warnings = importer.convert('{"elements": broken')
+        self.assertEqual(rows, [])
+        self.assertTrue(warnings)
+
+    def test_empty_response_is_reported(self):
+        rows, warnings = importer.convert('{"elements":[]}')
+        self.assertEqual(rows, [])
+        self.assertIn("no usable camera nodes", warnings[0])
 
 
 class ShippedPackTests(unittest.TestCase):

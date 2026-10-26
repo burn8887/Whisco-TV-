@@ -260,7 +260,8 @@ private fun cameraPins(lat: Double, lon: Double, hazards: List<Hazard>): List<Ma
             MapPin(
                 lat = hazard.point.lat, lon = hazard.point.lon,
                 label = record?.label ?: hazard.road,
-                exact = record?.precision == CameraRecord.Precision.EXACT
+                // Pack rows carry their own precision; OSM rows are mapped coordinates.
+                exact = record?.precision == CameraRecord.Precision.EXACT || record == null
             )
         }
 
@@ -304,7 +305,10 @@ private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, 
         if (state.hazards.isNotEmpty()) {
             val cameras = state.hazards.filter { it.kind.isCamera }
             if (cameras.isNotEmpty()) {
-                item { SectionLabel("CAMERAS · ${cameras.size}") }
+                val live = cameras.count { it.id.startsWith("osm:") }
+                item {
+                    SectionLabel("CAMERAS · ${cameras.size}" + if (live > 0) " · $live LIVE" else "")
+                }
                 items(cameras, key = { it.id }) { hazard ->
                     val record = CameraPack.info(hazard.id)
                     AlertRow(
@@ -741,7 +745,7 @@ private fun Settings(state: DriveState) {
         item {
             Column(Modifier.fillMaxWidth().clip(Sharp).background(scheme.surface).border(1.dp, scheme.outline, Sharp).padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text("YOUR JOURNEY STAYS YOURS", fontSize = 10.sp, letterSpacing = 1.4.sp, color = scheme.primary, fontFamily = Readout)
-                Text("No account, ads or billing SDKs in this test build. Alerts are stored offline. No route is uploaded.", fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant)
+                Text("No account, ads or billing SDKs in this build. Camera positions come from OpenStreetMap, fetched for the area around you and cached on the device; the query carries no identifier. No route is uploaded.", fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant)
             }
         }
         item {

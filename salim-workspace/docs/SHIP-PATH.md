@@ -1,0 +1,108 @@
+# Getting Salim into Play and TestFlight
+
+The critical path to a store build. Ordered, with the things only the Founder can do marked.
+
+## The two hard gates
+
+Everything technical is either done or automatable. Two things are not, and both need a card
+and an identity document:
+
+| Gate | Cost | Lead time | Where |
+| --- | --- | --- | --- |
+| Google Play developer account | $25 once | 1–3 days for identity verification | play.google.com/console |
+| Apple Developer Program | $99/year | 24–48 hours, sometimes longer | developer.apple.com |
+
+Until those exist, nothing can be uploaded — not because the app is unfinished, but because
+Play and Apple will not accept a package without an account. Start both today; they run in
+parallel with everything below.
+
+**Identity must match.** Both stores verify the legal entity. The operating entity on record
+is *Ali Sameer Sadeq Mohamed Albaharna*. Use the same legal name and address in both, or a
+mismatch will stall verification.
+
+## What blocks a release today
+
+Three items, in order:
+
+1. **`main` does not contain the release workflow.** GitHub only registers
+   `workflow_dispatch` for files present on the default branch. The signing workflow exists
+   on a feature branch and is therefore not dispatchable. Merging to `main` fixes this.
+2. **The release secrets are not configured.** Ten values in the `salim-release` environment
+   (five Android, five Apple). Without them the workflow fails closed by design.
+3. **`www.salimdrive.com` does not resolve.** Play requires a working privacy policy URL at
+   review time. The pages are written and pass `check_site.py`; they are not hosted.
+
+Item 3 is the one that most often delays a first submission, because it is invisible until
+review. Point the domain at Netlify and deploy `site/` before submitting.
+
+## Android — the fastest path to testers
+
+Play's rules for a personal developer account require **closed testing with at least 12
+testers for 14 continuous days** before production. That clock has not started. If you want
+production access in three weeks, the closed test needs to begin this week.
+
+Steps once the account exists:
+
+```sh
+# 1. Merge the working branch to main (this is what makes the workflow dispatchable)
+# 2. Configure the salim-release environment secrets — see docs/RELEASE-SIGNING.md
+# 3. Dispatch the signed build:
+gh workflow run release-signing.yml \
+  -f version_name=0.6.0 -f version_code=6 -f platform=android \
+  -f confirm_identity=com.salimdrive.app
+# 4. Download the artifact from the run, then upload the .aab in Play Console
+```
+
+The workflow builds `:app:bundleRelease`, verifies the signature with `jarsigner -strict`,
+and uploads the AAB as an artifact. It does **not** upload to Play — that stays a manual,
+deliberate act.
+
+Play Console also needs, at submission: privacy policy URL, Data safety form, content
+rating questionnaire, screenshots, a 512×512 icon (`docs/store-icon-512.png` exists) and a
+feature graphic (1024×500, **not yet made**).
+
+**Data safety — answer this honestly.** The app requests precise location and a foreground
+service, and as of 0.6.0 it makes an HTTPS request to `overpass-api.de` to fetch camera
+positions for the surrounding area. The query contains a bounding box, not a device
+identifier, and no route is uploaded. Declare the location permission and the network use;
+do not declare "no data collected" and then ship a location app.
+
+## iOS — TestFlight
+
+```sh
+# After merging to main and configuring the Apple secrets:
+gh workflow run release-signing.yml \
+  -f version_name=0.6.0 -f version_code=6 -f platform=ios \
+  -f confirm_identity=com.salimdrive.app
+```
+
+The workflow builds an unsigned archive and runs the XCTest suite on a macOS runner. A
+**signed** archive and TestFlight upload require an Apple Distribution certificate and an
+App Store provisioning profile, which only exist once the developer account is active. The
+five Apple secrets in `docs/RELEASE-SIGNING.md` cover them.
+
+TestFlight does not have Play's 14-day rule, so once the account is live, iOS can reach
+testers faster than Android can reach production.
+
+## Feature parity, stated plainly
+
+Android 0.6.0 has: raster map from OpenStreetMap tiles, live camera data from Overpass,
+camera list with precision markers, drive view, dark/light, settings.
+
+iOS 0.6.0 does **not** yet have the camera feed or the new visual system. It has MapKit (a
+real map), the demo pack and the legibility work. That gap is real and is the honest answer
+to "both apps ASAP": Android can ship in weeks, iOS needs a port pass first.
+
+## Order of operations
+
+| When | What | Who |
+| --- | --- | --- |
+| Today | Buy the Play account and the Apple Developer Program | Founder |
+| Today | Point `www.salimdrive.com` at Netlify, deploy `site/` | Founder |
+| This week | Merge to `main`, configure secrets | Founder + agent |
+| This week | Signed Android AAB, upload, start the 14-day closed test | Founder |
+| Next | iOS port pass for cameras and the visual system | Agent |
+| After the 14 days | Production rollout on Play | Founder |
+
+The 14-day Play clock is the binding constraint, and it cannot start until the first
+closed-testing build is uploaded. Everything else is shorter.
