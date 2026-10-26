@@ -1,6 +1,7 @@
 package app.salim
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -42,6 +43,7 @@ import app.salim.core.Geo
 import app.salim.core.Hazard
 import app.salim.core.Point
 import java.text.DateFormat
+import kotlinx.coroutines.flow.emptyFlow
 import java.util.Date
 
 /*
@@ -131,6 +133,13 @@ private fun Salim() {
 @Composable
 private fun SalimBody(state: DriveState) {
     val context = LocalContext.current
+    // Billing lives with the activity, not the composition: a purchase can complete after a
+    // rotation, and the listener has to outlive the recomposition that opened the dialog.
+    val billing = remember(context) { (context as? Activity)?.let { Billing(it) } }
+    DisposableEffect(billing) {
+        billing?.start()
+        onDispose { billing?.close() }
+    }
     var tab by remember { mutableIntStateOf(0) }
     var disclosure by remember { mutableStateOf(false) }
     var minimised by remember { mutableStateOf(false) }
@@ -193,7 +202,7 @@ private fun SalimBody(state: DriveState) {
                     0 -> Dashboard(state, onDemo = { DriveStore.begin(Mode.DEMO) }, onGPS = { disclosure = true }, onStop = { stop() })
                     1 -> Trips(state)
                     2 -> Community(state)
-                    3 -> Settings(state)
+                    3 -> Settings(state, billing)
                 }
             }
         }
@@ -689,10 +698,15 @@ private fun Community(state: DriveState) {
 }
 
 @Composable
-private fun Settings(state: DriveState) {
+private fun Settings(state: DriveState, billing: Billing?) {
     val context = LocalContext.current
     val scheme = MaterialTheme.colorScheme
     var privacy by remember { mutableStateOf(false) }
+    var premium by remember { mutableStateOf(false) }
+    // Collected unconditionally: a null billing client still needs a flow here, or the
+    // composable call would be conditional.
+    val isPremium by (billing?.premium ?: emptyFlow()).collectAsStateWithLifecycle(initialValue = false)
+    if (premium && billing != null) PremiumDialog(billing, onDismiss = { premium = false })
     if (privacy) AlertDialog(
         onDismissRequest = { privacy = false }, title = { Text("Privacy notice") },
         text = { Text(PrivacyNotice.text, modifier = Modifier.verticalScroll(rememberScrollState())) },
@@ -742,11 +756,27 @@ private fun Settings(state: DriveState) {
             }
         }
         item { Text("Only Bahrain has a bundled fictional pack. No country has verified live coverage in this build.", fontSize = 11.sp, color = scheme.onSurfaceVariant) }
+        item { SectionLabel("SALIM PREMIUM") }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(
+                    if (isPremium) "Active. Every warning stays free either way."
+                    else "Optional. Every camera and hazard warning works without it.",
+                    fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant
+                )
+                OutlinedButton(
+                    onClick = { premium = true },
+                    shape = Sharp,
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = billing != null
+                ) { Text(if (isPremium) "Manage Salim Premium" else "See Salim Premium") }
+            }
+        }
         item { Hairline() }
         item {
             Column(Modifier.fillMaxWidth().clip(Sharp).background(scheme.surface).border(1.dp, scheme.outline, Sharp).padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text("YOUR JOURNEY STAYS YOURS", fontSize = 10.sp, letterSpacing = 1.4.sp, color = scheme.primary, fontFamily = Readout)
-                Text("No account, ads or billing SDKs in this build. Camera positions come from OpenStreetMap, fetched for the area around you and cached on the device; the query carries no identifier. No route is uploaded.", fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant)
+                Text("No account and no advertising SDK. Camera positions come from OpenStreetMap, fetched for the area around you and cached on the device; the query carries no identifier. No route is uploaded. Subscriptions are handled by Google Play, which never passes Salim a card number.", fontSize = 12.sp, lineHeight = 17.sp, color = scheme.onSurfaceVariant)
             }
         }
         item {
@@ -758,7 +788,7 @@ private fun Settings(state: DriveState) {
         item { OutlinedButton(onClick = { privacy = true }, shape = Sharp, modifier = Modifier.fillMaxWidth()) { Text("Privacy notice") } }
         item {
             Text(
-                "Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay, Android Auto, watches and billing are not enabled. In an emergency in Bahrain, call 999.",
+                "Build ${BuildConfig.VERSION_NAME} · ${BuildConfig.APPLICATION_ID}\nCarPlay, Android Auto and watches are not enabled. In an emergency in Bahrain, call 999.",
                 fontSize = 10.sp, lineHeight = 15.sp, color = scheme.onSurfaceVariant, fontFamily = Readout
             )
         }
