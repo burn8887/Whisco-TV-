@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { GUIDES } from "@/lib/guides";
+import { GUIDE_CARD_SLUGS } from "@/lib/guide-social";
 
 // Branded share card per guide — type + well, no stolen still.
 //
@@ -8,20 +9,14 @@ import { GUIDES } from "@/lib/guides";
 // borrowed art. Guides have no poster, so nothing is borrowed at all.
 //
 // Per the 21 Sep work order this is wired for the NEW guide slugs only; the
-// pre-existing guides keep the generic /og-share-card.png until reviewed.
+// pre-existing guides keep the generic /og-share-card.png until reviewed. The
+// allow-list now lives in src/lib/guide-social.ts and is imported here, so the
+// guide metadata and this generator can never disagree about which guides have
+// a bespoke card — and no og:image can be emitted for a slug that 404s here.
 //
 // Guides are static data, so no Prisma — but match the title route and
 // avoid the deprecated Edge runtime.
 export const runtime = "nodejs";
-
-// Slugs the work order authorises a bespoke card for.
-const NEW_SLUGS = new Set([
-  "free-legal-hd-turkish-series-english-subtitles",
-  "hindi-serials-firestick-uae-legal",
-  "telugu-live-tv-dubai-apartment-no-dish",
-  "indonesian-tv-qatar-legal",
-  "free-legal-arabic-series-smart-tv-gulf",
-]);
 
 export async function GET(
   _req: Request,
@@ -29,7 +24,7 @@ export async function GET(
 ) {
   const { slug } = await params;
   const guide = GUIDES.find((g) => g.slug === slug);
-  if (!guide || !NEW_SLUGS.has(slug)) {
+  if (!guide || !GUIDE_CARD_SLUGS.has(slug)) {
     return new Response("Not found", { status: 404 });
   }
 

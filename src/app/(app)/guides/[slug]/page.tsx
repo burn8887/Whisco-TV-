@@ -2,16 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GUIDES } from "@/lib/guides";
+import { guideSocialMetadata, guideUrl } from "@/lib/guide-social";
 import AdWell from "@/components/AdWell";
-
-// Slugs authorised a bespoke OG card (work order, 21 Sep 2026).
-const NEW_OG_SLUGS = new Set([
-  "free-legal-hd-turkish-series-english-subtitles",
-  "hindi-serials-firestick-uae-legal",
-  "telugu-live-tv-dubai-apartment-no-dish",
-  "indonesian-tv-qatar-legal",
-  "free-legal-arabic-series-smart-tv-gulf",
-]);
 
 export const dynamic = "force-dynamic";
 
@@ -21,31 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!guide) return { title: "Not found" };
   return {
     title: guide.title,
-    description: guide.intro.slice(0, 160),
-    alternates: { canonical: `https://www.whisco.tv/guides/${guide.slug}` },
+    alternates: { canonical: guideUrl(guide.slug) },
     robots: { index: true, follow: true },
-    // Share card: bespoke per-guide card for the five new slugs only, per the
-    // 21 Sep work order. Older guides inherit the generic site card from the
-    // root layout — so the key is omitted entirely rather than set undefined,
-    // which would clear the inherited image.
-    ...(NEW_OG_SLUGS.has(guide.slug)
-      ? {
-          openGraph: {
-            type: "article" as const,
-            title: guide.title,
-            description: guide.intro.slice(0, 160),
-            url: `https://www.whisco.tv/guides/${guide.slug}`,
-            images: [
-              {
-                url: `https://www.whisco.tv/api/og/guide/${guide.slug}`,
-                width: 1200,
-                height: 630,
-                alt: guide.h1,
-              },
-            ],
-          },
-        }
-      : {}),
+    // Description, og:* and twitter:* come from one helper (src/lib/guide-social.ts):
+    // every guide — not just the five from the 21 Sep work order — now shares its
+    // own title, its own description and its own canonical as og:url. The share
+    // card is the bespoke /api/og/guide/[slug] image where that route serves one,
+    // and the generic brand card otherwise, so no og:image can point at a 404.
+    ...guideSocialMetadata(guide),
   };
 }
 
@@ -61,7 +36,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     description: guide.intro.slice(0, 200),
     author: { "@type": "Organization", name: "Whisco TV", url: "https://www.whisco.tv" },
     publisher: { "@type": "Organization", name: "Whisco TV", url: "https://www.whisco.tv" },
-    mainEntityOfPage: `https://www.whisco.tv/guides/${guide.slug}`,
+    mainEntityOfPage: guideUrl(guide.slug),
     inLanguage: "en",
   };
 
