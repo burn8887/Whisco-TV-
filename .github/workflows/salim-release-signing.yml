@@ -130,12 +130,15 @@ jobs:
           # Accept either the bare fingerprint or keytool's complete "SHA-256: ..." line.
           expected=$(printf '%s' "$EXPECTED_FINGERPRINT" | sed -E 's/^[[:space:]]*SHA-?256:[[:space:]]*//' | tr -d ':[:space:]' | tr 'A-F' 'a-f')
           if [ "$actual" != "$expected" ]; then
+            # Plain log lines are intentional: GitHub's annotation view has masked the
+            # useful mismatch detail. A certificate SHA-256 fingerprint is public.
             if [ -n "$actual" ]; then
-              echo "::error title=Wrong signing key::Actual upload-key SHA-256 fingerprint: $actual"
+              echo "Actual key SHA-256 fingerprint: $actual"
             else
-              echo "::error title=Wrong signing key::No SHA-256 fingerprint was read for alias '$SALIM_ANDROID_KEY_ALIAS'. Check that the alias names the key entry in this keystore."
+              echo "No SHA-256 fingerprint was read for alias '$SALIM_ANDROID_KEY_ALIAS'. Check the key alias and keystore password."
             fi
-            echo "::error title=Expected fingerprint format::Set SALIM_ANDROID_CERT_SHA256 to the 64-hex SHA-256 fingerprint (colons optional); a leading 'SHA-256:' label is accepted."
+            echo "Expected normalized fingerprint length: ${#expected} hex characters"
+            echo "Set SALIM_ANDROID_CERT_SHA256 to this keystore certificate's 64-hex fingerprint; colons and a leading SHA-256 label are accepted."
             exit 1
           fi
           echo "::notice title=Upload key verified::SHA-256 $actual"
