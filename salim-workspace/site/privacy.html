@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Privacy policy — Salim</title>
-    <meta name="description" content="How the Salim driving-awareness app handles location, local storage and system services." />
+    <meta name="description" content="How the Salim road-awareness app handles location, camera data, advertising and subscriptions." />
     <meta name="theme-color" content="#1f5c47" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -35,104 +35,132 @@
         <p class="meta">
           Applies to the Salim Android and iOS applications.
           Effective 20 October 2026.
-          Last updated 20 October 2026.
+          Last updated 26 October 2026.
         </p>
-
-        <div class="note">
-          <strong>Draft for preview — not yet submitted to a store.</strong> The registered operating
-          entity still has to be named, and the policy must be reviewed again before live regional
-          data, accounts, subscriptions or reporting back-ends are enabled. This text describes the
-          current demonstration build.
-        </div>
 
         <h2>Who we are</h2>
         <p>
-          Salim is operated by Ali Sameer Sadeq Mohamed Albaharna (“we”, “us”), the individual responsible for the
-          app and this website. Privacy requests:
-          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>.
+          Salim is operated by Ali Sameer Sadeq Mohamed Albaharna (“we”, “us”), the individual
+          responsible for the app and this website. Privacy requests and support:
+          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a> and
+          <a href="mailto:support@salimdrive.com">support@salimdrive.com</a>.
         </p>
 
         <h2>What the app does</h2>
         <p>
-          Salim provides road-awareness prompts — such as upcoming cameras, road hazards, speed
-          bumps and average-speed sections — based on your device’s location, speed and direction of
-          travel. The current demonstration build ships a fictional Bahrain data pack and has no
-          account, advertising, analytics SDK, billing or connected live feed.
+          Salim gives road-awareness prompts — upcoming cameras, road hazards, roadworks, traffic and
+          speed sections — based on your device’s location, speed and direction of travel. It is an
+          awareness aid, not a navigation or emergency service.
         </p>
 
         <h2>Location</h2>
         <p>
-          A simulated drive inside the app needs no location permission. When you explicitly start a
-          device GPS test or drive, we process precise coordinates, speed, heading, accuracy and
-          sample timing in memory to match nearby alerts and calculate section averages. On Android
-          this runs in a foreground service with a visible ongoing notification; on iOS it uses
-          location updates, which may continue while the test is active in the background.
+          A simulated drive inside the app needs no location permission. When you start a device GPS
+          test or drive, we process precise coordinates, speed, heading, accuracy and sample timing in
+          memory to match nearby alerts. On Android this runs in a foreground service with a visible
+          ongoing notification; on iOS it uses location updates, which may continue while a session is
+          active in the background.
         </p>
         <p>
-          Ending the session in the app, or from its Android notification, stops location updates.
-          You can also revoke permission in system settings. Operating-system suspension or
-          force-quitting the app can interrupt awareness. In this build, precise routes are not
-          stored and are not uploaded to a Salim server.
+          Ending the session, or the Android notification, stops location updates. You can revoke
+          permission in system settings at any time. Precise routes are not stored and are not uploaded
+          to a Salim server. Trip summaries kept on the device hold a start time, duration, alert count
+          and whether the session was simulated — never a route.
+        </p>
+
+        <h2>Camera data from OpenStreetMap</h2>
+        <p>
+          To know where cameras are, the app asks the OpenStreetMap Overpass service for cameras in a
+          rectangle around you. That request contains the rectangle, not your exact position, and no
+          account, advertising identifier or device identifier. Results are cached on the device so the
+          next drive does not repeat the request; at most one request is made per area every thirty
+          minutes. Camera data © OpenStreetMap contributors, available under the Open Database Licence.
+          Mapped positions can be wrong, out of date or missing.
+        </p>
+
+        <h2>Maps</h2>
+        <p>
+          On Android the map is drawn from OpenStreetMap raster tiles, so tile requests reach
+          OpenStreetMap’s tile servers and reveal the tiles you viewed and your IP address. On iOS the
+          map is Apple MapKit, which requests map tiles and related content from Apple. Alert matching
+          works without either.
+        </p>
+
+        <h2>Advertising</h2>
+        <p>
+          The free tier of the store build shows advertising served by Google AdMob. AdMob may use
+          device information and, where you have consented, advertising identifiers to select and
+          measure ads. We do not pass your location, trip data or the camera feed to the ad SDK, and
+          <strong>no advertisement is ever shown on the drive screen</strong> — the screen you see while
+          a session is running stays clear. In regions where consent is required, a consent prompt
+          appears before any ad loads, and you can change your choice later in the app’s settings.
+        </p>
+        <p>
+          Salim Premium removes advertising. Google’s privacy policy applies to the ad service:
+          <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.
+        </p>
+
+        <h2>Subscriptions</h2>
+        <p>
+          Salim Premium is sold through Google Play or the App Store. Payment is processed by the
+          store; we never see or store your card details. The app receives only whether a valid
+          subscription exists, so it can unlock the paid features, and Play or Apple records the
+          purchase against your store account as their terms describe.
+        </p>
+        <p>
+          <strong>No safety alert is ever withheld without a subscription.</strong> Camera and hazard
+          warnings are free. Premium covers advertising removal and the wider offline camera pack.
         </p>
 
         <h2>Stored on your device</h2>
         <p>
-          The app stores your voice preference, the local alert pack, trip date/duration/alert count
-          and test mode, and any community report drafts you type. Drafts are not transmitted or
-          published. Trip summaries are capped at 200 and drafts at 100; older items are removed when
-          the cap is exceeded. You can delete trip history in <em>My trips</em> and individual drafts
-          in <em>Community</em>. Deleting the app removes its local app storage, subject to your
-          device’s backup and restore behaviour. Android backup is disabled in this build; iOS device
-          backups may include local records according to your settings.
+          The app stores your voice and tone preferences, appearance, the local alert pack, cached
+          camera data, trip summaries and any community report drafts you type. Drafts are not
+          transmitted or published. Trip summaries are capped at 200 and drafts at 100. You can delete
+          trip history in <em>Trips</em> and individual drafts in <em>Community</em>. Deleting the app
+          removes its local storage, subject to your device’s backup settings.
         </p>
 
-        <h2>System and third-party services</h2>
-        <ul class="plain">
-          <li><strong>Maps.</strong> On iOS, Apple MapKit may request map tiles and related content from Apple. Offline alert matching does not require those tiles.</li>
-          <li><strong>External navigation.</strong> If you open a destination in another maps app, the destination you entered is shared with that app and its provider.</li>
-          <li><strong>Speech and notifications.</strong> Text-to-speech and notifications use operating-system services. An installed Android speech engine may use its own network services.</li>
-        </ul>
+        <h2>Text to speech and notifications</h2>
         <p>
-          These providers’ own terms and privacy practices apply. No third-party analytics SDK is
-          included.
+          Voice alerts use operating-system speech services. An installed Android speech engine may use
+          its own network services under its own policy. Notifications are generated on the device.
         </p>
 
         <h2>What we do not do</h2>
         <ul class="plain">
           <li>We do not sell personal data.</li>
-          <li>We do not run advertising or tracking SDKs in this build.</li>
+          <li>We do not keep a server-side copy of your route.</li>
           <li>We do not publish your community drafts.</li>
-          <li>We do not keep a server-side copy of your precise route.</li>
+          <li>We do not run analytics or tracking SDKs beyond the advertising described above.</li>
         </ul>
 
         <h2>Children</h2>
         <p>
-          Salim is a driving-awareness tool intended for licensed drivers and their passengers. It is
-          not directed at children.
+          Salim is intended for licensed drivers and their passengers. It is not directed at children
+          and we do not knowingly collect data from them.
         </p>
 
         <h2>Your choices and rights</h2>
         <p>
-          You can revoke location permission at any time, end a session to stop processing, and delete
-          local summaries and drafts inside the app. For access, correction or deletion requests
-          relating to anything we hold, contact
-          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>. Depending on where you live, you may have
-          additional rights under applicable data-protection law; we will respond within the period
-          required by that law.
+          You can revoke location permission, end a session at any time, delete local summaries and
+          drafts inside the app, and manage or cancel a subscription in Google Play or the App Store.
+          For access, correction or deletion requests, contact
+          <a href="mailto:legal@salimdrive.com">legal@salimdrive.com</a>. Depending on where you live
+          you may have additional rights under applicable data-protection law, and we will respond
+          within the period that law requires.
         </p>
 
         <h2>Changes</h2>
         <p>
-          If the app begins using live regional data, accounts, payments or a reporting back-end, this
-          policy will be updated before those features are enabled, and the effective date above will
-          change.
+          If the app begins using accounts, a reporting back-end or additional third-party services,
+          this policy will be updated before those features are enabled, and the date above will change.
         </p>
 
         <h2>Not a safety or emergency service</h2>
         <p>
-          Salim is an awareness aid. It does not guarantee that you will avoid a hazard, a fine or a
-          collision, and it is not a substitute for attention, posted signs or traffic law. In an
-          emergency in Bahrain, call 999.
+          Salim does not guarantee that you will avoid a hazard, a fine or a collision, and it is not a
+          substitute for attention, posted signs or traffic law. In an emergency in Bahrain, call 999.
         </p>
       </div>
     </main>

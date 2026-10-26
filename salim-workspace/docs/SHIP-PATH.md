@@ -96,6 +96,15 @@ endpoint, same 30-minute and 12 km limits, same 25 km bound on the cache), the s
 instrument-panel visual system, a synthesised alert chime, and an explicit cold-start
 "acquiring GPS" state so a first fix no longer reads as a failure.
 
+## Accounts and secrets
+
+`docs/ACCOUNTS-AND-SECRETS.md` is the clickpath for every credential and store identifier:
+the ten signing secrets, the four AdMob variables, and the two subscription products in each
+store. Nothing is pasted into chat; everything is entered in GitHub, Google or Apple.
+
+Privacy and support pages are live and public while `salimdrive.com` does not resolve:
+`docs/ACCOUNTS-AND-SECRETS.md` §6 has both links.
+
 ## Build evidence — 26 October 2026
 
 Both apps are green. This was the first time either had been through a compiler, and the
