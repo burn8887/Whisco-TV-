@@ -89,9 +89,14 @@ testers faster than Android can reach production.
 Android 0.6.0 has: raster map from OpenStreetMap tiles, live camera data from Overpass,
 camera list with precision markers, drive view, dark/light, settings.
 
-iOS 0.6.0 does **not** yet have the camera feed or the new visual system. It has MapKit (a
-real map), the demo pack and the legibility work. That gap is real and is the honest answer
-to "both apps ASAP": Android can ship in weeks, iOS needs a port pass first.
+iOS 0.6.0 now mirrors it: MapKit map with camera pins, the same Overpass client (same
+endpoint, same 30-minute and 12 km limits, same 25 km bound on the cache), the same
+`cameras.csv` shipped in the bundle — a test compares the two files byte for byte — the same
+instrument-panel visual system, a synthesised alert chime, and an explicit cold-start
+"acquiring GPS" state so a first fix no longer reads as a failure.
+
+Neither app has been through its compiler in this environment. The claim here is parity of
+source, not a verified binary: `xcodebuild` and Gradle runs are the next evidence required.
 
 ## Order of operations
 
@@ -101,7 +106,7 @@ to "both apps ASAP": Android can ship in weeks, iOS needs a port pass first.
 | Today | Point `www.salimdrive.com` at Netlify, deploy `site/` | Founder |
 | This week | Merge to `main`, configure secrets | Founder + agent |
 | This week | Signed Android AAB, upload, start the 14-day closed test | Founder |
-| Next | iOS port pass for cameras and the visual system | Agent |
+| Next | Compile both apps on a real toolchain; fix what the compiler says | Founder + agent |
 | After the 14 days | Production rollout on Play | Founder |
 
 The 14-day Play clock is the binding constraint, and it cannot start until the first

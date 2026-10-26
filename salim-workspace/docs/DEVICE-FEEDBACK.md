@@ -323,3 +323,20 @@ each row says where it came from, and the camera section reports how many are li
 The official source remains GDT's eTraffic app for Bahrain, which has published camera
 positions since 2019. It has no public API, so it cannot be read from the app — but it is the
 authority, and a report that disagrees with it should be treated as wrong.
+
+## iOS parity — same data, same rules
+
+The iOS app now carries the same `cameras.csv` in its bundle (a test compares the two files
+byte for byte, so they cannot drift apart) and asks Overpass the same question Android asks,
+with the same limits: one identifying User-Agent, 12 km around the driver, at most one query
+per area per half hour, results cached on disk. A cached row is only reused within 25 km of
+the driver, because a cache that outlives the drive would otherwise show yesterday's city.
+
+Three fixes came with the port, and the first two apply to Android as well:
+
+- **The simulation now proves something.** It used to drive a fictional stretch of Manama
+  where the honest pack has no camera, so no alert ever fired. It now runs past the mapped
+  Seef camera — a synthetic route over a real site. The invented demo camera points are gone.
+- **The cache is bounded by distance**, not just by time. See above.
+- **A cold start says "acquiring"**, not "stale". First fixes take 30–60 seconds outdoors; the
+  old copy called that a failure before it had a chance to work.

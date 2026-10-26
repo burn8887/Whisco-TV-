@@ -72,6 +72,26 @@ object CameraFeed {
         return runCatching { decode(raw) }.getOrDefault(emptyList())
     }
 
+    /**
+     * Cached rows close enough to be about *this* area. The cache persists across drives, and
+     * a drive from Manama to Dubai would otherwise keep showing Manama's cameras — caching
+     * must not turn yesterday's city into today's false alert.
+     */
+    fun cachedNear(context: Context, point: Point): List<Hazard> = near(cached(context), point)
+
+    /** The same 25 km bound, applied to rows already held in memory. */
+    fun near(rows: List<Hazard>, point: Point): List<Hazard> =
+        rows.filter { haversine(point, it.point) <= 25_000 }
+
+    private fun haversine(a: Point, b: Point): Double {
+        val r = Math.PI / 180
+        val dLat = (b.lat - a.lat) * r
+        val dLon = (b.lon - a.lon) * r
+        val h = Math.pow(Math.sin(dLat / 2), 2.0) +
+            Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.pow(Math.sin(dLon / 2), 2.0)
+        return 2 * 6_371_008.8 * Math.asin(Math.sqrt(minOf(1.0, maxOf(0.0, h))))
+    }
+
     private fun decode(raw: String): List<Hazard> {
         val array = org.json.JSONArray(raw)
         return buildList {
@@ -116,12 +136,12 @@ object CameraFeed {
      * cost the driver an alert they already had.
      */
     suspend fun fetch(context: Context, point: Point, now: Long = System.currentTimeMillis()): List<Hazard> {
-        val country = countryAt(point) ?: return cached(context)
+        val country = countryAt(point) ?: return cachedNear(context, point)
         val prefs = context.getSharedPreferences(PREF, 0)
         val last = prefs.getLong(KEY_LAST, 0L)
-        if (now - last < MIN_INTERVAL_MS) return cached(context)
+        if (now - last < MIN_INTERVAL_MS) return cachedNear(context, point)
 
-        val fresh = query(point) ?: return cached(context)
+        val fresh = query(point) ?: return cachedNear(context, point)
         val stamped = fresh.map { it.copy(expiresAt = now + 30L * 24 * 60 * 60 * 1000) }
         prefs.edit().putLong(KEY_LAST, now).putString(KEY_DATA, encode(stamped)).apply()
         return stamped

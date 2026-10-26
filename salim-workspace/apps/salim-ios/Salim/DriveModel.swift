@@ -10,7 +10,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     @Published var country="BH"
     @Published var status="Ready for a simulated drive"
     @Published var feed="Demo data only · Offline pack"
-    @Published var hazards:[Hazard]=DemoData.hazards
+    @Published var hazards:[Hazard]=DriveModel.bundledPack
     @Published var fix:Fix?
     @Published var warning:AlertMatch?
     @Published var average:Average?
@@ -18,6 +18,19 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     @Published var trips:[Trip]=[]
     @Published var drafts:[Draft]=[]
     @Published var voice=UserDefaults.standard.object(forKey:"voice") as? Bool ?? true {didSet{UserDefaults.standard.set(voice,forKey:"voice");if !voice {audio.stop()}}}
+    @Published var tone=UserDefaults.standard.object(forKey:"tone") as? Bool ?? true {didSet{UserDefaults.standard.set(tone,forKey:"tone")}}
+    @Published var appearance=UserDefaults.standard.string(forKey:"appearance") ?? "system" {didSet{UserDefaults.standard.set(appearance,forKey:"appearance")}}
+    /// Live cameras from OpenStreetMap for the current area.
+    @Published var liveCameras:[Hazard]=[]
+    /// False until the first valid fix arrives. Without it the app could only say "stale",
+    /// never "still looking", so a cold start read as a failure.
+    @Published var acquired=false
+    /// The bundled camera pack plus the in-memory demo rows. Compiled once; the CSV is
+    /// small enough that reading it a second time would only add a failure path.
+    nonisolated static let bundledPack:[Hazard] = {
+        let pack=CameraPack.load()
+        return pack.isEmpty ? DemoData.hazards : pack+DemoData.hazards
+    }()
     private let manager=CLLocationManager()
     private let engine=AlertEngine()
     private let sections=SectionEngine(DemoData.sections)
@@ -29,6 +42,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     private var started=0.0
     private var lastGood=0.0
     private var localAt=0.0
+    private var feedAt=0.0
     private var alertCount=0
     private var pendingStart=false
     override init() {
@@ -43,14 +57,47 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
             UserDefaults.standard.removeObject(forKey:"running");saveTrips();status="Previous session interrupted · Start a new test"
         }
         engine.replace(hazards)
-        Task {if let database {try? await database.seed(DemoData.hazards)};await reload()}
+        if let cached=CameraFeed.cached().first, cached.id.hasPrefix("osm:") {liveCameras=CameraFeed.cached()}
+        Task { [weak self] in
+            guard let self else {return}
+            if let database {try? await database.seed(Self.bundledPack)}
+            await self.reload()
+            if let last=self.manager.location?.coordinate {
+                self.refreshCameras(Point(lat:last.latitude,lon:last.longitude))
+            }
+        }
+    }
+    /// Pack rows plus live cameras. Appended rather than replacing: losing signal between
+    /// drives must not cost an alert already held.
+    private func merged(_ pack:[Hazard])->[Hazard] {
+        var seen=Set<String>();var out:[Hazard]=[]
+        for hazard in pack+liveCameras where seen.insert(hazard.id).inserted {out.append(hazard)}
+        return out
+    }
+    /// Fetches live cameras without blocking the UI; the list updates on success only.
+    func refreshCameras(_ point:Point) {
+        let token=generation
+        Task { [weak self] in
+            guard let self else {return}
+            let fetched=await CameraFeed.fetch(near:point)
+            guard token==self.generation else {return}
+            // A failed fetch keeps what we hold — but only what is still about this area.
+            // Keeping last night's city would be a false alert, not a saved one.
+            self.liveCameras=fetched.isEmpty
+                ? self.liveCameras.filter { Geo.distance($0.point, point) <= 25_000 }
+                : fetched
+            let combined=self.merged(self.hazards.filter{!$0.id.hasPrefix("osm:")})
+            self.hazards=combined;self.engine.replace(combined)
+        }
     }
     private static func load<T:Decodable>(_ key:String,fallback:T)->T {guard let data=UserDefaults.standard.data(forKey:key),let result=try? JSONDecoder().decode(T.self,from:data) else{return fallback};return result}
     func selectCountry(_ code:String) {guard mode == .idle,DemoData.countries.contains(code) else{return};generation+=1;country=code;hazards=[];engine.reset();engine.replace([]);Task{await reload()}}
     func reload(point:Point?=nil) async {
         let token=generation,code=country
         guard let database else {feed="SQLite unavailable · Bundled demo memory fallback";return}
-        do {let values=try await database.nearby(country:code,point:point ?? DemoData.center,now:Date().timeIntervalSince1970);guard token==generation else{return};hazards=values;engine.replace(values);feed=code=="BH" ? "SQLite demo pack · No live feed connected" : "No verified coverage for \(code)"}
+        do {let values=try await database.nearby(country:code,point:point ?? DemoData.center,now:Date().timeIntervalSince1970);guard token==generation else{return};let combined=merged(values);hazards=combined;engine.replace(combined)
+            let live=liveCameras.count
+            feed=code=="BH" ? (live>0 ? "Bundled pack + \(live) live cameras · OpenStreetMap" : "Bundled pack · No live cameras in range") : (live>0 ? "OpenStreetMap · \(live) live cameras" : "No local pack for \(code)")}
         catch {if token==generation {feed="Local read failed · Previous alerts retained"}}
     }
     func startGPS() {
@@ -71,7 +118,9 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         demoTask=Task { [weak self] in
             for step in 0..<75 {
                 guard !Task.isCancelled,let self else{return}
-                self.receive(Fix(point:Point(lat:26.213+Double(step)*0.000145,lon:50.5433+Double(step)*0.00007975),speed:18,course:25,accuracy:5,time:Date().timeIntervalSince1970,elapsed:ProcessInfo.processInfo.systemUptime))
+                // Routed past the mapped Seef camera in `cameras.csv`: a synthetic drive over a
+                // real site, not an invented one.
+                self.receive(Fix(point:Point(lat:26.2312+Double(step)*0.000145,lon:50.5330+Double(step)*0.00007975),speed:18,course:25,accuracy:5,time:Date().timeIntervalSince1970,elapsed:ProcessInfo.processInfo.systemUptime))
                 try? await Task.sleep(for:.seconds(1))
             }
             self?.stop()
@@ -79,7 +128,8 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     }
     private func begin(_ value:DriveMode) {
         generation+=1;mode=value;started=ProcessInfo.processInfo.systemUptime;lastGood=started;localAt=0;seconds=0;alertCount=0;warning=nil;average=nil;engine.reset();sections.reset()
-        status=value == .demo ? "Simulation · No device GPS" : "Waiting for an accurate GPS fix"
+        acquired = value == .demo
+        status=value == .demo ? "Simulation · No device GPS" : "Acquiring GPS…"
         UserDefaults.standard.set(Date(),forKey:"running");UserDefaults.standard.set(value == .demo,forKey:"runningDemo")
         Task {_ = try? await UNUserNotificationCenter.current().requestAuthorization(options:[.alert,.sound])}
         ticker=Task { [weak self] in
@@ -88,7 +138,11 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
                 let now=ProcessInfo.processInfo.systemUptime
                 self.seconds=Int(max(0,now-self.started))
                 if let warning=self.warning,now-warning.elapsed>30 {self.warning=nil}
-                if now-self.lastGood>15 {self.fix=nil;self.warning=nil;self.average=nil;self.sections.reset();self.audio.stop();self.status="GPS stale · Alerts paused"}
+                if !self.acquired {
+                    // Cold fixes legitimately take 30-60 seconds outdoors; saying "stale"
+                    // before the first fix was the bug that made GPS look broken.
+                    self.status=self.seconds<25 ? "Acquiring GPS… \(self.seconds)s" : "No fix yet · move near a window or outdoors"
+                } else if now-self.lastGood>15 {self.fix=nil;self.warning=nil;self.average=nil;self.sections.reset();self.audio.stop();self.status="GPS stale · Alerts paused"}
             }
         }
     }
@@ -96,7 +150,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         guard mode != .idle else{return}
         let trip=Trip(id:UUID(),at:Date(),seconds:Int(max(0,ProcessInfo.processInfo.systemUptime-started)),alerts:alertCount,demo:mode == .demo,interrupted:false)
         generation+=1;manager.stopUpdatingLocation();manager.allowsBackgroundLocationUpdates=false;demoTask?.cancel();ticker?.cancel();demoTask=nil;ticker=nil;audio.stop();sections.reset();engine.reset()
-        mode = .idle;pendingStart=false;fix=nil;warning=nil;average=nil;status="Test ended · Saved on this device"
+        mode = .idle;pendingStart=false;fix=nil;warning=nil;average=nil;acquired=false;status="Test ended · Saved on this device"
         trips.insert(trip,at:0);saveTrips();UserDefaults.standard.removeObject(forKey:"running")
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers:["salim.road"])
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers:["salim.road"])
@@ -104,14 +158,18 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     private func receive(_ sample:Fix) {
         guard mode != .idle else{return}
         let now=Date().timeIntervalSince1970,elapsed=ProcessInfo.processInfo.systemUptime
-        guard Geo.usable(sample,now:now,elapsed:elapsed) else {fix=nil;warning=nil;average=nil;sections.reset();audio.stop();status="Weak or stale GPS · Alerts paused";return}
-        lastGood=elapsed;fix=sample
+        guard Geo.usable(sample,now:now,elapsed:elapsed) else {if acquired {fix=nil;warning=nil;average=nil;sections.reset();audio.stop();status="Weak or stale GPS · Alerts paused"};return}
+        lastGood=elapsed;fix=sample;acquired=true
         status=mode == .demo ? "Simulation · Demo alerts only" : sample.speed>=2 && sample.course==nil ? "Heading unavailable · Proximity alerts paused" : "GPS test active · Demo data only"
         let result=sections.evaluate(sample,now:now,elapsed:elapsed,country:country);average=result.active.first ?? result.completed.first
         if elapsed-localAt>10 {localAt=elapsed;Task{await reload(point:sample.point)}}
+        // One query per area per half hour, run off the drive loop: the next stretch of road
+        // may be covered and this is the only moment the app knows where the driver is.
+        if elapsed-feedAt>600 {feedAt=elapsed;refreshCameras(sample.point)}
         guard let match=engine.evaluate(sample,now:now,elapsed:elapsed,country:country) else{return}
         warning=match;alertCount+=1
         let message="Demo alert. \(match.hazard.title) in \(Int(match.meters)) meters. Follow actual posted signs."
+        if tone {audio.beep()}
         if voice {audio.speak(message)}
         if UIApplication.shared.applicationState != .active {
             let content=UNMutableNotificationContent();content.title="Salim Demo · \(match.hazard.title)";content.body=message;content.sound = .default

@@ -9,5 +9,7 @@ object DemoData {
         Hazard("static:demo-traffic","BH",Kind.TRAFFIC,Point(26.2280,50.5810),120.0,"King Faisal Highway",EXPIRY),
         Hazard("static:demo-bump","BH",Kind.BUMP,Point(26.2050,50.5590),null,"Road 2813, Manama",EXPIRY)
     )
-    val sections=listOf(Section("demo-section","BH",Gate(Point(26.214,50.54385),25.0,18.0),Gate(Point(26.220,50.54715),25.0,18.0),744.0,80,EXPIRY))
+    // Gates sit on the simulated line, five and forty-five seconds in, so the average-speed
+    // demo measures a real interval instead of assuming the driver found the zone.
+    val sections=listOf(Section("demo-section","BH",Gate(Point(26.231925,50.533399),26.3,18.0),Gate(Point(26.237725,50.536589),26.3,18.0),720.0,80,EXPIRY))
 }

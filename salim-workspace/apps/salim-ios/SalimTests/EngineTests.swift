@@ -24,10 +24,10 @@ final class EngineTests:XCTestCase {
         let store=try OfflineStore(url:url)
         try await store.seed(DemoData.hazards)
         let values=try await store.nearby(country:"BH",point:DemoData.center,now:now)
-        XCTAssertEqual(values.count,4)
+        XCTAssertEqual(values.count,DemoData.hazards.count)
         try await store.seed(DemoData.hazards)
         let repeated=try await store.nearby(country:"BH",point:DemoData.center,now:now)
-        XCTAssertEqual(repeated.count,4)
+        XCTAssertEqual(repeated.count,DemoData.hazards.count)
         let expired=try await store.nearby(country:"BH",point:DemoData.center,now:DemoData.expiry+1)
         XCTAssertTrue(expired.isEmpty)
     }
@@ -50,7 +50,7 @@ final class EngineTests:XCTestCase {
         let bad=Hazard(id:"bad",country:"BH",kind:"CAMERA",point:Point(lat:91,lon:50),heading:nil,road:"bad",expiresAt:now+60)
         do {try await store.seed([bad]);XCTFail("Invalid coordinates accepted")} catch {}
         let values=try await store.nearby(country:"BH",point:DemoData.center,now:now)
-        XCTAssertEqual(values.count,4)
+        XCTAssertEqual(values.count,DemoData.hazards.count)
         let other=try await store.nearby(country:"SA",point:DemoData.center,now:now)
         XCTAssertTrue(other.isEmpty)
     }

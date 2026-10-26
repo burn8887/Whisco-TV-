@@ -168,5 +168,22 @@ class ShippedPackTests(unittest.TestCase):
             self.assertIn(row["kind"], importer.KINDS)
 
 
+class PackParityTests(unittest.TestCase):
+    """Both apps ship the same file, or they slowly stop warning about the same cameras."""
+
+    def setUp(self):
+        here = Path(__file__).resolve().parent.parent
+        self.android = sorted(here.glob("apps/*/app/src/main/assets/cameras.csv"))
+        self.ios = sorted(here.glob("apps/*/Salim/Resources/cameras.csv"))
+
+    def test_ios_pack_exists(self):
+        self.assertTrue(self.ios, "the iOS bundle has no cameras.csv")
+
+    def test_both_packs_are_byte_identical(self):
+        self.assertTrue(self.android and self.ios, "one platform is missing the pack")
+        self.assertEqual(self.android[0].read_bytes(), self.ios[0].read_bytes(),
+                         "cameras.csv differs between Android and iOS; copy one to the other")
+
+
 if __name__ == "__main__":
     unittest.main()

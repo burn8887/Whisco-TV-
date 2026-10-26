@@ -21,10 +21,24 @@ struct Hazard: Codable, Identifiable, Sendable {
     let heading: Double?
     let road: String
     let expiresAt: Double
-    var title: String { ["CAMERA":"Speed camera","ROADWORK":"Roadworks ahead","HAZARD":"Road hazard","TRAFFIC":"Traffic congestion","BUMP":"Road bump"][kind] ?? "Road alert" }
+    /// `exact` or `approximate` for pack rows; nil for live OSM nodes, which are mapped
+    /// positions and therefore exact to the node.
+    var precision: String? = nil
+    /// Posted limit in km/h when the pack records one.
+    var limit: Int? = nil
+    /// Approximate sites are drawn hollow and marked ≈, because a filled dot claims a
+    /// precision the underlying source does not have.
+    var approximate: Bool { precision == "approximate" }
+    var subtitle: String { limit.map { "\(road) · \($0) km/h" } ?? road }
+    var title: String {
+        ["CAMERA":"Speed camera","MOBILE_CAMERA":"Mobile camera","SEATBELT":"Seatbelt & phone camera",
+         "RED_LIGHT":"Red light camera","ROADWORK":"Roadworks ahead","HAZARD":"Road hazard",
+         "TRAFFIC":"Traffic congestion","BUMP":"Road bump"][kind] ?? "Road alert"
+    }
+    var isCamera: Bool { ["CAMERA","MOBILE_CAMERA","SEATBELT","RED_LIGHT"].contains(kind) }
     func validate() throws {
         guard !id.isEmpty,id.count<=120,DemoData.countries.contains(country),point.valid,expiresAt.isFinite,expiresAt>0,
-              ["CAMERA","MOBILE_CAMERA","ROADWORK","HAZARD","TRAFFIC","BUMP"].contains(kind),!road.isEmpty,road.count<=200,
+              ["CAMERA","MOBILE_CAMERA","SEATBELT","RED_LIGHT","ROADWORK","HAZARD","TRAFFIC","BUMP"].contains(kind),!road.isEmpty,road.count<=200,
               heading == nil || (heading!.isFinite && (0..<360).contains(heading!)) else { throw URLError(.cannotParseResponse) }
     }
 }
@@ -135,10 +149,8 @@ enum DemoData {
     static let center=Point(lat:26.22,lon:50.55)
     static let expiry=1_893_456_000.0
     static let hazards=[
-        Hazard(id:"static:demo-camera-1",country:"BH",kind:"CAMERA",point:Point(lat:26.2185,lon:50.5462),heading:25,road:"Sheikh Khalifa bin Salman Highway",expiresAt:expiry),
         Hazard(id:"static:demo-roadwork",country:"BH",kind:"ROADWORK",point:Point(lat:26.2353,lon:50.5655),heading:90,road:"King Faisal Highway",expiresAt:expiry),
-        Hazard(id:"static:demo-hazard",country:"BH",kind:"HAZARD",point:Point(lat:26.2003,lon:50.5768),heading:nil,road:"Shaikh Isa bin Salman Highway",expiresAt:expiry),
-        Hazard(id:"static:demo-camera-2",country:"BH",kind:"CAMERA",point:Point(lat:26.2194,lon:50.5992),heading:180,road:"Al Fateh Highway",expiresAt:expiry)
+        Hazard(id:"static:demo-hazard",country:"BH",kind:"HAZARD",point:Point(lat:26.2003,lon:50.5768),heading:nil,road:"Shaikh Isa bin Salman Highway",expiresAt:expiry)
     ]
-    static let sections=[SectionZone(id:"demo-section",country:"BH",entry:Gate(point:Point(lat:26.214,lon:50.54385),heading:25,halfWidth:18),exit:Gate(point:Point(lat:26.220,lon:50.54715),heading:25,halfWidth:18),meters:744,limit:80,expiresAt:expiry)]
+    static let sections=[SectionZone(id:"demo-section",country:"BH",entry:Gate(point:Point(lat:26.231925,lon:50.533399),heading:26.3,halfWidth:18),exit:Gate(point:Point(lat:26.237725,lon:50.536589),heading:26.3,halfWidth:18),meters:720,limit:80,expiresAt:expiry)]
 }

@@ -93,9 +93,10 @@ object DriveStore {
         scope.launch {
             val fetched=runCatching { CameraFeed.fetch(context,point) }.getOrDefault(emptyList())
             if(token!=generation)return@launch
-            if(fetched.isEmpty() && liveCameras.isNotEmpty())return@launch
-            liveCameras=fetched
-            mutable.update { it.copy(hazards=withFeed(it.hazards.filter { h->!h.id.startsWith("osm:") }),liveCameras=fetched.size) }
+            // A failed fetch keeps what we hold — but only what is still about this area.
+            // Keeping last night's city would be a false alert, not a saved one.
+            liveCameras=if(fetched.isEmpty()) CameraFeed.near(liveCameras,point) else fetched
+            mutable.update { it.copy(hazards=withFeed(it.hazards.filter { h->!h.id.startsWith("osm:") }),liveCameras=liveCameras.size) }
             engine.replace(state.value.hazards)
         }
     }
@@ -149,7 +150,10 @@ object DriveStore {
         } }
         if(mode==Mode.DEMO)demoJob=scope.launch {
             repeat(75) { step ->
-                receive(Fix(Point(26.213+step*.000145,50.5433+step*.00007975),18.0,25.0,5.0,System.currentTimeMillis(),SystemClock.elapsedRealtime()))
+                // The simulated run is routed past the mapped Seef camera in `cameras.csv`.
+                // It used to start in central Manama, where the honest pack has no camera —
+                // so the demo proved nothing. A synthetic route over a real site does.
+                receive(Fix(Point(26.2312+step*.000145,50.5330+step*.00007975),18.0,25.0,5.0,System.currentTimeMillis(),SystemClock.elapsedRealtime()))
                 delay(1000)
             }
             end("Demo complete · Session saved")
