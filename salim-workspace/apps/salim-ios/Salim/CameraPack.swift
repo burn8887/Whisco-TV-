@@ -19,10 +19,13 @@ enum CameraPack {
         var out: [Hazard] = []
         var seen = Set<String>()
         for raw in text.split(whereSeparator: \.isNewline) {
-            let line = raw.trimmingCharacters(in: .whitespaces)
+            let line = String(raw).trimmingCharacters(in: .whitespaces)
             if line.isEmpty || line.hasPrefix("#") || line.hasPrefix("id,") { continue }
+            // Strings, not Substrings: Foundation's trimming and numeric initialisers are
+            // written against String, and a silent overload miss here would be a compile
+            // error on a machine I cannot see.
             let cells = line.split(separator: ",", omittingEmptySubsequences: false)
-                .map { $0.trimmingCharacters(in: .whitespaces) }
+                .map { String($0).trimmingCharacters(in: .whitespaces) }
             if cells.count < 9 { continue }
             let id = cells[0], kind = cells[1].uppercased()
             if id.isEmpty || seen.contains(id) { continue }

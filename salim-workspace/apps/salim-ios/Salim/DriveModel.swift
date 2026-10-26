@@ -3,6 +3,14 @@ import CoreLocation
 import UserNotifications
 
 enum DriveMode {case idle,demo,gps}
+/// The bundled camera pack plus the in-memory demo rows, resolved once. Kept outside the
+/// main-actor class so it can be read from a property initialiser without an isolation hop.
+enum BundledPack {
+    static let rows:[Hazard] = {
+        let pack=CameraPack.load()
+        return pack.isEmpty ? DemoData.hazards : pack+DemoData.hazards
+    }()
+}
 struct Trip:Codable,Identifiable {let id:UUID;let at:Date;let seconds:Int;let alerts:Int;let demo:Bool;let interrupted:Bool}
 struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
 @MainActor final class DriveModel:NSObject,ObservableObject,CLLocationManagerDelegate {
@@ -10,7 +18,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     @Published var country="BH"
     @Published var status="Ready for a simulated drive"
     @Published var feed="Demo data only · Offline pack"
-    @Published var hazards:[Hazard]=DriveModel.bundledPack
+    @Published var hazards:[Hazard]=BundledPack.rows
     @Published var fix:Fix?
     @Published var warning:AlertMatch?
     @Published var average:Average?
@@ -25,12 +33,6 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     /// False until the first valid fix arrives. Without it the app could only say "stale",
     /// never "still looking", so a cold start read as a failure.
     @Published var acquired=false
-    /// The bundled camera pack plus the in-memory demo rows. Compiled once; the CSV is
-    /// small enough that reading it a second time would only add a failure path.
-    nonisolated static let bundledPack:[Hazard] = {
-        let pack=CameraPack.load()
-        return pack.isEmpty ? DemoData.hazards : pack+DemoData.hazards
-    }()
     private let manager=CLLocationManager()
     private let engine=AlertEngine()
     private let sections=SectionEngine(DemoData.sections)
@@ -60,7 +62,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         if let cached=CameraFeed.cached().first, cached.id.hasPrefix("osm:") {liveCameras=CameraFeed.cached()}
         Task { [weak self] in
             guard let self else {return}
-            if let database {try? await database.seed(Self.bundledPack)}
+            if let database {try? await database.seed(BundledPack.rows)}
             await self.reload()
             if let last=self.manager.location?.coordinate {
                 self.refreshCameras(Point(lat:last.latitude,lon:last.longitude))

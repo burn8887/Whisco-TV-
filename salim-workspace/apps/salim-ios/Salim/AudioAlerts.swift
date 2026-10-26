@@ -14,7 +14,9 @@ import Foundation
         }
     }
     func speak(_ text:String) {
-        stop()
+        // Only the speech is replaced here. Calling stop() would silence the chime that
+        // was just played for this same alert.
+        cancelSpeech()
         do {
             let session=AVAudioSession.sharedInstance()
             try session.setCategory(.playback,mode:.voicePrompt,options:[.duckOthers,.interruptSpokenAudioAndMixWithOthers])
@@ -58,7 +60,8 @@ import Foundation
         return data
     }
 
-    func stop() {chimePlayer?.stop();chimePlayer=nil;current=nil;watchdog?.cancel();watchdog=nil;speech.stopSpeaking(at:.immediate);release()}
+    func stop() {chimePlayer?.stop();chimePlayer=nil;cancelSpeech()}
+    private func cancelSpeech() {current=nil;watchdog?.cancel();watchdog=nil;speech.stopSpeaking(at:.immediate);release()}
     private func release() {try? AVAudioSession.sharedInstance().setActive(false,options:.notifyOthersOnDeactivation)}
     private func finish(_ utterance:AVSpeechUtterance) {guard current === utterance else{return};current=nil;watchdog?.cancel();watchdog=nil;release()}
     func speechSynthesizer(_ synthesizer:AVSpeechSynthesizer,didFinish utterance:AVSpeechUtterance) {finish(utterance)}

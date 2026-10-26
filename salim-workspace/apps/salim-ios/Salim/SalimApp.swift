@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 import UIKit
+import Foundation
 
 // Visual system, matching the Android instrument-panel direction.
 //
