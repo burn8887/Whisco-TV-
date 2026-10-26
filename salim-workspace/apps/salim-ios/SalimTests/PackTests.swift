@@ -5,7 +5,7 @@ import XCTest
 /// warning to a driver. These tests pin the rules that keep a bad row from doing that.
 final class PackTests:XCTestCase {
     private let header="id,kind,lat,lon,road,speed_limit,heading,precision,source"
-    private func row(_ id:String,kind:String,lat:Double=26.2166,lon:Double=50.5846,
+    private func row(_ id:String,_ kind:String,lat:Double=26.2166,lon:Double=50.5846,
                      road:String="Diplomatic Area",limit:String="50",heading:String="",
                      precision:String="approximate")->String {
         "\(id),\(kind),\(lat),\(lon),\(road),\(limit),\(heading),\(precision),test"

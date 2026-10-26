@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -238,11 +239,11 @@ private fun BrandLockup(screen: String?) {
 }
 
 @Composable
-private fun Hairline(modifier: Modifier = Modifier, width: Int? = null) {
+private fun Hairline(modifier: Modifier = Modifier, width: Dp? = null) {
     val scheme = MaterialTheme.colorScheme
     Box(
         modifier
-            .then(if (width != null) Modifier.width(width.dp) else Modifier.fillMaxWidth())
+            .then(if (width != null) Modifier.width(width) else Modifier.fillMaxWidth())
             .height(1.dp)
             .background(scheme.outline)
     )
