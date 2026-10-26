@@ -124,9 +124,19 @@ jobs:
           EXPECTED_FINGERPRINT: ${{ secrets.SALIM_ANDROID_CERT_SHA256 }}
         run: |
           set -euo pipefail
-          actual=$(keytool -list -v -keystore "$RUNNER_TEMP/salim-upload.jks" \
-            -alias "$SALIM_ANDROID_KEY_ALIAS" -storepass "$SALIM_ANDROID_KEYSTORE_PASSWORD" \
-            | awk -F': ' '/SHA-?256:/{print $2; exit}' | tr -d ': ' | tr 'A-F' 'a-f')
+          # Capture keytool explicitly. Under `set -e`, a failing command substitution
+          # used to exit before our fingerprint diagnostics could explain why it failed.
+          set +e
+          keytool_output=$(keytool -list -v -keystore "$RUNNER_TEMP/salim-upload.jks" \
+            -alias "$SALIM_ANDROID_KEY_ALIAS" -storepass "$SALIM_ANDROID_KEYSTORE_PASSWORD" 2>&1)
+          keytool_status=$?
+          set -e
+          if [ "$keytool_status" -ne 0 ]; then
+            echo "keytool could not read the keystore entry. Check the store password and alias."
+            printf '%s\n' "$keytool_output" | tail -6
+            exit 1
+          fi
+          actual=$(printf '%s\n' "$keytool_output" | awk -F': ' '/SHA-?256:/{print $2; exit}' | tr -d ': ' | tr 'A-F' 'a-f')
           # Accept either the bare fingerprint or keytool's complete "SHA-256: ..." line.
           expected=$(printf '%s' "$EXPECTED_FINGERPRINT" | sed -E 's/^[[:space:]]*SHA-?256:[[:space:]]*//' | tr -d ':[:space:]' | tr 'A-F' 'a-f')
           if [ "$actual" != "$expected" ]; then
