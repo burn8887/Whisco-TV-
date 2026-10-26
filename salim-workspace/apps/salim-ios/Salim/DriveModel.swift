@@ -5,10 +5,7 @@ import UserNotifications
 enum DriveMode {case idle,demo,gps}
 /// Disclosed bundled camera records, resolved once outside the main-actor class.
 enum BundledPack {
-    static let rows:[Hazard] = {
-        CameraPack.load()
-        return CameraPack.hazards()
-    }()
+    static let rows:[Hazard] = CameraPack.load()
 }
 struct Trip:Codable,Identifiable {let id:UUID;let at:Date;let seconds:Int;let alerts:Int;let demo:Bool;let interrupted:Bool}
 struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
