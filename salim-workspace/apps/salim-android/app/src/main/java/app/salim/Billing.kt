@@ -2,7 +2,6 @@ package app.salim
 
 import android.app.Activity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.heightIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.border
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
@@ -105,7 +105,7 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
         client.queryProductDetailsAsync(params) { result, details ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 // Cheapest first, so the shorter commitment is never buried under the longer one.
-                _plans.value = details.productDetailsList.orEmpty().sortedBy { priceMicros(it) }
+                _plans.value = details.sortedBy { priceMicros(it) }
                 if (_plans.value.isEmpty()) {
                     _unavailable.value = true
                     _message.value = "No subscription is configured for this build yet."
@@ -188,23 +188,23 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
             details.subscriptionOfferDetails?.firstOrNull()
                 ?.pricingPhases?.pricingPhaseList?.firstOrNull()?.priceAmountMicros ?: 0L
 
+        /**
+         * Play reports each phase as an ISO-8601 duration — P1M, P3M, P1Y — rather than a
+         * count and a unit, so the two have to be read back out of the string.
+         */
         fun period(details: ProductDetails): String {
-            val phase = details.subscriptionOfferDetails?.firstOrNull()
-                ?.pricingPhases?.pricingPhaseList?.firstOrNull() ?: return ""
-            val days = phase.billingPeriodCount * when (phase.billingPeriod.uppercase()) {
-                "P1D" -> 1
-                "P1W" -> 7
-                "P1M" -> 30
-                "P1Y" -> 365
-                else -> 0
+            val iso = details.subscriptionOfferDetails?.firstOrNull()
+                ?.pricingPhases?.pricingPhaseList?.firstOrNull()?.billingPeriod ?: return ""
+            val count = iso.filter { it.isDigit() }.toIntOrNull() ?: 0
+            if (count <= 0) return ""
+            val noun = when (iso.lastOrNull()?.uppercaseChar()) {
+                'D' -> "day"
+                'W' -> "week"
+                'M' -> "month"
+                'Y' -> "year"
+                else -> return ""
             }
-            return when {
-                days <= 0 -> ""
-                days <= 1 -> "per day"
-                days <= 7 -> "per week"
-                days <= 31 -> "per month"
-                else -> "per year"
-            }
+            return if (count == 1) "per $noun" else "every $count ${noun}s"
         }
     }
 }
