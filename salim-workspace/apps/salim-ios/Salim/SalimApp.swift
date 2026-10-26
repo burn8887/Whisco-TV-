@@ -60,12 +60,14 @@ struct Theme {
 
 @main struct SalimApp: App {
     @StateObject private var model = DriveModel()
+    @StateObject private var store = Store()
     @Environment(\.scenePhase) private var phase
 
     var body: some Scene {
         WindowGroup {
             RootView(appearance: model.appearance)
                 .environmentObject(model)
+                .environmentObject(store)
                 .preferredColorScheme(model.appearance == "dark" ? .dark : model.appearance == "light" ? .light : nil)
                 .onChange(of: phase) { _, value in
                     if value == .background && model.mode == .demo { model.stop() }
@@ -604,7 +606,10 @@ struct CommunityView: View {
 
 struct SettingsView: View {
     @EnvironmentObject var model: DriveModel
+    @EnvironmentObject var store: Store
     let theme: Theme
+    @State private var showPaywall = false
+
     var body: some View {
         Form {
             Section("Appearance") {
@@ -645,12 +650,22 @@ struct SettingsView: View {
                 Text("GPS testing requires precise location. Ending a session stops location updates and releases audio.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
+            Section("Salim Premium") {
+                if store.premium {
+                    Text("Active. Every warning stays free either way.").font(.caption)
+                } else {
+                    Button("See Salim Premium") { showPaywall = true }
+                    Text("Optional. Every camera and hazard warning works without it.").font(.caption).foregroundStyle(theme.muted)
+                }
+                Button("Restore purchases") { Task { await store.restore() } }
+            }
             Section("Privacy") { NavigationLink("Read privacy notice") { PrivacyNotice() } }
             Section("Release status") {
-                Text("CarPlay, watchOS, vehicle-triggered startup, subscriptions and internal 3D navigation are not enabled. No account or advertising SDK is active. In an emergency in Bahrain, call 999.")
+                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. No account exists and no advertising SDK is active. In an emergency in Bahrain, call 999.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
         }
         .navigationTitle("Settings")
+        .sheet(isPresented: $showPaywall) { Paywall(theme: theme) }
     }
 }
