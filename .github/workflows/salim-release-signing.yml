@@ -264,9 +264,9 @@ jobs:
       - name: Require App Store Connect API credentials
         if: ${{ inputs.platform == 'both' || inputs.platform == 'ios' }}
         env:
-          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY }}
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID || secrets.SALIM_ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID || secrets.SALIM_ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY || secrets.SALIM_ASC_PRIVATE_KEY_P8 }}
         run: |
           set -euo pipefail
           missing=""
@@ -274,7 +274,7 @@ jobs:
           [ -n "$ASC_ISSUER_ID" ] || missing="$missing ISSUER_ID"
           [ -n "$ASC_PRIVATE_KEY" ] || missing="$missing PRIVATE_KEY"
           if [ -n "$missing" ]; then
-            echo "::error title=App Store Connect API secrets missing::Configure the App Store Connect key ID, issuer ID and private key in the salim-release environment. Accepted names are APP_STORE_CONNECT_KEY_ID / APP_STORE_CONNECT_ISSUER_ID / APP_STORE_CONNECT_PRIVATE_KEY (or ASC_KEY_ID / ASC_ISSUER_ID / ASC_PRIVATE_KEY aliases). Values are never printed."
+            echo "::error title=App Store Connect API secrets missing::Configure the App Store Connect key ID, issuer ID and private key in the salim-release environment. Accepted names are APP_STORE_CONNECT_KEY_ID / APP_STORE_CONNECT_ISSUER_ID / APP_STORE_CONNECT_PRIVATE_KEY (or ASC_KEY_ID / ASC_ISSUER_ID / ASC_PRIVATE_KEY, or SALIM_ASC_KEY_ID / SALIM_ASC_ISSUER_ID / SALIM_ASC_PRIVATE_KEY_P8). Values are never printed."
             exit 1
           fi
           echo "App Store Connect API credential names resolved; values were not displayed."
@@ -392,9 +392,9 @@ jobs:
 
       - name: Upload the verified IPA to App Store Connect
         env:
-          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID }}
-          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY }}
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID || secrets.SALIM_ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID || secrets.SALIM_ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY || secrets.SALIM_ASC_PRIVATE_KEY_P8 }}
         run: |
           set -euo pipefail
           umask 077
@@ -419,7 +419,7 @@ jobs:
       - name: Delete temporary signing material
         if: always()
         env:
-          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID }}
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID || secrets.SALIM_ASC_KEY_ID }}
         run: |
           security delete-keychain "$KEYCHAIN_PATH" 2>/dev/null || true
           rm -f "$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
