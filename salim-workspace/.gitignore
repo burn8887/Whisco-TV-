@@ -19,6 +19,7 @@
 # Founder-approved Salim venture document library; keep generated/runtime material ignored.
 !docs/
 !docs/README.md
+!docs/*.md
 !docs/business/
 !docs/business/*.md
 !docs/research/

@@ -1,6 +1,6 @@
 # Salim Venture Document Library
 
-**Index version:** 1.0
+**Index version:** 1.1
 **Updated:** 2026-10-28
 **Scope:** Salim — Road Awareness; this library is stored under `salim-workspace/docs/` and must not change Whisco TV, Whisco Mobile, or any other app.
 **Source of truth:** Git in this repository. A document is durable only after its commit is pushed to `arena/74afd701-whisco-tv`.
@@ -20,10 +20,10 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 3 | Foundation | [Mission & Vision](business/MISSION-VISION.md) | 1.0 | 2026-10-28 | Mission, vision and values as decision rules | Complete; Founder may refine |
 | 4 | Foundation | [Project Handover Log](PROJECT-HANDOVER-LOG.md) | 1.0 | 2026-10-28 | Chronological operational memory | Living; initial entry recorded |
 | 5 | Foundation | [Disaster Recovery](DISASTER-RECOVERY.md) | 1.0 | 2026-10-28 | Credential locations and service/platform recovery | Complete interim runbook; contacts/drill evidence missing |
-| 6 | Product & Brand | Product Requirements / App Blueprint | — | — | Screens, flows, data model, platform plan, MVP and non-goals | Pending Phase 2 |
-| 7 | Product & Brand | Design System v1 | — | — | Visual tokens, accessibility and brand rails | Pending Phase 2 |
-| 8 | Product & Brand | Voice & Brand Doctrine | — | — | Voice, localization, claims and terminology | Pending Phase 2 |
-| 9 | Product & Brand | Content / Inventory Doctrine | — | — | Data provenance, admission, review and exclusion rules | Pending Phase 2 |
+| 6 | Product & Brand | [Product Requirements / App Blueprint](PRODUCT-BLUEPRINT.md) | 1.0 | 2026-10-28 | Screens, flows, data model, platform plan, MVP and non-goals | Complete; source-based, update after feature changes |
+| 7 | Product & Brand | [Design System v1](DESIGN-SYSTEM.md) | 1.0 | 2026-10-28 | Visual tokens, accessibility and brand rails | Complete interim; visual/accessibility audit pending |
+| 8 | Product & Brand | [Voice & Brand Doctrine](VOICE-AND-BRAND-DOCTRINE.md) | 1.0 | 2026-10-28 | Voice, localization, claims and terminology | Complete interim; Arabic native review pending |
+| 9 | Product & Brand | [Content / Inventory Doctrine](CONTENT-INVENTORY-DOCTRINE.md) | 1.0 | 2026-10-28 | Data provenance, admission, review and exclusion rules | Complete interim; legal review for ODbL/data rights pending |
 | 10 | Money | Business Plan | — | — | Gate-tied conservative/realistic model and cost structure | Pending Phase 3; revenue remains $0 until G4 |
 | 11 | Money | Monetization Roadmap | — | — | Revenue streams, binary gates and non-monetized areas | Pending Phase 3 |
 | 12 | Money | Market Analysis | — | — | Source-based audience sizing and competitor comparison | Pending Phase 3 research |
