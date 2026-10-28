@@ -15,3 +15,13 @@
 !apps/salim-ios/
 !apps/salim-ios/Salim/
 !apps/salim-ios/Salim/Ads.swift
+
+# Founder-approved Salim venture document library; keep generated/runtime material ignored.
+!docs/
+!docs/README.md
+!docs/business/
+!docs/business/*.md
+!docs/research/
+!docs/research/*.md
+!docs/PROJECT-HANDOVER-LOG.md
+!docs/DISASTER-RECOVERY.md
