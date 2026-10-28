@@ -1,6 +1,6 @@
 name: Salim
 options:
-  bundleIdPrefix: com.salimdrive
+  bundleIdPrefix: com.salimdrive.app
   deploymentTarget:
     iOS: '17.0'
 packages:
@@ -16,7 +16,6 @@ settings:
     ADMOB_APP_ID: 'ca-app-pub-3940256099942544~1458002511'
     SALIM_ADS_ENABLED: 'NO'
     ADMOB_BANNER_ID: 'ca-app-pub-3940256099942544/2934735716'
-    SALIM_REPORT_API_BASE_URL: ''
     MARKETING_VERSION: '0.7.0'
     CURRENT_PROJECT_VERSION: 7
     DEVELOPMENT_TEAM: ''

@@ -3,7 +3,7 @@
 A short record of choices that shape the app, with the reasoning, so a later session does
 not have to re-litigate them or guess why something is missing.
 
-_Historical entries are dated in their headings; current camera/report state updated 27 October 2026._
+_Last updated 21 October 2026._
 
 ## Legibility remediation — 21 Oct 2026
 
@@ -51,7 +51,8 @@ and no Xcode — so it has to land as a change the CI proves, not a change that 
 
 ## Basemap — deferred, conditionally approved
 
-The Founder's condition remains: **only if it will be professional and the user experience is not affected.** Current native implementation uses Apple MapKit on iOS and on-demand OpenStreetMap raster tiles on Android, with a grid fallback if tiles are unavailable. Tile delivery, rate-limit behavior, accessibility and real-device performance have not been verified in this checkout; the map is not yet release-validated. The browser demonstrator remains self-contained and uses no third-party tile requests. The following historical risks still apply:
+The Founder's condition: **only if it will be professional and the user experience is not
+affected.** On that test, a real basemap is not ready to ship yet:
 
 - The browser demonstrator is a **single self-contained HTML file** whose contract, enforced
   by `tools/build_deploy.py`, is *no external asset requests*. Tiles are external requests.
@@ -72,7 +73,9 @@ The Founder's condition remains: **only if it will be professional and the user 
 **Rule if it lands:** the basemap must degrade to the existing illustration when tiles are
 slow, blocked or offline. A blank grey canvas is worse than the current drawing.
 
-The platform asymmetry is intentional: iOS uses the native Apple `MapKit` framework; Android draws on-demand OpenStreetMap raster tiles in a native Compose canvas. Neither implementation is production-validated on physical devices in this checkout.
+Note the platform asymmetry: iOS already has a **real** `MapKit` map — Apple's own, no key,
+no cost. Android has a Compose `Canvas` illustration. That is the honest reason the two
+platforms look different in this area.
 
 ## Ads — out of the demo, in the release builds
 
@@ -91,42 +94,49 @@ Consequences that must be handled in the same change as the ad SDK, not afterwar
 - Do not put ads on the full-screen drive view. Distraction is a safety issue and an
   obvious store-review risk.
 
-## Cameras — reinstated with fixed-installation boundaries
+## Cameras — dropped, then reinstated, and the line that stays
 
-**21 Oct 2026:** the Founder said to drop police detection. **26 Oct 2026:** the Founder
-reinstated camera warnings with the explicit boundary that police/patrol detection stays out.
-Only fixed road-awareness camera records may be shown; no mobile patrol inference, police-car
-or tripod detection, covert detection, or radar-emission sensing is included.
+**21 Oct 2026:** "Drop police detection for now." Speed cameras were removed from the demo
+pack in `fde77d2`.
 
-**Current data state (27 Oct 2026):** no verified or redistribution-cleared static GCC camera
-dataset is bundled. The Android and iOS clients can query OpenStreetMap for nearby mapped
-camera nodes, but these are volunteer-mapped records, not an official register; coverage,
-classification, location accuracy, recency and reuse rights vary. There is no completeness
-claim. The previous claim of eight approximate Bahrain sites and the claimed Bahrain inventory
-count are unsubstantiated and must not be used. No guessed coordinates are shipped.
+**22 Oct 2026:** the Founder reinstated them: *"warnings for fixed speed and seatbelt
+cameras should be in the app"*. That is the ruling in force. The 21 October instruction is
+superseded for **fixed installations**, and only for those.
+
+What is now built, and what still is not:
 
 | | Status |
 | --- | --- |
-| Fixed speed, red-light and seatbelt/phone cameras | Nearby OpenStreetMap nodes only; incomplete, unverified, marked approximate |
-| Complete GCC country packs | **Not available**; a release blocker for the Founder's complete-coverage requirement |
-| Community reporting and confirmations | Client/service source prepared; the API is not deployed, so sharing is inactive |
-| Human review | Operator console exists in the report-service source; no live moderator is connected yet |
-| Mobile cameras, police cars, patrols or tripods | **Out of scope** |
-| Radar-emission detection or alerts | **Out of scope** |
+| Fixed speed cameras | In, from `assets/cameras.csv` |
+| Seatbelt / phone multi-offence cameras | In, same pack |
+| Red-light cameras | In, same pack |
+| Reported mobile camera units | Supported by the data format, no live source |
+| Detecting police cars, patrols or tripods | **Still out.** No covert detection, no radar-emission detection, no "police nearby" |
+| Radar *detection* (hardware or RF) | **Still out.** We read a list; we do not sense anything |
 
-An official Bahrain government service lists a camera locator inside MyGov/eTraffic, but no
-public bulk dataset or reuse licence was verified in this project. Announced deployment counts
-are not a point dataset. OSM edit timestamps and community votes are not proof of factual
-accuracy. Human review and authoritative evidence are required before a community report may
-change a camera record; community confirmation alone never activates an alert.
+The distinction that matters, and the reason `check_site.py` still fails the build on
+"radar detector" and "jammer": **a camera map is information; a radar detector is
+counter-surveillance.** The first tells a driver what is publicly known about the road.
+The second defeats enforcement. Salim only ever does the first.
 
-Every mapped OSM camera is shown as unverified/approximate rather than an exact location.
-A reported pin remains pending and is not used for alerts until a moderator approves it. The
-report service uses a random installation UUID as a pseudonymous duplicate-control measure,
-stores only a keyed hash, rate-limits reports/votes, and retains report/audit data for 365 days;
-this is not identity or physical-presence verification. See `report-service/README.md` for
-hosting prerequisites. Production reporting is disabled until the approved HTTPS domain, durable
-storage, privacy URL and operator process are live and tested.
+### A correction to what this file said before
+
+It previously claimed there was no reliable public dataset of Bahrain camera locations.
+That was wrong. The General Directorate of Traffic has published camera positions through
+the **eTraffic** app since 2019, and GDT has announced a smart-camera rollout reaching 258
+installations with more planned. There is an official locator; it is simply not machine
+readable from this project.
+
+That changes the conclusion, not the caution: the pack is now a data file that can be
+corrected without a rebuild, and every row must carry a `source`.
+
+### On precision
+
+Each row is `exact` or `approximate`. Approximate sites draw as hollow rings on the map and
+carry a `≈` in the list, because a filled dot reads to a driver as certainty, and a wrong
+camera claim is worse than no camera claim. The shipped eight rows are all marked
+approximate: they come from published announcements naming roads and districts, not from
+surveyed coordinates.
 
 ## Cross-platform framework — rejected
 

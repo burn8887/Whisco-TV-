@@ -1,115 +1,163 @@
 import Foundation
 
-/// On-demand OpenStreetMap Overpass queries. Mapped records are community data, not an
-/// official or complete GCC register, and are displayed as unverified/approximate.
+/// Live camera data from OpenStreetMap, fetched on the device.
+///
+/// Mirrors the Android `CameraFeed` deliberately, including the limits: one identifying
+/// User-Agent, at most one query per area per 30 minutes, a 12 km window, and results kept
+/// so the next drive costs nothing. Overpass is a shared volunteer service.
+///
+/// Two OSM taggings are read, because OSM has moved:
+///   highway=speed_camera                       original, still the most common
+///   highway=enforcement + enforcement=maxspeed newer scheme
 enum CameraFeed {
     private static let endpoint = URL(string: "https://overpass-api.de/api/interpreter")!
-    private static let radius = 15_000
-    private static let expiry: TimeInterval = 6 * 60 * 60
-    private static let cacheInterval: TimeInterval = 15 * 60
-    private static let snapGrid = 20.0
-    private static let lock = NSLock()
-    private static var cache: [String: (Date, [Hazard])] = [:]
-    private static var requested: [String: Date] = [:]
-    private static let countries: Set<String> = ["BH", "SA", "AE", "QA", "KW", "OM"]
+    private static let userAgent = "Salim/0.7 (iOS; road-awareness; support@salimdrive.com)"
+    private static let radiusMeters = 12_000.0
+    private static let minimumInterval: TimeInterval = 30 * 60
+    private static let cacheKey = "salim.cameras"
+    private static let stampKey = "salim.cameras.stamp"
+    private static let areaLatStep = 0.12
+    private static let areaLonStep = 0.15
 
-    static func cachedNear(_ point: Point) -> [Hazard] {
-        lock.lock(); defer { lock.unlock() }
-        let all = cache.values.flatMap { $0.1 }
-        let unique = Dictionary(all.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
-        return unique.values.filter { $0.expiresAt > Date().timeIntervalSince1970 && Geo.distance($0.point, point) <= 25_000 }
+    /// Country boxes as (code, south, west, north, east). Small states first, because Saudi
+    /// Arabia's rectangle would otherwise swallow Qatar, Bahrain and the UAE coast.
+    static let boxes: [(String, Double, Double, Double, Double)] = [
+        ("BH", 25.50, 50.20, 26.40, 50.90),
+        ("QA", 24.40, 50.70, 26.20, 51.70),
+        ("KW", 28.50, 46.50, 30.10, 48.50),
+        ("AE", 22.60, 51.50, 26.10, 56.40),
+        ("OM", 16.60, 52.00, 26.40, 59.90),
+        ("SA", 16.00, 34.50, 32.20, 55.70),
+    ]
+
+    static func country(at point: Point) -> String? {
+        boxes.first { $0.1...$0.3 ~= point.lat && $0.2...$0.4 ~= point.lon }?.0
     }
 
-    static func fetch(near point: Point, country: String) async -> [Hazard] {
-        guard point.valid, countries.contains(country) else { return [] }
-        let snappedLat = (floor(point.lat * snapGrid) + 0.5) / snapGrid
-        let snappedLon = (floor(point.lon * snapGrid) + 0.5) / snapGrid
-        let key = "\(country):\(Int(snappedLat * snapGrid)):\(Int(snappedLon * snapGrid))"
-        let now = Date()
-        let existing = entry(for: key)
-        if let existing, now.timeIntervalSince(existing.0) < cacheInterval {
-            return nearby(existing.1, point: point, now: now)
-        }
-        if !claim(key, at: now) {
-            return nearby(existing?.1 ?? [], point: point, now: now)
+    /// Cameras kept from the last successful query.
+    static func cached() -> [Hazard] {
+        guard let data = UserDefaults.standard.data(forKey: cacheKey),
+              let values = try? JSONDecoder().decode([Hazard].self, from: data) else { return [] }
+        return values
+    }
+
+    /// Cached rows close enough to be about this area. Multiple areas are retained so a trip
+    /// across the GCC does not replace the previous city or suppress a new-area fetch.
+    static func cachedNear(_ point: Point, now: TimeInterval = Date().timeIntervalSince1970) -> [Hazard] {
+        cached().filter { $0.expiresAt > now && Geo.distance(point, $0.point) <= 25_000 }
+    }
+
+    private static func areaKey(_ point: Point) -> String {
+        let country = country(at: point) ?? "outside"
+        return "\(country):\(Int(floor(point.lat / areaLatStep))):\(Int(floor(point.lon / areaLonStep)))"
+    }
+
+    private static func store(_ hazards: [Hazard], near point: Point, now: TimeInterval) {
+        let current = cached().filter { $0.expiresAt > now }
+        var merged: [String: Hazard] = [:]
+        for hazard in current { merged[hazard.id] = hazard }
+        for hazard in hazards { merged[hazard.id] = hazard }
+        let retained = Array(merged.values.sorted { $0.expiresAt > $1.expiresAt }.prefix(5_000))
+        guard let data = try? JSONEncoder().encode(retained) else { return }
+        UserDefaults.standard.set(data, forKey: cacheKey)
+        UserDefaults.standard.set(now, forKey: "\(stampKey).\(areaKey(point))")
+    }
+
+    /// Cameras near a point. Falls back to the cache when the request is still fresh, when
+    /// offline, or when Overpass is unavailable: losing the network must never cost the
+    /// driver an alert they already had.
+    static func fetch(near point: Point) async -> [Hazard] {
+        guard country(at: point) != nil else { return cachedNear(point) }
+        let now = Date().timeIntervalSince1970
+        let area = areaKey(point)
+        let last = UserDefaults.standard.double(forKey: "\(stampKey).\(area)")
+        let retryAfterKey = "\(stampKey).retry.\(area)"
+        if (last > 0 && now - last < minimumInterval) || now < UserDefaults.standard.double(forKey: retryAfterKey) {
+            return cachedNear(point, now: now)
         }
 
-        let query = """
-        [out:json][timeout:20];
-        (
-          node(around:\(radius),\(snappedLat),\(snappedLon))["highway"="speed_camera"];
-          node(around:\(radius),\(snappedLat),\(snappedLon))["enforcement"="maxspeed"];
-          node(around:\(radius),\(snappedLat),\(snappedLon))["camera:type"="red_light"];
-          node(around:\(radius),\(snappedLat),\(snappedLon))["enforcement"="red_light"];
-        );out body;
-        """
-        guard var components = URLComponents(url: endpoint, resolvingAgainstBaseURL: false) else { return [] }
-        components.queryItems = [URLQueryItem(name: "data", value: query)]
-        guard let encoded = components.percentEncodedQuery?.data(using: .utf8) else { return [] }
+        guard let body = await query(point) else {
+            UserDefaults.standard.set(now + 60, forKey: retryAfterKey)
+            return cachedNear(point, now: now)
+        }
+        UserDefaults.standard.removeObject(forKey: retryAfterKey)
+        store(body, near: point, now: now)
+        return cachedNear(point, now: now)
+    }
+
+    private static func query(_ point: Point) async -> [Hazard]? {
+        let dLat = radiusMeters / 111_574.0
+        let dLon = radiusMeters / (111_320.0 * max(0.05, cos(point.lat * .pi / 180)))
+        let box = "\(point.lat - dLat),\(point.lon - dLon),\(point.lat + dLat),\(point.lon + dLon)"
+
+        // Two taggings, one request. `out body` keeps the payload to the tags we read.
+        let overpass = "[out:json][timeout:25];" +
+            "(node[\"highway\"=\"speed_camera\"](\(box));" +
+            "node[\"highway\"=\"enforcement\"][\"enforcement\"~\"^(maxspeed|average_speed|traffic_signals|red_light|seatbelt|seat_belt)$\"](\(box));" +
+            ");out body;"
+
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.timeoutInterval = 25
-        request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("Salim/0.7 (https://www.salimdrive.com; support@salimdrive.com)", forHTTPHeaderField: "User-Agent")
-        request.httpBody = encoded
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard data.count <= 2_000_000, (response as? HTTPURLResponse)?.statusCode == 200,
-                  let root = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let elements = root["elements"] as? [[String: Any]] else { return cachedFor(key, near: point) }
-            let expiryTime = Date().timeIntervalSince1970 + expiry
-            let rows = elements.compactMap { node -> Hazard? in
-                guard node["type"] as? String == "node", let id = node["id"] as? Int,
-                      let lat = node["lat"] as? Double, let lon = node["lon"] as? Double,
-                      let tags = node["tags"] as? [String: String] else { return nil }
-                if tags["mobile"] == "yes" || tags["deployment"] == "mobile" { return nil }
-                let kind: String
-                if tags["camera:type"]?.lowercased() == "red_light" || tags["enforcement"] == "red_light" { kind = "RED_LIGHT" }
-                else if ["seatbelt", "phone"].contains(tags["camera:type"]?.lowercased() ?? "") { kind = "SEATBELT" }
-                else if tags["highway"] == "speed_camera" || tags["enforcement"] == "maxspeed" { kind = "CAMERA" }
-                else { return nil }
-                let label = tags["name"].flatMap { $0.isEmpty ? nil : $0 }
-                    ?? tags["ref"].flatMap { $0.isEmpty ? nil : $0 }
-                    ?? "Mapped camera · OpenStreetMap"
-                let direction = tags["camera:direction"].flatMap { Double($0) }.flatMap { (0..<360).contains($0) ? $0 : nil }
-                let hazard = Hazard(id: "osm:node/\(id)", country: country, kind: kind,
-                                    point: Point(lat: lat, lon: lon), heading: direction,
-                                    road: String(label.prefix(200)), expiresAt: expiryTime,
-                                    precision: "approximate")
-                do { try hazard.validate(); return hazard } catch { return nil }
-            }
-            store(rows, for: key, at: Date())
-            return nearby(rows, point: point, now: Date())
-        } catch {
-            return cachedFor(key, near: point)
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpBody = Data(("data=" + formEncode(overpass)).utf8)
+
+        guard let (data, response) = try? await URLSession.shared.data(for: request),
+              let http = response as? HTTPURLResponse, http.statusCode == 200,
+              let text = String(data: data, encoding: .utf8) else { return nil }
+        return parse(text)
+    }
+
+    /// Overpass expects form encoding. Percent-encoding the reserved characters by hand
+    /// avoids pulling in a UIKit dependency for `addingPercentAllowed`.
+    private static func formEncode(_ value: String) -> String {
+        var allowed = CharacterSet.alphanumerics
+        allowed.insert(charactersIn: "-._~")
+        return value.addingPercentEncoding(withAllowedCharacters: allowed) ?? ""
+    }
+
+    /// Also used by the offline importer path, so the parsing rules live in one place.
+    static func parse(_ text: String) -> [Hazard] {
+        guard let root = try? JSONSerialization.jsonObject(with: Data(text.utf8)) as? [String: Any],
+              let elements = root["elements"] as? [[String: Any]] else { return [] }
+        let now = Date().timeIntervalSince1970
+        var out: [String: Hazard] = [:]
+
+        for element in elements {
+            guard element["type"] as? String == "node",
+                  let id = (element["id"] as? NSNumber)?.int64Value, id != 0,
+                  let lat = (element["lat"] as? NSNumber)?.doubleValue,
+                  let lon = (element["lon"] as? NSNumber)?.doubleValue else { continue }
+            let point = Point(lat: lat, lon: lon)
+            guard point.valid, let country = country(at: point) else { continue }
+
+            let tags = element["tags"] as? [String: Any] ?? [:]
+            // Only genuine camera tags. An untagged node would become a phantom alert.
+            let highway = tags["highway"] as? String ?? ""
+            let enforcement = tags["enforcement"] as? String ?? ""
+            let supportedEnforcement = ["maxspeed", "average_speed", "traffic_signals", "red_light", "seatbelt", "seat_belt"]
+            guard highway == "speed_camera" || (highway == "enforcement" && supportedEnforcement.contains(enforcement)) else { continue }
+            let kind = ["traffic_signals", "red_light"].contains(enforcement) ? "RED_LIGHT"
+                : ["seatbelt", "seat_belt"].contains(enforcement) ? "SEATBELT" : "CAMERA"
+
+            let name = (tags["name"] as? String).flatMap { $0.isEmpty ? nil : $0 }
+                ?? (tags["ref"] as? String).flatMap { $0.isEmpty ? nil : $0 }
+                ?? "Mapped camera"
+            let heading = (tags["direction"] as? String).flatMap { Double($0.filter { $0.isNumber || $0 == "." }) }
+                .flatMap { (0..<360).contains($0) ? $0 : nil }
+
+            let hazard = Hazard(
+                id: "osm:node/\(id)",
+                country: country,
+                kind: kind,
+                point: point,
+                heading: heading,
+                road: String(name.prefix(200)),
+                expiresAt: now + 30 * 24 * 60 * 60
+            )
+            out[hazard.id] = hazard
         }
-    }
-
-    /// Country selection remains explicit until Salim has a licensed boundary dataset.
-    static func country(at point: Point) -> String? { nil }
-
-    private static func entry(for key: String) -> (Date, [Hazard])? {
-        lock.lock(); defer { lock.unlock() }
-        return cache[key]
-    }
-
-    private static func claim(_ key: String, at date: Date) -> Bool {
-        lock.lock(); defer { lock.unlock() }
-        if let last = requested[key], date.timeIntervalSince(last) < cacheInterval { return false }
-        requested[key] = date
-        return true
-    }
-
-    private static func store(_ rows: [Hazard], for key: String, at date: Date) {
-        lock.lock(); cache[key] = (date, rows); lock.unlock()
-    }
-
-    private static func nearby(_ rows: [Hazard], point: Point, now: Date) -> [Hazard] {
-        rows.filter { $0.expiresAt > now.timeIntervalSince1970 && Geo.distance($0.point, point) <= 25_000 }
-    }
-
-    private static func cachedFor(_ key: String, near point: Point) -> [Hazard] {
-        nearby(entry(for: key)?.1 ?? [], point: point, now: Date())
+        return Array(out.values)
     }
 }

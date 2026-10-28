@@ -1,166 +1,213 @@
 package app.salim
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import app.salim.core.Point
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.sync.Semaphore
-import kotlinx.coroutines.sync.withPermit
-import kotlinx.coroutines.withContext
-import kotlin.math.PI
-import kotlin.math.atan
+import kotlinx.coroutines.launch
 import kotlin.math.floor
-import kotlin.math.ln
-import kotlin.math.roundToInt
-import kotlin.math.sinh
-import kotlin.math.tan
+import kotlin.math.pow
 
-internal data class MapPin(val lat: Double, val lon: Double, val label: String, val exact: Boolean)
-private data class TileDraw(val zoom: Int, val x: Int, val y: Int, val left: Int, val top: Int)
+/** A camera or other point rendered on the map. `exact=false` draws a hollow ring. */
+data class MapPin(val lat: Double, val lon: Double, val label: String, val exact: Boolean = true)
 
-@androidx.compose.runtime.Composable
-internal fun OsmMap(
+/**
+ * A slippy map drawn directly into a Compose canvas.
+ *
+ * Tiles are fetched for the integer zoom below the current camera, then scaled, which
+ * keeps one code path for every zoom and avoids re-fetching during a pinch. When a tile
+ * is missing the road-grid fallback shows through, so an offline phone degrades to the
+ * illustration rather than to a blank rectangle.
+ */
+@Composable
+fun OsmMap(
     centerLat: Double,
     centerLon: Double,
     zoom: Float,
-    markerLat: Double?,
-    markerLon: Double?,
-    accent: Color,
-    surface: Color,
-    grid: Color,
-    interactive: Boolean,
-    pins: List<MapPin>
+    modifier: Modifier = Modifier,
+    markerLat: Double? = null,
+    markerLon: Double? = null,
+    accent: Color = Color(0xFF4ADE9B),
+    surface: Color = Color(0xFF0A0D0B),
+    grid: Color = Color(0xFF1E2A23),
+    interactive: Boolean = true,
+    pins: List<MapPin> = emptyList(),
+    onCameraMove: (Double, Double, Float) -> Unit = { _, _, _ -> },
 ) {
-    var center by remember { mutableStateOf(Point(centerLat, centerLon)) }
-    var currentZoom by remember { mutableStateOf(zoom.coerceIn(3f, 18f)) }
+    val scope = rememberCoroutineScope()
+    val tiles = remember { mutableStateMapOf<String, ImageBitmap>() }
+    val failed = remember { mutableStateMapOf<String, Boolean>() }
+
+    // The camera. Seeded from the caller and updated by gestures, then reported back so
+    // a "follow me" caller can choose to stop following once the user pans away.
+    var lat by remember { mutableStateOf(centerLat) }
+    var lon by remember { mutableStateOf(centerLon) }
+    var camZoom by remember { mutableStateOf(zoom) }
+    var width by remember { mutableStateOf(0) }
+    var height by remember { mutableStateOf(0) }
+
+    // Re-centre when the caller's centre genuinely moves, but not on every recomposition.
     LaunchedEffect(centerLat, centerLon) {
-        if (centerLat.isFinite() && centerLon.isFinite()) center = Point(centerLat.coerceIn(-85.0, 85.0), centerLon.coerceIn(-180.0, 180.0))
+        if (markerLat != null && markerLon != null) {
+            val dLat = kotlin.math.abs(centerLat - lat)
+            val dLon = kotlin.math.abs(centerLon - lon)
+            if (dLat > 1e-6 || dLon > 1e-6) { lat = centerLat; lon = centerLon }
+        } else {
+            lat = centerLat; lon = centerLon
+        }
+    }
+    LaunchedEffect(zoom) { camZoom = zoom }
+
+    val tileZoom = camZoom.toInt().coerceIn(3, 18)
+    val scale = 2.0.pow((camZoom - tileZoom).toDouble())
+    val tileSize = (Mercator.TILE * scale).toFloat()
+
+    // Which tiles the viewport covers, recomputed whenever the camera or the size moves.
+    LaunchedEffect(lat, lon, camZoom, width, height) {
+        if (width == 0 || height == 0) return@LaunchedEffect
+        val worldX = Mercator.x(lon, tileZoom)
+        val worldY = Mercator.y(lat, tileZoom)
+        val halfW = width / 2.0 / scale
+        val halfH = height / 2.0 / scale
+        val minX = floor((worldX - halfW) / Mercator.TILE).toInt()
+        val maxX = floor((worldX + halfW) / Mercator.TILE).toInt()
+        val minY = floor((worldY - halfH) / Mercator.TILE).toInt()
+        val maxY = floor((worldY + halfH) / Mercator.TILE).toInt()
+        val limit = (1 shl tileZoom) - 1
+        for (x in minX..maxX) for (y in minY..maxY) {
+            if (y < 0 || y > limit) continue
+            val wrapped = ((x % (limit + 1)) + (limit + 1)) % (limit + 1)
+            val key = "$tileZoom/$wrapped/$y"
+            if (tiles.containsKey(key) || failed.containsKey(key)) continue
+            scope.launch {
+                val bitmap = MapTiles.load(tileZoom, wrapped, y)
+                if (bitmap != null) tiles[key] = bitmap else failed[key] = true
+            }
+        }
     }
 
-    BoxWithConstraints(
-        Modifier.fillMaxSize().background(surface)
-            .pointerInput(interactive, currentZoom) {
-                if (interactive) detectDragGestures { change, delta ->
-                    change.consume()
-                    val world = MapTiles.worldSize(currentZoom.roundToInt().toDouble())
-                    val cx = worldX(center.lon, world) - delta.x
-                    val cy = worldY(center.lat, world) - delta.y
-                    center = worldPoint(cx, cy, world)
-                }
-            }
-            .pointerInput(interactive) {
-                if (interactive) detectTapGestures(onDoubleTap = {
-                    currentZoom = (currentZoom + 1f).coerceAtMost(18f)
-                })
-            }
-    ) {
-        val widthPx = constraints.maxWidth.coerceAtLeast(1)
-        val heightPx = constraints.maxHeight.coerceAtLeast(1)
-        val world = MapTiles.worldSize(currentZoom.roundToInt().toDouble())
-        val cx = worldX(center.lon, world)
-        val cy = worldY(center.lat, world)
-        val tileDraws = remember(center, currentZoom, widthPx, heightPx) {
-            visibleTiles(center, currentZoom, widthPx, heightPx)
-        }
-        val images by produceState<Map<TileDraw, ImageBitmap>>(initialValue = emptyMap(), tileDraws) {
-            value = withContext(Dispatchers.IO) {
-                val semaphore = Semaphore(4)
-                coroutineScope {
-                    tileDraws.map { tile -> async {
-                        semaphore.withPermit {
-                            MapTiles.loadTile(tile.zoom, tile.x, tile.y)?.asImageBitmap()?.let { tile to it }
+    Box(modifier.fillMaxSize()) {
+        Canvas(
+            Modifier.fillMaxSize()
+                .onSizeChanged { width = it.width; height = it.height }
+                .then(
+                    if (interactive) Modifier.pointerInput(Unit) {
+                        detectTransformGestures { _, pan, gestureZoom, _ ->
+                            val newZoom = (camZoom + kotlin.math.log2(gestureZoom)).coerceIn(3f, 18f)
+                            // Pan is in screen pixels; convert to world pixels at the
+                            // current scale so dragging tracks the finger exactly.
+                            val effective = 2.0.pow((newZoom - tileZoom).toDouble())
+                            val worldX = Mercator.x(lon, tileZoom) + pan.x / effective
+                            val worldY = Mercator.y(lat, tileZoom) + pan.y / effective
+                            camZoom = newZoom
+                            lat = Mercator.latOf(worldY, tileZoom)
+                            lon = Mercator.lonOf(worldX, tileZoom)
+                            onCameraMove(lat, lon, newZoom)
                         }
-                    } }.awaitAll().filterNotNull().toMap()
-                }
-            }
-        }
-
-        Canvas(Modifier.fillMaxSize()) {
+                    } else Modifier
+                )
+        ) {
             drawRect(surface)
-            val tileSize = 256
-            tileDraws.forEach { tile ->
-                images[tile]?.let { bitmap ->
-                    drawImage(bitmap, dstOffset = IntOffset(tile.left, tile.top), dstSize = IntSize(tileSize, tileSize))
-                }
+            drawFallbackGrid(grid)
+            if (width == 0 || height == 0) return@Canvas
+            val centerWorldX = Mercator.x(lon, tileZoom)
+            val centerWorldY = Mercator.y(lat, tileZoom)
+            val originX = (width / 2.0 - centerWorldX * scale).toFloat()
+            val originY = (height / 2.0 - centerWorldY * scale).toFloat()
+            val limit = 1 shl tileZoom
+
+            val firstX = floor((-originX) / tileSize).toInt()
+            val lastX = floor((width - originX) / tileSize).toInt()
+            val firstY = floor((-originY) / tileSize).toInt()
+            val lastY = floor((height - originY) / tileSize).toInt()
+            for (tx in firstX..lastX) for (ty in firstY..lastY) {
+                if (ty < 0 || ty >= limit) continue
+                val wrapped = ((tx % limit) + limit) % limit
+                val bitmap = tiles["$tileZoom/$wrapped/$ty"] ?: continue
+                val left = (originX + tx * tileSize).toInt()
+                val top = (originY + ty * tileSize).toInt()
+                val size = (tileSize + 1).toInt()
+                drawImage(
+                    image = bitmap,
+                    srcOffset = IntOffset.Zero,
+                    srcSize = IntSize(bitmap.width, bitmap.height),
+                    dstOffset = IntOffset(left, top),
+                    dstSize = IntSize(size, size)
+                )
             }
-            if (images.isEmpty()) {
-                val step = 56.dp.toPx()
-                var x = 0f
-                while (x < size.width) { drawLine(grid.copy(alpha = .6f), Offset(x, 0f), Offset(x, size.height), 1.dp.toPx()); x += step }
-                var y = 0f
-                while (y < size.height) { drawLine(grid.copy(alpha = .6f), Offset(0f, y), Offset(size.width, y), 1.dp.toPx()); y += step }
+            for (pin in pins) {
+                val px = (width / 2.0 + (Mercator.x(pin.lon, tileZoom) - centerWorldX) * scale).toFloat()
+                val py = (height / 2.0 + (Mercator.y(pin.lat, tileZoom) - centerWorldY) * scale).toFloat()
+                if (px < -40f || py < -40f || px > width + 40f || py > height + 40f) continue
+                drawPin(px, py, pin.exact)
             }
-            pins.take(100).forEach { pin ->
-                if (!pin.lat.isFinite() || !pin.lon.isFinite()) return@forEach
-                val p = screenPoint(pin.lat, pin.lon, cx, cy, size.width, size.height, world)
-                if (p.x in -12f..(size.width + 12f) && p.y in -12f..(size.height + 12f)) {
-                    val color = if (pin.exact) accent else Color(0xFFFFC24B)
-                    drawCircle(Color(0xCC08110D), 9.dp.toPx(), p)
-                    drawCircle(color, 6.dp.toPx(), p, style = if (pin.exact) androidx.compose.ui.graphics.drawscope.Fill else Stroke(2.dp.toPx()))
-                }
-            }
-            if (markerLat != null && markerLon != null && markerLat.isFinite() && markerLon.isFinite()) {
-                val p = screenPoint(markerLat, markerLon, cx, cy, size.width, size.height, world)
-                drawCircle(Color.White, 9.dp.toPx(), p)
-                drawCircle(Color(0xFF2A83F2), 6.dp.toPx(), p)
+            if (markerLat != null && markerLon != null) {
+                val markerX = (width / 2.0 + (Mercator.x(markerLon, tileZoom) - centerWorldX) * scale).toFloat()
+                val markerY = (height / 2.0 + (Mercator.y(markerLat, tileZoom) - centerWorldY) * scale).toFloat()
+                drawLocationMarker(markerX, markerY, accent)
             }
         }
-        if (images.isEmpty()) Text("MAP TILES LOADING OR UNAVAILABLE · DRAG TO PAN", color = Color.White.copy(alpha = .75f), modifier = Modifier.align(Alignment.Center))
     }
 }
 
-private fun visibleTiles(center: Point, zoomFloat: Float, width: Int, height: Int): List<TileDraw> {
-    val zoom = zoomFloat.roundToInt().coerceIn(1, 19)
-    val world = MapTiles.worldSize(zoom.toDouble())
-    val cx = worldX(center.lon, world); val cy = worldY(center.lat, world)
-    val left = cx - width / 2.0; val top = cy - height / 2.0
-    val x0 = floor(left / 256).toInt(); val x1 = floor((left + width) / 256).toInt()
-    val y0 = floor(top / 256).toInt(); val y1 = floor((top + height) / 256).toInt()
-    val result = mutableListOf<TileDraw>()
-    for (y in y0..y1) for (x in x0..x1) {
-        val tileLeft = (width / 2.0 + x * 256 - cx).roundToInt()
-        val tileTop = (height / 2.0 + y * 256 - cy).roundToInt()
-        result += TileDraw(zoom, x, y, tileLeft, tileTop)
+/** The offline state: the same road grid the previous illustration used, so no blank screen. */
+private fun DrawScope.drawFallbackGrid(grid: Color) {
+    for (i in 0..9) {
+        val y = size.height * (.14f + i * .1f)
+        drawLine(grid, Offset(0f, y), Offset(size.width, y - size.height * .06f), 1.5f)
     }
-    return result
+    for (i in 0..6) {
+        val x = i * size.width / 6f
+        drawLine(grid, Offset(x, 0f), Offset(x + size.width * .12f, size.height), 1.5f)
+    }
 }
 
-private fun worldX(lon: Double, world: Double): Double = ((lon + 180.0) / 360.0) * world
-private fun worldY(lat: Double, world: Double): Double {
-    val latitude = lat.coerceIn(-85.05112878, 85.05112878) * PI / 180.0
-    return (0.5 - ln((1 + kotlin.math.sin(latitude)) / (1 - kotlin.math.sin(latitude))) / (4 * PI)) * world
+/**
+ * Camera marker. Approximate sites are hollow: a filled dot claims a precision the data
+ * does not have, and a driver reads markers as certainty.
+ */
+private fun DrawScope.drawPin(x: Float, y: Float, exact: Boolean) {
+    val halo = Color(0xFFFFC24B)
+    val ring = Color(0xFF0A0D0B)
+    drawCircle(ring, 13f, Offset(x, y))
+    if (exact) {
+        drawCircle(halo, 9.5f, Offset(x, y))
+        drawCircle(ring, 4f, Offset(x, y))
+    } else {
+        drawCircle(halo, 9.5f, Offset(x, y), style = Stroke(2.5f))
+        drawCircle(halo, 2.5f, Offset(x, y))
+    }
 }
-private fun worldPoint(x: Double, y: Double, world: Double): Point {
-    val lon = (x / world) * 360.0 - 180.0
-    val n = PI - 2 * PI * y / world
-    val lat = 180.0 / PI * atan(sinh(n))
-    return Point(lat.coerceIn(-85.0, 85.0), ((lon + 180.0) % 360.0 + 360.0) % 360.0 - 180.0)
+
+private fun DrawScope.drawLocationMarker(x: Float, y: Float, accent: Color) {
+    // A bearing-less dot: honest about not knowing which way the car points.
+    drawCircle(Color(0x33101813), 30f, Offset(x, y))
+    drawCircle(Color.White, 13f, Offset(x, y))
+    drawCircle(accent, 9f, Offset(x, y))
+    val pulse = Path().apply {
+        moveTo(x, y - 30f); lineTo(x - 8f, y - 44f); lineTo(x + 8f, y - 44f); close()
+    }
+    drawPath(pulse, accent)
+    drawPath(pulse, Color(0xFF0A0D0B), style = Stroke(1.5f, cap = StrokeCap.Round))
 }
-private fun screenPoint(lat: Double, lon: Double, cx: Double, cy: Double, width: Float, height: Float, world: Double): Offset =
-    Offset((width / 2.0 + worldX(lon, world) - cx).toFloat(), (height / 2.0 + worldY(lat, world) - cy).toFloat())

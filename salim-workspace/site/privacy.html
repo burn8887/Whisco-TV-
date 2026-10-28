@@ -35,7 +35,7 @@
         <p class="meta">
           Applies to the Salim Android and iOS applications.
           Effective 20 October 2026.
-          Last updated 27 October 2026.
+          Last updated 26 October 2026.
         </p>
 
         <h2>Who we are</h2>
@@ -66,27 +66,6 @@
           permission in system settings at any time. Precise routes are not stored and are not uploaded
           to a Salim server. Trip summaries kept on the device hold a start time, duration, alert count
           and whether the session was simulated — never a route.
-        </p>
-
-        <h2>Community camera reports — not enabled in this build</h2>
-        <p>
-          A shared report service and moderator queue are under development; this build does not have a
-          live service endpoint, so Community camera reports and confirmations cannot currently be
-          sent or published. Do not rely on the Community controls as an active service. Before the
-          feature is enabled in a release, this policy and the in-app notice will describe the live
-          endpoint and retention settings.
-        </p>
-        <p>
-          The designed service accepts camera-only reports, not driver routes. A future report may
-          contain a camera identifier, country, camera type, proposed camera pin, claimed location
-          accuracy, optional road label and a random app-installation identifier. That identifier is
-          a pseudonymous abuse-control measure, not identity or proof of physical presence; the server
-          stores a keyed hash rather than its raw value. Pending camera pins and aggregate confirmations
-          or disputes would be visible to Community users, labelled unverified. Reports would not alter
-          alerts until human review. Planned retention is 365 days for reports, votes and review history;
-          approved camera records may remain until a reviewed correction or removal. The service does not
-          request names, phone numbers or email addresses. Hosting/network providers may process
-          connection metadata such as IP addresses; the application does not retain request IPs.
         </p>
 
         <h2>Camera data from OpenStreetMap</h2>
@@ -136,13 +115,11 @@
 
         <h2>Stored on your device</h2>
         <p>
-          The app stores voice and tone preferences, appearance, locally cached mapped camera data, trip
-          summaries and general road-note drafts that you explicitly save. These drafts stay on your
-          device. In this build, camera report form entries are not saved or transmitted; Android may
-          store a random installation identifier after you attempt a Community action, but the service
-          is not configured and receives no report. The free tier retains the latest 20 trip summaries;
-          Premium retains trip history without a product-based limit. General drafts are capped at 100.
-          Delete trip history in <em>Trips</em> and local drafts in <em>Community</em>. Deleting the app
+          The app stores your voice and tone preferences, appearance, the local alert pack, cached
+          camera data, trip summaries and any community report drafts you type. Drafts are not
+          transmitted or published. The free tier retains the latest 20 trip summaries; Premium retains trip history without a
+          product-based limit. Drafts are capped at 100. You can delete trip history in <em>Trips</em>
+          and individual drafts in <em>Community</em>. Deleting the app
           removes its local storage, subject to your device’s backup settings.
         </p>
 

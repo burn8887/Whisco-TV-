@@ -1,6 +1,6 @@
 # Salim — Play closed testing / TestFlight release gates
 
-This is a production-build preparation checklist, not approval to upload. The CI results quoted in older handoffs are historical and do not verify this checkout: the current branch is based on `32c4749`, has uncommitted changes, and has not passed a complete Android/iOS build after those changes. No current signed artifacts exist. The shared report API/operator queue is source code only, not deployed; `www.salimdrive.com` is not live. There is currently no verified bundled camera dataset; live OpenStreetMap queries do not constitute complete GCC coverage. No store upload is authorized.
+This is a production-build preparation checklist, not approval to upload. Current source commit `0915dfa` passed Android CI run `40316308868` (24 tests, zero failures, 16 KB alignment) and iOS CI run `40316308926` (17 XCTest cases; unsigned device archive compiled). These are not signed release artifacts. Historical signed artifacts predate the current changes and are not valid candidates. The eight approximate Bahrain pack entries and live OpenStreetMap queries do not constitute complete GCC coverage. No store upload is authorized.
 
 ## Independent app identity — Founder confirmation required
 
@@ -13,10 +13,10 @@ Approved store title: **Salim — Road Awareness**. Approved brand domain: **www
 
 | Platform | Development identifier | Store identifier | Display name | Current source version |
 | --- | --- | --- | --- | --- |
-| Android | `com.salimdrive.app` | `com.salimdrive.app` | Salim | `0.7.0` / 7 |
-| Apple | `com.salimdrive.app` | `com.salimdrive.app` | Salim | `0.7.0` / 7 |
+| Android | `app.salim.android.demo` | `com.salimdrive.app` | Salim | `0.7.0` / 7 |
+| Apple | `app.salim.ios.demo` | `com.salimdrive.app` | Salim | `0.7.0` / 7 |
 
-Both native project sources now declare the permanent ID; verify it again in each signed artifact. The signed Android build also requires `SALIM_REPORT_API_URL=https://www.salimdrive.com/v1`; that variable is not yet wired into the manual release workflow. The iOS project currently has an empty report-service build setting. Do not sign or submit until the service is live over HTTPS, privacy hosting is published, and both release builds receive the verified endpoint. Both developer accounts are active. Never change any Whisco app identity, listing, certificate, upload key or service configuration.
+The release materializer must be checked to ensure both native archives use the permanent store ID. Both developer accounts are active. Never change any Whisco app identity, listing, certificate, upload key or service configuration.
 
 ## Google Play closed testing
 

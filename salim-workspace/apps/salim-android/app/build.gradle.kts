@@ -20,7 +20,6 @@ val productionAdsConfigured = admobAppId.isNotBlank() && admobBannerId.isNotBlan
 val salimAdsEnabled = releaseVersionName != null
 if (releaseVersionName != null) {
     require(productionAdsConfigured) { "Signed store builds require SALIM_ADMOB_APP_ID_ANDROID and SALIM_ADMOB_BANNER_ANDROID repository variables." }
-    require(reportApiUrl == "https://www.salimdrive.com/v1") { "Signed store builds require the live approved Salim report API URL in SALIM_REPORT_API_URL." }
 }
 val resolvedAdmobAppId = admobAppId.ifBlank { "ca-app-pub-3940256099942544~3347511713" }
 val resolvedAdmobBannerId = admobBannerId.ifBlank { "ca-app-pub-3940256099942544/6300978111" }

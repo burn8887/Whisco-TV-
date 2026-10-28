@@ -23,8 +23,6 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     private var premiumEntitlementResolved=false
     private var premiumEntitled=false
     @Published var drafts:[Draft]=[]
-    @Published var communityReports:[CommunityReport]=[]
-    @Published var communityStatus="Shared camera reporting is not configured for this build."
     @Published var voice=UserDefaults.standard.object(forKey:"voice") as? Bool ?? true {didSet{UserDefaults.standard.set(voice,forKey:"voice");if !voice {audio.stop()}}}
     @Published var tone=UserDefaults.standard.object(forKey:"tone") as? Bool ?? true {didSet{UserDefaults.standard.set(tone,forKey:"tone")}}
     @Published var appearance=UserDefaults.standard.string(forKey:"appearance") ?? "system" {didSet{UserDefaults.standard.set(appearance,forKey:"appearance")}}
@@ -89,18 +87,16 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     }
     /// Fetches live cameras without blocking the UI; the list updates on success only.
     func refreshCameras(_ point:Point) {
-        let token=generation, selectedCountry=country
+        let token=generation
         Task { [weak self] in
             guard let self else {return}
-            let fetched=await CameraFeed.fetch(near:point,country:selectedCountry)
+            let fetched=await CameraFeed.fetch(near:point)
             guard token==self.generation else {return}
-            // A failed fetch keeps only current-area records; the reviewed service then
-            // applies moderator-approved additions, corrections and removals.
-            let held=self.liveCameras.filter { $0.expiresAt > Date().timeIntervalSince1970 && Geo.distance($0.point, point) <= 25_000 }
-            var seen=Set<String>()
-            let baseline=(fetched+held).filter { seen.insert($0.id).inserted }
-            self.liveCameras=await CommunityReports.applyApproved(country:selectedCountry,baseline:baseline,around:point)
-            guard token==self.generation else { return }
+            // A failed fetch keeps what we hold — but only what is still about this area.
+            // Keeping last night's city would be a false alert, not a saved one.
+            self.liveCameras=fetched.isEmpty
+                ? self.liveCameras.filter { $0.expiresAt > Date().timeIntervalSince1970 && Geo.distance($0.point, point) <= 25_000 }
+                : fetched
             let combined=self.merged(self.hazards.filter{!$0.id.hasPrefix("osm:")})
             self.hazards=combined;self.engine.replace(combined)
         }
@@ -112,7 +108,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         guard let database else {feed="SQLite unavailable · Bundled demo memory fallback";return}
         do {let values=try await database.nearby(country:code,point:point ?? DemoData.center,now:Date().timeIntervalSince1970);guard token==generation else{return};let combined=merged(values);hazards=combined;engine.replace(combined)
             let live=liveCameras.count
-            feed=live>0 ? "OpenStreetMap · \(live) mapped cameras · coverage may be incomplete" : "No verified bundled camera pack for \(code) · mapped coverage may be incomplete"}
+            feed=code=="BH" ? (live>0 ? "Approximate Bahrain pack + \(live) mapped cameras · OpenStreetMap" : "Approximate Bahrain pack · Live camera coverage varies") : (live>0 ? "OpenStreetMap · \(live) mapped cameras · coverage may be incomplete" : "No bundled pack for \(code) · live coverage may be incomplete")}
         catch {if token==generation {feed="Local read failed · Previous alerts retained"}}
     }
     func startGPS() {
@@ -134,8 +130,8 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         demoTask=Task { [weak self] in
             for step in 0..<75 {
                 guard !Task.isCancelled,let self else{return}
-                // Synthetic movement trace for UI/engine testing only; it is not a verified
-                // camera route and is excluded from store builds.
+                // Routed past the mapped Seef camera in `cameras.csv`: a synthetic drive over a
+                // real site, not an invented one.
                 self.receive(Fix(point:Point(lat:26.2312+Double(step)*0.000145,lon:50.5330+Double(step)*0.00007975),speed:18,course:25,accuracy:5,time:Date().timeIntervalSince1970,elapsed:ProcessInfo.processInfo.systemUptime))
                 try? await Task.sleep(for:.seconds(1))
             }
@@ -227,51 +223,5 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     }
     func addDraft(road:String,kind:String) {guard mode == .idle,!road.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty else{return};drafts.insert(Draft(id:UUID(),kind:kind,road:String(road.prefix(120))),at:0);saveDrafts()}
     func deleteDrafts(at offsets:IndexSet) {drafts.remove(atOffsets:offsets);saveDrafts()}
-    func refreshCommunity() {
-        guard mode == .idle else { return }
-        let code=country
-        Task {
-            do {
-                let reports=try await CommunityReports.pending(country:code)
-                guard self.mode == .idle,self.country == code else { return }
-                self.communityReports=reports
-                self.communityStatus="\(reports.count) unverified community reports · moderator review required"
-            } catch {
-                self.communityStatus="Shared camera service unavailable. No reports were sent."
-            }
-        }
-    }
-    func submitCameraReport(_ hazard:Hazard,reportType:String) {
-        guard mode == .idle else { return }
-        Task {
-            do {
-                self.communityStatus="Submitting camera report…"
-                let id=try await CommunityReports.submitCamera(hazard,reportType:reportType)
-                self.communityStatus="Sent for human review · \(id) · does not change alerts"
-                self.refreshCommunity()
-            } catch { self.communityStatus="Camera report could not be sent. No alert was changed." }
-        }
-    }
-    func proposeCamera(country:String,kind:String,lat:Double,lon:Double,accuracy:Double,road:String) {
-        guard mode == .idle else { return }
-        Task {
-            do {
-                self.communityStatus="Submitting camera candidate…"
-                let id=try await CommunityReports.proposeCamera(country:country,kind:kind,lat:lat,lon:lon,accuracy:accuracy,road:road)
-                self.communityStatus="Candidate sent for human review · \(id) · not used for alerts"
-                self.refreshCommunity()
-            } catch { self.communityStatus="Camera candidate could not be sent. Check the pin and service connection." }
-        }
-    }
-    func voteCommunityReport(_ id:String,vote:String) {
-        guard mode == .idle else { return }
-        Task {
-            do {
-                try await CommunityReports.vote(reportID:id,vote:vote)
-                self.communityStatus="Confirmation recorded · moderator review still required"
-                self.refreshCommunity()
-            } catch { self.communityStatus="Confirmation was not recorded. You may have already responded." }
-        }
-    }
     private func saveDrafts() {drafts=Array(drafts.prefix(100));if let data=try? JSONEncoder().encode(drafts) {UserDefaults.standard.set(data,forKey:"drafts")}}
 }

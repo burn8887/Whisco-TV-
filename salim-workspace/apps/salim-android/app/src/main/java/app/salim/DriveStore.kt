@@ -36,8 +36,6 @@ data class DriveState(
     val hazards: List<Hazard> = emptyList(),
     val trips: List<Trip> = emptyList(),
     val drafts: List<Draft> = emptyList(),
-    val communityReports: List<CommunityReport> = emptyList(),
-    val communityStatus: String = "Shared camera reporting is not configured for this build.",
     val premium: Boolean = false,
     val entitlementChecked: Boolean = false
 )
@@ -95,14 +93,11 @@ object DriveStore {
     private fun refreshCameras(point: Point) {
         val token=generation
         scope.launch {
-            val country=state.value.country
-            val fetched=runCatching { CameraFeed.fetch(context,point,country) }.getOrDefault(emptyList())
+            val fetched=runCatching { CameraFeed.fetch(context,point) }.getOrDefault(emptyList())
             if(token!=generation)return@launch
-            val held=CameraFeed.near(liveCameras,point)
-            val baseline=(fetched+held).distinctBy { it.id }
-            // A failed fetch keeps only cached records still near this area; a reviewed
-            // removal override is applied to both new and held records before alerts.
-            liveCameras=runCatching { CommunityReports.applyApproved(context,country,baseline,point) }.getOrDefault(baseline)
+            // A failed fetch keeps what we hold — but only what is still about this area.
+            // Keeping last night's city would be a false alert, not a saved one.
+            liveCameras=if(fetched.isEmpty()) CameraFeed.near(liveCameras,point) else fetched
             mutable.update { it.copy(hazards=withFeed(it.hazards.filter { h->!h.id.startsWith("osm:") }),liveCameras=liveCameras.size) }
             engine.replace(state.value.hazards)
         }
@@ -162,8 +157,9 @@ object DriveStore {
         } }
         if(mode==Mode.DEMO)demoJob=scope.launch {
             repeat(75) { step ->
-                // This is a clearly labelled synthetic movement trace for UI/engine testing.
-                // It is not a verified camera route and must never be enabled in store builds.
+                // The simulated run is routed past the mapped Seef camera in `cameras.csv`.
+                // It used to start in central Manama, where the honest pack has no camera —
+                // so the demo proved nothing. A synthetic route over a real site does.
                 receive(Fix(Point(26.2312+step*.000145,50.5330+step*.00007975),18.0,25.0,5.0,System.currentTimeMillis(),SystemClock.elapsedRealtime()))
                 delay(1000)
             }
@@ -216,60 +212,6 @@ object DriveStore {
         mutable.update { it.copy(drafts=(listOf(Draft(UUID.randomUUID().toString(),road.trim().take(120),kind))+it.drafts).take(100)) };saveDrafts()
     }
     fun deleteDraft(id: String) { mutable.update { it.copy(drafts=it.drafts.filterNot { d->d.id==id }) };saveDrafts() }
-
-    fun refreshCommunity() {
-        if (state.value.mode != Mode.IDLE) return
-        val country = state.value.country
-        scope.launch {
-            runCatching { CommunityReports.pending(context, country) }
-                .onSuccess { reports ->
-                    if (state.value.mode == Mode.IDLE && state.value.country == country)
-                        mutable.update { it.copy(communityReports=reports,communityStatus="${reports.size} unverified community reports · moderator review required") }
-                }
-                .onFailure {
-                    val message = if (BuildConfig.REPORT_API_URL.isBlank())
-                        "Shared camera reporting is not configured in this build. No reports were sent."
-                    else "Could not reach the shared camera service. No reports were sent."
-                    mutable.update { it.copy(communityStatus=message) }
-                }
-        }
-    }
-
-    fun submitCameraReport(hazard: Hazard, reportType: String) {
-        if (state.value.mode != Mode.IDLE) return
-        scope.launch {
-            mutable.update { it.copy(communityStatus="Submitting camera report…") }
-            runCatching { CommunityReports.submitCamera(context, hazard, reportType) }
-                .onSuccess { id ->
-                    mutable.update { it.copy(communityStatus="Sent for human review · $id · does not change alerts") }
-                    refreshCommunity()
-                }
-                .onFailure { error -> mutable.update { it.copy(communityStatus=error.message ?: "Camera report could not be sent") } }
-        }
-    }
-
-    fun proposeCamera(country: String, kind: String, lat: Double, lon: Double, accuracyM: Double, road: String) {
-        if (state.value.mode != Mode.IDLE) return
-        scope.launch {
-            mutable.update { it.copy(communityStatus="Submitting camera candidate…") }
-            runCatching { CommunityReports.proposeCamera(context, country, kind, lat, lon, accuracyM, road) }
-                .onSuccess { id ->
-                    mutable.update { it.copy(communityStatus="Camera candidate sent for human review · $id · not used for alerts") }
-                    refreshCommunity()
-                }
-                .onFailure { error -> mutable.update { it.copy(communityStatus=error.message ?: "Camera candidate could not be sent") } }
-        }
-    }
-
-    fun voteCommunityReport(reportId: String, vote: String) {
-        if (state.value.mode != Mode.IDLE) return
-        scope.launch {
-            runCatching { CommunityReports.vote(context, reportId, vote) }
-                .onSuccess { mutable.update { it.copy(communityStatus="Confirmation recorded · moderator review still required") }; refreshCommunity() }
-                .onFailure { error -> mutable.update { it.copy(communityStatus=error.message ?: "Confirmation could not be sent") } }
-        }
-    }
-
     private fun saveTrips() { val a=JSONArray();state.value.trips.forEach { a.put(JSONObject().put("id",it.id).put("at",it.at).put("seconds",it.seconds).put("alerts",it.alerts).put("demo",it.demo).put("interrupted",it.interrupted)) };prefs().edit().putString("trips",a.toString()).apply() }
     private fun saveDrafts() { val a=JSONArray();state.value.drafts.forEach { a.put(JSONObject().put("id",it.id).put("road",it.road).put("kind",it.kind)) };prefs().edit().putString("drafts",a.toString()).apply() }
 }

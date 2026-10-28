@@ -34,16 +34,17 @@
         <h1>Know what’s ahead.<br />Keep your calm.</h1>
         <p class="arabic" lang="ar" dir="rtl">اعرف ما أمامك. قُد بهدوء.</p>
         <p class="lede">
-          Salim is a calm road-awareness companion. It can show nearby mapped cameras and road alerts
-          for your direction of travel without taking over the drive. Coverage is incomplete and
-          no verified GCC camera pack is bundled in this build.
+          Salim is a calm co-pilot for the road ahead. It tells you what is coming — cameras,
+          hazards, speed bumps and average-speed sections — for the direction you are actually
+          travelling, without taking over the drive.
         </p>
 
         <div class="note">
-          <strong>Where the data comes from.</strong> This build has no verified static Bahrain or
-          GCC camera pack. Nearby mapped camera records may be fetched from OpenStreetMap contributors;
-          volunteer data can be wrong, out of date or missing. Community reporting is not connected to
-          a live service. Salim is not a navigation or emergency service and cannot predict road outcomes. Always follow posted signs and traffic rules.
+          <strong>Where the data comes from.</strong> Camera positions ship in a bundled Bahrain pack
+          and are fetched live from OpenStreetMap contributors for the area around you. Coverage is
+          what volunteer mappers have surveyed — dense on Gulf motorways, patchy elsewhere — so a
+          position can be wrong, out of date or missing. Salim is not a navigation or emergency
+          service and guarantees no outcome on the road. Always follow posted signs and traffic rules.
         </div>
 
         <div class="card">
@@ -51,8 +52,8 @@
           <ul class="plain">
             <li><strong>Relevant.</strong> Alerts are filtered by your heading, so cameras on the opposite carriageway stay quiet.</li>
             <li><strong>Considerate.</strong> Short spoken prompts that coexist with navigation and music instead of competing with them.</li>
-            <li><strong>Locally cached.</strong> Nearby mapped data may remain available offline after a successful fetch; coverage outside the cached area may be unavailable.</li>
-            <li><strong>In development.</strong> Verified regional camera datasets, community moderation and section-control coverage are not ready in this build.</li>
+            <li><strong>Offline-ready.</strong> Alert data is stored on the device, so awareness does not depend on a live connection.</li>
+            <li><strong>Section-aware.</strong> Average speed across section-control zones is calculated continuously, including time stopped.</li>
             <li><strong>Honest.</strong> Coverage, freshness and uncertainty are stated plainly. No claim of official endorsement.</li>
           </ul>
         </div>
@@ -60,9 +61,9 @@
         <div class="card">
           <h2>Where Salim is going</h2>
           <p>
-            Bahrain first, then the wider Gulf. Future work includes properly licensed verified
-            regional data, live human moderation, car-display support, watch haptics and vehicle-aware
-            automation. These are not available until their data, hosting and device tests are complete.
+            Bahrain first, then the wider Gulf. Later work includes live regional data, car-display
+            support, watch haptics and vehicle-aware automation. Those integrations are not in the
+            current build, and they will not be described as available until they ship.
           </p>
         </div>
 

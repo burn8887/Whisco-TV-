@@ -33,11 +33,10 @@ Calm, direction-aware road alerts for Bahrain and the Gulf. Camera coverage vari
 Salim provides direction-aware road-awareness prompts for cameras and mapped road hazards, without
 taking over the drive. It is Bahrain-first, with a GCC-wide product goal.
 
-Camera coverage is currently incomplete. This build has no verified bundled camera dataset. Nearby
-live camera searches may use OpenStreetMap and can return incomplete or out-of-date mapped records;
-those locations are not official. Salim does not claim to list every camera in Bahrain or the GCC.
-Always follow posted signs and local law. Community camera reports are not active in this build because
-the approved backend is not yet live.
+Camera coverage is currently limited. The bundled Bahrain pack contains eight approximate camera
+sites. Nearby live camera searches use OpenStreetMap and may return incomplete or out-of-date data.
+Salim does not claim to list every camera in Bahrain or the GCC. Always follow posted signs and local
+law.
 
 Location is used only after you start a drive and remains on-device for alert matching. Salim does
 not upload your route. Every safety warning is available without a subscription. Ads appear only on
@@ -55,7 +54,8 @@ integrations and internal navigation are not enabled.
 
 1. A debug-only simulation is available for testing without location permission; signed store builds
    exclude synthetic routes and fictional alerts.
-2. Review direction-aware warnings and trip history. Community camera reporting is disabled until the live backend and privacy URL are verified; do not enter real submissions during development. Do not treat simulated alerts as driving guidance.
+2. Review direction-aware warnings, trip history and local report drafts using the approved test
+   fixture only. Do not treat simulated alerts as driving guidance.
 3. Review Settings → Privacy notice, consent/privacy-options controls, ad placement and subscription
    disclosures. Verify that ads never appear during an active drive or for Premium subscribers.
 4. Verify the free trip-history limit (20), Premium history behavior, purchase restoration, trial and

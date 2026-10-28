@@ -10,8 +10,6 @@
 	<string>$(SALIM_ADS_ENABLED)</string>
 	<key>SalimAdMobBannerID</key>
 	<string>$(ADMOB_BANNER_ID)</string>
-	<key>SalimReportAPIBaseURL</key>
-	<string>$(SALIM_REPORT_API_BASE_URL)</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>

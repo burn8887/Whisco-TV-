@@ -590,95 +590,26 @@ struct TripsView: View {
 struct CommunityView: View {
     @EnvironmentObject var model: DriveModel
     let theme: Theme
-    @State private var cameraType = "SPEED"
-    @State private var latitude = ""
-    @State private var longitude = ""
-    @State private var accuracy = ""
     @State private var road = ""
-    @State private var localNote = ""
-    @State private var localKind = "Road hazard"
-
+    @State private var kind = "Road hazard"
     var body: some View {
         Form {
             Section {
-                Text("Use Community only while safely parked. Reports stay unverified until a human moderator checks them. Community votes never change live alerts.")
+                Text("Only report when safely parked. These are local drafts, not published or verified community alerts.")
                     .font(.caption)
-                Text(model.communityStatus).font(.caption).foregroundStyle(theme.accent)
-                Button("Refresh community queue") { model.refreshCommunity() }.disabled(model.mode != .idle)
             }
-            Section("Propose a fixed camera") {
-                Text("Enter the camera pin, not your route. Claimed GPS accuracy is not proof; moderators verify each proposal before publication.")
-                    .font(.caption).foregroundStyle(theme.muted)
-                Picker("Camera type", selection: $cameraType) {
-                    Text("Speed").tag("SPEED")
-                    Text("Red light").tag("RED_LIGHT")
-                    Text("Seatbelt / phone").tag("SEATBELT")
-                }
-                TextField("Latitude", text: $latitude).keyboardType(.decimalPad)
-                TextField("Longitude", text: $longitude).keyboardType(.decimalPad)
-                TextField("Claimed GPS accuracy (m)", text: $accuracy).keyboardType(.decimalPad)
-                TextField("Road name (optional)", text: $road)
-                Button("Send to human review") {
-                    guard let lat = Double(latitude), let lon = Double(longitude), let accuracy = Double(accuracy) else { return }
-                    model.proposeCamera(country: model.country, kind: cameraType, lat: lat, lon: lon, accuracy: accuracy, road: road)
-                    latitude = ""; longitude = ""; accuracy = ""; road = ""
-                }
-                .disabled(model.mode != .idle || Double(latitude) == nil || Double(longitude) == nil || Double(accuracy) == nil || !(1...50).contains(Double(accuracy) ?? -1))
-            }
-            .disabled(model.mode != .idle)
-
-            Section("Camera records in \(model.country)") {
-                Text("Confirm only cameras you personally checked. Your report does not validate identity or publish an alert.")
-                    .font(.caption).foregroundStyle(theme.muted)
-                ForEach(Array(model.hazards.filter { $0.country == model.country && $0.isCamera && $0.kind != "MOBILE_CAMERA" }.prefix(100))) { hazard in
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(hazard.title).font(.headline)
-                        Text("\(hazard.road) · \(hazard.point.lat.formatted(.number.precision(.fractionLength(5)))), \(hazard.point.lon.formatted(.number.precision(.fractionLength(5))))")
-                            .font(.caption).foregroundStyle(theme.muted)
-                        Text("\(hazard.id) · \(hazard.approximate ? "approximate" : "not independently verified")")
-                            .font(.system(size: 10, design: .monospaced)).foregroundStyle(theme.muted)
-                        HStack {
-                            Button("Confirm present") { model.submitCameraReport(hazard, reportType: "VERIFY_PRESENT") }
-                            Button("Flag removed", role: .destructive) { model.submitCameraReport(hazard, reportType: "FLAG_REMOVED") }
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    .disabled(model.mode != .idle)
-                }
-            }
-
-            Section("Community reports · unverified") {
-                if model.communityReports.isEmpty { Text("No open community reports for this country.").font(.caption).foregroundStyle(theme.muted) }
-                ForEach(model.communityReports) { report in
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(report.reportType.replacingOccurrences(of: "_", with: " ")).font(.headline)
-                        Text("\(report.country) · \(report.kind ?? "camera type pending") · \(report.cameraId ?? "new location candidate")")
-                            .font(.caption).foregroundStyle(theme.muted)
-                        if let lat = report.lat, let lon = report.lon {
-                            Text("\(lat.formatted(.number.precision(.fractionLength(5)))), \(lon.formatted(.number.precision(.fractionLength(5))))")
-                                .font(.caption).foregroundStyle(theme.muted)
-                        }
-                        Text("\(report.confirmations) confirmations · \(report.disputes) disputes · pending human review")
-                            .font(.caption2).foregroundStyle(theme.accent)
-                        HStack {
-                            Button("Confirm") { model.voteCommunityReport(report.id, vote: "CONFIRM") }
-                            Button("Dispute", role: .destructive) { model.voteCommunityReport(report.id, vote: "DISPUTE") }
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    .disabled(model.mode != .idle)
-                }
-            }
-
-            Section("Local-only road notes") {
-                Text("General road notes below stay on this device; they are not submitted to the community service.")
-                    .font(.caption).foregroundStyle(theme.muted)
-                Picker("Type", selection: $localKind) {
+            Section("Share a heads-up") {
+                Picker("Type", selection: $kind) {
+                    // Speed cameras are warned about from mapped data, not self-reported:
+                    // a miscounted user report is a false alert a driver could act on.
                     ForEach(["Road hazard", "Roadworks", "Traffic congestion", "Road bump"], id: \.self) { Text($0).tag($0) }
                 }
-                TextField("Road or location", text: $localNote)
-                Button("Save local note") { model.addDraft(road: localNote, kind: localKind); localNote = "" }
-                    .disabled(localNote.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                TextField("Road or location", text: $road)
+                Button("Save local draft") { model.addDraft(road: road, kind: kind); road = "" }
+                    .disabled(road.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+            .disabled(model.mode != .idle)
+            Section("Your drafts") {
                 ForEach(model.drafts) { draft in
                     VStack(alignment: .leading) {
                         Text(draft.kind)
@@ -687,11 +618,8 @@ struct CommunityView: View {
                 }
                 .onDelete(perform: model.deleteDrafts)
             }
-            .disabled(model.mode != .idle)
         }
         .navigationTitle("Community")
-        .onAppear { model.refreshCommunity() }
-        .onChange(of: model.country) { _, _ in model.refreshCommunity() }
     }
 }
 
@@ -726,7 +654,7 @@ struct SettingsView: View {
                     ForEach(DemoData.countries, id: \.self) { Text($0).tag($0) }
                 }
                 .disabled(model.mode != .idle)
-                Text("No verified static camera pack is bundled. OpenStreetMap may provide mapped speed-camera data nearby, but GCC coverage is incomplete and may be out of date.")
+                Text("The Bahrain pack contains approximate sites marked ≈. OpenStreetMap provides mapped speed-camera data nearby; GCC coverage is incomplete and may be out of date.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
             Section("Data") {
@@ -763,7 +691,7 @@ struct SettingsView: View {
             }
             Section("Privacy") { NavigationLink("Read privacy notice") { PrivacyNotice() } }
             Section("Release status") {
-                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. No verified static camera pack is bundled; mapped cameras may be missing or out of date. In an emergency in Bahrain, call 999.")
+                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. Camera coverage varies by area; mapped and approximate sites can be missing or out of date. In an emergency in Bahrain, call 999.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
         }

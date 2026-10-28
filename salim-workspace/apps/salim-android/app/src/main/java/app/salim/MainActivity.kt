@@ -41,7 +41,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.salim.core.AlertMatch
 import app.salim.core.Geo
 import app.salim.core.Hazard
-import app.salim.core.Kind
 import app.salim.core.Point
 import java.text.DateFormat
 import kotlinx.coroutines.flow.emptyFlow
@@ -283,7 +282,7 @@ private fun cameraPins(lat: Double, lon: Double, hazards: List<Hazard>): List<Ma
                 lat = hazard.point.lat, lon = hazard.point.lon,
                 label = record?.label ?: hazard.road,
                 // Pack rows carry their own precision; OSM rows are mapped coordinates.
-                exact = record?.precision == CameraRecord.Precision.EXACT
+                exact = record?.precision == CameraRecord.Precision.EXACT || record == null
             )
         }
 
@@ -338,7 +337,7 @@ private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, 
                         title = hazard.title,
                         subtitle = record?.label ?: hazard.road,
                         accent = Warn,
-                        trailing = if (record?.precision != CameraRecord.Precision.EXACT) "≈" else null
+                        trailing = if (record?.precision == CameraRecord.Precision.APPROXIMATE) "≈" else null
                     )
                 }
             }
@@ -667,96 +666,44 @@ private fun Trips(state: DriveState) {
 
 @Composable
 private fun Community(state: DriveState) {
-    var cameraKind by remember { mutableStateOf("SPEED") }
-    var latitude by remember { mutableStateOf("") }
-    var longitude by remember { mutableStateOf("") }
-    var accuracy by remember { mutableStateOf("") }
     var road by remember { mutableStateOf("") }
-    var note by remember { mutableStateOf("") }
-    var noteKind by remember { mutableStateOf("Road hazard") }
+    var kind by remember { mutableStateOf("Road hazard") }
     val scheme = MaterialTheme.colorScheme
-    LaunchedEffect(state.mode, state.country) { if (state.mode == Mode.IDLE) DriveStore.refreshCommunity() }
     LazyColumn(contentPadding = PaddingValues(horizontal = 18.dp, vertical = 14.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
-            Text("Camera reports & confirmations", fontSize = 22.sp, fontWeight = FontWeight.Bold, letterSpacing = (-0.4).sp)
-            Text("Use Community only while safely parked. Every item stays unverified until a human moderator checks it; community votes never change a live alert.", fontSize = 12.sp, color = scheme.onSurfaceVariant)
+            Text("Report a road condition", fontSize = 22.sp, fontWeight = FontWeight.Bold, letterSpacing = (-0.4).sp)
+            Text("Only when safely parked. These are local drafts, not published alerts.", fontSize = 12.sp, color = scheme.onSurfaceVariant)
         }
-        item {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(state.communityStatus, fontSize = 12.sp, color = scheme.primary, modifier = Modifier.weight(1f))
-                TextButton(onClick = { DriveStore.refreshCommunity() }, enabled = state.mode == Mode.IDLE) { Text("REFRESH") }
-            }
-        }
-        item { SectionLabel("PROPOSE A FIXED CAMERA") }
-        item {
-            Text("Enter the camera pin, not your route. Claimed GPS accuracy is not proof; moderators verify every proposal before publication.", fontSize = 11.sp, color = scheme.onSurfaceVariant)
-        }
+        item { SectionLabel("TYPE") }
         item {
             Column {
-                listOf("SPEED" to "Speed", "RED_LIGHT" to "Red light", "SEATBELT" to "Seatbelt / phone").forEach { (value, label) ->
+                listOf("Road hazard", "Roadworks", "Traffic congestion", "Road bump").forEach { type ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        RadioButton(selected = cameraKind == value, onClick = { cameraKind = value }, enabled = state.mode == Mode.IDLE)
-                        Text(label, fontSize = 13.sp)
+                        RadioButton(selected = kind == type, onClick = { kind = type }, enabled = state.mode == Mode.IDLE)
+                        Text(type, fontSize = 13.sp)
                     }
                 }
             }
         }
         item {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(value = latitude, onValueChange = { latitude = it.take(16) }, label = { Text("Latitude") }, enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.weight(1f))
-                OutlinedTextField(value = longitude, onValueChange = { longitude = it.take(16) }, label = { Text("Longitude") }, enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.weight(1f))
-            }
+            OutlinedTextField(
+                value = road, onValueChange = { road = it.take(120) }, label = { Text("Road or location") },
+                enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.fillMaxWidth()
+            )
         }
         item {
-            OutlinedTextField(value = accuracy, onValueChange = { accuracy = it.take(8) }, label = { Text("Claimed GPS accuracy (m)") }, enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.fillMaxWidth())
+            Button(
+                onClick = { DriveStore.draft(road, kind); road = "" },
+                enabled = road.isNotBlank() && state.mode == Mode.IDLE,
+                shape = Sharp, modifier = Modifier.fillMaxWidth()
+            ) { Text("SAVE DRAFT", fontFamily = Readout, letterSpacing = 1.sp) }
         }
-        item {
-            OutlinedTextField(value = road, onValueChange = { road = it.take(120) }, label = { Text("Road name (optional)") }, enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.fillMaxWidth())
-        }
-        item {
-            val lat = latitude.toDoubleOrNull(); val lon = longitude.toDoubleOrNull(); val acc = accuracy.toDoubleOrNull()
-            Button(onClick = { if (lat != null && lon != null && acc != null) { DriveStore.proposeCamera(state.country, cameraKind, lat, lon, acc, road); latitude = ""; longitude = ""; accuracy = ""; road = "" } }, enabled = state.mode == Mode.IDLE && lat != null && lon != null && acc != null && acc in 1.0..50.0, shape = Sharp, modifier = Modifier.fillMaxWidth()) {
-                Text("SEND TO HUMAN REVIEW", fontFamily = Readout, letterSpacing = 1.sp)
-            }
-        }
-        item { SectionLabel("CAMERAS IN THIS AREA") }
-        item { Text("Confirm only cameras you personally checked. This sends a report for review; it does not validate your identity or publish an alert.", fontSize = 11.sp, color = scheme.onSurfaceVariant) }
-        items(state.hazards.filter { it.country == state.country && it.kind.isCamera && it.kind != Kind.MOBILE_CAMERA }.distinctBy { it.id }.take(100), key = { "camera-${it.id}" }) { hazard ->
-            Column(Modifier.fillMaxWidth().clip(Sharper).background(scheme.surface).border(1.dp, scheme.outline, Sharper).padding(13.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                Text(hazard.title, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
-                Text("${hazard.road} · ${"%.5f".format(hazard.point.lat)}, ${"%.5f".format(hazard.point.lon)}", fontSize = 11.sp, color = scheme.onSurfaceVariant)
-                Text("${hazard.id} · not independently verified", fontSize = 9.sp, color = scheme.tertiary, fontFamily = Readout)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    TextButton(onClick = { DriveStore.submitCameraReport(hazard, "VERIFY_PRESENT") }, enabled = state.mode == Mode.IDLE) { Text("CONFIRM PRESENT") }
-                    TextButton(onClick = { DriveStore.submitCameraReport(hazard, "FLAG_REMOVED") }, enabled = state.mode == Mode.IDLE) { Text("FLAG REMOVED") }
-                }
-            }
-        }
-        item { SectionLabel("COMMUNITY REPORTS · UNVERIFIED") }
-        items(state.communityReports, key = { it.id }) { report ->
-            Column(Modifier.fillMaxWidth().clip(Sharper).background(scheme.surface).border(1.dp, scheme.outline, Sharper).padding(13.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                Text(report.reportType.replace('_', ' '), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
-                Text("${report.country} · ${report.kind ?: "camera type pending"} · ${report.cameraId ?: "new location candidate"}", fontSize = 11.sp, color = scheme.onSurfaceVariant)
-                if (report.lat != null && report.lon != null) Text("${"%.5f".format(report.lat)}, ${"%.5f".format(report.lon)}", fontSize = 11.sp, color = scheme.onSurfaceVariant)
-                Text("${report.confirmations} confirmations · ${report.disputes} disputes · pending human review", fontSize = 10.sp, color = scheme.tertiary)
-                Row {
-                    TextButton(onClick = { DriveStore.voteCommunityReport(report.id, "CONFIRM") }, enabled = state.mode == Mode.IDLE) { Text("CONFIRM") }
-                    TextButton(onClick = { DriveStore.voteCommunityReport(report.id, "DISPUTE") }, enabled = state.mode == Mode.IDLE) { Text("DISPUTE") }
-                }
-            }
-        }
-        item { SectionLabel("LOCAL-ONLY ROAD NOTES") }
-        item {
-            Text("These general road notes stay on this device and are not submitted.", fontSize = 11.sp, color = scheme.onSurfaceVariant)
-            OutlinedTextField(value = note, onValueChange = { note = it.take(120) }, label = { Text("Road or location") }, enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.fillMaxWidth())
-            Button(onClick = { DriveStore.draft(note, noteKind); note = "" }, enabled = note.isNotBlank() && state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.fillMaxWidth()) { Text("SAVE LOCAL NOTE", fontFamily = Readout) }
-        }
-        items(state.drafts, key = { "draft-${it.id}" }) { draft ->
+        items(state.drafts, key = { it.id }) { draft ->
             Row(Modifier.fillMaxWidth().clip(Sharper).background(scheme.surface).border(1.dp, scheme.outline, Sharper).padding(13.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(draft.kind, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
                     Text(draft.road, fontSize = 12.sp, color = scheme.onSurfaceVariant)
-                    Text("LOCAL · UNPUBLISHED", fontSize = 9.sp, letterSpacing = 1.2.sp, color = scheme.tertiary, fontFamily = Readout)
+                    Text("LOCAL · UNVERIFIED", fontSize = 9.sp, letterSpacing = 1.2.sp, color = scheme.tertiary, fontFamily = Readout)
                 }
                 IconButton(onClick = { DriveStore.deleteDraft(draft.id) }) { Icon(Icons.Outlined.Delete, "Delete") }
             }
