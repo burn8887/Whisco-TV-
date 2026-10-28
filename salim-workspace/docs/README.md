@@ -1,6 +1,6 @@
 # Salim Venture Document Library
 
-**Index version:** 1.3
+**Index version:** 1.4
 **Updated:** 2026-10-28
 **Scope:** Salim — Road Awareness; this library is stored under `salim-workspace/docs/` and must not change Whisco TV, Whisco Mobile, or any other app.
 **Source of truth:** Git in this repository. A document is durable only after its commit is pushed to `arena/74afd701-whisco-tv`.
@@ -15,9 +15,9 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 
 | # | Category | Document | Version | Date | Purpose | Status / staleness |
 |---:|---|---|---|---|---|---|
-| 1 | Foundation | [Company Dossier](business/COMPANY-DOSSIER.md) | 1.0 | 2026-10-28 | Master identity, scope, evidence-based product and commercial snapshot | Complete; verify entity/user/market facts at next milestone |
+| 1 | Foundation | [Company Dossier](business/COMPANY-DOSSIER.md) | 1.1 | 2026-10-28 | Master identity, scope, evidence-based product and commercial snapshot | Complete interim; operator, ownership, activities, contacts and publication identity unresolved |
 | 2 | Foundation | [Operating Rules](business/OPERATING-RULES.md) | 1.2 | 2026-10-28 | Measurement, gates, budgets, spending controls, maintenance | Complete interim rules; diligence controls and Year 1 budget distinction recorded; transaction caps remain unresolved |
-| 3 | Foundation | [Mission & Vision](business/MISSION-VISION.md) | 1.0 | 2026-10-28 | Mission, vision and values as decision rules | Complete; Founder may refine |
+| 3 | Foundation | [Mission & Vision](business/MISSION-VISION.md) | 1.1 | 2026-10-28 | Mission, vision and values as decision rules | Complete interim; safety and coverage limitations explicit |
 | 4 | Foundation | [Project Handover Log](PROJECT-HANDOVER-LOG.md) | 1.0 | 2026-10-28 | Chronological operational memory | Living; initial entry recorded |
 | 5 | Foundation | [Disaster Recovery](DISASTER-RECOVERY.md) | 1.0 | 2026-10-28 | Credential locations and service/platform recovery | Complete interim runbook; contacts/drill evidence missing |
 | 6 | Product & Brand | [Product Requirements / App Blueprint](PRODUCT-BLUEPRINT.md) | 1.0 | 2026-10-28 | Screens, flows, data model, platform plan, MVP and non-goals | Complete; source-based, update after feature changes |
@@ -29,9 +29,10 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 12 | Money | [Market Analysis](business/MARKET-ANALYSIS.md) | 1.0 | 2026-10-28 | Dated source-based market indicators, substitutes and validation plan | Complete desk research; no TAM/SAM/SOM or primary user research |
 | 13 | Money | [Hostile Diligence Memo](business/HOSTILE-DILIGENCE-MEMO.md) | 1.0 | 2026-10-28 | Adversarial review and concrete risk controls | Complete; amendments applied to Operating Rules v1.1 |
 | 14 | Money | [Billing Register](business/BILLING-REGISTER.md) | 1.0 | 2026-10-28 | Vendors, actual costs, renewals, payment/cancellation path | Complete interim; Year 1 availability recorded; invoices/actual spend NOT IN DATA |
-| 15 | Legal & Entity | Entity Formation Guide | — | — | Bahrain structure, registration, banking, tax and steps | Pending Phase 4; counsel/authority verification needed |
-| 16 | Legal & Entity | Policy Suite | — | — | Draft terms, privacy, cookies, use, complaints, refunds | Pending Phase 4; counsel review required |
-| 17 | Legal & Entity | Regulatory Memo | — | — | Road-awareness, data, privacy, store and GCC regulatory review | Pending Phase 4 research/counsel review |
+| 15 | Legal & Entity | [Entity Formation Guide](ENTITY-FORMATION-GUIDE.md) | 1.0 | 2026-10-28 | Bahrain entity decision, Sijilat/MOIC workflow, activity, tax and setup gates | Complete research draft; entity choice, Sijilat conflict and counsel remain unresolved |
+| 16 | Legal & Entity | [Privacy Policy Draft](PRIVACY-POLICY-DRAFT.md) + [Publication Status Audit](PRIVACY-PUBLICATION-DRAFT.md) | 1.0 / 1.1 | 2026-10-28 | Explicit-placeholder privacy notice and publication/data-inventory gates | Draft only; not publishable; controller, data map, contacts and legal review unresolved |
+| 17 | Legal & Entity | [Regulatory & Legal Memo](REGULATORY-LEGAL-MEMO.md) | 1.0 | 2026-10-28 | Bahrain/GCC issue-spotting: corporate, privacy, data, consumer, ads, subscriptions and taxes | Research memo only; Decree-Law 38/2025 and counsel review required |
+| — | Company Communications | [Who We Are Profile](WHO-WE-ARE-PROFILE.md) | 1.0 | 2026-10-28 | Cautious public-profile draft with verified-identity placeholders | Internal only; Founder and legal identity approval required |
 | 18 | Distribution & Growth | Marketing Playbook | — | — | Gated channels, launch sequence and stop rules | Pending Phase 5 |
 | 19 | Distribution & Growth | Community Map & Conduct Doctrine | — | — | Actual communities, rules, evidence and safe participation | Pending Phase 5 research |
 | 20 | Distribution & Growth | SEO / Content Gap Pack | — | — | Query evidence mapped to pages | Pending Phase 5 research |
@@ -44,7 +45,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 27 | Operations & AI Workforce | Operations & AI-Org Blueprint | — | — | Automation, human control, AI charters and sanitization | Pending Phase 8 |
 | 28 | Operations & AI Workforce | Agent Takeover Brief | — | — | Successor bootstrap, state, gates and watch list | Pending Phase 8; living |
 | 29 | Seasonal / Campaign | Flagship Campaign Bible | — | — | Bahrain/GCC seasonal campaign and freeze controls | Pending applicability research; likely defer until G3 |
-| 30 | Index | This library index | 1.3 | 2026-10-28 | Locate documents, versions and staleness | Living; updated with Founder Year 1 budget schedule |
+| 30 | Index | This library index | 1.4 | 2026-10-28 | Locate documents, versions and staleness | Living; Phase 4 source and publication gates recorded |
 
 ## Phase 3 supporting schedule (outside the 30 core documents)
 
@@ -53,7 +54,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 ## Existing Salim project references (not substitutes for the 30 core documents)
 
 - `PRODUCT-DECISIONS.md` — historical product rulings; verify its as-of date and reconcile where newer project decisions supersede it.
-- `STORE-RELEASE-CHECKLIST.md`, `STORE-LISTING-DRAFT.md`, `PRIVACY-PUBLICATION-DRAFT.md` — product/store drafts; not legal approval or proof that URLs are live.
+- `STORE-RELEASE-CHECKLIST.md`, `STORE-LISTING-DRAFT.md` — product/store drafts; not legal approval or proof that URLs are live. `PRIVACY-PUBLICATION-DRAFT.md` is the source-audit/publication-hold note; the new `PRIVACY-POLICY-DRAFT.md` is a separate placeholder-only policy draft.
 - `BUILDING-LOCALLY.md`, `RELEASE-SIGNING.md`, `ACCOUNTS-AND-SECRETS.md`, `RECOVERY-AND-RELEASE.md` — technical procedures; do not copy secret values into this library.
 - `BRAND-IDENTITY.md`, `NAME-CLEARANCE.md`, `NAME-CHANGE-ASSESSMENT.md` — prior brand/name work; retain Salim/سالم spelling.
 - `report-service/README.md` — source-only report service and activation gates.
@@ -73,6 +74,17 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 11. Who owns finance records, invoice reconciliation, renewals, domain/mailbox monitoring and support? Owner and safe private evidence location are **NOT IN DATA**.
 
 These questions do not block Phase 4 legal/entity research or Phase 5 organic discovery planning. Spending, releases, data purchases and unsupported country launches remain blocked by their existing gates and approvals.
+
+## Phase 4 Founder decisions (not blockers for Phase 5 desk research)
+
+1. Confirm whether Salim uses an existing entity or a new entity; if existing, verify current CR, exact legal name, activities, ownership/UBO and signatory authority through an appropriate secure channel.
+2. Approve the exact legal/public company name, Arabic spelling and whether any Founder name/bio may be published.
+3. Confirm launch activities: app service, subscriptions, ads, user reports/moderation and any other sales; obtain current Sijilat/MOIC activity classification.
+4. Obtain written MOIC/Sijilat and Bahrain counsel resolution of the single-member W.L.L. question (Decree-Law 28/2020 versus MOIC 2024 Guide) and advice on Decree-Law 38/2025/current implementing measures.
+5. Verify mailbox ownership, monitoring, domain/HTTPS operation and who handles privacy rights/support. Do not provide passwords, account access or private identifiers.
+6. Commission a complete data-flow/SDK audit and PDPA assessment; verify actual controller, providers, retention, transfers, notification/authorization and breach-response duties.
+7. Confirm whether and when shared camera reports may be activated, who will moderate, and what complaint, correction and deletion processes will operate.
+8. Approve adviser scope and any fee separately before engagement. The formation guide, memo and policy draft are not legal advice or filing authority.
 
 ## Update protocol
 

@@ -1,16 +1,16 @@
 # Salim Mission & Vision
 
-**Version:** 1.0
+**Version:** 1.1
 **Date:** 2026-10-28
 **Status:** Founder-input-based; wording may be refined by Founder
 
 ## Mission
 
-Help GCC drivers anticipate **known, mapped road hazards—starting with fixed cameras—so they can respond calmly, lawfully, and safely.**
+Build a Bahrain-first road-awareness companion intended to help drivers notice **known, mapped fixed road cameras** in time to respond calmly, lawfully, and safely—without distraction, evasion features, or promises of complete coverage. Any wider hazard category requires separate product, safety and legal review.
 
 ## Vision
 
-A trusted, Bahrain-first road-awareness companion whose warnings are useful because their sources, limits, and uncertainty are clear—and whose GCC coverage grows only as reliable, legally usable data becomes available.
+Earn trust by making each warning’s source, uncertainty and limits clear. Grow beyond Bahrain only where reliable, lawfully usable data, local compliance, suitable support and product readiness have been demonstrated. GCC expansion is an ambition, not a claim of current availability or approval.
 
 ## Values as decision rules
 

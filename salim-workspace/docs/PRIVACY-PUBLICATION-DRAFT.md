@@ -1,33 +1,34 @@
-# Salim privacy policy — publication draft
+# Privacy Publication Status & Source Audit
 
-**Not yet published or legally approved.** The public text is authored at `site/privacy.html` and is intended for `https://www.salimdrive.com/privacy`; the approved domain is not live and nothing has been deployed. The operating entity and support/legal contacts are now specified in the site draft, but the Founder must review the final wording and ensure both email addresses are monitored before publication. Interim store links remain the Google Docs listed in `STORE-LISTING-DRAFT.md`; confirm they are current and publicly readable before use.
+**Version:** 1.1
+**Reviewed:** 2026-10-28
+**Status:** Internal audit note only. No privacy-page wording is approved for publication.
+**Primary Phase 4 draft:** [PRIVACY-POLICY-DRAFT.md](PRIVACY-POLICY-DRAFT.md)
 
-This draft reflects the current native source state. It does not establish that the apps have passed a complete build or that any service is operating.
+## Publication hold
 
-## Current data and coverage
+The approved domain `www.salimdrive.com` is not live in the current project record. The two checked-in HTML privacy pages contain different operator-identity states and must not be treated as one verified or published policy:
 
-Salim has no account system or analytics SDK. Nearby mapped camera data may come from OpenStreetMap/Overpass and can be incomplete or inaccurate. No verified static GCC camera pack is bundled. The service package at `report-service/` is not deployed; the app build configuration is empty, so shared camera reports and confirmations cannot currently be sent. Do not collect real submissions or state that moderation is live until the approved domain, durable database, HTTPS endpoint, privacy notice, backups and human operator are verified.
+- `site/privacy.html` names an individual operator and lists `legal@salimdrive.com` and `support@salimdrive.com`.
+- `deploy/privacy.html` still contains an operating-entity placeholder.
+- The legal operator, CR, controller, public identity, mailbox ownership/deliverability/monitoring, and legal approval are **NOT IN DATA**. Neither page’s identity/contact assertions are verified facts.
 
-## Location
+These HTML pages were inspected for this documentation review but **not edited**. Do not publish, deploy, link to, or cite them as the approved Salim policy. Do not insert “Whisco Media W.L.L” or a Founder name as a replacement without verified evidence and explicit approval.
 
-A simulated drive needs no GPS permission. When the user explicitly starts a device GPS session, precise coordinates, speed, direction, accuracy and sample timing are used in memory to calculate nearby alerts. The route is not saved or uploaded to Salim. Nearby map tile or camera-data requests may reveal the viewed map tiles or a coarse search area to the respective map/data provider. End the session to stop location updates; operating-system suspension or force-quit may interrupt it.
+## Limited source observations — not a complete data inventory
 
-## Future shared camera reports — disabled
+A limited source review found Android fine/coarse location declarations and foreground location-service permission, an iOS location usage description, a Google Mobile Ads dependency, and an iOS notice describing AdMob banners on Overview/Settings while no drive is active plus UMP consent handling. These observations do not prove the behavior of a signed production binary, current SDK configuration, all transitive dependencies, network traffic, data retention, processor roles, transfers, or store privacy declarations.
 
-Before enabling the service, publish and validate the exact endpoint and retention terms. A report may contain a camera identifier, country, camera type, proposed camera pin, user-claimed location accuracy, optional road label and a random installation identifier. That identifier is a pseudonymous abuse-control method, not identity verification, device attestation or proof of physical presence; the service stores a keyed hash rather than the raw value. Pending camera pins and aggregate independent confirmations/disputes would be visible to Community users, clearly marked unverified. No report or community vote may change alerts without human moderation. The planned retention period is 365 days for reports, votes and audit history; approved camera records may remain until a later reviewed correction or removal. Names, phone numbers and email addresses are not requested. Hosting/network providers may process connection metadata such as IP addresses, even though the report API is designed not to retain request IPs. Update this policy with the actual hosting provider, retention, moderator process, and user request/deletion mechanism before the service is enabled.
+Other product records describe local location use, purchases, map data, and a source-only community-report service. Those design notes are not a substitute for validating the exact release candidate, all providers, server configuration, and operational settings. The report service is recorded as not deployed and shared reporting inactive; no community-report collection should be claimed or enabled based solely on source code.
 
-## Local storage and deletion
+## Required before publication
 
-The apps store preferences, locally cached camera data, bounded trip summaries and general road-note drafts that users explicitly save. Android app backup is disabled; iOS local records may be included in device backups according to operating-system settings. Users can delete trip summaries and local drafts in the app. Camera report form text is not saved or transmitted in the current unconfigured build; Android may store a random installation identifier after a Community action.
+1. Verify legal entity/controller identity from current CR records and obtain Founder approval for public naming.
+2. Verify that each support/privacy contact is owned, monitored, secure, staffed, and able to handle rights requests.
+3. Complete Android and iOS release-binary, SDK, network, storage, backup, provider, retention and transfer audits.
+4. Obtain Bahrain counsel/privacy review for PDPA notification/authorization, lawful bases, rights, transfers, security and breach procedures; separately assess each GCC country before service there.
+5. Complete [PRIVACY-POLICY-DRAFT.md](PRIVACY-POLICY-DRAFT.md), remove placeholders from evidence, reconcile with platform privacy forms, and have Arabic/English wording reviewed.
+6. Verify live HTTPS publication URL and ensure website, app notices, store listings, entity details and actual operation all match.
+7. Obtain explicit Founder approval before any publication or website/app code change.
 
-## Advertising and purchases
-
-Demo/debug builds must contain no ads. Store builds are intended to show AdMob only on eligible idle screens, never during an active drive; EEA/UK consent is required before ad requests where applicable. Google may process device identifiers, IP address, diagnostics and ad interactions under its own privacy policy. Subscriptions are handled by Google Play or Apple; Salim does not receive card details. No safety alert is paywalled. Complete platform data-safety/privacy labels only against the exact signed binary and provider SDK behavior.
-
-## Choices, contact and rights
-
-Users can revoke location permission, end a session, delete local history/drafts and manage subscriptions through the app stores. Privacy requests should be sent to `legal@salimdrive.com`; support requests to `support@salimdrive.com`. Verify the addresses and response process before publishing. Applicable privacy rights and required response periods depend on the user's jurisdiction.
-
-## Release gate
-
-The approved domain is not live, no shared-report backend is deployed, no current signed build has been verified, and complete GCC camera data is not available. This draft is not a substitute for legal review, App Store privacy details, Google Play Data Safety answers, or the disclosures required before enabling a reporting service.
+This file documents the publication gate. It is not itself a privacy policy, a statement of legal compliance, or permission to edit/deploy website or app files.

@@ -1,8 +1,8 @@
 # Salim Company Dossier
 
-**Version:** 1.0
+**Version:** 1.1
 **Snapshot date:** 2026-10-28
-**Status:** Founder-input-based; legal, market, and commercial claims remain unverified
+**Status:** Founder-input-based; legal, market, and commercial claims remain unverified. Legal operator and contact identity are explicitly unresolved.
 **Audience:** Founder, successor agents, advisers, and diligence reviewers
 
 > **Contains no credentials by design.** This dossier intentionally records no passwords, tokens, private keys, keystore contents, recovery codes, personal account identifiers, or private customer data. It points only to approved storage locations where relevant.
@@ -12,12 +12,12 @@
 | Field | Current record | Evidence / confidence |
 |---|---|---|
 | Product | **Salim — Road Awareness**; Latin brand **Salim**, Arabic **سالم** | Founder-approved project context; spelling is a hard rail |
-| Product purpose | Road and driver awareness assistant, beginning with warnings about known fixed road cameras | Founder input; scope excludes police/patrol detection and radar-emission detection |
-| Founder | Ali Albaharna, Manama, Bahrain (full legal name in project context: Ali Sameer Sadeq Mohamed Albaharna) | Founder-supplied; verify exact legal name and authority before filing or external use |
-| Candidate operating company | “Whisco Media W.L.L” | Founder input, exact spelling/registration/ownership not independently verified; do not represent as a registered entity until evidence is checked |
-| Jurisdiction | Bahrain base; intended GCC-wide product | Founder input; legal entity status, permitted activities, and operating licences are **NOT IN DATA** |
-| Domain | www.salimdrive.com | Founder-designated; **not live as of 2026-10-28**. Do not substitute another domain in published material |
-| Contact addresses | support@salimdrive.com and legal@salimdrive.com | Founder-designated; deliverability and mailbox ownership **NOT IN DATA** |
+| Product purpose | Road-awareness assistant for known, mapped fixed road cameras only | Founder input; excludes police/patrol, covert-enforcement and radar-emission detection; no completeness claim |
+| Founder | Public attribution **NOT APPROVED/NOT IN DATA**; project context contains “Ali Albaharna” and the longer name “Ali Sameer Sadeq Mohamed Albaharna” | Founder-supplied context only; do not publish either variant or use for filing until exact identity, authority and publication preference are verified |
+| Candidate operating company | “Whisco Media W.L.L” | Unverified candidate only; not established as Salim's registered owner/operator. Obtain current CR, activity, ownership/UBO and authority evidence; do not use in public/legal documents |
+| Jurisdiction | Bahrain-first; intended GCC scope | Product intent only; entity, activity codes, licenses and country approvals are **NOT IN DATA** |
+| Domain | www.salimdrive.com | Founder-designated; **not live as of 2026-10-28**. Do not state as a live policy/support URL |
+| Contact addresses | support@salimdrive.com and legal@salimdrive.com | Founder-designated strings only; mailbox ownership, deliverability, monitoring and response staffing **NOT IN DATA**. Do not publish as working contacts |
 | Repository boundary | Salim work lives under `salim-workspace/` in the current checkout | This is a repository layout, not proof of a separate legal entity or repository |
 
 Salim is a distinct product workstream. No Salim change may modify, deploy, sign, advertise, or otherwise affect Whisco TV, Whisco Mobile, or another application. Do not interpret the parent repository name as Salim's legal identity.
@@ -49,6 +49,12 @@ Drivers in GCC countries can encounter newly installed fixed speed or seatbelt c
 | Deployed reporting service, live moderation, real user submissions | **No** as of snapshot date |
 | Production store approval or current Play closed-test clock | **NOT IN DATA**; no evidence that a current signed build has been uploaded |
 | Legal counsel review / entity-specific legal memo | **NOT IN DATA** |
+
+### Legal / privacy status — Phase 4 snapshot
+
+The responsible legal entity, CR, owners/UBOs, manager, licensed activities, privacy controller, and approved public identity are **NOT IN DATA**. “Whisco Media W.L.L” remains an unverified candidate, not a verified Salim operator. The Founder-designated support/legal email strings are not proven to be owned, deliverable, or monitored. The domain is not live. `site/privacy.html` identifies an individual while `deploy/privacy.html` retains an entity placeholder; neither is verified or publication-ready. A limited source inspection found location permissions, an iOS location notice, and an advertising dependency, but this is not a complete binary/provider data inventory.
+
+Bahrain’s official 2020 Commercial Companies Law amendment and the MOIC 2024 Procedures Guide conflict on the W.L.L. minimum partner count; current Sijilat treatment requires written confirmation and counsel. Legislative Decree No. 38 of 2025 is an additional Companies Law amendment that must be considered using its Arabic Official Gazette text and current implementing rules. See [Entity Formation Guide](../ENTITY-FORMATION-GUIDE.md), [Regulatory & Legal Memo](../REGULATORY-LEGAL-MEMO.md), and [Privacy Policy Draft](../PRIVACY-POLICY-DRAFT.md). These are internal working documents, not legal advice or publication approval.
 
 ## 4. Business model — hypothesis, not actuals
 
