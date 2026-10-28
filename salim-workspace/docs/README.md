@@ -1,6 +1,6 @@
 # Salim Venture Document Library
 
-**Index version:** 1.4
+**Index version:** 1.5
 **Updated:** 2026-10-28
 **Scope:** Salim — Road Awareness; this library is stored under `salim-workspace/docs/` and must not change Whisco TV, Whisco Mobile, or any other app.
 **Source of truth:** Git in this repository. A document is durable only after its commit is pushed to `arena/74afd701-whisco-tv`.
@@ -45,7 +45,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 27 | Operations & AI Workforce | Operations & AI-Org Blueprint | — | — | Automation, human control, AI charters and sanitization | Pending Phase 8 |
 | 28 | Operations & AI Workforce | Agent Takeover Brief | — | — | Successor bootstrap, state, gates and watch list | Pending Phase 8; living |
 | 29 | Seasonal / Campaign | Flagship Campaign Bible | — | — | Bahrain/GCC seasonal campaign and freeze controls | Pending applicability research; likely defer until G3 |
-| 30 | Index | This library index | 1.4 | 2026-10-28 | Locate documents, versions and staleness | Living; Phase 4 source and publication gates recorded |
+| 30 | Index | This library index | 1.5 | 2026-10-28 | Locate documents, versions and staleness | Living; Phase 4 gates and Claude handover link recorded |
 
 ## Phase 3 supporting schedule (outside the 30 core documents)
 
@@ -53,6 +53,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 
 ## Existing Salim project references (not substitutes for the 30 core documents)
 
+- [Claude Engineering Handover](HANDOVER.md) — verified current-state bootstrap and safe first-task prompt; recheck live dashboards before acting.
 - `PRODUCT-DECISIONS.md` — historical product rulings; verify its as-of date and reconcile where newer project decisions supersede it.
 - `STORE-RELEASE-CHECKLIST.md`, `STORE-LISTING-DRAFT.md` — product/store drafts; not legal approval or proof that URLs are live. `PRIVACY-PUBLICATION-DRAFT.md` is the source-audit/publication-hold note; the new `PRIVACY-POLICY-DRAFT.md` is a separate placeholder-only policy draft.
 - `BUILDING-LOCALLY.md`, `RELEASE-SIGNING.md`, `ACCOUNTS-AND-SECRETS.md`, `RECOVERY-AND-RELEASE.md` — technical procedures; do not copy secret values into this library.
