@@ -104,8 +104,10 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
                 .build()
         }
         val params = QueryProductDetailsParams.newBuilder().setProductList(products).build()
-        client.queryProductDetailsAsync(params) { result, details ->
+        client.queryProductDetailsAsync(params) { result, queryResult ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                // Billing 8 returns matched product details separately from unfetched products.
+                val details = queryResult.productDetailsList
                 // Cheapest first, so the shorter commitment is never buried under the longer one.
                 _plans.value = details.sortedBy { priceMicros(it) }
                 if (_plans.value.isEmpty()) {
@@ -156,7 +158,7 @@ class Billing(private val activity: Activity) : PurchasesUpdatedListener {
         }
     }
 
-    override fun onPurchasesUpdated(result: BillingResult, purchases: MutableList<Purchase>?) {
+    override fun onPurchasesUpdated(result: BillingResult, purchases: List<Purchase>?) {
         when (result.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
                 purchases.orEmpty().forEach { acknowledge(it) }
