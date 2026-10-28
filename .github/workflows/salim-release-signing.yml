@@ -6,7 +6,8 @@ name: Salim signed release
 # Scope, agreed with the Founder:
 #   * Salim secrets only, from the dedicated `salim-release` environment.
 #   * Produces signed artifacts and retains them for download.
-#   * Does NOT upload to Play, App Store Connect or TestFlight.
+#   * Android is prepared for manual Play Console submission; iOS is uploaded to
+#     App Store Connect only after IPA signature and bundle identity verification.
 #   * Does not touch any existing Whisco workflow, secret, record or store listing.
 # The job fails closed: if any required secret is missing it stops before building.
 
@@ -260,6 +261,24 @@ jobs:
           fi
           echo "All required Apple signing secrets are present."
 
+      - name: Require App Store Connect API credentials
+        if: ${{ inputs.platform == 'both' || inputs.platform == 'ios' }}
+        env:
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          missing=""
+          [ -n "$ASC_KEY_ID" ] || missing="$missing KEY_ID"
+          [ -n "$ASC_ISSUER_ID" ] || missing="$missing ISSUER_ID"
+          [ -n "$ASC_PRIVATE_KEY" ] || missing="$missing PRIVATE_KEY"
+          if [ -n "$missing" ]; then
+            echo "::error title=App Store Connect API secrets missing::Configure the App Store Connect key ID, issuer ID and private key in the salim-release environment. Accepted names are APP_STORE_CONNECT_KEY_ID / APP_STORE_CONNECT_ISSUER_ID / APP_STORE_CONNECT_PRIVATE_KEY (or ASC_KEY_ID / ASC_ISSUER_ID / ASC_PRIVATE_KEY aliases). Values are never printed."
+            exit 1
+          fi
+          echo "App Store Connect API credential names resolved; values were not displayed."
+
       - name: Install the Salim distribution identity in a temporary keychain
         env:
           CERT_B64: ${{ secrets.SALIM_APPLE_CERT_P12_BASE64 }}
@@ -371,10 +390,39 @@ jobs:
           [ "$bundle_id" = "com.salimdrive.app" ] || { echo "::error title=Wrong bundle id::$bundle_id"; exit 1; }
           echo "::notice title=Signed IPA verified::$bundle_id"
 
-      - name: Delete the temporary keychain
+      - name: Upload the verified IPA to App Store Connect
+        env:
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_dir="$HOME/.appstoreconnect/private_keys"
+          mkdir -p "$key_dir"
+          key_file="$key_dir/AuthKey_${ASC_KEY_ID}.p8"
+          if printf '%s' "$ASC_PRIVATE_KEY" | grep -q -- '-----BEGIN PRIVATE KEY-----'; then
+            ASC_PRIVATE_KEY="$ASC_PRIVATE_KEY" python3 - <<'PYKEY' > "$key_file"
+          import os
+          print(os.environ["ASC_PRIVATE_KEY"].replace(chr(92) + "n", chr(10)), end="")
+          PYKEY
+          else
+            printf '%s' "$ASC_PRIVATE_KEY" | base64 --decode > "$key_file"
+          fi
+          chmod 600 "$key_file"
+          ipa=$(find "$RUNNER_TEMP/Salim-ipa" -maxdepth 1 -name '*.ipa' -print -quit)
+          test -n "$ipa" || { echo "::error title=IPA missing::No verified IPA is available for upload."; exit 1; }
+          xcrun altool --upload-app --type ios --file "$ipa" \
+            --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
+          rm -f "$key_file"
+
+      - name: Delete temporary signing material
         if: always()
+        env:
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID }}
         run: |
           security delete-keychain "$KEYCHAIN_PATH" 2>/dev/null || true
+          rm -f "$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
           rm -rf "$RUNNER_TEMP/salim.p12" "$RUNNER_TEMP/Salim-ipa" "$RUNNER_TEMP/ipa-check"
 
       - name: Retain the signed IPA and archive
@@ -410,5 +458,5 @@ jobs:
             [ "$ANDROID" = "skipped" ] || echo "| Android | $ANDROID |"
             [ "$IOS" = "skipped" ] || echo "| iOS | $IOS |"
             echo
-            echo "Artifacts are retained in this run for 14 days. **Nothing was uploaded to Google Play, App Store Connect or TestFlight.** Uploading is a separate, explicit Founder decision."
+            echo "Signed artifacts are retained for 14 days. Android is for manual Play Console upload; a verified iOS IPA is submitted to App Store Connect when the iOS job is selected. App Store Connect processing and review remain pending after upload."
           } >> "$GITHUB_STEP_SUMMARY"
