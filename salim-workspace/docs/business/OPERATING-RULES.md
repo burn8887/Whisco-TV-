@@ -1,6 +1,6 @@
 # Salim Operating Rules
 
-**Version:** 1.0
+**Version:** 1.1
 **Effective snapshot:** 2026-10-28
 **Owner:** Founder; agents execute only within explicit authority
 **Status:** Interim rules pending founder confirmation of legal entity and spending caps
@@ -14,6 +14,10 @@
 - Maintain base currency as **BHD for Bahrain operations** when a source supports it; record original currency and conversion date for foreign prices. FX policy/rate source is **NOT IN DATA** pending finance setup.
 - Public statements may not outpace evidence. Never claim all GCC cameras, official/complete coverage, guaranteed alerts, “verified users,” deployed reporting, or a free trial unless independently verified.
 - External-reader financial pages omit an optimistic scenario. Show conservative and realistic bands only; if inputs do not support a band, mark **NOT IN DATA** rather than manufacture one.
+- No TAM/SAM/SOM headline unless every denominator is dated, geographically scoped, source-linked, and definition-compatible. Vehicle registrations are not unique drivers or reachable app users; do not sum non-harmonized country figures.
+- No “all GCC,” “complete,” “official,” or “verified coverage” claim without per-country written rights, a stated coverage method, field-quality evidence, and a dated freshness statement. A G5 pass for one source/country does not open another country.
+- Do not describe community reports as shared, live, moderated, verified, or visible to other users until the production path, human moderator, privacy/security controls, and end-to-end evidence are verified. Local drafts must be labelled as such.
+- A usability result does not prove crash reduction or safer driving. Do not claim a safety outcome without appropriate independent evidence and review; do not encourage speeding or enforcement evasion.
 
 ## 2. Binary gates
 
@@ -32,6 +36,10 @@ A gate is closed until the stated documentary proof is stored in the project lib
 ## 3. Revenue and projection rule
 
 Every revenue stream remains `$0 actual` until Gate G4 has qualifying payment evidence. Forecasts may be shown only as `[EST]` conservative and realistic scenarios with method and sensitivity; optimistic case is prohibited. Sales forecasts do not count as cash, and app-store gross receipts are not net revenue. Refunds, taxes, store fees, advertising fill, and settlement timing must be separately evidenced before unit economics are claimed.
+
+Do not publish numeric multi-year revenue, break-even, or budget-to-income claims while price, users, fees, taxes, refunds, variable costs, or the Founder’s income target are missing. In that case publish the conservative/realistic formulas and `NOT IN DATA`; do not invent point estimates. Interview intent is not a purchase, competitor pricing is not Salim pricing, and an ad dashboard estimate is not settled cash.
+
+The Billing Register records evidence; it does not authorize a purchase, renewal, vendor, campaign, paid study, or dataset commitment. Each requires a Founder-set cap and written, transaction-specific approval. Preserve original invoices privately and record a safe reference only in Git.
 
 ## 4. Spending tiers — gates, not calendar dates
 

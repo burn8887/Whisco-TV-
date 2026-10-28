@@ -34,3 +34,13 @@
 **Documents:** Product Blueprint, Design System, Voice & Brand Doctrine, Content/Inventory Doctrine; index updated to v1.1.
 **Open issues:** visual contrast/accessibility require platform audits; Arabic requires native-market review; ODbL/data rights require legal review.
 **Next:** Phase 3 market and business research; first document the available sources and their limits. Do not fabricate target-market counts or financial projections.
+
+## Entry 5 — Phase 3 business and market package drafted
+
+**Date:** 2026-10-28
+**Documents:** Business Plan, Monetization Roadmap, Market Analysis, Hostile Diligence Memo, Billing Register; library index updated to v1.2. Operating Rules updated to v1.1 with diligence controls.
+**Research snapshot:** Official Bahrain 2024 registered-vehicle count (806,624), Saudi 2024 registered/in-use fleet (15.8M+) and Oman June 2026 vehicle count (1,889,463) recorded with definitions and dates; figures not summed because definitions differ. Qatar's monthly new-registration flow is explicitly not treated as vehicle stock. UAE/Kuwait comparable official active-fleet counts remain NOT IN DATA. Waze camera-entry dependence on partner/editor reports, Radarbot free/paid plans, and Bahrain eTraffic-to-MyGov migration / camera-locator feature are documented from official sources.
+**Commercial status:** No numeric TAM/SAM/SOM, pricing, three-year forecast, budget-to-income target or cost estimate is claimed because necessary inputs are missing. Actual revenue remains `$0` until G4 evidence; G1–G5 states remain as in Operating Rules. No purchase, release, campaign, or store upload was authorized.
+**Hostile review outcome:** No-go for scale/fundraising claims on current evidence; proceed only with gated user, data-rights, legal and operational validation. Its market-count, coverage, community-report, forecast, billing and safety-claim amendments were applied in Operating Rules v1.1.
+**Founder questions:** target net income/currency/horizon, cash and spend caps, monetization choice/features/price-test range, user access, GCC expansion order, entity/finance owner, and existing vendor invoices remain open. None blocks Phase 4 legal/entity research or Phase 5 organic discovery planning; decisions remain required before applicable spend/release/expansion.
+**Checks/push:** Phase 3 documentation drafted; repository checks and commit/push are pending.
