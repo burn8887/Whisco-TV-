@@ -1,17 +1,20 @@
 # Salim — Road Awareness: Engineering Handover for Claude
 
 **Prepared:** 2026-10-28 (Asia/Bahrain)
+
+> **Current release-status override — 2026-10-28:** Read [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md) first for today's verified branch, PR, CI, signing, upload, pending, and financial facts. This handover's older release snapshots below are historical unless explicitly refreshed. Billing Library 8.0.0 / Android default code 8 passed Android CI run `40671995018`; a signed Play AAB for code 8 is still pending. Signed iOS IPA upload to App Store Connect succeeded in run `40677950530` with Xcode 26.3; Apple processing/TestFlight status is unknown. The Founder temporarily deferred the Xcode 27.1/iPhone Duo requirement. No Play upload, PR merge, or public release is evidenced.
+
 **Evidence rule:** Every operational claim is tagged **VERIFIED**, **FROM-CHAT**, **UNSURE**, or **UNKNOWN**. “Verified” means checked in the current checkout/configuration or a dashboard queried on the preparation date; it does not mean independently audited or production-tested. Historical documents are explicitly called out when stale.
 **Never include or request secrets.** This document lists environment-variable *names* only. No keys, tokens, passwords, private keys, certificates, keystores, fingerprints, connection strings, or `.env` values are copied here.
 
 ## A. Ten-line summary
 
 1. **VERIFIED:** Salim — Road Awareness (سالم) is a native Kotlin/Jetpack Compose Android app and a native SwiftUI iOS app; it is not Expo, React Native, or Flutter.
-2. **VERIFIED:** Current GitHub repo is public `burn8887/Whisco-TV-`, default branch `main`; current work branch is `arena/74afd701-whisco-tv`, HEAD `34d87df8764a15f7b87c9480bc1b78504388914b`, clean at handover.
+2. **VERIFIED:** Current GitHub repo is public `burn8887/Whisco-TV-`, default branch `main`; current work branch is `arena/74afd701-whisco-tv`. For current HEAD and cleanliness, refresh Git; older pinned HEAD in this handover is stale.
 3. **VERIFIED:** Open draft PR #37 targets `main`: https://github.com/burn8887/Whisco-TV-/pull/37 . Do not merge it or touch `main` without the Founder’s direct approval.
-4. **VERIFIED:** Current checked-in native demo versions are Android `0.7.0-demo` / code 7 and iOS `0.7.0` / build 7; the permanent package/bundle ID is `com.salimdrive.app`.
-5. **VERIFIED:** Latest native CI at commit `2055538` passed on 2026-10-28: Android run `40627499812`; iOS run `40627499907`. These are unsigned CI outputs, not store submissions.
-6. **VERIFIED:** A manual Android signed-artifact workflow succeeded once (run `40311763923`, 2026-10-26); its iOS job was skipped. No Play upload, TestFlight upload, or store release was verified.
+4. **VERIFIED:** Android Billing dependency is 8.0.0 and default version code is 8; the release workflow takes a marketing version input. The permanent package/bundle ID is `com.salimdrive.app`. Latest iOS build uses workflow-dispatch version/build inputs; refresh ASC for exact uploaded values.
+5. **VERIFIED:** Android Billing 8 CI run `40671995018` passed on 2026-10-28 (24 tests, emulator and 16 KB alignment checks). Signed iOS release run `40677950530` succeeded through ASC upload; Apple processing is not verified.
+6. **VERIFIED:** iOS IPA upload to App Store Connect succeeded in run `40677950530`; processing/TestFlight/review/release remain unverified. Android signed version-code-8 AAB and Play upload remain pending.
 7. **VERIFIED:** App camera queries use OSM/Overpass from the device; no bundled verified camera pack exists and no country-level coverage audit or redistribution clearance is complete.
 8. **VERIFIED:** Shared-report service/admin code exists but is not deployed or connected to active native reporting; its planned database is persistent SQLite, not Neon.
 9. **VERIFIED:** Vercel `salim` project exists but has no deployments, no project env vars, and no `www.salimdrive.com` custom-domain assignment. The approved domain is **FROM-CHAT** recorded as not live.
@@ -50,7 +53,7 @@
 
 ## 2. Status now
 
-**Where we are:** Salim source remains a tracked capsule inside the public Whisco TV repository. Two native platforms compile and test in hosted CI. Live OSM/Overpass queries are present, but coverage is incomplete and legally/operationally unverified; the shipped static packs are empty. A report API/admin console exists only as source. Store signing produced a successful Android artifact historically, but no store upload or TestFlight processing is evidenced. Phase 4 company/legal documents were pushed on this branch; they explicitly block publication/filing until entity, contacts, data handling and counsel are verified. The current PR is draft and open. Current Vercel Salim project has no deployments.
+**Where we are:** Salim remains a tracked capsule inside the public Whisco TV repository. Android Billing 8 passes CI; signed Android code-8 AAB/Play upload remain pending. Signed iOS IPA upload to App Store Connect succeeded in run `40677950530`, but processing/TestFlight state remains unverified. Live OSM/Overpass queries are incomplete, legally/operationally unverified, and bundled static packs are empty. A report API/admin console exists only as source. Phase 4 company/legal documents remain drafts; identity, contacts, data handling and counsel gates remain. PR #37 is open; do not merge without Founder approval. The current Agent Takeover Brief is authoritative for release state.
 
 | Area | State | What is actually known |
 |---|---|---|
@@ -59,7 +62,7 @@
 | Database | **Blocked** | Native local cache stores exist; report service has SQLite schema. No Salim-managed production DB, Neon project, hosted database, migrations or seed pipeline verified. |
 | Camera data pipeline | **Blocked** | Live on-device OSM queries exist, but no validated country dataset or automated ingestion/rights/freshness process; cannot satisfy the Founder’s complete-data requirement. |
 | Web/admin/landing | **In progress** | Static `site/`, `deploy/`, Vite browser demo, and report admin source exist. Salim Vercel project has no deployments; no live domain verified. |
-| Store listings | **Blocked** | Developer accounts are **FROM-CHAT** active; Play/App Store app records, store URLs/listings/products/tester tracks and submissions are **UNKNOWN**. No upload verified. |
+| Store listings | **Partial / blocked** | iOS IPA upload to ASC succeeded in run `40677950530`; processing/TestFlight state and listing metadata remain unknown. No Play upload or signed Android code-8 artifact is evidenced. |
 | Legal pages | **Blocked** | Drafts only. `site/privacy.html` names an individual, `deploy/privacy.html` has entity placeholder; neither identity/contact claim is verified. Domain/mailboxes are not verified live. |
 | CI/CD | **In progress** | Two native push workflows + manual signed-only workflow. No EAS. Latest native CI green at `2055538`; current later documentation commits did not match native workflow path filters. PR checks show Vercel pass. |
 
@@ -81,7 +84,7 @@ Dates below are **FROM-CHAT or repository-history evidence**; inspect linked fil
 | 2026-10-26 | Founder: all GCC cameras, real data, real build; “don't cut corners.” | Requirement remains unmet; OSM coverage is not exhaustive and no approved country-by-country official/licensed dataset is bundled. |
 | 2026-10-27 | Founder directly requested shared reports, moderation, community/user camera verification and a live agent operating review/backend. | Desired feature is approved at the product-intent level; current backend is still source-only and native flow inactive. Do not claim it is live. |
 | 2026-10-26 to 2026-10-28 | Native CI and signing attempts; one signed Android build succeeded (run `40311763923`). | Signed artifact generation is not store upload. Later docs saying signing workflow “never ran” are stale. iOS job in that successful run was skipped. |
-| 2026-10-28 | PR #37 draft and docs phases pushed; latest native CI green at 2055538. | Current branch work remains draft; no merge/publish authorization. |
+| 2026-10-28 | PR #37 open; Billing 8 change passed Android CI run `40671995018`; signed iOS IPA uploaded to ASC in run `40677950530`. | Android signed code-8 AAB/Play upload pending; Apple processing unverified; no PR merge/public release. See Agent Takeover Brief. |
 | 2026-10-28 | Company/legal Phase 4 documents written, incorporating Bahrain 2025 Companies Law amendment research. | Drafts only; no lawyer approval, entity filing, web/app code change or publication. See document index. |
 
 Other significant constraints: all financial documents treat actual revenue as `$0` until reconciled evidence; Founder input is USD 20,000/month available spending during Year 1 and no Founder salary until Year 5. This is **FROM-CHAT**, not evidence of cash, spending permission, or a transaction authorization.
@@ -144,7 +147,7 @@ Separate Vite browser demo + static site/deploy artifacts (not the native app).
 ### Git facts
 
 - **VERIFIED:** GitHub URL `https://github.com/burn8887/Whisco-TV-` (public); default branch `main`; origin is `https://github.com/burn8887/Whisco-TV-.git`.
-- **VERIFIED:** Working branch `arena/74afd701-whisco-tv`; base commit noted by session context `32c4749660862852fd4b59cc53d8aa4acb30aed9`; HEAD at handover `34d87df8764a15f7b87c9480bc1b78504388914b` (`Record Salim Phase 4 documentation push`); no uncommitted changes at inspection.
+- **VERIFIED:** Working branch `arena/74afd701-whisco-tv`; the pinned HEAD in this older engineering snapshot is historical. Refresh `git status`, branch SHA, and PR #37 using the current [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md) before making decisions.
 - **VERIFIED:** PR #37, title “Salim 0.6.0 — cameras on both platforms, real map, sharper build”, draft/open, base `main`, head `arena/74afd701-whisco-tv`, merge state CLEAN; URL https://github.com/burn8887/Whisco-TV-/pull/37 . Title version is stale relative to checked-in demo version 0.7.0.
 - **VERIFIED:** Latest two commits are docs only: `f7fcaf8` Phase 4 legal/company docs; `34d87df` records Phase 4 push. Earlier Phase 3 and budget docs are `b6b4b89`, `5b708ec`, `364cadf`.
 - **VERIFIED / hard rule:** never switch branches, rename this branch, push another branch, or push/commit to `main`. Use only `git push origin arena/74afd701-whisco-tv` if separately authorized. Do not merge/close PR #37 without the explicit PR operation and direct Founder authorization.
@@ -190,8 +193,8 @@ The repository root also contains the Whisco TV Next.js/Prisma project, its `pac
 
 | Service | Verified status / names / IDs | Unknowns / safety boundary |
 |---|---|---|
-| GitHub | Repo `burn8887/Whisco-TV-`, public, default `main`; current branch and PR as §5. Three Salim workflow files. | Claude has no access by premise; Founder must use secure platform connection. Never request credentials in chat. |
-| GitHub Actions release environment | Workflow names environment `salim-release`; signed Android run succeeded 2026-10-26, so required Android secrets were available for that run. | Current environment protection/reviewer, branch rules, current secret existence/rotation and Apple secret state not inspected. Values are never to be read/copied. |
+| GitHub | Repo `burn8887/Whisco-TV-`, public, default `main`; current branch and PR as §5. Salim-specific workflows and current actions runs are readable; repo pushes are available in this session. | GitHub Actions workflow dispatch and Actions-secret metadata listing returned HTTP 403 to this agent. Founder can initiate manual workflows through the GitHub UI. Never request credential values in chat. |
+| GitHub Actions release environment | Workflow names environment `salim-release`; current Apple signing and ASC credential guards passed in run `40677950530`. Founder screenshot confirms ASC secret names `SALIM_ASC_KEY_ID`, `SALIM_ASC_ISSUER_ID`, `SALIM_ASC_PRIVATE_KEY_P8`; values were never viewed. | Current environment reviewer/branch protections and future secret rotation are not inspected. Never read or copy values. Android code-8 signed release remains pending. |
 | Vercel Salim project | **VERIFIED via connected Vercel dashboard:** project `salim`; project ID `prj_liHchOWtXIm6AeqmGhVAQ3rYIZ3L`; team/account ID `team_QrfLApJ76KNWBxlkkuttI0Pa`; root `salim-workspace/site`; framework unset; Node `24.x`; output `.`; function region `iad1`; generated project domain `salim-tan.vercel.app` verified; project `live=false`; deployment list empty; Salim project environment-variable list empty. | No custom domain attached. No Salim deployment URL serving a built page was found. Do not deploy without Founder approval. |
 | Vercel host project (not Salim) | Recent READY preview deployments tied to PR #37 for commits `f7fcaf8` and `34d87df`; Vercel PR checks pass. | These are on Whisco project `whisco-tv`, not a Salim production deployment. Do not affect it. |
 | Vercel host env names (not Salim) | Vercel list for `whisco-tv` showed names `ADS_TXT`, `AUTH_SECRET`, `DATABASE_URL`, marked sensitive; values intentionally not read. | They belong to host Whisco; never copy/use for Salim. |
@@ -211,7 +214,7 @@ The repository root also contains the Whisco TV Next.js/Prisma project, its `pac
 
 ### Identifiers and versions
 
-- Android `namespace`: `app.salim`; **applicationId** `com.salimdrive.app`; min SDK 26; compile/target SDK 36; default `versionName="0.7.0-demo"`, `versionCode=7`.
+- Android `namespace`: `app.salim`; **applicationId** `com.salimdrive.app`; min SDK 26; compile/target SDK 36; default `versionName="0.7.0-demo"`, `versionCode=8`; Billing dependency `8.0.0`.
 - iOS bundle ID `com.salimdrive.app`; iOS deployment target 17.0; checked-in `MARKETING_VERSION=0.7.0`, `CURRENT_PROJECT_VERSION=7`; visible app name “Salim”.
 - Store title decision: **Salim — Road Awareness**. The GitHub PR title’s “0.6.0” is not the current source version.
 
@@ -220,8 +223,8 @@ The repository root also contains the Whisco TV Next.js/Prisma project, its `pac
 - Android GitHub Environment secrets (names only): `SALIM_ANDROID_KEYSTORE_BASE64`, `SALIM_ANDROID_KEYSTORE_PASSWORD`, `SALIM_ANDROID_KEY_ALIAS`, `SALIM_ANDROID_KEY_PASSWORD`, `SALIM_ANDROID_CERT_SHA256`; job uses ephemeral runner path `SALIM_ANDROID_KEYSTORE_PATH`.
 - Apple Environment secrets: `SALIM_APPLE_TEAM_ID`, `SALIM_APPLE_CERT_P12_BASE64`, `SALIM_APPLE_CERT_PASSWORD`, `SALIM_APPLE_PROFILE_BASE64`, `SALIM_APPLE_PROFILE_NAME`.
 - **FROM-CHAT:** Founder keeps signing keys outside the repo in `~/salim-keys`; never stage keystores/certificates. Signing secrets belong only in GitHub Environment `salim-release`, never chat, terminal transcript, issue, repo, or Vercel.
-- **VERIFIED:** Signed workflow verifies Android cert fingerprint and iOS profile identity, removes temporary key material, retains artifact 14 days, and does not upload to stores.
-- **UNKNOWN:** Current secrets/profiles/Apple identity state; do not ask for values. Public certificate fingerprints may be shared only if genuinely needed; not included here.
+- **VERIFIED:** Signed workflow verifies Android certificate fingerprint and iOS profile identity, removes temporary key material, retains artifacts 14 days, uploads a verified iOS IPA to App Store Connect, and leaves Play upload manual. Run `40677950530` succeeded through the iOS upload step.
+- **VERIFIED:** Apple signing-secret guard, distribution identity installation, profile identity check, archive signing, and IPA signature verification passed in run `40677950530`. Founder screenshot showed ASC secret names `SALIM_ASC_KEY_ID`, `SALIM_ASC_ISSUER_ID`, `SALIM_ASC_PRIVATE_KEY_P8`; the ASC credential guard passed. Secret values were never viewed or recorded. Refresh current profile/secret state before a future release; do not ask for values.
 
 ### Ad variables (names only)
 
@@ -241,7 +244,7 @@ Four **GitHub repository Actions variables** expected for production signed buil
 
 | System | Dev | Preview/test | Production |
 |---|---|---|---|
-| Native Android/iOS | Materialized local runtime; test ad IDs; unsigned debug/simulator | GitHub Actions native tests on pushes to approved feature branches; artifacts 14-day retention | Manual GitHub `salim-release` signing only; artifact output, no store upload |
+| Native Android/iOS | Materialized local runtime; test ad IDs; unsigned debug/simulator | GitHub Actions native tests on pushes to approved feature branches; artifacts 14-day retention | Manual `salim-release`: Android signed artifact for manual Play upload; iOS verified IPA upload to App Store Connect |
 | Vercel `salim` | No deployment observed | No deployments observed | No production deployment observed; `salim-tan.vercel.app` assigned as project domain, but project deployment list empty |
 | Reporting API | Local unit tests/temp SQLite | No shared staging API found | No deployed prod API found; `SALIM_REPORT_API_URL` empty in Android build config |
 | Database | Local app caches; report-service test temp SQLite | None verified | None verified; no Neon branches/migrations/seed |
@@ -318,21 +321,21 @@ python3 salim-workspace/tools/verify_isolation.py
 python3 salim-workspace/tools/check_site.py salim-workspace/site --allow-placeholders
 ```
 
-No command above deploys or uploads. Static site checks may intentionally fail if entity placeholders remain; do not “fix” by inventing an entity.
+The table summarizes environment state; the manual signed-release workflow can submit a verified iOS IPA to App Store Connect, while Android produces an artifact for manual Play Console upload. No command above deploys the website or production services. Static site checks may intentionally fail if entity placeholders remain; do not “fix” by inventing an entity.
 
 ### Hosted CI
 
 - Android workflow: `.github/workflows/salim-android-build.yml`; push path filters cover Android source, materializer/test/report tools and workflow; manual `workflow_dispatch` also available. Ubuntu 24.04, Temurin 17, Gradle 8.13, SDK 36, JVM tests, debug APK, release AAB unsigned, lint, 16 KB alignment, API 35 emulator tests. Artifacts retained 14 days.
 - iOS workflow: `.github/workflows/salim-ios-build.yml`; same branch/path-gated push and manual trigger. macOS 15/Xcode 26.3, generate Xcode project, simulator XCTest, unsigned generic-device archive; no signing/upload. Artifacts retained 14 days.
-- Signed workflow: `.github/workflows/salim-release-signing.yml`, **manual `workflow_dispatch` only**; inputs `version_name`, `version_code`, `platform` (`both|android|ios`), `confirm_identity` (must equal `com.salimdrive.app`). Requires environment review/secrets. Builds/signs artifacts only and retains 14 days. **Never uploads**.
-- Do not dispatch a release build until Founder authorizes that specific artifact; the prior authorization to prepare/sign workflows does not authorize store upload.
+- Signed workflow: `.github/workflows/salim-release-signing.yml`, **manual `workflow_dispatch` only**; inputs `version_name`, `version_code`, `platform` (`both|android|ios`), `confirm_identity` (must equal `com.salimdrive.app`). Requires environment review/secrets. Android builds/signs artifacts for manual Play Console upload; iOS builds/signs, verifies, and uploads IPA to App Store Connect. Artifacts are retained 14 days.
+- The Founder explicitly authorized the current Android version-code-8 build and iOS App Store Connect upload. The iOS upload step succeeded; the Android signed artifact and Play upload remain pending. This authorization does not automatically extend to future builds or uploads.
 
 ### Store upload, EAS, Vercel deploy, DB migration
 
 - **EAS/OTA:** no EAS configuration and no OTA update process verified. Do not create `eas.json`, Expo config, or OTA channel without new Founder-approved technical decision.
 - **Vercel:** no Salim deployment verified; do not run `vercel deploy`, Vercel connector deployment calls, or domain changes without direct Founder permission. Vercel project integration can auto-create Whisco preview builds on PR pushes; this is an existing integration side effect.
 - **Database migrations:** no Salim migration command exists. Report DB schema auto-created in Python SQLite; production DB setup is pending and no migration should be invented.
-- **TestFlight / Play upload:** no safe automated upload command exists in current approved workflow. Uploads are explicitly outside the signed workflow and require separate Founder authorization. Do not use any other app’s certificate, provisioning profile, keystore or listing.
+- **TestFlight / Play upload:** the manual signed workflow now uploads a verified iOS IPA to App Store Connect; run `40677950530` succeeded. Android signed AAB artifacts are retained for manual Play Console upload; no automatic Play Publisher action exists. The Founder authorized the current iOS upload; future uploads still require the appropriate authorization. Do not use any other app’s certificate, provisioning profile, keystore or listing.
 
 ## 10. Data inventory and GCC country-by-country status
 
@@ -407,7 +410,7 @@ No command above deploys or uploads. Static site checks may intentionally fail i
 - [ ] Age rating, content rights, export compliance/encryption questions, review contact, beta description/What to Test, screenshots, icon, description, keywords, support/privacy URLs completed.
 - [ ] Background location purpose, UIBackgroundModes, in-app disclosure and review explanation accepted; real device behavior tested while backgrounded/locked.
 - [ ] Subscription products, terms, localization, prices, billing state, purchase/restore/cancel/refund/expiry verified on sandbox/TestFlight.
-- [ ] Upload only after separate explicit Founder authorization; current signed workflow does not upload.
+- [x] Founder authorized the current iOS build upload; workflow run `40677950530` reports successful IPA upload to ASC. [ ] Verify processing/TestFlight build visibility and complete listing/compliance gates.
 
 ### Google Play
 - [ ] Play Console Salim app record, package, app-signing enrollment/upload key and version code confirmed.
@@ -416,7 +419,7 @@ No command above deploys or uploads. Static site checks may intentionally fail i
 - [ ] Content rating, ads declaration, target countries, screenshots, 512×512 icon, feature graphic, store description, review access/contact, privacy/support URLs complete.
 - [ ] Closed/open/production testing track status, testers, account type/creation date, target-test requirements verified from current Play Console; old docs’ “12 testers/14 days” may be stale—check live policy rather than assume.
 - [ ] Subscription product IDs/base plans/prices/trials/refunds/restore verified; no public pricing assumed.
-- [ ] Upload only after separate explicit Founder approval.
+- [ ] Upload to Play only under the Founder-approved scope; no Play upload is evidenced yet.
 
 ### Product/security/quality
 - [ ] Complete authoritative/licensed data inventory by all six GCC markets; measure coverage, false positives/negatives and freshness. Current OSM-only coverage fails the Founder’s stated complete-data requirement.
@@ -435,8 +438,8 @@ No command above deploys or uploads. Static site checks may intentionally fail i
 4. **Privacy page identity mismatch (P0):** `site/privacy.html` names an individual and lists support/legal emails; `deploy/privacy.html` has an entity placeholder. Legal identity/mailboxes unverified and domain not live. Current Phase 4 documents explicitly block publication; neither page has been edited.
 5. **Reports/moderation (P0 for user-report feature):** report API is only source, not deployed, and active native client flow absent. User’s request for community verification and live moderation remains unfulfilled.
 6. **No registered/verified Salim operator:** Company dossier and legal notes mark operator, CR, activities, UBO and public contact as NOT IN DATA. “Whisco Media W.L.L” is an unverified candidate.
-7. **No current store submission evidence:** Developer accounts said active by Founder, but listing/build/history unavailable. No TestFlight or Play upload verified.
-8. **Historical docs conflict:** `RECOVERY-AND-RELEASE.md` says signed workflow never run; current Actions metadata shows Android signed success run 40311763923. `DEVICE-FEEDBACK.md` and older `PRODUCT-DECISIONS.md` say eight Bahrain rows/CSV; current code says pack empty. `SESSION-HANDOFF.md`, `SHIP-PATH.md`, `STORE-RELEASE-CHECKLIST.md` may include older repo, domain, identity, account, feature or version assumptions; use current config and date-stamped runs over narrative.
+7. **Store status is partial:** iOS IPA upload step succeeded in run `40677950530`; Apple processing/TestFlight/App Review status is not independently verified. No Play Console upload is evidenced.
+8. **Historical docs conflict:** `DEVICE-FEEDBACK.md` and older `PRODUCT-DECISIONS.md` say eight Bahrain rows/CSV; current code says pack empty. `SHIP-PATH.md` and other older notes may include older account, version, repo or feature assumptions. The 2026-10-28 `AGENT-TAKEOVER-BRIEF.md` supersedes earlier release-status snapshots; refresh dashboards before acting.
 9. **Build failures:** On 2026-10-26, signed attempts failed at the Android cert fingerprint check, then one at signed bundle verification; later run 40311763923 succeeded for Android. Native iOS run 40315410964 failed before later successes. GitHub job metadata is verified; exact logs could not be downloaded (sandbox request returned EOF), so exact error text/cause is UNKNOWN. Earlier compile defects in `DEVICE-FEEDBACK.md` (Dp/Int width; labelled/positional test argument) are recorded as fixed.
 10. **CI gaps:** Later docs-only commits do not trigger native workflows because of path filters. Current PR checks are Vercel (not mobile app test). CI build green does not verify physical devices, store signing/submission or real datasets.
 11. **External services risk:** Every Git push to the connected repository currently produced Vercel Whisco preview deployments; last two commits had READY preview URLs. No intentional production deploy observed; still avoid touching Whisco paths.
@@ -458,7 +461,7 @@ No command above deploys or uploads. Static site checks may intentionally fail i
 - Choose/confirm the Salim-owned repo path (current capsule vs private `burn8887/salim-drive`) via secure GitHub connection, not chat credentials. `promote.py` is the current intended migration tool; validate carefully before any migration.
 - End-to-end integrate reports only after secure host, persistent backups, real moderator staffing, privacy/retention decisions and Founder launch approval.
 - Complete physical-device QA, accessibility and subscription/ad consent tests.
-- Finish store records/listings and screenshots based on actual binaries, then request explicit upload approval.
+- Verify processing of the already-authorized iOS upload; finish listing/compliance/TestFlight setup. Produce the Android signed code-8 artifact, then upload to Play only within the Founder-approved release scope.
 
 ### P2 — later / defer
 
@@ -476,7 +479,7 @@ No command above deploys or uploads. Static site checks may intentionally fail i
 - Approved domain exactly `www.salimdrive.com` (not live); intended contacts exactly `support@salimdrive.com` and `legal@salimdrive.com` (deliverability unknown); no substitutes.
 - Google Play and Apple developer accounts are active (**FROM-CHAT**, not dashboard verified here).
 - Year 1 spending availability input USD 20,000/month; no Founder salary before Year 5; not cash verification or spending authorization.
-- No passwords, tokens, 2FA codes, wireless pairing codes, private keys, certificates or keystore values in chat. Keys kept outside repo under `~/salim-keys` (FROM-CHAT). No store upload authorized by the prior signing approval.
+- No passwords, tokens, 2FA codes, wireless pairing codes, private keys, certificates or keystore values in chat. Keys kept outside repo under `~/salim-keys` (FROM-CHAT). Current iOS upload was separately authorized by the Founder and succeeded in run `40677950530`; this does not authorize future uploads by default.
 
 ### Still unresolved (ask only when it blocks a task)
 
@@ -516,7 +519,7 @@ All paths below are relative to repository root unless stated otherwise. This in
 - `salim-workspace/docs/PRIVACY-PUBLICATION-DRAFT.md` — HTML privacy inconsistency/source audit and publication hold.
 - `salim-workspace/docs/WHO-WE-ARE-PROFILE.md` — unapproved profile draft.
 - `salim-workspace/docs/PROJECT-HISTORY.md` — original capsule and native evidence timeline; contains stale claims, reconcile against current code.
-- `salim-workspace/docs/SESSION-HANDOFF.md` — older session bootstrap; stale repository/branch/status information, do not treat as current.
+- `salim-workspace/docs/SESSION-HANDOFF.md` — short pointer to the current `AGENT-TAKEOVER-BRIEF.md`.
 - `salim-workspace/docs/MIGRATION-TO-OWN-REPO.md` — standalone repo migration plan/status; old access details may be stale.
 - `salim-workspace/docs/PRODUCT-DECISIONS.md` — historical decision log; contains stale camera dataset/bundle assertions; current user decisions in §3 and current source take precedence.
 - `salim-workspace/docs/DEVICE-FEEDBACK.md` — iterative UI/GPS feedback, tests, older camera/data assumptions; see stale-doc warnings.
@@ -586,4 +589,4 @@ All paths below are relative to repository root unless stated otherwise. This in
 
 ## B. Ready-to-paste first message to Claude
 
-> You are taking over Salim — Road Awareness (سالم). Start by reading `salim-workspace/docs/HANDOVER.md` and the referenced current-source files; verify the GitHub branch/PR, native workflow status, Vercel Salim project and actual `CameraFeed`/`CameraPack` code using available secure integrations. Your immediate goal is to reconcile stale project docs with the checked-in native code and deliver a concise evidence-based readiness report, prioritizing the gap between the Founder’s requirement for real GCC-wide fixed-camera data and the current OSM-only/empty-static-pack implementation. Do not modify app code, workflows, website, Vercel settings, stores, domains or signing configuration; do not deploy, upload, file, spend, or ask for passwords/tokens. Work only on `arena/74afd701-whisco-tv` if/when the Founder authorizes a change, and ask only for genuinely unresolved evidence (legal operator/CR, data reuse rights, contact operations, and current store listing facts), not already-decided product requirements. Cite every assertion as VERIFIED, FROM-CHAT, UNSURE or UNKNOWN, and preserve Whisco TV/Whisco Mobile isolation.
+> You are taking over Salim — Road Awareness (سالم). Start by reading `salim-workspace/docs/HANDOVER.md` and the referenced current-source files; verify the GitHub branch/PR, native workflow status, Vercel Salim project and actual `CameraFeed`/`CameraPack` code using available secure integrations. Your immediate goal is to reconcile stale project docs with the checked-in native code and deliver a concise evidence-based readiness report, prioritizing the gap between the Founder’s requirement for real GCC-wide fixed-camera data and the current OSM-only/empty-static-pack implementation. Do not modify app code, workflows, website, Vercel settings, stores, domains or signing configuration; do not deploy, upload another build, file, spend, or ask for passwords/tokens unless explicitly authorized; the current iOS upload has already succeeded. Work only on `arena/74afd701-whisco-tv` if/when the Founder authorizes a change, and ask only for genuinely unresolved evidence (legal operator/CR, data reuse rights, contact operations, and current store listing facts), not already-decided product requirements. Cite every assertion as VERIFIED, FROM-CHAT, UNSURE or UNKNOWN, and preserve Whisco TV/Whisco Mobile isolation.

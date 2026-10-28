@@ -1,150 +1,71 @@
-# Salim release signing — Founder runbook
+# Salim release signing and upload runbook
 
-This describes the **third approved Salim workflow**, `.github/workflows/salim-release-signing.yml`.
-It is manual-only and produces signed artifacts for download. **It never uploads to Google Play,
-App Store Connect or TestFlight.**
+**Updated:** 2026-10-28 (Asia/Bahrain)
+**Scope:** `.github/workflows/salim-release-signing.yml` in `burn8887/Whisco-TV-`. This is a Salim-only, manual workflow.
+**Authoritative latest run:** [40677950530](https://github.com/burn8887/Whisco-TV-/actions/runs/40677950530). For full current project state see [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md).
 
-## What exists
+## Current release status
 
-| Item | Status |
-| --- | --- |
-| `.github/workflows/salim-release-signing.yml` | Added, manual (`workflow_dispatch`) only |
-| GitHub environment `salim-release` | **Must be created by the Founder** |
-| Signing secrets | **None configured** — the workflow fails closed until they exist |
-| Any signed artifact | None produced yet |
-| Any store upload | None, by design |
+| Item | Current evidence-based state |
+|---|---|
+| Manual workflow | Present; guarded by `salim-release` environment and typed identity `com.salimdrive.app`. |
+| ASC API secret names | Founder screenshot confirms `SALIM_ASC_KEY_ID`, `SALIM_ASC_ISSUER_ID`, `SALIM_ASC_PRIVATE_KEY_P8`. The workflow accepts these exact names and common aliases. Values are not recorded here. |
+| iOS signed build | Run `40677950530` succeeded: Xcode 26.3 archive, signed IPA export, signature/bundle-ID validation all passed. |
+| iOS App Store Connect upload | The workflow step **“Upload the verified IPA to App Store Connect”** succeeded in run `40677950530`. Apple processing/TestFlight state has not been checked. This is not evidence of approval or public release. |
+| Android Billing 8 code | Android source uses Billing Library 8.0.0; default version code is 8; Android CI passed run `40671995018`. |
+| Signed Android code-8 AAB | Not yet evidenced. Latest successful signed release was iOS-only; Android was skipped. Run the workflow for Android to create the signed AAB. |
+| Play Console upload | Not performed by this workflow. Download the signed AAB artifact and upload it to the Salim Play Console testing track. |
+| Xcode version caveat | The Founder temporarily deferred the Xcode 27.1/iPhone Duo requirement. Latest iOS release used Xcode 26.3; do not claim it satisfies the deferred requirement. |
 
-Until the environment and secrets exist, the job stops in its first guard step and builds nothing.
+## Run the workflow
 
-## Create the environment
+GitHub → **Actions → Salim signed release → Run workflow**. Choose the current branch `arena/74afd701-whisco-tv` and provide:
 
-GitHub → repository **Settings → Environments → New environment → `salim-release`**.
+- `version_name`: intended marketing version (use the version approved for the release; do not infer it from Billing Library 8.0.0).
+- `version_code`: a positive integer, never previously used in the target store. The immediate Android replacement needs **8**. The workflow also passes this value as the iOS build number; check the intended ASC build-number policy before an iOS run.
+- `platform`: `android`, `ios`, or `both`.
+- `confirm_identity`: exactly `com.salimdrive.app`.
 
-Recommended settings:
+### Android output and Play upload
 
-- **Required reviewers:** add yourself. This means every signed build waits for a human click.
-- **Deployment branches:** *Selected branches* → `arena/3070ca80-whisco-tv` and `main`.
-- **Wait timer:** optional; a short delay makes accidental runs easy to cancel.
+The Android job checks the dedicated upload certificate fingerprint, materializes only Salim, builds a signed AAB and APK with the supplied inputs, verifies signatures and packaging, and retains artifact `salim-android-signed` for 14 days. For Play, download the `.aab`, verify package identity/version/signature, and manually upload it in Play Console. This workflow contains no Google Play Publisher/API upload step. A green push-triggered test build is not a substitute: it is not the signed store artifact.
 
-Do not reuse an environment, secret or certificate from any other application in this account.
+### iOS output and App Store Connect upload
 
-> **Create it before the first run.** GitHub silently creates a missing environment the first time a
-> workflow names it — with **no protection rules**. If that happens, delete the empty environment and
-> recreate it with the reviewers and branch restrictions above, so a signed build always needs a
-> human approval.
+The iOS job uses Xcode 26.3, checks the Apple distribution certificate/profile and production configuration, archives and exports an App Store IPA, verifies its signature and `com.salimdrive.app` bundle identity, then uploads that verified IPA to App Store Connect with `xcrun altool`. Artifact `salim-ios-signed` is retained for 14 days. After a successful upload, check App Store Connect → **My Apps → Salim → TestFlight → iOS Builds** for processing completion and any warnings. A successful Actions upload step is not App Review approval, TestFlight review completion, or release.
 
-## Android secrets
+## Environment and secret names
 
-Generate a **new upload key** for Salim. Never reuse another app's keystore.
+The workflow uses the `salim-release` GitHub environment. Never copy secret values into this repository, a workflow output, a terminal transcript, a chat, or an issue. The environment must contain the established Salim-specific signing material. Names used by the workflow include:
 
-```sh
-keytool -genkeypair -v -keystore salim-upload.jks -alias salim-upload \
-  -keyalg RSA -keysize 4096 -validity 10000 \
-  -dname "CN=Salim, O=YOUR ENTITY, C=BH"
-base64 -w0 salim-upload.jks > salim-upload.jks.b64
-keytool -list -v -keystore salim-upload.jks -alias salim-upload | grep SHA256
-```
+**Android signing**
 
-| Secret | Value |
-| --- | --- |
-| `SALIM_ANDROID_KEYSTORE_BASE64` | Contents of `salim-upload.jks.b64` |
-| `SALIM_ANDROID_KEYSTORE_PASSWORD` | Keystore password |
-| `SALIM_ANDROID_KEY_ALIAS` | `salim-upload` |
-| `SALIM_ANDROID_KEY_PASSWORD` | Key password |
-| `SALIM_ANDROID_CERT_SHA256` | SHA-256 fingerprint from the `keytool -list` output |
+- `SALIM_ANDROID_KEYSTORE_BASE64`
+- `SALIM_ANDROID_KEYSTORE_PASSWORD`
+- `SALIM_ANDROID_KEY_ALIAS`
+- `SALIM_ANDROID_KEY_PASSWORD`
+- `SALIM_ANDROID_CERT_SHA256`
 
-The workflow compares the keystore's fingerprint with `SALIM_ANDROID_CERT_SHA256` before building,
-so a wrong or substituted key fails immediately. Keep an offline backup of the keystore and its
-passwords: losing an upload key before Play App Signing is enrolled can permanently block updates.
+**Apple signing**
 
-## Apple secrets
+- `SALIM_APPLE_TEAM_ID`
+- `SALIM_APPLE_CERT_P12_BASE64`
+- `SALIM_APPLE_CERT_PASSWORD`
+- `SALIM_APPLE_PROFILE_BASE64`
+- `SALIM_APPLE_PROFILE_NAME`
 
-In the Apple Developer portal, with the permanent Salim App ID (`com.salimdrive.app`):
+**App Store Connect API**
 
-1. Create an **Apple Distribution** certificate; export it from Keychain as `.p12`.
-2. Create an **App Store** distribution provisioning profile for that App ID.
-3. Base64 both files.
+- Founder-confirmed names: `SALIM_ASC_KEY_ID`, `SALIM_ASC_ISSUER_ID`, `SALIM_ASC_PRIVATE_KEY_P8`.
+- Also accepted by the workflow: `APP_STORE_CONNECT_KEY_ID`, `APP_STORE_CONNECT_ISSUER_ID`, `APP_STORE_CONNECT_PRIVATE_KEY`; `ASC_API_KEY_ID`, `ASC_API_ISSUER_ID`, `ASC_API_PRIVATE_KEY`; and `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`.
+- The private-key secret can be raw PEM or base64-encoded PEM. The workflow writes it to a temporary key location and deletes it during cleanup. Never put it in source control.
 
-```sh
-base64 -w0 distribution.p12 > distribution.b64
-base64 -w0 Salim_AppStore.mobileprovision > profile.b64
-```
+A successful secret guard proves that required values were available to that run; it does not expose or independently validate their provenance. No credential values are recorded in this library.
 
-| Secret | Value |
-| --- | --- |
-| `SALIM_APPLE_TEAM_ID` | 10-character Apple team identifier |
-| `SALIM_APPLE_CERT_P12_BASE64` | Base64 of the distribution `.p12` |
-| `SALIM_APPLE_CERT_PASSWORD` | Password chosen when exporting the `.p12` |
-| `SALIM_APPLE_PROFILE_BASE64` | Base64 of the `.mobileprovision` |
-| `SALIM_APPLE_PROFILE_NAME` | Exact profile name as shown in the portal |
+## Store and safety boundaries
 
-The workflow refuses to continue if the profile's `application-identifier` is not Salim's, so a
-generic or wrong-app profile cannot silently sign the build.
-
-## Running it
-
-Actions → **Salim signed release** → *Run workflow*, filling in:
-
-- `version_name` — e.g. `0.3.0`
-- `version_code` — a positive integer never used before for this app
-- `platform` — `both`, `android` or `ios`
-- `confirm_identity` — must be exactly `com.salimdrive.app`; this is a deliberate speed bump so
-  nobody signs the wrong product.
-
-The Android signed build now fails closed unless `SALIM_REPORT_API_URL` is the approved live URL
-`https://www.salimdrive.com/v1`. The current manual release workflow does not yet pass that
-configuration, and the iOS project report-service URL remains empty. Do not run a store build until
-the service is deployed, both platform build settings are wired and verified, and the privacy URL is live.
-
-Outputs, retained for 14 days:
-
-- `salim-android-signed` — signed `.aab` and `.apk`
-- `salim-ios-signed` — signed `.ipa` and the `.xcarchive`
-
-The run summary states plainly that nothing was uploaded.
-
-## Safety properties
-
-- **Manual only.** No push, schedule or pull request can start a signed build.
-- **Environment-gated.** Secrets are unavailable unless the `salim-release` environment exists and
-  any protection rules you set are satisfied.
-- **Fail closed.** Missing secrets stop the job before checkout of build outputs.
-- **Identity-checked.** Android fingerprint and iOS provisioning profile are verified before
-  signing; bundle ID is re-checked on the exported IPA.
-- **Ephemeral key material.** The keystore and keychain are written to `$RUNNER_TEMP`, deleted in an
-  `always()` step, and never uploaded. Nothing is printed except the public certificate fingerprint.
-- **No upload path.** There is no Play Publisher, `altool`, `notarytool` or `xcrun` upload step.
-
-## Verification of the workflow itself
-
-`python3 salim-workspace/tools/check_workflows.py` (9 checks) verifies the three Salim workflows at
-commit time: every source path they reference must exist, the pre-rename capsule name must not
-reappear, no store-upload command may be present, and the signing workflow must stay
-`workflow_dispatch`-only with **every** job in `salim-release`. It was written after a stale
-pre-rename path was found in the Android verification step of this workflow. The same script runs
-in the generated standalone repository, where it also rejects any surviving capsule path.
-
-## Operational status (26 October 2026)
-
-The manual `workflow_dispatch` signing workflow is present on the repository default branch and
-can be run against the Salim feature branch after selecting the correct ref and approving the
-`salim-release` environment. It signs Salim artifacts only and has no store-upload step.
-
-Historical signed artifacts exist: Android run `40311763923` and iOS run `40298809146`. They were
-built before the current AdMob, consent, synthetic-data removal and trip-history changes. They are
-stale and must not be distributed or uploaded. Current source commit `0915dfa` passed unsigned CI:
-Android run `40316308868` (24 tests, zero failures, 16 KB alignment) and iOS run `40316308926`
-(17 XCTest cases and an unsigned device archive). Rerun both signed platform builds after verifying
-the production AdMob variables and store IDs; the agent cannot dispatch the signing workflow. The next release version
-is `0.7.0` / build `7`; the Android release build also needs an unused Play version code.
-
-The signed workflow performs release identity promotion to the permanent `com.salimdrive.app`
-bundle/application ID. Verify that value in the exported IPA and Android package before accepting
-any artifact. The checked-in development IDs remain `.demo` identities. App Store Connect and Play
-Console product configuration, free-trial setup, real GCC data, physical-device testing and final
-store screenshots remain separate acceptance gates.
-
-## What still requires separate approval
-
-Uploading a signed artifact to either store, creating store records, enrolling in Play App Signing,
-distributing to testers, or changing any other application's signing assets.
+- Android signed artifacts are for the Salim Play Console only. No other Whisco app, signing key, listing, account, or store record may be changed.
+- iOS upload authorization for the current build was given by the Founder and the App Store Connect upload step succeeded in run `40677950530`. Do not infer blanket authorization for future submissions.
+- This runbook does not authorize public release, store metadata changes, Play upload, new spend, or legal/publication claims.
+- Store readiness still requires privacy/data-flow and SDK audit against the exact binaries, accurate store declarations, lawful data provenance and coverage statements, app records/listings, reviewer information, and physical-device acceptance. See [`STORE-RELEASE-CHECKLIST.md`](STORE-RELEASE-CHECKLIST.md).
+- Environment secret names are safe to document; secret values, private keys, keystores, passwords, provisioning profiles, and API credentials are not.

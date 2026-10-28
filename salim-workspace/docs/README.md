@@ -1,13 +1,13 @@
 # Salim Venture Document Library
 
-**Index version:** 1.5
+**Index version:** 1.6
 **Updated:** 2026-10-28
 **Scope:** Salim — Road Awareness; this library is stored under `salim-workspace/docs/` and must not change Whisco TV, Whisco Mobile, or any other app.
 **Source of truth:** Git in this repository. A document is durable only after its commit is pushed to `arena/74afd701-whisco-tv`.
 
 ## Reading order
 
-Start with the **Company Dossier**, then **Operating Rules**, then the Mission & Vision. For current execution state use the **Project Handover Log** and **Agent Takeover Brief** when published. This library intentionally distinguishes measured facts, founder input, research, and `[EST]` scenarios. Missing facts are marked `NOT IN DATA`; credentials are never stored here.
+Start with the **Company Dossier**, then **Operating Rules**, then the Mission & Vision. For current execution state, start with the [Agent Takeover Brief](AGENT-TAKEOVER-BRIEF.md), then check the [Project Handover Log](PROJECT-HANDOVER-LOG.md) and latest GitHub run/PR state. This library intentionally distinguishes measured facts, founder input, research, and `[EST]` scenarios. Missing facts are marked `NOT IN DATA`; credentials are never stored here.
 
 ## Core library index
 
@@ -18,7 +18,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 1 | Foundation | [Company Dossier](business/COMPANY-DOSSIER.md) | 1.1 | 2026-10-28 | Master identity, scope, evidence-based product and commercial snapshot | Complete interim; operator, ownership, activities, contacts and publication identity unresolved |
 | 2 | Foundation | [Operating Rules](business/OPERATING-RULES.md) | 1.2 | 2026-10-28 | Measurement, gates, budgets, spending controls, maintenance | Complete interim rules; diligence controls and Year 1 budget distinction recorded; transaction caps remain unresolved |
 | 3 | Foundation | [Mission & Vision](business/MISSION-VISION.md) | 1.1 | 2026-10-28 | Mission, vision and values as decision rules | Complete interim; safety and coverage limitations explicit |
-| 4 | Foundation | [Project Handover Log](PROJECT-HANDOVER-LOG.md) | 1.0 | 2026-10-28 | Chronological operational memory | Living; initial entry recorded |
+| 4 | Foundation | [Project Handover Log](PROJECT-HANDOVER-LOG.md) | 1.1 | 2026-10-28 | Chronological operational memory | Living; includes 2026-10-28 Billing 8 and store-release events |
 | 5 | Foundation | [Disaster Recovery](DISASTER-RECOVERY.md) | 1.0 | 2026-10-28 | Credential locations and service/platform recovery | Complete interim runbook; contacts/drill evidence missing |
 | 6 | Product & Brand | [Product Requirements / App Blueprint](PRODUCT-BLUEPRINT.md) | 1.0 | 2026-10-28 | Screens, flows, data model, platform plan, MVP and non-goals | Complete; source-based, update after feature changes |
 | 7 | Product & Brand | [Design System v1](DESIGN-SYSTEM.md) | 1.0 | 2026-10-28 | Visual tokens, accessibility and brand rails | Complete interim; visual/accessibility audit pending |
@@ -43,9 +43,10 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 25 | Partnerships | Sponsor / BD Prospects Pack | — | — | Named prospects and gated offers | Pending applicability decision; no traction-based outreach yet |
 | 26 | App Store Operations | Store Review War Room | — | — | Rejection risks, evidence and response ladders | Pending Phase 7; before first submission |
 | 27 | Operations & AI Workforce | Operations & AI-Org Blueprint | — | — | Automation, human control, AI charters and sanitization | Pending Phase 8 |
-| 28 | Operations & AI Workforce | Agent Takeover Brief | — | — | Successor bootstrap, state, gates and watch list | Pending Phase 8; living |
+| 28 | Operations & AI Workforce | Operations & AI-Org Blueprint | — | — | Automation, human control, AI charters and sanitization | Pending Phase 8 |
 | 29 | Seasonal / Campaign | Flagship Campaign Bible | — | — | Bahrain/GCC seasonal campaign and freeze controls | Pending applicability research; likely defer until G3 |
-| 30 | Index | This library index | 1.5 | 2026-10-28 | Locate documents, versions and staleness | Living; Phase 4 gates and stale-document controls recorded |
+| 30 | Operations & AI Workforce | [Agent Takeover Brief](AGENT-TAKEOVER-BRIEF.md) | 1.0 | 2026-10-28 | Evidence-labeled current branch, release, pending work, constraints and finance facts for a successor agent | Current at 2026-10-28; refresh live run/store state before acting |
+| 31 | Index | This library index | 1.6 | 2026-10-28 | Locate documents, versions and staleness | Living; supersedes the old “brief pending” status |
 
 ## Phase 3 supporting schedule (outside the 30 core documents)
 
@@ -53,10 +54,10 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 
 ## Existing Salim project references (not substitutes for the 30 core documents)
 
-- [Claude Engineering Handover](HANDOVER.md) — verified current-state bootstrap and safe first-task prompt; recheck live dashboards before acting.
+- [Claude Engineering Handover](HANDOVER.md) — broad product/architecture bootstrap; older release-status snapshots are superseded by the current Agent Takeover Brief.
 - `PRODUCT-DECISIONS.md` — historical product rulings; verify its as-of date and reconcile where newer project decisions supersede it.
-- `STORE-RELEASE-CHECKLIST.md`, `STORE-LISTING-DRAFT.md` — product/store drafts; not legal approval or proof that URLs are live. `PRIVACY-PUBLICATION-DRAFT.md` is the source-audit/publication-hold note; the new `PRIVACY-POLICY-DRAFT.md` is a separate placeholder-only policy draft.
-- `BUILDING-LOCALLY.md`, `RELEASE-SIGNING.md`, `ACCOUNTS-AND-SECRETS.md`, `RECOVERY-AND-RELEASE.md` — technical procedures; do not copy secret values into this library.
+- `STORE-RELEASE-CHECKLIST.md`, `STORE-LISTING-DRAFT.md` — checklist and product/store drafts; not legal approval or proof that URLs are live. The checklist now records the successful iOS ASC upload and pending Android signed v8 AAB. `PRIVACY-PUBLICATION-DRAFT.md` is the source-audit/publication-hold note; the new `PRIVACY-POLICY-DRAFT.md` is a separate placeholder-only policy draft.
+- `BUILDING-LOCALLY.md`, `RELEASE-SIGNING.md`, `ACCOUNTS-AND-SECRETS.md`, `RECOVERY-AND-RELEASE.md` — technical procedures; release runbook/status refreshed 2026-10-28; do not copy secret values into this library.
 - `BRAND-IDENTITY.md`, `NAME-CLEARANCE.md`, `NAME-CHANGE-ASSESSMENT.md` — prior brand/name work; retain Salim/سالم spelling.
 - `report-service/README.md` — source-only report service and activation gates.
 

@@ -31,7 +31,7 @@ The product is not a general-purpose navigation replacement. Its central promise
 | Operating budget | Founder-provided Year 1 availability: USD 20,000/month; USD 240,000 annualized. Year 2–3 budgets NOT IN DATA; no transaction-specific spend authorized by the envelope |
 | Camera-data status | OSM coverage is approximate/incomplete; static packs empty; no GCC dataset cleared; G5 closed |
 | Community reports | Active app screen holds local unverified drafts; shared report service is source-only, not deployed or wired to active submission/overlay; live moderation **NOT IN DATA** |
-| Release status | Both developer accounts are reported active; current signed test upload and production approval are not evidenced; G2/G3 closed |
+| Release status (2026-10-28) | Signed iOS IPA upload to App Store Connect succeeded in run `40677950530`; Apple processing/TestFlight status unknown. Signed Android code-8 AAB / Play upload pending. G2/G3 remain closed; no production approval or revenue evidence |
 
 ## 3. Customer value proposition (hypothesis, not public claim)
 

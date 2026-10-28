@@ -1,6 +1,6 @@
 # Salim — Play closed testing / TestFlight release gates
 
-This is a production-build preparation checklist, not approval to upload. Current source commit `0915dfa` passed Android CI run `40316308868` (24 tests, zero failures, 16 KB alignment) and iOS CI run `40316308926` (17 XCTest cases; unsigned device archive compiled). These are not signed release artifacts. Historical signed artifacts predate the current changes and are not valid candidates. The eight approximate Bahrain pack entries and live OpenStreetMap queries do not constitute complete GCC coverage. No store upload is authorized.
+This is a release-readiness checklist, not evidence of store approval. **Updated 2026-10-28:** Android Billing 8 source passed CI run `40671995018` (24 tests, zero failures, 16 KB alignment and emulator tests). A signed Android version-code-8 AAB has not yet been evidenced; Android is still pending a signed-release run and manual Play Console upload. iOS signed IPA upload succeeded in release run `40677950530` using Xcode 26.3; App Store Connect processing/TestFlight visibility is not yet verified. The Founder temporarily deferred the Xcode 27.1/iPhone Duo requirement. OSM coverage and an empty bundled camera pack do not prove complete GCC coverage. See [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md) for the current evidence-labeled state.
 
 ## Independent app identity — Founder confirmation required
 
@@ -13,14 +13,14 @@ Approved store title: **Salim — Road Awareness**. Approved brand domain: **www
 
 | Platform | Development identifier | Store identifier | Display name | Current source version |
 | --- | --- | --- | --- | --- |
-| Android | `app.salim.android.demo` | `com.salimdrive.app` | Salim | `0.7.0` / 7 |
-| Apple | `app.salim.ios.demo` | `com.salimdrive.app` | Salim | `0.7.0` / 7 |
+| Android | `app.salim.android.demo` | `com.salimdrive.app` | Salim | Default source: `0.7.0-demo` / code 8; release workflow takes explicit marketing version |
+| Apple | `app.salim.ios.demo` | `com.salimdrive.app` | Salim | Release workflow injects version/build inputs; latest upload used inputs that must be confirmed in ASC |
 
-The release materializer must be checked to ensure both native archives use the permanent store ID. Both developer accounts are active. Never change any Whisco app identity, listing, certificate, upload key or service configuration.
+The release workflow verified `com.salimdrive.app` in the exported iOS IPA. Do not infer store-record ownership/account status beyond the successful ASC upload. Never change any Whisco app identity, listing, certificate, upload key or service configuration.
 
 ## Google Play closed testing
 
-- [ ] Android CI green: 14 JVM contracts; 6 SQLite and 4 lifecycle instrumentation cases; lint; debug APK; unsigned release AAB. Use the actual run report, not source test counts.
+- [x] Billing 8 Android CI green: run `40671995018` reports 24 tests passed, 0 failed/skipped, emulator tests passed and 16 KB alignment checks passed. This is CI validation, not a signed Play artifact.
 - [ ] Dedicated Salim app created in Play Console, independent upload key and Play App Signing configured; upload certificate fingerprint recorded securely.
 - [ ] Physical device testing completed below. Verify current Play target-SDK and 16 KB page-size requirements against the exact signed artifact, including Compose native dependencies.
 - [ ] `https://www.salimdrive.com/privacy` and `/support` live over HTTPS, placeholders replaced and
@@ -28,10 +28,10 @@ The release materializer must be checked to ensure both native archives use the 
       monitored. The domain did not resolve on 20 October 2026. Complete Data safety against actual behavior and all system/provider interactions; do not declare background location absent merely because `ACCESS_BACKGROUND_LOCATION` is not requested.
 - [ ] Foreground-service `location` declaration/review evidence, prominent in-app disclosure, content rating, app access (no account), ads declaration (AdMob in store builds only; no ads in demos), countries, subscription products/trials and closed tester group configured in the **Salim** record only.
 - [ ] Current store screenshots and graphic supplied from the final signed app. The present CI run does not capture store screenshots; add/capture them only after the release candidate is verified. Never use synthetic or incomplete coverage to imply comprehensive GCC data. `store-icon-512.png` is the Salim mark (road-S ribbon on `#1F5C47`). Brand system: [BRAND-IDENTITY.md](BRAND-IDENTITY.md).
-- [ ] Bundle signed, signature verified against the Salim upload certificate, version code unused, then uploaded only with separate explicit authorization.
+- [ ] Run the manual signed-release workflow for Android with version code **8**; download `salim-android-signed`, verify package/version/signature, confirm code 8 is unused in Play Console, then manually upload the AAB to the Salim testing track. The workflow does not upload to Play.
 - [ ] Review approved; tester opt-in URL opened on an authorized Google account; installation from Play and update path confirmed.
 
-A manual, environment-gated signed build exists: `.github/workflows/salim-release-signing.yml` with the `salim-release` environment. Earlier signed artifacts were produced, but predate the current AdMob/privacy/history changes and must not be uploaded. The workflow does not upload. It is manual-only and can be run against a selected branch after environment approval; see the current historical-artifact warning in [RELEASE-SIGNING.md](RELEASE-SIGNING.md).
+The manual, environment-gated workflow is `.github/workflows/salim-release-signing.yml`. It produces the Android signed artifact for manual Play upload; it does not publish to Play. Current Android Billing 8 source passed CI, but the signed code-8 AAB is still pending. See [RELEASE-SIGNING.md](RELEASE-SIGNING.md).
 
 Signing support is opt-in. The push-triggered CI intentionally supplies **none** of these variables and creates an unsigned release AAB:
 
@@ -52,14 +52,14 @@ keytool -printcert -jarfile app/build/outputs/bundle/release/app-release.aab
 
 ## Apple TestFlight
 
-- [ ] Xcode 26.3 simulator tests and unsigned arm64 device archive green; validate the current App Store Connect SDK requirement before submission.
+- [x] Signed iOS archive/IPA built with Xcode 26.3, identity/signature verified, and uploaded to App Store Connect in run `40677950530`. Xcode 27.1/iPhone Duo requirement was temporarily deferred by the Founder; this build does not satisfy that deferred requirement.
 - [ ] Separate Salim App ID, App Store Connect app record, Apple team ID, distribution certificate and matching App Store distribution profile confirmed. No existing app signing asset is reused without explicit approval.
 - [ ] App icon catalog, iPad orientations, location disclosure, background modes and required-reason privacy manifest validated in the actual archive. The manifest declares UserDefaults (`CA92.1`) and monotonic interval measurements (`35F9.1`); re-audit after dependency changes.
 - [ ] App Privacy answers, privacy/support URLs, age rating, export-compliance/encryption answers, beta description, What to Test and review contact completed. No export-compliance answer is inferred from an unsigned build.
-- [ ] Signed archive exported and validated on an authorized isolated macOS machine, then uploaded only with separate authorization. Simulator ZIP and unsigned archive ZIP cannot be installed through TestFlight.
-- [ ] TestFlight processing complete; marketing associates assigned as appropriate internal/external testers. External beta review, if required, is complete and invitation installation succeeds.
+- [x] Signed IPA exported and validated in the isolated macOS workflow; App Store Connect upload step succeeded in run `40677950530`. The Founder authorized this upload. A downloaded IPA is not required to repeat the upload.
+- [ ] Verify Apple processing completes and the build appears under TestFlight. Configure beta details/test groups as appropriate, then verify installability. External beta review, if required, remains a separate gate. No processing completion or approval is yet verified.
 
-The simulator build/test workflow builds/archives **without signing**. The separate approved release workflow signs but never uploads to App Store Connect. The agent cannot dispatch the signing workflow; a fresh signed release run must be initiated through the authorized manual process. On an already authorized Mac with the dedicated certificate and profile installed, the archive step is conceptually:
+The simulator workflow remains unsigned. The separate manual release workflow signs and uploads the verified IPA to App Store Connect; run `40677950530` completed successfully. The current source uses Xcode 26.3. The agent's GitHub Actions dispatch call was denied, so the Founder initiated the run in the GitHub UI. On a future signed release, use the guarded workflow rather than the conceptual local archive command below; retain this command only as historical manual-build reference:
 
 ```sh
 xcodegen generate

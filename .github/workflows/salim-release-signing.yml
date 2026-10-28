@@ -349,7 +349,7 @@ jobs:
             SALIM_ADS_ENABLED=YES \
             archive
 
-      - name: Export an App Store IPA without uploading it
+      - name: Export an App Store IPA for verified upload
         working-directory: ${{ runner.temp }}/salim/apps/ios
         env:
           TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}

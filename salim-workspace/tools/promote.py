@@ -503,7 +503,7 @@ This tree is **not ready for store submission**.
 
 - Nearby camera searches may use OpenStreetMap mapped records; coverage and accuracy are incomplete and not official. No verified static GCC camera dataset is bundled.
 - The community report API and moderation console are source code only. They are not deployed, and `www.salimdrive.com` is not live. Do not collect submissions until durable hosting, privacy disclosures, backups and a named moderator are in place.
-- No current signed release artifacts or end-to-end store-console verification are included. No store upload is authorized by this repository.
+- The generated tree does not contain signed artifacts or prove current store-console processing. The manual release workflow can upload a verified iOS IPA to App Store Connect when explicitly authorized; it creates an Android signed artifact for manual Play Console upload. Check the current release runbook and agent brief for evidence.
 - No physical-device validation of background location, audio, battery, basemap performance or accessibility has been completed for this tree.
 - CarPlay, Android Auto, watchOS, vehicle automation and internal turn-by-turn navigation are not implemented.
 - Permanent bundle identifier `com.salimdrive.app` is declared in both native project sources; confirm the corresponding store records before signing.

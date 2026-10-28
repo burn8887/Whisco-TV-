@@ -1,5 +1,7 @@
 # Getting Salim into Play and TestFlight
 
+> **Historical plan — superseded 2026-10-28:** Do not follow the old account-creation, merge-to-main, secret-setup, or no-upload claims below without checking current state. The current branch/PR, successful iOS App Store Connect upload, pending Android signed v8 build, and current workflow instructions are in [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md), [`RELEASE-SIGNING.md`](RELEASE-SIGNING.md), and [`STORE-RELEASE-CHECKLIST.md`](STORE-RELEASE-CHECKLIST.md).
+
 The critical path to a store build. Ordered, with the things only the Founder can do marked.
 
 ## The two hard gates

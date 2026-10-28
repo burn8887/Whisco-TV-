@@ -59,11 +59,19 @@ class WorkflowCheckTests(unittest.TestCase):
         problems = check_workflows.check(self.tmp)
         self.assertTrue(any("does not exist" in p for p in problems), problems)
 
-    def test_store_upload_command_is_rejected(self):
+    def test_automatic_play_upload_is_rejected(self):
         path = self.workflow("release-signing")
-        path.write_text(path.read_text() + "\n# run: xcrun altool --upload-app\n")
+        path.write_text(path.read_text() + "\n# uses: r0adkll/upload-google-play@v1\n")
         problems = check_workflows.check(self.tmp)
-        self.assertTrue(any("store-upload" in p for p in problems), problems)
+        self.assertTrue(any("Google Play upload" in p for p in problems), problems)
+
+    def test_app_store_upload_must_follow_identity_verification(self):
+        path = self.workflow("release-signing")
+        text = path.read_text()
+        text = text.replace("      - name: Verify the IPA signature and identity\n", "", 1)
+        path.write_text(text)
+        problems = check_workflows.check(self.tmp)
+        self.assertTrue(any("must follow IPA signature" in p for p in problems), problems)
 
     def test_signing_workflow_must_not_trigger_on_push(self):
         path = self.workflow("release-signing")

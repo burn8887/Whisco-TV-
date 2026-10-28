@@ -63,3 +63,19 @@
 **Checks:** `git diff --check` and internal Markdown-link existence checks passed (30 Markdown files scanned). Staged diff check passed. No release, store upload, entity filing, spend or public deployment was performed.
 **Commit/push:** Phase 4 documents committed as `f7fcaf8` (`Add Salim Phase 4 legal and company documents`) and pushed successfully to `origin/arena/74afd701-whisco-tv`.
 **Next:** obtain Founder’s entity, activity, identity-publication and privacy operations decisions; request current MOIC/Sijilat/counsel resolution of the W.L.L. count issue and 2025 amendment implications. Continue Phase 5 desk research if these facts remain unavailable; they do not authorize a filing or public launch.
+
+## Entry 8 — Billing 8 fix, signed iOS upload, and Android v8 pending
+
+**Date:** 2026-10-28 (Asia/Bahrain).
+**Branch/PR:** `arena/74afd701-whisco-tv`; PR #37 remains open. Do not merge without separate Founder approval.
+**Commits:** `6254193` (Billing Library 8.0.0 / default Android version code 8), `b5ed5fc` (Billing 8 callback migration), `3660d3e` (verified IPA ASC upload step), `b4e7356` (ASC secret-name compatibility).
+
+**Android evidence:** Initial run `40671355948` failed compilation after the Billing 8 API changed the product details callback shape. The fix reads `queryResult.productDetailsList` and uses the Billing 8 purchases callback type. Follow-up Android CI run `40671995018` passed: 24 tests, no failures or skips, APK ZIP alignment and 16 KB native-library alignment checks passed, and emulator verification passed. This is native CI evidence, **not** a signed Play bundle. The signed Android version-code-8 AAB has not yet been evidenced; a manual signed-release run on platform `android` remains required. The workflow retains an AAB/APK for download but does not publish to Google Play; Play upload remains manual.
+
+**iOS evidence:** Founder authorized an App Store Connect upload using available tooling while temporarily deferring the Xcode 27.1/iPhone Duo requirement. The workflow now uses Xcode 26.3. Signed release run `40677950530` passed Apple signing-secret and ASC credential checks, archived/exported the IPA, verified its signature and bundle ID, and succeeded at **Upload the verified IPA to App Store Connect**. User reports downloading the IPA; the workflow upload itself succeeded, so no manual re-upload is required absent a failed/missing build in ASC. App Store Connect processing, TestFlight visibility, App Review, and public release have not been verified.
+
+**Secret handling:** Founder screenshot confirmed environment secret names `SALIM_ASC_KEY_ID`, `SALIM_ASC_ISSUER_ID`, and `SALIM_ASC_PRIVATE_KEY_P8`; workflow aliases were added. Secret values were never read into chat or repository. The successful iOS run proves the named credential values were available to that job, not that the app is approved.
+
+**Financial state:** No monetization inputs changed. Actual revenue remains `$0` until a reconciled receipt; the strict projection is Year 1 net operating result `(USD 240,000)` under full use of the Year 1 spending envelope and zero revenue, while Year 2–3 strict net results remain NOT IN DATA. The separate `[EST]` flat-spend sensitivity remains `(USD 240,000)` per year, `(USD 720,000)` total, and is not an approved budget or expected outcome.
+
+**Next:** verify Apple processing/TestFlight status in ASC; run signed Android platform `android` with version code `8`; download and manually upload the signed AAB to Play testing; then complete remaining privacy/legal/data-rights/physical-device/store-metadata gates. See `AGENT-TAKEOVER-BRIEF.md` and refreshed release documents. No PR merge, Play upload, physical-device test, or public release occurred in this session.

@@ -1,5 +1,7 @@
 # Migration to `burn8887/salim-drive` — 20 October 2026
 
+> **Status correction — 2026-10-28:** This document is a historical migration proposal/snapshot, not proof that migration completed or that the standalone repository is the current source of truth. Current work remains in `burn8887/Whisco-TV-` under `salim-workspace/`; verify any private repository access and Founder-approved migration decision before using this plan. Current release status is in [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md).
+
 Salim now lives in its own private repository. This capsule is the **archive** of how it was
 built, not the working copy.
 
@@ -48,7 +50,7 @@ neither identifier can change afterwards.
 `promote.py --verify` checks the output and runs its test suites. Last verified run:
 
 - 18 Python tests pass (ELF checker, site checker, workflow guard, workflow tests).
-- `check_workflows.py` passes: three workflows, paths resolve, manual-only signing.
+- `check_workflows.py` passes: three workflows, paths resolve, manual-only signing, verified iOS App Store Connect upload, and manual Play upload.
 - `check_site.py site` passes with no placeholders left; the operator is named on every page.
 - 6 Node engine tests pass; `npm ci` and `npm run build` succeed.
 - `build_deploy.py` regenerates the single-file `deploy/index.html` (708 KiB) and keeps
