@@ -3,6 +3,7 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
+import android.media.ToneGenerator
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
@@ -18,6 +19,7 @@ class AudioAlerts(context: Context) {
     private var closed=false
     private var current: String?=null
     private var tts: TextToSpeech?=null
+    private var tone: ToneGenerator?=null
     private val focus=AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK).setAudioAttributes(attributes).setAcceptsDelayedFocusGain(false).setOnAudioFocusChangeListener({ value ->
         if(value==AudioManager.AUDIOFOCUS_LOSS || value==AudioManager.AUDIOFOCUS_LOSS_TRANSIENT)stop()
     },main).build()
@@ -36,6 +38,17 @@ class AudioAlerts(context: Context) {
             override fun onStop(id: String?,interrupted: Boolean) { finish(id) }
         })
     }
+    /**
+     * Short attention tone that runs before the spoken alert. ToneGenerator is
+     * optional: some devices refuse to allocate one, so every call is wrapped and a
+     * missing tone never prevents the voice or the alert itself.
+     */
+    fun beep() {
+        if(closed)return
+        val generator=tone ?: runCatching { ToneGenerator(AudioManager.STREAM_NOTIFICATION,70) }.getOrNull()
+        tone=generator
+        runCatching { generator?.startTone(ToneGenerator.TONE_PROP_BEEP,240) }
+    }
     fun speak(message: String) {
         if(!ready || closed)return
         stop()
@@ -46,5 +59,5 @@ class AudioAlerts(context: Context) {
     }
     private fun finish(id: String?) { main.post { if(id!=null && current==id) { current=null;manager.abandonAudioFocusRequest(focus) } } }
     fun stop() { current=null;tts?.stop();manager.abandonAudioFocusRequest(focus) }
-    fun close() { closed=true;stop();main.removeCallbacksAndMessages(null);tts?.shutdown();tts=null }
+    fun close() { closed=true;stop();main.removeCallbacksAndMessages(null);tts?.shutdown();tts=null;runCatching { tone?.release() };tone=null }
 }

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Salim camera review</title>
+<style>
+:root{color-scheme:dark;--bg:#091211;--panel:#101e1c;--line:#29413c;--ink:#eef6f2;--muted:#9cb0a9;--mint:#72e3bf;--red:#ff938b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,sans-serif}.wrap{max-width:1120px;margin:auto;padding:28px 20px 60px}header{display:flex;justify-content:space-between;align-items:end;gap:16px;border-bottom:1px solid var(--line);padding-bottom:20px}.eyebrow{letter-spacing:.16em;font-size:11px;color:var(--mint);font-weight:700}h1{font-size:clamp(26px,5vw,42px);margin:5px 0}.sub,.muted{color:var(--muted)}.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}input,select{min-height:42px;background:#091513;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px}input[type=password]{flex:1;min-width:240px}button{background:var(--mint);color:#062019;border:0;border-radius:8px;padding:10px 14px;font-weight:750;cursor:pointer}button.secondary{background:#1b302c;color:var(--ink);border:1px solid var(--line)}button.danger{background:#502724;color:#ffe7e2;border:1px solid #82433c}.toolbar{justify-content:space-between}.card h2{font-size:18px;margin:0 0 6px}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:11px;color:var(--mint);margin:0 6px 7px 0}.meta{font:12px ui-monospace,monospace;overflow-wrap:anywhere;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.notice{min-height:1.5em;color:var(--mint)}.empty{text-align:center;padding:48px 16px;color:var(--muted)}details{margin-top:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--muted);font-size:12px}.hidden{display:none}@media(max-width:620px){.wrap{padding:20px 12px}.toolbar{align-items:stretch}.toolbar>*{width:100%}}
+</style>
+<script src="/admin.js" defer></script>
+</head>
+<body><main class="wrap">
+<header><div><div class="eyebrow">SALIM · CAMERA DATA</div><h1>Human review queue</h1><div class="sub">Every action is reviewed by an operator. Community votes never publish a camera by themselves.</div></div><div class="badge">MODERATOR AREA</div></header>
+<section class="panel"><form id="auth" class="row"><label for="token">Moderator token</label><input id="token" type="password" autocomplete="current-password" required><button>Connect</button><button type="button" class="secondary" id="forget">Forget token</button></form><p id="notice" class="notice" role="status"></p></section>
+<section id="queue" class="hidden"><div class="panel row toolbar"><div><strong id="queueTitle">Pending reports</strong><div class="muted">Location proposals stay private until human approval. Do not approve from vote count alone.</div></div><div class="row"><select id="status"><option value="PENDING">Pending</option><option value="NEEDS_REVIEW">Needs review</option><option value="APPROVED">Approved</option><option value="REJECTED">Rejected</option><option value="ALL">All</option></select><button id="refresh">Refresh queue</button></div></div><div id="cards"></div></section>
+</main></body></html>

@@ -1,3 +1,32 @@
 # Keep Salim out of the host project's automatic content scans.
 # Reviewed source is explicitly tracked; dependency/build output must never be added.
 *
+
+# Explicitly tracked native advertising integration; every other new capsule file stays ignored.
+!apps/
+!apps/salim-android/
+!apps/salim-android/app/
+!apps/salim-android/app/src/
+!apps/salim-android/app/src/main/
+!apps/salim-android/app/src/main/java/
+!apps/salim-android/app/src/main/java/app/
+!apps/salim-android/app/src/main/java/app/salim/
+!apps/salim-android/app/src/main/java/app/salim/AdMob.kt
+!apps/salim-android/app/src/main/java/app/salim/CommunityReports.kt
+!apps/salim-android/app/src/main/java/app/salim/CameraPack.kt
+!apps/salim-android/app/src/main/java/app/salim/CameraFeed.kt
+!apps/salim-android/app/src/main/java/app/salim/MapTiles.kt
+!apps/salim-android/app/src/main/java/app/salim/OsmMap.kt
+!apps/salim-ios/
+!apps/salim-ios/Salim/
+!apps/salim-ios/Salim/Ads.swift
+!apps/salim-ios/Salim/CommunityReports.swift
+!apps/salim-ios/Salim/CameraPack.swift
+!apps/salim-ios/Salim/CameraFeed.swift
+
+# Independently reviewed Salim reports API/operator console; keep runtime secrets and data out.
+!report-service/
+!report-service/**
+report-service/.env
+report-service/data/
+report-service/__pycache__/
