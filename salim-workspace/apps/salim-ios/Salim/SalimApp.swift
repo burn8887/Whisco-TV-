@@ -159,65 +159,15 @@ struct Dashboard: View {
     private var others: [Hazard] { model.hazards.filter { !$0.isCamera } }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
-                statement
-                mapCard
-                metrics
-                if model.mode == .idle && store.entitlementsLoaded && !store.premium && adConsent.canRequestAds {
-                    SalimAdBanner().frame(height: 50).frame(maxWidth: .infinity)
-                }
-                if model.mode == .idle { startRow }
-                if model.mode == .gps && !model.acquired { acquiring }
-
-                Text(model.status).font(.system(size: 12, design: .monospaced)).foregroundStyle(theme.accent)
-                Text(model.feed).font(.system(size: 12)).foregroundStyle(theme.muted)
-
-                if let match = model.warning { alertBanner(match) }
-
-                if !cameras.isEmpty {
-                    sectionLabel("CAMERAS · \(cameras.count)" + (cameras.contains { $0.id.hasPrefix("osm:") } ? " · \(cameras.filter { $0.id.hasPrefix("osm:") }.count) LIVE" : ""))
-                    ForEach(cameras) { hazard in
-                        alertRow(hazard.title, hazard.subtitle,
-                                 camera: hazard.id.hasPrefix("osm:") ? "OSM" : hazard.approximate ? "≈" : nil)
-                    }
-                }
-                if !others.isEmpty {
-                    sectionLabel("ROAD CONDITIONS")
-                    ForEach(others) { hazard in
-                        alertRow(hazard.title, hazard.subtitle, camera: nil)
-                    }
-                }
-
-                sectionLabel("DESTINATION")
-                TextField("Where are you heading?", text: $destination)
-                    .textFieldStyle(.plain)
-                    .padding(12)
-                    .background(theme.surface, in: RoundedRectangle(cornerRadius: 6))
-                    .overlay(RoundedRectangle(cornerRadius: 6).stroke(theme.line))
-                    .disabled(model.mode != .idle)
-                Button {
-                    var components = URLComponents(string: "https://maps.apple.com")!
-                    components.queryItems = [URLQueryItem(name: "q", value: destination)]
-                    if let url = components.url { UIApplication.shared.open(url) }
-                } label: {
-                    Text("OPEN IN MAPS")
-                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                        .tracking(1)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                }
-                .buttonStyle(.plain)
-                .overlay(RoundedRectangle(cornerRadius: 6).stroke(theme.line))
-                .foregroundStyle(theme.ink)
-                .disabled(destination.trimmingCharacters(in: .whitespaces).isEmpty || model.mode != .idle)
-
-                Text("Simulation is foreground-only. A GPS test may continue in the background until ended, subject to OS restrictions. This is not a navigation or emergency service.")
-                    .font(.system(size: 11)).foregroundStyle(theme.muted).lineSpacing(3)
+        GeometryReader { geometry in
+            ScrollView {
+                dashboardContent(width: geometry.size.width)
+                    .frame(maxWidth: geometry.size.width >= 760 ? 1_280 : 680)
+                    .padding(geometry.size.width >= 760 ? 24 : 18)
+                    .frame(maxWidth: .infinity, alignment: .top)
             }
-            .padding(18)
+            .background(theme.ground)
         }
-        .background(theme.ground)
         .onChange(of: model.fix?.point) { _, point in
             guard let point, !centred else { return }
             centred = true
@@ -242,6 +192,111 @@ struct Dashboard: View {
         } message: {
             Text("Set up only while safely parked. Salim uses precise location, speed and heading during a drive, including in the background, until you end it. Camera coverage varies; mapped positions may be incomplete or out of date. No route is uploaded.")
         }
+    }
+
+    @ViewBuilder
+    private func dashboardContent(width: CGFloat) -> some View {
+        if width >= 760 {
+            HStack(alignment: .top, spacing: 28) {
+                VStack(alignment: .leading, spacing: 14) {
+                    statement
+                    mapCard(height: min(400, max(300, width * 0.34)))
+                    metrics
+                    statusAndFeed
+                    if let match = model.warning { alertBanner(match) }
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+
+                VStack(alignment: .leading, spacing: 14) {
+                    adBanner
+                    if model.mode == .idle { startRow }
+                    if model.mode == .gps && !model.acquired { acquiring }
+                    hazardSections
+                    destinationSection
+                    safetyNote
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 14) {
+                statement
+                mapCard(height: min(340, max(240, width * 0.72)))
+                metrics
+                adBanner
+                if model.mode == .idle { startRow }
+                if model.mode == .gps && !model.acquired { acquiring }
+                statusAndFeed
+                if let match = model.warning { alertBanner(match) }
+                hazardSections
+                destinationSection
+                safetyNote
+            }
+        }
+    }
+
+    private var adBanner: some View {
+        Group {
+            if model.mode == .idle && store.entitlementsLoaded && !store.premium && adConsent.canRequestAds {
+                SalimAdBanner().frame(height: 50).frame(maxWidth: .infinity)
+            }
+        }
+    }
+
+    private var statusAndFeed: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(model.status).font(.system(size: 12, design: .monospaced)).foregroundStyle(theme.accent)
+            Text(model.feed).font(.system(size: 12)).foregroundStyle(theme.muted)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    @ViewBuilder
+    private var hazardSections: some View {
+        if !cameras.isEmpty {
+            sectionLabel("CAMERAS · \(cameras.count)" + (cameras.contains { $0.id.hasPrefix("osm:") } ? " · \(cameras.filter { $0.id.hasPrefix("osm:") }.count) LIVE" : ""))
+            ForEach(cameras) { hazard in
+                alertRow(hazard.title, hazard.subtitle,
+                         camera: hazard.id.hasPrefix("osm:") ? "OSM" : hazard.approximate ? "≈" : nil)
+            }
+        }
+        if !others.isEmpty {
+            sectionLabel("ROAD CONDITIONS")
+            ForEach(others) { hazard in
+                alertRow(hazard.title, hazard.subtitle, camera: nil)
+            }
+        }
+    }
+
+    private var destinationSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            sectionLabel("DESTINATION")
+            TextField("Where are you heading?", text: $destination)
+                .textFieldStyle(.plain)
+                .padding(12)
+                .background(theme.surface, in: RoundedRectangle(cornerRadius: 6))
+                .overlay(RoundedRectangle(cornerRadius: 6).stroke(theme.line))
+                .disabled(model.mode != .idle)
+            Button {
+                var components = URLComponents(string: "https://maps.apple.com")!
+                components.queryItems = [URLQueryItem(name: "q", value: destination)]
+                if let url = components.url { UIApplication.shared.open(url) }
+            } label: {
+                Text("OPEN IN MAPS")
+                    .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                    .tracking(1)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+            }
+            .buttonStyle(.plain)
+            .overlay(RoundedRectangle(cornerRadius: 6).stroke(theme.line))
+            .foregroundStyle(theme.ink)
+            .disabled(destination.trimmingCharacters(in: .whitespaces).isEmpty || model.mode != .idle)
+        }
+    }
+
+    private var safetyNote: some View {
+        Text("Simulation is foreground-only. A GPS test may continue in the background until ended, subject to OS restrictions. This is not a navigation or emergency service.")
+            .font(.system(size: 11)).foregroundStyle(theme.muted).lineSpacing(3)
     }
 
     /// The two ways in. Deliberately not a single "Go" button: a simulation and a real
@@ -294,7 +349,7 @@ struct Dashboard: View {
         }
     }
 
-    private var mapCard: some View {
+    private func mapCard(height: CGFloat) -> some View {
         VStack(spacing: 0) {
             ZStack(alignment: .topLeading) {
                 Map(position: $camera) {
@@ -320,7 +375,7 @@ struct Dashboard: View {
                     }
                 }
                 .mapControls { MapCompass() }
-                .frame(height: 300)
+                .frame(height: height)
 
                 Text(model.fix == nil ? "MANAMA · NO FIX" : "YOUR POSITION")
                     .font(.system(size: 10, design: .monospaced)).tracking(1.8)
