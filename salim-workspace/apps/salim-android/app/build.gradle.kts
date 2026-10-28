@@ -30,7 +30,7 @@ android {
         applicationId = "com.salimdrive.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = releaseVersionCode ?: 7
+        versionCode = releaseVersionCode ?: 8
         versionName = releaseVersionName ?: "0.7.0-demo"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FEED_URL", "\"\"")
@@ -67,7 +67,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.4")
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    implementation("com.android.billingclient:billing-ktx:7.1.1")
+    implementation("com.android.billingclient:billing-ktx:8.0.0")
     implementation("com.google.android.gms:play-services-ads:25.5.0")
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
     androidTestImplementation("androidx.test:runner:1.6.2")
