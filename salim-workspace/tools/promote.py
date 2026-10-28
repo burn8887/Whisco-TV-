@@ -55,6 +55,12 @@ KEEP_TOOLS = {
 # subject matter, so rewriting them would falsify the record.
 NO_REWRITE = {"MIGRATION-TO-OWN-REPO.md", "PROJECT-HISTORY.md", "SESSION-HANDOFF.md"}
 
+# The Claude handover is specific to the capsule/host checkout (branch, PR, Vercel project,
+# parent Whisco repository and capsule-only tools). Do not publish that context as if it
+# described the generated standalone Salim repository.
+CAPSULE_ONLY_DOCS = {"HANDOVER.md"}
+HANDOVER_INDEX_LINE = "- [Claude Engineering Handover](HANDOVER.md) — verified current-state bootstrap and safe first-task prompt; recheck live dashboards before acting.\n"
+
 WORKFLOW_FILES = (
     ("salim-android-build.yml", "android.yml"),
     ("salim-ios-build.yml", "ios.yml"),
@@ -297,7 +303,20 @@ def build(output: Path) -> None:
         ignore=lambda _directory, names: {name for name in names if name in {".env", "data", "__pycache__"} or name.endswith((".sqlite", ".sqlite3", ".sqlite-wal", ".sqlite-shm"))},
     )
     for name in ("site", "deploy", "docs"):
-        shutil.copytree(CAPSULE / name, output / name)
+        if name == "docs":
+            # This handover contains host-checkout-specific operational context and is not
+            # valid for a standalone repository. The standalone docs index must not link to it.
+            shutil.copytree(
+                CAPSULE / name,
+                output / name,
+                ignore=shutil.ignore_patterns(*CAPSULE_ONLY_DOCS),
+            )
+            index = output / "docs" / "README.md"
+            if index.is_file():
+                text = index.read_text(encoding="utf-8")
+                index.write_text(text.replace(HANDOVER_INDEX_LINE, ""), encoding="utf-8")
+        else:
+            shutil.copytree(CAPSULE / name, output / name)
 
     (output / "tools").mkdir()
     for name in sorted(KEEP_TOOLS):

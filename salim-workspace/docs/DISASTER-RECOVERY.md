@@ -32,7 +32,7 @@
 
 ### B. Android build or signing unavailable
 
-1. Use `salim-workspace/tools/materialize.py`/`promote.py` to create an isolated Salim-only workspace as documented.
+1. Follow `BUILDING-LOCALLY.md` to prepare an isolated Salim-only build tree for this repository layout.
 2. Build unsigned debug/test artifacts first. A debug APK or unsigned AAB is never a Play upload.
 3. For a signed release, use only the manual, environment-gated Salim signing workflow and the `salim-release` environment. Confirm application ID `com.salimdrive.app`, version code, certificate fingerprint, ads configuration, and current privacy declarations.
 4. If the upload key may be exposed, stop releases, preserve the key evidence privately, and follow Play Console upload-key reset/rotation procedures with the account owner. Do not rotate the Play App Signing key without a separate impact assessment.

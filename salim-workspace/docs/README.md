@@ -45,7 +45,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 27 | Operations & AI Workforce | Operations & AI-Org Blueprint | — | — | Automation, human control, AI charters and sanitization | Pending Phase 8 |
 | 28 | Operations & AI Workforce | Agent Takeover Brief | — | — | Successor bootstrap, state, gates and watch list | Pending Phase 8; living |
 | 29 | Seasonal / Campaign | Flagship Campaign Bible | — | — | Bahrain/GCC seasonal campaign and freeze controls | Pending applicability research; likely defer until G3 |
-| 30 | Index | This library index | 1.5 | 2026-10-28 | Locate documents, versions and staleness | Living; Phase 4 gates and Claude handover link recorded |
+| 30 | Index | This library index | 1.5 | 2026-10-28 | Locate documents, versions and staleness | Living; Phase 4 gates and stale-document controls recorded |
 
 ## Phase 3 supporting schedule (outside the 30 core documents)
 
