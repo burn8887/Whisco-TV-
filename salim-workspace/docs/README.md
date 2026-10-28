@@ -1,6 +1,6 @@
 # Salim Venture Document Library
 
-**Index version:** 1.2
+**Index version:** 1.3
 **Updated:** 2026-10-28
 **Scope:** Salim — Road Awareness; this library is stored under `salim-workspace/docs/` and must not change Whisco TV, Whisco Mobile, or any other app.
 **Source of truth:** Git in this repository. A document is durable only after its commit is pushed to `arena/74afd701-whisco-tv`.
@@ -16,7 +16,7 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | # | Category | Document | Version | Date | Purpose | Status / staleness |
 |---:|---|---|---|---|---|---|
 | 1 | Foundation | [Company Dossier](business/COMPANY-DOSSIER.md) | 1.0 | 2026-10-28 | Master identity, scope, evidence-based product and commercial snapshot | Complete; verify entity/user/market facts at next milestone |
-| 2 | Foundation | [Operating Rules](business/OPERATING-RULES.md) | 1.1 | 2026-10-28 | Measurement, gates, budgets, spending controls, maintenance | Complete interim rules; Phase 3 diligence amendments applied; caps await Founder |
+| 2 | Foundation | [Operating Rules](business/OPERATING-RULES.md) | 1.2 | 2026-10-28 | Measurement, gates, budgets, spending controls, maintenance | Complete interim rules; diligence controls and Year 1 budget distinction recorded; transaction caps remain unresolved |
 | 3 | Foundation | [Mission & Vision](business/MISSION-VISION.md) | 1.0 | 2026-10-28 | Mission, vision and values as decision rules | Complete; Founder may refine |
 | 4 | Foundation | [Project Handover Log](PROJECT-HANDOVER-LOG.md) | 1.0 | 2026-10-28 | Chronological operational memory | Living; initial entry recorded |
 | 5 | Foundation | [Disaster Recovery](DISASTER-RECOVERY.md) | 1.0 | 2026-10-28 | Credential locations and service/platform recovery | Complete interim runbook; contacts/drill evidence missing |
@@ -24,11 +24,11 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 7 | Product & Brand | [Design System v1](DESIGN-SYSTEM.md) | 1.0 | 2026-10-28 | Visual tokens, accessibility and brand rails | Complete interim; visual/accessibility audit pending |
 | 8 | Product & Brand | [Voice & Brand Doctrine](VOICE-AND-BRAND-DOCTRINE.md) | 1.0 | 2026-10-28 | Voice, localization, claims and terminology | Complete interim; Arabic native review pending |
 | 9 | Product & Brand | [Content / Inventory Doctrine](CONTENT-INVENTORY-DOCTRINE.md) | 1.0 | 2026-10-28 | Data provenance, admission, review and exclusion rules | Complete interim; legal review for ODbL/data rights pending |
-| 10 | Money | [Business Plan](business/BUSINESS-PLAN.md) | 1.0 | 2026-10-28 | Gate-tied operating strategy, conservative/realistic model mechanics and cost structure | Complete interim; no numeric forecast because inputs are NOT IN DATA |
+| 10 | Money | [Business Plan](business/BUSINESS-PLAN.md) | 1.1 | 2026-10-28 | Gate-tied operating strategy, conservative/realistic model mechanics and cost structure | Complete interim; includes Founder Year 1 budget input and linked downside schedule |
 | 11 | Money | [Monetization Roadmap](business/MONETIZATION-ROADMAP.md) | 1.0 | 2026-10-28 | Candidate revenue streams, controls, gates and measurement | Complete proposal; no price or revenue evidence |
 | 12 | Money | [Market Analysis](business/MARKET-ANALYSIS.md) | 1.0 | 2026-10-28 | Dated source-based market indicators, substitutes and validation plan | Complete desk research; no TAM/SAM/SOM or primary user research |
 | 13 | Money | [Hostile Diligence Memo](business/HOSTILE-DILIGENCE-MEMO.md) | 1.0 | 2026-10-28 | Adversarial review and concrete risk controls | Complete; amendments applied to Operating Rules v1.1 |
-| 14 | Money | [Billing Register](business/BILLING-REGISTER.md) | 1.0 | 2026-10-28 | Vendors, actual costs, renewals, payment/cancellation path | Complete interim register; actual bills and approvals NOT IN DATA |
+| 14 | Money | [Billing Register](business/BILLING-REGISTER.md) | 1.0 | 2026-10-28 | Vendors, actual costs, renewals, payment/cancellation path | Complete interim; Year 1 availability recorded; invoices/actual spend NOT IN DATA |
 | 15 | Legal & Entity | Entity Formation Guide | — | — | Bahrain structure, registration, banking, tax and steps | Pending Phase 4; counsel/authority verification needed |
 | 16 | Legal & Entity | Policy Suite | — | — | Draft terms, privacy, cookies, use, complaints, refunds | Pending Phase 4; counsel review required |
 | 17 | Legal & Entity | Regulatory Memo | — | — | Road-awareness, data, privacy, store and GCC regulatory review | Pending Phase 4 research/counsel review |
@@ -44,7 +44,11 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 | 27 | Operations & AI Workforce | Operations & AI-Org Blueprint | — | — | Automation, human control, AI charters and sanitization | Pending Phase 8 |
 | 28 | Operations & AI Workforce | Agent Takeover Brief | — | — | Successor bootstrap, state, gates and watch list | Pending Phase 8; living |
 | 29 | Seasonal / Campaign | Flagship Campaign Bible | — | — | Bahrain/GCC seasonal campaign and freeze controls | Pending applicability research; likely defer until G3 |
-| 30 | Index | This library index | 1.2 | 2026-10-28 | Locate documents, versions and staleness | Living; updated at Phase 3 close |
+| 30 | Index | This library index | 1.3 | 2026-10-28 | Locate documents, versions and staleness | Living; updated with Founder Year 1 budget schedule |
+
+## Phase 3 supporting schedule (outside the 30 core documents)
+
+- [Conservative 3-Year Income & Expense Projection](business/CONSERVATIVE-3-YEAR-PROJECTION.md) — uses the Founder-provided Year 1 USD 20,000/month availability, keeps actual revenue at $0 absent G4 receipts, sets Founder salary to $0 through Years 1–4, and separates the known-input view from an explicitly `[EST]` flat-spend sensitivity for Years 2–3.
 
 ## Existing Salim project references (not substitutes for the 30 core documents)
 
@@ -58,11 +62,11 @@ Start with the **Company Dossier**, then **Operating Rules**, then the Mission &
 
 1. Is **Whisco Media W.L.L** the already-registered operating entity, a company being formed, or a working name? Please verify exact legal spelling, registration status, number, activities, ownership, and signatory authority outside chat; provide only the public/document facts needed for the library.
 2. Which founder name is approved for external documents: “Ali Albaharna” or “Ali Sameer Sadeq Mohamed Albaharna”? Confirm exact spelling and publication preference.
-3. What cash is currently available for Salim, and what maximum one-off and monthly recurring spend can agents recommend or incur? Until answered, all paid transactions require transaction-specific Founder approval.
+3. What cash is actually available to fund Salim (no account details needed), and is the Founder-provided Year 1 USD 20,000/month availability a hard cap or a planning envelope? The amount is not evidence of cash on hand; every paid transaction still requires written, transaction-specific approval.
 4. What are Play account type and creation date, and has any Salim version code already been uploaded? Do not share account credentials.
 5. Are `www.salimdrive.com`, DNS, support/legal mailboxes, privacy URLs, and monthly/yearly store products configured and monitored? The current project record does not establish this.
-6. What target monthly or annual net income, currency, and period after launch should a future plan test? Until supplied, numeric revenue targets and the budget needed to achieve them are **NOT IN DATA**.
-7. What funds are allocated to Salim, and what one-off, monthly recurring, and emergency spend caps are approved? No cap is assumed; transaction-specific written approval remains required.
+6. What target monthly or annual net income, currency, and period after launch should a future plan test? The Year 1 available spending envelope is recorded, but required budget-to-income and revenue projections remain **NOT IN DATA** without target, cost, user and monetization inputs.
+7. What Year 2–3 spending budgets are approved, and should unused Year 1 availability roll over? The flat Year 2–3 schedule is only an `[EST]` sensitivity, not an approved budget.
 8. Which premium features and monetization path should be tested first (subscription, non-driving ads, sequential tests, or neither), and what local price-test range is approved? No public price is implied.
 9. Can the Founder arrange access to Bahrain drivers for ethical, consented, non-driving interviews and a limited beta? Participant access and consent approach are **NOT IN DATA**.
 10. Which GCC country, if any, should follow Bahrain? Expansion order and per-country commercial readiness are **NOT IN DATA**.

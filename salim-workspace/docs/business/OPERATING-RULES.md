@@ -1,6 +1,6 @@
 # Salim Operating Rules
 
-**Version:** 1.1
+**Version:** 1.2
 **Effective snapshot:** 2026-10-28
 **Owner:** Founder; agents execute only within explicit authority
 **Status:** Interim rules pending founder confirmation of legal entity and spending caps
@@ -43,7 +43,7 @@ The Billing Register records evidence; it does not authorize a purchase, renewal
 
 ## 4. Spending tiers — gates, not calendar dates
 
-All numbers/caps remain **NOT IN DATA** until the Founder sets them in writing. There is no implied authority from this table.
+The Founder has stated that USD 20,000/month is available for spending in Year 1 (USD 240,000 annualized). This is a planning/budget availability input; whether it is a hard cap, actual liquidity, or rollover budget is NOT IN DATA. Year 2–3 budgets, one-off and emergency caps, and the recurring transaction approval limit remain NOT IN DATA. This does not authorize any specific commitment. There is no implied authority from this table.
 
 | Tier | Availability | Allowed spend (only after written Founder approval) | Never implied |
 |---|---|---|---|
@@ -57,7 +57,7 @@ All numbers/caps remain **NOT IN DATA** until the Founder sets them in writing. 
 
 Until the Founder fills the cap fields, **every paid transaction, recurring subscription, advertising spend, contract, and renewal requires written, transaction-specific approval**. Record approver, purpose, maximum amount, currency, vendor, renewal/cancellation date, and receipt location in the Billing Register. Agents may not enter payment details or accept terms on the Founder’s behalf.
 
-Founder to set: one-off approval threshold **NOT IN DATA**; monthly recurring cap **NOT IN DATA**; emergency response cap **NOT IN DATA**; approval channel and response SLA **NOT IN DATA**.
+Founder to confirm: whether the Year 1 USD 20,000/month availability is a hard cap or planning envelope, and whether it rolls over. Still NOT IN DATA: one-off approval threshold; recurring transaction cap; emergency response cap; Year 2–3 budgets; approval channel and response SLA.
 
 ## 5. Never-fund / never-do list
 

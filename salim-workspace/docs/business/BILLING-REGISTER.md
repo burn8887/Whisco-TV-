@@ -3,7 +3,7 @@
 **Version:** 1.0
 **Snapshot:** 2026-10-28
 **Owner:** Founder / designated finance owner (NOT IN DATA)
-**Purpose:** Record actual vendor obligations, renewal/cancellation controls and reconciled payments. This is not evidence that any bill has been paid.
+**Purpose:** Record actual vendor obligations, renewal/cancellation controls and reconciled payments. This is not evidence that any bill has been paid. Founder-provided planning input added 2026-10-28: USD 20,000/month available for Year 1 (USD 240,000 annualized), not transaction-specific authorization.
 
 ## Control rules
 
@@ -18,6 +18,7 @@
 
 | Vendor / obligation | Service / purpose | Actual amount / currency / cadence | Status / evidence | Next action / owner |
 |---|---|---|---|---|
+| Founder-provided Year 1 operating envelope | Planning ceiling/availability, not a vendor expense or payment | USD 20,000/month; USD 240,000 annualized | Founder input recorded 2026-10-28; actual cash balance, committed spend and transaction approvals NOT IN DATA | Track actual approved spend separately; confirm rollover/meaning and Years 2–3 budgets |
 | Apple Developer Program | iOS development, TestFlight/App Store distribution | **NOT IN DATA** | Developer account reported active; invoice, membership type, paid-through date, renewal and receipt are not supplied | Founder verifies account membership and receipt privately; record renewal/cancellation path |
 | Google Play Console | Android distribution | **NOT IN DATA** | Developer account reported active; actual payment receipt/account standing not supplied. Google documents a US$25 one-time registration fee for a new account; this is a public reference, not proof of Salim's payment or any recurring charge. [Official registration guide](https://support.google.com/googleplay/android-developer/answer/6112435?hl=en) | Founder reconciles the original receipt privately; confirm no additional recurring account obligation |
 | Google AdMob | Potential advertising monetization | **NOT IN DATA** | Four repository variables are reported set in project context; this does not prove that an AdMob account is active, that ads serve, or that revenue exists. No settlement evidence supplied | Verify account, payment threshold/status, tax forms, consent settings and test/production units privately; actual revenue `$0` until verified receipt |
@@ -52,7 +53,7 @@ No verified transaction records were provided for this snapshot. Add one row per
 ## Founder inputs required
 
 1. Who is the approved finance register owner and private evidence storage location? (Do not supply credentials.)
-2. What is the existing one-off / recurring spend authorization process, monthly cap and emergency cap? All remain **NOT IN DATA**.
+2. The Founder provided USD 20,000/month available in Year 1. Is this a hard maximum or planning envelope, and what one-off/recurring/emergency transaction approval process applies? Do not infer authorization for individual spend; further limits remain **NOT IN DATA**.
 3. Are the Apple membership and Google Play registration receipts available for private reconciliation? Amount paid and paid-through/renewal facts remain **NOT IN DATA**.
 4. Who monitors domain, support/legal mailbox and vendor renewals? Owner and alerts remain **NOT IN DATA**.
 5. What accounting base currency/FX source and reporting period should be used? BHD is the proposed operating presentation currency; formal FX policy is **NOT IN DATA**.

@@ -1,10 +1,10 @@
 # Salim — Road Awareness: Business Plan
 
-**Version:** 1.0
+**Version:** 1.1
 **Snapshot:** 2026-10-28
 **Stage:** Pre-launch / product and evidence preparation; production release not evidenced.
 **Planning scope:** Bahrain-first; GCC-wide ambition, released country-by-country.
-**Financial status:** No revenue, price, unit-cost, paid-user or operating-budget evidence supplied. All financial actuals are `$0` until receipt evidence; forward numeric totals are `NOT IN DATA`.
+**Financial status:** Founder-provided Year 1 spending availability is USD 20,000/month (USD 240,000 annualized); this is not transaction authorization. Revenue, price, unit-cost and paid-user evidence remain missing. Actual revenue is `$0` until receipt evidence. See the linked conservative three-year projection for the strict input view and clearly labeled flat-spend sensitivity.
 
 ## 1. Executive decision
 
@@ -28,7 +28,7 @@ The product is not a general-purpose navigation replacement. Its central promise
 | Store listing title | “Salim — Road Awareness” |
 | User evidence | Interviews, active users, retained cohorts, store installs and app reviews **NOT IN DATA** |
 | Revenue / receipts | `$0 actual` until verified receipt and ledger reconciliation; no receipt evidence supplied |
-| Operating budget | **NOT IN DATA**; all transaction-specific spend requires written Founder approval |
+| Operating budget | Founder-provided Year 1 availability: USD 20,000/month; USD 240,000 annualized. Year 2–3 budgets NOT IN DATA; no transaction-specific spend authorized by the envelope |
 | Camera-data status | OSM coverage is approximate/incomplete; static packs empty; no GCC dataset cleared; G5 closed |
 | Community reports | Active app screen holds local unverified drafts; shared report service is source-only, not deployed or wired to active submission/overlay; live moderation **NOT IN DATA** |
 | Release status | Both developer accounts are reported active; current signed test upload and production approval are not evidenced; G2/G3 closed |
@@ -88,9 +88,9 @@ The five existing binary gates in Operating Rules govern this plan; no additiona
 - Any store upload, signing/release action, public availability claim, or change to another app.
 - Any activation of the shared report service or live user-report verification/moderation backend without documented technical, privacy, security, staffing and Founder review.
 
-## 7. Three-year financial outlook — deliberately non-numeric
+## 7. Three-year financial outlook
 
-**Horizon definition:** Year 1–3 would begin only after G3 production eligibility and a dated Founder decision; no calendar start date is assumed. A specific target income, launch date, price, eligible audience, conversion, retention, cost base and settlement terms were not provided. Numeric forecasts would therefore be invented. The table provides the conservative and realistic model mechanics, not fabricated totals. No optimistic case is included.
+**Horizon definition:** Year 1–3 are planning years; their calendar start date is NOT IN DATA. The Founder has provided USD 20,000/month available for Year 1 (USD 240,000 annualized), with no Founder salary until Year 5. Years 2–3 spending budgets, target income, launch date, price, eligible audience, conversion, retention, detailed cost mix and settlement terms remain NOT IN DATA. See [Conservative 3-Year Projection](CONSERVATIVE-3-YEAR-PROJECTION.md) for the strict input-based statement and a clearly labeled flat-spend sensitivity. The latter is `[EST]`, not a Founder-approved later-year budget or spending authorization. No optimistic case is included.
 
 | Period | Conservative band | Realistic band | Revenue actual / evidence needed |
 |---|---|---|---|
@@ -116,7 +116,7 @@ The five existing binary gates in Operating Rules govern this plan; no additiona
 
 ## 8. Cost base and monthly budget
 
-The required budget to achieve a target income cannot be calculated because the target income, existing cash, invoices, vendor contracts, hosting design, workload and user scale are all **NOT IN DATA**. No amount in this section is authorization to spend. Build a verified monthly cost register before proposing any income target.
+The Year 1 spending availability supplied by the Founder is USD 20,000/month (USD 240,000 annualized), but the budget-to-income requirement cannot be calculated because the target income, existing cash, invoices, vendor contracts, hosting design, workload and user scale are **NOT IN DATA**. Year 2–3 budgets are also NOT IN DATA. The envelope is not authorization to spend; transaction-specific written approval remains required. Build a verified monthly cost register before proposing an income target.
 
 | Cost line | Cost evidence needed | Current amount |
 |---|---|---|
@@ -155,12 +155,12 @@ Decision rules:
 | Monetization harms experience or fails economically | No paid/ad evidence | Keep ads out of active drive/demo; measure consent, fill, retention, net settlement; gated tests only |
 | Privacy/legal/market-entry obligations | PDPL applies to automated personal-data processing; precise location and community data sensitive | Qualified counsel, data minimization, DPIA-like review, country-specific duties, store declarations |
 | Domain / operational identity unresolved | Domain not live; G1 not verified | Verify entity, domain, mailboxes, support and public URLs before external launch |
-| Financial overreach | Spend caps, cash, costs and target income missing | Transaction-specific Founder approval; no debt/minimum guarantee; no forecast totals until inputs exist |
+| Financial overreach | Year 1 spending availability set at USD 20,000/month; cash, detailed costs, Year 2–3 budgets and target income remain NOT IN DATA | Treat Year 1 as an envelope only; transaction-specific Founder approval; no debt/minimum guarantee; no fabricated revenue forecast |
 
 ## 11. Phase-close founder questions
 
 1. What, if any, target monthly or annual **net** income do you want modelled, in which currency, and by what period after launch? Until answered, target-income budget is **NOT IN DATA**.
-2. What funds are actually allocated to Salim and what one-off/monthly recurring caps may be proposed? No amount is assumed; transaction-specific approval remains required.
+2. The Founder provided USD 20,000/month available for Year 1. Is this a hard maximum or planning envelope, does unused availability roll over, and should it continue in Years 2–3? Until confirmed, only the Year 1 annualized envelope is modeled; each transaction still requires written approval.
 3. Which premium features are Founder-approved candidates, and should we test subscription only, ads only, or both? No public price is implied.
 4. Is the operating entity registered and authorized for app/software, advertising and the contemplated cross-border activity? G1 remains closed until official evidence is checked.
 5. Can the Founder arrange access to Bahrain drivers for ethical, non-driving interviews and a limited beta? Participant access and consent approach are **NOT IN DATA**.
