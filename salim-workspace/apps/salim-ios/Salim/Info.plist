@@ -10,6 +10,8 @@
 	<string>$(SALIM_ADS_ENABLED)</string>
 	<key>SalimAdMobBannerID</key>
 	<string>$(ADMOB_BANNER_ID)</string>
+	<key>SalimOverpassURL</key>
+	<string>$(SALIM_OVERPASS_URL)</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
