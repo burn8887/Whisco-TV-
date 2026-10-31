@@ -34,7 +34,8 @@ import java.net.URLEncoder
  */
 object CameraFeed {
 
-    private const val ENDPOINT = "https://overpass-api.de/api/interpreter"
+    /** Build-time configurable so release builds can use a Salim proxy instead of the public server. */
+    private val ENDPOINT = BuildConfig.OVERPASS_URL
     private const val USER_AGENT = "Salim/0.7 (Android; road-awareness; support@salimdrive.com)"
 
     /** Metres around the driver to ask about. Wider than the alert radius, narrower than a country. */
@@ -54,7 +55,8 @@ object CameraFeed {
      * Saudi Arabia, which would otherwise swallow Qatar, Bahrain and the UAE coast.
      */
     private val BOXES = listOf(
-        "BH" to doubleArrayOf(25.50, 50.20, 26.40, 50.90),
+        // West edge sits at the King Fahd Causeway border (≈50.32°E); 50.20 put Al Khobar in Bahrain.
+        "BH" to doubleArrayOf(25.50, 50.32, 26.40, 50.90),
         "QA" to doubleArrayOf(24.40, 50.70, 26.20, 51.70),
         "KW" to doubleArrayOf(28.50, 46.50, 30.10, 48.50),
         "AE" to doubleArrayOf(22.60, 51.50, 26.10, 56.40),
@@ -62,7 +64,25 @@ object CameraFeed {
         "SA" to doubleArrayOf(16.00, 34.50, 32.20, 55.70),
     )
 
-    fun countryAt(point: Point): String? = BOXES.firstOrNull { (_, b) ->
+    /**
+     * Countries confirmed by OpenStreetMap's own boundaries (`is_in`), per area cell. The
+     * rectangles below cannot separate Al Ain from Buraimi or Ras Al Khaimah from Musandam;
+     * the boundary answer can. Filled by every live query, persisted, and checked first.
+     */
+    private val resolved = java.util.concurrent.ConcurrentHashMap<String, String>()
+    @Volatile private var resolvedLoaded = false
+    private const val KEY_RESOLVED = "resolved_countries"
+    private fun cell(point: Point) =
+        "${kotlin.math.floor(point.lat / AREA_LAT_STEP).toInt()}:${kotlin.math.floor(point.lon / AREA_LON_STEP).toInt()}"
+
+    private fun loadResolved(context: Context) {
+        if (resolvedLoaded) return
+        resolvedLoaded = true
+        val raw = runCatching { context.getSharedPreferences(PREF, 0).getString(KEY_RESOLVED, null) }.getOrNull() ?: return
+        runCatching { val o = JSONObject(raw); o.keys().forEach { k -> o.optString(k).takeIf { it in COUNTRIES }?.let { resolved[k] = it } } }
+    }
+
+    fun countryAt(point: Point): String? = resolved[cell(point)] ?: BOXES.firstOrNull { (_, b) ->
         point.lat in b[0]..b[2] && point.lon in b[1]..b[3]
     }?.first?.takeIf { it in COUNTRIES }
 
@@ -114,6 +134,7 @@ object CameraFeed {
                             expiresAt = o.getLong("expiresAt"),
                             demo = false,
                             revision = 0,
+                            limit = if (o.has("limit") && !o.isNull("limit")) o.getInt("limit").takeIf { it in 5..200 } else null,
                         )
                     )
                 }
@@ -130,6 +151,7 @@ object CameraFeed {
                     .put("lat", h.point.lat).put("lon", h.point.lon)
                     .put("heading", h.heading ?: JSONObject.NULL)
                     .put("road", h.road).put("expiresAt", h.expiresAt)
+                    .put("limit", h.limit ?: JSONObject.NULL)
             )
         }
         return array.toString()
@@ -140,7 +162,13 @@ object CameraFeed {
      * the device is offline, or when Overpass is unavailable — a missing network must never
      * cost the driver an alert they already had.
      */
-    suspend fun fetch(context: Context, point: Point, now: Long = System.currentTimeMillis()): List<Hazard> {
+    suspend fun fetch(context: Context, point: Point, now: Long = System.currentTimeMillis()): List<Hazard> =
+        // The caller runs on the main thread. Network there throws NetworkOnMainThreadException,
+        // which query() swallowed, so every live fetch failed and only the (empty) cache was used.
+        withContext(Dispatchers.IO) { fetchBlocking(context, point, now) }
+
+    private fun fetchBlocking(context: Context, point: Point, now: Long): List<Hazard> {
+        loadResolved(context)
         val country = countryAt(point) ?: return cachedNear(context, point)
         val prefs = context.getSharedPreferences(PREF, 0)
         val area = areaKey(point, country)
@@ -151,11 +179,17 @@ object CameraFeed {
             return cachedNear(context, point)
         }
 
-        val fresh = query(point)
-        if (fresh == null) {
+        val response = query(point)
+        if (response == null) {
             prefs.edit().putLong(retryKey, now + 60_000L).apply()
             return cachedNear(context, point)
         }
+        parseCountry(response, point)?.let { code ->
+            resolved[cell(point)] = code
+            val o = JSONObject(); resolved.forEach { (k, v) -> o.put(k, v) }
+            prefs.edit().putString(KEY_RESOLVED, o.toString()).apply()
+        }
+        val fresh = runCatching { parse(response, point) }.getOrDefault(emptyList())
         val expiry = now + 30L * 24 * 60 * 60 * 1000
         val mergedById = cached(context, now).associateBy { it.id }.toMutableMap()
         fresh.map { it.copy(expiresAt = expiry) }.forEach { mergedById[it.id] = it }
@@ -171,14 +205,21 @@ object CameraFeed {
         return doubleArrayOf(point.lat - dLat, point.lon - dLon, point.lat + dLat, point.lon + dLon)
     }
 
-    private fun query(point: Point): List<Hazard>? = runCatching {
+    /** Raw Overpass response text, or null on any network or HTTP failure. */
+    private fun query(exact: Point): String? = runCatching {
+        // Only a point rounded to ~1 km leaves the phone: enough for a 12 km camera window
+        // and a country lookup, not enough to pin a home or a route.
+        val point = Point(Math.round(exact.lat * 100) / 100.0, Math.round(exact.lon * 100) / 100.0)
         val b = box(point)
         // Two taggings, one request. `out body` keeps the payload to the tags we read.
         val body = "[out:json][timeout:25];" +
             "(" +
             "node[\"highway\"=\"speed_camera\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
             "node[\"highway\"=\"enforcement\"][\"enforcement\"~\"^(maxspeed|average_speed|traffic_signals|red_light|seatbelt|seat_belt)$\"](${b[0]},${b[1]},${b[2]},${b[3]});" +
-            ");out body;"
+            ");out body;" +
+            // The country this point is in, from OSM's national boundaries. Same request,
+            // same recipient, so no extra location leaves the phone.
+            "is_in(${point.lat},${point.lon})->.a;area.a[\"admin_level\"=\"2\"];out tags;"
 
         var connection: HttpURLConnection? = null
         try {
@@ -193,12 +234,28 @@ object CameraFeed {
             val payload = "data=" + URLEncoder.encode(body, "UTF-8")
             connection.outputStream.use { it.write(payload.toByteArray()) }
             if (connection.responseCode != HttpURLConnection.HTTP_OK) return@runCatching null
-            val text = connection.inputStream.bufferedReader().use { it.readText() }
-            parse(text, point)
+            connection.inputStream.bufferedReader().use { it.readText() }
         } finally {
             runCatching { connection?.disconnect() }
         }
     }.getOrNull()
+
+    /** ISO country code of the national boundary `is_in` returned for the query point, if it is a GCC one. */
+    fun parseCountry(text: String, @Suppress("UNUSED_PARAMETER") near: Point): String? = runCatching {
+        val elements = JSONObject(text).optJSONArray("elements") ?: return@runCatching null
+        (0 until elements.length()).asSequence().mapNotNull { elements.optJSONObject(it) }
+            .filter { it.optString("type") == "area" }
+            .mapNotNull { e -> e.optJSONObject("tags")?.let { t -> t.optString("ISO3166-1").ifBlank { t.optString("ISO3166-1:alpha2") } } }
+            .firstOrNull { it in COUNTRIES }
+    }.getOrNull()
+
+    /** OSM `maxspeed` in km/h: "80", "80 km/h", "50 mph". Anything else (signals, none, walk) is unknown. */
+    fun parseLimit(value: String?): Int? {
+        val text = value?.trim()?.lowercase() ?: return null
+        val number = Regex("^(\\d{1,3})(?!\\d)").find(text)?.groupValues?.get(1)?.toIntOrNull() ?: return null
+        val kmh = if (text.contains("mph")) (number * 1.609344).toInt() else number
+        return kmh.takeIf { it in 5..200 }
+    }
 
     /** Also used by the offline importer, so the parsing rules exist in exactly one place. */
     fun parse(text: String, near: Point): List<Hazard> {
@@ -242,6 +299,7 @@ object CameraFeed {
                     expiresAt = System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000,
                     demo = false,
                     revision = 0,
+                    limit = parseLimit(tags.optString("maxspeed").takeIf { it.isNotBlank() }),
                 )
             }.getOrNull() ?: continue
             out[hazard.id] = hazard

@@ -86,4 +86,4 @@ product or introductory offer.
 
 No account is required. Community drafts remain local and are not published. No police or patrol
 detection is provided. Interim privacy/support links are listed above; the approved domain is not
-live. The operating entity is Ali Sameer Sadeq Mohamed Albaharna.
+live. The app is published by Ali Albaharna.

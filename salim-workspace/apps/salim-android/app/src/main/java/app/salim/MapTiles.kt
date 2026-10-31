@@ -62,7 +62,7 @@ object Mercator {
 object MapTiles {
     const val ATTRIBUTION = "© OpenStreetMap contributors"
 
-    private const val USER_AGENT = "SalimDemo/0.4 (Android; road-awareness demo; support@salimdrive.com)"
+    private const val USER_AGENT = "Salim/0.7 (Android; road-awareness; support@salimdrive.com)"
     private val semaphore = Semaphore(4)
 
     // Bounded by bytes rather than entries: tiles are 256x256 of 4 bytes per pixel,
@@ -89,7 +89,7 @@ object MapTiles {
                 cached.asImageBitmap()
             } else {
                 withContext(Dispatchers.IO) {
-                    val bytes = fetch("https://tile.openstreetmap.org/$zoom/$x/$y.png")
+                    val bytes = fetch(BuildConfig.TILE_URL.replace("{z}", "$zoom").replace("{x}", "$x").replace("{y}", "$y"))
                     val bitmap = if (bytes == null) null
                                  else runCatching { BitmapFactory.decodeByteArray(bytes, 0, bytes.size) }.getOrNull()
                     if (bitmap == null) {

@@ -10,7 +10,13 @@ import Foundation
 ///   highway=speed_camera                       original, still the most common
 ///   highway=enforcement + enforcement=maxspeed newer scheme
 enum CameraFeed {
-    private static let endpoint = URL(string: "https://overpass-api.de/api/interpreter")!
+    /// Overridable with an Info.plist `SalimOverpassURL` entry so release builds can use a
+    /// Salim proxy instead of the public volunteer server.
+    private static let endpoint: URL = {
+        if let custom = Bundle.main.object(forInfoDictionaryKey: "SalimOverpassURL") as? String,
+           !custom.isEmpty, let url = URL(string: custom) { return url }
+        return URL(string: "https://overpass-api.de/api/interpreter")!
+    }()
     private static let userAgent = "Salim/0.7 (iOS; road-awareness; support@salimdrive.com)"
     private static let radiusMeters = 12_000.0
     private static let minimumInterval: TimeInterval = 30 * 60
@@ -22,7 +28,8 @@ enum CameraFeed {
     /// Country boxes as (code, south, west, north, east). Small states first, because Saudi
     /// Arabia's rectangle would otherwise swallow Qatar, Bahrain and the UAE coast.
     static let boxes: [(String, Double, Double, Double, Double)] = [
-        ("BH", 25.50, 50.20, 26.40, 50.90),
+        // West edge at the King Fahd Causeway border (≈50.32°E); 50.20 put Al Khobar in Bahrain.
+        ("BH", 25.50, 50.32, 26.40, 50.90),
         ("QA", 24.40, 50.70, 26.20, 51.70),
         ("KW", 28.50, 46.50, 30.10, 48.50),
         ("AE", 22.60, 51.50, 26.10, 56.40),
@@ -30,8 +37,20 @@ enum CameraFeed {
         ("SA", 16.00, 34.50, 32.20, 55.70),
     ]
 
+    /// Countries confirmed by OpenStreetMap's national boundaries (`is_in`) per area cell.
+    /// The rectangles cannot separate Al Ain from Buraimi or Ras Al Khaimah from Musandam.
+    private static let resolvedKey = "salim.cameras.countries"
+    private static func cell(_ point: Point) -> String {
+        "\(Int(floor(point.lat / areaLatStep))):\(Int(floor(point.lon / areaLonStep)))"
+    }
     static func country(at point: Point) -> String? {
-        boxes.first { $0.1...$0.3 ~= point.lat && $0.2...$0.4 ~= point.lon }?.0
+        if let known = (UserDefaults.standard.dictionary(forKey: resolvedKey) as? [String: String])?[cell(point)] { return known }
+        return boxes.first { $0.1...$0.3 ~= point.lat && $0.2...$0.4 ~= point.lon }?.0
+    }
+    private static func remember(country: String, at point: Point) {
+        var all = UserDefaults.standard.dictionary(forKey: resolvedKey) as? [String: String] ?? [:]
+        all[cell(point)] = country
+        UserDefaults.standard.set(all, forKey: resolvedKey)
     }
 
     /// Cameras kept from the last successful query.
@@ -76,16 +95,19 @@ enum CameraFeed {
             return cachedNear(point, now: now)
         }
 
-        guard let body = await query(point) else {
+        guard let text = await query(point) else {
             UserDefaults.standard.set(now + 60, forKey: retryAfterKey)
             return cachedNear(point, now: now)
         }
         UserDefaults.standard.removeObject(forKey: retryAfterKey)
-        store(body, near: point, now: now)
+        if let code = parseCountry(text) { remember(country: code, at: point) }
+        store(parse(text), near: point, now: now)
         return cachedNear(point, now: now)
     }
 
-    private static func query(_ point: Point) async -> [Hazard]? {
+    /// Raw Overpass response, or nil on any failure. Only a point rounded to ~1 km is sent.
+    private static func query(_ exact: Point) async -> String? {
+        let point = Point(lat: (exact.lat * 100).rounded() / 100, lon: (exact.lon * 100).rounded() / 100)
         let dLat = radiusMeters / 111_574.0
         let dLon = radiusMeters / (111_320.0 * max(0.05, cos(point.lat * .pi / 180)))
         let box = "\(point.lat - dLat),\(point.lon - dLon),\(point.lat + dLat),\(point.lon + dLon)"
@@ -94,7 +116,9 @@ enum CameraFeed {
         let overpass = "[out:json][timeout:25];" +
             "(node[\"highway\"=\"speed_camera\"](\(box));" +
             "node[\"highway\"=\"enforcement\"][\"enforcement\"~\"^(maxspeed|average_speed|traffic_signals|red_light|seatbelt|seat_belt)$\"](\(box));" +
-            ");out body;"
+            ");out body;" +
+            // The country this point is in, from OSM's national boundaries: same request, same recipient.
+            "is_in(\(point.lat),\(point.lon))->.a;area.a[\"admin_level\"=\"2\"];out tags;"
 
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
@@ -106,7 +130,7 @@ enum CameraFeed {
         guard let (data, response) = try? await URLSession.shared.data(for: request),
               let http = response as? HTTPURLResponse, http.statusCode == 200,
               let text = String(data: data, encoding: .utf8) else { return nil }
-        return parse(text)
+        return text
     }
 
     /// Overpass expects form encoding. Percent-encoding the reserved characters by hand
@@ -115,6 +139,27 @@ enum CameraFeed {
         var allowed = CharacterSet.alphanumerics
         allowed.insert(charactersIn: "-._~")
         return value.addingPercentEncoding(withAllowedCharacters: allowed) ?? ""
+    }
+
+    /// ISO code of the GCC national boundary `is_in` returned, if any.
+    static func parseCountry(_ text: String) -> String? {
+        guard let root = try? JSONSerialization.jsonObject(with: Data(text.utf8)) as? [String: Any],
+              let elements = root["elements"] as? [[String: Any]] else { return nil }
+        for element in elements where element["type"] as? String == "area" {
+            let tags = element["tags"] as? [String: Any] ?? [:]
+            let code = (tags["ISO3166-1"] as? String) ?? (tags["ISO3166-1:alpha2"] as? String) ?? ""
+            if DemoData.countries.contains(code) { return code }
+        }
+        return nil
+    }
+
+    /// OSM `maxspeed` in km/h: "80", "80 km/h", "50 mph". Anything else is unknown.
+    static func parseLimit(_ value: String?) -> Int? {
+        guard let text = value?.trimmingCharacters(in: .whitespaces).lowercased() else { return nil }
+        let digits = text.prefix { $0.isNumber }
+        guard !digits.isEmpty, digits.count <= 3, let number = Int(digits) else { return nil }
+        let kmh = text.contains("mph") ? Int(Double(number) * 1.609344) : number
+        return (5...200).contains(kmh) ? kmh : nil
     }
 
     /// Also used by the offline importer path, so the parsing rules live in one place.
@@ -154,7 +199,8 @@ enum CameraFeed {
                 point: point,
                 heading: heading,
                 road: String(name.prefix(200)),
-                expiresAt: now + 30 * 24 * 60 * 60
+                expiresAt: now + 30 * 24 * 60 * 60,
+                limit: parseLimit(tags["maxspeed"] as? String)
             )
             out[hazard.id] = hazard
         }

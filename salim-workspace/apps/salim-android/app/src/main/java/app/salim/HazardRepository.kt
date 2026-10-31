@@ -29,7 +29,7 @@ class HazardRepository(context: Context) {
     suspend fun refresh(country: String,point: Point): PackResult = withContext(Dispatchers.IO) { lock.withLock {
         initialize()
         fun cached(status: String)=PackResult(database.nearby(country,point,System.currentTimeMillis()),status)
-        if(BuildConfig.FEED_URL.isBlank())return@withLock cached(if(country=="BH")"Approximate Bahrain pack · OpenStreetMap coverage varies" else "No verified static pack for $country · live coverage may be incomplete")
+        if(BuildConfig.FEED_URL.isBlank())return@withLock cached("Live OpenStreetMap cameras · coverage varies by area")
         val scope=runCatching { Scope.at(country,point) }.getOrNull() ?: return@withLock cached("Outside configured GCC sync area")
         val now=SystemClock.elapsedRealtime()
         if(!retry.ready(now) && lastScope==scope.key)return@withLock cached("Cached regional alerts")

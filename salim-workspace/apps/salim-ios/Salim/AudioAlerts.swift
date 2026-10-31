@@ -13,6 +13,30 @@ import Foundation
             Task { @MainActor in self?.stop() }
         }
     }
+    /// Arabic when the phone's first language is Arabic and an Arabic voice is installed.
+    static var arabic:Bool {
+        Ar.enabled && AVSpeechSynthesisVoice(language:"ar-SA") != nil
+    }
+    /// One alert sentence in the active language. Distances over 100 m are rounded to 50 m.
+    static func alertText(_ hazard:Hazard,meters:Double,demo:Bool) -> String {
+        let raw=Int(meters)
+        let m:Int=raw > 100 ? ((raw+25)/50)*50 : raw
+        if arabic {
+            let titles:[String:String]=["CAMERA":"كاميرا سرعة","MOBILE_CAMERA":"كاميرا متنقلة","SEATBELT":"كاميرا حزام الأمان والهاتف","RED_LIGHT":"كاميرا الإشارة الحمراء",
+                        "ROADWORK":"أعمال طرق","HAZARD":"خطر على الطريق","TRAFFIC":"ازدحام مروري","BUMP":"مطب"]
+            let title:String=titles[hazard.kind] ?? "تنبيه"
+            var text:String=demo ? "تنبيه تجريبي. " : ""
+            text += "\(title) بعد \(m) متر"
+            if let limit=hazard.limit { text += "، السرعة المحددة \(limit)" }
+            text += ". التزم باللوحات المرورية."
+            return text
+        }
+        var text:String=demo ? "Demo alert. " : ""
+        text += "\(hazard.title) in \(m) metres"
+        if let limit=hazard.limit { text += ", limit \(limit)" }
+        text += ". Follow posted signs."
+        return text
+    }
     func speak(_ text:String) {
         // Only the speech is replaced here. Calling stop() would silence the chime that
         // was just played for this same alert.
@@ -21,7 +45,7 @@ import Foundation
             let session=AVAudioSession.sharedInstance()
             try session.setCategory(.playback,mode:.voicePrompt,options:[.duckOthers,.interruptSpokenAudioAndMixWithOthers])
             try session.setActive(true)
-            let utterance=AVSpeechUtterance(string:text);utterance.voice=AVSpeechSynthesisVoice(language:"en");current=utterance;speech.speak(utterance)
+            let utterance=AVSpeechUtterance(string:text);utterance.voice=AVSpeechSynthesisVoice(language:AudioAlerts.arabic ? "ar-SA" : "en");current=utterance;speech.speak(utterance)
             watchdog=Task { [weak self] in try? await Task.sleep(for:.seconds(15));guard !Task.isCancelled else{return};self?.stop() }
         } catch {release()}
     }

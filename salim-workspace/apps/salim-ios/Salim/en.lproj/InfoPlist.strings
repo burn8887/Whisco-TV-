@@ -1,0 +1,4 @@
+/* Home-screen name and permission prompts, English. */
+"CFBundleDisplayName" = "Salim";
+"NSLocationWhenInUseUsageDescription" = "During a drive session, Salim uses precise location, speed and heading to calculate nearby road alerts. Location updates stop when you end the session. Precise routes are not uploaded.";
+"Drive" = "Camera alerts need your precise position during this drive. Approximate location is too coarse to tell which road you are on.";

@@ -15,11 +15,13 @@ enum class Kind {
     HAZARD, ROADWORK, TRAFFIC, BUMP;
     val isCamera: Boolean get() = this == CAMERA || this == MOBILE_CAMERA || this == SEATBELT || this == RED_LIGHT
 }
-data class Hazard(val id: String, val country: String, val kind: Kind, val point: Point, val heading: Double?, val road: String, val expiresAt: Long, val demo: Boolean = true, val revision: Long = 0) {
+/** `limit` is the posted speed limit in km/h when the source records one (OSM `maxspeed`). */
+data class Hazard(val id: String, val country: String, val kind: Kind, val point: Point, val heading: Double?, val road: String, val expiresAt: Long, val demo: Boolean = true, val revision: Long = 0, val limit: Int? = null) {
     init {
         require(id.isNotBlank() && id.length <= 120 && country in COUNTRIES && point.valid())
         require(heading == null || (heading.isFinite() && heading >= 0 && heading < 360))
         require(road.isNotBlank() && road.length <= 200 && expiresAt > 0 && revision >= 0)
+        require(limit == null || limit in 5..200)
     }
     val title: String get() = when(kind) {
         Kind.CAMERA -> "Speed camera"
@@ -44,11 +46,31 @@ object Geo {
         val r=Math.PI/180; val d=(b.lon-a.lon)*r
         return (atan2(sin(d)*cos(b.lat*r),cos(a.lat*r)*sin(b.lat*r)-sin(a.lat*r)*cos(b.lat*r)*cos(d))/r+360)%360
     }
+    /**
+     * Alert-grade fix: tight accuracy, fresh on the monotonic clock, plausible motion.
+     *
+     * Freshness is judged on the monotonic clock only. Android stamps GPS fixes with
+     * satellite (GNSS) time while `now` is the phone's wall clock; a phone whose clock is
+     * a few seconds off (common with automatic time disabled) used to have every single
+     * fix rejected, so the app sat on "Acquiring" next to a phone that had a lock.
+     * `now` stays in the signature for callers and expiry logic.
+     */
+    @Suppress("UNUSED_PARAMETER")
     fun usable(fix: Fix, now: Long, elapsed: Long, accuracy: Double=50.0): Boolean =
-        fix.point.valid() && fix.accuracy.isFinite() && fix.accuracy in 0.0..accuracy &&
-        fix.elapsedMs >= 0 && elapsed-fix.elapsedMs in 0..15_000 && now-fix.timeMs in -2_000..15_000 &&
+        fix.point.valid() && fix.accuracy.isFinite() && fix.accuracy > 0.0 && fix.accuracy <= accuracy &&
+        fix.elapsedMs >= 0 && elapsed-fix.elapsedMs in 0..15_000 &&
         fix.speed.isFinite() && fix.speed in 0.0..70.0 &&
         (fix.course==null || (fix.course.isFinite() && fix.course>=0 && fix.course<360))
+
+    /**
+     * Position-grade fix: good enough to show where the driver is and to say "GPS found"
+     * — a first satellite fix (often 30-100 m) or a Wi-Fi/cell fix — but not to alert on.
+     * Requiring alert-grade accuracy before showing any position was why the app looked
+     * like it never got a fix indoors, in car parks, and for the first minute outdoors.
+     */
+    fun positioned(fix: Fix, elapsed: Long, accuracy: Double=1_000.0): Boolean =
+        fix.point.valid() && fix.accuracy.isFinite() && fix.accuracy > 0.0 && fix.accuracy <= accuracy &&
+        fix.elapsedMs >= 0 && elapsed-fix.elapsedMs in 0..30_000
 }
 class SpatialIndex(alerts: List<Hazard>) {
     private val all=alerts.toList()
@@ -78,7 +100,10 @@ class AlertEngine {
         seen.entries.removeAll { elapsed-it.value.first>120_000 && Geo.distance(fix.point,it.value.second.point)>1500 }
         val radius=(fix.speed*30).coerceIn(400.0,1000.0)
         val hazard=index.nearby(fix.point,radius).asSequence().filter {
-            it.country==country && it.expiresAt>now && !seen.containsKey(it.id) &&
+            // A live OpenStreetMap camera is a mapped position: one 500 m ahead is ahead
+            // whichever side of a border it sits on (King Fahd Causeway, Al Ain/Buraimi).
+            // Country boundaries are approximate, so only non-live rows are country-scoped.
+            (it.country==country || it.id.startsWith("osm:")) && it.expiresAt>now && !seen.containsKey(it.id) &&
             Geo.angle(fix.course,Geo.bearing(fix.point,it.point))<=55 && (it.heading==null || Geo.angle(fix.course,it.heading)<=55)
         }.minByOrNull { Geo.distance(fix.point,it.point) } ?: return null
         seen[hazard.id]=elapsed to hazard

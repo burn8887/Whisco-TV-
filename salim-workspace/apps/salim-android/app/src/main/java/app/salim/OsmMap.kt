@@ -15,6 +15,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
@@ -30,7 +32,20 @@ import kotlin.math.floor
 import kotlin.math.pow
 
 /** A camera or other point rendered on the map. `exact=false` draws a hollow ring. */
-data class MapPin(val lat: Double, val lon: Double, val label: String, val exact: Boolean = true)
+/** `kind` is the hazard kind name (CAMERA, SEATBELT, RED_LIGHT, MOBILE_CAMERA) and picks the marker shape. */
+data class MapPin(val lat: Double, val lon: Double, val label: String, val exact: Boolean = true, val kind: String = "CAMERA")
+
+/**
+ * Night rendering for the standard OSM tiles: inverted, hue-rotated back so water stays
+ * blue-green, and dimmed 15 %. White land becomes near-black, so the map no longer glares in
+ * a dark car. Replace with a proper dark tile style when a tile provider is chosen.
+ */
+private val NightTiles = ColorFilter.colorMatrix(ColorMatrix(floatArrayOf(
+    0.4879f, -1.2155f, -0.1224f, 0f, 216.75f,
+    -0.3621f, -0.3655f, -0.1224f, 0f, 216.75f,
+    -0.3621f, -1.2155f, 0.7276f, 0f, 216.75f,
+    0f, 0f, 0f, 1f, 0f
+)))
 
 /**
  * A slippy map drawn directly into a Compose canvas.
@@ -53,6 +68,7 @@ fun OsmMap(
     grid: Color = Color(0xFF1E2A23),
     interactive: Boolean = true,
     pins: List<MapPin> = emptyList(),
+    night: Boolean = false,
     onCameraMove: (Double, Double, Float) -> Unit = { _, _, _ -> },
 ) {
     val scope = rememberCoroutineScope()
@@ -153,14 +169,15 @@ fun OsmMap(
                     srcOffset = IntOffset.Zero,
                     srcSize = IntSize(bitmap.width, bitmap.height),
                     dstOffset = IntOffset(left, top),
-                    dstSize = IntSize(size, size)
+                    dstSize = IntSize(size, size),
+                    colorFilter = if (night) NightTiles else null
                 )
             }
             for (pin in pins) {
                 val px = (width / 2.0 + (Mercator.x(pin.lon, tileZoom) - centerWorldX) * scale).toFloat()
                 val py = (height / 2.0 + (Mercator.y(pin.lat, tileZoom) - centerWorldY) * scale).toFloat()
                 if (px < -40f || py < -40f || px > width + 40f || py > height + 40f) continue
-                drawPin(px, py, pin.exact)
+                drawPin(px, py, pin.exact, pin.kind)
             }
             if (markerLat != null && markerLon != null) {
                 val markerX = (width / 2.0 + (Mercator.x(markerLon, tileZoom) - centerWorldX) * scale).toFloat()
@@ -187,9 +204,31 @@ private fun DrawScope.drawFallbackGrid(grid: Color) {
  * Camera marker. Approximate sites are hollow: a filled dot claims a precision the data
  * does not have, and a driver reads markers as certainty.
  */
-private fun DrawScope.drawPin(x: Float, y: Float, exact: Boolean) {
+private fun DrawScope.drawPin(x: Float, y: Float, exact: Boolean, kind: String = "CAMERA") {
     val halo = Color(0xFFFFC24B)
     val ring = Color(0xFF0A0D0B)
+    // Shape carries the type, so it reads without colour: square = seatbelt/phone camera,
+    // diamond = red-light camera, ring with a dot = mobile unit, round = speed camera.
+    when (kind) {
+        "SEATBELT" -> {
+            drawRect(ring, Offset(x - 12f, y - 12f), androidx.compose.ui.geometry.Size(24f, 24f))
+            drawRect(halo, Offset(x - 8.5f, y - 8.5f), androidx.compose.ui.geometry.Size(17f, 17f))
+            drawRect(ring, Offset(x - 3.5f, y - 3.5f), androidx.compose.ui.geometry.Size(7f, 7f))
+            return
+        }
+        "RED_LIGHT" -> {
+            val outer = Path().apply { moveTo(x, y - 15f); lineTo(x + 15f, y); lineTo(x, y + 15f); lineTo(x - 15f, y); close() }
+            val inner = Path().apply { moveTo(x, y - 10f); lineTo(x + 10f, y); lineTo(x, y + 10f); lineTo(x - 10f, y); close() }
+            drawPath(outer, ring); drawPath(inner, Color(0xFFFF6B5A)); drawCircle(ring, 3.5f, Offset(x, y))
+            return
+        }
+        "MOBILE_CAMERA" -> {
+            drawCircle(ring, 13f, Offset(x, y))
+            drawCircle(halo, 9.5f, Offset(x, y), style = Stroke(3f))
+            drawCircle(halo, 4f, Offset(x, y))
+            return
+        }
+    }
     drawCircle(ring, 13f, Offset(x, y))
     if (exact) {
         drawCircle(halo, 9.5f, Offset(x, y))

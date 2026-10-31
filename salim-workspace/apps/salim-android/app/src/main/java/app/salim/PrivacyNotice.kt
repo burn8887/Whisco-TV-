@@ -2,13 +2,16 @@ package app.salim
 
 object PrivacyNotice {
     val text="""
-        Salim uses a small, explicitly approximate Bahrain camera pack plus live OpenStreetMap data. Coverage varies; mapped data can be incomplete or out of date. There is no Salim account, analytics SDK or Salim server. Google Play handles subscriptions.
+        Salim warns about fixed cameras using live OpenStreetMap data. Coverage varies by area; mapped data can be incomplete or out of date. There is no Salim account, analytics SDK or Salim server. Google Play handles subscriptions.
 
         LOCATION
         Location is used only during a driver-started session. Salim uses precise location, speed and heading in memory to calculate proximity alerts and section averages. Updates continue while the explicitly started GPS test is active, including in the background. End the drive in Overview or its notification to stop location and speech. OS restrictions or force-stop can interrupt a test. Precise routes are not saved or uploaded by Salim.
 
         LOCAL STORAGE AND DELETION
-        Voice preferences, the camera pack, trip times/durations/alert counts and report drafts are stored locally. Free accounts retain the latest 20 trip summaries; Premium retains trip history without a product-based limit. Report drafts are capped at 100. Delete trip summaries in My trips and drafts in Community. Android app backup is disabled. There is no Salim server copy.
+        Voice preferences, cached OpenStreetMap camera data, trip times/durations/alert counts and report drafts are stored locally. Free accounts retain the latest 20 trip summaries; Premium retains trip history without a product-based limit. Report drafts are capped at 100. Delete trip summaries in My trips and drafts in Community. Android app backup is disabled. There is no Salim server copy.
+
+        MAP AND CAMERA DATA
+        To draw the map and find nearby cameras, the app requests map tiles and camera data for the area around a point rounded to about 1 km from OpenStreetMap services (the OpenStreetMap tile server and the Overpass API, or a provider Salim configures in their place). Those services receive that area and your IP address under their own policies. Salim sends no account, identifier or route history with these requests. Camera results are cached on this device.
 
         ADVERTISING
         Google Mobile Ads (AdMob) serves banner ads on Overview and Settings while no drive is active. Ads never appear on the drive screen. Google’s User Messaging Platform (UMP) requests consent where required and provides an advertising privacy-options form. Ad requests are sent only when UMP says they are permitted. Google may process device identifiers, IP address and ad interactions under its own privacy policy. Salim does not receive a route or precise GPS coordinates for advertising.
@@ -20,6 +23,6 @@ object PrivacyNotice {
         Opening an external map passes the destination you enter to the selected maps app. The installed text-to-speech engine handles alert speech according to its settings and may use its own network services. Notifications use Android system services. Those services have their own privacy policies.
 
         COVERAGE AND LIMITATIONS
-        Camera records are drawn from OpenStreetMap and the disclosed approximate Bahrain pack; neither source guarantees completeness or current operation. No police or patrol detection is provided. No community draft is published. Do not treat Salim as an official source or as a substitute for posted signs and local law.
+        Camera records are drawn from OpenStreetMap volunteer mapping, which does not guarantee completeness or current operation. No police or patrol detection is provided. No community draft is published. Do not treat Salim as an official source or as a substitute for posted signs and local law.
     """.trimIndent()
 }

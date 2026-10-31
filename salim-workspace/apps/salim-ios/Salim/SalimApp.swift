@@ -102,13 +102,13 @@ struct RootView: View {
             } else {
                 TabView {
                     NavigationStack { Dashboard(theme: theme) }
-                        .tabItem { Label("Overview", systemImage: "square.grid.2x2") }
+                        .tabItem { Label(Ar.t("Overview"), systemImage: "square.grid.2x2") }
                     NavigationStack { TripsView() }
-                        .tabItem { Label("Trips", systemImage: "clock.arrow.circlepath") }
+                        .tabItem { Label(Ar.t("Trips"), systemImage: "clock.arrow.circlepath") }
                     NavigationStack { CommunityView(theme: theme) }
-                        .tabItem { Label("Community", systemImage: "person.2") }
+                        .tabItem { Label(Ar.t("Community"), systemImage: "person.2") }
                     NavigationStack { SettingsView(theme: theme) }
-                        .tabItem { Label("Settings", systemImage: "slider.horizontal.3") }
+                        .tabItem { Label(Ar.t("Settings"), systemImage: "slider.horizontal.3") }
                 }
                 .tint(theme.accent)
             }
@@ -117,17 +117,40 @@ struct RootView: View {
     }
 }
 
-/// The mark: Arabic initial in a square tile, SALIM in monospaced caps on a hairline.
+/// The Salim mark, drawn in code so it is crisp at every size: a road receding to the
+/// horizon with a camera dot ahead. Same geometry as docs/brand/salim-icon.svg (96-unit grid).
+struct SalimMark: View {
+    var size: CGFloat = 30
+    var body: some View {
+        Canvas { context, canvas in
+            let s = canvas.width / 96
+            func p(_ x: CGFloat, _ y: CGFloat) -> CGPoint { CGPoint(x: x * s, y: y * s) }
+            func line(_ a: CGPoint, _ b: CGPoint, _ width: CGFloat, _ color: Color) {
+                var path = Path(); path.move(to: a); path.addLine(to: b)
+                context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: width * s, lineCap: .round))
+            }
+            context.fill(Path(roundedRect: CGRect(origin: .zero, size: canvas), cornerRadius: 22 * s), with: .color(Color.nightGround))
+            line(p(18, 86), p(43, 40), 4, Color(red: 0.957, green: 0.937, blue: 0.902))
+            line(p(78, 86), p(53, 40), 4, Color(red: 0.957, green: 0.937, blue: 0.902))
+            line(p(48, 82), p(48, 72), 3.5, .signal)
+            line(p(48, 63), p(48, 56), 3, .signal)
+            line(p(48, 49), p(48, 45), 2.5, .signal)
+            context.stroke(Path(ellipseIn: CGRect(x: 37.5 * s, y: 11.5 * s, width: 21 * s, height: 21 * s)),
+                           with: .color(Color.warn.opacity(0.55)), lineWidth: 2 * s)
+            context.fill(Path(ellipseIn: CGRect(x: 42.5 * s, y: 16.5 * s, width: 11 * s, height: 11 * s)), with: .color(.warn))
+        }
+        .frame(width: size, height: size)
+        .accessibilityHidden(true)
+    }
+}
+
+/// The lockup: the Salim mark, SALIM in monospaced caps on a hairline.
 struct BrandLockup: View {
     let theme: Theme
     var screen: String? = nil
     var body: some View {
         HStack(spacing: 10) {
-            Text("س")
-                .font(.system(size: 17, weight: .bold))
-                .foregroundStyle(theme.onAccent)
-                .frame(width: 30, height: 30)
-                .background(theme.accent, in: RoundedRectangle(cornerRadius: 4))
+            SalimMark(size: 30)
             VStack(alignment: .leading, spacing: 3) {
                 Text(screen?.uppercased() ?? "SALIM")
                     .font(.system(size: 16, weight: .bold, design: .monospaced))
@@ -186,9 +209,9 @@ struct Dashboard: View {
                     .foregroundStyle(theme.muted)
             }
         }
-        .alert("Start a drive?", isPresented: $consent) {
-            Button("Start drive") { model.startGPS() }
-            Button("Not now", role: .cancel) {}
+        .alert(Ar.t("Start a drive?"), isPresented: $consent) {
+            Button(Ar.t("Start drive")) { model.startGPS() }
+            Button(Ar.t("Not now"), role: .cancel) {}
         } message: {
             Text("Set up only while safely parked. Salim uses precise location, speed and heading during a drive, including in the background, until you end it. Camera coverage varies; mapped positions may be incomplete or out of date. No route is uploaded.")
         }
@@ -270,7 +293,7 @@ struct Dashboard: View {
     private var destinationSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             sectionLabel("DESTINATION")
-            TextField("Where are you heading?", text: $destination)
+            TextField(Ar.t("Where are you heading?"), text: $destination)
                 .textFieldStyle(.plain)
                 .padding(12)
                 .background(theme.surface, in: RoundedRectangle(cornerRadius: 6))
@@ -394,7 +417,7 @@ struct Dashboard: View {
                         .foregroundStyle(theme.muted)
                 }
                 Spacer()
-                Toggle("", isOn: $model.voice).labelsHidden().tint(theme.accent)
+                Toggle(Ar.t(""), isOn: $model.voice).labelsHidden().tint(theme.accent)
             }
             .padding(.top, 12)
         }
@@ -500,11 +523,7 @@ struct DriveScreen: View {
             Map(position: $camera) {
                 ForEach(model.hazards.filter(\.isCamera)) { hazard in
                     Annotation("", coordinate: CLLocationCoordinate2D(latitude: hazard.point.lat, longitude: hazard.point.lon)) {
-                        Image(systemName: "camera.fill")
-                            .font(.system(size: 10))
-                            .foregroundStyle(Color.warn)
-                            .padding(6)
-                            .background(Color.nightGround, in: Circle())
+                        CameraMarker(kind: hazard.kind)
                     }
                 }
                 if let sample = model.fix {
@@ -519,6 +538,8 @@ struct DriveScreen: View {
             }
             .ignoresSafeArea()
             .mapStyle(.standard(elevation: .flat))
+            // The drive screen is always dark; a bright map glares in a car at night.
+            .environment(\.colorScheme, .dark)
             .onChange(of: model.fix?.point) { _, point in
                 guard let point else { return }
                 withAnimation(.easeInOut(duration: 0.4)) {
@@ -539,24 +560,28 @@ struct DriveScreen: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 4) {
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(model.mode == .demo ? "SIMULATED DRIVE" : "DRIVE")
-                            .font(.system(size: 10, design: .monospaced)).tracking(2).foregroundStyle(Color.signal)
+                        HStack(spacing: 8) {
+                            Text(model.mode == .demo ? "SIMULATED DRIVE" : "DRIVE")
+                                .font(.system(size: 10, design: .monospaced)).tracking(2).foregroundStyle(Color.signal)
+                            if model.mode == .gps { SignalBars(accuracy: model.fix?.accuracy, ready: model.alertReady) }
+                        }
                         Text(model.mode == .demo ? "Fictional route · no device GPS" : model.status)
                             .font(.system(size: 11)).foregroundStyle(Color.nightMuted).lineLimit(1)
                     }
                     Spacer()
                     Button { model.voice.toggle() } label: {
+                        // 56 pt targets: pressed in a phone holder, at arm's length.
                         Image(systemName: model.voice ? "speaker.wave.2.fill" : "speaker.slash.fill")
-                            .foregroundStyle(Color.nightInk).padding(10)
+                            .foregroundStyle(Color.nightInk).frame(width: 56, height: 56).contentShape(Rectangle())
                     }
                     Button { minimised = true } label: {
-                        Image(systemName: "chevron.down").foregroundStyle(Color.nightInk).padding(10)
+                        Image(systemName: "chevron.down").foregroundStyle(Color.nightInk).frame(width: 56, height: 56).contentShape(Rectangle())
                     }
                     Button { model.stop() } label: {
                         Text("END")
                             .font(.system(size: 12, weight: .bold, design: .monospaced)).tracking(0.8)
                             .foregroundStyle(Color(red: 0.1, green: 0.02, blue: 0.01))
-                            .padding(.horizontal, 16).padding(.vertical, 9)
+                            .padding(.horizontal, 20).frame(minHeight: 52)
                             .background(Color.danger, in: RoundedRectangle(cornerRadius: 6))
                     }
                 }
@@ -569,19 +594,7 @@ struct DriveScreen: View {
                         .padding(.horizontal, 14)
                 }
                 if let match = model.warning {
-                    HStack(spacing: 12) {
-                        Text("\(Int(match.meters))").font(.system(size: 28, weight: .bold, design: .monospaced)).foregroundStyle(Color.warn)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("METRES · \(match.hazard.title.uppercased())")
-                                .font(.system(size: 10, design: .monospaced)).tracking(1).foregroundStyle(Color.nightMuted)
-                            Text(match.hazard.road).font(.system(size: 13)).foregroundStyle(Color.nightInk)
-                        }
-                        Spacer()
-                    }
-                    .padding(12)
-                    .background(Color.nightSurface, in: RoundedRectangle(cornerRadius: 6))
-                    .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.warn))
-                    .padding(.horizontal, 14)
+                    AlertTakeover(match: match, fix: model.fix).padding(.horizontal, 14)
                 }
 
                 Spacer()
@@ -609,6 +622,99 @@ struct DriveScreen: View {
     }
 }
 
+/// Full-width drive-screen alert: distance counts down from the live position, and the
+/// panel turns red when the driver is over the camera's posted limit (when OSM records one).
+struct AlertTakeover: View {
+    let match: AlertMatch
+    let fix: Fix?
+    var body: some View {
+        let meters: Double = fix.map { Geo.distance($0.point, match.hazard.point) } ?? match.meters
+        let kmh: Int? = fix.map { Int($0.speed * 3.6) }
+        let limit: Int? = match.hazard.limit
+        let over: Bool = limit != nil && kmh != nil && kmh! > limit!
+        let tint: Color = over ? Color.danger : Color.warn
+        VStack(alignment: .leading, spacing: 6) {
+            Text(match.hazard.title.uppercased())
+                .font(.system(size: 13, weight: .bold, design: .monospaced)).tracking(1.6).foregroundStyle(tint)
+            HStack(alignment: .center, spacing: 8) {
+                Text("\(Int(meters))").font(.system(size: 64, weight: .bold, design: .monospaced)).foregroundStyle(Color.nightInk)
+                Text("M").font(.system(size: 18, design: .monospaced)).foregroundStyle(Color.nightMuted)
+                Spacer()
+                if let limit {
+                    Text("\(limit)").font(.system(size: 22, weight: .bold)).foregroundStyle(Color.black)
+                        .frame(width: 64, height: 64)
+                        .background(Circle().fill(Color.white))
+                        .overlay(Circle().stroke(Color(red: 0.843, green: 0.149, blue: 0.118), lineWidth: 6))
+                }
+            }
+            Text(match.hazard.road).font(.system(size: 14)).foregroundStyle(Color.nightInk).lineLimit(1)
+            if over, let kmh, let limit {
+                Text("SLOW DOWN · \(kmh) KM/H IN A \(limit) ZONE")
+                    .font(.system(size: 12, weight: .bold, design: .monospaced)).tracking(1).foregroundStyle(Color.danger)
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.nightSurface.opacity(0.95), in: RoundedRectangle(cornerRadius: 6))
+        .overlay(RoundedRectangle(cornerRadius: 6).stroke(tint, lineWidth: 2))
+    }
+}
+
+/// GPS quality as four bars: ≤10 m, ≤25 m, ≤50 m (alerts live), anything coarser.
+struct SignalBars: View {
+    let accuracy: Double?
+    let ready: Bool
+    private var bars: Int {
+        guard let a = accuracy else { return 0 }
+        return a <= 10 ? 4 : a <= 25 ? 3 : a <= 50 ? 2 : 1
+    }
+    var body: some View {
+        HStack(alignment: .bottom, spacing: 2) {
+            ForEach(1...4, id: \.self) { i in
+                Rectangle()
+                    .fill(i <= bars ? (ready ? Color.signal : Color.warn) : Color.nightLine)
+                    .frame(width: 4, height: CGFloat(4 + i * 3))
+            }
+            Text(accuracy.map { " ±\(Int($0)) m" } ?? " NO FIX")
+                .font(.system(size: 10, design: .monospaced)).foregroundStyle(Color.nightMuted)
+        }
+    }
+}
+
+/// Camera marker whose shape carries the type, so it reads without colour: square =
+/// seatbelt/phone, diamond = red light, ringed = mobile unit, round = speed camera.
+struct CameraMarker: View {
+    let kind: String
+    var body: some View {
+        switch kind {
+        case "SEATBELT":
+            Image(systemName: "camera.fill").font(.system(size: 10)).foregroundStyle(Color.nightGround)
+                .padding(6).background(Color.warn, in: RoundedRectangle(cornerRadius: 2))
+        case "RED_LIGHT":
+            Image(systemName: "camera.fill").font(.system(size: 10)).foregroundStyle(Color.nightGround)
+                .padding(9).background(Color.danger, in: Diamond())
+        case "MOBILE_CAMERA":
+            Image(systemName: "camera.fill").font(.system(size: 10)).foregroundStyle(Color.warn)
+                .padding(6).background(Color.nightGround, in: Circle()).overlay(Circle().stroke(Color.warn, lineWidth: 2))
+        default:
+            Image(systemName: "camera.fill").font(.system(size: 10)).foregroundStyle(Color.warn)
+                .padding(6).background(Color.nightGround, in: Circle())
+        }
+    }
+}
+
+struct Diamond: Shape {
+    func path(in r: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: r.midX, y: r.minY))
+        p.addLine(to: CGPoint(x: r.maxX, y: r.midY))
+        p.addLine(to: CGPoint(x: r.midX, y: r.maxY))
+        p.addLine(to: CGPoint(x: r.minX, y: r.midY))
+        p.closeSubpath()
+        return p
+    }
+}
+
 struct TripsView: View {
     @EnvironmentObject var model: DriveModel
     @Environment(\.colorScheme) private var scheme
@@ -619,8 +725,8 @@ struct TripsView: View {
             Text("Summaries remain on this device. Precise routes are not saved.")
                 .font(.caption).foregroundStyle(theme.muted)
             if model.trips.isEmpty {
-                ContentUnavailableView("Your next journey starts here", systemImage: "car",
-                                       description: Text("Start and finish a simulated drive."))
+                ContentUnavailableView(Ar.t("Your next journey starts here"), systemImage: "car",
+                                       description: SwiftUI.Text(Ar.t("Start and finish a simulated drive.")))
             }
             ForEach(model.trips) { trip in
                 VStack(alignment: .leading, spacing: 6) {
@@ -633,11 +739,11 @@ struct TripsView: View {
                     }
                 }
             }
-            if !model.trips.isEmpty { Button("Delete local history", role: .destructive) { clear = true } }
+            if !model.trips.isEmpty { Button(Ar.t("Delete local history"), role: .destructive) { clear = true } }
         }
-        .navigationTitle("Trips")
-        .confirmationDialog("Delete local trip history?", isPresented: $clear, titleVisibility: .visible) {
-            Button("Delete", role: .destructive) { model.clearTrips() }
+        .navigationTitle(Ar.t("Trips"))
+        .confirmationDialog(Ar.t("Delete local trip history?"), isPresented: $clear, titleVisibility: .visible) {
+            Button(Ar.t("Delete"), role: .destructive) { model.clearTrips() }
         }
     }
 }
@@ -653,18 +759,18 @@ struct CommunityView: View {
                 Text("Only report when safely parked. These are local drafts, not published or verified community alerts.")
                     .font(.caption)
             }
-            Section("Share a heads-up") {
-                Picker("Type", selection: $kind) {
+            Section(Ar.t("Share a heads-up")) {
+                Picker(Ar.t("Type"), selection: $kind) {
                     // Speed cameras are warned about from mapped data, not self-reported:
                     // a miscounted user report is a false alert a driver could act on.
                     ForEach(["Road hazard", "Roadworks", "Traffic congestion", "Road bump"], id: \.self) { Text($0).tag($0) }
                 }
-                TextField("Road or location", text: $road)
-                Button("Save local draft") { model.addDraft(road: road, kind: kind); road = "" }
+                TextField(Ar.t("Road or location"), text: $road)
+                Button(Ar.t("Save local draft")) { model.addDraft(road: road, kind: kind); road = "" }
                     .disabled(road.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
             .disabled(model.mode != .idle)
-            Section("Your drafts") {
+            Section(Ar.t("Your drafts")) {
                 ForEach(model.drafts) { draft in
                     VStack(alignment: .leading) {
                         Text(draft.kind)
@@ -674,7 +780,7 @@ struct CommunityView: View {
                 .onDelete(perform: model.deleteDrafts)
             }
         }
-        .navigationTitle("Community")
+        .navigationTitle(Ar.t("Community"))
     }
 }
 
@@ -687,70 +793,70 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Section("Appearance") {
-                Picker("Theme", selection: $model.appearance) {
+            Section(Ar.t("Appearance")) {
+                Picker(Ar.t("Theme"), selection: $model.appearance) {
                     Text("System").tag("system")
                     Text("Light").tag("light")
                     Text("Dark").tag("dark")
                 }
                 .pickerStyle(.segmented)
             }
-            Section("Alerts") {
-                Toggle("Voice alerts", isOn: $model.voice)
-                Toggle("Alert tone", isOn: $model.tone)
+            Section(Ar.t("Alerts")) {
+                Toggle(Ar.t("Voice alerts"), isOn: $model.voice)
+                Toggle(Ar.t("Alert tone"), isOn: $model.tone)
                 Text(model.voice && model.tone ? "Chime, then the spoken warning."
                      : model.voice ? "Spoken warning only."
                      : model.tone ? "Chime only."
                      : "Both off — alerts arrive as a notification only.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
-            Section("Country") {
-                Picker("Country", selection: Binding(get: { model.country }, set: { model.selectCountry($0) })) {
+            Section(Ar.t("Country")) {
+                Picker(Ar.t("Country"), selection: Binding(get: { model.country }, set: { model.selectCountry($0) })) {
                     ForEach(DemoData.countries, id: \.self) { Text($0).tag($0) }
                 }
                 .disabled(model.mode != .idle)
-                Text("The Bahrain pack contains approximate sites marked ≈. OpenStreetMap provides mapped speed-camera data nearby; GCC coverage is incomplete and may be out of date.")
+                Text("OpenStreetMap volunteers provide mapped speed-camera data nearby; GCC coverage is incomplete and may be out of date. Always follow posted signs.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
-            Section("Data") {
+            Section(Ar.t("Data")) {
                 Text(model.feed).font(.caption)
-                Button("Reload pack and cameras") { Task { await model.reload() } }
+                Button(Ar.t("Reload pack and cameras")) { Task { await model.reload() } }
                 Text("Camera positions come from OpenStreetMap, fetched for the area around you and cached on the device. The query carries no identifier. No route is uploaded.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
-            if SalimAdConsent.isEnabled { Section("Advertising") {
+            if SalimAdConsent.isEnabled { Section(Ar.t("Advertising")) {
                 Text("Google AdMob may show banners on Overview and Settings while no drive is active. Ads never appear on the drive screen. Google's UMP consent flow controls ad requests and provides a privacy-options form where required. The SDK may process device identifiers, IP address and ad interactions under Google's policy; Salim does not provide AdMob with your route or precise GPS for targeting.")
                     .font(.caption).foregroundStyle(theme.muted)
                 if store.entitlementsLoaded && !store.premium && adConsent.canRequestAds {
                     SalimAdBanner().frame(height: 50).frame(maxWidth: .infinity)
                 }
                 if adConsent.privacyOptionsRequired {
-                    Button("Advertising privacy choices") { adConsent.showPrivacyOptions() }
+                    Button(Ar.t("Advertising privacy choices")) { adConsent.showPrivacyOptions() }
                 }
             } }
-            Section("Permissions") {
-                Button("Open system settings") {
+            Section(Ar.t("Permissions")) {
+                Button(Ar.t("Open system settings")) {
                     if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
                 }
                 Text("A drive requires precise location. Ending a session stops location updates and releases audio.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
-            Section("Salim Premium") {
+            Section(Ar.t("Salim Premium")) {
                 if store.premium {
                     Text("Active. Every warning stays free either way.").font(.caption)
                 } else {
-                    Button("See Salim Premium") { showPaywall = true }
+                    Button(Ar.t("See Salim Premium")) { showPaywall = true }
                     Text("Optional. Every camera and hazard warning works without it.").font(.caption).foregroundStyle(theme.muted)
                 }
-                Button("Restore purchases") { Task { await store.restore() } }
+                Button(Ar.t("Restore purchases")) { Task { await store.restore() } }
             }
-            Section("Privacy") { NavigationLink("Read privacy notice") { PrivacyNotice() } }
-            Section("Release status") {
-                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. Camera coverage varies by area; mapped and approximate sites can be missing or out of date. In an emergency in Bahrain, call 999.")
+            Section(Ar.t("Privacy")) { NavigationLink(Ar.t("Read privacy notice")) { PrivacyNotice() } }
+            Section(Ar.t("Release status")) {
+                Text("CarPlay, watchOS, vehicle-triggered startup and internal 3D navigation are not enabled. Camera coverage varies by area; mapped sites can be missing or out of date. In an emergency in Bahrain, call 999.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
         }
-        .navigationTitle("Settings")
+        .navigationTitle(Ar.t("Settings"))
         .sheet(isPresented: $showPaywall) { Paywall(theme: theme) }
     }
 }

@@ -166,8 +166,8 @@ struct Paywall: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             HStack(spacing: 16) {
-                Link("Terms of Use", destination: Store.termsURL)
-                Link("Privacy Policy", destination: Store.privacyURL)
+                Link(Ar.t("Terms of Use"), destination: Store.termsURL)
+                Link(Ar.t("Privacy Policy"), destination: Store.privacyURL)
             }
             .font(.system(size: 11, weight: .semibold))
             .foregroundStyle(theme.accent)

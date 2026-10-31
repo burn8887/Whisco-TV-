@@ -31,6 +31,12 @@ data class DriveState(
     // this the app could only say "stale", never "still looking", so a cold start
     // that legitimately needs 30-60 seconds read as a failure.
     val acquired: Boolean=false,
+    /**
+     * True while recent fixes are accurate enough to alert on (±50 m). `acquired` means
+     * "we know roughly where you are"; this means "alerts are live". Keeping them apart
+     * lets the app show a coarse position immediately instead of "Acquiring" for minutes.
+     */
+    val alertReady: Boolean=false,
     /** Cameras fetched live from OpenStreetMap for the current area. */
     val liveCameras: Int=0,
     val hazards: List<Hazard> = emptyList(),
@@ -52,6 +58,7 @@ object DriveStore {
     private var generation=0L
     private var startedAt=0L
     private var lastGood=0L
+    private var lastPosition=0L
     private var localAt=0L
     private var audio: AudioAlerts?=null
     private var ticker: Job?=null
@@ -85,7 +92,7 @@ object DriveStore {
      * alerts they already had.
      */
     private fun withFeed(pack: List<Hazard>): List<Hazard> =
-        (pack + liveCameras).distinctBy { it.id }
+        (pack + liveCameras + (if(state.value.mode==Mode.DEMO) DemoData.cameras else emptyList())).distinctBy { it.id }
 
     private var liveCameras: List<Hazard> = emptyList()
 
@@ -124,9 +131,12 @@ object DriveStore {
         if(state.value.mode!=Mode.IDLE)return
         if(mode==Mode.DEMO && !BuildConfig.DEBUG)return
         require(mode!=Mode.IDLE)
-        generation++;startedAt=SystemClock.elapsedRealtime();lastGood=startedAt;localAt=0;engine.reset();sections.reset();audio=AudioAlerts(context)
+        generation++;startedAt=SystemClock.elapsedRealtime();lastGood=startedAt;lastPosition=startedAt;localAt=0;engine.reset();sections.reset();audio=AudioAlerts(context)
+        // The simulated route passes one fictional debug-only camera, so the demo exercises a
+        // real camera alert end to end instead of driving past nothing.
+        if(mode==Mode.DEMO)mutable.update { it.copy(hazards=(it.hazards+DemoData.cameras).distinctBy { h->h.id }) }
         engine.replace(state.value.hazards)
-        mutable.update { it.copy(mode=mode,seconds=0,count=0,fix=null,warning=null,average=null,acquired=mode==Mode.DEMO,status=if(mode==Mode.DEMO)"Simulation · No device GPS" else "Acquiring GPS satellites…") }
+        mutable.update { it.copy(mode=mode,seconds=0,count=0,fix=null,warning=null,average=null,acquired=mode==Mode.DEMO,alertReady=mode==Mode.DEMO,status=if(mode==Mode.DEMO)"Simulation · No device GPS" else "Acquiring GPS satellites…") }
         prefs().edit().putLong("running",System.currentTimeMillis()).putBoolean("runningDemo",mode==Mode.DEMO).apply()
         ticker=scope.launch { while(isActive) {
             delay(1000);val elapsed=SystemClock.elapsedRealtime()
@@ -142,7 +152,16 @@ object DriveStore {
                 }
                 s.copy(seconds=waited,status=status,warning=s.warning?.takeIf { w->elapsed-w.atElapsed<=30_000 })
             }
-            if(state.value.acquired && elapsed-lastGood>15_000) { sections.reset();audio?.stop();mutable.update { it.copy(status="GPS stale · Alerts paused",fix=null,average=null,warning=null) } }
+            val s=state.value
+            if(s.mode==Mode.GPS && s.acquired && elapsed-lastPosition>15_000) {
+                // No position of any quality for 15 s: the signal is genuinely gone.
+                sections.reset();audio?.stop()
+                mutable.update { it.copy(status="GPS signal lost · Alerts paused",fix=null,alertReady=false,average=null,warning=null) }
+            } else if(s.mode==Mode.GPS && s.alertReady && elapsed-lastGood>15_000) {
+                // Still positioned, but nothing alert-grade lately: say so instead of "stale".
+                sections.reset()
+                mutable.update { it.copy(alertReady=false,average=null,status="Weak GPS · ±${it.fix?.accuracy?.toInt() ?: 0} m · Alerts paused") }
+            }
         } }
         val token=generation
         syncJob=scope.launch { while(isActive) {
@@ -157,9 +176,7 @@ object DriveStore {
         } }
         if(mode==Mode.DEMO)demoJob=scope.launch {
             repeat(75) { step ->
-                // The simulated run is routed past the mapped Seef camera in `cameras.csv`.
-                // It used to start in central Manama, where the honest pack has no camera —
-                // so the demo proved nothing. A synthetic route over a real site does.
+                // Synthetic route past DemoData.cameras (debug builds only).
                 receive(Fix(Point(26.2312+step*.000145,50.5330+step*.00007975),18.0,25.0,5.0,System.currentTimeMillis(),SystemClock.elapsedRealtime()))
                 delay(1000)
             }
@@ -169,12 +186,12 @@ object DriveStore {
     fun receive(fix: Fix) {
         if(state.value.mode==Mode.IDLE)return
         val now=System.currentTimeMillis();val elapsed=SystemClock.elapsedRealtime()
-        if(!Geo.usable(fix,now,elapsed)) {
-            audio?.stop();sections.reset()
-            mutable.update { it.copy(status=if(it.acquired)"Weak or stale GPS · Alerts paused" else "Acquiring GPS satellites…",fix=null,average=null,warning=null) }
-            return
-        }
-        lastGood=elapsed
+        // Anything we cannot even place on the map is ignored outright; the ticker reports
+        // "signal lost" if that goes on for 15 seconds.
+        if(!Geo.positioned(fix,elapsed))return
+        lastPosition=elapsed
+        val precise=Geo.usable(fix,now,elapsed)
+        if(precise)lastGood=elapsed
         val detectedCountry=CameraFeed.countryAt(fix.point)
         val country=detectedCountry ?: state.value.country
         if (country != state.value.country) {
@@ -182,7 +199,11 @@ object DriveStore {
         }
         val measurement=sections.evaluate(fix,now,elapsed,country)
         val average=measurement.active.firstOrNull() ?: measurement.completed.firstOrNull()
-        mutable.update { it.copy(acquired=true,fix=fix,average=average,status=when { it.mode==Mode.DEMO->"Simulation · Demo alerts only";fix.speed>=2 && fix.course==null->"Heading unavailable · Proximity alerts paused";else->"GPS drive active · Camera coverage varies" }) }
+        mutable.update { it.copy(acquired=true,alertReady=precise,fix=fix,average=average,status=when {
+            it.mode==Mode.DEMO->"Simulation · Demo alerts only"
+            !precise->"Locating · ±${fix.accuracy.toInt()} m · Alerts start when GPS sharpens"
+            fix.speed>=2 && fix.course==null->"Heading unavailable · Proximity alerts paused"
+            else->"GPS locked · ±${fix.accuracy.toInt()} m · Camera coverage varies" }) }
         if(elapsed-localAt>10_000 && localJob?.isActive!=true) {
             localAt=elapsed;val token=generation
             localJob=scope.launch { runCatching { repository.local(country,fix.point) }.onSuccess { hazards->if(token==generation) { val merged=withFeed(hazards);engine.replace(merged);mutable.update { it.copy(hazards=merged) } } }.onFailure { if(it is CancellationException)throw it } }
@@ -190,7 +211,8 @@ object DriveStore {
         val match=engine.evaluate(fix,now,elapsed,country) ?: return
         mutable.update { it.copy(warning=match,count=it.count+1) }
         if(state.value.tone)audio?.beep()
-        if(state.value.voice)audio?.speak("Demo alert. ${match.hazard.title} in ${match.meters.toInt()} meters. Follow posted signs.")
+        // "Demo" is said only in a simulation; a real drive's alert is a real alert.
+        if(state.value.voice)audio?.speakAlert(match.hazard,match.meters,state.value.mode==Mode.DEMO)
         onWarning?.invoke(match)
     }
     fun end(status: String="Session ended · Saved on this device") {
@@ -198,7 +220,7 @@ object DriveStore {
         val old=state.value
         generation++;ticker?.cancel();syncJob?.cancel();localJob?.cancel();demoJob?.cancel();audio?.close();audio=null;sections.reset();engine.reset()
         val trip=Trip(UUID.randomUUID().toString(),System.currentTimeMillis(),((SystemClock.elapsedRealtime()-startedAt)/1000).toInt(),old.count,old.mode==Mode.DEMO)
-        mutable.update { it.copy(mode=Mode.IDLE,fix=null,warning=null,average=null,acquired=false,status=status,trips=(listOf(trip)+it.trips).let { trips -> if(it.entitlementChecked && !it.premium) trips.take(20) else trips }) }
+        mutable.update { it.copy(mode=Mode.IDLE,fix=null,warning=null,average=null,acquired=false,alertReady=false,hazards=it.hazards.filterNot { h->h.id.startsWith("demo:") },status=status,trips=(listOf(trip)+it.trips).let { trips -> if(it.entitlementChecked && !it.premium) trips.take(20) else trips }) }
         prefs().edit().remove("running").remove("runningDemo").apply();saveTrips()
     }
     fun applyPremiumEntitlement(checked: Boolean, active: Boolean) {

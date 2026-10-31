@@ -16,6 +16,11 @@ val releaseVersionCode = providers.gradleProperty("versionCode").orNull?.toIntOr
 val admobAppId = System.getenv("SALIM_ADMOB_APP_ID_ANDROID").orEmpty()
 val admobBannerId = System.getenv("SALIM_ADMOB_BANNER_ANDROID").orEmpty()
 val reportApiUrl = System.getenv("SALIM_REPORT_API_URL").orEmpty().trimEnd('/')
+// Data endpoints. The public OpenStreetMap tile and Overpass servers are fine for testing but
+// their usage policies do not cover store-scale traffic; point these at a tile provider or a
+// Salim proxy for release builds without a code change.
+val overpassUrl = System.getenv("SALIM_OVERPASS_URL").orEmpty().ifBlank { "https://overpass-api.de/api/interpreter" }
+val tileUrl = System.getenv("SALIM_TILE_URL").orEmpty().ifBlank { "https://tile.openstreetmap.org/{z}/{x}/{y}.png" }
 val productionAdsConfigured = admobAppId.isNotBlank() && admobBannerId.isNotBlank()
 val salimAdsEnabled = releaseVersionName != null
 if (releaseVersionName != null) {
@@ -35,6 +40,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FEED_URL", "\"\"")
         buildConfigField("String", "REPORT_API_URL", "\"$reportApiUrl\"")
+        buildConfigField("String", "OVERPASS_URL", "\"$overpassUrl\"")
+        buildConfigField("String", "TILE_URL", "\"$tileUrl\"")
         buildConfigField("String", "ADMOB_BANNER_ID", "\"$resolvedAdmobBannerId\"")
         buildConfigField("Boolean", "ADS_ENABLED", salimAdsEnabled.toString())
         manifestPlaceholders["admobAppId"] = resolvedAdmobAppId

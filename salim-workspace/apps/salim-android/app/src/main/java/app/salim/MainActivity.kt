@@ -8,10 +8,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -30,7 +36,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -109,6 +118,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DriveStore.initialize(this)
+        // Android 15+ draws edge to edge regardless; doing it everywhere keeps older phones
+        // consistent, and the status-bar icon colour is then set from the app's own theme.
+        enableEdgeToEdge()
         setContent { Salim() }
     }
     override fun onPostResume() {
@@ -130,7 +142,25 @@ private fun Salim() {
         Appearance.LIGHT -> false
         Appearance.DARK -> true
     }
+    SystemBarIcons(light = !dark)
     MaterialTheme(colorScheme = if (dark) DarkScheme else LightScheme) { SalimBody(state) }
+}
+
+/**
+ * Status/navigation bar icon colour. The window theme forced dark icons, which vanished on
+ * the dark theme and on the always-dark drive screen (which overrides this while shown).
+ */
+@Composable
+private fun SystemBarIcons(light: Boolean) {
+    val view = LocalView.current
+    if (view.isInEditMode) return
+    SideEffect {
+        val window = (view.context as? Activity)?.window ?: return@SideEffect
+        WindowCompat.getInsetsController(window, view).apply {
+            isAppearanceLightStatusBars = light
+            isAppearanceLightNavigationBars = light
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -243,10 +273,7 @@ private fun SalimBody(state: DriveState) {
 private fun BrandLockup(screen: String?) {
     val scheme = MaterialTheme.colorScheme
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        Box(
-            Modifier.size(30.dp).background(scheme.primary, Sharper),
-            contentAlignment = Alignment.Center
-        ) { Text("س", color = scheme.onPrimary, fontSize = 17.sp, fontWeight = FontWeight.Bold) }
+        SalimMark(30.dp)
         Column(Modifier.padding(start = 0.dp)) {
             Text(
                 if (screen == null) "SALIM" else screen.uppercase(),
@@ -255,6 +282,27 @@ private fun BrandLockup(screen: String?) {
             )
             if (screen == null) Hairline(Modifier.padding(top = 3.dp), width = 34.dp)
         }
+    }
+}
+
+/**
+ * The Salim mark, drawn in code so it is crisp at every size: a road receding to the horizon
+ * with a camera dot ahead. Same geometry as docs/brand/salim-icon.svg (96-unit grid).
+ */
+@Composable
+fun SalimMark(size: Dp) {
+    Canvas(Modifier.size(size)) {
+        val s = this.size.width / 96f
+        fun line(x1: Float, y1: Float, x2: Float, y2: Float, w: Float, c: Color) =
+            drawLine(c, Offset(x1 * s, y1 * s), Offset(x2 * s, y2 * s), w * s, StrokeCap.Round)
+        drawRoundRect(NightGround, cornerRadius = CornerRadius(22f * s))
+        line(18f, 86f, 43f, 40f, 4f, Color(0xFFF4EFE6))
+        line(78f, 86f, 53f, 40f, 4f, Color(0xFFF4EFE6))
+        line(48f, 82f, 48f, 72f, 3.5f, Signal)
+        line(48f, 63f, 48f, 56f, 3f, Signal)
+        line(48f, 49f, 48f, 45f, 2.5f, Signal)
+        drawCircle(Warn.copy(alpha = .55f), 10.5f * s, Offset(48f * s, 22f * s), style = Stroke(2f * s))
+        drawCircle(Warn, 5.5f * s, Offset(48f * s, 22f * s))
     }
 }
 
@@ -282,7 +330,8 @@ private fun cameraPins(lat: Double, lon: Double, hazards: List<Hazard>): List<Ma
                 lat = hazard.point.lat, lon = hazard.point.lon,
                 label = record?.label ?: hazard.road,
                 // Pack rows carry their own precision; OSM rows are mapped coordinates.
-                exact = record?.precision == CameraRecord.Precision.EXACT || record == null
+                exact = record?.precision == CameraRecord.Precision.EXACT || record == null,
+                kind = hazard.kind.name
             )
         }
 
@@ -414,7 +463,8 @@ private fun MapCard(
             markerLat = if (located) lat else null, markerLon = if (located) lon else null,
             accent = Signal, surface = NightGround, grid = NightLine,
             interactive = true,
-            pins = cameraPins(lat, lon, state.hazards)
+            pins = cameraPins(lat, lon, state.hazards),
+            night = scheme.background.luminance() < .5f
         )
         // Scrim so the overlay text keeps its contrast over pale map tiles.
         Box(Modifier.fillMaxWidth().height(96.dp).align(Alignment.TopCenter).background(
@@ -517,6 +567,54 @@ private fun AlertBanner(match: AlertMatch) {
     }
 }
 
+/**
+ * Full-width alert for the drive screen: read in a glance, not a sentence. The distance
+ * counts down from the live position; the panel turns red when the driver is over the
+ * camera's posted limit (when OSM records one).
+ */
+@Composable
+private fun AlertTakeover(match: AlertMatch, fix: app.salim.core.Fix?) {
+    val meters = fix?.let { Geo.distance(it.point, match.hazard.point) } ?: match.meters
+    val kmh = fix?.let { (it.speed * 3.6).toInt() }
+    val limit = match.hazard.limit
+    val over = limit != null && kmh != null && kmh > limit
+    val tint = if (over) Danger else Warn
+    Column(
+        Modifier.fillMaxWidth().clip(Sharp).background(Color(0xF2121715)).border(2.dp, tint, Sharp).padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        Text(match.hazard.title.uppercase(), fontSize = 13.sp, letterSpacing = 1.6.sp, color = tint, fontFamily = Readout, fontWeight = FontWeight.Bold)
+        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("${meters.toInt()}", fontSize = 64.sp, lineHeight = 66.sp, fontWeight = FontWeight.Bold, fontFamily = Readout, color = NightInk)
+            Text("M", fontSize = 18.sp, color = NightMuted, fontFamily = Readout, modifier = Modifier.padding(bottom = 10.dp))
+            Spacer(Modifier.weight(1f))
+            if (limit != null) Box(
+                Modifier.size(64.dp).clip(RoundedCornerShape(50)).background(Color.White).border(6.dp, Color(0xFFD7261E), RoundedCornerShape(50)),
+                contentAlignment = Alignment.Center
+            ) { Text("$limit", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color(0xFF111111)) }
+        }
+        Text(match.hazard.road, fontSize = 14.sp, color = NightInk, maxLines = 1)
+        if (over) Text("SLOW DOWN · ${kmh} KM/H IN A ${limit} ZONE", fontSize = 12.sp, letterSpacing = 1.sp, color = Danger, fontFamily = Readout, fontWeight = FontWeight.Bold)
+    }
+}
+
+/** GPS quality as four bars: ≤10 m, ≤25 m, ≤50 m (alerts live), anything coarser. */
+@Composable
+private fun SignalBars(accuracy: Double?, alertReady: Boolean) {
+    val bars = when {
+        accuracy == null -> 0
+        accuracy <= 10 -> 4
+        accuracy <= 25 -> 3
+        accuracy <= 50 -> 2
+        else -> 1
+    }
+    val on = if (alertReady) Signal else Warn
+    Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+        for (i in 1..4) Box(Modifier.width(4.dp).height((4 + i * 3).dp).background(if (i <= bars) on else NightLine))
+        Text(accuracy?.let { " ±${it.toInt()} m" } ?: " NO FIX", fontSize = 10.sp, color = NightMuted, fontFamily = Readout)
+    }
+}
+
 @Composable
 private fun Acquiring(state: DriveState) {
     val scheme = MaterialTheme.colorScheme
@@ -559,6 +657,20 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
     }
     val lat = fix?.lat ?: homeLat
     val lon = fix?.lon ?: homeLon
+    // The drive screen is always dark: light bar icons while it is up, then put back
+    // whatever the theme had set.
+    val view = LocalView.current
+    DisposableEffect(Unit) {
+        val controller = (view.context as? Activity)?.window?.let { WindowCompat.getInsetsController(it, view) }
+        val previousStatus = controller?.isAppearanceLightStatusBars
+        val previousNavigation = controller?.isAppearanceLightNavigationBars
+        controller?.isAppearanceLightStatusBars = false
+        controller?.isAppearanceLightNavigationBars = false
+        onDispose {
+            previousStatus?.let { controller?.isAppearanceLightStatusBars = it }
+            previousNavigation?.let { controller?.isAppearanceLightNavigationBars = it }
+        }
+    }
 
     Box(Modifier.fillMaxSize().background(NightGround)) {
         OsmMap(
@@ -566,7 +678,8 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
             markerLat = fix?.lat, markerLon = fix?.lon,
             accent = Signal, surface = NightGround, grid = NightLine,
             interactive = true,
-            pins = cameraPins(lat, lon, state.hazards)
+            pins = cameraPins(lat, lon, state.hazards),
+            night = true
         )
         // Top scrim, bottom scrim: the overlays own the contrast, not the tiles.
         Box(Modifier.fillMaxWidth().height(140.dp).background(Brush.verticalGradient(listOf(Color(0xE60A0D0B), Color(0x000A0D0B)))))
@@ -575,23 +688,28 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
         Column(Modifier.fillMaxSize().systemBarsPadding()) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text(
-                        if (state.mode == Mode.DEMO) "SIMULATED DRIVE" else "DRIVE",
-                        fontSize = 10.sp, letterSpacing = 2.sp, color = Signal, fontFamily = Readout
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            if (state.mode == Mode.DEMO) "SIMULATED DRIVE" else "DRIVE",
+                            fontSize = 10.sp, letterSpacing = 2.sp, color = Signal, fontFamily = Readout
+                        )
+                        if (state.mode == Mode.GPS) SignalBars(state.fix?.accuracy, state.alertReady)
+                    }
                     Text(
                         if (state.mode == Mode.DEMO) "Fictional route · no device GPS" else state.status,
                         fontSize = 11.sp, color = NightMuted, maxLines = 1
                     )
                 }
-                IconButton(onClick = { DriveStore.setVoice(!state.voice) }) {
+                // 56 dp targets: these are pressed in a phone holder, at arm's length.
+                IconButton(onClick = { DriveStore.setVoice(!state.voice) }, modifier = Modifier.size(56.dp)) {
                     Icon(if (state.voice) Icons.Outlined.VolumeUp else Icons.Outlined.VolumeOff, "Voice", tint = NightInk)
                 }
-                IconButton(onClick = onMinimise) { Icon(Icons.Outlined.KeyboardArrowDown, "Minimise", tint = NightInk) }
+                IconButton(onClick = onMinimise, modifier = Modifier.size(56.dp)) { Icon(Icons.Outlined.KeyboardArrowDown, "Minimise", tint = NightInk) }
                 Button(
                     onClick = { end() }, shape = Sharp,
                     colors = ButtonDefaults.buttonColors(containerColor = Danger, contentColor = Color(0xFF1A0503)),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                    modifier = Modifier.heightIn(min = 56.dp),
+                    contentPadding = PaddingValues(horizontal = 20.dp, vertical = 8.dp)
                 ) { Text("END", fontWeight = FontWeight.Bold, fontFamily = Readout, letterSpacing = .8.sp) }
             }
 
@@ -600,7 +718,7 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
             }
             val liveWarning = state.warning
             if (liveWarning != null) {
-                Box(Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 6.dp)) { AlertBanner(liveWarning) }
+                Box(Modifier.fillMaxWidth().padding(horizontal = 14.dp, vertical = 6.dp)) { AlertTakeover(liveWarning, state.fix) }
             }
 
             Spacer(Modifier.weight(1f))
@@ -623,7 +741,7 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
             }
             Row(Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, bottom = 14.dp), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(MapTiles.ATTRIBUTION, fontSize = 9.sp, color = Color(0xFF9AAA9F))
-                Text("FICTIONAL DATA", fontSize = 9.sp, letterSpacing = 1.sp, color = Color(0xFF9AAA9F), fontFamily = Readout)
+                if (state.mode == Mode.DEMO) Text("FICTIONAL DATA", fontSize = 9.sp, letterSpacing = 1.sp, color = Color(0xFF9AAA9F), fontFamily = Readout)
             }
         }
     }
@@ -724,7 +842,12 @@ private fun Settings(state: DriveState, billing: Billing?, showAds: Boolean, act
     if (premium && billing != null) PremiumDialog(billing, onDismiss = { premium = false })
     if (privacy) AlertDialog(
         onDismissRequest = { privacy = false }, title = { Text("Privacy notice") },
-        text = { Text(PrivacyNotice.text, modifier = Modifier.verticalScroll(rememberScrollState())) },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                if (Ar.enabled) Text("The privacy notice is currently available in English.", fontWeight = FontWeight.Bold)
+                Text(PrivacyNotice.text)
+            }
+        },
         confirmButton = { TextButton(onClick = { privacy = false }) { Text("Close") } }
     )
     LazyColumn(contentPadding = PaddingValues(horizontal = 18.dp, vertical = 14.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -770,7 +893,7 @@ private fun Settings(state: DriveState, billing: Billing?, showAds: Boolean, act
                 }
             }
         }
-        item { Text("Coverage varies by area. Live cameras are mapped by OpenStreetMap; known approximate Bahrain sites are marked ≈. Camera data may be incomplete or out of date.", fontSize = 11.sp, color = scheme.onSurfaceVariant) }
+        item { Text("Coverage varies by area. Cameras are mapped by OpenStreetMap volunteers and may be incomplete or out of date. Always follow posted signs.", fontSize = 11.sp, color = scheme.onSurfaceVariant) }
         if (showAds) item { SalimAdBanner() }
         if (privacyOptionsRequired && activity != null) item {
             OutlinedButton(onClick = { SalimAdConsent.showPrivacyOptions(activity) }, shape = Sharp, modifier = Modifier.fillMaxWidth()) {
