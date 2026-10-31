@@ -10,8 +10,9 @@ It runs in both layouts: inside the capsule (`salim-workspace/tools/`) and in th
 generated standalone repository (`tools/`). The repository root is found by walking up to
 the directory that holds `.github/workflows`, never by counting parents.
 
-Also enforces the agreed guard rails: the signed-release workflow must stay manual-only,
-must run in the `salim-release` environment, and must not contain any store-upload step.
+Also enforces release guard rails: signing stays manual-only and environment-gated; the
+verified iOS IPA may upload to App Store Connect only after signature/identity checks; Play
+uploads remain manual and no Google Play publisher action may be added to this workflow.
 """
 from __future__ import annotations
 
@@ -52,17 +53,15 @@ WORKFLOW_REF_RE = re.compile(r"\.github/workflows/[\w.\-]+")
 # Build outputs and generated reports do not exist at commit time, so they are exempt from
 # the existence check. Only source paths must resolve.
 GENERATED_MARKERS = ("/build/", "native-test-summary.json", "/DerivedData/")
-# Anything that would push an artifact to a store. None of these may appear.
-FORBIDDEN_UPLOAD = (
+# Play publication remains manual; the only current automated store transfer is the
+# Founder-authorized, identity-checked IPA upload to App Store Connect.
+FORBIDDEN_PLAY_UPLOAD = (
     "r0adkll/upload-google-play",
-    "altool",
-    "notarytool",
-    "xcrun altool",
     "publishReleaseBundle",
     "google-play-github-action",
     "fastlane supply",
-    "fastlane pilot",
 )
+IOS_ASC_UPLOAD = "xcrun altool --upload-app --type ios --file"
 
 
 def workflow_kind(path: Path) -> str | None:
@@ -119,11 +118,17 @@ def check(workflows_dir: Path = WORKFLOWS) -> list[str]:
             if not (ROOT / reference).is_file():
                 problems.append(f"{name}: workflow reference does not exist: {reference}")
 
-        for term in FORBIDDEN_UPLOAD:
+        for term in FORBIDDEN_PLAY_UPLOAD:
             if term.lower() in lowered:
-                problems.append(f"{name}: contains a store-upload command: {term}")
+                problems.append(f"{name}: contains an automatic Google Play upload command: {term}")
 
         if kind == "release-signing":
+            upload_at = lowered.find(IOS_ASC_UPLOAD)
+            verify_at = lowered.find("verify the ipa signature and identity")
+            if upload_at < 0:
+                problems.append(f"{name}: missing the verified App Store Connect IPA upload")
+            elif verify_at < 0 or verify_at > upload_at:
+                problems.append(f"{name}: App Store Connect upload must follow IPA signature and identity verification")
             if "workflow_dispatch" not in text:
                 problems.append(f"{name}: must remain workflow_dispatch triggered")
             # A push/pull_request/schedule trigger would run signing without a human.
@@ -147,7 +152,7 @@ def main() -> int:
         return 1
     print(
         f"Workflow check passed ({layout}): {len(REQUIRED_KINDS)} workflows, "
-        "paths resolve, manual-only signing."
+        "paths resolve, manual-only signing, verified iOS ASC upload, manual Play upload."
     )
     return 0
 

@@ -1,65 +1,33 @@
-# Native recovery and release status — 20 October 2026
+# Salim — recovery and release status
 
-## Persisted implementation
+**Updated:** 2026-10-28 (Asia/Bahrain). This document replaces the 20 October 2026 status snapshot. For the full dated facts block, links, pending gates, and continuation instructions, see [`AGENT-TAKEOVER-BRIEF.md`](AGENT-TAKEOVER-BRIEF.md).
 
-Canonical source is tracked under `salim-workspace/`; builds materialize a separate disposable tree. Android is native Kotlin/Compose; iOS is native SwiftUI. The browser dashboard remains a separate demonstrator, not a native binary.
+## Current release evidence
 
-Both native demos are branded **Salim — سالم** and include heading-aware proximity filtering, sample section-control entry/exit gates and speed integration, explicit simulated versus device-GPS sessions, bounded spoken alerts/audio restoration, SQLite fictional alert packs, local trip summaries and report drafts, permission disclosures, app icons and in-app privacy notices. Android additionally contains a validated regional delta adapter, disabled by its empty feed URL. iOS remains offline demo-only and has no remote delta synchronization.
+- Repository: `burn8887/Whisco-TV-`; Salim source is isolated under `salim-workspace/`. Current work branch `arena/74afd701-whisco-tv`; PR #37 is open. Do not merge without separate Founder approval.
+- Android Billing Library 8.0.0 and default version code 8 are committed. Native Android CI run [40671995018](https://github.com/burn8887/Whisco-TV-/actions/runs/40671995018) passed 24 tests, emulator tests, APK ZIP alignment, and 16 KB native-library alignment checks.
+- A signed Android code-8 AAB has not yet been evidenced. Run the manual `Salim signed release` workflow with platform `android`, version code `8`, and identity `com.salimdrive.app`; download artifact `salim-android-signed` and manually upload the AAB to Play Console. The workflow does not publish to Play.
+- The signed iOS IPA was built with Xcode 26.3, verified, and successfully uploaded to App Store Connect in run [40677950530](https://github.com/burn8887/Whisco-TV-/actions/runs/40677950530). The Founder temporarily deferred the Xcode 27.1/iPhone Duo requirement. App Store Connect processing/TestFlight state remains unknown pending dashboard check.
+- ASC API secret names in the `salim-release` environment are documented in the agent brief and runbook only; secret values are not copied here. The latest iOS run's credential guard and upload step both succeeded.
 
-## Verified runner evidence
+## Persisted implementation and release separation
 
-### Apple
+Canonical Salim source is under `salim-workspace/`; workflows materialize a separate build tree. Android is native Kotlin/Compose; iOS is native SwiftUI. The browser dashboard is a separate demonstrator, not a native app binary. Android's Billing 8 callback migration is included and CI-validated. The signed-release workflow is manual-only and isolated to Salim's environment.
 
-- [Run 39418444930](https://github.com/burn8887/Whisco-TV-/actions/runs/39418444930), source commit `b790ebe` (Salim rename): **passed**.
-- Pre-rename run 38559900113, source `8880afd`, also passed.
-- Xcode **26.3**, **9 XCTest cases passed, 0 failed, 0 skipped**; iPhone 16 Pro / iOS 18.5 simulator.
-- Unsigned arm64 device archive built successfully, in addition to the simulator app.
-- Artifact `salim-ios-simulator` contains `Salim-simulator.zip`, `Salim-unsigned-device-archive.zip`, build logs, result bundle and machine-readable XCTest summary. Artifact retention is 14 days.
-- No signing/provisioning, IPA export, TestFlight processing or physical-device verification has occurred. Neither ZIP is a TestFlight distribution.
+The Android signed workflow produces a signed AAB/APK artifact for manual Play Console submission. The iOS signed workflow builds, validates, and submits its IPA to App Store Connect. Successful upload only confirms the upload step; it is not proof of store processing, beta approval, App Review approval, or public release.
 
-### Android
+## Still open before test/public release
 
-- [Run 39418531146](https://github.com/burn8887/Whisco-TV-/actions/runs/39418531146), source commit `829c630` (Salim rename and icon fix): full run **passed**, including the API 35 emulator.
-- Annotations report **24 JUnit cases passed, 0 failed, 0 skipped**, `Salim APK packaging :: ZIP alignment verified at 16 KB`, and arm64-v8a/x86_64 `libandroidx.graphics.path.so` LOAD alignments `[16384, 16384, 16384]`.
-- Pre-rename run 38561259145, source `cb5ef28`, also passed with the same test counts.
-- Test mix is unchanged: **14 JVM engine/sync, 6 SQLite and 4 native lifecycle cases**.
-- The 64-bit native libraries for arm64-v8a and x86_64 each have 16,384-byte ELF LOAD alignment. APK ZIP alignment also passed. This is static packaging evidence, not testing on a physical 16 KB-page device.
-- Artifacts are retained in GitHub Actions, not committed into this repository. `salim-android-test-build` contains native packages/reports; `salim-android-device-tests` contains the connected-test reports and exact JUnit summary.
-- Debug signing is for direct developer testing only and may change between clean runners. The release AAB is **unsigned**, not Play-uploadable. Dedicated Salim signing remains unconfigured.
+- Check App Store Connect processing and TestFlight visibility for the successful iOS upload; record only what the dashboard actually shows.
+- Produce the signed Android version-code-8 AAB and upload it to the correct Salim Play testing track. Confirm Play-side package, signing, version code, and processing status.
+- Complete store metadata/privacy/data-safety/export compliance/reviewer fields as applicable. Verify live privacy and support URLs and monitored contacts before representing them as ready.
+- Complete physical-device QA and accessibility review. Current OSM/Overpass camera data is not comprehensive GCC coverage; static packs are empty. Do not claim official or complete camera coverage.
+- Resolve entity/operator, data provenance/rights, privacy disclosures, and qualified Bahrain legal/accounting review before public release.
 
-### Local tooling
+## Recovery and safety rules
 
-- **13 Python tests passed**: 9 materializer safety/recovery cases and 4 ELF-checker cases.
-- **6 browser-reference geospatial tests passed**.
-- Apple plist/asset-catalog validation passed; iOS icon is 1024×1024 RGB without alpha.
-- Isolation verifier and `git diff --check` pass. Existing host files remain identical to baseline.
-
-Actions artifact/log downloads are blocked by this sandbox's outbound host restrictions. Runner status, exact test summaries and artifact metadata are available through the GitHub API; download retained files from the corresponding Actions run in your browser. No binary has been locally installed or tested in this Linux sandbox.
-
-## Signed release workflow — prepared, never run
-
-`.github/workflows/salim-release-signing.yml` is the Founder-approved third Salim workflow. It is
-manual-only, runs in the `salim-release` GitHub environment, verifies the Android certificate
-fingerprint and the iOS provisioning profile identity before signing, deletes key material in an
-`always()` step, and **does not upload anywhere**. No environment, secret or signed artifact exists
-yet, so it has never executed. Setup: [RELEASE-SIGNING.md](RELEASE-SIGNING.md).
-
-## Public pages — authored, not published
-
-`site/` holds the home, privacy and support pages for the approved domain `www.salimdrive.com`.
-`deploy/` holds the uploadable bundle: a single self-contained `index.html` app preview plus
-inlined `privacy.html` and `support.html`. The domain did not resolve on 20 October 2026 and
-nothing has been deployed. The operating entity is still an unfilled placeholder, and
-`tools/check_site.py` fails until it is supplied.
-
-## Store-readiness gates
-
-See [STORE-RELEASE-CHECKLIST.md](STORE-RELEASE-CHECKLIST.md) for dedicated identities/signing, store declarations and the physical-device acceptance matrix; [STORE-LISTING-DRAFT.md](STORE-LISTING-DRAFT.md) and [PRIVACY-PUBLICATION-DRAFT.md](PRIVACY-PUBLICATION-DRAFT.md) are review drafts, not submitted or published materials.
-
-Still required: Founder-confirmed separate app IDs; dedicated upload/distribution signing material; separate Play/App Store Connect records; public privacy/support details; store questionnaires and review contacts; actual-device GPS/lock-screen/audio/battery/accessibility testing; screenshots; authorized signed export/upload and platform processing/review. Store acceptance is not guaranteed by a green CI result.
-
-Verified feeds/licensing, iOS live deltas, CarPlay/Android Auto, watches, Bluetooth/vehicle automation, paid entitlements and internal premium navigation remain unfinished product work. Do not claim these integrations are enabled or that fictional Bahrain data is authoritative GCC coverage.
-
-## Founder isolation constraint
-
-Only the source capsule and the two **explicitly approved new Salim-only build workflows** differ from baseline. No pre-existing Whisco files/workflows, root dependencies, cloud services, secrets, store records, DNS or production configuration were edited. Existing GitHub/Vercel integrations may inspect pushes/PRs; they are not reconfigured. PR #32 remains draft and unmerged. No store upload or intentional production deployment has occurred.
+- Refresh current GitHub branch/PR and workflow state before acting; use `AGENT-TAKEOVER-BRIEF.md` as the current starting point, not old run IDs in archived material.
+- Never request or expose passwords, tokens, 2FA codes, private keys, certificates, keystores, or API secret values. Use GitHub's secure environment and platform access.
+- Keep changes strictly within Salim paths and approved Salim workflows. Do not modify Whisco TV, Whisco Mobile, or other app products.
+- No merge, public release, new store submission, production deployment, spend, or legal filing without the relevant direct Founder authorization.
+- Actual revenue stays `$0` until reconciled receipt evidence. See the linked conservative projection for the strict known-input view and separately labeled sensitivity; do not infer cash from budget availability.

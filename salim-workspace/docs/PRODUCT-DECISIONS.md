@@ -94,20 +94,49 @@ Consequences that must be handled in the same change as the ad SDK, not afterwar
 - Do not put ads on the full-screen drive view. Distraction is a safety issue and an
   obvious store-review risk.
 
-## Police detection — dropped
+## Cameras — dropped, then reinstated, and the line that stays
 
-Approved 21 Oct 2026: **no on-device detection of police positions or tripods.** Removed
-from the roadmap.
+**21 Oct 2026:** "Drop police detection for now." Speed cameras were removed from the demo
+pack in `fde77d2`.
 
-Two reasons, both independent:
+**22 Oct 2026:** the Founder reinstated them: *"warnings for fixed speed and seatbelt
+cameras should be in the app"*. That is the ruling in force. The 21 October instruction is
+superseded for **fixed installations**, and only for those.
 
-1. It contradicts the product's own guard rail. `tools/check_site.py` fails the build on
-   "radar detector" language, because the positioning is road awareness, not enforcement
-   evasion.
-2. Detecting police positions is restricted or banned in several target markets and is a
-   predictable store-review rejection.
+What is now built, and what still is not:
 
-The camera and hazard data stay fictional until a real, licensed provider is connected.
+| | Status |
+| --- | --- |
+| Fixed speed cameras | In, from `assets/cameras.csv` |
+| Seatbelt / phone multi-offence cameras | In, same pack |
+| Red-light cameras | In, same pack |
+| Reported mobile camera units | Supported by the data format, no live source |
+| Detecting police cars, patrols or tripods | **Still out.** No covert detection, no radar-emission detection, no "police nearby" |
+| Radar *detection* (hardware or RF) | **Still out.** We read a list; we do not sense anything |
+
+The distinction that matters, and the reason `check_site.py` still fails the build on
+"radar detector" and "jammer": **a camera map is information; a radar detector is
+counter-surveillance.** The first tells a driver what is publicly known about the road.
+The second defeats enforcement. Salim only ever does the first.
+
+### A correction to what this file said before
+
+It previously claimed there was no reliable public dataset of Bahrain camera locations.
+That was wrong. The General Directorate of Traffic has published camera positions through
+the **eTraffic** app since 2019, and GDT has announced a smart-camera rollout reaching 258
+installations with more planned. There is an official locator; it is simply not machine
+readable from this project.
+
+That changes the conclusion, not the caution: the pack is now a data file that can be
+corrected without a rebuild, and every row must carry a `source`.
+
+### On precision
+
+Each row is `exact` or `approximate`. Approximate sites draw as hollow rings on the map and
+carry a `≈` in the list, because a filled dot reads to a driver as certainty, and a wrong
+camera claim is worse than no camera claim. The shipped eight rows are all marked
+approximate: they come from published announcements naming roads and districts, not from
+surveyed coordinates.
 
 ## Cross-platform framework — rejected
 

@@ -6,7 +6,30 @@ final class EngineTests:XCTestCase {
     func hazard(lat:Double=26.214,heading:Double?=0,expires:Double=1_800_003_600)->Hazard {Hazard(id:"test",country:"BH",kind:"CAMERA",point:Point(lat:lat,lon:50.54),heading:heading,road:"Test road",expiresAt:expires)}
     func testDistanceAndHeading() {XCTAssertEqual(Geo.distance(fix().point,hazard().point),444.8,accuracy:1);XCTAssertEqual(Geo.angle(359,1),2)}
     func testWarnsOnce() {let e=AlertEngine();e.replace([hazard()]);XCTAssertNotNil(e.evaluate(fix(),now:now,elapsed:100,country:"BH"));XCTAssertNil(e.evaluate(fix(elapsed:101),now:now,elapsed:101,country:"BH"))}
-    func testBadFixesRejected() {for f in [fix(accuracy:51),fix(accuracy:-1),fix(accuracy:.nan),fix(speed:0),fix(course:nil),fix(course:.nan),fix(time:now-16),fix(time:now+3),fix(elapsed:80)] {let e=AlertEngine();e.replace([hazard()]);XCTAssertNil(e.evaluate(f,now:now,elapsed:100,country:"BH"))}}
+    /// A device clock that disagrees with the fix timestamp must not block alerts.
+    func testWallClockSkewDoesNotRejectFix() {for f in [fix(time:now-60),fix(time:now+60)] {let e=AlertEngine();e.replace([hazard()]);XCTAssertNotNil(e.evaluate(f,now:now,elapsed:100,country:"BH"))}}
+    /// Coarse first fixes count as "found" for position, never for alerts.
+    func testCoarseFixPositionsButDoesNotAlert() {
+        let coarse=fix(accuracy:180)
+        XCTAssertTrue(Geo.positioned(coarse,elapsed:100));XCTAssertFalse(Geo.usable(coarse,now:now,elapsed:100))
+        for f in [fix(accuracy:1500),fix(accuracy:-1),fix(elapsed:60)] {XCTAssertFalse(Geo.positioned(f,elapsed:100))}
+    }
+    /// Live OSM cameras alert across an approximate border; other rows stay country-scoped.
+    func testLiveCameraAlertsAcrossBorder() {
+        let live=Hazard(id:"osm:node/1",country:"SA",kind:"CAMERA",point:Point(lat:26.214,lon:50.54),heading:0,road:"Test road",expiresAt:1_800_003_600)
+        let other=Hazard(id:"static:x",country:"SA",kind:"CAMERA",point:Point(lat:26.214,lon:50.54),heading:0,road:"Test road",expiresAt:1_800_003_600)
+        var e=AlertEngine();e.replace([live]);XCTAssertNotNil(e.evaluate(fix(),now:now,elapsed:100,country:"BH"))
+        e=AlertEngine();e.replace([other]);XCTAssertNil(e.evaluate(fix(),now:now,elapsed:100,country:"BH"))
+    }
+    func testMaxspeedParsing() {
+        XCTAssertEqual(CameraFeed.parseLimit("80"),80);XCTAssertEqual(CameraFeed.parseLimit("80 km/h"),80);XCTAssertEqual(CameraFeed.parseLimit("50 mph"),80)
+        XCTAssertNil(CameraFeed.parseLimit("signals"));XCTAssertNil(CameraFeed.parseLimit("1000"));XCTAssertNil(CameraFeed.parseLimit(nil))
+    }
+    func testCountryFromBoundary() {
+        XCTAssertEqual(CameraFeed.parseCountry(#"{"elements":[{"type":"area","id":1,"tags":{"ISO3166-1":"OM"}}]}"#),"OM")
+        XCTAssertNil(CameraFeed.parseCountry(#"{"elements":[{"type":"area","id":1,"tags":{"ISO3166-1":"IR"}}]}"#))
+    }
+    func testBadFixesRejected() {for f in [fix(accuracy:51),fix(accuracy:-1),fix(accuracy:.nan),fix(speed:0),fix(course:nil),fix(course:.nan),fix(accuracy:0),fix(elapsed:80),fix(elapsed:100.5)] {let e=AlertEngine();e.replace([hazard()]);XCTAssertNil(e.evaluate(f,now:now,elapsed:100,country:"BH"))}}
     func testOppositeBehindExpiry() {for h in [hazard(heading:180),hazard(lat:26.208),hazard(expires:now)] {let e=AlertEngine();e.replace([h]);XCTAssertNil(e.evaluate(fix(),now:now,elapsed:100,country:"BH"))}}
     func testRearmRequiresExitAndCooldown() {let e=AlertEngine();e.replace([hazard()]);XCTAssertNotNil(e.evaluate(fix(),now:now,elapsed:100,country:"BH"));XCTAssertNil(e.evaluate(fix(time:now+200,elapsed:300),now:now+200,elapsed:300,country:"BH"));_ = e.evaluate(fix(lat:26.18,time:now+201,elapsed:301),now:now+201,elapsed:301,country:"BH");XCTAssertNotNil(e.evaluate(fix(time:now+202,elapsed:302),now:now+202,elapsed:302,country:"BH"))}
     func testSectionStoppedTimeAndGap() {
@@ -24,10 +47,10 @@ final class EngineTests:XCTestCase {
         let store=try OfflineStore(url:url)
         try await store.seed(DemoData.hazards)
         let values=try await store.nearby(country:"BH",point:DemoData.center,now:now)
-        XCTAssertEqual(values.count,4)
+        XCTAssertEqual(values.count,DemoData.hazards.count)
         try await store.seed(DemoData.hazards)
         let repeated=try await store.nearby(country:"BH",point:DemoData.center,now:now)
-        XCTAssertEqual(repeated.count,4)
+        XCTAssertEqual(repeated.count,DemoData.hazards.count)
         let expired=try await store.nearby(country:"BH",point:DemoData.center,now:DemoData.expiry+1)
         XCTAssertTrue(expired.isEmpty)
     }
@@ -50,7 +73,7 @@ final class EngineTests:XCTestCase {
         let bad=Hazard(id:"bad",country:"BH",kind:"CAMERA",point:Point(lat:91,lon:50),heading:nil,road:"bad",expiresAt:now+60)
         do {try await store.seed([bad]);XCTFail("Invalid coordinates accepted")} catch {}
         let values=try await store.nearby(country:"BH",point:DemoData.center,now:now)
-        XCTAssertEqual(values.count,4)
+        XCTAssertEqual(values.count,DemoData.hazards.count)
         let other=try await store.nearby(country:"SA",point:DemoData.center,now:now)
         XCTAssertTrue(other.isEmpty)
     }

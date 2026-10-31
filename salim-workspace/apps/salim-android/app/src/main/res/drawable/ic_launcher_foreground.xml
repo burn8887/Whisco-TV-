@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Salim mark: an S-shaped road with a continuous centre line, drawn inside
-     the 66dp adaptive-icon safe zone of the 108dp viewport. -->
+<!-- Salim mark: a road receding to the horizon with a camera dot ahead ("road awareness").
+     Drawn on a 96-unit grid, scaled into the 66dp adaptive-icon safe zone of the 108dp viewport.
+     Source: docs/brand/salim-icon.svg, tools/make_brand_assets.py. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    <path
-        android:pathData="M42.0,76.6 C42.0,62.1 66.0,64.0 66.0,50.4 C66.0,36.8 42.0,38.7 42.0,24.2"
-        android:strokeColor="#F5F1E6"
-        android:strokeWidth="16.4"
-        android:strokeLineCap="round"
-        android:fillColor="#00000000"/>
-    <path
-        android:pathData="M42.0,76.6 C42.0,62.1 66.0,64.0 66.0,50.4 C66.0,36.8 42.0,38.7 42.0,24.2"
-        android:strokeColor="#1F5C47"
-        android:strokeWidth="5.7"
-        android:strokeLineCap="round"
-        android:fillColor="#00000000"/>
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <group android:translateX="22.32" android:translateY="23" android:scaleX="0.66" android:scaleY="0.66">
+        <path android:pathData="M18,86 L43,40" android:strokeColor="#FFF4EFE6" android:strokeWidth="4" android:strokeLineCap="round"/>
+        <path android:pathData="M78,86 L53,40" android:strokeColor="#FFF4EFE6" android:strokeWidth="4" android:strokeLineCap="round"/>
+        <path android:pathData="M48,82 L48,72" android:strokeColor="#FF4ADE9B" android:strokeWidth="3.5" android:strokeLineCap="round"/>
+        <path android:pathData="M48,63 L48,56" android:strokeColor="#FF4ADE9B" android:strokeWidth="3" android:strokeLineCap="round"/>
+        <path android:pathData="M48,49 L48,45" android:strokeColor="#FF4ADE9B" android:strokeWidth="2.5" android:strokeLineCap="round"/>
+        <path android:pathData="M37.5,22 a10.5,10.5 0 1,0 21,0 a10.5,10.5 0 1,0 -21,0" android:strokeColor="#FFFFC24B" android:strokeAlpha="0.55" android:strokeWidth="2"/>
+        <path android:pathData="M42.5,22 a5.5,5.5 0 1,0 11,0 a5.5,5.5 0 1,0 -11,0" android:fillColor="#FFFFC24B"/>
+    </group>
 </vector>

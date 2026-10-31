@@ -1,4 +1,4 @@
-# Demonstration store metadata — Founder review required
+# Store listing draft — Founder review required
 
 Brand system: [BRAND-IDENTITY.md](BRAND-IDENTITY.md). Name risks: [NAME-CLEARANCE.md](NAME-CLEARANCE.md).
 Nothing here is published or reserved.
@@ -8,85 +8,82 @@ Nothing here is published or reserved.
 - Google Play: **Salim — Road Awareness**
 - App Store: **Salim — Road Awareness**, subtitle **Know what's ahead.**
 
-Approved by the Founder on 20 October 2026. Use this exact form in listings, screenshots and
-promotional graphics. Storefront limits still apply (Play 30 characters, App Store 30 characters
-plus a 30-character subtitle) and availability of the exact title is **not** confirmed — check in
-each console before finalising artwork. A bare “Salim” title is unlikely to be available or
-discoverable; same-name apps already exist on both stores.
+Approved by the Founder on 20 October 2026. Use the exact title in listings, screenshots and
+promotional graphics. Verify availability and storefront character limits in each console before
+finalising artwork.
 
-## Public URLs
+## Identity and public URLs
 
-| Purpose | URL | Status |
-| --- | --- | --- |
-| Website | `https://www.salimdrive.com` | approved domain, **not yet live** |
-| Privacy policy | `https://www.salimdrive.com/privacy` | source in `site/privacy.html`, **not yet published** |
-| Support | `https://www.salimdrive.com/support` | source in `site/support.html`, **not yet published** |
+- Permanent store bundle ID: `com.salimdrive.app` on both platforms.
+- Store display name: `Salim`.
+- Approved brand domain: `https://www.salimdrive.com` — **not live yet**.
+- Interim privacy policy: https://docs.google.com/document/d/1gv7tD1tYx3aMiLptPBw4nXSRWDwqexy_Tk_e6WcaSHY/view
+- Interim support page: https://docs.google.com/document/d/1JlPEh8gLyLd2P93smaYkhe2GuuwXpnIn6d9pH1kut5E/view
 
-Do not enter these URLs in Play Console or App Store Connect until each one loads over HTTPS in a
-private browser window. Publication is a separate decision requiring the Founder’s approval; see
-`site/README.md`.
+Use the interim Google Docs URLs until the approved domain is live. Do not claim that the domain is
+live or replace it with another domain. Check that both interim URLs are public and readable before
+submitting them to a store.
 
 ## Short description (Play, 80 characters)
 
-Calm, direction-aware alerts for the road ahead. Bahrain-first, offline-ready.
+Calm, direction-aware road alerts for Bahrain and the Gulf. Camera coverage varies.
 
-## Description / TestFlight beta description
+## Description / TestFlight beta description — draft only
 
-Salim is a calm co-pilot for the road ahead. It tells you what is coming — cameras, hazards, speed
-bumps and average-speed sections — for the direction you are actually travelling, without taking
-over the drive.
+Salim provides direction-aware road-awareness prompts for cameras and mapped road hazards, without
+taking over the drive. It is Bahrain-first, with a GCC-wide product goal.
 
-This build is a demonstration. Run a simulated drive without granting location access, explore
-heading-aware fictional alerts, see section-average calculations and keep local trip summaries.
-Only Bahrain has a bundled pack, and every camera, hazard and section in it is fictional.
+Camera coverage is currently limited. The bundled Bahrain pack contains eight approximate camera
+sites. Nearby live camera searches use OpenStreetMap and may return incomplete or out-of-date data.
+Salim does not claim to list every camera in Bahrain or the GCC. Always follow posted signs and local
+law.
 
-Optional device GPS testing requires precise location and is started explicitly while safely
-parked. It may continue in the background until you end the test, subject to OS restrictions. Voice
-prompts temporarily reduce other audio where supported. Report drafts stay on your device and are
-not published.
+Location is used only after you start a drive and remains on-device for alert matching. Salim does
+not upload your route. Every safety warning is available without a subscription. Ads appear only on
+Overview and Settings while idle in store builds; never on the active drive screen. Consent controls
+ad requests where required. Optional Premium removes these ads and keeps trip history without a
+product-based limit; the free tier retains the latest 20 trips. Any free trial, price and renewal
+terms must be displayed by the platform before purchase.
 
-Salim is not a radar detector, a navigation replacement, an emergency service or a guarantee of any
-outcome. Always follow posted signs and road rules. Car-display/watch integrations, vehicle
-automation, subscriptions and internal navigation are not enabled in this build.
+A complete, verified GCC offline camera pack is **not included in this build**. Do not advertise that
+it is included until real, properly sourced data is implemented and checked. Salim is not a
+navigation or emergency service, radar detector, or guarantee of any outcome. Car-display/watch
+integrations and internal navigation are not enabled.
 
-## What to Test
+## What to test (tester instructions, not public listing copy)
 
-1. Run the 75-second simulation without granting location access.
-2. Observe sample speed, section average and demo alert; end the session and find its summary in My trips.
-3. Save/delete a community draft while no session is active.
-4. Review Settings → Privacy notice; change voice preference and country while idle.
-5. Only when safely parked, start/stop a device GPS test; verify permission denial, background indicator and stopping behavior. Do not rely on fictional alerts on the road.
+1. A debug-only simulation is available for testing without location permission; signed store builds
+   exclude synthetic routes and fictional alerts.
+2. Review direction-aware warnings, trip history and local report drafts using the approved test
+   fixture only. Do not treat simulated alerts as driving guidance.
+3. Review Settings → Privacy notice, consent/privacy-options controls, ad placement and subscription
+   disclosures. Verify that ads never appear during an active drive or for Premium subscribers.
+4. Verify the free trip-history limit (20), Premium history behavior, purchase restoration, trial and
+   renewal disclosure, and every configured price in platform sandbox accounts.
+5. Only when safely parked, test a real GPS session, permission denial, background location and
+   explicit stop behavior. Do not interact with the phone while driving.
 
-## Arabic listing draft — needs native review before use
+## Arabic listing draft — not approved for publication
 
 - العنوان المقترح: **سالم — وعي بالطريق**
-- وصف قصير: تنبيهات هادئة وموجّهة حسب اتجاه سيرك على الطريق. البداية من البحرين، وتعمل دون اتصال.
-- الوصف: سالم رفيق هادئ على الطريق. يخبرك بما هو قادم — كاميرات، مخاطر، مطبات، ومقاطع متوسط
-  السرعة — حسب اتجاه سيرك فقط، دون أن يستحوذ على القيادة. هذه النسخة تجريبية، وكل بياناتها
-  افتراضية. لا تعتمد عليها في قرارات السلامة على الطريق، واتبع اللوحات المرورية دائمًا.
+- الوصف القصير والطويل: يلزم إعداد نسخة عربية دقيقة تعكس أن تغطية الكاميرات محدودة وغير مكتملة،
+  وأن بيانات دول الخليج غير مكتملة في هذا الإصدار.
 
-**Do not publish this Arabic copy until a native Bahraini/Gulf speaker has reviewed it aloud.**
+**Do not publish Arabic copy until a native Bahraini/Gulf Arabic speaker has reviewed it.**
 
-## Keyword candidates (unverified; check against real store behaviour)
+## Review notes and submission gates
 
-`road awareness`, `speed camera alert`, `Bahrain driving`, `Gulf roads`, `average speed`,
-`road hazards`, `speed bumps`, `offline alerts`
-Arabic: `تنبيهات الطريق`, `كاميرات السرعة`, `البحرين`, `الخليج`, `مطبات`
+- Native Android and iOS billing/ad integrations must pass CI on the final source before signing.
+- Configure and verify `salim_premium_monthly` and `salim_premium_yearly`, including any free-trial
+offers, in Google Play Console and App Store Connect. Code support alone does not create a store
+product or introductory offer.
+- Verify production AdMob IDs and consent behavior. Debug and web demonstrations must remain ad-free.
+- Complete the real GCC camera-data work or explicitly narrow launch claims; do not imply completeness.
+- Capture screenshots directly from the final signed store builds. Do not fabricate map pins, camera
+  sites, testimonials or coverage claims.
+- Complete platform privacy, ads, location, subscription, age-rating and review disclosures against
+  actual behavior. Obtain the Founder’s separate approval before any store upload.
 
-Avoid keywords that imply radar detection, evasion or guaranteed outcomes; they invite rejection
-and misrepresent the product.
-
-## Review notes
-
-No login, subscription or purchase is required. Simulation is foreground-only and ends when the
-app is backgrounded. Device GPS testing is separate and explicit. Location and audio background
-modes support an active GPS test and short spoken alerts, not hidden tracking. Android uses an
-ongoing location foreground-service notification. If location is denied, simulation remains
-available. SQLite alert data is bundled; no live feed or user-report submission endpoint is
-connected.
-
-## Required before submission
-
-Founder-confirmed permanent app identity, operating entity, published privacy/support URLs, review
-contact, real screenshots from signed builds, platform declarations, tester group and approval to
-upload. Do not fabricate contact details, coverage claims, testimonials or screenshots.
+No account is required. Community drafts remain local and are not published. No police or patrol
+detection is provided. Interim privacy/support links are listed above; the approved domain is not
+live. The app is published by Ali Albaharna.

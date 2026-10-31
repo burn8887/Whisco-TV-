@@ -47,6 +47,11 @@ header.site a.brand {
   letter-spacing: -0.5px;
 }
 header.site a.brand svg { flex: none; }
+header.site a.brand .brand-ar {
+  font: 600 16px/1 "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0; opacity: 0.85;
+}
+@media (max-width: 520px) { header.site a.brand .brand-ar { display: none; } }
 header.site nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
 header.site nav a { color: var(--sand); opacity: 0.9; text-decoration: none; }
 header.site nav a:hover, header.site nav a[aria-current="page"] { opacity: 1; text-decoration: underline; }
@@ -128,13 +133,15 @@ footer.site a { color: var(--muted); }
     <header class="site">
       <div class="wrap">
         <a class="brand" href="/" aria-label="Salim home">
-          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
-                  fill="none" stroke="#F5F1E6" stroke-width="5.2" stroke-linecap="round" />
-            <path d="M11.6 25.4C11.6 20.4 20.4 21.2 20.4 16C20.4 10.8 11.6 11.6 11.6 6.6"
-                  fill="none" stroke="#1F5C47" stroke-width="1.9" stroke-linecap="round" />
+          <svg width="30" height="30" viewBox="0 0 96 96" aria-hidden="true" focusable="false">
+            <rect width="96" height="96" rx="22" fill="#0A0D0B" />
+            <path d="M18 86L43 40M78 86L53 40" fill="none" stroke="#F4EFE6" stroke-width="4" stroke-linecap="round" />
+            <path d="M48 82V72M48 63V56M48 49V45" fill="none" stroke="#4ADE9B" stroke-width="3.5" stroke-linecap="round" />
+            <circle cx="48" cy="22" r="10.5" fill="none" stroke="#FFC24B" stroke-opacity="0.55" stroke-width="2" />
+            <circle cx="48" cy="22" r="5.5" fill="#FFC24B" />
           </svg>
-          salim<span aria-hidden="true">.</span>
+          <span class="brand-latin">salim<span aria-hidden="true">.</span></span>
+          <span class="brand-ar" lang="ar" dir="rtl">سالم</span>
         </a>
         <nav aria-label="Main">
           <a href="/">Home</a>
@@ -152,8 +159,10 @@ footer.site a { color: var(--muted); }
         </p>
 
         <div class="note">
-          <strong>Demonstration build.</strong> Alerts currently use fictional Bahrain data. Do not
-          rely on them for road-safety decisions. In an emergency in Bahrain, call 999.
+          <strong>Where the data comes from.</strong> Camera positions come from a bundled Bahrain
+          pack and live OpenStreetMap data, which volunteer mappers survey and which can be wrong,
+          out of date or missing. Do not rely on an alert instead of the road. In an emergency in
+          Bahrain, call 999.
         </div>
 
         <h2>Contact</h2>
@@ -171,7 +180,11 @@ footer.site a { color: var(--muted); }
         <h2>Getting started</h2>
         <dl class="faq">
           <dt>Do I need an account?</dt>
-          <dd>No. There is no sign-in, subscription or purchase.</dd>
+          <dd>
+            No. There is no sign-in and no account. The app is free to use, with an optional Salim
+            Premium subscription that removes advertising and unlocks the wider offline camera pack.
+            Camera and hazard warnings are never held back without it.
+          </dd>
 
           <dt>Can I try it without granting location?</dt>
           <dd>
@@ -238,7 +251,7 @@ footer.site a { color: var(--muted); }
 
     <footer class="site">
       <div class="wrap">
-        <span>© 2026 <span class="placeholder">OPERATING ENTITY</span></span>
+        <span>© 2026 Ali Albaharna</span>
         <a href="/privacy">Privacy</a>
         <a href="/support">Support</a>
       </div>

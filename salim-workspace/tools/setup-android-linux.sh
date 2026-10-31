@@ -18,7 +18,13 @@
 # What it installs:
 #   zip, unzip, curl        SDKMAN and unzip both need zip; its absence is the most
 #                           common Crostini failure and stops SDKMAN at the first step
-#   openjdk-17-jdk          AGP 8.13 and Kotlin 2.2 compile against Java 17
+#   a JDK 17 or newer       any JDK already on the machine is used if it is new
+#                           enough; otherwise openjdk-17-jdk, openjdk-17-jdk-headless
+#                           and openjdk-21-jdk-headless are tried in turn, and if apt
+#                           has none of them a Temurin build is unpacked into
+#                           ~/.local/share/salim-tools. Package names differ between
+#                           Debian releases, so a hard dependency on one apt package
+#                           name is a bug.
 #   Android command line tools, platforms;android-36, build-tools;36.0.0
 #   Gradle 8.13             downloaded directly, not through SDKMAN
 #
@@ -31,9 +37,13 @@ GRADLE_URL="https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-b
 CMDLINE_TOOLS_ZIP="commandlinetools-linux-11076708_latest.zip"
 CMDLINE_TOOLS_URL="https://dl.google.com/android/repository/${CMDLINE_TOOLS_ZIP}"
 ANDROID_PACKAGES=("platforms;android-36" "build-tools;36.0.0" "platform-tools")
-APT_PACKAGES=(zip unzip curl openjdk-17-jdk)
+SYSTEM_PACKAGES=(zip unzip curl ca-certificates)
+# Tried in order. Debian bookworm has openjdk-17-jdk; some images only expose the
+# headless variant; anything 17 or newer is fine for AGP 8.13 and Kotlin 2.2.
+JAVA_PACKAGES=(openjdk-17-jdk openjdk-17-jdk-headless openjdk-21-jdk-headless openjdk-21-jdk)
 
 ANDROID_HOME_DEFAULT="${HOME}/android-sdk"
+LOG_FILE="${HOME}/salim-android-setup.log"
 TOOLS_DIR="${HOME}/.local/share/salim-tools"
 ENV_FILE="${HOME}/.salim-android-env"
 
@@ -78,14 +88,132 @@ find_android_module() {
   return 1
 }
 
+# ---------------------------------------------------------------- java discovery
+
+# Prints the major version of the given java binary: 17, 21, 8, ...
+java_major() {
+  local bin="$1" version
+  [ -x "${bin}" ] || return 1
+  version="$("${bin}" -version 2>&1 | head -1 | sed -nE 's/.*version "([^"]+)".*/\1/p')"
+  [ -n "${version}" ] || return 1
+  case "${version}" in
+    1.*) printf '%s\n' "${version#1.}" | cut -d. -f1 ;;
+    *)   printf '%s\n' "${version}"   | cut -d. -f1 ;;
+  esac
+}
+
+# Every java binary worth testing, one per line. Unmatched globs are filtered by
+# the -x test in the callers, not here.
+java_candidates() {
+  if command -v java >/dev/null 2>&1; then
+    command -v java
+  fi
+  if [ -n "${JAVA_HOME:-}" ] && [ -x "${JAVA_HOME}/bin/java" ]; then
+    printf '%s\n' "${JAVA_HOME}/bin/java"
+  fi
+  printf '%s\n' "${TOOLS_DIR}/jdk-17/bin/java"
+  local f
+  for f in "${HOME}"/jdk/bin/java "${HOME}"/jdk/*/bin/java \
+           "${HOME}"/jdk-*/bin/java "${HOME}"/jdk-*/*/bin/java; do
+    printf '%s\n' "${f}"
+  done
+}
+
+# Prints the first java binary with major version >= $1.
+find_java() {
+  local want="$1" candidate major
+  while IFS= read -r candidate; do
+    [ -x "${candidate}" ] || continue
+    major="$(java_major "${candidate}" || true)"
+    [ -n "${major}" ] || continue
+    if [ "${major}" -ge "${want}" ] 2>/dev/null; then
+      printf '%s\n' "${candidate}"
+      return 0
+    fi
+  done < <(java_candidates)
+  return 1
+}
+
+# Prints the first java binary with exactly major version $1. The project pins
+# jvmToolchain(17), and a toolchain request for 17 is not satisfied by 21.
+find_java_major() {
+  local want="$1" candidate major
+  while IFS= read -r candidate; do
+    [ -x "${candidate}" ] || continue
+    major="$(java_major "${candidate}" || true)"
+    [ -n "${major}" ] || continue
+    if [ "${major}" = "${want}" ]; then
+      printf '%s\n' "${candidate}"
+      return 0
+    fi
+  done < <(java_candidates)
+  return 1
+}
+
+# Directory above bin/java, with symlinks resolved.
+java_home_of() {
+  local bin="$1" real
+  real="$(readlink -f "${bin}" 2>/dev/null || printf '%s' "${bin}")"
+  printf '%s\n' "${real%/bin/java}"
+}
+
+# ---------------------------------------------------------------- memory
+
+# Total usable memory in MiB, or empty if it cannot be read.
+total_mem_mb() {
+  awk '/^MemTotal:/ {printf "%d", $2/1024}' /proc/meminfo 2>/dev/null
+}
+
+# The project's gradle.properties asks for a 3 GB heap, and the Kotlin compiler
+# starts a second JVM. On a small Linux container - a Chromebook is typically
+# given 4-8 GB total - that can starve ChromeOS badly enough that the whole
+# Linux environment is killed. A terminal window that closes mid-build is that
+# symptom: it is not a Gradle error, the machine went away.
+#
+# When memory is tight the build gets a smaller heap and compiles Kotlin inside
+# Gradle's own JVM instead of spawning another one. These are command-line
+# properties, so the checked-in gradle.properties and CI stay untouched.
+low_memory() {
+  local total
+  total="$(total_mem_mb)"
+  [ -n "${total}" ] || return 1
+  [ "${total}" -lt 7000 ]
+}
+
+# Flags for a small machine, as an array. They must not be a string: the value of
+# -Dorg.gradle.jvmargs contains spaces, and splitting it produces a stray -XX:
+# argument that makes Gradle abort with "Unknown command-line option '-X'".
+GRADLE_MEMORY_ARGS=()
+
+compute_gradle_memory_args() {
+  GRADLE_MEMORY_ARGS=()
+  local total heap metaspace workers
+  total="$(total_mem_mb)"
+  [ -n "${total}" ] || return 0
+  if [ "${total}" -ge 7000 ]; then
+    return 0
+  elif [ "${total}" -ge 5000 ]; then
+    heap=2048m; metaspace=512m; workers=2
+  elif [ "${total}" -ge 3500 ]; then
+    heap=1536m; metaspace=512m; workers=2
+  else
+    # Under 3.5 GB total there is very little headroom; take the smallest heap
+    # that still compiles Compose, and a single worker.
+    heap=1024m; metaspace=384m; workers=1
+  fi
+  GRADLE_MEMORY_ARGS=(
+    "-Dorg.gradle.jvmargs=-Xmx${heap} -XX:MaxMetaspaceSize=${metaspace} -Dfile.encoding=UTF-8"
+    "-Pkotlin.compiler.execution.strategy=in-process"
+    "--max-workers=${workers}"
+  )
+}
+
 # ---------------------------------------------------------------- prerequisites
 
 version_of() {
-  # zip and unzip both print banners rather than clean versions, so report the path.
   case "$1" in
-    java)  java -version 2>&1 | head -1 | sed 's/.*version "\([^"]*\)".*/\1/' ;;
-    curl)  curl --version | head -1 | cut -d' ' -f2 ;;
-    *)     command -v "$1" ;;
+    curl) curl --version | head -1 | cut -d' ' -f2 ;;
+    *)    command -v "$1" ;;
   esac
 }
 
@@ -100,10 +228,22 @@ check_command() {
 
 run_check() {
   head2 "Prerequisites"
-  check_command zip   "needed by SDKMAN and by unzip tooling: apt install zip"
+  check_command zip   "apt install zip"
   check_command unzip "apt install unzip"
-  check_command java  "apt install openjdk-17-jdk"
   check_command curl  "apt install curl"
+
+  local java_bin
+  if java_bin="$(find_java 17)"; then
+    ok "java $(java_major "${java_bin}") at ${java_bin}"
+  else
+    fail "no JDK 17 or newer — the setup script installs one"
+  fi
+  local seventeen
+  if seventeen="$(find_java_major 17)"; then
+    ok "JDK 17 toolchain at ${seventeen} (both modules pin jvmToolchain(17))"
+  else
+    fail "no JDK 17 — the project pins jvmToolchain(17); the script provisions one"
+  fi
 
   head2 "Android SDK"
   if [ -n "${ANDROID_HOME:-}" ] && [ -d "${ANDROID_HOME}" ]; then
@@ -111,11 +251,7 @@ run_check() {
   elif [ -d "${ANDROID_HOME_DEFAULT}" ]; then
     ok "Android SDK found at ${ANDROID_HOME_DEFAULT} (not yet on PATH)"
   else
-    if [ -n "${ANDROID_HOME:-}" ]; then
-      fail "ANDROID_HOME=${ANDROID_HOME} does not exist"
-    else
-      fail "no Android SDK: ANDROID_HOME unset and ${ANDROID_HOME_DEFAULT} absent"
-    fi
+    fail "no Android SDK at ANDROID_HOME or ${ANDROID_HOME_DEFAULT}"
   fi
 
   head2 "Gradle"
@@ -137,6 +273,21 @@ run_check() {
   fi
 
   head2 "Hardware"
+  local total
+  total="$(total_mem_mb)"
+  if [ -n "${total}" ]; then
+    if low_memory; then
+      compute_gradle_memory_args
+      warn "${total} MiB of total memory - below the 7 GB this project expects"
+      say  "build will use: ${GRADLE_MEMORY_ARGS[0]#-Dorg.gradle.jvmargs=}"
+      if [ "${total}" -lt 3500 ]; then
+        warn "under 3.5 GB a full Compose build may still be killed; close Chrome"
+        say  "before building, or build on a machine with more memory"
+      fi
+    else
+      ok "${total} MiB of memory"
+    fi
+  fi
   if [ -w /dev/kvm ] 2>/dev/null; then
     ok "/dev/kvm available — the emulator can run"
   else
@@ -162,10 +313,25 @@ if [ "$(id -u)" -ne 0 ]; then
   fi
 fi
 
-install_apt() {
+apt_install() {
+  local pkg="$1"
+  if [ -z "${SUDO}" ] && [ "$(id -u)" -ne 0 ]; then
+    return 1
+  fi
+  DEBIAN_FRONTEND=noninteractive ${SUDO} apt-get install -y -qq "${pkg}" >/dev/null 2>&1
+}
+
+apt_refresh() {
+  say "refreshing package lists"
+  if ! ${SUDO} apt-get update -qq 2>/dev/null; then
+    warn "apt-get update failed; continuing with whatever lists are cached"
+  fi
+}
+
+install_system_packages() {
   head2 "System packages"
-  local missing=()
-  for pkg in "${APT_PACKAGES[@]}"; do
+  local missing=() pkg
+  for pkg in "${SYSTEM_PACKAGES[@]}"; do
     if dpkg -s "${pkg}" >/dev/null 2>&1; then
       ok "${pkg}"
     else
@@ -175,14 +341,105 @@ install_apt() {
   if [ "${#missing[@]}" -eq 0 ]; then
     return 0
   fi
-  say "installing: ${missing[*]}"
-  if [ -z "${SUDO}" ] && [ "$(id -u)" -ne 0 ]; then
-    echo "need root or sudo to install: ${missing[*]}" >&2
-    exit 1
+  apt_refresh
+  for pkg in "${missing[@]}"; do
+    if apt_install "${pkg}"; then
+      ok "installed ${pkg}"
+    else
+      warn "could not install ${pkg} from apt"
+    fi
+  done
+}
+
+install_java() {
+  head2 "Java"
+  local existing
+  if existing="$(find_java 17)"; then
+    ok "using java $(java_major "${existing}") at ${existing}"
+  else
+    apt_refresh
+    local pkg
+    for pkg in "${JAVA_PACKAGES[@]}"; do
+      if apt_install "${pkg}"; then
+        hash -r 2>/dev/null || true
+        if existing="$(find_java 17)"; then
+          ok "installed ${pkg} — java $(java_major "${existing}")"
+          break
+        fi
+        warn "${pkg} installed but no java 17+ appeared on PATH"
+      fi
+    done
+    if ! find_java 17 >/dev/null; then
+      warn "apt offers no JDK here (package names vary by Debian release)"
+      install_temurin || return 1
+    fi
   fi
-  ${SUDO} apt-get update -qq
-  DEBIAN_FRONTEND=noninteractive ${SUDO} apt-get install -y -qq "${missing[@]}"
-  ok "installed ${missing[*]}"
+
+  # The project pins jvmToolchain(17) in both modules, so a machine with only a
+  # newer JDK still fails to configure. Provision 17 explicitly.
+  local seventeen
+  if seventeen="$(find_java_major 17)"; then
+    ok "JDK 17 toolchain: ${seventeen}"
+  else
+    warn "no JDK 17 found, and both modules ask for a 17 toolchain"
+    say  "downloading one rather than editing the build to match this machine"
+    if install_temurin; then
+      ok "JDK 17 toolchain: $(java_major "${TOOLS_DIR}/jdk-17/bin/java") at ${TOOLS_DIR}/jdk-17"
+    else
+      warn "could not obtain JDK 17 — the build will fail at toolchain resolution"
+    fi
+  fi
+}
+
+install_temurin() {
+  local arch
+  case "$(uname -m)" in
+    x86_64|amd64)  arch="x64" ;;
+    aarch64|arm64) arch="aarch64" ;;
+    *) warn "unsupported architecture $(uname -m)"; return 1 ;;
+  esac
+
+  local dest="${TOOLS_DIR}/jdk-17"
+  if [ -x "${dest}/bin/java" ]; then
+    ok "Temurin 17 already unpacked at ${dest}"
+    return 0
+  fi
+
+  local tmp
+  tmp="$(mktemp -d)"
+  say "downloading Temurin 17 for ${arch} (~190 MB)"
+  if ! curl -fsSL -o "${tmp}/jdk.tar.gz" \
+      "https://api.adoptium.net/v3/binary/latest/17/ga/linux/${arch}/jdk/hotspot/normal/eclipse?project=jdk"; then
+    warn "download failed — check the network, then re-run"
+    rm -rf "${tmp}"
+    return 1
+  fi
+
+  say "unpacking"
+  if ! tar -xzf "${tmp}/jdk.tar.gz" -C "${tmp}" 2>/dev/null; then
+    warn "the archive did not unpack"
+    rm -rf "${tmp}"
+    return 1
+  fi
+
+  local extracted
+  extracted="$(find "${tmp}" -maxdepth 1 -mindepth 1 -type d | head -1)"
+  if [ -z "${extracted}" ]; then
+    warn "no directory inside the archive"
+    rm -rf "${tmp}"
+    return 1
+  fi
+  mkdir -p "${TOOLS_DIR}"
+  rm -rf "${dest}"
+  mv "${extracted}" "${dest}"
+  rm -rf "${tmp}"
+
+  if [ -x "${dest}/bin/java" ]; then
+    ok "Temurin $(java_major "${dest}/bin/java") installed at ${dest}"
+  else
+    warn "unpacked, but no bin/java inside"
+    return 1
+  fi
 }
 
 install_sdk() {
@@ -204,9 +461,17 @@ install_sdk() {
     ok "installed into ${sdk}"
   fi
 
+  # sdkmanager is a Java program; make sure the JDK we found is visible to it.
+  local java_bin home
+  if java_bin="$(find_java 17)"; then
+    home="$(cd "$(dirname "${java_bin}")/.." && pwd)"
+    export JAVA_HOME="${home}"
+    export PATH="${home}/bin:${PATH}"
+  fi
+
   say "accepting SDK licences"
   # A rejected licence blocks every later Gradle build with an unrelated message.
-  yes | "${sdkmanager}" --licenses >/dev/null 2>&1 || true
+  yes 2>/dev/null | "${sdkmanager}" --licenses >/dev/null 2>&1 || true
   say "installing ${ANDROID_PACKAGES[*]}"
   "${sdkmanager}" "${ANDROID_PACKAGES[@]}" >/dev/null
   ok "SDK packages installed"
@@ -243,14 +508,51 @@ write_env() {
   head2 "Environment"
   local sdk="${ANDROID_HOME:-${ANDROID_HOME_DEFAULT}}"
   local gradle_bin="${TOOLS_DIR}/gradle-${GRADLE_VERSION}/bin"
+
+  # JAVA_HOME should be the 17 the project asks for when it exists, because the
+  # JDK running Gradle also satisfies its own toolchain request.
+  local chosen="" seventeen="" runtime=""
+  if seventeen="$(find_java_major 17)"; then
+    chosen="${seventeen}"
+  elif runtime="$(find_java 17)"; then
+    chosen="${runtime}"
+  fi
+  local java_home="" installations=""
+  if [ -n "${chosen}" ]; then
+    java_home="$(java_home_of "${chosen}")"
+    installations="${java_home}"
+  fi
+  if [ -n "${runtime}" ]; then
+    local runtime_home
+    runtime_home="$(java_home_of "${runtime}")"
+    if [ -n "${installations}" ] && [ "${runtime_home}" != "${installations}" ]; then
+      installations="${installations},${runtime_home}"
+    elif [ -z "${installations}" ]; then
+      installations="${runtime_home}"
+    fi
+  fi
+
+  # GRADLE_OPTS is assigned outright, not appended to its previous value: the
+  # file is re-sourced by every interactive shell, and appending would grow the
+  # property list each time a child shell starts.
+  local gradle_opts_line=""
+  if [ -n "${installations}" ]; then
+    gradle_opts_line="export GRADLE_OPTS=\"-Dorg.gradle.java.installations.paths=${installations}\""
+  fi
+
   cat > "${ENV_FILE}" <<ENV
 # Salim Android build environment. Add this to ~/.bashrc:
 #   . "${ENV_FILE}"
+export JAVA_HOME="${java_home}"
+${gradle_opts_line}
 export ANDROID_HOME="${sdk}"
 export ANDROID_SDK_ROOT="${sdk}"
-export PATH="\${ANDROID_HOME}/cmdline-tools/latest/bin:\${ANDROID_HOME}/platform-tools:${gradle_bin}:\${PATH}"
+export PATH="\${JAVA_HOME}/bin:\${ANDROID_HOME}/cmdline-tools/latest/bin:\${ANDROID_HOME}/platform-tools:${gradle_bin}:\${PATH}"
 ENV
   ok "wrote ${ENV_FILE}"
+  if [ -n "${java_home}" ]; then
+    ok "JAVA_HOME=${java_home}"
+  fi
   # shellcheck disable=SC1090
   . "${ENV_FILE}"
   if ! grep -q "salim-android-env" "${HOME}/.bashrc" 2>/dev/null; then
@@ -275,14 +577,35 @@ maybe_wrapper() {
 smoke_build() {
   head2 "Smoke build"
   say "cd ${ANDROID_MODULE} && gradle :core:test :app:assembleDebug"
-  ( cd "${ANDROID_MODULE}" && gradle --no-daemon :core:test :app:assembleDebug )
-  local apk="${ANDROID_MODULE}/app/build/outputs/apk/debug/app-debug.apk"
-  if [ -f "${apk}" ]; then
-    ok "APK: ${apk} ($(du -h "${apk}" | cut -f1))"
-    say "install on a phone with: adb install -r ${apk}"
-  else
-    warn "build finished but no debug APK was produced"
+  local log
+  log="$(mktemp)"
+  compute_gradle_memory_args
+  if [ "${#GRADLE_MEMORY_ARGS[@]}" -gt 0 ]; then
+    say "reduced-memory build: ${GRADLE_MEMORY_ARGS[0]#-Dorg.gradle.jvmargs=}"
   fi
+  # The array is expanded as a quoted list, so the jvmargs value keeps its spaces
+  # and reaches Gradle as one argument.
+  if ( cd "${ANDROID_MODULE}" \
+       && gradle --no-daemon ${GRADLE_MEMORY_ARGS[@]+"${GRADLE_MEMORY_ARGS[@]}"} :core:test :app:assembleDebug ) 2>&1 | tee "${log}"; then
+    local apk="${ANDROID_MODULE}/app/build/outputs/apk/debug/app-debug.apk"
+    if [ -f "${apk}" ]; then
+      ok "APK: ${apk} ($(du -h "${apk}" | cut -f1))"
+      say "install on a phone with: adb install -r ${apk}"
+    else
+      warn "build finished but no debug APK was produced"
+    fi
+    rm -f "${log}"
+    return 0
+  fi
+  if grep -q "No matching toolchains" "${log}"; then
+    warn "Gradle could not find the JDK 17 toolchain the project pins"
+    say  "Fix: re-run this script so it provisions one, or point Gradle at a JDK 17"
+    say  "with -Dorg.gradle.java.installations.paths=/path/to/jdk-17"
+  elif grep -qE "Unresolved reference|e: file:" "${log}"; then
+    warn "a Kotlin compilation error — the toolchain is fine, the source is not"
+  fi
+  rm -f "${log}"
+  return 1
 }
 
 # ---------------------------------------------------------------- main
@@ -294,6 +617,14 @@ if [ "${PRINT_MODULE}" -eq 1 ]; then
   [ -n "${ANDROID_MODULE}" ] || exit 1
   printf '%s\n' "${ANDROID_MODULE}"
   exit 0
+fi
+
+# Everything goes to a log as well as the screen. If the terminal window
+# disappears mid-build, the log survives on disk and shows how far it got.
+if [ -z "${SALIM_SETUP_LOGGED:-}" ] && command -v tee >/dev/null 2>&1; then
+  export SALIM_SETUP_LOGGED=1
+  exec > >(tee -a "${LOG_FILE}") 2>&1
+  printf 'Logging to %s\n' "${LOG_FILE}"
 fi
 
 printf 'Salim Android setup — %s\n' "$(date +%Y-%m-%d)"
@@ -314,7 +645,15 @@ if [ -z "${ANDROID_MODULE}" ]; then
   exit 1
 fi
 
-install_apt
+install_system_packages
+if ! install_java || ! find_java 17 >/dev/null; then
+  echo >&2
+  echo "No JDK 17 or newer could be installed, so nothing else can be built." >&2
+  echo "Debian 13 ships openjdk-21 rather than 17, so this script provisions 17" >&2
+  echo "itself when apt has none; that needs a working connection to" >&2
+  echo "api.adoptium.net. Fix the network or install a JDK 17 by hand, then re-run." >&2
+  exit 1
+fi
 install_sdk
 install_gradle
 write_env
@@ -326,7 +665,11 @@ if [ "${NO_BUILD}" -eq 1 ]; then
   exit 0
 fi
 
-smoke_build
+if ! smoke_build; then
+  echo >&2
+  echo "Smoke build failed; the output above explains why." >&2
+  exit 1
+fi
 
 head2 "Done"
 ok "Android builds locally"
