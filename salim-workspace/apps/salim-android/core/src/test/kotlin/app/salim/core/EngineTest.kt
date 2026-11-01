@@ -9,7 +9,7 @@ class EngineTest {
     private fun engine(h: Hazard=hazard)=AlertEngine().apply { replace(listOf(h)) }
     @Test fun distanceAndWrap() { assertEquals(444.8,Geo.distance(fix.point,hazard.point),1.0); assertEquals(2.0,Geo.angle(359.0,1.0),0.001) }
     @Test fun warnsOnce() { val e=engine(); assertNotNull(e.evaluate(fix,now,100_000,"BH")); assertNull(e.evaluate(fix.copy(elapsedMs=101_000),now,101_000,"BH")) }
-    @Test fun rejectsBadFixes() { listOf(fix.copy(accuracy=51.0),fix.copy(accuracy=-1.0),fix.copy(accuracy=Double.NaN),fix.copy(speed=0.0),fix.copy(course=null),fix.copy(course=Double.NaN),fix.copy(point=Point(91.0,50.0)),fix.copy(timeMs=now-15001),fix.copy(timeMs=now+2001),fix.copy(elapsedMs=80_000)).forEach { assertNull(engine().evaluate(it,now,100_000,"BH")) } }
+    @Test fun rejectsBadFixes() { listOf(fix.copy(accuracy=51.0),fix.copy(accuracy=-1.0),fix.copy(accuracy=Double.NaN),fix.copy(speed=0.0),fix.copy(course=null),fix.copy(course=Double.NaN),fix.copy(point=Point(91.0,50.0)),fix.copy(accuracy=0.0),fix.copy(elapsedMs=80_000),fix.copy(elapsedMs=100_001)).forEach { assertNull(engine().evaluate(it,now,100_000,"BH")) } }
     @Test fun rejectsOppositeBehindExpiredAndCountry() { listOf(hazard.copy(heading=180.0),hazard.copy(point=Point(26.208,50.54)),hazard.copy(expiresAt=now),hazard.copy(country="SA")).forEach { assertNull(engine(it).evaluate(fix,now,100_000,"BH")) } }
     @Test fun requiresExitAndMonotonicCooldown() { val e=engine(); assertNotNull(e.evaluate(fix,now,100_000,"BH"));assertNull(e.evaluate(fix.copy(timeMs=now+200_000,elapsedMs=300_000),now+200_000,300_000,"BH")); e.evaluate(fix.copy(point=Point(26.18,50.54),timeMs=now+201_000,elapsedMs=301_000),now+201_000,301_000,"BH"); assertNotNull(e.evaluate(fix.copy(timeMs=now+202_000,elapsedMs=302_000),now+202_000,302_000,"BH")) }
     @Test fun indexCrossesDateline() { val h=hazard.copy(point=Point(0.0,-179.999));assertEquals(1,SpatialIndex(listOf(h)).nearby(Point(0.0,179.999),400.0).size) }
@@ -20,4 +20,22 @@ class EngineTest {
     @Test fun ignoresStartInsideAndAdjacentRoad() { val e=SectionEngine(listOf(zone));e.evaluate(sample(30.0,0),now,100_000,"BH");assertTrue(e.evaluate(sample(40.0,1),now+1000,101_000,"BH").active.isEmpty()); val other=SectionEngine(listOf(zone));other.evaluate(sample(-10.0,0).copy(point=Point(25.9999,50.001)),now,100_000,"BH");assertTrue(other.evaluate(sample(10.0,2).copy(point=Point(26.0001,50.001)),now+2000,102_000,"BH").active.isEmpty()) }
     @Test fun invalidatesGapReversalAndPoorAccuracy() { for(which in 0..2) { val e=SectionEngine(listOf(zone));e.evaluate(sample(-10.0,0),now,100_000,"BH");e.evaluate(sample(10.0,2),now+2000,102_000,"BH");val f=when(which){0->sample(20.0,30);1->sample(20.0,3).copy(course=180.0);else->sample(20.0,3).copy(accuracy=60.0)};assertEquals(setOf("s"),e.evaluate(f,f.timeMs,f.elapsedMs,"BH").invalidated) } }
     @Test fun expiryDoesNotResetWhenNetworkIsAbsent() { val e=engine(hazard.copy(expiresAt=now+500));assertNull(e.evaluate(fix.copy(timeMs=now+1000,elapsedMs=101_000),now+1000,101_000,"BH")) }
+    // A phone clock that disagrees with GNSS time must not block alerts; age is judged
+    // on the monotonic clock only.
+    @Test fun wallClockSkewDoesNotRejectFix() { listOf(fix.copy(timeMs=now-60_000),fix.copy(timeMs=now+60_000)).forEach { assertNotNull(engine().evaluate(it,now,100_000,"BH")) } }
+    // Coarse first fixes count as "found" for position, never for alerts.
+    @Test fun coarseFixPositionsButDoesNotAlert() {
+        val coarse=fix.copy(accuracy=180.0)
+        assertTrue(Geo.positioned(coarse,100_000)); assertFalse(Geo.usable(coarse,now,100_000)); assertNull(engine().evaluate(coarse,now,100_000,"BH"))
+        listOf(fix.copy(accuracy=1500.0),fix.copy(accuracy=-1.0),fix.copy(elapsedMs=60_000)).forEach { assertFalse(Geo.positioned(it,100_000)) }
+    }
+    // Live cameras alert across an approximate border; other rows stay country-scoped.
+    @Test fun liveCameraAlertsAcrossBorder() {
+        assertNotNull(engine(hazard.copy(id="osm:node/1",country="SA")).evaluate(fix,now,100_000,"BH"))
+        assertNull(engine(hazard.copy(country="SA")).evaluate(fix,now,100_000,"BH"))
+    }
+    @Test fun limitIsValidated() {
+        assertEquals(80,hazard.copy(limit=80).limit)
+        try { hazard.copy(limit=400); fail("Expected an implausible limit to be rejected") } catch(_: IllegalArgumentException) {}
+    }
 }

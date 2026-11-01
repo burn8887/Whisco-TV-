@@ -1,0 +1,81 @@
+# Salim Project Handover Log
+
+**Version:** 1.0 (living log)
+**Started:** 2026-10-28
+**Update rule:** Append chronological entries; do not rewrite earlier evidence. Link to the relevant commit/run/document. No credentials or private customer data.
+
+## Entry 1 — library created
+
+**Date:** 2026-10-28
+**Event:** library created.
+**State:** Phase 1 foundation documents drafted from Founder input and the current Salim project record. Legal entity, market counts, operating budget, revenue, users, and production readiness remain unverified or NOT IN DATA.
+**Repository snapshot:** branch `arena/74afd701-whisco-tv`; native CI commit `2055538` passed Android and iOS native CI. Salim source is under `salim-workspace/`; the repository also contains Whisco work, which is explicitly out of scope.
+**Open risks:** www.salimdrive.com is not live; report service is source-only; OSM camera coverage is approximate/incomplete; no static GCC camera dataset is cleared for redistribution; no current signed Play upload is evidenced.
+**Next:** finish product/brand phase; then conduct sourced market, community, query, and directory research before writing Phase 3–5. Resolve founder questions recorded in Phase 1 documents.
+
+## Entry 2 — Phase 1 foundation committed
+
+**Date:** 2026-10-28
+**Commit:** `7703674` — `Add Salim venture library foundation` (pushed to `arena/74afd701-whisco-tv`).
+**Documents:** Company Dossier, Operating Rules, Mission & Vision, this log, Disaster Recovery, and library index v1.0.
+**Open questions:** legal entity/spelling, founder publication name, spend caps and cash, Play account eligibility/version code, domain/mailbox/store-product status. See `README.md`. None blocks Product & Brand documentation.
+
+## Entry 3 — current branch reconciliation and build evidence
+
+**Date:** 2026-10-28
+**Commit:** `2055538` merge commit; remote work was reconciled before push to preserve the newer billing/paywall and camera-feed work.
+**Evidence:** Android CI passed 24 tests, emulator checks and 16 KB alignment; iOS CI passed 10 tests and compiled an unsigned device archive. These are test artifacts, not Play/App Store uploads. App IDs are `com.salimdrive.app`. Static camera packs remain empty.
+**Important correction:** the active Community screen stores local unverified drafts only. The shared report API source and client code exist, but the client is not wired to active submissions/overlay UI, endpoint is blank, service is not deployed, and no moderator is connected. Reporting must remain described as inactive.
+**Open risk:** older public web copy still appears to claim a bundled Bahrain camera pack and offline coverage; audit/correct before publishing or store submission.
+
+## Entry 4 — Phase 2 Product & Brand drafted
+
+**Date:** 2026-10-28
+**Documents:** Product Blueprint, Design System, Voice & Brand Doctrine, Content/Inventory Doctrine; index updated to v1.1.
+**Open issues:** visual contrast/accessibility require platform audits; Arabic requires native-market review; ODbL/data rights require legal review.
+**Next:** Phase 3 market and business research; first document the available sources and their limits. Do not fabricate target-market counts or financial projections.
+
+## Entry 5 — Phase 3 business and market package drafted
+
+**Date:** 2026-10-28
+**Documents:** Business Plan, Monetization Roadmap, Market Analysis, Hostile Diligence Memo, Billing Register; library index updated to v1.2. Operating Rules updated to v1.1 with diligence controls.
+**Research snapshot:** Official Bahrain 2024 registered-vehicle count (806,624), Saudi 2024 registered/in-use fleet (15.8M+) and Oman June 2026 vehicle count (1,889,463) recorded with definitions and dates; figures not summed because definitions differ. Qatar's monthly new-registration flow is explicitly not treated as vehicle stock. UAE/Kuwait comparable official active-fleet counts remain NOT IN DATA. Waze camera-entry dependence on partner/editor reports, Radarbot free/paid plans, and Bahrain eTraffic-to-MyGov migration / camera-locator feature are documented from official sources.
+**Commercial status:** No numeric TAM/SAM/SOM, pricing, three-year forecast, budget-to-income target or cost estimate is claimed because necessary inputs are missing. Actual revenue remains `$0` until G4 evidence; G1–G5 states remain as in Operating Rules. No purchase, release, campaign, or store upload was authorized.
+**Hostile review outcome:** No-go for scale/fundraising claims on current evidence; proceed only with gated user, data-rights, legal and operational validation. Its market-count, coverage, community-report, forecast, billing and safety-claim amendments were applied in Operating Rules v1.1.
+**Founder questions:** target net income/currency/horizon, cash and spend caps, monetization choice/features/price-test range, user access, GCC expansion order, entity/finance owner, and existing vendor invoices remain open. None blocks Phase 4 legal/entity research or Phase 5 organic discovery planning; decisions remain required before applicable spend/release/expansion.
+**Checks/push:** `git diff --cached --check` passed. Phase 3 committed as `b6b4b89` (`Add Salim Phase 3 business and market plans`) and pushed successfully to `origin/arena/74afd701-whisco-tv`.
+
+## Entry 6 — Founder Year 1 budget and salary input; conservative schedule added
+
+**Date:** 2026-10-28
+**Founder input:** USD 20,000/month available for spending in Year 1 (USD 240,000 annualized); Founder takes no salary until Year 5. This is a budget availability input, not transaction-specific authorization or evidence of cash on hand. Year 2–3 budgets, target income, rollover, cash balance, and detailed cost allocations remain NOT IN DATA.
+**Documents:** Added `business/CONSERVATIVE-3-YEAR-PROJECTION.md`; updated Business Plan to v1.1, Billing Register, Operating Rules to v1.2, and index to v1.3. The strict-input view shows Year 1 full-envelope downside spend, revenue $0, Founder salary $0, and net operating result (240,000); Year 2–3 costs/net results remain NOT IN DATA. A separate `[EST]` sensitivity carries the annualized Year 1 envelope flat through Years 2–3, assumes full utilization and zero revenue, and shows cumulative net operating result of (720,000). This is explicitly not a later-year budget, funding commitment, spending authorization, or audited P&L.
+**Controls:** Revenue stays $0 actual until G4 receipt evidence; individual spend approvals remain required. Founder salary is $0 through Years 1–4. No app code changed.
+**Next:** confirm whether Year 1 availability is a hard cap/planning envelope and whether it rolls over; collect actual cash/approved spend separately; obtain Year 2–3 budgets and target net income before updating the sensitivity. Keep actual receipts/costs distinct from this scenario.
+**Commit/push:** projection package committed as `5b708ec` (`Add Salim conservative three-year projection`) and pushed successfully to `origin/arena/74afd701-whisco-tv`; `git diff --cached --check` passed.
+
+## Entry 7 — Phase 4 company/legal documentation drafted
+
+**Date:** 2026-10-28
+**Documents:** Added Entity Formation Guide, Regulatory & Legal Memo, placeholder-only Privacy Policy Draft, and Who We Are Profile. Revised Company Dossier to v1.1, Mission & Vision to v1.1, Privacy Publication Status/Audit to v1.1, and library index to v1.4. All materials are internal, provisional documentation only; no website/app code changed, no publication or filing occurred, and no lawyer approval is represented.
+**Research update:** Reviewed official Bahrain sources on Commercial Companies Law amendments, PDPA and implementing orders, MOIC/Sijilat activity and company formation, VAT, CR renewal, UBO and bank/payment topics. Explicitly recorded Legislative Decree No. 38 of 2025 (Gazette issue 3832, 11 September 2025) and the need to review its Arabic official text/current implementing measures. Kept the unresolved conflict between the 2020 single-owner W.L.L. amendment and MOIC’s 2024 guide (2–50 partners) as a hard confirmation gate; do not file or recommend a form until current Sijilat treatment and counsel are confirmed.
+**Identity/privacy controls:** “Whisco Media W.L.L” remains unverified and not identified as the Salim operator. Public Founder identity, CR, activities, UBO, controller, data flows, provider/transfer map, retention and contact routes remain unresolved. Recorded the conflicting current HTML privacy states (individual operator in `site/privacy.html`, entity placeholder in `deploy/privacy.html`), unverified mailbox delivery, and non-live domain. Neither HTML page was edited or treated as publishable. The new privacy text contains explicit placeholders and requires complete release-binary/provider audit and counsel review.
+**Checks:** `git diff --check` and internal Markdown-link existence checks passed (30 Markdown files scanned). Staged diff check passed. No release, store upload, entity filing, spend or public deployment was performed.
+**Commit/push:** Phase 4 documents committed as `f7fcaf8` (`Add Salim Phase 4 legal and company documents`) and pushed successfully to `origin/arena/74afd701-whisco-tv`.
+**Next:** obtain Founder’s entity, activity, identity-publication and privacy operations decisions; request current MOIC/Sijilat/counsel resolution of the W.L.L. count issue and 2025 amendment implications. Continue Phase 5 desk research if these facts remain unavailable; they do not authorize a filing or public launch.
+
+## Entry 8 — Billing 8 fix, signed iOS upload, and Android v8 pending
+
+**Date:** 2026-10-28 (Asia/Bahrain).
+**Branch/PR:** `arena/74afd701-whisco-tv`; PR #37 remains open. Do not merge without separate Founder approval.
+**Commits:** `6254193` (Billing Library 8.0.0 / default Android version code 8), `b5ed5fc` (Billing 8 callback migration), `3660d3e` (verified IPA ASC upload step), `b4e7356` (ASC secret-name compatibility).
+
+**Android evidence:** Initial run `40671355948` failed compilation after the Billing 8 API changed the product details callback shape. The fix reads `queryResult.productDetailsList` and uses the Billing 8 purchases callback type. Follow-up Android CI run `40671995018` passed: 24 tests, no failures or skips, APK ZIP alignment and 16 KB native-library alignment checks passed, and emulator verification passed. This is native CI evidence, **not** a signed Play bundle. The signed Android version-code-8 AAB has not yet been evidenced; a manual signed-release run on platform `android` remains required. The workflow retains an AAB/APK for download but does not publish to Google Play; Play upload remains manual.
+
+**iOS evidence:** Founder authorized an App Store Connect upload using available tooling while temporarily deferring the Xcode 27.1/iPhone Duo requirement. The workflow now uses Xcode 26.3. Signed release run `40677950530` passed Apple signing-secret and ASC credential checks, archived/exported the IPA, verified its signature and bundle ID, and succeeded at **Upload the verified IPA to App Store Connect**. User reports downloading the IPA; the workflow upload itself succeeded, so no manual re-upload is required absent a failed/missing build in ASC. App Store Connect processing, TestFlight visibility, App Review, and public release have not been verified.
+
+**Secret handling:** Founder screenshot confirmed environment secret names `SALIM_ASC_KEY_ID`, `SALIM_ASC_ISSUER_ID`, and `SALIM_ASC_PRIVATE_KEY_P8`; workflow aliases were added. Secret values were never read into chat or repository. The successful iOS run proves the named credential values were available to that job, not that the app is approved.
+
+**Financial state:** No monetization inputs changed. Actual revenue remains `$0` until a reconciled receipt; the strict projection is Year 1 net operating result `(USD 240,000)` under full use of the Year 1 spending envelope and zero revenue, while Year 2–3 strict net results remain NOT IN DATA. The separate `[EST]` flat-spend sensitivity remains `(USD 240,000)` per year, `(USD 720,000)` total, and is not an approved budget or expected outcome.
+
+**Next:** verify Apple processing/TestFlight status in ASC; run signed Android platform `android` with version code `8`; download and manually upload the signed AAB to Play testing; then complete remaining privacy/legal/data-rights/physical-device/store-metadata gates. See `AGENT-TAKEOVER-BRIEF.md` and refreshed release documents. No PR merge, Play upload, physical-device test, or public release occurred in this session.

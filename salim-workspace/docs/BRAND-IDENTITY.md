@@ -184,7 +184,7 @@ market.
 ## 8. What changed in this rename
 
 Applied throughout the codebase and CI: package and module names (`app.salim.*`), iOS target and
-scheme (`Salim`, `SalimTests`), bundle identifiers (`app.salim.ios.demo`, `app.salim.android.demo`),
+scheme (`Salim`, `SalimTests`), bundle identifier (`com.salimdrive.app` on both platforms),
 display names (“Salim Demo”), workflow and artifact names, web demo branding and the icon set.
 
 Provisional identifiers are **unchanged in structure** and remain demo-only until the founder

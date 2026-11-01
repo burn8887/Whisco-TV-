@@ -19,12 +19,17 @@ class HazardRepository(context: Context) {
     private val retry=RetryGate()
     private var seeded=false
     private var lastScope: String?=null
-    private fun initialize() { if(!seeded) { database.seed("BH",1,DemoData.hazards); seeded=true } }
+    private fun initialize() { if(!seeded) {
+        // Revision 3 replaces the old synthetic test rows with the disclosed camera pack.
+        // Existing installations discard the previous static layer atomically.
+        database.seed("BH",3,CameraPack.hazards())
+        seeded=true
+    } }
     suspend fun local(country: String,point: Point): List<Hazard> = withContext(Dispatchers.IO) { lock.withLock { initialize(); database.nearby(country,point,System.currentTimeMillis()) } }
     suspend fun refresh(country: String,point: Point): PackResult = withContext(Dispatchers.IO) { lock.withLock {
         initialize()
         fun cached(status: String)=PackResult(database.nearby(country,point,System.currentTimeMillis()),status)
-        if(BuildConfig.FEED_URL.isBlank())return@withLock cached(if(country=="BH")"Bundled demo pack · Offline detection ready" else "No verified coverage for $country")
+        if(BuildConfig.FEED_URL.isBlank())return@withLock cached("Live OpenStreetMap cameras · coverage varies by area")
         val scope=runCatching { Scope.at(country,point) }.getOrNull() ?: return@withLock cached("Outside configured GCC sync area")
         val now=SystemClock.elapsedRealtime()
         if(!retry.ready(now) && lastScope==scope.key)return@withLock cached("Cached regional alerts")

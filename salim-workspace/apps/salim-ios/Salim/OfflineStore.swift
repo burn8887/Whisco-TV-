@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-/// Actor-confined SQLite. Current iOS build is deliberately offline demo-only.
+/// Actor-confined SQLite for the disclosed local pack and on-device camera cache.
 actor OfflineStore {
     private var db:OpaquePointer?
     private let transient=unsafeBitCast(-1,to:sqlite3_destructor_type.self)
@@ -15,6 +15,9 @@ actor OfflineStore {
     }
     deinit {sqlite3_close(db)}
     private func exec(_ sql:String) throws {guard sqlite3_exec(db,sql,nil,nil,nil)==SQLITE_OK else {throw URLError(.cannotWriteToFile)}}
+    func removeSyntheticDemoRows() throws {
+        try exec("DELETE FROM hazards WHERE id LIKE 'static:demo-%'")
+    }
     func seed(_ hazards:[Hazard]) throws {
         for h in hazards {try h.validate()}
         try exec("BEGIN IMMEDIATE")

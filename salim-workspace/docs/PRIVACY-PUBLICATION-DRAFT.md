@@ -1,27 +1,34 @@
-# Salim Demo privacy policy — publication draft
+# Privacy Publication Status & Source Audit
 
-**Not yet published or legally approved.** The public version is authored at `site/privacy.html`
-and is intended for `https://www.salimdrive.com/privacy`; that domain did not resolve on
-20 October 2026 and nothing has been deployed. The Founder must still supply the operating entity,
-privacy/support contact and effective date. Do not publish missing or invented contact information.
-This draft describes the current demonstration build only.
+**Version:** 1.1
+**Reviewed:** 2026-10-28
+**Status:** Internal audit note only. No privacy-page wording is approved for publication.
+**Primary Phase 4 draft:** [PRIVACY-POLICY-DRAFT.md](PRIVACY-POLICY-DRAFT.md)
 
-## What the app does
+## Publication hold
 
-Salim Demo demonstrates heading-aware alerts, speed-section calculations and local trip summaries using fictional Bahrain data. It is not verified road coverage, navigation or an emergency service. No account, ads, analytics SDK, purchases or connected live feed is enabled.
+The approved domain `www.salimdrive.com` is not live in the current project record. The two checked-in HTML privacy pages contain different operator-identity states and must not be treated as one verified or published policy:
 
-## Location
+- `site/privacy.html` names an individual operator and lists `legal@salimdrive.com` and `support@salimdrive.com`.
+- `deploy/privacy.html` still contains an operating-entity placeholder.
+- The legal operator, CR, controller, public identity, mailbox ownership/deliverability/monitoring, and legal approval are **NOT IN DATA**. Neither page’s identity/contact assertions are verified facts.
 
-A simulated drive needs no GPS permission. When you explicitly start a device GPS test, precise coordinates, speed, direction, accuracy and sample timing are processed in memory for nearby demonstration alerts and section averages. This may continue in the background while the test is active. End the test in the app, or its Android notification, to stop updates. You may revoke location permission in system settings. OS suspension or force-quit can interrupt awareness. Salim does not retain a precise route or upload it to a Salim server in this build.
+These HTML pages were inspected for this documentation review but **not edited**. Do not publish, deploy, link to, or cite them as the approved Salim policy. Do not insert “Whisco Media W.L.L” or a Founder name as a replacement without verified evidence and explicit approval.
 
-## Saved information
+## Limited source observations — not a complete data inventory
 
-The app stores voice preferences, its fictional alert pack, trip date/duration/alert count/test mode and the report drafts you type. Drafts are not transmitted or published. Trip history is capped at 200 summaries and drafts at 100; older items are removed when the cap is exceeded. You can delete trip history in My trips and individual drafts in Community. Deleting the app removes its local app storage, subject to the device's backup/restore behavior. Android backup is disabled; iOS device backups may include local records according to OS settings.
+A limited source review found Android fine/coarse location declarations and foreground location-service permission, an iOS location usage description, a Google Mobile Ads dependency, and an iOS notice describing AdMob banners on Overview/Settings while no drive is active plus UMP consent handling. These observations do not prove the behavior of a signed production binary, current SDK configuration, all transitive dependencies, network traffic, data retention, processor roles, transfers, or store privacy declarations.
 
-## System and external services
+Other product records describe local location use, purchases, map data, and a source-only community-report service. Those design notes are not a substitute for validating the exact release candidate, all providers, server configuration, and operational settings. The report service is recorded as not deployed and shared reporting inactive; no community-report collection should be claimed or enabled based solely on source code.
 
-On iOS, Apple MapKit may request map tiles and related content from Apple; offline alert detection does not require those tiles. Opening an external maps app shares the entered destination with that app/provider. Text-to-speech and notifications use OS services; an installed Android speech engine may use its own network services. These providers' terms and privacy practices also apply. No third-party analytics SDK is included. Review the exact shipping binary and provider behavior before completing store privacy labels.
+## Required before publication
 
-## Changes and contact
+1. Verify legal entity/controller identity from current CR records and obtain Founder approval for public naming.
+2. Verify that each support/privacy contact is owned, monitored, secure, staffed, and able to handle rights requests.
+3. Complete Android and iOS release-binary, SDK, network, storage, backup, provider, retention and transfer audits.
+4. Obtain Bahrain counsel/privacy review for PDPA notification/authorization, lawful bases, rights, transfers, security and breach procedures; separately assess each GCC country before service there.
+5. Complete [PRIVACY-POLICY-DRAFT.md](PRIVACY-POLICY-DRAFT.md), remove placeholders from evidence, reconcile with platform privacy forms, and have Arabic/English wording reviewed.
+6. Verify live HTTPS publication URL and ensure website, app notices, store listings, entity details and actual operation all match.
+7. Obtain explicit Founder approval before any publication or website/app code change.
 
-Connecting a live feed, account service, payments or reporting backend will require updated disclosures before release. Future Android regional feed requests would disclose a coarse geographic query tile to that provider; the feed URL is empty in this build. Privacy questions and rights requests must be directed to the operating entity/contact the Founder supplies before publication.
+This file documents the publication gate. It is not itself a privacy policy, a statement of legal compliance, or permission to edit/deploy website or app files.

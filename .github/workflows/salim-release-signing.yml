@@ -6,7 +6,8 @@ name: Salim signed release
 # Scope, agreed with the Founder:
 #   * Salim secrets only, from the dedicated `salim-release` environment.
 #   * Produces signed artifacts and retains them for download.
-#   * Does NOT upload to Play, App Store Connect or TestFlight.
+#   * Android is prepared for manual Play Console submission; iOS is uploaded to
+#     App Store Connect only after IPA signature and bundle identity verification.
 #   * Does not touch any existing Whisco workflow, secret, record or store listing.
 # The job fails closed: if any required secret is missing it stops before building.
 
@@ -14,7 +15,7 @@ on:
   workflow_dispatch:
     inputs:
       version_name:
-        description: Marketing version for this build (e.g. 0.3.0)
+        description: Marketing version for this build (e.g. 0.7.0)
         required: true
         type: string
       version_code:
@@ -52,7 +53,7 @@ jobs:
           VERSION_NAME: ${{ inputs.version_name }}
         run: |
           set -euo pipefail
-          expected="app.salim.android.demo"
+          expected="com.salimdrive.app"
           if [ "$CONFIRM" != "$expected" ]; then
             echo "::error title=Identity mismatch::Expected '$expected'. This workflow signs Salim only."
             exit 1
@@ -124,18 +125,37 @@ jobs:
           EXPECTED_FINGERPRINT: ${{ secrets.SALIM_ANDROID_CERT_SHA256 }}
         run: |
           set -euo pipefail
-          actual=$(keytool -list -v -keystore "$RUNNER_TEMP/salim-upload.jks" \
-            -alias "$SALIM_ANDROID_KEY_ALIAS" -storepass "$SALIM_ANDROID_KEYSTORE_PASSWORD" \
-            | awk -F': ' '/SHA256:/{print $2; exit}' | tr -d ' ' | tr 'A-F' 'a-f')
-          expected=$(printf '%s' "$EXPECTED_FINGERPRINT" | tr -d ': ' | tr 'A-F' 'a-f')
+          # Capture keytool explicitly. Under `set -e`, a failing command substitution
+          # used to exit before our fingerprint diagnostics could explain why it failed.
+          set +e
+          keytool_output=$(keytool -list -v -keystore "$RUNNER_TEMP/salim-upload.jks" \
+            -alias "$SALIM_ANDROID_KEY_ALIAS" -storepass "$SALIM_ANDROID_KEYSTORE_PASSWORD" 2>&1)
+          keytool_status=$?
+          set -e
+          if [ "$keytool_status" -ne 0 ]; then
+            echo "keytool could not read the keystore entry. Check the store password and alias."
+            printf '%s\n' "$keytool_output" | tail -6
+            exit 1
+          fi
+          actual=$(printf '%s\n' "$keytool_output" | awk -F': ' '/SHA-?256:/{print $2; exit}' | tr -d ': ' | tr 'A-F' 'a-f')
+          # Accept either the bare fingerprint or keytool's complete "SHA-256: ..." line.
+          expected=$(printf '%s' "$EXPECTED_FINGERPRINT" | sed -E 's/^[[:space:]]*SHA-?256:[[:space:]]*//' | tr -d ':[:space:]' | tr 'A-F' 'a-f')
           if [ "$actual" != "$expected" ]; then
-            echo "::error title=Wrong signing key::The keystore does not match the recorded Salim upload certificate."
+            # Plain log lines are intentional: GitHub's annotation view has masked the
+            # useful mismatch detail. A certificate SHA-256 fingerprint is public.
+            if [ -n "$actual" ]; then
+              echo "Actual key SHA-256 fingerprint: $actual"
+            else
+              echo "No SHA-256 fingerprint was read for alias '$SALIM_ANDROID_KEY_ALIAS'. Check the key alias and keystore password."
+            fi
+            echo "Expected normalized fingerprint length: ${#expected} hex characters"
+            echo "Set SALIM_ANDROID_CERT_SHA256 to this keystore certificate's 64-hex fingerprint; colons and a leading SHA-256 label are accepted."
             exit 1
           fi
           echo "::notice title=Upload key verified::SHA-256 $actual"
 
       - name: Materialize only Salim outside the host checkout
-        run: python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
+        run: python3 salim-workspace/tools/promote.py --output "$RUNNER_TEMP/salim"
 
       - name: Install the Android platform used by Salim
         run: |
@@ -143,7 +163,12 @@ jobs:
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;36.0.0'
 
       - name: Build and sign the release bundle
-        working-directory: ${{ runner.temp }}/salim/apps/salim-android
+        env:
+          SALIM_ADMOB_APP_ID_ANDROID: ${{ vars.SALIM_ADMOB_APP_ID_ANDROID }}
+          SALIM_ADMOB_BANNER_ANDROID: ${{ vars.SALIM_ADMOB_BANNER_ANDROID }}
+          SALIM_OVERPASS_URL: ${{ vars.SALIM_OVERPASS_URL }}
+          SALIM_TILE_URL: ${{ vars.SALIM_TILE_URL }}
+        working-directory: ${{ runner.temp }}/salim/apps/android
         run: |
           gradle --no-daemon \
             -PversionName="${{ inputs.version_name }}" \
@@ -151,13 +176,27 @@ jobs:
             :app:verifyReleaseSigning :app:bundleRelease :app:assembleRelease
 
       - name: Verify the signed bundle and APK
-        working-directory: ${{ runner.temp }}/salim/apps/salim-android
+        working-directory: ${{ runner.temp }}/salim/apps/android
         run: |
           set -euo pipefail
           aab=app/build/outputs/bundle/release/app-release.aab
           apk=app/build/outputs/apk/release/app-release.apk
           test -f "$aab" && test -f "$apk"
-          jarsigner -verify -strict -certs "$aab" | tail -3
+          # AABs produced by bundletool place META-INF/MANIFEST.MF after the entries.
+          # JDK 17 strict mode treats that known JarFile/JarInputStream ordering warning,
+          # and the normal self-signed upload certificate, as fatal even when signatures
+          # verify. Keep cryptographic verification, but do not promote warnings to errors.
+          jarsigner -verify -certs "$aab" > "$RUNNER_TEMP/salim-aab-jarsigner.log" 2>&1 || {
+            cat "$RUNNER_TEMP/salim-aab-jarsigner.log"
+            echo "::error title=Invalid Android App Bundle signature::jarsigner could not verify the AAB signature."
+            exit 1
+          }
+          grep -qi 'jar verified' "$RUNNER_TEMP/salim-aab-jarsigner.log" || {
+            cat "$RUNNER_TEMP/salim-aab-jarsigner.log"
+            echo "::error title=Android App Bundle signature unconfirmed::jarsigner did not report a verified AAB."
+            exit 1
+          }
+          tail -8 "$RUNNER_TEMP/salim-aab-jarsigner.log"
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs "$apk" | head -5
           "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 4 "$apk"
           python3 "$GITHUB_WORKSPACE/salim-workspace/tools/check_android_apk.py" "$apk"
@@ -175,8 +214,8 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: |
-            ${{ runner.temp }}/salim/apps/salim-android/app/build/outputs/bundle/release/*.aab
-            ${{ runner.temp }}/salim/apps/salim-android/app/build/outputs/apk/release/*.apk
+            ${{ runner.temp }}/salim/apps/android/app/build/outputs/bundle/release/*.aab
+            ${{ runner.temp }}/salim/apps/android/app/build/outputs/apk/release/*.apk
 
   ios:
     name: Signed iOS archive and IPA
@@ -192,6 +231,17 @@ jobs:
         run: |
           sudo xcode-select --switch /Applications/Xcode_26.3.app/Contents/Developer
           xcodebuild -version
+
+      - name: Require production iOS AdMob variables
+        env:
+          APP_ID: ${{ vars.SALIM_ADMOB_APP_ID_IOS }}
+          BANNER_ID: ${{ vars.SALIM_ADMOB_BANNER_IOS }}
+        run: |
+          set -euo pipefail
+          if [ -z "$APP_ID" ] || [ -z "$BANNER_ID" ]; then
+            echo "::error title=iOS AdMob configuration missing::Set SALIM_ADMOB_APP_ID_IOS and SALIM_ADMOB_BANNER_IOS as repository variables before signing a store build."
+            exit 1
+          fi
 
       - name: Require Apple signing secrets
         env:
@@ -212,6 +262,24 @@ jobs:
             exit 1
           fi
           echo "All required Apple signing secrets are present."
+
+      - name: Require App Store Connect API credentials
+        if: ${{ inputs.platform == 'both' || inputs.platform == 'ios' }}
+        env:
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID || secrets.SALIM_ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID || secrets.SALIM_ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY || secrets.SALIM_ASC_PRIVATE_KEY_P8 }}
+        run: |
+          set -euo pipefail
+          missing=""
+          [ -n "$ASC_KEY_ID" ] || missing="$missing KEY_ID"
+          [ -n "$ASC_ISSUER_ID" ] || missing="$missing ISSUER_ID"
+          [ -n "$ASC_PRIVATE_KEY" ] || missing="$missing PRIVATE_KEY"
+          if [ -n "$missing" ]; then
+            echo "::error title=App Store Connect API secrets missing::Configure the App Store Connect key ID, issuer ID and private key in the salim-release environment. Accepted names are APP_STORE_CONNECT_KEY_ID / APP_STORE_CONNECT_ISSUER_ID / APP_STORE_CONNECT_PRIVATE_KEY (or ASC_KEY_ID / ASC_ISSUER_ID / ASC_PRIVATE_KEY, or SALIM_ASC_KEY_ID / SALIM_ASC_ISSUER_ID / SALIM_ASC_PRIVATE_KEY_P8). Values are never printed."
+            exit 1
+          fi
+          echo "App Store Connect API credential names resolved; values were not displayed."
 
       - name: Install the Salim distribution identity in a temporary keychain
         env:
@@ -247,23 +315,26 @@ jobs:
           app_id=$(/usr/libexec/PlistBuddy -c 'Print :Entitlements:application-identifier' "$RUNNER_TEMP/salim-profile.plist")
           echo "::notice title=Provisioning profile::authorises $app_id ($profile_uuid)"
           case "$app_id" in
-            *app.salim.ios.demo) ;;
+            *com.salimdrive.app) ;;
             *) echo "::error title=Wrong provisioning profile::This profile is not for Salim."; exit 1 ;;
           esac
 
       - name: Prepare Salim source and Xcode project
         run: |
           set -euo pipefail
-          python3 salim-workspace/tools/materialize.py --output "$RUNNER_TEMP/salim"
+          python3 salim-workspace/tools/promote.py --output "$RUNNER_TEMP/salim"
           brew install xcodegen
-          cd "$RUNNER_TEMP/salim/apps/salim-ios"
+          cd "$RUNNER_TEMP/salim/apps/ios"
           xcodegen generate
 
       - name: Archive with the Salim distribution identity
-        working-directory: ${{ runner.temp }}/salim/apps/salim-ios
+        working-directory: ${{ runner.temp }}/salim/apps/ios
         env:
           TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
           PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
+          SALIM_ADMOB_APP_ID_IOS: ${{ vars.SALIM_ADMOB_APP_ID_IOS }}
+          SALIM_ADMOB_BANNER_IOS: ${{ vars.SALIM_ADMOB_BANNER_IOS }}
+          SALIM_OVERPASS_URL: ${{ vars.SALIM_OVERPASS_URL }}
         run: |
           set -euo pipefail
           xcodebuild -project Salim.xcodeproj -scheme Salim -configuration Release \
@@ -276,10 +347,14 @@ jobs:
             CODE_SIGN_IDENTITY='Apple Distribution' \
             PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
+            ADMOB_APP_ID="$SALIM_ADMOB_APP_ID_IOS" \
+            ADMOB_BANNER_ID="$SALIM_ADMOB_BANNER_IOS" \
+            SALIM_ADS_ENABLED=YES \
+            SALIM_OVERPASS_URL="$SALIM_OVERPASS_URL" \
             archive
 
-      - name: Export an App Store IPA without uploading it
-        working-directory: ${{ runner.temp }}/salim/apps/salim-ios
+      - name: Export an App Store IPA for verified upload
+        working-directory: ${{ runner.temp }}/salim/apps/ios
         env:
           TEAM_ID: ${{ secrets.SALIM_APPLE_TEAM_ID }}
           PROFILE_NAME: ${{ secrets.SALIM_APPLE_PROFILE_NAME }}
@@ -295,7 +370,7 @@ jobs:
             <key>signingCertificate</key><string>Apple Distribution</string>
             <key>teamID</key><string>$TEAM_ID</string>
             <key>provisioningProfiles</key>
-            <dict><key>app.salim.ios.demo</key><string>$PROFILE_NAME</string></dict>
+            <dict><key>com.salimdrive.app</key><string>$PROFILE_NAME</string></dict>
             <key>uploadSymbols</key><true/>
             <key>manageAppVersionAndBuildNumber</key><false/>
           </dict></plist>
@@ -316,13 +391,42 @@ jobs:
           codesign --verify --deep --strict --verbose=2 "$app"
           codesign -dvvv "$app" 2>&1 | grep -E 'Authority=|TeamIdentifier=|Identifier=' | head -5
           bundle_id=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Info.plist")
-          [ "$bundle_id" = "app.salim.ios.demo" ] || { echo "::error title=Wrong bundle id::$bundle_id"; exit 1; }
+          [ "$bundle_id" = "com.salimdrive.app" ] || { echo "::error title=Wrong bundle id::$bundle_id"; exit 1; }
           echo "::notice title=Signed IPA verified::$bundle_id"
 
-      - name: Delete the temporary keychain
+      - name: Upload the verified IPA to App Store Connect
+        env:
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID || secrets.SALIM_ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID || secrets.ASC_API_ISSUER_ID || secrets.ASC_ISSUER_ID || secrets.SALIM_ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY || secrets.ASC_API_PRIVATE_KEY || secrets.ASC_PRIVATE_KEY || secrets.SALIM_ASC_PRIVATE_KEY_P8 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_dir="$HOME/.appstoreconnect/private_keys"
+          mkdir -p "$key_dir"
+          key_file="$key_dir/AuthKey_${ASC_KEY_ID}.p8"
+          if printf '%s' "$ASC_PRIVATE_KEY" | grep -q -- '-----BEGIN PRIVATE KEY-----'; then
+            ASC_PRIVATE_KEY="$ASC_PRIVATE_KEY" python3 - <<'PYKEY' > "$key_file"
+          import os
+          print(os.environ["ASC_PRIVATE_KEY"].replace(chr(92) + "n", chr(10)), end="")
+          PYKEY
+          else
+            printf '%s' "$ASC_PRIVATE_KEY" | base64 --decode > "$key_file"
+          fi
+          chmod 600 "$key_file"
+          ipa=$(find "$RUNNER_TEMP/Salim-ipa" -maxdepth 1 -name '*.ipa' -print -quit)
+          test -n "$ipa" || { echo "::error title=IPA missing::No verified IPA is available for upload."; exit 1; }
+          xcrun altool --upload-app --type ios --file "$ipa" \
+            --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
+          rm -f "$key_file"
+
+      - name: Delete temporary signing material
         if: always()
+        env:
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID || secrets.ASC_API_KEY_ID || secrets.ASC_KEY_ID || secrets.SALIM_ASC_KEY_ID }}
         run: |
           security delete-keychain "$KEYCHAIN_PATH" 2>/dev/null || true
+          rm -f "$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
           rm -rf "$RUNNER_TEMP/salim.p12" "$RUNNER_TEMP/Salim-ipa" "$RUNNER_TEMP/ipa-check"
 
       - name: Retain the signed IPA and archive
@@ -358,5 +462,5 @@ jobs:
             [ "$ANDROID" = "skipped" ] || echo "| Android | $ANDROID |"
             [ "$IOS" = "skipped" ] || echo "| iOS | $IOS |"
             echo
-            echo "Artifacts are retained in this run for 14 days. **Nothing was uploaded to Google Play, App Store Connect or TestFlight.** Uploading is a separate, explicit Founder decision."
+            echo "Signed artifacts are retained for 14 days. Android is for manual Play Console upload; a verified iOS IPA is submitted to App Store Connect when the iOS job is selected. App Store Connect processing and review remain pending after upload."
           } >> "$GITHUB_STEP_SUMMARY"

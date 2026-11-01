@@ -41,17 +41,25 @@ KEEP_TOOLS = {
     "check_android_apk.py",
     "check_site.py",
     "check_workflows.py",
+    "import-cameras.py",
     "promote.py",
     "report_native_tests.py",
     "setup-android-linux.sh",
     "test_android_apk.py",
     "test_check_site.py",
     "test_check_workflows.py",
+    "test_import_cameras.py",
 }
 
 # Documents that describe the capsule itself. Their old identifiers and old paths are the
 # subject matter, so rewriting them would falsify the record.
 NO_REWRITE = {"MIGRATION-TO-OWN-REPO.md", "PROJECT-HISTORY.md", "SESSION-HANDOFF.md"}
+
+# The Claude handover is specific to the capsule/host checkout (branch, PR, Vercel project,
+# parent Whisco repository and capsule-only tools). Do not publish that context as if it
+# described the generated standalone Salim repository.
+CAPSULE_ONLY_DOCS = {"HANDOVER.md"}
+HANDOVER_INDEX_LINE = "- [Claude Engineering Handover](HANDOVER.md) — verified current-state bootstrap and safe first-task prompt; recheck live dashboards before acting.\n"
 
 WORKFLOW_FILES = (
     ("salim-android-build.yml", "android.yml"),
@@ -289,8 +297,26 @@ def build(output: Path) -> None:
     shutil.copytree(CAPSULE / "apps" / "salim-ios", output / "apps" / "ios")
     shutil.copytree(CAPSULE / "apps" / "salim-web", output / "web")
     shutil.copytree(CAPSULE / "packages" / "salim-core", output / "packages" / "core")
+    shutil.copytree(
+        CAPSULE / "report-service",
+        output / "report-service",
+        ignore=lambda _directory, names: {name for name in names if name in {".env", "data", "__pycache__"} or name.endswith((".sqlite", ".sqlite3", ".sqlite-wal", ".sqlite-shm"))},
+    )
     for name in ("site", "deploy", "docs"):
-        shutil.copytree(CAPSULE / name, output / name)
+        if name == "docs":
+            # This handover contains host-checkout-specific operational context and is not
+            # valid for a standalone repository. The standalone docs index must not link to it.
+            shutil.copytree(
+                CAPSULE / name,
+                output / name,
+                ignore=shutil.ignore_patterns(*CAPSULE_ONLY_DOCS),
+            )
+            index = output / "docs" / "README.md"
+            if index.is_file():
+                text = index.read_text(encoding="utf-8")
+                index.write_text(text.replace(HANDOVER_INDEX_LINE, ""), encoding="utf-8")
+        else:
+            shutil.copytree(CAPSULE / name, output / name)
 
     (output / "tools").mkdir()
     for name in sorted(KEEP_TOOLS):
@@ -381,6 +407,9 @@ def verify(output: Path) -> list[str]:
         "web/vite.config.js",
         "packages/core/index.mjs",
         "packages/core/core.test.mjs",
+        "report-service/server.py",
+        "report-service/admin.html",
+        "report-service/README.md",
         ".github/workflows/android.yml",
         ".github/workflows/ios.yml",
         ".github/workflows/release-signing.yml",
@@ -423,7 +452,12 @@ build/
 .gradle/
 local.properties
 *.pyc
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
 __pycache__/
+report-service/data/
 .DS_Store
 *.xcodeproj/
 *.xcworkspace/
@@ -457,6 +491,7 @@ hazards, speed bumps and average-speed sections, built for Bahrain first and the
 | `apps/ios/` | SwiftUI app, MapKit, SQLite (WAL) |
 | `web/` | React browser demonstrator |
 | `packages/core/` | Shared geospatial engine and its tests |
+| `report-service/` | SQLite API, community confirmations and authenticated human moderation queue |
 | `site/` | Home, privacy and support pages for `www.salimdrive.com` |
 | `deploy/` | Uploadable static bundle |
 | `docs/` | Brand, name clearance, store checklist, signing runbook |
@@ -464,19 +499,20 @@ hazards, speed bumps and average-speed sections, built for Bahrain first and the
 
 ## Status, stated honestly
 
-This is a **demonstration**, not a shipped product.
+This tree is **not ready for store submission**.
 
-- **All alert data is fictional.** No live or verified provider is connected.
-- **No app has been published.** No store record, no TestFlight build, no signed upload.
-- **No physical-device validation** of background location, audio, battery or accessibility.
-- CarPlay, Android Auto, watchOS, vehicle automation, billing and in-app navigation are not
-  implemented.
-- Bundle identifier `com.salimdrive.app` is chosen but not yet registered in either account.
+- Nearby camera searches may use OpenStreetMap mapped records; coverage and accuracy are incomplete and not official. No verified static GCC camera dataset is bundled.
+- The community report API and moderation console are source code only. They are not deployed, and `www.salimdrive.com` is not live. Do not collect submissions until durable hosting, privacy disclosures, backups and a named moderator are in place.
+- The generated tree does not contain signed artifacts or prove current store-console processing. The manual release workflow can upload a verified iOS IPA to App Store Connect when explicitly authorized; it creates an Android signed artifact for manual Play Console upload. Check the current release runbook and agent brief for evidence.
+- No physical-device validation of background location, audio, battery, basemap performance or accessibility has been completed for this tree.
+- CarPlay, Android Auto, watchOS, vehicle automation and internal turn-by-turn navigation are not implemented.
+- Permanent bundle identifier `com.salimdrive.app` is declared in both native project sources; confirm the corresponding store records before signing.
 
 ## Verify
 
 ```sh
 python3 -m unittest discover -s tools -p 'test_*.py'
+python3 -m unittest discover -s report-service -p 'test_*.py'
 python3 tools/check_workflows.py
 python3 tools/check_site.py site
 ```
@@ -502,6 +538,7 @@ def main(argv: list[str] | None = None) -> int:
         for cmd in (
             [sys.executable, "-m", "unittest", "discover", "-s", "tools", "-p", "test_*.py"],
             [sys.executable, "tools/check_workflows.py"],
+            [sys.executable, "-m", "unittest", "discover", "-s", "report-service", "-p", "test_*.py"],
             [sys.executable, "tools/check_site.py", "site", "--allow-placeholders"],
         ):
             result = subprocess.run(cmd, cwd=args.output, text=True, capture_output=True)
