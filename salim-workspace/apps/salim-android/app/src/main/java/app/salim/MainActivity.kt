@@ -53,7 +53,9 @@ import app.salim.core.Hazard
 import app.salim.core.Point
 import java.text.DateFormat
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.launch
 import java.util.Date
+import java.util.Locale
 
 /*
  * Visual system.
@@ -121,13 +123,28 @@ class MainActivity : ComponentActivity() {
         // Android 15+ draws edge to edge regardless; doing it everywhere keeps older phones
         // consistent, and the status-bar icon colour is then set from the app's own theme.
         enableEdgeToEdge()
+        receiveShare(intent)
         setContent { Salim() }
+    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        receiveShare(intent)
+    }
+    /** Share › Salim from Google Maps (or anything with text) pre-fills Drive to. */
+    private fun receiveShare(intent: Intent?) {
+        if (intent?.action == Intent.ACTION_SEND) intent.getStringExtra(Intent.EXTRA_TEXT)?.takeIf { it.isNotBlank() }?.let { NavLauncher.shared.value = it }
+    }
+    override fun onStart() {
+        super.onStart()
+        OverlayAlert.appVisible = true
+        OverlayAlert.hide(this)
     }
     override fun onPostResume() {
         super.onPostResume()
         if (BuildConfig.ADS_ENABLED) SalimAdConsent.refresh(this)
     }
     override fun onStop() {
+        OverlayAlert.appVisible = false
         if (!isChangingConfigurations && DriveStore.state.value.mode == Mode.DEMO)
             DriveStore.end("Simulation paused when app left foreground · Saved")
         super.onStop()
@@ -207,7 +224,7 @@ private fun SalimBody(state: DriveState) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { BrandLockup(if (tab == 0) null else tabs[tab]) },
+                    title = { BrandLockup(tabs[tab]) },
                     actions = {
                         Text(
                             state.country, fontSize = 11.sp, fontFamily = Readout,
@@ -339,7 +356,6 @@ private fun cameraPins(lat: Double, lon: Double, hazards: List<Hazard>): List<Ma
 private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, onStop: () -> Unit, showAds: Boolean) {
     val context = LocalContext.current
     val scheme = MaterialTheme.colorScheme
-    var destination by remember { mutableStateOf("") }
     val active = state.mode != Mode.IDLE
 
     // Where to open the map. A real last-known position beats a hard-coded city.
@@ -354,7 +370,7 @@ private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, 
         contentPadding = PaddingValues(horizontal = 18.dp, vertical = 14.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        item { Statement(state) }
+        item { HeroBanner(state) }
         item {
             MapCard(
                 lat = state.fix?.point?.lat ?: homeLat,
@@ -403,47 +419,13 @@ private fun Dashboard(state: DriveState, onDemo: () -> Unit, onGPS: () -> Unit, 
             }
         }
 
-        item { SectionLabel("DESTINATION") }
-        item {
-            OutlinedTextField(
-                value = destination, onValueChange = { destination = it.take(120) },
-                label = { Text("Where are you heading?") }, singleLine = true,
-                enabled = !active, shape = Sharp, modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(Modifier.height(8.dp))
-            OutlinedButton(
-                onClick = {
-                    runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("geo:26.22,50.55?q=${Uri.encode(destination)}"))) }
-                        .onFailure { DriveStore.message("No compatible maps app is installed") }
-                },
-                enabled = destination.isNotBlank() && !active,
-                shape = Sharp, modifier = Modifier.fillMaxWidth()
-            ) { Text("Open in Maps", fontFamily = Readout, letterSpacing = 1.sp) }
-        }
+        item { DriveTo(state, onGPS) }
         item {
             Text(
                 "Simulation runs only while this app is in the foreground. A GPS test uses a visible location service. OS force-stop and battery restrictions may interrupt it.",
                 fontSize = 11.sp, lineHeight = 16.sp, color = scheme.onSurfaceVariant
             )
         }
-    }
-}
-
-/** Replaces the soft gradient hero. Type, a rule, and one line of plain fact. */
-@Composable
-private fun Statement(state: DriveState) {
-    val scheme = MaterialTheme.colorScheme
-    Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
-        Text("AWARE, NOT ALARMED", fontSize = 10.sp, letterSpacing = 2.4.sp, color = scheme.primary, fontFamily = Readout)
-        Text(
-            "Know what’s ahead.\nKeep your calm.",
-            fontSize = 27.sp, lineHeight = 31.sp, fontWeight = FontWeight.Bold, letterSpacing = (-0.6).sp,
-            color = scheme.onBackground
-        )
-        Text("اعرف ما أمامك.", fontSize = 14.sp, color = scheme.onSurfaceVariant)
-        Text("قُد بهدوء.", fontSize = 14.sp, color = scheme.onSurfaceVariant)
-        Hairline(Modifier.padding(vertical = 4.dp))
-        Text("COVERAGE VARIES · FOLLOW POSTED SIGNS", fontSize = 10.sp, letterSpacing = 1.1.sp, color = scheme.tertiary, fontFamily = Readout)
     }
 }
 
@@ -671,6 +653,11 @@ private fun DriveScreen(state: DriveState, onMinimise: () -> Unit, onRequestGPS:
             previousNavigation?.let { controller?.isAppearanceLightNavigationBars = it }
         }
     }
+    // Settings › Drive view › Keep screen on.
+    DisposableEffect(Unit) {
+        view.keepScreenOn = AlertPrefs.options.value.keepScreenOn
+        onDispose { view.keepScreenOn = false }
+    }
 
     Box(Modifier.fillMaxSize().background(NightGround)) {
         OsmMap(
@@ -786,6 +773,16 @@ private fun Trips(state: DriveState) {
 private fun Community(state: DriveState) {
     var road by remember { mutableStateOf("") }
     var kind by remember { mutableStateOf("Road hazard") }
+    var pinLat by remember { mutableStateOf<Double?>(null) }
+    var pinLon by remember { mutableStateOf<Double?>(null) }
+    var picking by remember { mutableStateOf(false) }
+    var startLat by remember { mutableStateOf(DemoData.center.lat) }
+    var startLon by remember { mutableStateOf(DemoData.center.lon) }
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(Unit) { MapTiles.lastKnown(context)?.let { (la, lo) -> startLat = la; startLon = lo } }
+    if (picking) PinPicker(state.fix?.point?.lat ?: startLat, state.fix?.point?.lon ?: startLon,
+        onPick = { la, lo -> pinLat = la; pinLon = lo; picking = false }, onDismiss = { picking = false })
     val scheme = MaterialTheme.colorScheme
     LazyColumn(contentPadding = PaddingValues(horizontal = 18.dp, vertical = 14.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
@@ -809,10 +806,31 @@ private fun Community(state: DriveState) {
                 enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.fillMaxWidth()
             )
         }
+        // Like reporting in Google Maps: one tap for "right here", or drop a pin on the map.
+        item {
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                OutlinedButton(
+                    onClick = {
+                        val here = state.fix?.point
+                        if (here != null) { pinLat = here.lat; pinLon = here.lon }
+                        else scope.launch { MapTiles.lastKnown(context)?.let { (la, lo) -> pinLat = la; pinLon = lo } ?: DriveStore.message("No recent position · Pick on map instead") }
+                    },
+                    enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.weight(1f)
+                ) { Text("Use my location", fontSize = 12.sp) }
+                OutlinedButton(onClick = { picking = true }, enabled = state.mode == Mode.IDLE, shape = Sharp, modifier = Modifier.weight(1f)) {
+                    Text("Pick on map", fontSize = 12.sp)
+                }
+            }
+            val la = pinLat; val lo = pinLon
+            if (la != null && lo != null) Text("Pinned: %.5f, %.5f".format(Locale.US, la, lo), fontSize = 11.sp, fontFamily = Readout, color = scheme.primary, modifier = Modifier.padding(top = 6.dp))
+        }
         item {
             Button(
-                onClick = { DriveStore.draft(road, kind); road = "" },
-                enabled = road.isNotBlank() && state.mode == Mode.IDLE,
+                onClick = {
+                    DriveStore.draft(road.ifBlank { Ar.t("Pinned location") }, kind, pinLat, pinLon)
+                    road = ""; pinLat = null; pinLon = null
+                },
+                enabled = (road.isNotBlank() || pinLat != null) && state.mode == Mode.IDLE,
                 shape = Sharp, modifier = Modifier.fillMaxWidth()
             ) { Text("SAVE DRAFT", fontFamily = Readout, letterSpacing = 1.sp) }
         }
@@ -821,6 +839,7 @@ private fun Community(state: DriveState) {
                 Column(Modifier.weight(1f)) {
                     Text(draft.kind, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
                     Text(draft.road, fontSize = 12.sp, color = scheme.onSurfaceVariant)
+                    if (draft.lat != null && draft.lon != null) Text("%.5f, %.5f".format(draft.lat, draft.lon), fontSize = 10.sp, fontFamily = Readout, color = scheme.onSurfaceVariant, translate = false)
                     Text("LOCAL · UNVERIFIED", fontSize = 9.sp, letterSpacing = 1.2.sp, color = scheme.tertiary, fontFamily = Readout)
                 }
                 IconButton(onClick = { DriveStore.deleteDraft(draft.id) }) { Icon(Icons.Outlined.Delete, "Delete") }
@@ -877,6 +896,10 @@ private fun Settings(state: DriveState, billing: Billing?, showAds: Boolean, act
                 fontSize = 11.sp, color = scheme.onSurfaceVariant
             )
         }
+        item { AlertOptions() }
+        item { DriveViewOptions() }
+        item { IntegrationOptions(state, onPremium = { premium = true }) }
+        item { OfflinePackOptions(state, onPremium = { premium = true }) }
         item { SectionLabel("COUNTRY") }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

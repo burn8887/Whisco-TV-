@@ -132,10 +132,12 @@ fun OsmMap(
                         detectTransformGestures { _, pan, gestureZoom, _ ->
                             val newZoom = (camZoom + kotlin.math.log2(gestureZoom)).coerceIn(3f, 18f)
                             // Pan is in screen pixels; convert to world pixels at the
-                            // current scale so dragging tracks the finger exactly.
+                            // current scale. The map follows the finger, as in Google Maps:
+                            // drag down and the view moves north. Adding the pan moved the
+                            // view the opposite way, which felt reversed.
                             val effective = 2.0.pow((newZoom - tileZoom).toDouble())
-                            val worldX = Mercator.x(lon, tileZoom) + pan.x / effective
-                            val worldY = Mercator.y(lat, tileZoom) + pan.y / effective
+                            val worldX = Mercator.x(lon, tileZoom) - pan.x / effective
+                            val worldY = Mercator.y(lat, tileZoom) - pan.y / effective
                             camZoom = newZoom
                             lat = Mercator.latOf(worldY, tileZoom)
                             lon = Mercator.lonOf(worldX, tileZoom)

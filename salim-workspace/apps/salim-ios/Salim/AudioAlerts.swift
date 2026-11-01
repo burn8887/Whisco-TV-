@@ -45,7 +45,11 @@ import Foundation
             let session=AVAudioSession.sharedInstance()
             try session.setCategory(.playback,mode:.voicePrompt,options:[.duckOthers,.interruptSpokenAudioAndMixWithOthers])
             try session.setActive(true)
-            let utterance=AVSpeechUtterance(string:text);utterance.voice=AVSpeechSynthesisVoice(language:AudioAlerts.arabic ? "ar-SA" : "en");current=utterance;speech.speak(utterance)
+            let utterance=AVSpeechUtterance(string:text)
+            // The driver's chosen voice and speaking speed (Settings › Alerts), else the language default.
+            utterance.voice=DriverOptions.voiceID.flatMap { AVSpeechSynthesisVoice(identifier:$0) } ?? AVSpeechSynthesisVoice(language:AudioAlerts.arabic ? "ar-SA" : "en")
+            utterance.rate=min(AVSpeechUtteranceMaximumSpeechRate,AVSpeechUtteranceDefaultSpeechRate*Float(DriverOptions.rate))
+            current=utterance;speech.speak(utterance)
             watchdog=Task { [weak self] in try? await Task.sleep(for:.seconds(15));guard !Task.isCancelled else{return};self?.stop() }
         } catch {release()}
     }

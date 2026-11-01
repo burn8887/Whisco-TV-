@@ -90,6 +90,7 @@ struct Theme {
 
 struct RootView: View {
     @EnvironmentObject var model: DriveModel
+    @EnvironmentObject var store: Store
     @Environment(\.colorScheme) private var scheme
     let appearance: String
     @State private var minimised = false
@@ -114,6 +115,8 @@ struct RootView: View {
             }
         }
         .onChange(of: model.mode) { _, value in if value == .idle { minimised = false } }
+        .onAppear { OfflinePacks.active = store.premium }
+        .onChange(of: store.premium) { _, value in OfflinePacks.active = value }
     }
 }
 
@@ -222,7 +225,7 @@ struct Dashboard: View {
         if width >= 760 {
             HStack(alignment: .top, spacing: 28) {
                 VStack(alignment: .leading, spacing: 14) {
-                    statement
+                    HeroBanner()
                     mapCard(height: min(400, max(300, width * 0.34)))
                     metrics
                     statusAndFeed
@@ -235,14 +238,14 @@ struct Dashboard: View {
                     if model.mode == .idle { startRow }
                     if model.mode == .gps && !model.acquired { acquiring }
                     hazardSections
-                    destinationSection
+                    DriveToView(theme: theme) { consent = true }
                     safetyNote
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             }
         } else {
             VStack(alignment: .leading, spacing: 14) {
-                statement
+                HeroBanner()
                 mapCard(height: min(340, max(240, width * 0.72)))
                 metrics
                 adBanner
@@ -251,7 +254,7 @@ struct Dashboard: View {
                 statusAndFeed
                 if let match = model.warning { alertBanner(match) }
                 hazardSections
-                destinationSection
+                DriveToView(theme: theme) { consent = true }
                 safetyNote
             }
         }
@@ -753,6 +756,8 @@ struct CommunityView: View {
     let theme: Theme
     @State private var road = ""
     @State private var kind = "Road hazard"
+    @State private var pin: CLLocationCoordinate2D?
+    @State private var picking = false
     var body: some View {
         Form {
             Section {
@@ -766,8 +771,17 @@ struct CommunityView: View {
                     ForEach(["Road hazard", "Roadworks", "Traffic congestion", "Road bump"], id: \.self) { Text($0).tag($0) }
                 }
                 TextField(Ar.t("Road or location"), text: $road)
-                Button(Ar.t("Save local draft")) { model.addDraft(road: road, kind: kind); road = "" }
-                    .disabled(road.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                // Like reporting in Google Maps: one tap for "right here", or drop a pin.
+                Button { if let p = model.fix?.point { pin = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon) } else { picking = true } } label: {
+                    Label(Ar.t("Use my location"), systemImage: "location.fill")
+                }
+                Button { picking = true } label: { Label(Ar.t("Pick on map"), systemImage: "mappin.and.ellipse") }
+                if let pin { Text("Pinned: \(String(format: "%.5f, %.5f", pin.latitude, pin.longitude))").font(.caption.monospaced()) }
+                Button(Ar.t("Save local draft")) {
+                    model.addDraft(road: road.isEmpty ? Ar.t("Pinned location") : road, kind: kind, lat: pin?.latitude, lon: pin?.longitude)
+                    road = ""; pin = nil
+                }
+                .disabled(road.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && pin == nil)
             }
             .disabled(model.mode != .idle)
             Section(Ar.t("Your drafts")) {
@@ -775,12 +789,16 @@ struct CommunityView: View {
                     VStack(alignment: .leading) {
                         Text(draft.kind)
                         Text(draft.road).font(.caption).foregroundStyle(theme.muted)
+                        if let lat = draft.lat, let lon = draft.lon { Text(verbatim: String(format: "%.5f, %.5f", lat, lon)).font(.caption2.monospaced()).foregroundStyle(theme.muted) }
                     }
                 }
                 .onDelete(perform: model.deleteDrafts)
             }
         }
         .navigationTitle(Ar.t("Community"))
+        .sheet(isPresented: $picking) {
+            PinPickerView(start: model.fix.map { CLLocationCoordinate2D(latitude: $0.point.lat, longitude: $0.point.lon) } ?? CLLocationCoordinate2D(latitude: 26.2235, longitude: 50.5876)) { pin = $0 }
+        }
     }
 }
 
@@ -810,6 +828,7 @@ struct SettingsView: View {
                      : "Both off — alerts arrive as a notification only.")
                     .font(.caption).foregroundStyle(theme.muted)
             }
+            DriverSettingsSections(theme: theme)
             Section(Ar.t("Country")) {
                 Picker(Ar.t("Country"), selection: Binding(get: { model.country }, set: { model.selectCountry($0) })) {
                     ForEach(DemoData.countries, id: \.self) { Text($0).tag($0) }

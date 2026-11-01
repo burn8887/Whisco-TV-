@@ -37,9 +37,10 @@ fun Text(
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
-    style: TextStyle = LocalTextStyle.current
+    style: TextStyle = LocalTextStyle.current,
+    translate: Boolean = true
 ) {
-    val shown = Ar.t(text)
+    val shown = if (translate) Ar.t(text) else text
     val arabic = Ar.hasArabic(shown)
     androidx.compose.material3.Text(
         text = shown,

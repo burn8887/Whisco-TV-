@@ -11,6 +11,8 @@ struct PrivacyNotice: View {
                 Text("Location").font(.headline)
                 Text("Location is used during a drive session that you start. Salim uses precise location, speed and heading in memory to calculate nearby alerts. It does not save or upload your route. When requesting nearby OpenStreetMap camera data, Salim sends a search area around a point rounded to about 1 km, and asks which country that point is in; it never sends a route. Overpass is a shared volunteer service and may log requests under its own policy. End the session to stop location updates and speech; OS restrictions can interrupt a session.")
 
+                Text("Navigation apps and offline packs").font(.headline)
+                Text("Drive & navigate passes the destination you entered to the navigation app you chose (Apple Maps, Google Maps or Waze), which handles it under its own policy. Home, Work and your last five destinations stay on this device. Premium offline packs are downloaded per country: the request names the country, not your position.")
                 Text("Advertising and consent").font(.headline)
                 Text("Google Mobile Ads (AdMob) serves banner ads on Overview and Settings only while no drive is active. Ads never appear on the drive screen. Google's User Messaging Platform (UMP) obtains and stores consent choices where required, and Salim provides Google's privacy-options form when required. Salim requests ads only when UMP permits it. The Google Mobile Ads SDK may process device identifiers, IP address, diagnostics and ad interactions under Google's privacy policy. Salim does not provide AdMob with your route or use your precise location for ad targeting.")
 

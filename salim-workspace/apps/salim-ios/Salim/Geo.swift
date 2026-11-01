@@ -70,6 +70,10 @@ enum Geo {
     }
 }
 final class AlertEngine {
+    /// Alert distance = speed × leadSeconds, clamped to [minRadius, maxRadius]. Set from the "Alert distance" option.
+    var leadSeconds:Double=30
+    var minRadius:Double=400
+    var maxRadius:Double=1000
     private var cells: [String:[Hazard]] = [:]
     private var all: [Hazard] = []
     private var seen: [String:(Double,Hazard)] = [:]
@@ -83,7 +87,7 @@ final class AlertEngine {
         guard Geo.usable(fix,now:now,elapsed:elapsed),fix.speed>=2,let course=fix.course,fix.elapsed>previous else { return nil }
         previous=fix.elapsed
         seen=seen.filter { elapsed-$0.value.0<=120 || Geo.distance(fix.point,$0.value.1.point)<=1500 }
-        let radius=min(1000,max(400,fix.speed*30))
+        let radius=min(maxRadius,max(minRadius,fix.speed*leadSeconds))
         var nearby:[Hazard]=[]
         if abs(fix.point.lat)>85 { nearby=all }
         else {

@@ -8,7 +8,8 @@ enum BundledPack {
     static let rows:[Hazard] = CameraPack.load()
 }
 struct Trip:Codable,Identifiable {let id:UUID;let at:Date;let seconds:Int;let alerts:Int;let demo:Bool;let interrupted:Bool}
-struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
+/// A local road-condition draft; lat/lon set when pinned on the map or taken from the current position.
+struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String;var lat:Double?=nil;var lon:Double?=nil}
 @MainActor final class DriveModel:NSObject,ObservableObject,CLLocationManagerDelegate {
     @Published var mode:DriveMode = .idle
     @Published var country="BH"
@@ -44,6 +45,9 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     private var generation=0
     private var started=0.0
     private var lastGood=0.0
+    private let countdown=CountdownController()
+    private var tracked:Hazard?
+    private var trackedClosest=Double.greatestFiniteMagnitude
     private var lastPosition=0.0
     private var previousLocation:CLLocation?
     private var lastCourse:Double?
@@ -89,7 +93,8 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
     private func merged(_ pack:[Hazard])->[Hazard] {
         var seen=Set<String>();var out:[Hazard]=[]
         // The demo's fictional camera survives the periodic reloads while a simulation runs.
-        for hazard in pack+liveCameras+(mode == .demo ? DemoData.cameras : []) where seen.insert(hazard.id).inserted {out.append(hazard)}
+        let offline=OfflinePacks.active ? OfflinePacks.cameras(country) : []
+        for hazard in pack+liveCameras+offline+(mode == .demo ? DemoData.cameras : []) where seen.insert(hazard.id).inserted {out.append(hazard)}
         return out
     }
     /// Fetches live cameras without blocking the UI; the list updates on success only.
@@ -165,6 +170,9 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         generation+=1;mode=value;started=ProcessInfo.processInfo.systemUptime;lastGood=started;lastPosition=started;previousLocation=nil;lastCourse=nil;localAt=0;feedAt=started-601;seconds=0;alertCount=0;warning=nil;average=nil;engine.reset();sections.reset()
         acquired = value == .demo
         alertReady = value == .demo
+        let lead=DriverOptions.lead;engine.leadSeconds=lead.seconds;engine.minRadius=lead.range.0;engine.maxRadius=lead.range.1
+        countdown.stop();tracked=nil
+        UIApplication.shared.isIdleTimerDisabled=DriverOptions.keepScreenOn
         status=value == .demo ? "Test simulation · No device GPS" : "Acquiring GPS…"
         UserDefaults.standard.set(Date(),forKey:"running");UserDefaults.standard.set(value == .demo,forKey:"runningDemo")
         Task {_ = try? await UNUserNotificationCenter.current().requestAuthorization(options:[.alert,.sound])}
@@ -193,6 +201,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         let trip=Trip(id:UUID(),at:Date(),seconds:Int(max(0,ProcessInfo.processInfo.systemUptime-started)),alerts:alertCount,demo:mode == .demo,interrupted:false)
         generation+=1;manager.stopUpdatingLocation();manager.allowsBackgroundLocationUpdates=false;demoTask?.cancel();ticker?.cancel();demoTask=nil;ticker=nil;audio.stop();sections.reset();engine.reset()
         hazards.removeAll { $0.id.hasPrefix("demo:") };engine.replace(hazards)
+        countdown.stop();tracked=nil;UIApplication.shared.isIdleTimerDisabled=false
         mode = .idle;pendingStart=false;fix=nil;warning=nil;average=nil;acquired=false;alertReady=false;previousLocation=nil;lastCourse=nil;status="Drive ended · Saved on this device"
         trips.insert(trip,at:0);saveTrips();UserDefaults.standard.removeObject(forKey:"running")
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers:["salim.road"])
@@ -222,10 +231,17 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         // One query per area per half hour, run off the drive loop: the next stretch of road
         // may be covered and this is the only moment the app knows where the driver is.
         if elapsed-feedAt>600 {feedAt=elapsed;refreshCameras(sample.point)}
+        // Live distance to the camera being counted down.
+        if let target=tracked {
+            let d=Geo.distance(sample.point,target.point);countdown.update(d)
+            trackedClosest=min(trackedClosest,d);if d>trackedClosest+60 {tracked=nil}
+        }
         guard let match=engine.evaluate(sample,now:now,elapsed:elapsed,country:country) else{return}
         warning=match;alertCount+=1
         let message=AudioAlerts.alertText(match.hazard,meters:match.meters,demo:mode == .demo)
-        if tone {audio.beep()}
+        if tone {TonePlayer.shared.play(ToneSynth.alert(DriverOptions.tone))}
+        if DriverOptions.haptics {Haptics.pulse(0.9)}
+        if match.hazard.isCamera {tracked=match.hazard;trackedClosest=match.meters;countdown.start(meters:match.meters)}
         if voice {audio.speak(message)}
         if UIApplication.shared.applicationState != .active {
             let content=UNMutableNotificationContent();content.title=(mode == .demo ? "Salim Demo · " : "Salim · ")+Ar.t(match.hazard.title);content.body=message;content.sound = .default
@@ -283,7 +299,7 @@ struct Draft:Codable,Identifiable {let id:UUID;let kind:String;let road:String}
         trips=Array(trips.prefix(limit))
         if let data=try? JSONEncoder().encode(trips) {UserDefaults.standard.set(data,forKey:"trips")}
     }
-    func addDraft(road:String,kind:String) {guard mode == .idle,!road.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty else{return};drafts.insert(Draft(id:UUID(),kind:kind,road:String(road.prefix(120))),at:0);saveDrafts()}
+    func addDraft(road:String,kind:String,lat:Double?=nil,lon:Double?=nil) {guard mode == .idle,!road.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty else{return};drafts.insert(Draft(id:UUID(),kind:kind,road:String(road.prefix(120)),lat:lat,lon:lon),at:0);saveDrafts()}
     func deleteDrafts(at offsets:IndexSet) {drafts.remove(atOffsets:offsets);saveDrafts()}
     private func saveDrafts() {drafts=Array(drafts.prefix(100));if let data=try? JSONEncoder().encode(drafts) {UserDefaults.standard.set(data,forKey:"drafts")}}
 }

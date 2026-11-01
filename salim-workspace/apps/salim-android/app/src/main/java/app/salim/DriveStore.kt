@@ -13,7 +13,8 @@ import java.util.UUID
 enum class Mode { IDLE, DEMO, GPS }
 enum class Appearance { SYSTEM, LIGHT, DARK }
 data class Trip(val id: String,val at: Long,val seconds: Int,val alerts: Int,val demo: Boolean,val interrupted: Boolean=false)
-data class Draft(val id: String,val road: String,val kind: String)
+/** A local road-condition draft; lat/lon set when pinned on the map or taken from the current position. */
+data class Draft(val id: String,val road: String,val kind: String,val lat: Double?=null,val lon: Double?=null)
 data class DriveState(
     val mode: Mode=Mode.IDLE,
     val status: String="Ready to start a drive",
@@ -53,6 +54,10 @@ object DriveStore {
     private lateinit var repository: HazardRepository
     private val scope=CoroutineScope(SupervisorJob()+Dispatchers.Main.immediate)
     private val engine=AlertEngine()
+    private var countdown: Countdown?=null
+    /** The camera the countdown and the floating card are tracking, and the closest we've been to it. */
+    private var tracked: app.salim.core.Hazard?=null
+    private var trackedClosest=Double.MAX_VALUE
     private var sections=SectionEngine(if (BuildConfig.DEBUG) DemoData.sections else emptyList())
     private var initialized=false
     private var generation=0L
@@ -72,10 +77,12 @@ object DriveStore {
         initialized=true;context=app.applicationContext
         // Camera pack first: the repository seeds from it.
         CameraPack.load(context)
+        AlertPrefs.init(context)
+        OfflinePacks.init(context)
         repository=HazardRepository(context)
         val p=prefs()
         val trips=runCatching { val a=JSONArray(p.getString("trips","[]"));(0 until a.length()).map { val t=a.getJSONObject(it);Trip(t.getString("id"),t.getLong("at"),t.getInt("seconds"),t.getInt("alerts"),t.getBoolean("demo"),t.optBoolean("interrupted")) } }.getOrDefault(emptyList())
-        val drafts=runCatching { val a=JSONArray(p.getString("drafts","[]"));(0 until a.length()).map { val t=a.getJSONObject(it);Draft(t.getString("id"),t.getString("road"),t.getString("kind")) } }.getOrDefault(emptyList())
+        val drafts=runCatching { val a=JSONArray(p.getString("drafts","[]"));(0 until a.length()).map { val t=a.getJSONObject(it);Draft(t.getString("id"),t.getString("road"),t.getString("kind"),if(t.has("lat")) t.optDouble("lat").takeIf { v->v.isFinite() } else null,if(t.has("lon")) t.optDouble("lon").takeIf { v->v.isFinite() } else null) } }.getOrDefault(emptyList())
         val appearance=runCatching { Appearance.valueOf(p.getString("appearance",Appearance.SYSTEM.name) ?: Appearance.SYSTEM.name) }.getOrDefault(Appearance.SYSTEM)
         mutable.value=DriveState(voice=p.getBoolean("voice",true),tone=p.getBoolean("tone",true),appearance=appearance,trips=trips,drafts=drafts)
         // A process-death marker is a failed/incomplete session, never a resurrected active drive.
@@ -92,7 +99,8 @@ object DriveStore {
      * alerts they already had.
      */
     private fun withFeed(pack: List<Hazard>): List<Hazard> =
-        (pack + liveCameras + (if(state.value.mode==Mode.DEMO) DemoData.cameras else emptyList())).distinctBy { it.id }
+        (pack + liveCameras + (if(state.value.premium) OfflinePacks.cameras(state.value.country) else emptyList()) +
+            (if(state.value.mode==Mode.DEMO) DemoData.cameras else emptyList())).distinctBy { it.id }
 
     private var liveCameras: List<Hazard> = emptyList()
 
@@ -132,6 +140,8 @@ object DriveStore {
         if(mode==Mode.DEMO && !BuildConfig.DEBUG)return
         require(mode!=Mode.IDLE)
         generation++;startedAt=SystemClock.elapsedRealtime();lastGood=startedAt;lastPosition=startedAt;localAt=0;engine.reset();sections.reset();audio=AudioAlerts(context)
+        AlertPrefs.options.value.lead.let { engine.leadSeconds=it.seconds;engine.minRadius=it.min;engine.maxRadius=it.max }
+        countdown=Countdown(context,scope);tracked=null
         // The simulated route passes one fictional debug-only camera, so the demo exercises a
         // real camera alert end to end instead of driving past nothing.
         if(mode==Mode.DEMO)mutable.update { it.copy(hazards=(it.hazards+DemoData.cameras).distinctBy { h->h.id }) }
@@ -208,9 +218,23 @@ object DriveStore {
             localAt=elapsed;val token=generation
             localJob=scope.launch { runCatching { repository.local(country,fix.point) }.onSuccess { hazards->if(token==generation) { val merged=withFeed(hazards);engine.replace(merged);mutable.update { it.copy(hazards=merged) } } }.onFailure { if(it is CancellationException)throw it } }
         }
+        // Live distance to the camera being counted down, for the countdown and the floating card.
+        tracked?.let { h ->
+            val d=Geo.distance(fix.point,h.point)
+            countdown?.update(d);OverlayAlert.update(d)
+            if(d<trackedClosest)trackedClosest=d
+            if(d>trackedClosest+60) { tracked=null;OverlayAlert.hide(context) }
+        }
         val match=engine.evaluate(fix,now,elapsed,country) ?: return
         mutable.update { it.copy(warning=match,count=it.count+1) }
-        if(state.value.tone)audio?.beep()
+        val options=AlertPrefs.options.value
+        if(state.value.tone)ToneSynth.play(ToneSynth.alert(options.tone))
+        if(options.vibration)Haptics.pulse(context,300,220)
+        if(match.hazard.kind.isCamera) {
+            tracked=match.hazard;trackedClosest=match.meters
+            countdown?.start(match.hazard.id,match.meters)
+            OverlayAlert.show(context,match)
+        }
         // "Demo" is said only in a simulation; a real drive's alert is a real alert.
         if(state.value.voice)audio?.speakAlert(match.hazard,match.meters,state.value.mode==Mode.DEMO)
         onWarning?.invoke(match)
@@ -219,6 +243,7 @@ object DriveStore {
         if(state.value.mode==Mode.IDLE)return
         val old=state.value
         generation++;ticker?.cancel();syncJob?.cancel();localJob?.cancel();demoJob?.cancel();audio?.close();audio=null;sections.reset();engine.reset()
+        countdown?.stop();countdown=null;tracked=null;OverlayAlert.hide(context)
         val trip=Trip(UUID.randomUUID().toString(),System.currentTimeMillis(),((SystemClock.elapsedRealtime()-startedAt)/1000).toInt(),old.count,old.mode==Mode.DEMO)
         mutable.update { it.copy(mode=Mode.IDLE,fix=null,warning=null,average=null,acquired=false,alertReady=false,hazards=it.hazards.filterNot { h->h.id.startsWith("demo:") },status=status,trips=(listOf(trip)+it.trips).let { trips -> if(it.entitlementChecked && !it.premium) trips.take(20) else trips }) }
         prefs().edit().remove("running").remove("runningDemo").apply();saveTrips()
@@ -229,11 +254,11 @@ object DriveStore {
         saveTrips()
     }
     fun clearTrips() { mutable.update { it.copy(trips=emptyList()) };saveTrips() }
-    fun draft(road: String,kind: String) {
+    fun draft(road: String,kind: String,lat: Double?=null,lon: Double?=null) {
         if(state.value.mode!=Mode.IDLE || road.isBlank())return
-        mutable.update { it.copy(drafts=(listOf(Draft(UUID.randomUUID().toString(),road.trim().take(120),kind))+it.drafts).take(100)) };saveDrafts()
+        mutable.update { it.copy(drafts=(listOf(Draft(UUID.randomUUID().toString(),road.trim().take(120),kind,lat,lon))+it.drafts).take(100)) };saveDrafts()
     }
     fun deleteDraft(id: String) { mutable.update { it.copy(drafts=it.drafts.filterNot { d->d.id==id }) };saveDrafts() }
     private fun saveTrips() { val a=JSONArray();state.value.trips.forEach { a.put(JSONObject().put("id",it.id).put("at",it.at).put("seconds",it.seconds).put("alerts",it.alerts).put("demo",it.demo).put("interrupted",it.interrupted)) };prefs().edit().putString("trips",a.toString()).apply() }
-    private fun saveDrafts() { val a=JSONArray();state.value.drafts.forEach { a.put(JSONObject().put("id",it.id).put("road",it.road).put("kind",it.kind)) };prefs().edit().putString("drafts",a.toString()).apply() }
+    private fun saveDrafts() { val a=JSONArray();state.value.drafts.forEach { a.put(JSONObject().put("id",it.id).put("road",it.road).put("kind",it.kind).apply { it.lat?.let { v->put("lat",v) };it.lon?.let { v->put("lon",v) } }) };prefs().edit().putString("drafts",a.toString()).apply() }
 }

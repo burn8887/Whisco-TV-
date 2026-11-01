@@ -59,6 +59,8 @@ enum Ar {
 struct Text: View {
     private let shown: String
     init<S: StringProtocol>(_ content: S) { shown = Ar.t(String(content)) }
+    /// Shown exactly as given, never translated (brand names, the other-language echo, coordinates).
+    init(verbatim content: String) { shown = content }
     var body: some View {
         if Ar.hasArabic(shown) {
             SwiftUI.Text(verbatim: shown).tracking(0)

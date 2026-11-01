@@ -38,6 +38,10 @@ class AudioAlerts(context: Context) {
                 arabic=usable(arabicResult)
                 val language=if(arabic) arabicResult else tts?.setLanguage(Locale.ENGLISH)
                 ready=code==TextToSpeech.SUCCESS && usable(language)
+                // The driver's chosen voice and speaking speed (Settings › Alerts).
+                val options=AlertPrefs.options.value
+                options.voiceName?.let { name -> runCatching { tts?.voices?.firstOrNull { it.name==name } }.getOrNull()?.let { tts?.setVoice(it) } }
+                tts?.setSpeechRate(options.speechRate)
             }
         } }
         tts?.setAudioAttributes(attributes)

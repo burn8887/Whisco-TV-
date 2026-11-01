@@ -89,6 +89,10 @@ class SpatialIndex(alerts: List<Hazard>) {
 }
 data class AlertMatch(val hazard: Hazard,val meters: Double,val atElapsed: Long)
 class AlertEngine {
+    /** Alert distance = speed × leadSeconds, clamped to [minRadius, maxRadius]. Set from the "Alert distance" option. */
+    var leadSeconds=30.0
+    var minRadius=400.0
+    var maxRadius=1000.0
     private var index=SpatialIndex(emptyList())
     private val seen=mutableMapOf<String,Pair<Long,Hazard>>()
     private var lastFixElapsed: Long?=null
@@ -98,7 +102,7 @@ class AlertEngine {
         if(!Geo.usable(fix,now,elapsed) || fix.speed<2 || fix.course==null || (lastFixElapsed?.let { fix.elapsedMs<=it }==true))return null
         lastFixElapsed=fix.elapsedMs
         seen.entries.removeAll { elapsed-it.value.first>120_000 && Geo.distance(fix.point,it.value.second.point)>1500 }
-        val radius=(fix.speed*30).coerceIn(400.0,1000.0)
+        val radius=(fix.speed*leadSeconds).coerceIn(minRadius,maxRadius)
         val hazard=index.nearby(fix.point,radius).asSequence().filter {
             // A live OpenStreetMap camera is a mapped position: one 500 m ahead is ahead
             // whichever side of a border it sits on (King Fahd Causeway, Al Ain/Buraimi).

@@ -13,6 +13,9 @@ object PrivacyNotice {
         MAP AND CAMERA DATA
         To draw the map and find nearby cameras, the app requests map tiles and camera data for the area around a point rounded to about 1 km from OpenStreetMap services (the OpenStreetMap tile server and the Overpass API, or a provider Salim configures in their place). Those services receive that area and your IP address under their own policies. Salim sends no account, identifier or route history with these requests. Camera results are cached on this device.
 
+        VOICE INPUT, NAVIGATION APPS AND OFFLINE PACKS
+        The microphone in Drive to uses your phone's speech recognition service under its own policy; Salim receives only the text. Drive & navigate passes the destination you entered to the navigation app you chose (Google Maps or Waze). Home, Work and your last five destinations stay on this device. Premium offline packs are downloaded per country: the request names the country, not your position. Alerts over other apps use the display-over-other-apps permission only to draw Salim's own alert card; nothing is read from other apps.
+
         ADVERTISING
         Google Mobile Ads (AdMob) serves banner ads on Overview and Settings while no drive is active. Ads never appear on the drive screen. Google’s User Messaging Platform (UMP) requests consent where required and provides an advertising privacy-options form. Ad requests are sent only when UMP says they are permitted. Google may process device identifiers, IP address and ad interactions under its own privacy policy. Salim does not receive a route or precise GPS coordinates for advertising.
 
