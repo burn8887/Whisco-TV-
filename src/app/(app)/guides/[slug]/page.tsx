@@ -69,7 +69,10 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     <div className="mx-auto px-4 sm:px-6 py-12" style={{ maxWidth: "68ch" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="w-caps text-xs font-bold mb-2" style={{ color: "var(--w-ember)" }}>Whisco TV Guide</p>
-      <h1 className="w-display text-3xl font-extrabold mb-4">{guide.h1}</h1>
+      <h1 className="w-display text-3xl font-extrabold mb-2">{guide.h1}</h1>
+      <p className="text-sm mb-4" style={{ color: "var(--w-fg-faint)" }}>
+        By the Whisco TV editorial team, Manama{guide.reviewedOn ? `. Last reviewed ${guide.reviewedOn}.` : ""}
+      </p>
       <p className="leading-relaxed mb-8" style={{ color: "var(--w-fg-muted)", fontSize: "var(--w-fs-4)" }}>{guide.intro}</p>
 
       <div className="space-y-8">

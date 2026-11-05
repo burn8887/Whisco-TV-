@@ -203,9 +203,9 @@ export default async function Home() {
             Built for the Gulf, honestly
           </h2>
           <p className="mt-4" style={{ color: "var(--w-fg-muted)" }}>
-            Live news from broadcasters who put it on the open internet, and
-            public-domain film from the archive that owns it. Nothing rebroadcast,
-            nothing resold.
+            Live news from broadcasters who put it on the open internet, series
+            and films from their owners&apos; official channels, and public-domain
+            film from the Internet Archive. Nothing rebroadcast, nothing resold.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -217,8 +217,8 @@ export default async function Home() {
             },
             {
               icon: Film,
-              title: "Public-domain film",
-              desc: "Classic cinema, cult favourites and documentaries from the Internet Archive — free to watch any time.",
+              title: "Series and film from the source",
+              desc: "Turkish, Arabic, South Asian and Filipino drama from the broadcasters' own channels, plus public-domain film from the Internet Archive.",
             },
             {
               icon: Smartphone,
@@ -270,10 +270,10 @@ export default async function Home() {
           <div className="flex items-end justify-between mb-5">
             <div>
               <h2 className="w-display text-2xl sm:text-3xl font-extrabold">
-                From the archive
+                Featured series
               </h2>
               <p className="text-sm mt-1" style={{ color: "var(--w-fg-faint)" }}>
-                Public-domain film, streaming from the source that owns it.
+                Drama from the official channels that own it.
               </p>
             </div>
             <Link
@@ -311,7 +311,7 @@ export default async function Home() {
           {[
             {
               title: "Ad-supported, like TV always was",
-              desc: "Short ad breaks fund the content, the same way free-to-air television always has — you never pay a subscription fee.",
+              desc: "Whisco is built to be paid for by advertising, the way free-to-air television is. You never pay a subscription fee.",
             },
             {
               title: "Official sources only",
@@ -420,7 +420,7 @@ export default async function Home() {
             },
             {
               q: "Is the content legal?",
-              a: "Yes. Live channels stream from the broadcaster's own player, and the on-demand catalogue is public-domain material streamed from the Internet Archive's own player. We host no video files of our own.",
+              a: "Yes. Live channels stream from the broadcaster's own player. Series and films play from the rights holders' own YouTube channels, and public-domain titles stream from the Internet Archive's player. We host no video files of our own.",
             },
           ].map((f) => (
             <details

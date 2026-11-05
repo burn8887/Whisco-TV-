@@ -11,6 +11,8 @@ export type Guide = {
   sections: { heading: string; paragraphs: string[] }[];
   ctaLabel: string;
   ctaHref: string;
+  /** Day a person last checked the guide, e.g. "12 Nov 2026". Shown under the byline. */
+  reviewedOn?: string;
 };
 
 export const GUIDES: Guide[] = [

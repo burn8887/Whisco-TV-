@@ -8,7 +8,16 @@ import AdSlot from "@/components/AdSlot";
 import WatchlistButton from "@/components/WatchlistButton";
 import ShareButton from "@/components/ShareButton";
 import CopyMessageButton from "@/components/CopyMessageButton";
-import { Play, Star, Clock } from "lucide-react";
+import { Play, Clock } from "lucide-react";
+import {
+  describeKind,
+  isHarvestedSynopsis,
+  looksLikeEpisode,
+  officialChannelName,
+  playbackSource,
+  sourceSentence,
+} from "@/lib/catalog-quality";
+import { SERIES_NOTES } from "@/lib/series-notes";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -16,10 +25,9 @@ export const dynamic = "force-dynamic";
 const SITE_URL = "https://www.whisco.tv";
 
 // ---------------------------------------------------------------------------
-// SEO: rich per-title metadata. People search "watch <show> episode N online
-// free" in huge volumes (especially for Turkish dizi across the Gulf) — these
-// tags plus the JSON-LD below are what let Google index each show as a
-// first-class TV series / movie page with rich results.
+// SEO metadata: factual, per title. No "watch ... online free / full movie"
+// phrasing (the vocabulary of pirate sites; it cost us two AdSense reviews in
+// Aug and Nov 2026), no meta keywords, and no claim the page can't back up.
 // ---------------------------------------------------------------------------
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -27,31 +35,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!title) return { title: "Not found — Whisco TV" };
 
   const episodeCount = title.seasons.reduce((a, s) => a + s.episodes.length, 0);
-  const kind = title.type === "SERIES" ? "Series" : title.type === "DOCUMENTARY" ? "Documentary" : "Movie";
-  const epPart = title.type === "SERIES" && episodeCount > 0 ? ` All ${episodeCount} episodes` : "";
-  const pageTitle = `Watch ${title.name} (${title.releaseYear}) Online Free — Full ${kind}`;
-  const description =
-    `Stream ${title.name} free on Whisco TV.${epPart ? epPart + " available —" : ""} ` +
-    `no subscription, no signup, 100% free and ad-supported. ${title.synopsis}`.slice(0, 300);
-
-  // Thin-content guard: harvested titles with boilerplate synopses are
-  // noindexed (viewers still get the page; Google doesn't count it).
-  const isThin =
-    title.synopsis.includes("official channel. Free and ad-supported") ||
-    title.synopsis.includes("من القناة الرسمية") ||
-    title.synopsis.includes("Official broadcaster upload");
+  const note = SERIES_NOTES[slug];
+  const harvested = isHarvestedSynopsis(title.synopsis);
+  const source = playbackSource(title);
+  const pageTitle = `${title.name}${title.releaseYear ? ` (${title.releaseYear})` : ""} — ${describeKind(title, episodeCount)}`;
+  const lead = note ? note.paragraphs[0] : harvested ? "" : title.synopsis;
+  const description = [lead, sourceSentence(title, source, episodeCount)].filter(Boolean).join(" ").slice(0, 300);
 
   const url = `${SITE_URL}/title/${slug}`;
   return {
     title: pageTitle,
     description,
-    keywords: [
-      `watch ${title.name} online free`,
-      `${title.name} full episodes`,
-      `${title.name} ${title.releaseYear}`,
-      ...(title.language === "Turkish" ? [`${title.name} English subtitles`, "Turkish series free", "Turkish dizi online"] : []),
-      ...title.genres.split(",").map((g) => g.trim().toLowerCase()),
-    ],
     alternates: { canonical: url },
     openGraph: {
       title: pageTitle,
@@ -67,7 +61,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       images: [`${SITE_URL}/api/og/title/${slug}`],
     },
-    robots: { index: !isThin, follow: true },
+    // Auto-imported single uploads (boilerplate synopsis) stay noindexed:
+    // viewers still get the page; Google is not asked to rank it.
+    robots: { index: !harvested, follow: true },
   };
 }
 
@@ -83,6 +79,11 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
     : false;
 
   const genreList = title.genres.split(",").map((g) => g.trim()).filter(Boolean);
+  const note = SERIES_NOTES[slug];
+  const harvested = isHarvestedSynopsis(title.synopsis);
+  const source = playbackSource(title);
+  const channel = officialChannelName(title, source);
+  const kindLabel = title.type !== "SERIES" && looksLikeEpisode(title.name) ? "EPISODE" : title.type;
 
   // JSON-LD structured data: lets Google show this as a rich TV-series /
   // movie result ("Watch free · Whisco TV") instead of a plain blue link.
@@ -93,16 +94,12 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
     name: title.name,
     url: `https://www.whisco.tv/title/${title.slug}`,
     image: title.posterUrl,
-    description: title.synopsis,
+    description: note ? note.paragraphs[0] : title.synopsis,
     datePublished: `${title.releaseYear}`,
     genre: genreList,
     inLanguage: title.language,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: title.imdbRating,
-      bestRating: 10,
-      ratingCount: 1000,
-    },
+    // No aggregateRating: we hold no real review counts, and invented rating
+    // markup breaks Google's structured-data rules (removed Nov 2026).
     ...(title.cast
       ? { actor: title.cast.split(",").map((c) => ({ "@type": "Person", name: c.trim() })) }
       : {}),
@@ -152,16 +149,15 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
 
           <div className="w-title-details pt-4 md:pt-24">
             <span className="flex items-center gap-2 text-xs font-bold text-orange-400 uppercase tracking-wide">
-              {title.type}
+              {kindLabel}
               <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full ring-1 ring-emerald-500/30 normal-case">Free</span>
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold mt-1">{title.name}</h1>
             <div className="flex flex-wrap items-center gap-3 mt-3 text-sm text-zinc-400">
-              <span className="flex items-center gap-1 text-amber-400 font-semibold">
-                <Star size={14} fill="currentColor" /> {title.imdbRating.toFixed(1)}
-              </span>
               <span>{title.releaseYear}</span>
-              <span className="px-1.5 py-0.5 rounded border border-zinc-600 text-xs">{title.rating}</span>
+              {!harvested && title.rating && (
+                <span className="px-1.5 py-0.5 rounded border border-zinc-600 text-xs">{title.rating}</span>
+              )}
               {title.durationMins && (
                 <span className="flex items-center gap-1">
                   <Clock size={13} /> {title.durationMins} min
@@ -177,7 +173,7 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
               ))}
             </div>
 
-            <p className="mt-5 text-zinc-300 max-w-2xl leading-relaxed">{title.synopsis}</p>
+            {!harvested && <p className="mt-5 text-zinc-300 max-w-2xl leading-relaxed">{title.synopsis}</p>}
 
             <div className="mt-3 text-sm text-zinc-500 space-y-1">
               {title.cast && (
@@ -188,8 +184,8 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
               )}
               {title.director && (
                 <p>
-                  <span className="text-zinc-400 font-medium">Director: </span>
-                  {title.director}
+                  <span className="text-zinc-400 font-medium">{source === "youtube" ? "Official channel: " : "Director: "}</span>
+                  {source === "youtube" ? channel : title.director}
                 </p>
               )}
             </div>
@@ -226,6 +222,33 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
               The band spans both tracks and re-exposes them as a subgrid. */}
           <div className="w-title-rest">
 
+        {note && (
+          <article className="mt-14 max-w-3xl">
+            <h2 className="text-xl font-bold mb-2">{note.headline}</h2>
+            <p className="text-xs text-zinc-500 mb-4">
+              By {note.author}, reviewed {note.reviewedOn}
+            </p>
+            <div className="space-y-4 text-zinc-300 leading-relaxed">
+              {note.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+            {note.sources.length > 0 && (
+              <p className="mt-4 text-xs text-zinc-500">
+                Sources:{" "}
+                {note.sources.map((src, i) => (
+                  <span key={src.url}>
+                    {i > 0 && ", "}
+                    <a href={src.url} className="underline" target="_blank" rel="noopener noreferrer">
+                      {src.label}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            )}
+          </article>
+        )}
+
         {title.type !== "MOVIE" && title.seasons.length > 0 && (
           <div className="mt-14">
             <h2 className="text-xl font-bold mb-4">Episodes</h2>
@@ -261,7 +284,9 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
           </div>
         )}
 
-        <AdSlot format="horizontal" />
+        {/* Ad slot only where Whisco's own writing carries the page: YouTube API
+            Developer Policies III.G.1.d bars ads on pages whose value is the embed. */}
+        {note && <AdSlot format="horizontal" />}
 
         {similar.length > 0 && (
           <div className="mt-14">
@@ -274,31 +299,20 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
           </div>
         )}
 
-        {/* SEO content block — answers the questions people actually type
-            into Google, in natural language. Styled to stay quiet/minimal. */}
-        <section className="mt-16 border-t border-white/5 pt-8 text-sm text-zinc-500 leading-relaxed space-y-4 max-w-3xl">
-          <h2 className="text-base font-bold text-zinc-300">
-            How to watch {title.name} online free
-          </h2>
-          <p>
-            You can stream {title.name} ({title.releaseYear}) free on Whisco TV — no subscription, no credit card, and no
-            signup required. Whisco TV is a 100% free, ad-supported streaming service.
-            {title.type === "SERIES" && episodeCount > 0 && (
-              <> All {episodeCount} episode{episodeCount !== 1 ? "s" : ""} across {title.seasons.length} season{title.seasons.length !== 1 ? "s" : ""} are available on demand — start from Episode 1 or continue where you left off.</>
-            )}
-            {title.type !== "SERIES" && <> Press play above to start watching instantly in your browser.</>}
-          </p>
-          {title.language === "Turkish" && (
-            <p>
-              {title.name} is a Turkish {title.type === "SERIES" ? "series (dizi)" : "production"} streamed from the
-              broadcaster&apos;s official channel. Popular with viewers across the Gulf, Middle East, and worldwide —
-              episodes play in Turkish{title.director.includes("English") ? " with English subtitles" : ""}, and
-              YouTube&apos;s caption settings offer subtitles in many languages.
-            </p>
+        {/* Provenance: where the picture actually comes from. Replaces the old
+            "How to watch X online free" boilerplate (Nov 2026 AdSense recovery). */}
+        <section className="mt-16 border-t border-white/5 pt-8 text-sm text-zinc-500 leading-relaxed space-y-3 max-w-3xl">
+          <h2 className="text-base font-bold text-zinc-300">Where this plays from</h2>
+          <p>{sourceSentence(title, source, episodeCount)}</p>
+          {title.language === "Turkish" && source === "youtube" && (
+            <p>Episodes play in Turkish. YouTube&apos;s caption menu shows subtitles where the broadcaster has added them.</p>
           )}
           <p>
-            Whisco TV works on any device with a browser — phone, tablet, laptop, or smart TV. Create a free profile to
-            build a watchlist and resume playback across devices.
+            Whisco TV hosts no video files. Rights holders can ask for a listing to be changed or removed at{" "}
+            <a href="mailto:legal@whisco.tv" className="underline">
+              legal@whisco.tv
+            </a>
+            .
           </p>
         </section>
           </div>
