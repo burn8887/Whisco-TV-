@@ -1,3 +1,4 @@
+import { looksLikeSingleUpload } from "@/lib/catalog-quality";
 /**
  * Tonight on Whisco — data + selector.
  * Server-only module. Do not import from a Client Component.
@@ -267,6 +268,9 @@ function collectCandidates(
   const push = (title: CatalogTitle | undefined, source: Ranked["source"]) => {
     if (!title?.id || !title.slug || !title.name) return;
     if (!belongsTo(title, community)) return;
+    // Curated series and named films only: never a single dated upload or live
+    // stream on the homepage (Nov 2026 AdSense recovery plan).
+    if (looksLikeSingleUpload(title.name)) return;
     if (seen.has(title.slug) || seen.has(title.id)) return;
     seen.add(title.slug);
     seen.add(title.id);

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Whisco TV",
   },
   description:
-    "Free, ad-supported streaming for Gulf households — live news from official broadcaster channels, and public-domain films from the Internet Archive. We host no video files of our own. No subscription, ever.",
+    "Free, ad-supported streaming for Gulf households — live news from official broadcaster channels, series and films from their owners' official channels, and public-domain film from the Internet Archive. We host no video files of our own. No subscription, ever.",
   keywords: [
     "free live tv",
     "free streaming",
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     url: "https://www.whisco.tv",
     title: "Whisco TV — Free Live TV & On-Demand Streaming",
     description:
-      "Free, ad-supported streaming for Gulf households — live news from official broadcaster channels, and public-domain films. We host no video files. No subscription, ever.",
+      "Free, ad-supported streaming for Gulf households — live news, series and films from official channels, and public-domain film. We host no video files. No subscription, ever.",
     images: [{ url: "/og-share-card.png", width: 1200, height: 630, alt: "Whisco TV — live news and public-domain film" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Whisco TV — Free Live TV & On-Demand Streaming",
-    description: "Live news from official broadcaster channels, and public-domain films. Free and ad-supported. No subscription, ever.",
+    description: "Live news, series and films from official channels, and public-domain film. Free and ad-supported. No subscription, ever.",
     images: ["/og-share-card.png"],
   },
   robots: { index: true, follow: true },

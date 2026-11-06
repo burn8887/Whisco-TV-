@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, type MouseEvent } from "react";
-import { Star } from "lucide-react";
 import PosterImage from "./PosterImage";
 
 /**
@@ -100,10 +99,6 @@ export default function TitleCard({
           <div className="w-card-body">
             <h3 className="w-card-title">{title.name}</h3>
             <p className="w-card-meta flex items-center gap-2">
-              <span className="flex items-center gap-0.5" style={{ color: "var(--w-warn)" }}>
-                <Star size={10} fill="currentColor" aria-hidden="true" />
-                {title.imdbRating.toFixed(1)}
-              </span>
               <span>{title.releaseYear}</span>
             </p>
           </div>
