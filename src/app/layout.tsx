@@ -13,16 +13,6 @@ export const metadata: Metadata = {
   },
   description:
     "Free, ad-supported streaming for Gulf households — live news from official broadcaster channels, series and films from their owners' official channels, and public-domain film from the Internet Archive. We host no video files of our own. No subscription, ever.",
-  keywords: [
-    "free live tv",
-    "free streaming",
-    "watch tv online free",
-    "free live news",
-    "free news channels online",
-    "public domain films",
-    "expat tv channels",
-    "arabic tv channels",
-  ],
   icons: {
     icon: "/logo-mark.png",
     shortcut: "/logo-mark.png",
