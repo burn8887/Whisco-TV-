@@ -27,7 +27,7 @@ export const SERIES_NOTES: Record<string, SeriesNote> = {
       "It is a good first dizi if you want a slow-burn romance with a family feud at its heart, and a natural next step after Kara Sevda. ATV sold the series widely abroad, and Telemundo began airing it in the United States in June 2021.",
     ],
     author: "Whisco TV editorial team",
-    reviewedOn: "",
+    reviewedOn: "7 Nov 2026",
     sources: [{ label: `${WIKI}: Hercai`, url: "https://en.wikipedia.org/wiki/Hercai" }],
   },
   "ask-i-memnu-forbidden-love": {
@@ -39,7 +39,7 @@ export const SERIES_NOTES: Record<string, SeriesNote> = {
       "Start here if you prefer character-driven stories to plot twists. Whisco plays the episodes the broadcaster publishes on its official channel, in Turkish; YouTube's caption menu shows subtitles where the channel has added them.",
     ],
     author: "Whisco TV editorial team",
-    reviewedOn: "",
+    reviewedOn: "7 Nov 2026",
     sources: [{ label: `${WIKI}: Aşk-ı Memnu (2008 TV series)`, url: "https://en.wikipedia.org/wiki/A%C5%9Fk-%C4%B1_Memnu_(2008_TV_series)" }],
   },
   "kurulus-osman": {
@@ -51,7 +51,7 @@ export const SERIES_NOTES: Record<string, SeriesNote> = {
       "Viewers who finished Diriliş: Ertuğrul can carry straight on here. The series has also aired in Pakistan on Geo Entertainment. Whisco plays the episodes ATV publishes on its official channel.",
     ],
     author: "Whisco TV editorial team",
-    reviewedOn: "",
+    reviewedOn: "7 Nov 2026",
     sources: [
       { label: `${WIKI}: Kuruluş: Osman season 1`, url: "https://en.wikipedia.org/wiki/Kurulu%C5%9F:_Osman_season_1" },
       { label: `${WIKI}: Kuruluş: Osman season 2`, url: "https://en.wikipedia.org/wiki/Kurulu%C5%9F:_Osman_season_2" },
