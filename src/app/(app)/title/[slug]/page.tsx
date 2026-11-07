@@ -226,7 +226,8 @@ export default async function TitlePage({ params }: { params: Promise<{ slug: st
           <article className="mt-14 max-w-3xl">
             <h2 className="text-xl font-bold mb-2">{note.headline}</h2>
             <p className="text-xs text-zinc-500 mb-4">
-              By {note.author}, reviewed {note.reviewedOn}
+              By {note.author}
+              {note.reviewedOn ? `, reviewed ${note.reviewedOn}` : ""}
             </p>
             <div className="space-y-4 text-zinc-300 leading-relaxed">
               {note.paragraphs.map((p, i) => (
